@@ -1,0 +1,129 @@
+{
+    "id": "e058ed59-b184-4f9e-b8ce-0ba7b4e497d8",
+    "href": "https://localhost/psi-api/productCatalog/v1/productSpecification/e058ed59-b184-4f9e-b8ce-0ba7b4e497d8",
+    "targetProductSchema": {
+        "@type": "InternetAccessProduct",
+        "@schemaLocation": "https://localhost/psi-api/schema/Product/InternetAccessProduct.schema.json"
+    },
+    "name": "Example Internet Access Product",
+    "description": "Minimal example of a product specification for internet access.",
+    "productSpecCharacteristic": [
+        {
+            "id": "frequencyBand",
+            "valueType": "string",
+            "characteristicValueSpecification": [
+                {
+                    "value": "KU"
+                }
+            ]
+        },
+        {
+            "id": "forwardCIR",
+            "valueType": "integer",
+            "characteristicValueSpecification": [
+                {
+                    "value": 1024,
+                    "unitOfMeasure": "kbsp"
+                },
+                {
+                    "value": 2048,
+                    "unitOfMeasure": "kbsp"
+                },
+                {
+                    "value": 4096,
+                    "unitOfMeasure": "kbsp"
+                }
+            ]
+        },
+        {
+            "name": "returnCIR",
+            "valueType": "integer",
+            "characteristicValueSpecification": [
+                {
+                    "value": 512,
+                    "unitOfMeasure": "kbsp"
+                },
+                {
+                    "value": 1024,
+                    "unitOfMeasure": "kbsp"
+                },
+                {
+                    "value": 2048,
+                    "unitOfMeasure": "kbsp"
+                }
+            ]
+        },
+        {
+            "id": "latency",
+            "valueType": "integer",
+            "characteristicValueSpecification": [
+                {
+                    "value": 150
+                }
+            ]
+        },
+        {
+            "id": "geometry",
+            "valueType": "GeoJson",
+            "characteristicValueSpecification": [
+                {
+                    "value": {
+                        "type": "FeatureCollection",
+                        "features": [
+                            {
+                                "type": "Feature",
+                                "properties": {
+                                    "eirp": 52
+                                },
+                                "geometry": {
+                                    "type": "Polygon",
+                                    "coordinates": [
+                                        [
+                                            [11.220988194397677, 26.22394180257379],
+                                            [11.220988194397677, 14.865251212329568],
+                                            [27.469850275674077, 14.865251212329568],
+                                            [27.469850275674077, 26.22394180257379],
+                                            [11.220988194397677, 26.22394180257379]
+                                        ]
+                                    ]
+                                }
+                            },
+                            {
+                                "type": "Feature",
+                                "properties": {
+                                    "eirp": 50
+                                },
+                                "geometry": {
+                                    "type": "Polygon",
+                                    "coordinates": [
+                                        [
+                                            [4.759853575667137, 31.956806312697395],
+                                            [4.759853575667137, 10.906752651362126],
+                                            [33.12632675803542, 10.906752651362126],
+                                            [33.12632675803542, 31.956806312697395],
+                                            [4.759853575667137, 31.956806312697395]
+                                        ]
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    ],
+    "serviceSpecification": [
+        {
+            "id": "d34cc471-1b43-4661-b475-e261fd28c104",
+            "href": "https://localhost/psi-api/serviceCatalog/v1/serviceSpecification/d34cc471-1b43-4661-b475-e261fd28c104"
+        }
+    ],
+    "relatedParty": [
+        {
+            "id": "06046aed-55dc-4062-884c-a30082fa158c",
+            "href": "/psi-api/partyManagement/v1/organization/06046aed-55dc-4062-884c-a30082fa158c",
+            "name": "ACME Inc.",
+            "role": "Provider"
+        }
+    ]
+}

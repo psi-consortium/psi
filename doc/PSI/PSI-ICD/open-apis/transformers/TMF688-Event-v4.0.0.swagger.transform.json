@@ -1,0 +1,198 @@
+{
+    "@jdt.replace": [
+        {
+            "@jdt.path": "$.servers[*].url",
+            "@jdt.value": "/psi-api/eventManagement/v1/"
+        },
+        {
+            "@jdt.path": "$.tags[1].name",
+            "@jdt.value": "listener"
+        },
+        {
+            "@jdt.path": "$.paths['/topic/{topicId}/event'].get.tags[0]",
+            "@jdt.value": "listener"
+        },
+        {
+            "@jdt.path": "$.paths['/topic/{topicId}/event'].post.tags[0]",
+            "@jdt.value": "listener"
+        },
+        {
+            "@jdt.path": "$.paths['/topic'].get.tags[0]",
+            "@jdt.value": "hub"
+        },
+        {
+            "@jdt.path": "$.paths['/topic/{topicId}/hub'].post.requestBody.content.*.schema.$ref",
+            "@jdt.value": "#/components/schemas/HubSubscription_Create"
+        },
+        {
+            "@jdt.path": "$.paths['/topic/{topicId}/hub'].post.responses.201.content.*.schema.$ref",
+            "@jdt.value": "#/components/schemas/HubSubscription"
+        },
+        {
+            "@jdt.path": "$.paths['/topic/{topicId}/hub'].get.responses.200.content.*.schema.items.$ref",
+            "@jdt.value": "#/components/schemas/HubSubscription"
+        }
+    ],
+    "@jdt.remove": [
+        {
+            "@jdt.path": "$.tags[?(@.name!='hub' && @.name!='notification listeners (client side)')]"
+        },
+        {
+            "@jdt.path": "$.paths['/topic/{topicId}/event/{id}']"
+        },
+        {
+            "@jdt.path": "$.paths['/topic'].post"
+        },
+        {
+            "@jdt.path": "$.paths['/topic/{id}']"
+        },
+        {
+            "@jdt.path": "$.paths['/topic/{topicId}/hub/{id}'].get"
+        },
+        {
+            "@jdt.path": "$.paths['/hub']"
+        },
+        {
+            "@jdt.path": "$.paths['/hub/{id}']"
+        },
+        {
+            "@jdt.path": "$.paths['/listener/eventCreateEvent']"
+        },
+        {
+            "@jdt.path": "$.paths['/listener/topicCreateEvent']"
+        },
+        {
+            "@jdt.path": "$.paths['/listener/topicChangeEvent']"
+        },
+        {
+            "@jdt.path": "$.paths['/listener/topicDeleteEvent']"
+        },
+        {
+            "@jdt.path": "$.components.schemas.Addressable"
+        },
+        {
+            "@jdt.path": "$.components.schemas.Entity"
+        },
+        {
+            "@jdt.path": "$.components.schemas.EventSubscription"
+        },
+        {
+            "@jdt.path": "$.components.schemas.EventSubscriptionInput"
+        },
+        {
+            "@jdt.path": "$.components.schemas.Topic_Create"
+        },
+        {
+            "@jdt.path": "$.components.schemas.EventCreateEvent"
+        },
+        {
+            "@jdt.path": "$.components.schemas.EventCreateEventPayload"
+        },
+        {
+            "@jdt.path": "$.components.schemas.TopicCreateEvent"
+        },
+        {
+            "@jdt.path": "$.components.schemas.TopicCreateEventPayload"
+        },
+        {
+            "@jdt.path": "$.components.schemas.TopicChangeEvent"
+        },
+        {
+            "@jdt.path": "$.components.schemas.TopicChangeEventPayload"
+        },
+        {
+            "@jdt.path": "$.components.schemas.TopicDeleteEvent"
+        },
+        {
+            "@jdt.path": "$.components.schemas.TopicDeleteEventPayload"
+        },
+        {
+            "@jdt.path": "$.components.schemas.Event.properties.event.$ref"
+        },
+        {
+            "@jdt.path": "$.components.schemas.Event_Create.properties.event.$ref"
+        }
+    ],
+    "@jdt.merge": [
+        {
+            "@jdt.path": "$.tags[?(@.name=='hub')]",
+            "@jdt.value": {
+                "description": "Event Hub API"
+            }
+        },
+        {
+            "@jdt.path": "$.tags[?(@.name=='listener')]",
+            "@jdt.value": {
+                "description": "Event Listener API"
+            }
+        },
+        {
+            "@jdt.path": "$.components.schemas.Event.properties.event",
+            "@jdt.value": {
+                "type": "object"
+            }
+        },
+        {
+            "@jdt.path": "$.components.schemas.Event_Create.properties.event",
+            "@jdt.value": {
+                "type": "object"
+            }
+        },
+        {
+            "@jdt.path": "$.paths['/topic/{topicId}/hub'].post",
+            "@jdt.value": {
+                "operationId": "registerListener",
+                "summary": "Register listener to a Hub",
+                "description": "The operation registers a listener to a Hub."
+            }
+        },
+        {
+            "@jdt.path": "$.paths['/topic/{topicId}/hub/{id}'].delete",
+            "@jdt.value": {
+                "operationId": "unregisterListener",
+                "summary": "Unregister listener from a Hub",
+                "description": "The operation unregisters a listener from a Hub."
+            }
+        },
+        {
+            "@jdt.path": "$.paths['/topic/{topicId}/hub'].post.requestBody.content[*]",
+            "@jdt.value": {
+                "name": "hubSubscription",
+                "description": "The Hub subscription to be created."
+            }
+        },
+        {
+            "@jdt.path": "$.paths['/topic/{topicId}/hub'].get",
+            "@jdt.value": {
+                "operationId": "listHubSubscription",
+                "summary": "List or find Hub subscription objects",
+                "description": "The operation lists or finds Hub subscription entities."
+            }
+        },
+        {
+            "@jdt.path": "$.components.schemas.RelatedParty",
+            "@jdt.value": {
+                "description": "Related Party reference. A related party defines party or party role linked to a specific entity."
+            }
+        },
+        {
+            "@jdt.path": "$.components.schemas.Characteristic.properties",
+            "@jdt.value": {
+                "unitOfMeasure": {
+                    "type": "string",
+                    "description": "A length, surface, volume, dry measure, liquid measure, money, weight, time, and the like. In general, a determinate quantity or magnitude of the kind designated, taken as a standard of comparison for others of the same kind, in assigning them numerical values, as 1 foot, 1 yard, 1 mile, 1 square foot."
+                }
+            }
+        }
+    ],
+    "@jdt.rename": [
+        {
+            "@jdt.path": "$.components.schemas.Hub",
+            "@jdt.value": "HubSubscription"
+        },
+        {
+            "@jdt.path": "$.components.schemas.Hub_Create",
+            "@jdt.value": "HubSubscription_Create"
+        }
+    ]
+}

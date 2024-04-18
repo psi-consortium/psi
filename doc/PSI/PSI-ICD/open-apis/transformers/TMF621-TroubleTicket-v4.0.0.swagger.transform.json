@@ -1,0 +1,149 @@
+{
+    "@jdt.replace": [
+        {
+            "@jdt.path": "$.servers[*].url",
+            "@jdt.value": "/psi-api/troubleTicket/v1/"
+        },
+        {
+            "@jdt.path": "$.components.schemas.AttachmentRefOrValue.description",
+            "@jdt.value": "Reference to an attachment or a document. A document comprises of multiple attachments, while a single attachment has uri, mimeType, size, etc."
+        }
+    ],
+    "@jdt.remove": [
+        {
+            "@jdt.path": "$.tags[?(@.name!='troubleTicket')]"
+        },
+        {
+            "@jdt.path": "$.paths['/hub']"
+        },
+        {
+            "@jdt.path": "$.paths['/hub/{id}']"
+        },
+        {
+            "@jdt.path": "$.paths['/listener/troubleTicketCreateEvent']"
+        },
+        {
+            "@jdt.path": "$.paths['/listener/troubleTicketAttributeValueChangeEvent']"
+        },
+        {
+            "@jdt.path": "$.paths['/listener/troubleTicketStatusChangeEvent']"
+        },
+        {
+            "@jdt.path": "$.paths['/listener/troubleTicketDeleteEvent']"
+        },
+        {
+            "@jdt.path": "$.paths['/listener/troubleTicketResolvedEvent']"
+        },
+        {
+            "@jdt.path": "$.paths['/listener/troubleTicketInformationRequiredEvent']"
+        },
+        {
+            "@jdt.path": "$.components.schemas.Addressable"
+        },
+        {
+            "@jdt.path": "$.components.schemas.Attachment"
+        },
+        {
+            "@jdt.path": "$.components.schemas.AttachmentRef"
+        },
+        {
+            "@jdt.path": "$.components.schemas.AttachmentRefOrValue.properties.content"
+        },
+        {
+            "@jdt.path": "$.components.schemas.Entity"
+        },
+        {
+            "@jdt.path": "$.components.schemas.EntityRef"
+        },
+        {
+            "@jdt.path": "$.components.schemas.Extensible"
+        },
+        {
+            "@jdt.path": "$.components.schemas.EventSubscription"
+        },
+        {
+            "@jdt.path": "$.components.schemas.EventSubscriptionInput"
+        },
+        {
+            "@jdt.path": "$.components.schemas.TroubleTicketCreateEvent"
+        },
+        {
+            "@jdt.path": "$.components.schemas.TroubleTicketCreateEventPayload"
+        },
+        {
+            "@jdt.path": "$.components.schemas.TroubleTicketAttributeValueChangeEvent"
+        },
+        {
+            "@jdt.path": "$.components.schemas.TroubleTicketAttributeValueChangeEventPayload"
+        },
+        {
+            "@jdt.path": "$.components.schemas.TroubleTicketStatusChangeEvent"
+        },
+        {
+            "@jdt.path": "$.components.schemas.TroubleTicketStatusChangeEventPayload"
+        },
+        {
+            "@jdt.path": "$.components.schemas.TroubleTicketDeleteEvent"
+        },
+        {
+            "@jdt.path": "$.components.schemas.TroubleTicketDeleteEventPayload"
+        },
+        {
+            "@jdt.path": "$.components.schemas.TroubleTicketResolvedEvent"
+        },
+        {
+            "@jdt.path": "$.components.schemas.TroubleTicketResolvedEventPayload"
+        },
+        {
+            "@jdt.path": "$.components.schemas.TroubleTicketInformationRequiredEvent"
+        },
+        {
+            "@jdt.path": "$.components.schemas.TroubleTicketInformationRequiredEventPayload"
+        },
+        {
+            "@jdt.path": "$.components.schemas.StatusChange.properties.status.*"
+        }
+    ],
+    "@jdt.rename": [
+        {
+            "@jdt.path": "$.components.schemas.AttachmentRefOrValue",
+            "@jdt.value": "AttachmentOrDocumentRef"
+        }
+    ],
+    "@jdt.merge": [
+        {
+            "@jdt.path": "$.tags[?(@.name=='troubleTicket')]",
+            "@jdt.value": {
+                "description": "Trouble Ticket API"
+            }
+        },
+        {
+            "@jdt.path": "$.components.schemas.*.properties.attachment.items",
+            "@jdt.value": {
+                "$ref": "#/components/schemas/AttachmentOrDocumentRef"
+            }
+        },
+        {
+            "@jdt.path": "$.components.schemas.Note",
+            "@jdt.value": {
+                "required": ["text"]
+            }
+        },
+        {
+            "@jdt.path": "$.components.schemas.Note.properties",
+            "@jdt.value": {
+                "href": {
+                    "type": "string",
+                    "format": "uri",
+                    "description": "Hyperlink reference"
+                }
+            }
+        },
+        {
+            "@jdt.path": "$.components.schemas.StatusChange.properties.status",
+            "@jdt.value": {
+                "$ref": "#/components/schemas/TroubleTicketStatusType"
+            }
+        }
+    ]
+}

@@ -1,0 +1,673 @@
+{
+    "@jdt.replace": [
+        {
+            "@jdt.path": "$.servers[*].url",
+            "@jdt.value": "/psi-api/productOrdering/v1/"
+        },
+        {
+            "@jdt.path": "$.components.schemas.Characteristic",
+            "@jdt.value": {
+                "type": "object",
+                "description": "Describes a given characteristic of an object or entity through a name/value pair.",
+                "required": ["name", "value"],
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "The unique identifier of the characteristic."
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The Name of the characteristic."
+                    },
+                    "valueType": {
+                        "type": "string",
+                        "description": "The data type of the value of the characteristic."
+                    },
+                    "characteristicRelationship": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/CharacteristicRelationship"
+                        }
+                    },
+                    "value": {
+                        "$ref": "#/components/schemas/Any",
+                        "description": "The value of the characteristic."
+                    },
+                    "@baseType": {
+                        "type": "string",
+                        "description": "When sub-classing, this defines the super-class."
+                    },
+                    "@schemaLocation": {
+                        "type": "string",
+                        "format": "uri",
+                        "description": "A URI to a JSON-Schema file that defines additional attributes and relationships."
+                    },
+                    "@type": {
+                        "type": "string",
+                        "description": "When sub-classing, this defines the sub-class Extensible name."
+                    }
+                }
+            }
+        },
+        {
+            "@jdt.path": "$.components.schemas.CharacteristicRelationship",
+            "@jdt.value": {
+                "type": "object",
+                "description": "Another Characteristic that is related to the current Characteristic.",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "The unique identifier of the characteristic."
+                    },
+                    "href": {
+                        "type": "string",
+                        "format": "uri",
+                        "description": "The hyperlink reference."
+                    },
+                    "relationshipType": {
+                        "type": "string",
+                        "description": "The type of relationship."
+                    },
+                    "@baseType": {
+                        "type": "string",
+                        "description": "When sub-classing, this defines the super-class."
+                    },
+                    "@schemaLocation": {
+                        "type": "string",
+                        "format": "uri",
+                        "description": "A URI to a JSON-Schema file that defines additional attributes and relationships."
+                    },
+                    "@type": {
+                        "type": "string",
+                        "description": "When sub-classing, this defines the sub-class Extensible name."
+                    }
+                }
+            }
+        }
+    ],
+    "@jdt.remove": [
+        {
+            "@jdt.path": "$.tags[?(@.name!='productOrder')]"
+        },
+        {
+            "@jdt.path": "$.paths['/cancelProductOrder']"
+        },
+        {
+            "@jdt.path": "$.paths['/cancelProductOrder/{id}']"
+        },
+        {
+            "@jdt.path": "$.paths['/hub']"
+        },
+        {
+            "@jdt.path": "$.paths['/hub/{id}']"
+        },
+        {
+            "@jdt.path": "$.paths['/listener/productOrderCreateEvent']"
+        },
+        {
+            "@jdt.path": "$.paths['/listener/productOrderAttributeValueChangeEvent']"
+        },
+        {
+            "@jdt.path": "$.paths['/listener/productOrderDeleteEvent']"
+        },
+        {
+            "@jdt.path": "$.paths['/listener/productOrderStateChangeEvent']"
+        },
+        {
+            "@jdt.path": "$.paths['/listener/productOrderInformationRequiredEvent']"
+        },
+        {
+            "@jdt.path": "$.paths['/listener/cancelProductOrderCreateEvent']"
+        },
+        {
+            "@jdt.path": "$.paths['/listener/cancelProductOrderStateChangeEvent']"
+        },
+        {
+            "@jdt.path": "$.paths['/listener/cancelProductOrderInformationRequiredEvent']"
+        },
+        {
+            "@jdt.path": "$.components.schemas.Addressable"
+        },
+        {
+            "@jdt.path": "$.components.schemas.AgreementItemRef.properties.@baseType.example"
+        },
+        {
+            "@jdt.path": "$.components.schemas.AgreementItemRef.properties.@schemaLocation.example"
+        },
+        {
+            "@jdt.path": "$.components.schemas.AgreementItemRef.properties.@type.example"
+        },
+        {
+            "@jdt.path": "$.components.schemas.AgreementRef.properties.@baseType.example"
+        },
+        {
+            "@jdt.path": "$.components.schemas.AgreementRef.properties.@schemaLocation.example"
+        },
+        {
+            "@jdt.path": "$.components.schemas.AgreementRef.properties.@type.example"
+        },
+        {
+            "@jdt.path": "$.components.schemas.CancelOrder"
+        },
+        {
+            "@jdt.path": "$.components.schemas.CancelProductOrder"
+        },
+        {
+            "@jdt.path": "$.components.schemas.CancelProductOrder_Create"
+        },
+        {
+            "@jdt.path": "$.components.schemas.EntityRef"
+        },
+        {
+            "@jdt.path": "$.components.schemas.Extensible"
+        },
+        {
+            "@jdt.path": "$.components.schemas.PaymentRef.properties.@baseType.example"
+        },
+        {
+            "@jdt.path": "$.components.schemas.PaymentRef.properties.@schemaLocation.example"
+        },
+        {
+            "@jdt.path": "$.components.schemas.PaymentRef.properties.@type.example"
+        },
+        {
+            "@jdt.path": "$.components.schemas.Place"
+        },
+        {
+            "@jdt.path": "$.components.schemas.PlaceRef.properties.@baseType.example"
+        },
+        {
+            "@jdt.path": "$.components.schemas.PlaceRef.properties.@schemaLocation.example"
+        },
+        {
+            "@jdt.path": "$.components.schemas.PlaceRef.properties.@type.example"
+        },
+        {
+            "@jdt.path": "$.components.schemas.Product"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductOfferingPriceRef.properties.@baseType.example"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductOfferingPriceRef.properties.@schemaLocation.example"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductOfferingPriceRef.properties.@type.example"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductOfferingRef.properties.@baseType.example"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductOfferingRef.properties.@schemaLocation.example"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductOfferingRef.properties.@type.example"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductOfferingQualificationRef.properties.@baseType.example"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductOfferingQualificationRef.properties.@schemaLocation.example"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductOfferingQualificationRef.properties.@type.example"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductOrder_Update.required"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductOrder_Update.properties.productOrderItem.minItems"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductOrderRef"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductRef"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductRefOrValue.properties.@baseType.example"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductRefOrValue.properties.@schemaLocation.example"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductRefOrValue.properties.@type.example"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductSpecificationRef.properties.@baseType.example"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductSpecificationRef.properties.@schemaLocation.example"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductSpecificationRef.properties.@type.example"
+        },
+        {
+            "@jdt.path": "$.components.schemas.QuoteItemRef.properties.@baseType.example"
+        },
+        {
+            "@jdt.path": "$.components.schemas.QuoteItemRef.properties.@schemaLocation.example"
+        },
+        {
+            "@jdt.path": "$.components.schemas.QuoteItemRef.properties.@type.example"
+        },
+        {
+            "@jdt.path": "$.components.schemas.QuoteRef.properties.@baseType.example"
+        },
+        {
+            "@jdt.path": "$.components.schemas.QuoteRef.properties.@schemaLocation.example"
+        },
+        {
+            "@jdt.path": "$.components.schemas.QuoteRef.properties.@type.example"
+        },
+        {
+            "@jdt.path": "$.components.schemas.RelatedChannel.properties.@baseType.example"
+        },
+        {
+            "@jdt.path": "$.components.schemas.RelatedChannel.properties.@schemaLocation.example"
+        },
+        {
+            "@jdt.path": "$.components.schemas.RelatedChannel.properties.@type.example"
+        },
+        {
+            "@jdt.path": "$.components.schemas.RelatedParty.properties.@baseType.example"
+        },
+        {
+            "@jdt.path": "$.components.schemas.RelatedParty.properties.@schemaLocation.example"
+        },
+        {
+            "@jdt.path": "$.components.schemas.RelatedParty.properties.@type.example"
+        },
+        {
+            "@jdt.path": "$.components.schemas.RelatedPlaceRefOrValue.properties.@baseType.example"
+        },
+        {
+            "@jdt.path": "$.components.schemas.RelatedPlaceRefOrValue.properties.@schemaLocation.example"
+        },
+        {
+            "@jdt.path": "$.components.schemas.RelatedPlaceRefOrValue.properties.@type.example"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ResourceRef.properties.@baseType.example"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ResourceRef.properties.@schemaLocation.example"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ResourceRef.properties.@type.example"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ServiceRef.properties.@baseType.example"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ServiceRef.properties.@schemaLocation.example"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ServiceRef.properties.@type.example"
+        },
+        {
+            "@jdt.path": "$.components.schemas.TaskStateType"
+        },
+        {
+            "@jdt.path": "$.components.schemas.EventSubscription"
+        },
+        {
+            "@jdt.path": "$.components.schemas.EventSubscriptionInput"
+        },
+        {
+            "@jdt.path": "$.components.schemas.*.properties.randomAtt"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductOrderCreateEvent"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductOrderCreateEventPayload"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductOrderAttributeValueChangeEvent"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductOrderAttributeValueChangeEventPayload"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductOrderDeleteEvent"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductOrderDeleteEventPayload"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductOrderStateChangeEvent"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductOrderStateChangeEventPayload"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductOrderInformationRequiredEvent"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductOrderInformationRequiredEventPayload"
+        },
+        {
+            "@jdt.path": "$.components.schemas.CancelProductOrderCreateEvent"
+        },
+        {
+            "@jdt.path": "$.components.schemas.CancelProductOrderCreateEventPayload"
+        },
+        {
+            "@jdt.path": "$.components.schemas.CancelProductOrderStateChangeEvent"
+        },
+        {
+            "@jdt.path": "$.components.schemas.CancelProductOrderStateChangeEventPayload"
+        },
+        {
+            "@jdt.path": "$.components.schemas.CancelProductOrderInformationRequiredEvent"
+        },
+        {
+            "@jdt.path": "$.components.schemas.CancelProductOrderInformationRequiredEventPayload"
+        },
+        {
+            "@jdt.path": "$.components.schemas.Money.properties['@type']"
+        },
+        {
+            "@jdt.path": "$.components.schemas.Money.properties['@baseType']"
+        },
+        {
+            "@jdt.path": "$.components.schemas.Money.properties['@schemaLocation']"
+        },
+        {
+            "@jdt.path": "$.components.schemas.TimePeriod.properties['@type']"
+        },
+        {
+            "@jdt.path": "$.components.schemas.TimePeriod.properties['@baseType']"
+        },
+        {
+            "@jdt.path": "$.components.schemas.TimePeriod.properties['@schemaLocation']"
+        },
+        {
+            "@jdt.path": "$.components.schemas.Quantity.properties['@type']"
+        },
+        {
+            "@jdt.path": "$.components.schemas.Quantity.properties['@baseType']"
+        },
+        {
+            "@jdt.path": "$.components.schemas.Quantity.properties['@schemaLocation']"
+        },
+        {
+            "@jdt.path": "$.components.schemas.TargetProductSchema.properties['@baseType']"
+        }
+    ],
+    "@jdt.merge": [
+        {
+            "@jdt.path": "$.tags[?(@.name=='productOrder')]",
+            "@jdt.value": {
+                "description": "Product Order API"
+            }
+        },
+        {
+            "@jdt.path": "$.components.schemas",
+            "@jdt.value": { "Any": {} }
+        },
+        {
+            "@jdt.path": "$.components.schemas.AgreementRef.properties.href",
+            "@jdt.value": {
+                "format": "uri"
+            }
+        },
+        {
+            "@jdt.path": "$.components.schemas.AgreementRef.properties['@schemaLocation']",
+            "@jdt.value": {
+                "format": "uri"
+            }
+        },
+        {
+            "@jdt.path": "$.components.schemas.AgreementItemRef.properties.href",
+            "@jdt.value": {
+                "format": "uri"
+            }
+        },
+        {
+            "@jdt.path": "$.components.schemas.AgreementItemRef.properties['@schemaLocation']",
+            "@jdt.value": {
+                "format": "uri"
+            }
+        },
+        {
+            "@jdt.path": "$.components.schemas.AppointmentRef.properties.href",
+            "@jdt.value": {
+                "format": "uri"
+            }
+        },
+        {
+            "@jdt.path": "$.components.schemas.BillingAccountRef.properties.href",
+            "@jdt.value": {
+                "format": "uri"
+            }
+        },
+        {
+            "@jdt.path": "$.components.schemas.PaymentRef.properties.href",
+            "@jdt.value": {
+                "format": "uri"
+            }
+        },
+        {
+            "@jdt.path": "$.components.schemas.PaymentRef.properties['@schemaLocation']",
+            "@jdt.value": {
+                "format": "uri"
+            }
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductSpecificationRef.properties.href",
+            "@jdt.value": {
+                "format": "uri"
+            }
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductSpecificationRef.properties['@schemaLocation']",
+            "@jdt.value": {
+                "format": "uri"
+            }
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductOfferingRef.properties.href",
+            "@jdt.value": {
+                "format": "uri"
+            }
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductOfferingRef.properties['@schemaLocation']",
+            "@jdt.value": {
+                "format": "uri"
+            }
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductOfferingPriceRef.properties.href",
+            "@jdt.value": {
+                "format": "uri"
+            }
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductOfferingPriceRef.properties['@schemaLocation']",
+            "@jdt.value": {
+                "format": "uri"
+            }
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductOfferingQualificationRef.properties.href",
+            "@jdt.value": {
+                "format": "uri"
+            }
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductOfferingQualificationRef.properties['@schemaLocation']",
+            "@jdt.value": {
+                "format": "uri"
+            }
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductOrder.properties.href",
+            "@jdt.value": {
+                "format": "uri"
+            }
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductOrderItem.properties",
+            "@jdt.value": {
+                "requestedStartDate": {
+                    "type": "string",
+                    "description": "Order fulfillment start date wished by the requestor. This is used when, for any reason, the requestor cannot allow the seller to operationally begin the fulfillment before a date. ",
+                    "format": "date-time"
+                },
+                "requestedEndDate": {
+                    "type": "string",
+                    "description": "Order fulfillment end date wished by the requestor. This is used when, for any reason, the requestor cannot allow the seller to operationally shutdown before a date.",
+                    "format": "date-time"
+                }
+            }
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductRefOrValue.properties.href",
+            "@jdt.value": {
+                "format": "uri"
+            }
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductRefOrValue.properties['@schemaLocation']",
+            "@jdt.value": {
+                "format": "uri"
+            }
+        },
+        {
+            "@jdt.path": "$.components.schemas.PlaceRef.properties.href",
+            "@jdt.value": {
+                "format": "uri"
+            }
+        },
+        {
+            "@jdt.path": "$.components.schemas.PlaceRef.properties['@schemaLocation']",
+            "@jdt.value": {
+                "format": "uri"
+            }
+        },
+        {
+            "@jdt.path": "$.components.schemas.QuoteItemRef.properties.href",
+            "@jdt.value": {
+                "format": "uri"
+            }
+        },
+        {
+            "@jdt.path": "$.components.schemas.QuoteItemRef.properties['@schemaLocation']",
+            "@jdt.value": {
+                "format": "uri"
+            }
+        },
+        {
+            "@jdt.path": "$.components.schemas.QuoteRef.properties.href",
+            "@jdt.value": {
+                "format": "uri"
+            }
+        },
+        {
+            "@jdt.path": "$.components.schemas.QuoteRef.properties['@schemaLocation']",
+            "@jdt.value": {
+                "format": "uri"
+            }
+        },
+        {
+            "@jdt.path": "$.components.schemas.RelatedChannel.properties.href",
+            "@jdt.value": {
+                "format": "uri"
+            }
+        },
+        {
+            "@jdt.path": "$.components.schemas.RelatedChannel.properties['@schemaLocation']",
+            "@jdt.value": {
+                "format": "uri"
+            }
+        },
+        {
+            "@jdt.path": "$.components.schemas.RelatedPlaceRefOrValue.properties.href",
+            "@jdt.value": {
+                "format": "uri"
+            }
+        },
+        {
+            "@jdt.path": "$.components.schemas.RelatedPlaceRefOrValue.properties['@schemaLocation']",
+            "@jdt.value": {
+                "format": "uri"
+            }
+        },
+        {
+            "@jdt.path": "$.components.schemas.RelatedParty.properties.href",
+            "@jdt.value": {
+                "format": "uri"
+            }
+        },
+        {
+            "@jdt.path": "$.components.schemas.RelatedParty.properties['@schemaLocation']",
+            "@jdt.value": {
+                "format": "uri"
+            }
+        },
+        {
+            "@jdt.path": "$.components.schemas.ResourceRef.properties.href",
+            "@jdt.value": {
+                "format": "uri"
+            }
+        },
+        {
+            "@jdt.path": "$.components.schemas.ResourceRef.properties['@schemaLocation']",
+            "@jdt.value": {
+                "format": "uri"
+            }
+        },
+        {
+            "@jdt.path": "$.components.schemas.ServiceRef.properties.href",
+            "@jdt.value": {
+                "format": "uri"
+            }
+        },
+        {
+            "@jdt.path": "$.components.schemas.ServiceRef.properties['@schemaLocation']",
+            "@jdt.value": {
+                "format": "uri"
+            }
+        },
+        {
+            "@jdt.path": "$.components.schemas.TargetProductSchema.properties['@schemaLocation']",
+            "@jdt.value": {
+                "format": "uri"
+            }
+        },
+        {
+            "@jdt.path": "$.components.schemas.RelatedParty",
+            "@jdt.value": {
+                "description": "Related Party reference. A related party defines party or party role linked to a specific entity."
+            }
+        },
+        {
+            "@jdt.path": "$.components.schemas.Note.properties",
+            "@jdt.value": {
+                "href": {
+                    "type": "string",
+                    "format": "uri",
+                    "description": "The hyperlink reference."
+                }
+            }
+        },
+        {
+            "@jdt.path": "$.components.schemas.Characteristic.properties",
+            "@jdt.value": {
+                "unitOfMeasure": {
+                    "type": "string",
+                    "description": "A length, surface, volume, dry measure, liquid measure, money, weight, time, and the like. In general, a determinate quantity or magnitude of the kind designated, taken as a standard of comparison for others of the same kind, in assigning them to numerical values, as 1 foot, 1 yard, 1 mile, 1 square foot."
+                }
+            }
+        },
+        {
+            "@jdt.path": "$.components.schemas.TimePeriod.properties.startDateTime",
+            "@jdt.value": {
+                "description": "Start of the time period, using IETC-RFC-3339 format."
+            }
+        }
+    ]
+}

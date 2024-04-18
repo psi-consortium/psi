@@ -1,0 +1,1993 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Service Quality Management",
+    "description": "This is Swagger UI environment generated for the TMF Service Quality Management specification",
+    "version": "4.0.0"
+  },
+  "servers": [
+    {
+      "url": "/psi-api/serviceQuality/v1/"
+    }
+  ],
+  "tags": [
+    {
+      "name": "serviceLevelObjective",
+      "description": "Service Level Objective API"
+    },
+    {
+      "name": "serviceLevelSpecification",
+      "description": "Service Level Specification API"
+    }
+  ],
+  "paths": {
+    "/serviceLevelObjective": {
+      "get": {
+        "tags": [
+          "serviceLevelObjective"
+        ],
+        "summary": "List or find ServiceLevelObjective objects",
+        "description": "This operation list or find ServiceLevelObjective entities",
+        "operationId": "listServiceLevelObjective",
+        "parameters": [
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "Comma-separated properties to be provided in response",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Requested index for start of resources to be provided in response",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Requested number of resources to be provided in response",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "headers": {
+              "X-Total-Count": {
+                "description": "Total number of items matching criteria",
+                "schema": {
+                  "type": "integer"
+                }
+              },
+              "X-Result-Count": {
+                "description": "Actual number of items returned in the response body",
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            },
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ServiceLevelObjective"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method Not allowed",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "serviceLevelObjective"
+        ],
+        "summary": "Creates a ServiceLevelObjective",
+        "description": "This operation creates a ServiceLevelObjective entity.",
+        "operationId": "createServiceLevelObjective",
+        "requestBody": {
+          "description": "The ServiceLevelObjective to be created",
+          "content": {
+            "application/json;charset=utf-8": {
+              "schema": {
+                "$ref": "#/components/schemas/ServiceLevelObjective_Create"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServiceLevelObjective"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method Not allowed",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "serviceLevelObjective"
+      }
+    },
+    "/serviceLevelObjective/{id}": {
+      "get": {
+        "tags": [
+          "serviceLevelObjective"
+        ],
+        "summary": "Retrieves a ServiceLevelObjective by ID",
+        "description": "This operation retrieves a ServiceLevelObjective entity. Attribute selection is enabled for all first level attributes.",
+        "operationId": "retrieveServiceLevelObjective",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Identifier of the ServiceLevelObjective",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "Comma-separated properties to provide in response",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServiceLevelObjective"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method Not allowed",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "serviceLevelObjective"
+        ],
+        "summary": "Deletes a ServiceLevelObjective",
+        "description": "This operation deletes a ServiceLevelObjective entity.",
+        "operationId": "deleteServiceLevelObjective",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Identifier of the ServiceLevelObjective",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Deleted",
+            "content": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method Not allowed",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "serviceLevelObjective"
+        ],
+        "summary": "Updates partially a ServiceLevelObjective",
+        "description": "This operation updates partially a ServiceLevelObjective entity.",
+        "operationId": "patchServiceLevelObjective",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Identifier of the ServiceLevelObjective",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The ServiceLevelObjective to be updated",
+          "content": {
+            "application/json;charset=utf-8": {
+              "schema": {
+                "$ref": "#/components/schemas/ServiceLevelObjective_Update"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Updated",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServiceLevelObjective"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method Not allowed",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "serviceLevelObjective"
+      }
+    },
+    "/serviceLevelSpecification": {
+      "get": {
+        "tags": [
+          "serviceLevelSpecification"
+        ],
+        "summary": "List or find ServiceLevelSpecification objects",
+        "description": "This operation list or find ServiceLevelSpecification entities",
+        "operationId": "listServiceLevelSpecification",
+        "parameters": [
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "Comma-separated properties to be provided in response",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Requested index for start of resources to be provided in response",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Requested number of resources to be provided in response",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "headers": {
+              "X-Total-Count": {
+                "description": "Total number of items matching criteria",
+                "schema": {
+                  "type": "integer"
+                }
+              },
+              "X-Result-Count": {
+                "description": "Actual number of items returned in the response body",
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            },
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ServiceLevelSpecification"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method Not allowed",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "serviceLevelSpecification"
+        ],
+        "summary": "Creates a ServiceLevelSpecification",
+        "description": "This operation creates a ServiceLevelSpecification entity.",
+        "operationId": "createServiceLevelSpecification",
+        "requestBody": {
+          "description": "The ServiceLevelSpecification to be created",
+          "content": {
+            "application/json;charset=utf-8": {
+              "schema": {
+                "$ref": "#/components/schemas/ServiceLevelSpecification_Create"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServiceLevelSpecification"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method Not allowed",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "serviceLevelSpecification"
+      }
+    },
+    "/serviceLevelSpecification/{id}": {
+      "get": {
+        "tags": [
+          "serviceLevelSpecification"
+        ],
+        "summary": "Retrieves a ServiceLevelSpecification by ID",
+        "description": "This operation retrieves a ServiceLevelSpecification entity. Attribute selection is enabled for all first level attributes.",
+        "operationId": "retrieveServiceLevelSpecification",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Identifier of the ServiceLevelSpecification",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "Comma-separated properties to provide in response",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServiceLevelSpecification"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method Not allowed",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "serviceLevelSpecification"
+        ],
+        "summary": "Deletes a ServiceLevelSpecification",
+        "description": "This operation deletes a ServiceLevelSpecification entity.",
+        "operationId": "deleteServiceLevelSpecification",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Identifier of the ServiceLevelSpecification",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Deleted",
+            "content": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method Not allowed",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "serviceLevelSpecification"
+        ],
+        "summary": "Updates partially a ServiceLevelSpecification",
+        "description": "This operation updates partially a ServiceLevelSpecification entity.",
+        "operationId": "patchServiceLevelSpecification",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Identifier of the ServiceLevelSpecification",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The ServiceLevelSpecification to be updated",
+          "content": {
+            "application/json;charset=utf-8": {
+              "schema": {
+                "$ref": "#/components/schemas/ServiceLevelSpecification_Update"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Updated",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServiceLevelSpecification"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method Not allowed",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "serviceLevelSpecification"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "EntityRef": {
+        "required": [
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "unique identifier"
+          },
+          "href": {
+            "type": "string",
+            "description": "Hyperlink reference",
+            "format": "uri"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the related entity."
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class",
+            "example": "ResourceSpecification"
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships",
+            "format": "uri",
+            "example": "https://mycsp.com:8080/tmf-api/schema/Resource/LogicalResourceSpecification.schema.json"
+          },
+          "@type": {
+            "type": "string",
+            "description": "When sub-classing, this defines the sub-class Extensible name",
+            "example": "LogicalResourceSpecification"
+          },
+          "@referredType": {
+            "type": "string",
+            "description": "The actual type of the target instance when needed for disambiguation."
+          }
+        },
+        "description": "Entity reference schema to be use for all entityRef class."
+      },
+      "RelatedEntity": {
+        "required": [
+          "@referredType",
+          "id",
+          "role"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "unique identifier"
+          },
+          "href": {
+            "type": "string",
+            "description": "Hyperlink reference",
+            "format": "uri"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the related entity."
+          },
+          "role": {
+            "type": "string",
+            "description": "The role of an entity."
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class",
+            "example": "ResourceSpecification"
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships",
+            "format": "uri",
+            "example": "https://mycsp.com:8080/tmf-api/schema/Resource/LogicalResourceSpecification.schema.json"
+          },
+          "@type": {
+            "type": "string",
+            "description": "When sub-classing, this defines the sub-class Extensible name",
+            "example": "LogicalResourceSpecification"
+          },
+          "@referredType": {
+            "type": "string",
+            "description": "The actual type of the target instance when needed for disambiguation."
+          }
+        },
+        "description": "A reference to an entity, where the type of the entity is not known in advance."
+      },
+      "ServiceLevelObjective": {
+        "type": "object",
+        "description": "Service level objectives are defined in terms of parameters and metrics, thresholds, and tolerances associated with the parameters.",
+        "properties": {
+          "href": {
+            "type": "string",
+            "description": "The hyperlink reference"
+          },
+          "id": {
+            "type": "string",
+            "description": "The unique identifier"
+          },
+          "conformancePeriod": {
+            "$ref": "#/components/schemas/TimePeriod"
+          },
+          "conformanceTarget": {
+            "type": "string",
+            "description": "A value used to determine if Service Level Objective is met. \nThe data type should be adjusted case by case."
+          },
+          "graceTimes": {
+            "type": "string",
+            "description": "The number of times an objective can remain un-updated without \na violation of a Service Level Agreement in reference to a measurement period and/or Service Level Agreement reporting period."
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the service level objectives."
+          },
+          "thresholdTarget": {
+            "type": "string",
+            "description": "A value that used to specify when a warning should be used \nthat indicates an objective is danger of not being met. Notice, the data type should be adjusted case by case."
+          },
+          "tolerancePeriod": {
+            "$ref": "#/components/schemas/TimeInterval"
+          },
+          "toleranceTarget": {
+            "type": "string",
+            "description": "A value that specifies the allowable variation of a conformance \nTarget. The data type should be adjusted case by case."
+          },
+          "validFor": {
+            "$ref": "#/components/schemas/TimePeriod"
+          },
+          "keyIndicator": {
+            "$ref": "#/components/schemas/KeyIndicator"
+          },
+          "consequence": {
+            "type": "array",
+            "description": "A list of consequences for this objective.",
+            "items": {
+              "$ref": "#/components/schemas/ServiceLevelSpecConsequence"
+            }
+          },
+          "threshold": {
+            "type": "array",
+            "description": "A list of thresholds that applies to this objective.",
+            "items": {
+              "$ref": "#/components/schemas/ServiceLevelObjectiveThreshold"
+            },
+            "minItems": 1
+          },
+          "applicability": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApplicableTimePeriod"
+            },
+            "description": "The SLO applicability in terms of timing."
+          },
+          "@type": {
+            "type": "string",
+            "description": "When sub-classing, this defines the sub-class extensible name."
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class."
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships."
+          }
+        }
+      },
+      "ServiceLevelObjective_Create": {
+        "type": "object",
+        "description": "Service level objectives are defined in terms of parameters and metrics, thresholds, and tolerances associated with the parameters.",
+        "required": [
+          "conformanceTarget",
+          "keyIndicator"
+        ],
+        "properties": {
+          "href": {
+            "type": "string",
+            "description": "The hyperlink reference."
+          },
+          "id": {
+            "type": "string",
+            "description": "The unique identifier."
+          },
+          "conformancePeriod": {
+            "$ref": "#/components/schemas/TimePeriod"
+          },
+          "conformanceTarget": {
+            "type": "string",
+            "description": "A value used to determine if Service Level Objective is met. \nThe data type should be adjusted case by case."
+          },
+          "graceTimes": {
+            "type": "string",
+            "description": "The number of times an objective can remain un-updated without \na violation of a Service Level Agreement in reference to a measurement period and/or Service Level Agreement reporting period."
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the service level objectives."
+          },
+          "thresholdTarget": {
+            "type": "string",
+            "description": "A value that used to specify when a warning should be used \nthat indicates an objective is danger of not being met. Notice, the data type should be adjusted case by case."
+          },
+          "tolerancePeriod": {
+            "$ref": "#/components/schemas/TimeInterval"
+          },
+          "toleranceTarget": {
+            "type": "string",
+            "description": "A value that specifies the allowable variation of a conformance \nTarget. The data type should be adjusted case by case."
+          },
+          "validFor": {
+            "$ref": "#/components/schemas/TimePeriod"
+          },
+          "keyIndicator": {
+            "$ref": "#/components/schemas/KeyIndicator"
+          },
+          "consequence": {
+            "type": "array",
+            "description": "A list of consequences for this objective.",
+            "items": {
+              "$ref": "#/components/schemas/ServiceLevelSpecConsequence"
+            }
+          },
+          "threshold": {
+            "type": "array",
+            "description": "A list of thresholds that applies to this objective.",
+            "items": {
+              "$ref": "#/components/schemas/ServiceLevelObjectiveThreshold"
+            },
+            "minItems": 1
+          },
+          "applicability": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApplicableTimePeriod"
+            },
+            "description": "The SLO applicability in terms of timing."
+          },
+          "@type": {
+            "type": "string",
+            "description": "When sub-classing, this defines the sub-class Extensible name."
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class."
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships."
+          }
+        }
+      },
+      "ServiceLevelObjective_Update": {
+        "type": "object",
+        "description": "Service level objectives are defined in terms of parameters and metrics, thresholds, and tolerances associated with the parameters.",
+        "properties": {
+          "conformancePeriod": {
+            "$ref": "#/components/schemas/TimePeriod"
+          },
+          "conformanceTarget": {
+            "type": "string",
+            "description": "A value used to determine if Service Level Objective is met. \nThe data type should be adjusted case by case."
+          },
+          "graceTimes": {
+            "type": "string",
+            "description": "The number of times an objective can remain un-updated without \na violation of a Service Level Agreement in reference to a measurement period and/or Service Level Agreement reporting period."
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the service level objectives."
+          },
+          "thresholdTarget": {
+            "type": "string",
+            "description": "A value that used to specify when a warning should be used \nthat indicates an objective is danger of not being met. Notice, the data type should be adjusted case by case."
+          },
+          "tolerancePeriod": {
+            "$ref": "#/components/schemas/TimeInterval"
+          },
+          "toleranceTarget": {
+            "type": "string",
+            "description": "A value that specifies the allowable variation of a conformance \nTarget. The data type should be adjusted case by case."
+          },
+          "keyIndicator": {
+            "$ref": "#/components/schemas/KeyIndicator"
+          },
+          "consequence": {
+            "type": "array",
+            "description": "A list of consequences for this objective.",
+            "items": {
+              "$ref": "#/components/schemas/ServiceLevelSpecConsequence"
+            }
+          },
+          "threshold": {
+            "type": "array",
+            "description": "A list of Thresholds that applies to this objective.",
+            "items": {
+              "$ref": "#/components/schemas/ServiceLevelObjectiveThreshold"
+            },
+            "minItems": 1
+          },
+          "applicability": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApplicableTimePeriod"
+            },
+            "description": "The SLO applicability in terms of timing."
+          },
+          "@type": {
+            "type": "string",
+            "description": "When sub-classing, this defines the sub-class Extensible name."
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class."
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships."
+          }
+        }
+      },
+      "ServiceLevelObjectiveRef": {
+        "required": [
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The identifier of a service level object."
+          },
+          "href": {
+            "type": "string",
+            "description": "The hyperlink to access a service level object."
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class"
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships",
+            "format": "uri"
+          },
+          "@type": {
+            "type": "string",
+            "description": "When sub-classing, this defines the sub-class entity name"
+          },
+          "@referredType": {
+            "type": "string",
+            "description": "The actual type of the target instance when needed for disambiguation."
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of Service Level Objective."
+          }
+        },
+        "description": "A set of Service Level Objectives that are contained in the Service Level Specification."
+      },
+      "ServiceLevelSpecConsequence": {
+        "type": "object",
+        "description": "A target/threshold crossing or a target/threshold ceased to be crossing results in a consequence.",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "A word, term, or phrase by which a Consequence is known and distinguished from other measurements."
+          },
+          "description": {
+            "type": "string",
+            "description": "A description of a Consequence."
+          },
+          "prescribedAction": {
+            "$ref": "#/components/schemas/PrescribedAction"
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class."
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships."
+          },
+          "@type": {
+            "type": "string"
+          }
+        }
+      },
+      "ServiceLevelSpecification": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The identifier to a service level specification."
+          },
+          "href": {
+            "type": "string",
+            "description": "The hyperlink to access a service level specification."
+          },
+          "description": {
+            "type": "string",
+            "description": "A brief introduction of a service level specification."
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of Service Level Specification"
+          },
+          "relatedServiceLevelObjective": {
+            "type": "array",
+            "description": "A list of objectives related to this service level specification",
+            "items": {
+              "$ref": "#/components/schemas/ServiceLevelObjectiveRef"
+            }
+          },
+          "validFor": {
+            "$ref": "#/components/schemas/TimePeriod"
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class"
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships",
+            "format": "uri"
+          },
+          "@type": {
+            "type": "string",
+            "description": "When sub-classing, this defines the sub-class entity name"
+          }
+        },
+        "description": "A Service Level Specification represents a pre-defined or negotiated set of Service Level \nObjectives. In addition, certain consequences are associated with not meeting the Service Level \nObjectives. Service Level Agreements are expressed in terms of Service Level Specifications."
+      },
+      "ServiceLevelSpecification_Create": {
+        "required": [
+          "name",
+          "relatedServiceLevelObjective"
+        ],
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "A brief introduction of a service level specification."
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of Service Level Specification"
+          },
+          "relatedServiceLevelObjective": {
+            "minItems": 1,
+            "type": "array",
+            "description": "A list of objectives related to this service level specification",
+            "items": {
+              "$ref": "#/components/schemas/ServiceLevelObjectiveRef"
+            }
+          },
+          "validFor": {
+            "$ref": "#/components/schemas/TimePeriod"
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class"
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships",
+            "format": "uri"
+          },
+          "@type": {
+            "type": "string",
+            "description": "When sub-classing, this defines the sub-class entity name"
+          }
+        },
+        "description": "A Service Level Specification represents a pre-defined or negotiated set of Service Level \nObjectives. In addition, certain consequences are associated with not meeting the Service Level \nObjectives. Service Level Agreements are expressed in terms of Service Level Specifications.\nSkipped properties: id,href"
+      },
+      "ServiceLevelSpecification_Update": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "A brief introduction of a service level specification."
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of Service Level Specification"
+          },
+          "relatedServiceLevelObjective": {
+            "type": "array",
+            "description": "A list of objectives related to this service level specification",
+            "items": {
+              "$ref": "#/components/schemas/ServiceLevelObjectiveRef"
+            }
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class"
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships",
+            "format": "uri"
+          },
+          "@type": {
+            "type": "string",
+            "description": "When sub-classing, this defines the sub-class entity name"
+          }
+        },
+        "description": "A Service Level Specification represents a pre-defined or negotiated set of Service Level \nObjectives. In addition, certain consequences are associated with not meeting the Service Level \nObjectives. Service Level Agreements are expressed in terms of Service Level Specifications.\nSkipped properties: id,href,validFor"
+      },
+      "TimePeriod": {
+        "type": "object",
+        "properties": {
+          "endDateTime": {
+            "type": "string",
+            "description": "End of the time period, using IETC-RFC-3339 format",
+            "format": "date-time",
+            "example": "1985-04-12T23:20:50.52Z"
+          },
+          "startDateTime": {
+            "type": "string",
+            "description": "Start of the time period, using IETC-RFC-3339 format. If you define a start, you must also define an end",
+            "format": "date-time",
+            "example": "1985-04-12T23:20:50.52Z"
+          }
+        },
+        "description": "A period of time, either as a deadline (endDateTime only) a startDateTime only, or both"
+      },
+      "Error": {
+        "required": [
+          "code",
+          "reason"
+        ],
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Application relevant detail, defined in the API or a common list."
+          },
+          "reason": {
+            "type": "string",
+            "description": "Explanation of the reason for the error which can be shown to a client user."
+          },
+          "message": {
+            "type": "string",
+            "description": "More details and corrective actions related to the error which can be shown to a client user."
+          },
+          "status": {
+            "type": "string",
+            "description": "HTTP Error code extension"
+          },
+          "referenceError": {
+            "type": "string",
+            "description": "URI of documentation describing the error.",
+            "format": "uri"
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class."
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships",
+            "format": "uri"
+          },
+          "@type": {
+            "type": "string",
+            "description": "When sub-classing, this defines the sub-class entity name."
+          }
+        },
+        "description": "Used when an API throws an Error, typically with a HTTP error response-code (3xx, 4xx, 5xx)"
+      },
+      "KeyIndicator": {
+        "type": "object",
+        "description": "KeyIndicators are defined in terms of parameters and metrics, thresholds, and tolerances \nassociated with the parameters.",
+        "properties": {
+          "href": {
+            "type": "string",
+            "description": "The hyperlink reference."
+          },
+          "id": {
+            "type": "string",
+            "description": "The unique identifier."
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the key indicator."
+          },
+          "category": {
+            "type": "string",
+            "description": "A string that specifies whether the key indicator is technology specific, service specific, or technology/service independent."
+          },
+          "isBundled": {
+            "type": "boolean",
+            "description": "A boolean that specifies whether the key indicator represents a single key indicator (false) or a key indicator that represents an aggregation (true)."
+          },
+          "transformationAlgorithmOfKQI": {
+            "type": "string",
+            "description": "The description of a logical step-by-step procedure used to calculate the value of a KQI."
+          },
+          "indicatorType": {
+            "type": "string",
+            "description": "Type of Key Indicator are Key Quality Indicator (KQI) or Key Performance Indicator (KPI).",
+            "enum": [
+              "KQI",
+              "KPI"
+            ]
+          },
+          "validFor": {
+            "$ref": "#/components/schemas/TimePeriod"
+          },
+          "keyIndicatorRelationship": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/KeyIndicatorRelationship"
+            },
+            "description": "A list of key indicator relationships related to this object."
+          },
+          "relatedEntity": {
+            "type": "array",
+            "description": "A list of entities related to this parameter.",
+            "items": {
+              "$ref": "#/components/schemas/RelatedEntity"
+            }
+          },
+          "@type": {
+            "type": "string",
+            "description": "When sub-classing, this defines the sub-class Extensible name."
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class."
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships."
+          }
+        }
+      },
+      "KeyIndicatorRelationship": {
+        "type": "object",
+        "description": "A uni-directionmal relationship from this entity to a target entity instance.",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "href": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "relationshipType": {
+            "type": "string",
+            "description": "Type of relationship such as \"contains\", \"required\", ..."
+          },
+          "role": {
+            "type": "string",
+            "description": "The association role for this entity."
+          },
+          "validFor": {
+            "$ref": "#/components/schemas/TimePeriod"
+          },
+          "associationSpec": {
+            "$ref": "#/components/schemas/EntityRef"
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class."
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships."
+          },
+          "@referredType": {
+            "type": "string"
+          },
+          "@type": {
+            "type": "string"
+          }
+        }
+      },
+      "PrescribedAction": {
+        "type": "object",
+        "description": "Contains information on a prescribed action that should be applied.",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The id given to the action."
+          },
+          "href": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name given to the action."
+          },
+          "actionType": {
+            "type": "string",
+            "description": "The type of action.",
+            "enum": [
+              "ProcessFlow",
+              "Task",
+              "Notification"
+            ]
+          },
+          "input": {
+            "$ref": "#/components/schemas/Any"
+          },
+          "output": {
+            "$ref": "#/components/schemas/Any"
+          },
+          "headers": {
+            "$ref": "#/components/schemas/Any"
+          },
+          "description": {
+            "type": "string",
+            "description": "A free-form description of the prescribed action."
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class."
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships."
+          },
+          "@type": {
+            "type": "string"
+          }
+        }
+      },
+      "ApplicableTimePeriod": {
+        "type": "object",
+        "description": "The period of time for which Capacity or CapacityDemand applies.",
+        "properties": {
+          "dayOfWeek": {
+            "type": "string",
+            "description": "A day or days representing when the schedule is applicable. For example 2, 3 represent Monday and Tuesday."
+          },
+          "fromToDateTime": {
+            "$ref": "#/components/schemas/TimePeriod"
+          },
+          "rangeInterval": {
+            "type": "string",
+            "description": "An indicator that specifies the inclusion or exclusion of the from and to DateTime attributes. \r\nPossible values are \"open\", \"closed\", \"closedBottom\" and \"closedTop\"."
+          },
+          "validFor": {
+            "$ref": "#/components/schemas/TimePeriod"
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class."
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships."
+          },
+          "@type": {
+            "type": "string"
+          }
+        }
+      },
+      "ServiceLevelObjectiveThreshold": {
+        "type": "object",
+        "description": "A threshold base entity containing threshold rules.This entity is mandatory.",
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "A description of the threshold."
+          },
+          "id": {
+            "type": "string",
+            "description": "The unique identifier."
+          },
+          "name": {
+            "type": "string",
+            "description": "A word, term, or phrase by which a threshold is known and distinguished from other thresholds."
+          },
+          "thresholdType": {
+            "type": "string",
+            "description": "The Threshold Type may be either LogicDefinition or PreDefined.",
+            "enum": [
+              "LogicDefinition",
+              "PreDefined"
+            ]
+          },
+          "consequence": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ServiceLevelSpecConsequence"
+            },
+            "description": "A threshold crossing or a threshold ceased to be crossing results in a consequence."
+          },
+          "thresholdCondition": {
+            "type": "string",
+            "enum": [
+              "Raise",
+              "Clear"
+            ],
+            "description": "A concrete threshold may have two possible values: \\\"Raise\\\" - a threshold was crossed or \\\"Clear\\\" - a threshold ceased crossing."
+          },
+          "applicability": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApplicableTimePeriod"
+            },
+            "description": "The threshold applicability in terms of timing."
+          },
+          "upperBound": {
+            "$ref": "#/components/schemas/Quantity"
+          },
+          "lowerBound": {
+            "$ref": "#/components/schemas/Quantity"
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class."
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships."
+          },
+          "@type": {
+            "type": "string"
+          }
+        }
+      },
+      "Quantity": {
+        "type": "object",
+        "description": "An amount in a given unit.",
+        "properties": {
+          "amount": {
+            "type": "number",
+            "format": "float",
+            "default": 1,
+            "description": "Numeric value in a given unit."
+          },
+          "units": {
+            "type": "string",
+            "description": "Unit"
+          }
+        }
+      },
+      "Any": {
+        "type": "object"
+      },
+      "TimeInterval": {
+        "required": [
+          "startTime",
+          "endTime"
+        ],
+        "type": "object",
+        "properties": {
+          "startTime": {
+            "type": "string",
+            "pattern": "^([0]?[0-9]|1[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]",
+            "description": "Start of the time interval in hours, minutes and seconds.",
+            "format": "time",
+            "example": "00:00:00"
+          },
+          "endTime": {
+            "type": "string",
+            "pattern": "^([0]?[0-9]|1[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]",
+            "description": "End of the time interval in hours, minutes and seconds.",
+            "format": "time",
+            "example": "23:59:59"
+          }
+        },
+        "description": "An interval of time from start- to endTime. If a time zone is required, it must be determined from the context."
+      }
+    }
+  },
+  "x-original-swagger-version": "2.0"
+}

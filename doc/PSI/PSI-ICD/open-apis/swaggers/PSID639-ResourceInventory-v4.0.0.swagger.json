@@ -1,0 +1,1997 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "API Resource Inventory Management",
+    "description": "## TMF API Reference: TMF639 - Resource Inventory \n\n### Release : 19.5 - December 2019\n\nResource Inventory  API goal is to provide the ability to manage Resources.\n\n### Operations\nResource Inventory API performs the following operations on the resources :\n- Retrieve an entity or a collection of entities depending on filter criteria\n- Partial update of an entity (including updating rules)\n- Create an entity (including default values and creation rules)\n- Delete an entity (for administration purposes)\n- Manage notification of events",
+    "version": "4.0.0"
+  },
+  "servers": [
+    {
+      "url": "/psi-api/resourceInventory/v1/"
+    }
+  ],
+  "tags": [
+    {
+      "name": "resource",
+      "description": "Resource Inventory API"
+    }
+  ],
+  "paths": {
+    "/resource": {
+      "get": {
+        "tags": [
+          "resource"
+        ],
+        "summary": "List or find Resource objects",
+        "description": "This operation list or find Resource entities",
+        "operationId": "listResource",
+        "parameters": [
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "Comma-separated properties to be provided in response",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Requested index for start of resources to be provided in response",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Requested number of resources to be provided in response",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "headers": {
+              "X-Total-Count": {
+                "description": "Total number of items matching criteria",
+                "schema": {
+                  "type": "integer"
+                }
+              },
+              "X-Result-Count": {
+                "description": "Actual number of items returned in the response body",
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            },
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Resource"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method Not allowed",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "resource"
+        ],
+        "summary": "Creates a Resource",
+        "description": "This operation creates a Resource entity.",
+        "operationId": "createResource",
+        "requestBody": {
+          "description": "The Resource to be created",
+          "content": {
+            "application/json;charset=utf-8": {
+              "schema": {
+                "$ref": "#/components/schemas/Resource_Create"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resource"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method Not allowed",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "resource"
+      }
+    },
+    "/resource/{id}": {
+      "get": {
+        "tags": [
+          "resource"
+        ],
+        "summary": "Retrieves a Resource by ID",
+        "description": "This operation retrieves a Resource entity. Attribute selection is enabled for all first level attributes.",
+        "operationId": "retrieveResource",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Identifier of the Resource",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "Comma-separated properties to provide in response",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resource"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method Not allowed",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "resource"
+        ],
+        "summary": "Deletes a Resource",
+        "description": "This operation deletes a Resource entity.",
+        "operationId": "deleteResource",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Identifier of the Resource",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Deleted",
+            "content": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method Not allowed",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "resource"
+        ],
+        "summary": "Updates partially a Resource",
+        "description": "This operation updates partially a Resource entity.",
+        "operationId": "patchResource",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Identifier of the Resource",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The Resource to be updated",
+          "content": {
+            "application/json;charset=utf-8": {
+              "schema": {
+                "$ref": "#/components/schemas/Resource_Update"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Updated",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resource"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method Not allowed",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "resource"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Any": {
+        "type": "object"
+      },
+      "AttachmentOrDocumentRef": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for this particular attachment",
+            "example": "4aafacbd-11ff-4dc8-b445-305f2215715f"
+          },
+          "href": {
+            "type": "string",
+            "description": "URI for this Attachment",
+            "format": "uri",
+            "example": "http://host/Attachment/4aafacbd-11ff-4dc8-b445-305f2215715f"
+          },
+          "attachmentType": {
+            "type": "string",
+            "description": "Attachment type such as video, picture",
+            "example": "video"
+          },
+          "description": {
+            "type": "string",
+            "description": "A narrative text describing the content of the attachment",
+            "example": "Photograph of the Product"
+          },
+          "mimeType": {
+            "type": "string",
+            "description": "Attachment mime type such as extension file for video, picture and document"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the attachment"
+          },
+          "url": {
+            "type": "string",
+            "description": "Uniform Resource Locator, is a web page address (a subset of URI)",
+            "format": "uri",
+            "example": "http://host/Content/4aafacbd-11ff-4dc8-b445-305f2215715f"
+          },
+          "size": {
+            "$ref": "#/components/schemas/Quantity"
+          },
+          "validFor": {
+            "$ref": "#/components/schemas/TimePeriod"
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class"
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships",
+            "format": "uri"
+          },
+          "@type": {
+            "type": "string",
+            "description": "When sub-classing, this defines the sub-class Extensible name"
+          },
+          "@referredType": {
+            "type": "string",
+            "description": "The actual type of the target instance when needed for disambiguation."
+          }
+        },
+        "description": "Reference to an attachment or a document. A document comprises of multiple attachments, while a single attachment has uri, mimeType, size, etc."
+      },
+      "Characteristic": {
+        "required": [
+          "name",
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the characteristic"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the characteristic"
+          },
+          "valueType": {
+            "type": "string",
+            "description": "Data type of the value of the characteristic"
+          },
+          "characteristicRelationship": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CharacteristicRelationship"
+            }
+          },
+          "value": {
+            "$ref": "#/components/schemas/Any"
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class"
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships",
+            "format": "uri"
+          },
+          "@type": {
+            "type": "string",
+            "description": "When sub-classing, this defines the sub-class Extensible name"
+          },
+          "unitOfMeasure": {
+            "type": "string",
+            "description": "A length, surface, volume, dry measure, liquid measure, money, weight, time, and the like. In general, a determinate quantity or magnitude of the kind designated, taken as a standard of comparison for others of the same kind, in assigning them numerical values, as 1 foot, 1 yard, 1 mile, 1 square foot."
+          }
+        },
+        "description": "Describes a given characteristic of an object or entity through a name/value pair."
+      },
+      "CharacteristicRelationship": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the characteristic"
+          },
+          "href": {
+            "type": "string",
+            "description": "Hyperlink reference",
+            "format": "uri"
+          },
+          "relationshipType": {
+            "type": "string",
+            "description": "The type of relationship"
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class"
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships",
+            "format": "uri"
+          },
+          "@type": {
+            "type": "string",
+            "description": "When sub-classing, this defines the sub-class Extensible name"
+          }
+        },
+        "description": "Another Characteristic that is related to the current Characteristic;"
+      },
+      "ConstraintRef": {
+        "required": [
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "unique identifier"
+          },
+          "href": {
+            "type": "string",
+            "description": "Hyperlink reference",
+            "format": "uri"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the related entity."
+          },
+          "version": {
+            "type": "string",
+            "description": "constraint version"
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class"
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships",
+            "format": "uri"
+          },
+          "@type": {
+            "type": "string",
+            "description": "When sub-classing, this defines the sub-class Extensible name"
+          },
+          "@referredType": {
+            "type": "string",
+            "description": "The actual type of the target instance when needed for disambiguation."
+          }
+        },
+        "description": "Constraint reference. The Constraint resource represents a policy/rule applied to an entity or entity spec."
+      },
+      "Feature": {
+        "required": [
+          "featureCharacteristic",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the feature."
+          },
+          "isBundle": {
+            "type": "boolean",
+            "description": "True if this is a feature group. Default is false."
+          },
+          "isEnabled": {
+            "type": "boolean",
+            "description": "True if this feature is enabled. Default is true."
+          },
+          "name": {
+            "type": "string",
+            "description": "This is the name for the feature."
+          },
+          "constraint": {
+            "type": "array",
+            "description": "This is a list of feature constraints.",
+            "items": {
+              "$ref": "#/components/schemas/ConstraintRef"
+            }
+          },
+          "featureCharacteristic": {
+            "minItems": 1,
+            "type": "array",
+            "description": "This is a list of Characteristics for a particular feature.",
+            "items": {
+              "$ref": "#/components/schemas/Characteristic"
+            }
+          },
+          "featureRelationship": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FeatureRelationship"
+            }
+          }
+        },
+        "description": "Configuration feature."
+      },
+      "FeatureRelationship": {
+        "required": [
+          "name",
+          "relationshipType"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the target feature."
+          },
+          "name": {
+            "type": "string",
+            "description": "This is the name of the target feature."
+          },
+          "relationshipType": {
+            "type": "string",
+            "description": "This is the type of the feature relationship."
+          },
+          "validFor": {
+            "$ref": "#/components/schemas/TimePeriod"
+          }
+        },
+        "description": "Configuration feature"
+      },
+      "LogicalResource": {
+        "required": [
+          "href",
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "unique identifier"
+          },
+          "href": {
+            "type": "string",
+            "description": "Hyperlink reference",
+            "format": "uri"
+          },
+          "category": {
+            "type": "string",
+            "description": "Category of the concrete resource. e.g Gold, Silver for MSISDN concrete resource"
+          },
+          "description": {
+            "type": "string",
+            "description": "free-text description of the resource"
+          },
+          "endOperatingDate": {
+            "type": "string",
+            "description": "A date time( DateTime). The date till the resource is operating",
+            "format": "date-time"
+          },
+          "name": {
+            "type": "string",
+            "description": "A string used to give a name to the resource"
+          },
+          "resourceVersion": {
+            "type": "string",
+            "description": "A field that identifies the specific version of an instance of a resource."
+          },
+          "startOperatingDate": {
+            "type": "string",
+            "description": "A date time( DateTime). The date from which the resource is operating",
+            "format": "date-time"
+          },
+          "value": {
+            "type": "string",
+            "description": "the value of the logical resource. E.g '0746712345' for  MSISDN's"
+          },
+          "activationFeature": {
+            "type": "array",
+            "description": "Configuration features",
+            "items": {
+              "$ref": "#/components/schemas/Feature"
+            }
+          },
+          "administrativeState": {
+            "$ref": "#/components/schemas/ResourceAdministrativeStateType"
+          },
+          "attachment": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AttachmentOrDocumentRef"
+            }
+          },
+          "note": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Note"
+            }
+          },
+          "operationalState": {
+            "$ref": "#/components/schemas/ResourceOperationalStateType"
+          },
+          "place": {
+            "$ref": "#/components/schemas/RelatedPlaceRefOrValue"
+          },
+          "relatedParty": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RelatedParty"
+            }
+          },
+          "resourceCharacteristic": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Characteristic"
+            }
+          },
+          "resourceRelationship": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ResourceRelationship"
+            }
+          },
+          "resourceSpecification": {
+            "$ref": "#/components/schemas/ResourceSpecificationRef"
+          },
+          "resourceStatus": {
+            "$ref": "#/components/schemas/ResourceStatusType"
+          },
+          "usageState": {
+            "$ref": "#/components/schemas/ResourceUsageStateType"
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class"
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships",
+            "format": "uri"
+          },
+          "@type": {
+            "type": "string",
+            "description": "When sub-classing, this defines the sub-class Extensible name"
+          }
+        },
+        "description": "Logic resource is a type of resource that describes the common set of attributes shared by all concrete logical resources (e.g. TPE, MSISDN, IP Addresses) in the inventory."
+      },
+      "Note": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Identifier of the note within its containing entity (may or may not be globally unique, depending on provider implementation)"
+          },
+          "href": {
+            "type": "string",
+            "description": "Hyperlink reference",
+            "format": "uri"
+          },
+          "author": {
+            "type": "string",
+            "description": "Author of the note"
+          },
+          "date": {
+            "type": "string",
+            "description": "Date of the note",
+            "format": "date-time"
+          },
+          "text": {
+            "type": "string",
+            "description": "Text of the note"
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class"
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships",
+            "format": "uri"
+          },
+          "@type": {
+            "type": "string",
+            "description": "When sub-classing, this defines the sub-class Extensible name"
+          }
+        },
+        "description": "Extra information about a given entity",
+        "required": [
+          "text"
+        ]
+      },
+      "PhysicalResource": {
+        "required": [
+          "href",
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "unique identifier"
+          },
+          "href": {
+            "type": "string",
+            "description": "Hyperlink reference",
+            "format": "uri"
+          },
+          "category": {
+            "type": "string",
+            "description": "Category of the concrete resource. e.g Gold, Silver for MSISDN concrete resource"
+          },
+          "description": {
+            "type": "string",
+            "description": "free-text description of the resource"
+          },
+          "endOperatingDate": {
+            "type": "string",
+            "description": "A date time( DateTime). The date till the resource is operating",
+            "format": "date-time"
+          },
+          "manufactureDate": {
+            "type": "string",
+            "description": "This is a string attribute that defines the date of manufacture of this item in the fixed format \"dd/mm/yyyy\". This is an optional attribute.",
+            "format": "date-time"
+          },
+          "name": {
+            "type": "string",
+            "description": "A string used to give a name to the resource"
+          },
+          "powerState": {
+            "type": "string",
+            "description": "This defines the current power status of the hardware item. Values include:\n\n  0:  Unknown\n  1:  Not Applicable\n  2:  No Power Applied\n  3: Full Power Applied\n  4:  Power Save - Normal\n  5:  Power Save - Degraded\n  6:  Power Save - Standby\n  7:  Power Save - Critical\n  8:  Power Save - Low Power Mode\n  9:  Power Save - Unknown\n 10: Power Cycle\n 11: Power Warning\n 12: Power Off"
+          },
+          "resourceVersion": {
+            "type": "string",
+            "description": "A field that identifies the specific version of an instance of a resource."
+          },
+          "serialNumber": {
+            "type": "string",
+            "description": "This is a string that represents a manufacturer-allocated number used to identify different instances of the same hardware item. The ModelNumber and PartNumber attributes are used to identify different types of hardware items. This is a REQUIRED attribute."
+          },
+          "startOperatingDate": {
+            "type": "string",
+            "description": "A date time( DateTime). The date from which the resource is operating",
+            "format": "date-time"
+          },
+          "versionNumber": {
+            "type": "string",
+            "description": "This is a string that identifies the version of this physical resource. This is an optional attribute."
+          },
+          "activationFeature": {
+            "type": "array",
+            "description": "Configuration features",
+            "items": {
+              "$ref": "#/components/schemas/Feature"
+            }
+          },
+          "administrativeState": {
+            "$ref": "#/components/schemas/ResourceAdministrativeStateType"
+          },
+          "attachment": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AttachmentOrDocumentRef"
+            }
+          },
+          "note": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Note"
+            }
+          },
+          "operationalState": {
+            "$ref": "#/components/schemas/ResourceOperationalStateType"
+          },
+          "place": {
+            "$ref": "#/components/schemas/RelatedPlaceRefOrValue"
+          },
+          "relatedParty": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RelatedParty"
+            }
+          },
+          "resourceCharacteristic": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Characteristic"
+            }
+          },
+          "resourceRelationship": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ResourceRelationship"
+            }
+          },
+          "resourceSpecification": {
+            "$ref": "#/components/schemas/ResourceSpecificationRef"
+          },
+          "resourceStatus": {
+            "$ref": "#/components/schemas/ResourceStatusType"
+          },
+          "usageState": {
+            "$ref": "#/components/schemas/ResourceUsageStateType"
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class"
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships",
+            "format": "uri"
+          },
+          "@type": {
+            "type": "string",
+            "description": "When sub-classing, this defines the sub-class Extensible name"
+          }
+        },
+        "description": "Physical resource is a type of resource that describes the common set of attributes shared by all concrete physical resources (e.g. EQUIPMENT) in the inventory."
+      },
+      "Place": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the place"
+          },
+          "href": {
+            "type": "string",
+            "description": "Unique reference of the place",
+            "format": "uri"
+          },
+          "name": {
+            "type": "string",
+            "description": "A user-friendly name for the place, such as [Paris Store], [London Store], [Main Home]"
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class"
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships",
+            "format": "uri"
+          },
+          "@type": {
+            "type": "string",
+            "description": "When sub-classing, this defines the sub-class Extensible name"
+          }
+        },
+        "description": "Place reference. Place defines the places where the products are sold or delivered."
+      },
+      "PlaceRef": {
+        "required": [
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "unique identifier"
+          },
+          "href": {
+            "type": "string",
+            "description": "Hyperlink reference",
+            "format": "uri"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the related entity."
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class"
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships",
+            "format": "uri"
+          },
+          "@type": {
+            "type": "string",
+            "description": "When sub-classing, this defines the sub-class Extensible name"
+          },
+          "@referredType": {
+            "type": "string",
+            "description": "The actual type of the target instance when needed for disambiguation."
+          }
+        },
+        "description": "Place reference. PlaceRef defines the placeRefs where the products are sold or delivered."
+      },
+      "Quantity": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "number",
+            "description": "Numeric value in a given unit",
+            "format": "float",
+            "default": 1.0
+          },
+          "units": {
+            "type": "string",
+            "description": "Unit"
+          }
+        },
+        "description": "An amount in a given unit"
+      },
+      "RelatedParty": {
+        "required": [
+          "@referredType",
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "unique identifier"
+          },
+          "href": {
+            "type": "string",
+            "description": "Hyperlink reference",
+            "format": "uri"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the related entity."
+          },
+          "role": {
+            "type": "string",
+            "description": "Role played by the related party"
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class"
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships",
+            "format": "uri"
+          },
+          "@type": {
+            "type": "string",
+            "description": "When sub-classing, this defines the sub-class Extensible name"
+          },
+          "@referredType": {
+            "type": "string",
+            "description": "The actual type of the target instance when needed for disambiguation."
+          }
+        },
+        "description": "Related Party reference. A related party defines party or party role linked to a specific entity."
+      },
+      "RelatedPlaceRefOrValue": {
+        "required": [
+          "role"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the place"
+          },
+          "href": {
+            "type": "string",
+            "description": "Unique reference of the place",
+            "format": "uri"
+          },
+          "name": {
+            "type": "string",
+            "description": "A user-friendly name for the place, such as [Paris Store], [London Store], [Main Home]"
+          },
+          "role": {
+            "type": "string"
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class"
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships",
+            "format": "uri"
+          },
+          "@type": {
+            "type": "string",
+            "description": "When sub-classing, this defines the sub-class Extensible name"
+          },
+          "@referredType": {
+            "type": "string",
+            "description": "The actual type of the target instance when needed for disambiguation."
+          }
+        },
+        "description": "Related Entity reference. A related place defines a place described by reference or by value linked to a specific entity. The polymorphic attributes @type, @schemaLocation & @referredType are related to the place entity and not the RelatedPlaceRefOrValue class itself"
+      },
+      "Resource": {
+        "required": [
+          "href",
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Identifier of an instance of the resource. Required to be unique within the resource type.  Used in URIs as the identifier for specific instances of a type."
+          },
+          "href": {
+            "type": "string",
+            "description": "The URI for the object itself.",
+            "format": "uri"
+          },
+          "category": {
+            "type": "string",
+            "description": "Category of the concrete resource. e.g Gold, Silver for MSISDN concrete resource"
+          },
+          "description": {
+            "type": "string",
+            "description": "free-text description of the resource"
+          },
+          "endOperatingDate": {
+            "type": "string",
+            "description": "A date time( DateTime). The date till the resource is operating",
+            "format": "date-time"
+          },
+          "name": {
+            "type": "string",
+            "description": "A string used to give a name to the resource"
+          },
+          "resourceVersion": {
+            "type": "string",
+            "description": "A field that identifies the specific version of an instance of a resource."
+          },
+          "startOperatingDate": {
+            "type": "string",
+            "description": "A date time( DateTime). The date from which the resource is operating",
+            "format": "date-time"
+          },
+          "activationFeature": {
+            "type": "array",
+            "description": "Configuration features",
+            "items": {
+              "$ref": "#/components/schemas/Feature"
+            }
+          },
+          "administrativeState": {
+            "$ref": "#/components/schemas/ResourceAdministrativeStateType"
+          },
+          "attachment": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AttachmentOrDocumentRef"
+            }
+          },
+          "note": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Note"
+            }
+          },
+          "operationalState": {
+            "$ref": "#/components/schemas/ResourceOperationalStateType"
+          },
+          "place": {
+            "$ref": "#/components/schemas/RelatedPlaceRefOrValue"
+          },
+          "relatedParty": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RelatedParty"
+            }
+          },
+          "resourceCharacteristic": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Characteristic"
+            }
+          },
+          "resourceRelationship": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ResourceRelationship"
+            }
+          },
+          "resourceSpecification": {
+            "$ref": "#/components/schemas/ResourceSpecificationRef"
+          },
+          "resourceStatus": {
+            "$ref": "#/components/schemas/ResourceStatusType"
+          },
+          "usageState": {
+            "$ref": "#/components/schemas/ResourceUsageStateType"
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class"
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships",
+            "format": "uri"
+          },
+          "@type": {
+            "type": "string",
+            "description": "When sub-classing, this defines the sub-class Extensible name"
+          }
+        },
+        "description": "Resource is an abstract entity that describes the common set of attributes shared by all concrete resources (e.g. TPE, EQUIPMENT) in the inventory."
+      },
+      "Resource_Create": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "category": {
+            "type": "string",
+            "description": "Category of the concrete resource. e.g Gold, Silver for MSISDN concrete resource"
+          },
+          "description": {
+            "type": "string",
+            "description": "free-text description of the resource"
+          },
+          "endOperatingDate": {
+            "type": "string",
+            "description": "A date time( DateTime). The date till the resource is operating",
+            "format": "date-time"
+          },
+          "name": {
+            "type": "string",
+            "description": "A string used to give a name to the resource"
+          },
+          "resourceVersion": {
+            "type": "string",
+            "description": "A field that identifies the specific version of an instance of a resource."
+          },
+          "startOperatingDate": {
+            "type": "string",
+            "description": "A date time( DateTime). The date from which the resource is operating",
+            "format": "date-time"
+          },
+          "activationFeature": {
+            "type": "array",
+            "description": "Configuration features",
+            "items": {
+              "$ref": "#/components/schemas/Feature"
+            }
+          },
+          "administrativeState": {
+            "$ref": "#/components/schemas/ResourceAdministrativeStateType"
+          },
+          "attachment": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AttachmentOrDocumentRef"
+            }
+          },
+          "note": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Note"
+            }
+          },
+          "operationalState": {
+            "$ref": "#/components/schemas/ResourceOperationalStateType"
+          },
+          "place": {
+            "$ref": "#/components/schemas/RelatedPlaceRefOrValue"
+          },
+          "relatedParty": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RelatedParty"
+            }
+          },
+          "resourceCharacteristic": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Characteristic"
+            }
+          },
+          "resourceRelationship": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ResourceRelationship"
+            }
+          },
+          "resourceSpecification": {
+            "$ref": "#/components/schemas/ResourceSpecificationRef"
+          },
+          "resourceStatus": {
+            "$ref": "#/components/schemas/ResourceStatusType"
+          },
+          "usageState": {
+            "$ref": "#/components/schemas/ResourceUsageStateType"
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class"
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships",
+            "format": "uri"
+          },
+          "@type": {
+            "type": "string",
+            "description": "When sub-classing, this defines the sub-class Extensible name"
+          },
+          "value": {
+            "type": "string",
+            "description": "The value of the logical resource. E.g '0746712345' for  MSISDN's."
+          },
+          "manufactureDate": {
+            "type": "string",
+            "format": "date-time",
+            "description": "This is a string attribute that defines the date of manufacture of this item in the fixed format \"dd/mm/yyyy\". This is an optional attribute."
+          },
+          "powerState": {
+            "type": "string",
+            "description": "This defines the current power status of the hardware item. Values include:\n\n  0:  Unknown\n  1:  Not Applicable\n  2:  No Power Applied\n  3: Full Power Applied\n  4:  Power Save - Normal\n  5:  Power Save - Degraded\n  6:  Power Save - Standby\n  7:  Power Save - Critical\n  8:  Power Save - Low Power Mode\n  9:  Power Save - Unknown\n 10: Power Cycle\n 11: Power Warning\n 12: Power Off"
+          },
+          "serialNumber": {
+            "type": "string",
+            "description": "This is a string that represents a manufacturer-allocated number used to identify different instances of the same hardware item. The ModelNumber and PartNumber attributes are used to identify different types of hardware items. This is a REQUIRED attribute."
+          },
+          "versionNumber": {
+            "type": "string",
+            "description": "This is a string that identifies the version of this physical resource. This is an optional attribute."
+          }
+        },
+        "description": "Resource is an abstract entity that describes the common set of attributes shared by all concrete resources (e.g. TPE, EQUIPMENT) in the inventory.\nSkipped properties: id,href"
+      },
+      "Resource_Update": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "type": "string",
+            "description": "Category of the concrete resource. e.g Gold, Silver for MSISDN concrete resource"
+          },
+          "description": {
+            "type": "string",
+            "description": "free-text description of the resource"
+          },
+          "endOperatingDate": {
+            "type": "string",
+            "description": "A date time( DateTime). The date till the resource is operating",
+            "format": "date-time"
+          },
+          "name": {
+            "type": "string",
+            "description": "A string used to give a name to the resource"
+          },
+          "resourceVersion": {
+            "type": "string",
+            "description": "A field that identifies the specific version of an instance of a resource."
+          },
+          "startOperatingDate": {
+            "type": "string",
+            "description": "A date time( DateTime). The date from which the resource is operating",
+            "format": "date-time"
+          },
+          "activationFeature": {
+            "type": "array",
+            "description": "Configuration features",
+            "items": {
+              "$ref": "#/components/schemas/Feature"
+            }
+          },
+          "administrativeState": {
+            "$ref": "#/components/schemas/ResourceAdministrativeStateType"
+          },
+          "attachment": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AttachmentOrDocumentRef"
+            }
+          },
+          "note": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Note"
+            }
+          },
+          "operationalState": {
+            "$ref": "#/components/schemas/ResourceOperationalStateType"
+          },
+          "place": {
+            "$ref": "#/components/schemas/RelatedPlaceRefOrValue"
+          },
+          "relatedParty": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RelatedParty"
+            }
+          },
+          "resourceCharacteristic": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Characteristic"
+            }
+          },
+          "resourceRelationship": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ResourceRelationship"
+            }
+          },
+          "resourceSpecification": {
+            "$ref": "#/components/schemas/ResourceSpecificationRef"
+          },
+          "resourceStatus": {
+            "$ref": "#/components/schemas/ResourceStatusType"
+          },
+          "usageState": {
+            "$ref": "#/components/schemas/ResourceUsageStateType"
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class"
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships",
+            "format": "uri"
+          },
+          "@type": {
+            "type": "string",
+            "description": "When sub-classing, this defines the sub-class Extensible name"
+          },
+          "value": {
+            "type": "string",
+            "description": "The value of the logical resource. E.g '0746712345' for  MSISDN's."
+          },
+          "manufactureDate": {
+            "type": "string",
+            "format": "date-time",
+            "description": "This is a string attribute that defines the date of manufacture of this item in the fixed format \"dd/mm/yyyy\". This is an optional attribute."
+          },
+          "powerState": {
+            "type": "string",
+            "description": "This defines the current power status of the hardware item. Values include:\n\n  0:  Unknown\n  1:  Not Applicable\n  2:  No Power Applied\n  3: Full Power Applied\n  4:  Power Save - Normal\n  5:  Power Save - Degraded\n  6:  Power Save - Standby\n  7:  Power Save - Critical\n  8:  Power Save - Low Power Mode\n  9:  Power Save - Unknown\n 10: Power Cycle\n 11: Power Warning\n 12: Power Off"
+          },
+          "serialNumber": {
+            "type": "string",
+            "description": "This is a string that represents a manufacturer-allocated number used to identify different instances of the same hardware item. The ModelNumber and PartNumber attributes are used to identify different types of hardware items. This is a REQUIRED attribute."
+          },
+          "versionNumber": {
+            "type": "string",
+            "description": "This is a string that identifies the version of this physical resource. This is an optional attribute."
+          }
+        },
+        "description": "Resource is an abstract entity that describes the common set of attributes shared by all concrete resources (e.g. TPE, EQUIPMENT) in the inventory.\nSkipped properties: id,href"
+      },
+      "ResourceAdministrativeStateType": {
+        "type": "string",
+        "description": "ResourceAdministrativeStateType enumerations",
+        "enum": [
+          "locked",
+          "unlocked",
+          "shutdown"
+        ]
+      },
+      "ResourceOperationalStateType": {
+        "type": "string",
+        "description": "ResourceOperationalStateType enumerations",
+        "enum": [
+          "enable",
+          "disable"
+        ]
+      },
+      "ResourceRef": {
+        "required": [
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "unique identifier"
+          },
+          "href": {
+            "type": "string",
+            "description": "Hyperlink reference",
+            "format": "uri"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the related entity."
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class"
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships",
+            "format": "uri"
+          },
+          "@type": {
+            "type": "string",
+            "description": "When sub-classing, this defines the sub-class Extensible name"
+          },
+          "@referredType": {
+            "type": "string",
+            "description": "The actual type of the target instance when needed for disambiguation."
+          },
+          "value": {
+            "type": "string",
+            "description": "The resource value that can be used to identify a resource with a public key (e.g.: a tel nr, an msisdn)."
+          }
+        }
+      },
+      "ResourceRefOrValue": {
+        "required": [
+          "href",
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Identifier of an instance of the resource. Required to be unique within the resource type.  Used in URIs as the identifier for specific instances of a type."
+          },
+          "href": {
+            "type": "string",
+            "description": "The URI for the object itself."
+          },
+          "category": {
+            "type": "string",
+            "description": "Category of the concrete resource. e.g Gold, Silver for MSISDN concrete resource"
+          },
+          "description": {
+            "type": "string",
+            "description": "free-text description of the resource"
+          },
+          "endOperatingDate": {
+            "type": "string",
+            "description": "A date time( DateTime). The date till the resource is operating",
+            "format": "date-time"
+          },
+          "name": {
+            "type": "string",
+            "description": "A string used to give a name to the resource"
+          },
+          "resourceVersion": {
+            "type": "string",
+            "description": "A field that identifies the specific version of an instance of a resource."
+          },
+          "startOperatingDate": {
+            "type": "string",
+            "description": "A date time( DateTime). The date from which the resource is operating",
+            "format": "date-time"
+          },
+          "activationFeature": {
+            "type": "array",
+            "description": "Configuration features",
+            "items": {
+              "$ref": "#/components/schemas/Feature"
+            }
+          },
+          "administrativeState": {
+            "$ref": "#/components/schemas/ResourceAdministrativeStateType"
+          },
+          "attachment": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AttachmentOrDocumentRef"
+            }
+          },
+          "note": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Note"
+            }
+          },
+          "operationalState": {
+            "$ref": "#/components/schemas/ResourceOperationalStateType"
+          },
+          "place": {
+            "$ref": "#/components/schemas/RelatedPlaceRefOrValue"
+          },
+          "relatedParty": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RelatedParty"
+            }
+          },
+          "resourceCharacteristic": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Characteristic"
+            }
+          },
+          "resourceRelationship": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ResourceRelationship"
+            }
+          },
+          "resourceSpecification": {
+            "$ref": "#/components/schemas/ResourceSpecificationRef"
+          },
+          "resourceStatus": {
+            "$ref": "#/components/schemas/ResourceStatusType"
+          },
+          "usageState": {
+            "$ref": "#/components/schemas/ResourceUsageStateType"
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class"
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships",
+            "format": "uri"
+          },
+          "@type": {
+            "type": "string",
+            "description": "When sub-classing, this defines the sub-class Extensible name"
+          },
+          "@referredType": {
+            "type": "string",
+            "description": "The actual type of the target instance when needed for disambiguation."
+          }
+        },
+        "description": "Resource is an abstract entity that describes the common set of attributes shared by all concrete resources. The polymorphic attributes @type, @schemaLocation & @referredType are related to the Resource entity and not the related ResourceRefOrValue class itself"
+      },
+      "ResourceRelationship": {
+        "required": [
+          "relationshipType",
+          "resource"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "unique identifier"
+          },
+          "href": {
+            "type": "string",
+            "description": "Hyperlink reference",
+            "format": "uri"
+          },
+          "relationshipType": {
+            "type": "string",
+            "description": "Type of the resource relationship, such as [bundled] if the resource is a bundle and you want to describe the bundled resources inside this bundle; [reliesOn] if the resource needs another already owned resource to rely on (eg: an option on an already owned mobile access resource) [targets] or [isTargeted] (depending on the way of expressing the link) for any other kind of links that may be useful",
+            "example": "bundled"
+          },
+          "resource": {
+            "$ref": "#/components/schemas/ResourceRefOrValue"
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class"
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships",
+            "format": "uri"
+          },
+          "@type": {
+            "type": "string",
+            "description": "When sub-classing, this defines the sub-class Extensible name"
+          }
+        },
+        "description": "Linked resources to the one instantiate, such as [bundled] if the resource is a bundle and you want to describe the bundled resources inside this bundle; [reliesOn] if the resource needs another already owned resource to rely on (e.g. an option on an already owned mobile access resource) [targets] or [isTargeted] (depending on the way of expressing the link) for any other kind of links that may be useful"
+      },
+      "ResourceSpecificationRef": {
+        "required": [
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "unique identifier"
+          },
+          "href": {
+            "type": "string",
+            "description": "Hyperlink reference",
+            "format": "uri"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the related entity."
+          },
+          "version": {
+            "type": "string",
+            "description": "Resource Specification version"
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class"
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships",
+            "format": "uri"
+          },
+          "@type": {
+            "type": "string",
+            "description": "When sub-classing, this defines the sub-class Extensible name"
+          },
+          "@referredType": {
+            "type": "string",
+            "description": "The actual type of the target instance when needed for disambiguation."
+          }
+        },
+        "description": "Resources are physical or non-physical components (or some combination of these) within an enterprise's infrastructure or inventory. They are typically consumed or used by services (for example a physical port assigned to a service) or contribute to the realization of a Product (for example, a SIM card). They can be drawn from the Application, Computing and Network domains, and include, for example, Network Elements, software, IT systems, content and information, and technology components.\nA ResourceSpecification is an abstract base class for representing a generic means for implementing a particular type of Resource. In essence, a ResourceSpecification defines the common attributes and relationships of a set of related Resources, while Resource defines a specific instance that is based on a particular ResourceSpecification."
+      },
+      "ResourceStatusType": {
+        "type": "string",
+        "description": "ResourceStatusType enumerations",
+        "enum": [
+          "standby",
+          "alarm",
+          "available",
+          "reserved",
+          "unknown",
+          "suspended"
+        ]
+      },
+      "ResourceUsageStateType": {
+        "type": "string",
+        "description": "ResourceUsageStateType enumerations",
+        "enum": [
+          "idle",
+          "active",
+          "busy"
+        ]
+      },
+      "TimePeriod": {
+        "type": "object",
+        "properties": {
+          "endDateTime": {
+            "type": "string",
+            "description": "End of the time period, using IETC-RFC-3339 format",
+            "format": "date-time",
+            "example": "1985-04-12T23:20:50.52Z"
+          },
+          "startDateTime": {
+            "type": "string",
+            "description": "Start of the time period, using IETC-RFC-3339 format",
+            "format": "date-time",
+            "example": "1985-04-12T23:20:50.52Z"
+          }
+        },
+        "description": "A period of time, either as a deadline (endDateTime only) a startDateTime only, or both"
+      },
+      "Error": {
+        "required": [
+          "code",
+          "reason"
+        ],
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Application relevant detail, defined in the API or a common list."
+          },
+          "reason": {
+            "type": "string",
+            "description": "Explanation of the reason for the error which can be shown to a client user."
+          },
+          "message": {
+            "type": "string",
+            "description": "More details and corrective actions related to the error which can be shown to a client user."
+          },
+          "status": {
+            "type": "string",
+            "description": "HTTP Error code extension"
+          },
+          "referenceError": {
+            "type": "string",
+            "description": "URI of documentation describing the error.",
+            "format": "uri"
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class."
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships",
+            "format": "uri"
+          },
+          "@type": {
+            "type": "string",
+            "description": "When sub-classing, this defines the sub-class entity name."
+          }
+        },
+        "description": "Used when an API throws an Error, typically with a HTTP error response-code (3xx, 4xx, 5xx)"
+      }
+    }
+  },
+  "x-original-swagger-version": "2.0"
+}

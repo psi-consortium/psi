@@ -1,0 +1,1118 @@
+{
+    "@jdt.replace": [
+        {
+            "@jdt.path": "$.servers[*].url",
+            "@jdt.value": "/psi-api/productCatalog/v1/"
+        },
+        {
+            "@jdt.path": "$.components.schemas.AttachmentRefOrValue.description",
+            "@jdt.value": "Reference to an attachment or a document. A document comprises of multiple attachments, while a single attachment has uri, mimeType, size, etc."
+        }
+    ],
+    "@jdt.remove": [
+        {
+            "@jdt.path": "$.tags[?(@.name!='productOffering' && @.name!='productSpecification')]"
+        },
+        {
+            "@jdt.path": "$.paths['/catalog']"
+        },
+        {
+            "@jdt.path": "$.paths['/catalog/{id}']"
+        },
+        {
+            "@jdt.path": "$.paths['/category']"
+        },
+        {
+            "@jdt.path": "$.paths['/category/{id}']"
+        },
+        {
+            "@jdt.path": "$.paths['/productOfferingPrice']"
+        },
+        {
+            "@jdt.path": "$.paths['/productOfferingPrice/{id}']"
+        },
+        {
+            "@jdt.path": "$.paths['/importJob']"
+        },
+        {
+            "@jdt.path": "$.paths['/importJob/{id}']"
+        },
+        {
+            "@jdt.path": "$.paths['/exportJob']"
+        },
+        {
+            "@jdt.path": "$.paths['/exportJob/{id}']"
+        },
+        {
+            "@jdt.path": "$.paths['/hub']"
+        },
+        {
+            "@jdt.path": "$.paths['/hub/{id}']"
+        },
+        {
+            "@jdt.path": "$.paths['/listener/catalogCreateEvent']"
+        },
+        {
+            "@jdt.path": "$.paths['/listener/catalogAttributeValueChangeEvent']"
+        },
+        {
+            "@jdt.path": "$.paths['/listener/catalogStateChangeEvent']"
+        },
+        {
+            "@jdt.path": "$.paths['/listener/catalogDeleteEvent']"
+        },
+        {
+            "@jdt.path": "$.paths['/listener/catalogBatchEvent']"
+        },
+        {
+            "@jdt.path": "$.paths['/listener/categoryCreateEvent']"
+        },
+        {
+            "@jdt.path": "$.paths['/listener/categoryAttributeValueChangeEvent']"
+        },
+        {
+            "@jdt.path": "$.paths['/listener/categoryStateChangeEvent']"
+        },
+        {
+            "@jdt.path": "$.paths['/listener/categoryDeleteEvent']"
+        },
+        {
+            "@jdt.path": "$.paths['/listener/productOfferingCreateEvent']"
+        },
+        {
+            "@jdt.path": "$.paths['/listener/productOfferingAttributeValueChangeEvent']"
+        },
+        {
+            "@jdt.path": "$.paths['/listener/productOfferingStateChangeEvent']"
+        },
+        {
+            "@jdt.path": "$.paths['/listener/productOfferingDeleteEvent']"
+        },
+        {
+            "@jdt.path": "$.paths['/listener/productOfferingPriceCreateEvent']"
+        },
+        {
+            "@jdt.path": "$.paths['/listener/productOfferingPriceAttributeValueChangeEvent']"
+        },
+        {
+            "@jdt.path": "$.paths['/listener/productOfferingPriceStateChangeEvent']"
+        },
+        {
+            "@jdt.path": "$.paths['/listener/productOfferingPriceDeleteEvent']"
+        },
+        {
+            "@jdt.path": "$.paths['/listener/productSpecificationCreateEvent']"
+        },
+        {
+            "@jdt.path": "$.paths['/listener/productSpecificationAttributeValueChangeEvent']"
+        },
+        {
+            "@jdt.path": "$.paths['/listener/productSpecificationStateChangeEvent']"
+        },
+        {
+            "@jdt.path": "$.paths['/listener/productSpecificationDeleteEvent']"
+        },
+        {
+            "@jdt.path": "$.components.schemas.Addressable"
+        },
+        {
+            "@jdt.path": "$.components.schemas.Attachment"
+        },
+        {
+            "@jdt.path": "$.components.schemas.AttachmentRef"
+        },
+        {
+            "@jdt.path": "$.components.schemas.BundledProductOfferingPriceRelationship"
+        },
+        {
+            "@jdt.path": "$.components.schemas.Catalog"
+        },
+        {
+            "@jdt.path": "$.components.schemas.Catalog_Create"
+        },
+        {
+            "@jdt.path": "$.components.schemas.Catalog_Update"
+        },
+        {
+            "@jdt.path": "$.components.schemas.Category"
+        },
+        {
+            "@jdt.path": "$.components.schemas.Category_Create"
+        },
+        {
+            "@jdt.path": "$.components.schemas.Category_Update"
+        },
+        {
+            "@jdt.path": "$.components.schemas.Category_Update"
+        },
+        {
+            "@jdt.path": "$.components.schemas.CharacteristicSpecificationBase"
+        },
+        {
+            "@jdt.path": "$.components.schemas.Entity"
+        },
+        {
+            "@jdt.path": "$.components.schemas.EntityRef"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ExportJob"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ExportJob_Create"
+        },
+        {
+            "@jdt.path": "$.components.schemas.Extensible"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ImportJob"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ImportJob_Create"
+        },
+        {
+            "@jdt.path": "$.components.schemas.JobStateType"
+        },
+        {
+            "@jdt.path": "$.components.schemas.POPCharge"
+        },
+        {
+            "@jdt.path": "$.components.schemas.PricingLogicAlgorithm"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductOfferingPrice_Create"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductOfferingPrice_Update"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductOfferingPrice"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductOfferingPriceRelationship"
+        },
+        {
+            "@jdt.path": "$.components.schemas.TaxItem"
+        },
+        {
+            "@jdt.path": "$.components.schemas.EventSubscription"
+        },
+        {
+            "@jdt.path": "$.components.schemas.EventSubscriptionInput"
+        },
+        {
+            "@jdt.path": "$.components.schemas.CatalogCreateEvent"
+        },
+        {
+            "@jdt.path": "$.components.schemas.CatalogCreateEventPayload"
+        },
+        {
+            "@jdt.path": "$.components.schemas.CatalogAttributeValueChangeEvent"
+        },
+        {
+            "@jdt.path": "$.components.schemas.CatalogAttributeValueChangeEventPayload"
+        },
+        {
+            "@jdt.path": "$.components.schemas.CatalogStateChangeEvent"
+        },
+        {
+            "@jdt.path": "$.components.schemas.CatalogStateChangeEventPayload"
+        },
+        {
+            "@jdt.path": "$.components.schemas.CatalogDeleteEvent"
+        },
+        {
+            "@jdt.path": "$.components.schemas.CatalogDeleteEventPayload"
+        },
+        {
+            "@jdt.path": "$.components.schemas.CatalogBatchEvent"
+        },
+        {
+            "@jdt.path": "$.components.schemas.CatalogBatchEventPayload"
+        },
+        {
+            "@jdt.path": "$.components.schemas.CategoryCreateEvent"
+        },
+        {
+            "@jdt.path": "$.components.schemas.CategoryCreateEventPayload"
+        },
+        {
+            "@jdt.path": "$.components.schemas.CategoryStateChangeEvent"
+        },
+        {
+            "@jdt.path": "$.components.schemas.CategoryStateChangeEventPayload"
+        },
+        {
+            "@jdt.path": "$.components.schemas.CategoryAttributeValueChangeEvent"
+        },
+        {
+            "@jdt.path": "$.components.schemas.CategoryAttributeValueChangeEventPayload"
+        },
+        {
+            "@jdt.path": "$.components.schemas.CategoryDeleteEvent"
+        },
+        {
+            "@jdt.path": "$.components.schemas.CategoryDeleteEventPayload"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductOfferingCreateEvent"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductOfferingCreateEventPayload"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductOfferingAttributeValueChangeEvent"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductOfferingAttributeValueChangeEventPayload"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductOfferingStateChangeEvent"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductOfferingStateChangeEventPayload"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductOfferingDeleteEvent"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductOfferingDeleteEventPayload"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductOfferingPriceCreateEvent"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductOfferingPriceCreateEventPayload"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductOfferingPriceAttributeValueChangeEvent"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductOfferingPriceAttributeValueChangeEventPayload"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductOfferingPriceStateChangeEvent"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductOfferingPriceStateChangeEventPayload"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductOfferingPriceDeleteEvent"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductOfferingPriceDeleteEventPayload"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductSpecificationCreateEvent"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductSpecificationCreateEventPayload"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductSpecificationAttributeValueChangeEvent"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductSpecificationAttributeValueChangeEventPayload"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductSpecificationStateChangeEvent"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductSpecificationStateChangeEventPayload"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductSpecificationDeleteEvent"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductSpecificationDeleteEventPayload"
+        },
+        {
+            "@jdt.path": "$.components.schemas.AttachmentRefOrValue.properties.content"
+        }
+    ],
+    "@jdt.rename": [
+        {
+            "@jdt.path": "$.components.schemas.AttachmentRefOrValue",
+            "@jdt.value": "AttachmentOrDocumentRef"
+        }
+    ],
+    "@jdt.merge": [
+        {
+            "@jdt.path": "$.tags[?(@.name=='productOffering')]",
+            "@jdt.value": {
+                "description": "Product Offering API"
+            }
+        },
+        {
+            "@jdt.path": "$.tags[?(@.name=='productSpecification')]",
+            "@jdt.value": {
+                "description": "Product Specification API"
+            }
+        },
+        {
+            "@jdt.path": "$.tags",
+            "@jdt.value": [
+                {
+                    "name": "productTemplate",
+                    "description": "Product Template API"
+                }
+            ]
+        },
+        {
+            "@jdt.path": "$.components.schemas.BundledProductOffering.properties.href",
+            "@jdt.value": {
+                "format": "uri"
+            }
+        },
+        {
+            "@jdt.path": "$.components.schemas.BundledProductSpecification.properties.href",
+            "@jdt.value": {
+                "format": "uri"
+            }
+        },
+        {
+            "@jdt.path": "$.components.schemas.MarketSegmentRef.properties.href",
+            "@jdt.value": {
+                "format": "uri"
+            }
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductOffering.properties.href",
+            "@jdt.value": {
+                "format": "uri"
+            }
+        },
+        {
+            "@jdt.path": "$.components.schemas['ProductOffering','ProductOffering_Create','ProductOffering_Update'].properties",
+            "@jdt.value": {
+                "accessProbability": {
+                    "type": "integer",
+                    "description": "Probability that an order of this offering can be fulfilled (in %).",
+                    "minimum": 0.0,
+                    "maximum": 1.0,
+                    "default": 1.0,
+                    "example": 0.75
+                },
+                "bundledGroupProductOffering": {
+                    "type": "array",
+                    "description": "A group of product offerings that can be selected for instantiation, e.g. between 2 and 7 from a list of 15 channel packs.",
+                    "items": {
+                        "$ref": "#/components/schemas/BundledGroupProductOffering"
+                    }
+                }
+            }
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductSpecification.properties.href",
+            "@jdt.value": {
+                "format": "uri"
+            }
+        },
+        {
+            "@jdt.path": "$.components.schemas.ProductSpecificationCharacteristicRelationship.properties.href",
+            "@jdt.value": {
+                "format": "uri"
+            }
+        },
+        {
+            "@jdt.path": "$.components.schemas.*.properties.attachment.items",
+            "@jdt.value": {
+                "$ref": "#/components/schemas/AttachmentOrDocumentRef"
+            }
+        },
+        {
+            "@jdt.path": "$.paths",
+            "@jdt.value": {
+                "/productTemplate": {
+                    "get": {
+                        "tags": ["productTemplate"],
+                        "summary": "List or find ProductTemplate objects",
+                        "description": "This operation lists or find ProductTemplate entities.",
+                        "operationId": "listProductTemplate",
+                        "parameters": [
+                            {
+                                "name": "fields",
+                                "in": "query",
+                                "description": "Comma-separated properties to be provided in response.",
+                                "schema": {
+                                    "type": "string"
+                                }
+                            },
+                            {
+                                "name": "offset",
+                                "in": "query",
+                                "description": "Requested index for start of resources to be provided in response.",
+                                "schema": {
+                                    "type": "integer"
+                                }
+                            },
+                            {
+                                "name": "limit",
+                                "in": "query",
+                                "description": "Requested number of resources to be provided in response.",
+                                "schema": {
+                                    "type": "integer"
+                                }
+                            }
+                        ],
+                        "responses": {
+                            "200": {
+                                "description": "Success",
+                                "headers": {
+                                    "X-Total-Count": {
+                                        "description": "Total number of items matching criteria.",
+                                        "schema": {
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "X-Result-Count": {
+                                        "description": "Actual number of items returned in the response body.",
+                                        "schema": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                },
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/ProductSpecification"
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "400": {
+                                "description": "Bad Request",
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            },
+                            "401": {
+                                "description": "Unauthorized",
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            },
+                            "403": {
+                                "description": "Forbidden",
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            },
+                            "404": {
+                                "description": "Not Found",
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            },
+                            "405": {
+                                "description": "Method Not allowed",
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            },
+                            "409": {
+                                "description": "Conflict",
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            },
+                            "500": {
+                                "description": "Internal Server Error",
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "post": {
+                        "tags": ["productTemplate"],
+                        "summary": "Creates a ProductTemplate",
+                        "description": "This operation creates a ProductTemplate entity.",
+                        "operationId": "createProductTemplate",
+                        "requestBody": {
+                            "description": "The ProductTemplate to be created.",
+                            "content": {
+                                "application/json;charset=utf-8": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/ProductSpecification_Create"
+                                    }
+                                }
+                            },
+                            "required": true
+                        },
+                        "responses": {
+                            "201": {
+                                "description": "Created",
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/ProductSpecification"
+                                        }
+                                    }
+                                }
+                            },
+                            "400": {
+                                "description": "Bad Request",
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            },
+                            "401": {
+                                "description": "Unauthorized",
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            },
+                            "403": {
+                                "description": "Forbidden",
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            },
+                            "405": {
+                                "description": "Method Not allowed",
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            },
+                            "409": {
+                                "description": "Conflict",
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            },
+                            "500": {
+                                "description": "Internal Server Error",
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "x-codegen-request-body-name": "productTemplate"
+                    }
+                },
+                "/productTemplate/{id}": {
+                    "get": {
+                        "tags": ["productTemplate"],
+                        "summary": "Retrieves a ProductTemplate by ID.",
+                        "description": "This operation retrieves a ProductTemplate entity. Attribute selection is enabled for all first level attributes.",
+                        "operationId": "retrieveProductTemplate",
+                        "parameters": [
+                            {
+                                "name": "id",
+                                "in": "path",
+                                "description": "The identifier of the ProductTemplate.",
+                                "required": true,
+                                "schema": {
+                                    "type": "string"
+                                }
+                            },
+                            {
+                                "name": "fields",
+                                "in": "query",
+                                "description": "Comma-separated properties to provide in response.",
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        ],
+                        "responses": {
+                            "200": {
+                                "description": "Success",
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/ProductSpecification"
+                                        }
+                                    }
+                                }
+                            },
+                            "400": {
+                                "description": "Bad Request",
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            },
+                            "401": {
+                                "description": "Unauthorized",
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            },
+                            "403": {
+                                "description": "Forbidden",
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            },
+                            "404": {
+                                "description": "Not Found",
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            },
+                            "405": {
+                                "description": "Method Not allowed",
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            },
+                            "409": {
+                                "description": "Conflict",
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            },
+                            "500": {
+                                "description": "Internal Server Error",
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "delete": {
+                        "tags": ["productTemplate"],
+                        "summary": "Deletes a ProductTemplate",
+                        "description": "This operation deletes a ProductTemplate entity.",
+                        "operationId": "deleteProductTemplate",
+                        "parameters": [
+                            {
+                                "name": "id",
+                                "in": "path",
+                                "description": "The identifier of the ProductTemplate",
+                                "required": true,
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        ],
+                        "responses": {
+                            "204": {
+                                "description": "Deleted",
+                                "content": {}
+                            },
+                            "400": {
+                                "description": "Bad Request",
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            },
+                            "401": {
+                                "description": "Unauthorized",
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            },
+                            "403": {
+                                "description": "Forbidden",
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            },
+                            "404": {
+                                "description": "Not Found",
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            },
+                            "405": {
+                                "description": "Method Not allowed",
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            },
+                            "409": {
+                                "description": "Conflict",
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            },
+                            "500": {
+                                "description": "Internal Server Error",
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "patch": {
+                        "tags": ["productTemplate"],
+                        "summary": "Updates partially a ProductTemplate",
+                        "description": "This operation updates partially a ProductTemplate entity.",
+                        "operationId": "patchProductTemplate",
+                        "parameters": [
+                            {
+                                "name": "id",
+                                "in": "path",
+                                "description": "The identifier of the ProductTemplate",
+                                "required": true,
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        ],
+                        "requestBody": {
+                            "description": "The ProductTemplate to be updated",
+                            "content": {
+                                "application/json;charset=utf-8": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/ProductSpecification_Update"
+                                    }
+                                }
+                            },
+                            "required": true
+                        },
+                        "responses": {
+                            "200": {
+                                "description": "Updated",
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/ProductSpecification"
+                                        }
+                                    }
+                                }
+                            },
+                            "400": {
+                                "description": "Bad Request",
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            },
+                            "401": {
+                                "description": "Unauthorized",
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            },
+                            "403": {
+                                "description": "Forbidden",
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            },
+                            "404": {
+                                "description": "Not Found",
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            },
+                            "405": {
+                                "description": "Method Not allowed",
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            },
+                            "409": {
+                                "description": "Conflict",
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            },
+                            "500": {
+                                "description": "Internal Server Error",
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "x-codegen-request-body-name": "productTemplate"
+                    }
+                }
+            }
+        },
+        {
+            "@jdt.path": "$.components.schemas",
+            "@jdt.value": {
+                "Geometry": {
+                    "type": "object",
+                    "description": "A GeoJson geometry.",
+                    "discriminator": {
+                        "propertyName": "type",
+                        "mapping": {
+                            "Point": "#/components/schemas/Point",
+                            "Polygon": "#/components/schemas/Polygon"
+                        }
+                    },
+                    "properties": {
+                        "type": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "Point2D": {
+                    "type": "array",
+                    "maxItems": 2,
+                    "minItems": 2,
+                    "items": {
+                        "type": "number"
+                    }
+                },
+                "Point": {
+                    "type": "object",
+                    "description": "A GeoJSon geometry.",
+                    "allOf": [
+                        {
+                            "$ref": "#/components/schemas/Geometry"
+                        },
+                        {
+                            "type": "object",
+                            "properties": {
+                                "coordinates": {
+                                    "$ref": "#/components/schemas/Point2D"
+                                }
+                            }
+                        }
+                    ]
+                },
+                "Polygon": {
+                    "type": "object",
+                    "description": "A GeoJSon geometry.",
+                    "allOf": [
+                        {
+                            "$ref": "#/components/schemas/Geometry"
+                        },
+                        {
+                            "type": "object",
+                            "properties": {
+                                "coordinates": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/components/schemas/Point2D"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "@jdt.path": "$.components.schemas",
+            "@jdt.value": {
+                "BundledGroupProductOffering": {
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "type": "string",
+                            "description": "The unique identifier of the BundledGroupProductOffering."
+                        },
+                        "href": {
+                            "type": "string",
+                            "description": "The unique reference of the BundledGroupProductOffering.",
+                            "format": "uri"
+                        },
+                        "lifecycleStatus": {
+                            "type": "string",
+                            "description": "Used to indicate the current lifecycle status."
+                        },
+                        "name": {
+                            "type": "string",
+                            "description": "The name of the BundledGroupProductOffering."
+                        },
+                        "bundledGroupProductOfferingOption": {
+                            "$ref": "#/components/schemas/BundledGroupProductOfferingOption"
+                        },
+                        "bundledGroupProductOffering": {
+                            "type": "array",
+                            "description": "A group of product offerings that can be selected for instantiation, e.g. between 2 and 7 from a list of 15 channel packs.",
+                            "items": {
+                                "$ref": "#/components/schemas/BundledGroupProductOffering"
+                            }
+                        },
+                        "bundledProductOffering": {
+                            "type": "array",
+                            "description": "A type of ProductOffering that belongs to a grouping of ProductOfferings made available to the market.",
+                            "items": {
+                                "$ref": "#/components/schemas/BundledProductOffering"
+                            }
+                        },
+                        "@baseType": {
+                            "type": "string",
+                            "description": "When sub-classing, this defines the super-class."
+                        },
+                        "@schemaLocation": {
+                            "type": "string",
+                            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships.",
+                            "format": "uri"
+                        },
+                        "@type": {
+                            "type": "string",
+                            "description": "When sub-classing, this defines the sub-class Extensible name."
+                        }
+                    },
+                    "description": "Defines a group between a parent product offering and multiple child offerings, allowing (for example) choosing a minimum of 2 and a maximum of 6 offerings from within the list of child offerings. And optionally specifying offerings that would be selected by default. For example facilitate the choice of between 2 and 7 channel packs from a list, and cause certain items to be selected by default."
+                },
+                "BundledGroupProductOfferingOption": {
+                    "type": "object",
+                    "properties": {
+                        "numberRelOfferLowerLimit": {
+                            "type": "integer",
+                            "description": "The lower limit for offerings that can be procured as part of the related BundledGroupProductOffering."
+                        },
+                        "numberRelOfferUpperLimit": {
+                            "type": "integer",
+                            "description": "The upper limit for offerings that can be procured as part of the related BundledGroupProductOffering."
+                        },
+                        "@baseType": {
+                            "type": "string",
+                            "description": "When sub-classing, this defines the super-class."
+                        },
+                        "@schemaLocation": {
+                            "type": "string",
+                            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships.",
+                            "format": "uri"
+                        },
+                        "@type": {
+                            "type": "string",
+                            "description": "When sub-classing, this defines the sub-class Extensible name."
+                        }
+                    },
+                    "description": "A set of numbers that specifies the lower and upper limits for a ProductOfferingGroup that can be procured as part of the related BundledGroupProductOffering. Values can range from 0 to unbounded"
+                }
+            }
+        }
+    ]
+}
