@@ -14,11 +14,11 @@ TPE, MSISDN, IP Addresses) in the inventory.
 | href | string | uri | Yes |
 | name | string | N/A | No |
 | description | string | N/A | No |
+| value | string | N/A | No |
 | category | string | N/A | No |
 | endOperatingDate | string | date-time | No |
 | resourceVersion | string | N/A | No |
 | startOperatingDate | string | date-time | No |
-| value | string | N/A | No |
 | activationFeature | array | Feature | No |
 | administrativeState | ResourceAdministrativeStateType | N/A | No |
 | attachment | array | AttachmentOrDocumentRef | No |
@@ -33,6 +33,6 @@ TPE, MSISDN, IP Addresses) in the inventory.
 | usageState | ResourceUsageStateType | N/A | No |
 | \@baseType | string | N/A | No |
 | \@schemaLocation | string | uri | No |
-| \@type | string | N/A | No |
+| \@type | string | "LogicalResource" | Yes |
 
 Table: Fields of LogicalResource. {#tbl:LogicalResource.md:LogicalResource}

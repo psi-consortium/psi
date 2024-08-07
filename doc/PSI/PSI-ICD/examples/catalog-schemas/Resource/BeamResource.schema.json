@@ -1,0 +1,43 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "BeamResource.schema.schema.json",
+    "title": "BeamResource.schema",
+    "description": "Describes a satellite beam.",
+    "allOf": [{ "$ref": "Resource.schema.json#Resource" }],
+    "properties": {
+        "frequencyBand": {
+            "type": "string",
+            "enum": ["P", "L", "S", "C", "X", "KA", "KU", "MILKA"]
+        },
+        "frequency": {
+            "type": "integer",
+            "description": "Frequency range of the beam, measured in kHz"
+        },
+        "steerable": {
+            "type": "boolean",
+            "default": false,
+            "description": "Whether the beam is steerable (default: false)"
+        },
+        "direction": {
+            "type": "string",
+            "enum": ["UPLINK", "DOWNLINK"]
+        },
+        "polarization": {
+            "type": "string",
+            "enum": ["LINEAR_VERTICAL", "LINEAR_HORIZONTAL", "CIRCULAR_RIGHT_HAND", "CIRCULAR_LEFT_HAND"]
+        },
+        "carrierBpEirp": {
+            "type": "number",
+            "description": "Carrier BP EIRP"
+        },
+        "carrierBpGOverT": {
+            "type": "number",
+            "description": "Carrier BP G/T"
+        },
+        "geometry": {
+            "type": "object",
+            "$ref": "https://geojson.org/schema/FeatureCollection.json"
+        }
+    },
+    "required": ["frequencyBand", "frequency", "direction", "polarization", "geometry"]
+}

@@ -4,8 +4,8 @@
 
 =end
 
-| Req. ID | Description | Comment / Understanding | Category |
-| ------- | ----------- | ----------------------- | -------- |
+| Req. ID                        | Description                         | Comment / Understanding                  | Category                       |
+| ------------------------------ | ----------------------------------- | ---------------------------------------- | ------------------------------ |
 | __PSI-04-03-03-01__ | The interface shall allow the governance to delete or mark an existing product template from a PSS as invalid. | - | POOLING |
 | __PSI-04-03-03-02__ | The interface shall allow only the governance to delete product templates in the PSS. | - | POOLING, SEC |
 

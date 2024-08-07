@@ -981,6 +981,18 @@
                             "$ref": "#/components/schemas/Note"
                         }
                     },
+                    "totalPrice": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/TotalPrice"
+                        }
+                    },
+                    "inquiredProductRelationship": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/InquiredProductRelationship"
+                        }
+                    },
                     "productSpecification": {
                         "type": "array",
                         "items": {
@@ -1107,6 +1119,191 @@
                     }
                 ]
             },
+
+            "Money": {
+                "type": "object",
+                "properties": {
+                  "unit": {
+                    "type": "string",
+                    "description": "Currency (ISO4217 norm uses 3 letters to define the currency)"
+                  },
+                  "value": {
+                    "type": "number",
+                    "description": "A positive floating point number",
+                    "format": "float"
+                  }
+                },
+                "description": "A base / value business entity used to represent money"
+            },
+            "Price": {
+                "type": "object",
+                "properties": {
+                    "percentage": {
+                        "type": "number",
+                        "description": "Percentage to apply for ProdOfferPriceAlteration",
+                        "format": "float"
+                    },
+                    "taxRate": {
+                        "type": "number",
+                        "description": "Tax rate",
+                        "format": "float"
+                    },
+                    "dutyFreeAmount": {
+                        "$ref": "#/components/schemas/Money"
+                    },
+                    "taxIncludedAmount": {
+                        "$ref": "#/components/schemas/Money"
+                    },
+                    "@baseType": {
+                        "type": "string",
+                        "description": "When sub-classing, this defines the super-class"
+                    },
+                    "@schemaLocation": {
+                        "type": "string",
+                        "description": "A URI to a JSON-Schema file that defines additional attributes and relationships",
+                        "format": "uri"
+                    },
+                    "@type": {
+                        "type": "string",
+                        "description": "When sub-classing, this defines the sub-class entity name"
+                    }
+                },
+                "description": "Provides all amounts (tax included, duty free, tax rate), used currency and percentage."
+            },
+            "TotalPrice": {
+                "required": [
+                    "price",
+                    "priceType"
+                ],
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "A short descriptive name."
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "A narrative that explains in detail the semantics of this total price."
+                    },
+                    "priceType": {
+                        "type": "string",
+                        "description": "A category that describes the price, such as recurring, discount, allowance, penalty, and so forth."
+                    },
+                    "recurringChargePeriod": {
+                        "type": "string",
+                        "description": "Could be month, week..."
+                    },
+                    "unitOfMeasure": {
+                        "type": "string",
+                        "description": "Could be minutes, GB..."
+                    },
+                    "price": {
+                        "$ref": "#/components/schemas/Price"
+                    }
+                },
+                "description": "An amount, usually of money, that represents the actual price to be paid by a Customer for current group of inquiry results."
+            },
+
+            "InquiredProductRef": {
+                "type": "object",
+                "required": [
+                    "id"
+                ],
+                "description": "A reference to an InquiredProduct.",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "Unique identifier of an InquiredProduct."
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Optional: Name of the InquiredProduct."
+                    }
+                }
+            },
+
+            "Any": {
+                "type": "object"
+            },
+
+            "RelationshipCharacteristic": {
+                "type": "object",
+                "description": "A characteristic property or distinguishing feature of this relationship.",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "Unique ID for the characteristic."
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "A word, term, or phrase by which this characteristic specification is known and distinguished from other characteristic specifications."
+                    },
+                    "deviation": {
+                        "type": "string",
+                        "description": "Explains the deviation from the originally inquired characteristic, like 'below', 'alternative', etc."
+                    },
+                    "valueType": {
+                        "type": "string",
+                        "description": "A kind of value that the characteristic can take on, such as numeric, text and so forth"
+                    },
+                    "relationshipCharacteristicValue": {
+                        "type": "array",
+                        "description": "A RelationshipCharacteristicValue object is used to define a set of attributes.",
+                        "items": {
+                            "$ref": "./PSID620-ProductCatalog-v4.1.0.swagger.json#/components/schemas/CharacteristicValueSpecification"
+                        }
+                    }
+                }
+            },
+
+            "InquiredProductRelationship": {
+                "required": [
+                    "inquiredProductRef"
+                ],
+                "type": "object",
+                "properties": {
+                    "inquiredProductRef": {
+                        "$ref": "#/components/schemas/InquiredProductRef"
+                    },
+                    "coverage": {
+                        "type": "string",
+                        "enum": ["complete", "partial"],
+                        "description": "Provides details on how the given ProductOffering/ProductSpecification/Product coveres the related InquiredProduct."
+                    },
+                    "quantity": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "default": 1
+                    },
+                    "totalPrice": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/TotalPrice"
+                        }
+                    },
+                    "servicePeriod": {
+                        "$ref": "#/components/schemas/TimePeriod",
+                        "description": "Optional: For the case of a deviation from the service period originally requested in the RequiredProduct."
+                    },
+                    "relationshipCharacteristic": {
+                        "type": "array",
+                        "description": "A characteristic property or distinguishing feature for this relationship.",
+                        "items": {
+                            "$ref": "#/components/schemas/RelationshipCharacteristic"
+                        }
+                    },
+                    "productOfferingRef": {
+                        "$ref": "./PSID620-ProductCatalog-v4.1.0.swagger.json#/components/schemas/ProductOfferingRef"
+                    },
+                    "productSpecificationRef": {
+                        "$ref": "./PSID620-ProductCatalog-v4.1.0.swagger.json#/components/schemas/ProductSpecificationRef"
+                    },
+                    "productRef": {
+                        "$ref": "./PSID637-ProductInventory-v4.0.0.swagger.json#/components/schemas/ProductRef"
+                    }
+                }
+            },
+
             "Error": {
                 "required": ["code", "reason"],
                 "type": "object",

@@ -1,0 +1,22 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "BandwidthResource.schema.json",
+    "title": "BandwidthResource",
+    "description": "Describes raw bandwidth. Uplink and downlink must be provided as related resources.",
+    "allOf": [{ "$ref": "Resource.schema.json#Resource" }],
+    "properties": {
+        "frequencyBand": {
+            "type": "string",
+            "enum": ["P", "L", "S", "C", "X", "KA", "KU", "MILKA"]
+        },
+        "allocatedBandwidth": {
+            "type": "integer",
+            "description": "Measured in kHz"
+        },
+        "latency": {
+            "type": "integer",
+            "description": "Measured in ms"
+        }
+    },
+    "required": ["frequencyBand", "allocatedBandwidth"]
+}

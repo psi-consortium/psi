@@ -1,0 +1,22 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "BandwidthProduct.schema.json",
+    "title": "BandwidthProduct",
+    "description": "Describes a raw bandwidth product.",
+    "allOf": [{ "$ref": "Product.schema.json#Product" }],
+    "properties": {
+        "frequencyBand": {
+            "type": "string",
+            "enum": ["P", "L", "S", "C", "X", "KA", "KU", "MILKA"]
+        },
+        "allocatedBandwidth": {
+            "type": "integer",
+            "description": "Measured in kHz"
+        },
+        "latency": {
+            "type": "integer",
+            "description": "Measured in ms"
+        }
+    },
+    "required": []
+}

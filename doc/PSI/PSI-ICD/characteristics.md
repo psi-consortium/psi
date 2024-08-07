@@ -571,5 +571,5 @@ json "JSON Schema: InternetAccessService" as prodSchema {
 
 ![JSON Schema for InternetAccessService](../common/pixel.png){#fig:json-schema}
 
-More example schemas (including space assets and user terminals) are not available in the first release of PSI due to contractual obligations.
-It will be made available in the next release.
+More example schemas (including space assets and user terminals) can be found in Annex II of this document.
+They are extracted from the prototype, which was designed based on input of different providers.

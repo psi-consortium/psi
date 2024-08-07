@@ -16,6 +16,12 @@ dcr_overrides:
    version: '1.0.0'
    author: 'Hendrik Oppenberg'
    message: 'Release of Version 1.0.0'
+- dcr:
+   from: '2024-04-09'
+   to: '2024-07-29'
+   version: '1.1.0'
+   author: 'Hendrik Oppenberg'
+   message: 'Improve description of InquiryResults and ProductOrders.'
 =end
 
 # Document Meta Information
@@ -34,11 +40,11 @@ The following information can prove the integrity of the document and reveal any
 
 | Acronym | Reference | Title                                | Version |
 |---------|-----------|--------------------------------------|---------|
-| PSI-DL  | PSI-DL    | PSI Document List                    | 1.0.0   |
-| PSI-ICD | PSI-ICD   | Interface Control Document           | 1.0.0   |
-| PSI-REQ | PSI-REQ   | Interface Requirements Document      | 1.0.0   |
-| PSI-TAD | PSI-TAD   | Terms, Abbreviations and Definitions | 1.0.0   |
-| PSI-TOD | PSI-TOD   | Tasks and Operations Dictionary      | 1.0.0   |
+| PSI-DL  | PSI-DL    | PSI Document List                    | 1.1.0   |
+| PSI-ICD | PSI-ICD   | Interface Control Document           | 1.1.0   |
+| PSI-REQ | PSI-REQ   | Interface Requirements Document      | 1.1.0   |
+| PSI-TAD | PSI-TAD   | Terms, Abbreviations and Definitions | 1.1.0   |
+| PSI-TOD | PSI-TOD   | Tasks and Operations Dictionary      | 1.1.0   |
 
 Table: Reference Documents. {#tbl:reference-documents}
 

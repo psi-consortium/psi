@@ -65,8 +65,13 @@ These can be of different nature:
   In this case, the PSS can show the availability and no further checks are necessary, which may result in higher ranking.
   Note that this does not imply a reservation, so the actual order may still be rejected if the resource was booked in the meantime.
 
-All of these can be fetched from the corresponding endpoints listed below.
-Note that all of them use different responses if there is no content because the inquiry isn't processed or no entities were found.
+In addition, the inquiry result can contain relationship definitions between a single result entity and an inquired product.
+This is particularly necessary if the inquiry includes more than one inquired product and potentially results in multiple entities per inquiry result.
+With the help of this approach a clear assignment is ensured between the inquired products and the results.
+Furthermore, relationship-dependent details are provided in this way, such as the coverage (full or partial matches), a deviation of the service period or the calculated prices.
+
+All of these can be fetched from the corresponding endpoint listed below.
+It should be noted that different responses are used if there is no content because the inquiry was not processed or no entities were found.
 If the inquiry is processed by an algorithm, the endpoints may optionally block for a few seconds to wait for results.
 It is up to the implementation (or human decision) whether to include partial matches when there are others that fully match the target values.
 

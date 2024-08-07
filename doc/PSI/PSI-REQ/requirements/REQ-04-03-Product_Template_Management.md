@@ -4,8 +4,8 @@
 
 =end
 
-| Req. ID | Description | Comment / Understanding | Category |
-| ------- | ----------- | ----------------------- | -------- |
+| Req. ID                        | Description                         | Comment / Understanding                  | Category                       |
+| ------------------------------ | ----------------------------------- | ---------------------------------------- | ------------------------------ |
 | __PSI-04-03-00-01__ | The interface shall ensure that the product templates are provider-agnostic. | - | POOLING |
 | __PSI-04-03-00-02__ | The interface shall allow only the governance to have write access to product templates in the PSS. | - | POOLING, SEC |
 

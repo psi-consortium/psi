@@ -32,6 +32,6 @@ TPE, EQUIPMENT) in the inventory.
 | usageState | ResourceUsageStateType | N/A | No |
 | \@baseType | string | N/A | No |
 | \@schemaLocation | string | uri | No |
-| \@type | string | N/A | No |
+| \@type | string | oneOf["LogicalResource", "PhysicalResource", "Resource"] | Yes |
 
 Table: Fields of Resource. {#tbl:Resource.md:Resource}

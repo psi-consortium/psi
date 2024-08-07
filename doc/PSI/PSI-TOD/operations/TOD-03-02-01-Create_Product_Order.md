@@ -67,6 +67,8 @@ Some properties of the product order are:
   * *action* - The action to be carried out on the product.
     Can be: add, modify, delete, noChange.
   * *product* - A reference to the product to be modified or deleted (if applicable).
+  * *requestedStartDate*/*requestedEndDate* - The option for a start and end date deviating from the order.
+  * *productOrderItemRelationship* - A list of relations on item level, to reflect bundles and other dependencies.
 * *orderTotalPrice* - A list of the combined prices of the items.
 * *relatedParty* - A list of related parties for the order (e.g. customer, PSS and provider).
 

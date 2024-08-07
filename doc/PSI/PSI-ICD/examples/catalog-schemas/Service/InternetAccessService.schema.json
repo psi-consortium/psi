@@ -1,0 +1,40 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "InternetAccessService.schema.json",
+    "title": "InternetAccessService",
+    "description": "Describes a service that provides internet access via satellites.",
+    "allOf": [{ "$ref": "Service.schema.json#Service" }],
+    "properties": {
+        "frequencyBand": {
+            "type": "string",
+            "enum": ["P", "L", "S", "C", "X", "KA", "KU", "MILKA"]
+        },
+        "forwardCIR": {
+            "type": "integer",
+            "default": 0,
+            "description": "Measured in kbsp"
+        },
+        "forwardPIR": {
+            "type": "integer",
+            "description": "Measured in kbsp"
+        },
+        "returnCIR": {
+            "type": "integer",
+            "default": 0,
+            "description": "Measured in kbsp"
+        },
+        "returnPIR": {
+            "type": "integer",
+            "description": "Measured in kbsp"
+        },
+        "latency": {
+            "type": "integer",
+            "description": "Measured in ms"
+        },
+        "geometry": {
+            "type": "object",
+            "$ref": "https://geojson.org/schema/FeatureCollection.json"
+        }
+    },
+    "required": ["frequencyBand", "forwardPIR", "returnPIR"]
+}

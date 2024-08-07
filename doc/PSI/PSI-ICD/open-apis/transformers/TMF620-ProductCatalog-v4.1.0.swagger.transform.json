@@ -392,6 +392,13 @@
                     "default": 1.0,
                     "example": 0.75
                 },
+                "relatedParty": {
+                    "type": "array",
+                    "description": "A related party defines party or party role linked to a specific entity.",
+                    "items": {
+                        "$ref": "#/components/schemas/RelatedParty"
+                    }
+                },
                 "bundledGroupProductOffering": {
                     "type": "array",
                     "description": "A group of product offerings that can be selected for instantiation, e.g. between 2 and 7 from a list of 15 channel packs.",

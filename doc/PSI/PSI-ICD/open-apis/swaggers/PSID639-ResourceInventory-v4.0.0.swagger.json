@@ -835,115 +835,17 @@
         ],
         "type": "object",
         "properties": {
-          "id": {
-            "type": "string",
-            "description": "unique identifier"
-          },
-          "href": {
-            "type": "string",
-            "description": "Hyperlink reference",
-            "format": "uri"
-          },
-          "category": {
-            "type": "string",
-            "description": "Category of the concrete resource. e.g Gold, Silver for MSISDN concrete resource"
-          },
-          "description": {
-            "type": "string",
-            "description": "free-text description of the resource"
-          },
-          "endOperatingDate": {
-            "type": "string",
-            "description": "A date time( DateTime). The date till the resource is operating",
-            "format": "date-time"
-          },
-          "name": {
-            "type": "string",
-            "description": "A string used to give a name to the resource"
-          },
-          "resourceVersion": {
-            "type": "string",
-            "description": "A field that identifies the specific version of an instance of a resource."
-          },
-          "startOperatingDate": {
-            "type": "string",
-            "description": "A date time( DateTime). The date from which the resource is operating",
-            "format": "date-time"
-          },
           "value": {
             "type": "string",
             "description": "the value of the logical resource. E.g '0746712345' for  MSISDN's"
-          },
-          "activationFeature": {
-            "type": "array",
-            "description": "Configuration features",
-            "items": {
-              "$ref": "#/components/schemas/Feature"
-            }
-          },
-          "administrativeState": {
-            "$ref": "#/components/schemas/ResourceAdministrativeStateType"
-          },
-          "attachment": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/AttachmentOrDocumentRef"
-            }
-          },
-          "note": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Note"
-            }
-          },
-          "operationalState": {
-            "$ref": "#/components/schemas/ResourceOperationalStateType"
-          },
-          "place": {
-            "$ref": "#/components/schemas/RelatedPlaceRefOrValue"
-          },
-          "relatedParty": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/RelatedParty"
-            }
-          },
-          "resourceCharacteristic": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Characteristic"
-            }
-          },
-          "resourceRelationship": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ResourceRelationship"
-            }
-          },
-          "resourceSpecification": {
-            "$ref": "#/components/schemas/ResourceSpecificationRef"
-          },
-          "resourceStatus": {
-            "$ref": "#/components/schemas/ResourceStatusType"
-          },
-          "usageState": {
-            "$ref": "#/components/schemas/ResourceUsageStateType"
-          },
-          "@baseType": {
-            "type": "string",
-            "description": "When sub-classing, this defines the super-class"
-          },
-          "@schemaLocation": {
-            "type": "string",
-            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships",
-            "format": "uri"
-          },
-          "@type": {
-            "type": "string",
-            "description": "When sub-classing, this defines the sub-class Extensible name"
           }
         },
-        "description": "Logic resource is a type of resource that describes the common set of attributes shared by all concrete logical resources (e.g. TPE, MSISDN, IP Addresses) in the inventory."
+        "description": "Logic resource is a type of resource that describes the common set of attributes shared by all concrete logical resources (e.g. TPE, MSISDN, IP Addresses) in the inventory.",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Resource"
+          }
+        ]
       },
       "Note": {
         "type": "object",
@@ -996,128 +898,30 @@
         ],
         "type": "object",
         "properties": {
-          "id": {
-            "type": "string",
-            "description": "unique identifier"
-          },
-          "href": {
-            "type": "string",
-            "description": "Hyperlink reference",
-            "format": "uri"
-          },
-          "category": {
-            "type": "string",
-            "description": "Category of the concrete resource. e.g Gold, Silver for MSISDN concrete resource"
-          },
-          "description": {
-            "type": "string",
-            "description": "free-text description of the resource"
-          },
-          "endOperatingDate": {
-            "type": "string",
-            "description": "A date time( DateTime). The date till the resource is operating",
-            "format": "date-time"
-          },
           "manufactureDate": {
             "type": "string",
             "description": "This is a string attribute that defines the date of manufacture of this item in the fixed format \"dd/mm/yyyy\". This is an optional attribute.",
             "format": "date-time"
           },
-          "name": {
-            "type": "string",
-            "description": "A string used to give a name to the resource"
-          },
           "powerState": {
             "type": "string",
             "description": "This defines the current power status of the hardware item. Values include:\n\n  0:  Unknown\n  1:  Not Applicable\n  2:  No Power Applied\n  3: Full Power Applied\n  4:  Power Save - Normal\n  5:  Power Save - Degraded\n  6:  Power Save - Standby\n  7:  Power Save - Critical\n  8:  Power Save - Low Power Mode\n  9:  Power Save - Unknown\n 10: Power Cycle\n 11: Power Warning\n 12: Power Off"
-          },
-          "resourceVersion": {
-            "type": "string",
-            "description": "A field that identifies the specific version of an instance of a resource."
           },
           "serialNumber": {
             "type": "string",
             "description": "This is a string that represents a manufacturer-allocated number used to identify different instances of the same hardware item. The ModelNumber and PartNumber attributes are used to identify different types of hardware items. This is a REQUIRED attribute."
           },
-          "startOperatingDate": {
-            "type": "string",
-            "description": "A date time( DateTime). The date from which the resource is operating",
-            "format": "date-time"
-          },
           "versionNumber": {
             "type": "string",
             "description": "This is a string that identifies the version of this physical resource. This is an optional attribute."
-          },
-          "activationFeature": {
-            "type": "array",
-            "description": "Configuration features",
-            "items": {
-              "$ref": "#/components/schemas/Feature"
-            }
-          },
-          "administrativeState": {
-            "$ref": "#/components/schemas/ResourceAdministrativeStateType"
-          },
-          "attachment": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/AttachmentOrDocumentRef"
-            }
-          },
-          "note": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Note"
-            }
-          },
-          "operationalState": {
-            "$ref": "#/components/schemas/ResourceOperationalStateType"
-          },
-          "place": {
-            "$ref": "#/components/schemas/RelatedPlaceRefOrValue"
-          },
-          "relatedParty": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/RelatedParty"
-            }
-          },
-          "resourceCharacteristic": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Characteristic"
-            }
-          },
-          "resourceRelationship": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ResourceRelationship"
-            }
-          },
-          "resourceSpecification": {
-            "$ref": "#/components/schemas/ResourceSpecificationRef"
-          },
-          "resourceStatus": {
-            "$ref": "#/components/schemas/ResourceStatusType"
-          },
-          "usageState": {
-            "$ref": "#/components/schemas/ResourceUsageStateType"
-          },
-          "@baseType": {
-            "type": "string",
-            "description": "When sub-classing, this defines the super-class"
-          },
-          "@schemaLocation": {
-            "type": "string",
-            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships",
-            "format": "uri"
-          },
-          "@type": {
-            "type": "string",
-            "description": "When sub-classing, this defines the sub-class Extensible name"
           }
         },
-        "description": "Physical resource is a type of resource that describes the common set of attributes shared by all concrete physical resources (e.g. EQUIPMENT) in the inventory."
+        "description": "Physical resource is a type of resource that describes the common set of attributes shared by all concrete physical resources (e.g. EQUIPMENT) in the inventory.",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Resource"
+          }
+        ]
       },
       "Place": {
         "type": "object",
@@ -1403,7 +1207,10 @@
             "description": "When sub-classing, this defines the sub-class Extensible name"
           }
         },
-        "description": "Resource is an abstract entity that describes the common set of attributes shared by all concrete resources (e.g. TPE, EQUIPMENT) in the inventory."
+        "description": "Resource is an abstract entity that describes the common set of attributes shared by all concrete resources (e.g. TPE, EQUIPMENT) in the inventory.",
+        "discriminator": {
+          "propertyName": "@type"
+        }
       },
       "Resource_Create": {
         "required": [

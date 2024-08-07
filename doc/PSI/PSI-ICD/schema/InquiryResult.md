@@ -13,6 +13,8 @@ Must contain at least one ProductSpecification, optionally complemented by an of
 | id | string | N/A | Yes |
 | priority | number | N/A | No |
 | note | array | Note | No |
+| totalPrice | array | TotalPrice | No |
+| inquiredProductRelationship | array | InquiredProductRelationship | No |
 | productSpecification | array | ProductSpecification | Yes |
 | product | array | Product | No |
 | productOffering | array | ProductOffering | No |

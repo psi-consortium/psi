@@ -35,6 +35,7 @@ Skipped properties: id,href
 | serviceLevelAgreement | SLARef | N/A | No |
 | validFor | TimePeriod | N/A | No |
 | accessProbability | integer | N/A | No |
+| relatedParty | array | RelatedParty | No |
 | bundledGroupProductOffering | array | BundledGroupProductOffering | No |
 | \@baseType | string | N/A | No |
 | \@schemaLocation | string | uri | No |

@@ -14,14 +14,14 @@ EQUIPMENT) in the inventory.
 | href | string | uri | Yes |
 | name | string | N/A | No |
 | description | string | N/A | No |
-| category | string | N/A | No |
-| endOperatingDate | string | date-time | No |
 | manufactureDate | string | date-time | No |
 | powerState | string | N/A | No |
-| resourceVersion | string | N/A | No |
 | serialNumber | string | N/A | No |
-| startOperatingDate | string | date-time | No |
 | versionNumber | string | N/A | No |
+| category | string | N/A | No |
+| endOperatingDate | string | date-time | No |
+| resourceVersion | string | N/A | No |
+| startOperatingDate | string | date-time | No |
 | activationFeature | array | Feature | No |
 | administrativeState | ResourceAdministrativeStateType | N/A | No |
 | attachment | array | AttachmentOrDocumentRef | No |
@@ -36,6 +36,6 @@ EQUIPMENT) in the inventory.
 | usageState | ResourceUsageStateType | N/A | No |
 | \@baseType | string | N/A | No |
 | \@schemaLocation | string | uri | No |
-| \@type | string | N/A | No |
+| \@type | string | "PhysicalResource" | Yes |
 
 Table: Fields of PhysicalResource. {#tbl:PhysicalResource.md:PhysicalResource}

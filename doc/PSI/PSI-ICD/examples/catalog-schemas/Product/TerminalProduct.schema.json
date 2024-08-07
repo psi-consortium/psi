@@ -1,0 +1,42 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "TerminalProduct.schema.json",
+    "title": "TerminalProduct",
+    "description": "Describes a terminal to access satellite services.",
+    "allOf": [{ "$ref": "Product.schema.json#Product" }],
+    "properties": {
+        "frequencyBand": {
+            "type": "string",
+            "enum": ["P", "L", "S", "C", "X", "KA", "KU", "MILKA"]
+        },
+        "reflectorDiameter": {
+            "type": "integer",
+            "description": "Measured in cm"
+        },
+        "uplinkPower": {
+            "type": "number",
+            "description": "Measured in W"
+        },
+        "transmissionTech": {
+            "type": "string",
+            "description": "Technology used by the modem, e.g. 'iDirect' or 'UHP'. Used to check for compatibility with services."
+        },
+        "width": {
+            "type": "integer",
+            "description": "The unpacked width of the terminal. Measured in cm."
+        },
+        "length": {
+            "type": "integer",
+            "description": "The unpacked length of the terminal. Measured in cm."
+        },
+        "height": {
+            "type": "integer",
+            "description": "The unpacked height of the terminal. Measured in cm."
+        },
+        "weight": {
+            "type": "integer",
+            "description": "The weight of the terminal. Measured in g."
+        }
+    },
+    "required": []
+}
