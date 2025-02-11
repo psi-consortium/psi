@@ -10,7 +10,7 @@ A characteristic quality or distinctive feature of a ProductSpecification.
 Certain characteristics, such as color, may be configured during the ordering or some other process.
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | id | string | N/A | No |
 | name | string | N/A | No |
 | description | string | N/A | No |
@@ -24,9 +24,11 @@ Certain characteristics, such as color, may be configured during the ordering or
 | productSpecCharRelationship | array | ProductSpecificationCharacteristicRelationship | No |
 | productSpecCharacteristicValue | array | CharacteristicValueSpecification | No |
 | validFor | TimePeriod | N/A | No |
-| \@baseType | string | N/A | No |
-| \@schemaLocation | string | uri | No |
-| \@type | string | N/A | No |
-| \@valueSchemaLocation | string | N/A | No |
+| @baseType | string | N/A | No |
+| @schemaLocation | string | uri | No |
+| @type | string | N/A | No |
+| @valueSchemaLocation | string | N/A | No |
 
 Table: Fields of ProductSpecificationCharacteristic. {#tbl:ProductSpecificationCharacteristic.md:ProductSpecificationCharacteristic}
+
+{#page:break}

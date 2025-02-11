@@ -12,10 +12,11 @@ The categories are listed and described in the table below.
 
 | Category | Description                                                   |
 | -------- | ------------------------------------------------------------- |
+| MISSION  | Requirements on missions                                      |
 | INQUIRY  | Requirements on customer inquiries                            |
 | PARTY    | Requirements on party management (individuals, organizations) |
-| POOLING  | Requirements on pooling of resources, services and products   |
-| SEC      | Requirements on Security                                      |
+| POOLING  | Requirements on pooling of resources, services, and products  |
+| SEC      | Requirements on security                                      |
 | ORDER    | Requirements on product ordering                              |
 | DOC      | Requirements on managing documents as attachments             |
 | TICKET   | Requirements on managing trouble tickets                      |
@@ -36,7 +37,7 @@ Table: PSID Requirement Categories {#tbl:psid-req-cat}
 
 A PSS has at least four different actors they need to interact with:
 
-* Providers (satellite operators, SatCom service providers)
+* Providers (satellite operators, (Gov)SatCom service providers)
 * Other Pooling & Sharing Systems
 * Users
 * Governance (the operator of the PSS and their staff)

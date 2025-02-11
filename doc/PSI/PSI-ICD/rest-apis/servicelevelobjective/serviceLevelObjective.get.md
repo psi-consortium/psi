@@ -7,12 +7,14 @@
 
 **Absolute Path:** /serviceQuality/v1/serviceLevelObjective
 
+**TOD Reference:** TOD-06-01-05-View_All_Service_Level_Objective
+
 **Summary:** List or find ServiceLevelObjective objects
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | fields | string | No | Comma-separated properties to be provided in response |
 | offset | integer | No | Requested index for start of resources to be provided in response |
 | limit | integer | No | Requested number of resources to be provided in response |
@@ -34,6 +36,4 @@ Table: Parameters of GET serviceLevelObjective. {#tbl:serviceLevelObjective.get.
 
 Table: Responses of GET serviceLevelObjective. {#tbl:serviceLevelObjective.get.md:responses}
 
-## TOD Reference
-
-TOD-06-01-05-View_All_Service_Level_Objective
+{#page:break}

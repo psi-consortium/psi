@@ -7,6 +7,8 @@
 
 **Absolute Path:** /resourceCatalog/v1/resourceTemplate
 
+**TOD Reference:** TOD-04-01-01-Create_Resource_Template
+
 **Summary:** Creates a ResourceTemplate
 
 ## Request Body
@@ -31,6 +33,4 @@ Table: Request Body of POST resourceTemplate. {#tbl:resourceTemplate.post.md:req
 
 Table: Responses of POST resourceTemplate. {#tbl:resourceTemplate.post.md:responses}
 
-## TOD Reference
-
-TOD-04-01-01-Create_Resource_Template
+{#page:break}

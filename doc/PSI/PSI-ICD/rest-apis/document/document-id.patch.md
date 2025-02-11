@@ -7,12 +7,14 @@
 
 **Absolute Path:** /documentManagement/v1/document/{id}
 
+**TOD Reference:** TOD-01-03-02-Update_Document
+
 **Summary:** Updates partially a Document
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | id | string | Yes | Identifier of the Document |
 
 Table: Parameters of PATCH document/{id}. {#tbl:document-id.patch.md:parameters}
@@ -40,6 +42,4 @@ Table: Request Body of PATCH document/{id}. {#tbl:document-id.patch.md:request_b
 
 Table: Responses of PATCH document/{id}. {#tbl:document-id.patch.md:responses}
 
-## TOD Reference
-
-TOD-01-03-02-Update_Document
+{#page:break}

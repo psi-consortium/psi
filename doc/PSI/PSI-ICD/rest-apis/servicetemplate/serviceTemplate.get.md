@@ -7,12 +7,14 @@
 
 **Absolute Path:** /serviceCatalog/v1/serviceTemplate
 
+**TOD Reference:** TOD-04-02-05-View_All_Service_Templates
+
 **Summary:** List or find ServiceTemplate objects
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | fields | string | No | Comma-separated properties to be provided in response. |
 | offset | integer | No | The requested index for start of resources to be provided in response. |
 | limit | integer | No | The requested number of resources to be provided in response. |
@@ -34,6 +36,4 @@ Table: Parameters of GET serviceTemplate. {#tbl:serviceTemplate.get.md:parameter
 
 Table: Responses of GET serviceTemplate. {#tbl:serviceTemplate.get.md:responses}
 
-## TOD Reference
-
-TOD-04-02-05-View_All_Service_Templates
+{#page:break}

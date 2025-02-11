@@ -7,12 +7,14 @@
 
 **Absolute Path:** /resourceInventory/v1/resource/{id}
 
+**TOD Reference:** TOD-05-01-03-Remove_Resource
+
 **Summary:** Deletes a Resource
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | id | string | Yes | Identifier of the Resource |
 
 Table: Parameters of DELETE resource/{id}. {#tbl:resource-id.delete.md:parameters}
@@ -32,6 +34,4 @@ Table: Parameters of DELETE resource/{id}. {#tbl:resource-id.delete.md:parameter
 
 Table: Responses of DELETE resource/{id}. {#tbl:resource-id.delete.md:responses}
 
-## TOD Reference
-
-TOD-05-01-03-Remove_Resource
+{#page:break}

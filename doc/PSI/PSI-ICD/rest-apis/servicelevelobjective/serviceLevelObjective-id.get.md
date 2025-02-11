@@ -7,12 +7,14 @@
 
 **Absolute Path:** /serviceQuality/v1/serviceLevelObjective/{id}
 
+**TOD Reference:** TOD-06-01-04-View_Service_Level_Objective
+
 **Summary:** Retrieves a ServiceLevelObjective by ID
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | id | string | Yes | Identifier of the ServiceLevelObjective |
 | fields | string | No | Comma-separated properties to provide in response |
 
@@ -33,6 +35,4 @@ Table: Parameters of GET serviceLevelObjective/{id}. {#tbl:serviceLevelObjective
 
 Table: Responses of GET serviceLevelObjective/{id}. {#tbl:serviceLevelObjective-id.get.md:responses}
 
-## TOD Reference
-
-TOD-06-01-04-View_Service_Level_Objective
+{#page:break}

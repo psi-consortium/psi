@@ -43,7 +43,7 @@ I2 --           Operation
 
 ```
 
-![**TOD-01-03-01**: Create Document](../../common/pixel.png){#fig:TOD-01-03-01-Create_Document}
+![TOD-01-03-01: Create Document](../../common/pixel.png){#fig:TOD-01-03-01-Create_Document}
 
 **Prerequisites**
 

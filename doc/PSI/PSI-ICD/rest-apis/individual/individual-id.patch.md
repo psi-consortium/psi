@@ -7,12 +7,14 @@
 
 **Absolute Path:** /partyManagement/v1/individual/{id}
 
+**TOD Reference:** TOD-01-01-02-Update_Party_Profile
+
 **Summary:** Updates partially a Individual
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | id | string | Yes | Identifier of the Individual |
 
 Table: Parameters of PATCH individual/{id}. {#tbl:individual-id.patch.md:parameters}
@@ -40,6 +42,4 @@ Table: Request Body of PATCH individual/{id}. {#tbl:individual-id.patch.md:reque
 
 Table: Responses of PATCH individual/{id}. {#tbl:individual-id.patch.md:responses}
 
-## TOD Reference
-
-TOD-01-01-02-Update_Party_Profile
+{#page:break}

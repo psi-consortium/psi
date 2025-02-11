@@ -7,6 +7,8 @@
 
 **Absolute Path:** /partyManagement/v1/individual
 
+**TOD Reference:** TOD-01-01-01-Create_Party_Profile
+
 **Summary:** Creates a Individual
 
 ## Request Body
@@ -31,6 +33,4 @@ Table: Request Body of POST individual. {#tbl:individual.post.md:request_body}
 
 Table: Responses of POST individual. {#tbl:individual.post.md:responses}
 
-## TOD Reference
-
-TOD-01-01-01-Create_Party_Profile
+{#page:break}

@@ -39,7 +39,7 @@ Task  ..> O5    : <<includes>>
 
 ```
 
-![**TOD-04-01**: Resource Template Management](../../common/pixel.png){#fig:TOD-04-01-Resource_Template_Management}
+![TOD-04-01: Resource Template Management](../../common/pixel.png){#fig:TOD-04-01-Resource_Template_Management}
 
 |                                 |  Customer  |  Provider  | Other PSS | Governance |
 |---------------------------------|:----------:|:----------:|:---------:|:----------:|

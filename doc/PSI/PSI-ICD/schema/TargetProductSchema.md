@@ -8,8 +8,10 @@
 The reference object to the schema and type of target product which is described by product specification
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
-| \@schemaLocation | string | uri | Yes |
-| \@type | string | N/A | Yes |
+| ------- | ------- | ------- | --- |
+| @schemaLocation | string | uri | Yes |
+| @type | string | N/A | Yes |
 
 Table: Fields of TargetProductSchema. {#tbl:TargetProductSchema.md:TargetProductSchema}
+
+{#page:break}

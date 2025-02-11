@@ -33,4 +33,4 @@ The criteria used to build the list of tasks and operations are:
 * The candidate requirements, which define the functionalities that should be supported by the interfaces.
 * The identified needs of the consortium partners via direct communication with them.
 
-[^1]: See https://www.tmforum.org/resources/standard/gb991-odf-concepts-and-principles-v22-0-0/
+[^1]: See <https://www.tmforum.org/resources/standard/gb991-odf-concepts-and-principles-v22-0-0/>

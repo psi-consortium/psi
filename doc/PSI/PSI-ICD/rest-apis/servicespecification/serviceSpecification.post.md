@@ -7,6 +7,8 @@
 
 **Absolute Path:** /serviceCatalog/v1/serviceSpecification
 
+**TOD Reference:** TOD-02-02-01-Create_Service_Specification
+
 **Summary:** Creates a ServiceSpecification
 
 ## Request Body
@@ -31,6 +33,4 @@ Table: Request Body of POST serviceSpecification. {#tbl:serviceSpecification.pos
 
 Table: Responses of POST serviceSpecification. {#tbl:serviceSpecification.post.md:responses}
 
-## TOD Reference
-
-TOD-02-02-01-Create_Service_Specification
+{#page:break}

@@ -51,7 +51,7 @@ I4 --           Operation
 
 ```
 
-![**TOD-01-01-03**: Remove Party Profile](../../common/pixel.png){#fig:TOD-01-01-03-Remove_Party_Profile}
+![TOD-01-01-03: Remove Party Profile](../../common/pixel.png){#fig:TOD-01-01-03-Remove_Party_Profile}
 
 
 **Prerequisites**
@@ -77,3 +77,4 @@ The profile for the party is successfully deleted or indicated it is no longer v
 **eTOM Reference**
 
 The operation is based on 1.3.6.4 and 1.6.21.2 process identifiers from the eTOM.
+

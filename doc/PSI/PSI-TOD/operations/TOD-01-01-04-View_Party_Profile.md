@@ -51,7 +51,7 @@ I4 --           Operation
 
 ```
 
-![**TOD-01-01-04**: View Party Profile](../../common/pixel.png){#fig:TOD-01-01-04-View_Party_Profile}
+![TOD-01-01-04: View Party Profile](../../common/pixel.png){#fig:TOD-01-01-04-View_Party_Profile}
 
 **Prerequisites**
 

@@ -9,11 +9,13 @@ Linked products to the one instantiate, such as [bundled] if the product is a bu
 an option on an already owned mobile access product) [targets] or [isTargeted] (depending on the way of expressing the link) for any other kind of links that may be useful
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | relationshipType | string | N/A | Yes |
 | product | ProductRefOrValue | N/A | Yes |
-| \@baseType | string | N/A | No |
-| \@schemaLocation | string | uri | No |
-| \@type | string | N/A | No |
+| @baseType | string | N/A | No |
+| @schemaLocation | string | uri | No |
+| @type | string | N/A | No |
 
 Table: Fields of ProductRelationship. {#tbl:ProductRelationship.md:ProductRelationship}
+
+{#page:break}

@@ -7,6 +7,8 @@
 
 **Absolute Path:** /partyManagement/v1/organization
 
+**TOD Reference:** TOD-01-01-01-Create_Party_Profile
+
 **Summary:** Creates a Organization
 
 ## Request Body
@@ -31,6 +33,4 @@ Table: Request Body of POST organization. {#tbl:organization.post.md:request_bod
 
 Table: Responses of POST organization. {#tbl:organization.post.md:responses}
 
-## TOD Reference
-
-TOD-01-01-01-Create_Party_Profile
+{#page:break}

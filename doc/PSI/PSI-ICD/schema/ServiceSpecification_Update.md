@@ -11,7 +11,7 @@ By sharing the same specification, these services would therefore share the same
 Skipped properties: id,href,lastUpdate
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | name | string | N/A | No |
 | description | string | N/A | No |
 | isBundle | boolean | N/A | No |
@@ -29,8 +29,10 @@ Skipped properties: id,href,lastUpdate
 | targetEntitySchema | TargetEntitySchema | N/A | No |
 | validFor | TimePeriod | N/A | No |
 | category | string | N/A | No |
-| \@baseType | string | N/A | No |
-| \@schemaLocation | string | uri | No |
-| \@type | string | N/A | No |
+| @baseType | string | N/A | No |
+| @schemaLocation | string | uri | No |
+| @type | string | N/A | No |
 
 Table: Fields of ServiceSpecification_Update. {#tbl:ServiceSpecification_Update.md:ServiceSpecification_Update}
+
+{#page:break}

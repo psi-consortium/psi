@@ -8,7 +8,7 @@
 Describes the contact medium characteristics that could be used to contact a party (an individual or an organization)
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | id | string | N/A | No |
 | href | string | uri | No |
 | city | string | N/A | No |
@@ -22,8 +22,10 @@ Describes the contact medium characteristics that could be used to contact a par
 | stateOrProvince | string | N/A | No |
 | street1 | string | N/A | No |
 | street2 | string | N/A | No |
-| \@baseType | string | N/A | No |
-| \@schemaLocation | string | uri | No |
-| \@type | string | N/A | No |
+| @baseType | string | N/A | No |
+| @schemaLocation | string | uri | No |
+| @type | string | N/A | No |
 
 Table: Fields of MediumCharacteristic. {#tbl:MediumCharacteristic.md:MediumCharacteristic}
+
+{#page:break}

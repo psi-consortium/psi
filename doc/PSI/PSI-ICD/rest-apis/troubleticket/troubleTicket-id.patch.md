@@ -7,12 +7,14 @@
 
 **Absolute Path:** /troubleTicket/v1/troubleTicket/{id}
 
+**TOD Reference:** TOD-01-04-02-Update_Trouble_Ticket
+
 **Summary:** Updates partially a TroubleTicket
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | id | string | Yes | Identifier of the TroubleTicket |
 
 Table: Parameters of PATCH troubleTicket/{id}. {#tbl:troubleTicket-id.patch.md:parameters}
@@ -40,6 +42,4 @@ Table: Request Body of PATCH troubleTicket/{id}. {#tbl:troubleTicket-id.patch.md
 
 Table: Responses of PATCH troubleTicket/{id}. {#tbl:troubleTicket-id.patch.md:responses}
 
-## TOD Reference
-
-TOD-01-04-02-Update_Trouble_Ticket
+{#page:break}

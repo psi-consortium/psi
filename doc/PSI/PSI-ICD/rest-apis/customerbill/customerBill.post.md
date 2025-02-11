@@ -7,6 +7,8 @@
 
 **Absolute Path:** /customerBillManagement/v1/customerBill
 
+**TOD Reference:** TOD-03-03-01-Create_Customer_Bill
+
 **Summary:** Creates a CustomerBill
 
 ## Request Body
@@ -31,6 +33,4 @@ Table: Request Body of POST customerBill. {#tbl:customerBill.post.md:request_bod
 
 Table: Responses of POST customerBill. {#tbl:customerBill.post.md:responses}
 
-## TOD Reference
-
-TOD-03-03-01-Create_Customer_Bill
+{#page:break}

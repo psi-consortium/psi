@@ -7,12 +7,14 @@
 
 **Absolute Path:** /resourceCatalog/v1/resourceSpecification/{id}
 
+**TOD Reference:** TOD-02-01-02-Update_Resource_Specification
+
 **Summary:** Updates partially a ResourceSpecification
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | id | string | Yes | Identifier of the ResourceSpecification |
 
 Table: Parameters of PATCH resourceSpecification/{id}. {#tbl:resourceSpecification-id.patch.md:parameters}
@@ -40,6 +42,4 @@ Table: Request Body of PATCH resourceSpecification/{id}. {#tbl:resourceSpecifica
 
 Table: Responses of PATCH resourceSpecification/{id}. {#tbl:resourceSpecification-id.patch.md:responses}
 
-## TOD Reference
-
-TOD-02-01-02-Update_Resource_Specification
+{#page:break}

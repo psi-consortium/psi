@@ -10,41 +10,107 @@ subtitle: "PSI-ICD"
 reference: "PSI-ICD"
 ---
 dcr_overrides:
-- dcr:
-   from: '2022-04-01'
-   to: '2024-04-09'
-   version: '1.0.0'
-   author: 'Hendrik Oppenberg'
-   message: 'Release of Version 1.0.0'
-- dcr:
-   from: '2024-04-09'
-   to: '2024-07-29'
-   version: '1.1.0'
-   author: 'Hendrik Oppenberg'
-   message: 'Improvement of CustomerInquriy entity relationships. Include relatedParty in ProductCatalog.'
+ - dcr:
+   from: '2022-03-01'
+   to: '2022-08-24'
+   version: 'MS1'
+   author: 'Christian Grubert'
+   message: 'Initial version'
+ - dcr:
+   from: '2022-08-25'
+   to: '2022-09-30'
+   version: 'MS2'
+   author: 'Christian Grubert'
+   message: 'Added party management and resource registration.'
+ - dcr:
+   from: '2022-10-01'
+   to: '2022-12-31'
+   version: 'MS3'
+   author: 'Christian Grubert'
+   message: 'Added inquiry, template, event, attachment and billing API'
+ - dcr:
+   from: '2023-01-01'
+   to: '2023-04-19'
+   version: 'MS4'
+   author: 'Christian Grubert'
+   message: 'Updated endpoints descriptions for billing and attachments, added beam areas, best-effort flag and inquiry timeouts, added security considerations'
+ - dcr:
+   from: '2023-04-20'
+   to: '2023-07-26'
+   version: 'MS5'
+   author: 'Norbert Czeranka'
+   message: 'Priority system for offerings, characteristics, trouble ticket management and time intervals'
+ - dcr:
+   from: '2023-07-27'
+   to: '2023-10-06'
+   version: 'MS6'
+   author: 'Christian Grubert'
+   message: 'Introduced JSON Schema approach and GeoJSON details'
+ - dcr:
+   from: '2023-10-07'
+   to: '2024-01-25'
+   version: 'MS7'
+   author: 'Christian Grubert'
+   message: 'Clarified mandatory columns, additional JSON schemas, introduced polymorphism'
+ - dcr:
+   from: '2024-01-26'
+   to: '2024-09-11'
+   version: 'MS8 [1.2.0]'
+   author: 'Thomas Schulz'
+   message: 'Public release adjustments.'
+ - dcr:
+   from: '2024-09-12'
+   to: '2024-12-09'
+   version: 'MS9 [1.2.1]'
+   author: 'Christian Grubert'
+   message: 'Mission-API and location handling updates.'
+ - dcr:
+   from: '2024-12-10'
+   to: '2025-02-03'
+   version: 'MS10 [1.2.2]'
+   author: 'Norbert Czeranka'
+   message: 'Relative times in Mision-API, implicit subtypes, Open-API 3.0 type update.'
 =end
 
 # Document Meta Information
 
-## Document Change Record
+## Document Signature Table
 
-Changes to this document are tracked electronically.
-No signature is required by the authors.
-The following information can prove the integrity of the document and reveal any change.
+|           | Name              | Function                       | Company         |
+| --------- | ----------------- | ------------------------------ | --------------- |
+| Author    | Christian Grubert | Project Team                   | CGI             |
+| Author    | Norbert Czeranka  | Project Team                   | CGI             |
+| Author    | Dafinka Srezoska  | Project Team                   | CGI             |
+| Author    | Hendrik Oppenberg | Technical Officer              | CGI             |
+| Approval  | Rui Goncalves     | Project Manager                | SES             |
+| Approval  | Wolfgang Robben   | Project Manager                | CGI             |
+| Checked   | Pepijn Witte      | Quality Assurance Manager      | CGI             |
 
-@dcr(git_qr_code){#fig:dcr_qr_code}
+Table: Signature Table. {#tbl:signature_table}
+
+@include [Document Change Record](../common/document-change-record.md)
 
 ## Documents
 
 ### Reference Documents
 
-| Acronym | Reference | Title                                | Version |
-|---------|-----------|--------------------------------------|---------|
-| PSI-DL  | PSI-DL    | PSI Document List                    | 1.1.0   |
-| PSI-ICD | PSI-ICD   | Interface Control Document           | 1.1.0   |
-| PSI-TAD | PSI-TAD   | Terms, Abbreviations and Definitions | 1.1.0   |
+| Acronym | Reference | Title                                    | Version                  |
+|---------|-----------|------------------------------------------|--------------------------|
+| PSI-DL  | PSI-DL    | PSI CGI Document List                    | current MS (doc version) |
+| PSI-ICD | PSI-ICD   | PSI Interface Control Document           | see before               |
+| PSI-TAD | PSI-TAD   | PSI Terms, Abbreviations and Definitions | see before               |
+| PSI-TOD | PSI-TOD   | PSI Tasks and Operations Dictionary      | see before               |
 
 Table: Reference Documents. {#tbl:reference-documents}
+
+### External Annexes
+
+| Reference        | Title or Filename    |
+|------------------|----------------------|
+| PSI-ICD-Annex-I  | PSI-ICD-Annex-I.zip  |
+| PSI-ICD-Annex-II | PSI-ICD-Annex-II.zip |
+
+Table: External Annexes {#tbl:external-annexes}
 
 # Introduction
 
@@ -59,7 +125,7 @@ The following sections heavily refer to terms, abbreviations and definitions def
 
 @include [generated document warning](../common/generated_document.md)
 
-## Release Notes
+@include [development_state](../common/development_state.md)
 
 @include [Release Notes](../common/release_notes.md)
 
@@ -74,7 +140,7 @@ Unless specified otherwise, all interfaces are implemented RESTful, which includ
 
 Each of the following sections describe the available endpoints and operations, including the parameters, and request bodies.
 Wherever a named class is referenced see the [Data-Transfer-Objects](#data-transfer-objects) section for details.
-All information is also available as OpenAPI Specifications[^3] in annex I of this document.
+All information is also available as OpenAPI Specifications[^3] in [PSI-ICD-Annex-I] of this document.
 These files can be used to generate server and client code[^4] in a programming language of choice.
 
 Every interface is implemented by a server and a client.

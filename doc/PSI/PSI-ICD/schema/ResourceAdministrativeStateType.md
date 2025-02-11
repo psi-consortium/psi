@@ -8,7 +8,9 @@
 ResourceAdministrativeStateType enumerations
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | ResourceAdministrativeStateType | string | oneOf[locked, unlocked, shutdown] | No |
 
 Table: Fields of ResourceAdministrativeStateType. {#tbl:ResourceAdministrativeStateType.md:ResourceAdministrativeStateType}
+
+{#page:break}

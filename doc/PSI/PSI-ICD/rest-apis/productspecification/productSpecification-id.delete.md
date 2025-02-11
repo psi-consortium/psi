@@ -7,12 +7,14 @@
 
 **Absolute Path:** /productCatalog/v1/productSpecification/{id}
 
+**TOD Reference:** TOD-02-03-03-Remove_Product_Specification
+
 **Summary:** Deletes a ProductSpecification
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | id | string | Yes | Identifier of the ProductSpecification |
 
 Table: Parameters of DELETE productSpecification/{id}. {#tbl:productSpecification-id.delete.md:parameters}
@@ -32,6 +34,4 @@ Table: Parameters of DELETE productSpecification/{id}. {#tbl:productSpecificatio
 
 Table: Responses of DELETE productSpecification/{id}. {#tbl:productSpecification-id.delete.md:responses}
 
-## TOD Reference
-
-TOD-02-03-03-Remove_Product_Specification
+{#page:break}

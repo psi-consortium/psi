@@ -7,12 +7,14 @@
 
 **Absolute Path:** /resourceInventory/v1/resource/{id}
 
+**TOD Reference:** TOD-05-01-04-View_Resource
+
 **Summary:** Retrieves a Resource by ID
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | id | string | Yes | Identifier of the Resource |
 | fields | string | No | Comma-separated properties to provide in response |
 
@@ -33,6 +35,4 @@ Table: Parameters of GET resource/{id}. {#tbl:resource-id.get.md:parameters}
 
 Table: Responses of GET resource/{id}. {#tbl:resource-id.get.md:responses}
 
-## TOD Reference
-
-TOD-05-01-04-View_Resource
+{#page:break}

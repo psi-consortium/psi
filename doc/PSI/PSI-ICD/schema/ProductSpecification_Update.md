@@ -9,7 +9,7 @@ Is a detailed description of a tangible or intangible object made available exte
 Skipped properties: id,href,lastUpdate,@type,@baseType
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | name | string | N/A | No |
 | description | string | N/A | No |
 | brand | string | N/A | No |
@@ -26,6 +26,8 @@ Skipped properties: id,href,lastUpdate,@type,@baseType
 | serviceSpecification | array | ServiceSpecificationRef | No |
 | targetProductSchema | TargetProductSchema | N/A | No |
 | validFor | TimePeriod | N/A | No |
-| \@schemaLocation | string | uri | No |
+| @schemaLocation | string | uri | No |
 
 Table: Fields of ProductSpecification_Update. {#tbl:ProductSpecification_Update.md:ProductSpecification_Update}
+
+{#page:break}

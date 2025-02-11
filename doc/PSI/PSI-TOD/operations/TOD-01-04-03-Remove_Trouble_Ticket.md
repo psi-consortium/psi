@@ -39,7 +39,7 @@ I2 --           Operation
 
 ```
 
-![**TOD-01-04-03**: Remove Trouble Ticket](../../common/pixel.png){#fig:TOD-01-04-03-Remove_Trouble_Ticket}
+![TOD-01-04-03: Remove Trouble Ticket](../../common/pixel.png){#fig:TOD-01-04-03-Remove_Trouble_Ticket}
 
 **Prerequisites**
 

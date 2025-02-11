@@ -58,7 +58,8 @@
             "valueType": "integer",
             "characteristicValueSpecification": [
                 {
-                    "value": 150
+                    "value": 150,
+                    "unitOfMeasure": "ms"
                 }
             ]
         },

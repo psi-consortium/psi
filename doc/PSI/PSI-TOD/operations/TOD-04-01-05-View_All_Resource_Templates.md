@@ -47,7 +47,7 @@ I3 --           Operation
 
 ```
 
-![**TOD-04-01-05**: View All Resource Templates](../../common/pixel.png){#fig:TOD-04-01-05-View_All_Resource_Templates}
+![TOD-04-01-05: View All Resource Templates](../../common/pixel.png){#fig:TOD-04-01-05-View_All_Resource_Templates}
 
 **Prerequisites**
 

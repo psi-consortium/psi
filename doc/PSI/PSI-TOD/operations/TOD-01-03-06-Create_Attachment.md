@@ -43,7 +43,7 @@ I2 --           Operation
 
 ```
 
-![**TOD-01-03-06**: Create Attachment](../../common/pixel.png){#fig:TOD-01-03-06-Create_Attachment}
+![TOD-01-03-06: Create Attachment](../../common/pixel.png){#fig:TOD-01-03-06-Create_Attachment}
 
 **Prerequisites**
 

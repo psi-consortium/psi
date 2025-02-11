@@ -39,7 +39,7 @@ I1 --           Operation
 
 ```
 
-![**TOD-05-02-03**: Remove Service](../../common/pixel.png){#fig:TOD-05-02-03-Remove_Service}
+![TOD-05-02-03: Remove Service](../../common/pixel.png){#fig:TOD-05-02-03-Remove_Service}
 
 **Prerequisites**
 

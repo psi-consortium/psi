@@ -39,7 +39,7 @@ I1 --           Operation
 
 ```
 
-![**TOD-06-01-01**: Create Service Level Objective](../../common/pixel.png){#fig:TOD-06-01-01-Create_Service_Level_Objective}
+![TOD-06-01-01: Create Service Level Objective](../../common/pixel.png){#fig:TOD-06-01-01-Create_Service_Level_Objective}
 
 **Prerequisites**
 

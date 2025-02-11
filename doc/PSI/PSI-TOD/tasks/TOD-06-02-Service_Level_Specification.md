@@ -7,10 +7,12 @@
 =end
 
 The Service Level Specification Management task takes care of the maintenance of service level specifications (SLSs) in the PSS.
-An SLS represents a predefined or negotiated set of service level objectives (SLO - see [TOD-06-01](#tod-06-01-service_level_objective_management)).
+An SLS represents a predefined or negotiated set of service level objectives (SLO - see [TOD-06-01](#tod-06-01-servicelevelobjectivemanagement)).
+The requirements for service instances that must be met can then be represented as SLS, which are linked from the corresponding product offerings and/or service specifications.
 
-Service level specifications can be used to define service level agreements (SLA).
-They could also be associated with service catalogs by being referenced by service specifications, that must be capable of meeting the goals by corresponding service instances.
+When an order is issued, a legally binding SLA between the parties might result from an SLS.
+As per its nature, it is often documented in PDF or other text formats.
+Those documents can be stored in the document management (see [TOD-01-03](#tod-01-03-documentmanagement)).
 
 ```plantuml
 @startuml
@@ -30,7 +32,7 @@ Task  ..> O5    : <<includes>>
 @enduml
 ```
 
-![**TOD-06-02**: Service Level Specification (SLS) Management](../../common/pixel.png){#fig:TOD-06-02-Service_Level_Specification_Management}
+![TOD-06-02: Service Level Specification (SLS) Management](../../common/pixel.png){#fig:TOD-06-02-Service_Level_Specification_Management}
 
 |                   |  Customer  |  Provider  | Other PSS | Governance |
 |-------------------|:----------:|:----------:|:---------:|:----------:|

@@ -10,7 +10,7 @@ Examples include business, department and enterprise.
 Because of the complex nature of many businesses, both organizations and organization units are represented by the same data.
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | id | string | N/A | No |
 | href | string | uri | No |
 | name | string | N/A | No |
@@ -31,8 +31,10 @@ Because of the complex nature of many businesses, both organizations and organiz
 | relatedParty | array | RelatedParty | No |
 | status | OrganizationStateType | N/A | No |
 | taxExemptionCertificate | array | TaxExemptionCertificate | No |
-| \@baseType | string | N/A | No |
-| \@schemaLocation | string | uri | No |
-| \@type | string | N/A | No |
+| @baseType | string | N/A | No |
+| @schemaLocation | string | uri | No |
+| @type | string | N/A | No |
 
 Table: Fields of Organization. {#tbl:Organization.md:Organization}
+
+{#page:break}

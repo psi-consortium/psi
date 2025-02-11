@@ -7,12 +7,14 @@
 
 **Absolute Path:** /customerInquiry/v1/customerInquiry/{id}
 
+**TOD Reference:** TOD-03-01-02-View_Customer_Inquiry
+
 **Summary:** Retrieves a CustomerInquiry
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | id | string | Yes | Identifier of the CustomerInquiry |
 
 Table: Parameters of GET customerInquiry/{id}. {#tbl:customerInquiry-id.get.md:parameters}
@@ -32,6 +34,4 @@ Table: Parameters of GET customerInquiry/{id}. {#tbl:customerInquiry-id.get.md:p
 
 Table: Responses of GET customerInquiry/{id}. {#tbl:customerInquiry-id.get.md:responses}
 
-## TOD Reference
-
-TOD-03-01-02-View_Customer_Inquiry
+{#page:break}

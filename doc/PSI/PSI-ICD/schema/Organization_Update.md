@@ -11,7 +11,7 @@ Because of the complex nature of many businesses, both organizations and organiz
 Skipped properties: id,href
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | name | string | N/A | No |
 | isHeadOffice | boolean | N/A | No |
 | isLegalEntity | boolean | N/A | No |
@@ -30,8 +30,10 @@ Skipped properties: id,href
 | relatedParty | array | RelatedParty | No |
 | status | OrganizationStateType | N/A | No |
 | taxExemptionCertificate | array | TaxExemptionCertificate | No |
-| \@baseType | string | N/A | No |
-| \@schemaLocation | string | uri | No |
-| \@type | string | N/A | No |
+| @baseType | string | N/A | No |
+| @schemaLocation | string | uri | No |
+| @type | string | N/A | No |
 
 Table: Fields of Organization_Update. {#tbl:Organization_Update.md:Organization_Update}
+
+{#page:break}

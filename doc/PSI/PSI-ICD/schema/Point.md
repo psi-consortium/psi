@@ -5,11 +5,13 @@
 
 # Point
 
-GeoJSon geometry
+A GeoJSON Point.
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | coordinates | Point2D | N/A | No |
 | type | string | "Point" | Yes |
 
 Table: Fields of Point. {#tbl:Point.md:Point}
+
+{#page:break}

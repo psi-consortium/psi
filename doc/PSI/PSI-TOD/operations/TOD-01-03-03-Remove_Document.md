@@ -43,7 +43,7 @@ I2 --           Operation
 
 ```
 
-![**TOD-01-03-03**: Remove Document](../../common/pixel.png){#fig:TOD-01-03-03-Remove_Document}
+![TOD-01-03-03: Remove Document](../../common/pixel.png){#fig:TOD-01-03-03-Remove_Document}
 
 **Prerequisites**
 

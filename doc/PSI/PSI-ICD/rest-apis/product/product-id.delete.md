@@ -7,12 +7,14 @@
 
 **Absolute Path:** /productInventory/v1/product/{id}
 
+**TOD Reference:** TOD-05-03-03-Remove_Product
+
 **Summary:** Deletes a Product
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | id | string | Yes | Identifier of the Product |
 
 Table: Parameters of DELETE product/{id}. {#tbl:product-id.delete.md:parameters}
@@ -32,6 +34,4 @@ Table: Parameters of DELETE product/{id}. {#tbl:product-id.delete.md:parameters}
 
 Table: Responses of DELETE product/{id}. {#tbl:product-id.delete.md:responses}
 
-## TOD Reference
-
-TOD-05-03-03-Remove_Product
+{#page:break}

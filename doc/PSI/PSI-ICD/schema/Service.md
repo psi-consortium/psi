@@ -10,7 +10,7 @@ All Services are characterized as either being possibly visible and usable by a 
 This gives rise to the two subclasses of Service: CustomerFacingService and ResourceFacingService.
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | id | string | N/A | No |
 | href | string | uri | No |
 | name | string | N/A | No |
@@ -37,8 +37,10 @@ This gives rise to the two subclasses of Service: CustomerFacingService and Reso
 | state | ServiceStateType | N/A | No |
 | supportingResource | array | ResourceRef | No |
 | supportingService | array | ServiceRefOrValue | No |
-| \@baseType | string | N/A | No |
-| \@schemaLocation | string | uri | No |
-| \@type | string | N/A | No |
+| @baseType | string | N/A | No |
+| @schemaLocation | string | uri | No |
+| @type | string | N/A | No |
 
 Table: Fields of Service. {#tbl:Service.md:Service}
+
+{#page:break}

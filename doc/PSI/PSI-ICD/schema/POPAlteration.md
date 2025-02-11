@@ -8,7 +8,7 @@
 Is an amount, usually of money, that modifies the price charged for an order item.
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | id | string | N/A | No |
 | href | string | uri | No |
 | name | string | N/A | No |
@@ -20,8 +20,10 @@ Is an amount, usually of money, that modifies the price charged for an order ite
 | price | ProductPriceValue | N/A | Yes |
 | unitOfMeasure | Quantity | N/A | No |
 | validFor | TimePeriod | N/A | No |
-| \@baseType | string | N/A | No |
-| \@schemaLocation | string | uri | No |
-| \@type | string | N/A | No |
+| @baseType | string | N/A | No |
+| @schemaLocation | string | uri | No |
+| @type | string | N/A | No |
 
 Table: Fields of POPAlteration. {#tbl:POPAlteration.md:POPAlteration}
+
+{#page:break}

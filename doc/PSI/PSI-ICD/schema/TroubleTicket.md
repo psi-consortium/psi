@@ -8,7 +8,7 @@
 A trouble ticket is a record of an issue that is created, tracked, and managed by a trouble ticket management system
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | id | string | N/A | No |
 | href | string | N/A | No |
 | name | string | N/A | No |
@@ -32,8 +32,10 @@ A trouble ticket is a record of an issue that is created, tracked, and managed b
 | status | TroubleTicketStatusType | N/A | No |
 | statusChange | array | StatusChange | No |
 | troubleTicketRelationship | array | TroubleTicketRelationship | No |
-| \@baseType | string | N/A | No |
-| \@schemaLocation | string | uri | No |
-| \@type | string | N/A | No |
+| @baseType | string | N/A | No |
+| @schemaLocation | string | uri | No |
+| @type | string | N/A | No |
 
 Table: Fields of TroubleTicket. {#tbl:TroubleTicket.md:TroubleTicket}
+
+{#page:break}

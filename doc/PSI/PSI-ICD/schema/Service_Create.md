@@ -11,7 +11,7 @@ This gives rise to the two subclasses of Service: CustomerFacingService and Reso
 Skipped properties: id,href
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | name | string | N/A | No |
 | description | string | N/A | No |
 | category | string | N/A | No |
@@ -36,8 +36,10 @@ Skipped properties: id,href
 | state | ServiceStateType | N/A | Yes |
 | supportingResource | array | ResourceRef | No |
 | supportingService | array | ServiceRefOrValue | No |
-| \@baseType | string | N/A | No |
-| \@schemaLocation | string | uri | No |
-| \@type | string | N/A | No |
+| @baseType | string | N/A | No |
+| @schemaLocation | string | uri | No |
+| @type | string | N/A | No |
 
 Table: Fields of Service_Create. {#tbl:Service_Create.md:Service_Create}
+
+{#page:break}

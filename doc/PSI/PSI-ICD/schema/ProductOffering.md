@@ -8,7 +8,7 @@
 Represents entities that are orderable from the provider of the catalog, this resource includes pricing information.
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | id | string | N/A | No |
 | href | string | uri | No |
 | name | string | N/A | No |
@@ -33,13 +33,15 @@ Represents entities that are orderable from the provider of the catalog, this re
 | productSpecification | ProductSpecificationRef | N/A | No |
 | resourceCandidate | ResourceCandidateRef | N/A | No |
 | serviceCandidate | ServiceCandidateRef | N/A | No |
-| serviceLevelAgreement | SLARef | N/A | No |
+| serviceLevelSpecification | ServiceLevelSpecificationRef | N/A | No |
 | validFor | TimePeriod | N/A | No |
 | accessProbability | integer | N/A | No |
 | relatedParty | array | RelatedParty | No |
 | bundledGroupProductOffering | array | BundledGroupProductOffering | No |
-| \@baseType | string | N/A | No |
-| \@schemaLocation | string | uri | No |
-| \@type | string | N/A | No |
+| @baseType | string | N/A | No |
+| @schemaLocation | string | uri | No |
+| @type | string | N/A | No |
 
 Table: Fields of ProductOffering. {#tbl:ProductOffering.md:ProductOffering}
+
+{#page:break}

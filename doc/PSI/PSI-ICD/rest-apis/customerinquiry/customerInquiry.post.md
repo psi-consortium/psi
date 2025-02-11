@@ -7,6 +7,8 @@
 
 **Absolute Path:** /customerInquiry/v1/customerInquiry
 
+**TOD Reference:** TOD-03-01-01-Create_Customer_Inquiry
+
 **Summary:** Creates a CustomerInquiry
 
 ## Request Body
@@ -31,6 +33,4 @@ Table: Request Body of POST customerInquiry. {#tbl:customerInquiry.post.md:reque
 
 Table: Responses of POST customerInquiry. {#tbl:customerInquiry.post.md:responses}
 
-## TOD Reference
-
-TOD-03-01-01-Create_Customer_Inquiry
+{#page:break}

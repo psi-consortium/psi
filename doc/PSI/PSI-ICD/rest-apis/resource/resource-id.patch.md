@@ -7,12 +7,14 @@
 
 **Absolute Path:** /resourceInventory/v1/resource/{id}
 
+**TOD Reference:** TOD-05-01-02-Update_Resource
+
 **Summary:** Updates partially a Resource
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | id | string | Yes | Identifier of the Resource |
 
 Table: Parameters of PATCH resource/{id}. {#tbl:resource-id.patch.md:parameters}
@@ -40,6 +42,4 @@ Table: Request Body of PATCH resource/{id}. {#tbl:resource-id.patch.md:request_b
 
 Table: Responses of PATCH resource/{id}. {#tbl:resource-id.patch.md:responses}
 
-## TOD Reference
-
-TOD-05-01-02-Update_Resource
+{#page:break}

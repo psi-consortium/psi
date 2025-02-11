@@ -7,12 +7,14 @@
 
 **Absolute Path:** /serviceCatalog/v1/serviceSpecification/{id}
 
+**TOD Reference:** TOD-02-02-02-Update_Service_Specification
+
 **Summary:** Updates partially a ServiceSpecification
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | id | string | Yes | Identifier of the ServiceSpecification |
 
 Table: Parameters of PATCH serviceSpecification/{id}. {#tbl:serviceSpecification-id.patch.md:parameters}
@@ -40,6 +42,4 @@ Table: Request Body of PATCH serviceSpecification/{id}. {#tbl:serviceSpecificati
 
 Table: Responses of PATCH serviceSpecification/{id}. {#tbl:serviceSpecification-id.patch.md:responses}
 
-## TOD Reference
-
-TOD-02-02-02-Update_Service_Specification
+{#page:break}

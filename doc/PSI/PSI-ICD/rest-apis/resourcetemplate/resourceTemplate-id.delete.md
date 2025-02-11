@@ -7,12 +7,14 @@
 
 **Absolute Path:** /resourceCatalog/v1/resourceTemplate/{id}
 
+**TOD Reference:** TOD-04-01-03-Remove_Resource_Template
+
 **Summary:** Deletes a ResourceTemplate
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | id | string | Yes | The identifier of the ResourceTemplate. |
 
 Table: Parameters of DELETE resourceTemplate/{id}. {#tbl:resourceTemplate-id.delete.md:parameters}
@@ -32,6 +34,4 @@ Table: Parameters of DELETE resourceTemplate/{id}. {#tbl:resourceTemplate-id.del
 
 Table: Responses of DELETE resourceTemplate/{id}. {#tbl:resourceTemplate-id.delete.md:responses}
 
-## TOD Reference
-
-TOD-04-01-03-Remove_Resource_Template
+{#page:break}

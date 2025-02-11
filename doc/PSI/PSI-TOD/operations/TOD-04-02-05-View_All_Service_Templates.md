@@ -43,7 +43,7 @@ I2 --           Operation
 
 ```
 
-![**TOD-04-02-05**: View All Service Templates](../../common/pixel.png){#fig:TOD-04-02-05-View_All_Service_Templates}
+![TOD-04-02-05: View All Service Templates](../../common/pixel.png){#fig:TOD-04-02-05-View_All_Service_Templates}
 
 **Prerequisites**
 

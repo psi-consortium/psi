@@ -7,7 +7,7 @@
 =end
 
 The Trouble Ticket Management task is responsible for tracking incident reports, complaints and other requests of customers and providers.
-They can be processed either by a PSS helpdesk operator if they concern the functionality of the PSS itself, or by the provider if they affect a SATCOM service.
+They can be processed either by a PSS helpdesk operator if they concern the functionality of the PSS itself, or by the provider if they affect a (Gov)SatCom service.
 Most likely, the actual implementation is outsourced to an existing ticket system or the CRM.
 
 ```plantuml
@@ -31,7 +31,7 @@ Task1  ..> O5    : <<includes>>
 
 ```
 
-![**TOD-01-04**: Trouble Ticket Management](../../common/pixel.png){#fig:TOD-01-04-Trouble_Ticket_Management}
+![TOD-01-04: Trouble Ticket Management](../../common/pixel.png){#fig:TOD-01-04-Trouble_Ticket_Management}
 
 |                               |  Customer  |  Provider  | Other PSS  | Governance |
 |-------------------------------|:----------:|:----------:|:----------:|:----------:|

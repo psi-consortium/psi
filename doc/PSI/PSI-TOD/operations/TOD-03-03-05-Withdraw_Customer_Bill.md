@@ -39,7 +39,7 @@ I1 --           Operation
 
 ```
 
-![**TOD-03-03-02**: Withdraw Customer Bill](../../common/pixel.png){#fig:TOD-03-03-02-Withdraw_Customer_Bill}
+![TOD-03-03-02: Withdraw Customer Bill](../../common/pixel.png){#fig:TOD-03-03-02-Withdraw_Customer_Bill}
 
 **Prerequisites**
 

@@ -8,7 +8,9 @@
 Possible values for the precedence of a characteristic value.
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | CharacteristicValuePrecedence | string | oneOf[preferred, minimum, maximum, alternative] | No |
 
 Table: Fields of CharacteristicValuePrecedence. {#tbl:CharacteristicValuePrecedence.md:CharacteristicValuePrecedence}
+
+{#page:break}

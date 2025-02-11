@@ -33,19 +33,18 @@ Task  ..> O5    : <<includes>>
 
 ```
 
-![**TOD-02-03**: Product Catalog Management](../../common/pixel.png){#fig:TOD-02-03-Product_Catalog_Management}
+![TOD-02-03: Product Catalog Management](../../common/pixel.png){#fig:TOD-02-03-Product_Catalog_Management}
 
 |                                     |  Customer  |  Provider  | Other PSS  | Governance |
 |-------------------------------------|:----------:|:----------:|:----------:|:----------:|
 | **Create Product Specification**    |            | \checkmark |            |            |
 | **Update Product Specification**    |            | \checkmark |            |            |
 | **Remove Product Specification**    |            | \checkmark |            |            |
-| **View Product Specification**      | \checkmark | \checkmark | \checkmark |            |
-| **View All Product Specifications** | \checkmark | \checkmark | \checkmark |            |
+| **View Product Specification**      | \checkmark | \checkmark | \checkmark | \checkmark |
+| **View All Product Specifications** | \checkmark | \checkmark | \checkmark | \checkmark |
 
 Table: Product Catalog Management Matrix. {#tbl:product-catalog-management-matrix}
 
 **eTOM Reference**
 
 The task is based on the 1.2.22 and 1.2.7 process identifiers from the eTOM.
-

@@ -8,7 +8,9 @@
 ResourceUsageStateType enumerations
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | ResourceUsageStateType | string | oneOf[idle, active, busy] | No |
 
 Table: Fields of ResourceUsageStateType. {#tbl:ResourceUsageStateType.md:ResourceUsageStateType}
+
+{#page:break}

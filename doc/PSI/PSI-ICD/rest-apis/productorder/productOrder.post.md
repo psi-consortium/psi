@@ -7,6 +7,8 @@
 
 **Absolute Path:** /productOrdering/v1/productOrder
 
+**TOD Reference:** TOD-03-02-01-Create_Product_Order
+
 **Summary:** Creates a ProductOrder
 
 ## Request Body
@@ -31,6 +33,4 @@ Table: Request Body of POST productOrder. {#tbl:productOrder.post.md:request_bod
 
 Table: Responses of POST productOrder. {#tbl:productOrder.post.md:responses}
 
-## TOD Reference
-
-TOD-03-02-01-Create_Product_Order
+{#page:break}

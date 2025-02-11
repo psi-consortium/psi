@@ -10,13 +10,15 @@ An account of money owed by a party to another entity in exchange for goods or s
 An account receivable aggregates the amounts of one or more party accounts (billing or settlement) owned by a given party.
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | id | string | N/A | Yes |
 | href | string | N/A | No |
 | name | string | N/A | No |
-| \@baseType | string | N/A | No |
-| \@schemaLocation | string | uri | No |
-| \@type | string | N/A | No |
-| \@referredType | string | N/A | No |
+| @baseType | string | N/A | No |
+| @schemaLocation | string | uri | No |
+| @type | string | N/A | No |
+| @referredType | string | N/A | No |
 
 Table: Fields of FinancialAccountRef. {#tbl:FinancialAccountRef.md:FinancialAccountRef}
+
+{#page:break}

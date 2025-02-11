@@ -48,7 +48,7 @@ Task  ..> O5    : <<includes>>
 
 ```
 
-![**TOD-03-03**: Customer Bill Management](../../common/pixel.png){#fig:TOD-03-03-Customer_Bill_Management}
+![TOD-03-03: Customer Bill Management](../../common/pixel.png){#fig:TOD-03-03-Customer_Bill_Management}
 
 |                             |  Customer  |  Provider  |  Other PSS   | Governance |
 |-----------------------------|:----------:|:----------:|:------------:|:----------:|

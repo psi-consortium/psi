@@ -9,7 +9,7 @@ A new product offering price being created by value or a reference to an existin
 The polymorphic attributes @type, @schemaLocation & @referredType are related to the product offering price and not to this ReforValue structure
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | id | string | N/A | No |
 | href | string | uri | No |
 | name | string | N/A | No |
@@ -25,9 +25,11 @@ The polymorphic attributes @type, @schemaLocation & @referredType are related to
 | priceAlteration | array | POPAlteration | No |
 | unitOfMeasure | Quantity | N/A | No |
 | validFor | TimePeriod | N/A | No |
-| \@baseType | string | N/A | No |
-| \@schemaLocation | string | uri | No |
-| \@type | string | N/A | No |
-| \@referredType | string | N/A | No |
+| @baseType | string | N/A | No |
+| @schemaLocation | string | uri | No |
+| @type | string | N/A | No |
+| @referredType | string | N/A | No |
 
 Table: Fields of ProductOfferingPriceRefOrValue. {#tbl:ProductOfferingPriceRefOrValue.md:ProductOfferingPriceRefOrValue}
+
+{#page:break}

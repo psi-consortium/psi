@@ -39,7 +39,7 @@ I1 --           Operation
 
 ```
 
-![**TOD-05-02-02**: Update Service](../../common/pixel.png){#fig:TOD-05-02-02-Update_Service}
+![TOD-05-02-02: Update Service](../../common/pixel.png){#fig:TOD-05-02-02-Update_Service}
 
 **Prerequisites**
 

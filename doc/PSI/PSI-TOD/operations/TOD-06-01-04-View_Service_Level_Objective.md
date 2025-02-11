@@ -47,7 +47,7 @@ I3 --           Operation
 
 ```
 
-![**TOD-06-01-04**: View Service Level Objective](../../common/pixel.png){#fig:TOD-06-01-04-View_Service_Level_Objective}
+![TOD-06-01-04: View Service Level Objective](../../common/pixel.png){#fig:TOD-06-01-04-View_Service_Level_Objective}
 
 **Prerequisites**
 

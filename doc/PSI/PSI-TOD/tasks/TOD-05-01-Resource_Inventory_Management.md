@@ -12,7 +12,7 @@ Resources are created based on their specifications and reflect the actual chara
 There are two different scenarios to do this:
 
 * For *on-demand* resources, the entity may or may not exist in the provider system.
-  They are unknown to the PSS and are only queried via the Stock Management API (cf. [TOD-05-04](#tod-05-04-stock_management)).
+  They are unknown to the PSS and are only queried via the Stock Management API (cf. [TOD-05-04](#tod-05-04-stockmanagement)).
   Only upon order acceptance (or even afterwards) it is created in the PSS and "lives" for the requested period of time.
 * *Committed* resources are created in the PSS beforehand.
   This allows the PSS to internally check the availability in any given timespan.
@@ -56,9 +56,9 @@ SpecA_PSS --> I2_PSS
 @enduml
 ```
 
-![Tree of resources.](../../common/pixel.png){#fig:resource_tree}
+![TOD-05-01: Tree of Resources.](../../common/pixel.png){#fig:resource_tree}
 
-Depending on the implementation, the resource can be further subdivided, e.g. if it is shared with another user or is resold by a service provider.
+Depending on the implementation, the resource can be further subdivided, e.g. if it is shared with another user or resold by a service provider.
 If the resource instance is offered to customers, it has to be wrapped in a product instance resembling their corresponding specifications.
 
 ```plantuml
@@ -79,7 +79,7 @@ Task  ..> O5    : <<includes>>
 @enduml
 ```
 
-![**TOD-05-01**: Resource Inventory Management](../../common/pixel.png){#fig:TOD-05-01-Resource_Inventory_Management}
+![TOD-05-01: Resource Inventory Management](../../common/pixel.png){#fig:TOD-05-01-Resource_Inventory_Management}
 
 |                       |  Customer  |  Provider  | Other PSS | Governance |
 |-----------------------|:----------:|:----------:|:---------:|:----------:|

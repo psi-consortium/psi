@@ -39,7 +39,7 @@ I1 --           Operation
 
 ```
 
-![**TOD-06-02-03**: Remove Service Level Specification](../../common/pixel.png){#fig:TOD-06-02-03-Remove_Service_Level_Specification}
+![TOD-06-02-03: Remove Service Level Specification](../../common/pixel.png){#fig:TOD-06-02-03-Remove_Service_Level_Specification}
 
 **Prerequisites**
 

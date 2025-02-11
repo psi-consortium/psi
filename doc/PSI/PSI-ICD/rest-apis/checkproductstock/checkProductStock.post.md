@@ -7,6 +7,8 @@
 
 **Absolute Path:** /stock/v1/checkProductStock
 
+**TOD Reference:** TOD-05-04-01-Check_Product_Stock
+
 **Summary:** Creates a CheckProductStock
 
 ## Request Body
@@ -32,6 +34,4 @@ Table: Request Body of POST checkProductStock. {#tbl:checkProductStock.post.md:r
 
 Table: Responses of POST checkProductStock. {#tbl:checkProductStock.post.md:responses}
 
-## TOD Reference
-
-TOD-05-04-01-Check_Product_Stock
+{#page:break}

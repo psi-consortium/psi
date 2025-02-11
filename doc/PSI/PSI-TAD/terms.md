@@ -12,11 +12,11 @@ This chapter describes some core concepts and terminology necessary for the corr
 
 # Understanding and different Scenarios of a Pooling & Sharing Systems (PSS)
 
-A pooling & sharing system (PSS) for SatCom services is a centralised platform that connects users' needs and providers' offers.
+A pooling & sharing system (PSS) for (Gov)SatCom services is a centralised platform that connects users' needs and providers' offers.
 A provider can offer their services and add their resources to a common pool managed by the PSS from which users can select the best fitting option for their needs.
 A PSS gives its users a dedicated interface to specify their needs in such a way that their input can be processed automatically to find suitable options or at least to identify providers that are capable of making a serious offer.
-In the commercial domain, this enables open competition between providers in the SatCom market by striving to make better and more attractive offers for the users, that can promote innovation and growth.
-In the governmental domain, this allows to optimise the usage of governmental SatCom resources, e.g., as part of a common space communication plan for EU member states.
+In the commercial domain, this enables open competition between providers in the (Gov)SatCom market by striving to make better and more attractive offers for the users, that can promote innovation and growth.
+In the governmental domain, this allows to optimise the usage of governmental (Gov)SatCom resources, e.g., as part of a common space communication plan for EU member states.
 Users can share the ordered resources among each other, but this is internally handled by a PSS.
 For example, a PSS can support defining the hierarchical structure of an organization with its sub-organizations and community of users.
 Therefore, an organization as a user of a PSS might order an internet access service that will be used by its sub-organizations/users.
@@ -46,11 +46,11 @@ pss <--> provider
 
 A single provider can implement a PSS and use it basically as their sales frontend.
 In that case, it offers products and combines space assets/resources of a single operator.
-This is a scenario mainly applicable to commercial SatCom providers but can be envisioned as a platform for non-commercial usage as well, e.g., as a tool to request secure SatCom capacities as part of a governmental framework contract.
+This is a scenario mainly applicable to commercial (Gov)SatCom providers but can be envisioned as a platform for non-commercial usage as well, e.g., as a tool to request secure (Gov)SatCom capacities as part of a governmental framework contract.
 With this setup of digitalised services, a commercial CSP can couple the PSS to their other systems seamlessly, e.g., to their Content Management or Enterprise Resource Planning systems.
 
 It is even possible to have a direct connection with their teleport, i.e., the PSS offers a contingent of preconfigured services that are automatically configured on the teleport's hub systems.
-Then, a user can book or request services right away and minimal, if any, human interaction is required to set up a service through the digital SatCom value chain created.
+Then, a user can book or request services right away and minimal, if any, human interaction is required to set up a service through the digital (Gov)SatCom value chain created.
 
 ### Stand-Alone PSS for Multiple Providers
 
@@ -58,7 +58,7 @@ Then, a user can book or request services right away and minimal, if any, human 
 @startuml
 allowmixing
 
- object "<font color=ivory>**User Frontend**" as pss #LightSteelBlue {
+object "<font color=ivory>**User Frontend**" as pss #LightSteelBlue {
  PSS Multi-Providers
 }
 
@@ -148,19 +148,20 @@ pss3 <--> provider3
 
 ```
 
-![PSS set-up scenario 4. The user frontend for those PSSs connected to the overall hub PSS is not needed and replaced with a uniform hub frontend.](../common/pixel.png){#fig:pss_scenario4}
+![PSS set-up scenario 4.](../common/pixel.png){#fig:pss_scenario4}
 
+The user frontend for those PSSs connected to the overall hub PSS is not needed and replaced with a uniform hub frontend.
 It is a "reference PSS" federating different PSSs including their respective provider combinations.
 All examples given above can potentially be combined to form a hub PSS.
 As depicted in the diagram, the hub PSS offers a centralised user frontend, hence the user frontends of the individual PSSs that are connected to the hub PSS are obsolete.
-There are plans for a European GovSatCom hub to centralise the SatCom demand & supply by European public authorities.
+There are plans for a European (Gov)SatCom hub to centralise the (Gov)SatCom demand & supply by European public authorities.
 
 > The hub PSS setup is not addressed within PSI, but it is only elaborated for the completeness of the different PSS types.
 
 ### Control over a PSS or hub PSS
 
 The control over a PSS or a hub federating multiple PSSs can be *community* or *commercially* driven.
-For example, community stakeholders controlling a PSS or hub PSS could be a consortium of humanitarian aid organisations, aiming at centralising and pooling resources to reduce costs while optimising the usage of booked SatCom capacities.
+For example, community stakeholders controlling a PSS or hub PSS could be a consortium of humanitarian aid organisations, aiming at centralising and pooling resources to reduce costs while optimising the usage of booked (Gov)SatCom capacities.
 
 A commercially driven PSS or hub PSS would be controlled by commercial parties.
 
@@ -244,7 +245,7 @@ As mentioned before, each party can have different roles in different contexts:
 
 [^tmf_roles]: https://www.tmforum.org/Browsable_HTML_SID_R20.0/content/_3E3F0EC000E93E389BB6023C-content.html
 
-* General role inside a PSS (may be used for role-based authorization):
+* General role inside a PSS (maybe used for role based access control):
   * **(Service) Provider**: An organization or individual which offers products to others in exchange for payment in some form.
   * **Customer**: A person or organization that buys products from the enterprise or receives free offers or products.
   Customers can also be other service providers who resell the enterprises products, other service providers that lease the enterprise's resources for utilization by the other service provider's products and services, and so forth.
@@ -252,7 +253,7 @@ As mentioned before, each party can have different roles in different contexts:
 * Order context:
   * **Supplier**: A role played by a Party, who commits to provide a product to a Buyer by a formal agreement. Usually a provider.
   * **Buyer**: A role played by a Party, who imposed a Supplier to provide a product by a formal agreement. Usually a customer.
-  * **(Product) User**: A Product User is corresponding to the role of using a product. Usually an individual or sub-unit of a customer organization.
+  * **(Product) User**: A Product User is corresponding to the role of using a product. Usually an individual or subunit of a customer organization.
   * **Broker**: A role played by a party, who brokers products between buyer and supplier. Usually the [PSS](#pss).
 
 ```plantuml
@@ -288,7 +289,7 @@ Order <-u- PSS : "Broker"
   * **Community Administrator**: A CommunityAdministrator is a PartyRole, played by a Party, who administers a Community.
 
 * Party Relationship Context
-  * **Partner**: A PartyRole, played by a Party being an equitable partner in a business interaction with other parties, playing the Partner role. Usually all Partner have the same (or even compatible) business objectives.
+  * **Partner**: A PartyRole, played by a Party being an equitable partner in a business interaction with other parties, playing the Partner role. Usually all Partners have the same (or even compatible) business objectives.
   * **Complementary Provider**: A type of ServiceProvider that complements another provider.
   * **Third Party Provider**: A ServiceProvider besides the two primarily involved in a situation.
   * **Service Provider Employee**: A ServiceProviderEmployee is an Individual who is employed by the Service Provider for wages or salary.
@@ -298,8 +299,37 @@ Order <-u- PSS : "Broker"
 
 # User Missions
 
-Users conduct missions, which form the reference frame for a set of communication needs and resultant communication services.
-Such a user mission entity is generally composed of some header information - like a name and a description, a time frame and the operational areas - and a list of [services](#services).
+Users conduct missions, which require certain assets to achieve a given goal; e.g. humanitarian aid or disaster recovery.
+Such a user mission entity is generally composed of some header information (name and description, time frame and other characteristics) and lists of places.
+Following TMF, the places are expressed as addresses (which may be incomplete, e.g. only a country) and/or a location object, which contains the actual coordinates (point, line or polygon).
+The `MissionAsset` assigns an [InquiredProduct](#inquiry), ordered [Product](#products) or [User Resources](#resources) to the mission.
+They can be in relationship with each other, e.g. a fire truck may require an internet connection to stream data.
+
+```plantuml
+@startuml
+object Mission
+object Place
+object Resource
+object MissionAsset
+object InquiredProduct
+object Product
+
+Mission --> Mission
+Mission --> Place
+Mission --> MissionAsset
+
+Place --> MissionAsset
+MissionAsset --> InquiredProduct
+MissionAsset --> Product
+MissionAsset --> Resource
+MissionAsset --> MissionAsset
+
+InquiredProduct -r[hidden]- Product
+Product -r[hidden]- Resource
+@enduml
+```
+
+![User Mission.](../common/pixel.png){#fig:user-mission}
 
 # Resources, Services and Products
 
@@ -323,7 +353,7 @@ They are generally divided into the following groups:
 * Logical resources (IP addresses, software, RF bandwidth)
 * Compound resources of the above (e.g. a router consists of different cards/ports and runs software)
 
-![Resources and Service Demarcation Points.](./img/Dummy-Network_Visualization.png){#fig:resources}
+![Resources and Service Demarcation Points.](./def_service/img/SUD_Network_Visualization.png){#fig:resources}
 
 Resources can be utilised either in the on-site user segment or the space segment and teleport (see figure {@fig:resources}).
 The ones used in the on-site user segment are a visible part of the [product](#products) offered by the provider.
@@ -346,7 +376,7 @@ object Party
 Product "1" o-u-> "0..n" Resource
 Service "1" o-u-> "0..n" Resource
 Resource <--> Resource
-Resource "1" -l-> "1..n" Party : "\t"
+Resource "1" -l-> "1..n" Party : "\t\t"
 @enduml
 ```
 
@@ -354,7 +384,7 @@ Resource "1" -l-> "1..n" Party : "\t"
 
 ## Services
 
-Services are a predifined utilization of different [resources](#resources) in the teleport and the space segment, which providers offer to users, e.g. Internet Access, Telephony or Site-to-Site IP-Trunk.
+Services are a predefined utilization of different [resources](#resources) in the teleport and the space segment, which providers offer to users, e.g. Internet Access, Telephony or Site-to-Site IP-Trunk.
 They may also provide value-added services, e.g. network management or field services, which do not employ resources.
 Services (and on-site resources) are then bundled to [products](#products), which are sold to a user.
 
@@ -379,10 +409,10 @@ ResourceFacingService "1" o-> "0..n" Resource : \t
 ## Products
 
 A product is a wrapper entity for a [services](#services) or on-site [resources](#resources) which is sold to a [user](#parties) within an [order](#order).
-Though it is possible to combine multiple services and resources in a single product, the nominal layer to combine those is a (bundled) [offering](#specifications-catalogs-and-offerings).
+Though it is possible to combine multiple services and resources in a single product, the nominal layer to combine them is a (bundled) [offering](#specifications-catalogs-and-offerings).
 
 The diagram below demonstrates the relationship between a product and its bundled resources and services.
-A product may require zero or many resources or/and services to be realized.
+A product may require zero or many resources and/or services to be realised.
 
 ```plantuml
 @startuml
@@ -406,13 +436,13 @@ To describe this, there are three terms defined by the SID:
 
 * Specifications describe general characteristics a resource, service or a product can have.
   For example, a product specification is composed of service and resource specifications.
-  If a product is offered and bought, those specifications need to be realized, e.g., the specification of a particular modem is realized by providing a physical instance of this modem.
+  If a product is offered and bought, those specifications need to be realised, e.g., the specification of a particular modem is realised by providing a physical instance of this modem.
   The total of all realizations of services and resources are then the actual product.
   Specifications often contain characteristics with variants.
   For example:
   * "iDirect X3 DC on/off" is the specification of a physical resource. The resource itself is a specific modem with a serial-number and DC **either** on **or** off (the specification allows both variants).
-  * "[1; 2; ...; 100] Mhz Ku-Band bandwidth" is the specification of a logical resource. The resource itself is a specific chunk of bandwidth with up to 100 Mhz.
-  * "VSAT Internet Access Service" is the specification of a service. It allows defining the possible information rates with granularity e.g. 128, 256, 512, 1024 Kbps, etc. The service itself is bound to a user and a site, or multiple users and sites (e.g. multicast/broadcast service).
+  * "[1; 2; ...; 100] MHz Ku-Band bandwidth" is the specification of a logical resource. The resource itself is a specific chunk of bandwidth with up to 100 MHz.
+  * "VSAT Internet Access Service" is the specification of a service. It allows defining the possible information rates with granularity e.g. 128, 256, 512, 1024 kbps, etc. The service itself is bound to a user and a site, or multiple users and sites (e.g. multicast/broadcast service).
   * A product specification contains resource and/or service specifications as described above.
 * Catalogs are used by a provider to make a list of offerable specifications visible to other parties.
   There is a catalog for each category of specification defined per provider, i.e., a product catalog for product specifications, a service catalog for service specifications, and a resource catalog for resource specifications.
@@ -508,11 +538,13 @@ There are three cases considered:
 * **Services:** If a service is only available in a specific area, this can also be expressed via geometries.
   Each area can be augmented with additional properties that can be referenced in offerings, e.g. a minimum required dish size.
 
-# Service Level Specification
+# Service Quality
+
+## Service Level Specification
 
 A service level specification represents a predefined or negotiated set of service level objectives (SLO).
 The SLO, in turn, defines for a key performance/quality indicator a threshold which is to be adhered to.
-In case the targets are not met, the consequences define the expected outcome.
+In case the targets are not met, the consequences define the expected outcome which in most cases would be generating an alarm.
 
 A service specification may refer to a list of service level specifications (SLS) that must be capable of being met by corresponding service instances.
 
@@ -523,10 +555,12 @@ object "ServiceLevelSpecification" as SLS
 object "ServiceLevelObjective" as SLO
 object "ServiceLevelObjectiveThreshold" as SLOT
 object "ServiceLevelSpecConsequence" as SLSC
+object "KeyIndicator" as KI
 
 ServiceSpec --> "0..n" SLS
 SLS o--> "1..n" SLO
 SLO *--> "1..n" SLOT
+SLO o--> "0..1" KI
 SLOT *--> "0..n" SLSC
 @enduml
 ```
@@ -534,6 +568,47 @@ SLOT *--> "0..n" SLSC
 ![Service Level Specifications.](../common/pixel.png){#fig:service_level_specifications}
 
 The service level specifications could then be used to establish a service level agreement between the customer and the provider.
+
+## Performance Monitoring
+
+In case of services with attached service level specification, a service provider will enable performance monitoring for a provisioned service to measure the applicable KPIs/KQIs of the service as defined by the service level objectives.
+Examples of performance objectives encompass various metrics such as frame/packet delay, frame/packet loss ratio, inter-frame/packet delay variation, and more.
+These objectives serve as measurable criteria for assessing the performance characteristics of a service.
+In this scenario, a service provider is responsible for provisioning the appropriate measurement points and performance objectives, together with measurement intervals and schedules, as well as gathering data.
+Measured values are available for retrieval by the PSS by generating a performance monitoring report for the requested key indicators.
+
+For an ad-hoc performance measurement (not related to an SLS but e.g. for supporting troubleshooting during service assurance) that is initiated for a limited time (typically a single run or non-continuous run) the on-demand performance monitoring job is provisioned to carry out the measurement of key indicators.
+The on-demand performance job is indicated by a performance monitoring job type.
+The execution of the performance monitoring job results in the generation of performance measurement reports, which deliver comprehensive performance collections.
+
+The PSS API does not define performance indicators' specifications but can be used in combination with any specifications. This is delivered by the ServiceSpecificPayload attribute of the performance monitoring job entity which serves as an extension point for configuring service-specific performance indicators. Reports delivered by the performance job contain ResultPayload attribute which similarly acts as an extension point for capturing and representing the outcome of performance monitoring.
+
+## Alarm
+
+An Alarm is a specific type of notification related to detected faults or abnormal conditions. Alarms are generated by a service provider in case thresholds specified in a service level specification are violated. Alarm generation results in the creation of an event that is received by an interested party.
+
+Alarms support both resources and services and are not restricted to any particular technology or vendor.
+Important entities and relationships are depicted in the following diagram.
+
+* alarmedObject is a reference to an object (typically a resource) which is affected by the Alarm. An example of *alarmedObject* is a malfunctioning terminal.
+* affectedService is a reference to services that are affected by the Alarm. Services that are known to be degraded because of the *alarmedObject* will be listed here.
+* crossedThresholdInformation identifies details of the crossed threshold.
+
+```plantuml
+@startuml
+object "Alarm" as Alarm
+object "Object" as Object
+object "Service" as Service
+object "Threshold" as Threshold
+
+Alarm o--> "0..1" Object : alarmedObject
+Alarm o--> "0..*" Service : affectedService
+Alarm o--> "0..1" Threshold: crossedThresholdInformation
+
+@enduml
+```
+
+![Alarm.](../common/pixel.png){#fig:alarm}
 
 # Service Demarcation Points
 
@@ -759,22 +834,22 @@ package Catalog as C_PSS {
 package Inventory as I_PSS {
     object "Instance 1" as I1_PSS {
         validFor = [period of commitment]
-        relatedParty = [prov]
+        relatedParty = [provider]
     }
     object "Instance 1a" as I1a_PSS {
         validFor = [period of mission a]
         status = "booked"
-        relatedParty = [prov, cusA]
+        relatedParty = [provider, customerA]
     }
     object "Instance 1b" as I1b_PSS {
         validFor = [period of mission b]
         status = "reserved"
-        relatedParty = [prov, cusB]
+        relatedParty = [provider, customerB]
     }
 
     object "Instance 2" as I2_PSS {
         validFor = [period of commitment]
-        relatedParty = [prov]
+        relatedParty = [provider]
     }
 }
 
@@ -790,7 +865,7 @@ SpecA_PSS --> I2_PSS
 
 ![Tree of resources.](../common/pixel.png){#fig:resource_tree}
 
-For committed resources, the PSS can calculate the bookability as part of the matchmaking:
+For committed resources, the PSS can calculate the booking capability as part of the matchmaking:
 Physical resources (e.g. terminals) are bookable when there is no sub-entity in the inquired timespan.
 For logical resources (e.g. bandwidth) the implementation has to sum up the assigned amount (MHz or Mbit), subtract it from the available amount and compare it with the inquired value.
 If the resource is booked as part of *Product A*, it is not available for *Product B* any more (excluding pre-emption etc.).

@@ -39,7 +39,7 @@ I1 --           Operation
 
 ```
 
-![**TOD-03-03-01**: Create Customer Bill](../../common/pixel.png){#fig:TOD-03-03-01-Create_Customer_Bill}
+![TOD-03-03-01: Create Customer Bill](../../common/pixel.png){#fig:TOD-03-03-01-Create_Customer_Bill}
 
 **Prerequisites**
 

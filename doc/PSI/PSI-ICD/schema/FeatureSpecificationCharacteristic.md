@@ -8,7 +8,7 @@
 Configuration feature characteristic specification.
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | id | string | N/A | No |
 | name | string | N/A | Yes |
 | description | string | N/A | No |
@@ -22,9 +22,11 @@ Configuration feature characteristic specification.
 | featureSpecCharRelationship | array | FeatureSpecificationCharacteristicRelationship | No |
 | featureSpecCharacteristicValue | array | CharacteristicValueSpecification | No |
 | validFor | TimePeriod | N/A | No |
-| \@baseType | string | N/A | No |
-| \@schemaLocation | string | uri | No |
-| \@type | string | N/A | No |
-| \@valueSchemaLocation | string | N/A | No |
+| @baseType | string | N/A | No |
+| @schemaLocation | string | uri | No |
+| @type | string | N/A | No |
+| @valueSchemaLocation | string | N/A | No |
 
 Table: Fields of FeatureSpecificationCharacteristic. {#tbl:FeatureSpecificationCharacteristic.md:FeatureSpecificationCharacteristic}
+
+{#page:break}

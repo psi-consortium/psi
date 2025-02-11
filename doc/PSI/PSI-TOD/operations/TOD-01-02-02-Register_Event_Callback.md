@@ -65,7 +65,7 @@ PSI2_I1 --      Operation2
 
 ```
 
-![**TOD-01-02-02**: Register Event Callback](../../common/pixel.png){#fig:TOD-01-02-02-Register_Event_Callback}
+![TOD-01-02-02: Register Event Callback](../../common/pixel.png){#fig:TOD-01-02-02-Register_Event_Callback}
 
 **Prerequisites**
 
@@ -80,7 +80,7 @@ Usually, both systems will register for the following topics named after the cor
 * order
 * invoice
 
-The registration must contain the URL of the callback endpoint, which is expected to be the one described in [TOD-01-02-03](#tod-01-02-03-dispatch_event).
+The registration must contain the URL of the callback endpoint, which is expected to be the one described in [TOD-01-02-03](#tod-01-02-03-dispatchevent).
 Note that the implementation may reject callbacks if the host is not whitelisted beforehand (see PSI-ICD).
 
 Events are always filtered by the sending system on a need-to-know basis, e.g. the PSS will send order events only to the parties participating in the interaction.

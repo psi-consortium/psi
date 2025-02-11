@@ -7,12 +7,14 @@
 
 **Absolute Path:** /partyManagement/v1/organization/{id}
 
+**TOD Reference:** TOD-01-01-02-Update_Party_Profile
+
 **Summary:** Updates partially a Organization
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | id | string | Yes | Identifier of the Organization |
 
 Table: Parameters of PATCH organization/{id}. {#tbl:organization-id.patch.md:parameters}
@@ -40,6 +42,4 @@ Table: Request Body of PATCH organization/{id}. {#tbl:organization-id.patch.md:r
 
 Table: Responses of PATCH organization/{id}. {#tbl:organization-id.patch.md:responses}
 
-## TOD Reference
-
-TOD-01-01-02-Update_Party_Profile
+{#page:break}

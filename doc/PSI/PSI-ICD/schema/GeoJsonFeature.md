@@ -8,9 +8,11 @@
 GeoJSon Feature
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | geometry | Geometry | N/A | No |
 | properties | any | N/A | No |
 | type | string | "Feature" | Yes |
 
 Table: Fields of GeoJsonFeature. {#tbl:GeoJsonFeature.md:GeoJsonFeature}
+
+{#page:break}

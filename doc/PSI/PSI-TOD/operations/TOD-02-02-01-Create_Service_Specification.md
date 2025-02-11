@@ -39,7 +39,7 @@ I1 --           Operation
 
 ```
 
-![**TOD-02-02-01**: Create Service Specification](../../common/pixel.png){#fig:TOD-02-02-01-Create_Service_Specification}
+![TOD-02-02-01: Create Service Specification](../../common/pixel.png){#fig:TOD-02-02-01-Create_Service_Specification}
 
 **Prerequisites**
 
@@ -58,12 +58,13 @@ Some properties of a service specification are:
 * *category* - Category (service type) of the target service like internet access, telephony, IP-Trunk, etc.
 * *resourceSpecification* - List of resources that are required to realise the target service
 * *targetEntitySchema* - Name and reference to the JSON Schema defining the type of service described by this specification.
-* *specCharacteristic* - List of specification characteristics of the target service such as forwardCIR, returnCIR, etc. The geography where a service is available is described as a characteristic of a special Geometry type in GeoJSON data format, where the coordinates of a polygon are provided.
+* *specCharacteristic* - List of specification characteristics of the target service such as forwardCIR, returnCIR, etc.
+  The footprint of a service is described as a characteristic of type *GeoJSON FeatureCollection*, which contains one or more GeoJSON entries (e.g. as a polygon) with the option for assigned properties, such as the EIRP value.
 * *relatedParty* - Usually reference to the provider that offers the service
 * *lifecycleStatus* - Current lifecycle status of the service specification (e.g. active, draft, etc.)
 * *validFor* - Time period of validity of the service specification
 
-Before creating a new service specification, a provider can request available service templates from the PSS via the [TOD-04-02-05-View_All_Service_Templates](TOD-04-02-05-View_All_Service_Templates.md) operation.
+Before creating a new service specification, a provider can request available service templates from the PSS via the [TOD-04-02-05-View_All_Service_Templates](#tod-04-02-05-viewallservicetemplates) operation.
 The templates are prepared by the governance of the PSS, and they contain default values for the characteristics of a service specification.
 For instance, if the provider wants to register a service specification for internet access to the PSS, they can request available service templates for internet access, replace the default values with specific ones and invoke the endpoint for creating a service specification.
 

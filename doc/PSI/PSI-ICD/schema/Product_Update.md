@@ -10,7 +10,7 @@ A product is realized as one or more service(s) and / or resource(s).
 Skipped properties: id,href
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | name | string | N/A | No |
 | description | string | N/A | No |
 | isBundle | boolean | N/A | No |
@@ -34,8 +34,10 @@ Skipped properties: id,href
 | realizingService | array | ServiceRef | No |
 | relatedParty | array | RelatedParty | No |
 | status | ProductStatusType | N/A | No |
-| \@baseType | string | N/A | No |
-| \@schemaLocation | string | uri | No |
-| \@type | string | N/A | No |
+| @baseType | string | N/A | No |
+| @schemaLocation | string | uri | No |
+| @type | string | N/A | No |
 
 Table: Fields of Product_Update. {#tbl:Product_Update.md:Product_Update}
+
+{#page:break}

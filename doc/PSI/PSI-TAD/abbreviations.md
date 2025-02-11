@@ -7,7 +7,7 @@
 
 ## General Abbreviations
 
-The [table](#psi_abbreviations) below lists all abbreviations used in the context of PSID, i.e. in communication, design/documents and implementation.
+The table {@tbl:psi-abbreviations} below lists all abbreviations used in the context of PSID, i.e. in communication, design/documents and implementation.
 
 | Abbreviation | Expansion                                              |
 | ------------ | ------------------------------------------------------ |
@@ -59,6 +59,7 @@ The [table](#psi_abbreviations) below lists all abbreviations used in the contex
 | PKI          | Public Key Infrastructure                              |
 | PMDB         | Project Management Database                            |
 | P2P          | Point-to-point                                         |
+| PM           | Performance Monitoring                                 |
 | PSI          | Pooling And Sharing Interfaces Definition Project, implementation      |
 | PSID         | Pooling And Sharing Interfaces Definition Project, definition      |
 | PSS          | Pooling & Sharing System                               |
@@ -68,14 +69,14 @@ The [table](#psi_abbreviations) below lists all abbreviations used in the contex
 | REST         | Representational State Transfer                        |
 | RF           | Radio frequency                                        |
 | RFQ          | Request for Quote                                      |
-| RVM          | Requirements Verification Matrix                       |
+| RTM          | Requirements Traceability Matrix                       |
 | SCPC         | Single Channel per Carrier                             |
 | SID          | Information Framework                                  |
 | SLA          | Service Level Agreement                                |
 | SLI          | Service Level Indicator                            |
 | SLO          | Service Level Objective                            |
 | SLS          | Service Level Specification                            |
-| SSPS         | Secure SatCom Pooling And Sharing System               |
+| SSPS         | Secure (Gov)SatCom Pooling And Sharing System               |
 | TAD          | Terms, Abbreviations, and Definitions                  |
 | TBD          | To Be Defined                                          |
 | TLS          | Transport Layer Security                               |
@@ -88,4 +89,4 @@ The [table](#psi_abbreviations) below lists all abbreviations used in the contex
 | URI          | Uniform Resource Identifier                            |
 | VAS          | Value-Added Services                                   |
 
-Table: General abbreviations used in the scope of PSID. {#tbl:psi_abbreviations}
+Table: General abbreviations used in the scope of PSID. {#tbl:psi-abbreviations}

@@ -7,12 +7,14 @@
 
 **Absolute Path:** /serviceInventory/v1/service/{id}
 
+**TOD Reference:** TOD-05-02-04-View_Service
+
 **Summary:** Retrieves a Service by ID
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | id | string | Yes | Identifier of the Service |
 | fields | string | No | Comma-separated properties to provide in response |
 
@@ -33,6 +35,4 @@ Table: Parameters of GET service/{id}. {#tbl:service-id.get.md:parameters}
 
 Table: Responses of GET service/{id}. {#tbl:service-id.get.md:responses}
 
-## TOD Reference
-
-TOD-05-02-04-View_Service
+{#page:break}

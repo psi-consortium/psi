@@ -13,7 +13,7 @@ In essence, a ResourceSpecification defines the common attributes and relationsh
 Skipped properties: id,href
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | name | string | N/A | Yes |
 | description | string | N/A | No |
 | category | string | N/A | No |
@@ -32,8 +32,10 @@ Skipped properties: id,href
 | part | string | N/A | No |
 | sku | string | N/A | No |
 | vendor | string | N/A | No |
-| \@baseType | string | N/A | No |
-| \@schemaLocation | string | uri | No |
-| \@type | string | N/A | No |
+| @baseType | string | N/A | No |
+| @schemaLocation | string | uri | No |
+| @type | string | N/A | No |
 
 Table: Fields of ResourceSpecification_Create. {#tbl:ResourceSpecification_Create.md:ResourceSpecification_Create}
+
+{#page:break}

@@ -7,6 +7,8 @@
 
 **Absolute Path:** /productCatalog/v1/productTemplate
 
+**TOD Reference:** TOD-04-03-01-Create_Product_Template
+
 **Summary:** Creates a ProductTemplate
 
 ## Request Body
@@ -31,6 +33,4 @@ Table: Request Body of POST productTemplate. {#tbl:productTemplate.post.md:reque
 
 Table: Responses of POST productTemplate. {#tbl:productTemplate.post.md:responses}
 
-## TOD Reference
-
-TOD-04-03-01-Create_Product_Template
+{#page:break}

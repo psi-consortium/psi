@@ -2358,8 +2358,8 @@
           "serviceCandidate": {
             "$ref": "#/components/schemas/ServiceCandidateRef"
           },
-          "serviceLevelAgreement": {
-            "$ref": "#/components/schemas/SLARef"
+          "serviceLevelSpecification": {
+            "$ref": "#/components/schemas/ServiceLevelSpecificationRef"
           },
           "validFor": {
             "$ref": "#/components/schemas/TimePeriod"
@@ -2527,8 +2527,8 @@
           "serviceCandidate": {
             "$ref": "#/components/schemas/ServiceCandidateRef"
           },
-          "serviceLevelAgreement": {
-            "$ref": "#/components/schemas/SLARef"
+          "serviceLevelSpecification": {
+            "$ref": "#/components/schemas/ServiceLevelSpecificationRef"
           },
           "validFor": {
             "$ref": "#/components/schemas/TimePeriod"
@@ -2688,8 +2688,8 @@
           "serviceCandidate": {
             "$ref": "#/components/schemas/ServiceCandidateRef"
           },
-          "serviceLevelAgreement": {
-            "$ref": "#/components/schemas/SLARef"
+          "serviceLevelSpecification": {
+            "$ref": "#/components/schemas/ServiceLevelSpecificationRef"
           },
           "validFor": {
             "$ref": "#/components/schemas/TimePeriod"
@@ -3742,7 +3742,7 @@
         },
         "description": "Resources are physical or non-physical components (or some combination of these) within an enterprise's infrastructure or inventory. They are typically consumed or used by services (for example a physical port assigned to a service) or contribute to the realization of a Product (for example, a SIM card). They can be drawn from the Application, Computing and Network domains, and include, for example, Network Elements, software, IT systems, content and information, and technology components.\nA ResourceSpecification is an abstract base class for representing a generic means for implementing a particular type of Resource. In essence, a ResourceSpecification defines the common attributes and relationships of a set of related Resources, while Resource defines a specific instance that is based on a particular ResourceSpecification."
       },
-      "SLARef": {
+      "ServiceLevelSpecificationRef": {
         "required": [
           "id"
         ],
@@ -3750,15 +3750,16 @@
         "properties": {
           "id": {
             "type": "string",
-            "description": "Unique identifier of service level agreement"
+            "description": "unique identifier"
           },
           "href": {
             "type": "string",
-            "description": "Reference of the service level agreement"
+            "description": "Hyperlink reference",
+            "format": "uri"
           },
           "name": {
             "type": "string",
-            "description": "Name of the service level agreement"
+            "description": "Name of the related entity."
           },
           "@baseType": {
             "type": "string",
@@ -3778,7 +3779,7 @@
             "description": "The actual type of the target instance when needed for disambiguation."
           }
         },
-        "description": "ServiceLevelAgreement reference: A service level agreement (SLA) is a type of agreement that represents a formal negotiated agreement between two parties designed to create a common understanding about products, services, priorities, responsibilities, and so forth. The SLA is a set of appropriate procedures and targets formally or informally agreed between parties in order to achieve and maintain specified Quality of Service."
+        "description": "A Service Level Specification represents a pre-defined or negotiated set of Service Level \nObjectives. In addition, certain consequences are associated with not meeting the Service Level \nObjectives. Service Level Agreements are expressed in terms of Service Level Specifications."
       },
       "ServiceCandidateRef": {
         "required": [
@@ -3950,16 +3951,35 @@
       "Geometry": {
         "type": "object",
         "description": "A GeoJson geometry.",
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/LineString"
+          },
+          {
+            "$ref": "#/components/schemas/MultiLineString"
+          },
+          {
+            "$ref": "#/components/schemas/MultiPoint"
+          },
+          {
+            "$ref": "#/components/schemas/MultiPolygon"
+          },
+          {
+            "$ref": "#/components/schemas/Point"
+          },
+          {
+            "$ref": "#/components/schemas/Polygon"
+          }
+        ],
         "discriminator": {
           "propertyName": "type",
           "mapping": {
+            "LineString": "#/components/schemas/LineString",
+            "MultiLineString": "#/components/schemas/MultiLineString",
+            "MultiPoint": "#/components/schemas/MultiPoint",
+            "MultiPolygon": "#/components/schemas/MultiPolygon",
             "Point": "#/components/schemas/Point",
             "Polygon": "#/components/schemas/Polygon"
-          }
-        },
-        "properties": {
-          "type": {
-            "type": "string"
           }
         }
       },
@@ -3973,43 +3993,106 @@
       },
       "Point": {
         "type": "object",
-        "description": "A GeoJSon geometry.",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/Geometry"
+        "description": "A GeoJSON Point.",
+        "properties": {
+          "type": {
+            "type": "string"
           },
-          {
-            "type": "object",
-            "properties": {
-              "coordinates": {
+          "coordinates": {
+            "$ref": "#/components/schemas/Point2D"
+          }
+        }
+      },
+      "MultiPoint": {
+        "type": "object",
+        "description": "A GeoJSON MultiPoint.",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "coordinates": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Point2D"
+            }
+          }
+        }
+      },
+      "LineString": {
+        "type": "object",
+        "description": "A GeoJSON LineString.",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "coordinates": {
+            "type": "array",
+            "minItems": 2,
+            "items": {
+              "$ref": "#/components/schemas/Point2D"
+            }
+          }
+        }
+      },
+      "MultiLineString": {
+        "type": "object",
+        "description": "A GeoJSON MultiLineString.",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "coordinates": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "minItems": 2,
+              "items": {
                 "$ref": "#/components/schemas/Point2D"
               }
             }
           }
-        ]
+        }
       },
       "Polygon": {
         "type": "object",
-        "description": "A GeoJSon geometry.",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/Geometry"
+        "description": "A GeoJSON Polygon.",
+        "properties": {
+          "type": {
+            "type": "string"
           },
-          {
-            "type": "object",
-            "properties": {
-              "coordinates": {
+          "coordinates": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "minItems": 4,
+              "items": {
+                "$ref": "#/components/schemas/Point2D"
+              }
+            }
+          }
+        }
+      },
+      "MultiPolygon": {
+        "type": "object",
+        "description": "A GeoJSON MultiPolygon.",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "coordinates": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
                 "type": "array",
+                "minItems": 4,
                 "items": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Point2D"
-                  }
+                  "$ref": "#/components/schemas/Point2D"
                 }
               }
             }
           }
-        ]
+        }
       },
       "BundledGroupProductOffering": {
         "type": "object",

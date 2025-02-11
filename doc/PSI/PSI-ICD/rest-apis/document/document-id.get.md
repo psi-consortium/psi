@@ -7,12 +7,14 @@
 
 **Absolute Path:** /documentManagement/v1/document/{id}
 
+**TOD Reference:** TOD-01-03-04-View_Document
+
 **Summary:** Retrieves a Document by ID
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | id | string | Yes | Identifier of the Document |
 | fields | string | No | Comma-separated properties to provide in response |
 
@@ -33,6 +35,4 @@ Table: Parameters of GET document/{id}. {#tbl:document-id.get.md:parameters}
 
 Table: Responses of GET document/{id}. {#tbl:document-id.get.md:responses}
 
-## TOD Reference
-
-TOD-01-03-04-View_Document
+{#page:break}

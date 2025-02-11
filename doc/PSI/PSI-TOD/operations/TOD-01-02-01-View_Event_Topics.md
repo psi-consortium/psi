@@ -57,7 +57,7 @@ PSI2_I1 --      Operation2
 
 ```
 
-![**TOD-01-02-01**: View Event Topics](../../common/pixel.png){#fig:TOD-01-02-01-View_Event_Topics}
+![TOD-01-02-01: View Event Topics](../../common/pixel.png){#fig:TOD-01-02-01-View_Event_Topics}
 
 **Prerequisites**
 
@@ -67,7 +67,7 @@ The event topics are created on the other system.
 
 This operation allows one system to query the available event topics of another system.
 Since the relevant names for PSID are predefined, doing so is considered optional, though it may reveal additional topics.
-The topics can then be subscribed to using [TOD-01-02-02](#tod-01-02-02-register_event_callback).
+The topics can then be subscribed to using [TOD-01-02-02](#tod-01-02-02-registereventcallback).
 
 **REST Endpoints**
 

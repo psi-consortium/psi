@@ -7,12 +7,14 @@
 
 **Absolute Path:** /productCatalog/v1/productSpecification/{id}
 
+**TOD Reference:** TOD-02-03-02-Update_Product_Specification
+
 **Summary:** Updates partially a ProductSpecification
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | id | string | Yes | Identifier of the ProductSpecification |
 
 Table: Parameters of PATCH productSpecification/{id}. {#tbl:productSpecification-id.patch.md:parameters}
@@ -40,6 +42,4 @@ Table: Request Body of PATCH productSpecification/{id}. {#tbl:productSpecificati
 
 Table: Responses of PATCH productSpecification/{id}. {#tbl:productSpecification-id.patch.md:responses}
 
-## TOD Reference
-
-TOD-02-03-02-Update_Product_Specification
+{#page:break}

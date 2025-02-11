@@ -39,7 +39,7 @@ I1 --           Operation
 
 ```
 
-![**TOD-03-01-04**: Update Customer Inquiry](../../common/pixel.png){#fig:TOD-03-01-04-Update_Customer_Inquiry}
+![TOD-03-01-04: Update Customer Inquiry](../../common/pixel.png){#fig:TOD-03-01-04-Update_Customer_Inquiry}
 
 **Prerequisites**
 
@@ -59,7 +59,7 @@ Updates on a customer inquiry are restricted to the inquired providers list only
 Therefore, if changes need to be made to the inquiry specification, the active inquiry can be cancelled and a new one with the new specifications can be initiated.
 A PSS may support the customers in the definition process, e.g. by creating an inquiry based on a previously created one.
 
-Details concerning the structure and processing of a customer inquiry are explained in [TOD-03-01-01](#tod-03-01-01-create_customer_inquiry).
+Details concerning the structure and processing of a customer inquiry are explained in [TOD-03-01-01](#tod-03-01-01-createcustomerinquiry).
 
 **REST Endpoints**
 

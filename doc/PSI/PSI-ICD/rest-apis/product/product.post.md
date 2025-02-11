@@ -7,6 +7,8 @@
 
 **Absolute Path:** /productInventory/v1/product
 
+**TOD Reference:** TOD-05-03-01-Create_Product
+
 **Summary:** Creates a Product
 
 ## Request Body
@@ -31,6 +33,4 @@ Table: Request Body of POST product. {#tbl:product.post.md:request_body}
 
 Table: Responses of POST product. {#tbl:product.post.md:responses}
 
-## TOD Reference
-
-TOD-05-03-01-Create_Product
+{#page:break}

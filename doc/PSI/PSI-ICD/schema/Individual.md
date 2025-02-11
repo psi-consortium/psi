@@ -9,7 +9,7 @@ Individual represents a single human being (a man, woman or child).
 The individual can be a customer, an employee or any other person that the organization needs to store information about.
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | id | string | N/A | No |
 | href | string | uri | No |
 | aristocraticTitle | string | N/A | No |
@@ -43,8 +43,10 @@ The individual can be a customer, an employee or any other person that the organ
 | skill | array | Skill | No |
 | status | IndividualStateType | N/A | No |
 | taxExemptionCertificate | array | TaxExemptionCertificate | No |
-| \@baseType | string | N/A | No |
-| \@schemaLocation | string | uri | No |
-| \@type | string | N/A | No |
+| @baseType | string | N/A | No |
+| @schemaLocation | string | uri | No |
+| @type | string | N/A | No |
 
 Table: Fields of Individual. {#tbl:Individual.md:Individual}
+
+{#page:break}

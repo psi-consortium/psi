@@ -864,17 +864,36 @@
             "@jdt.value": {
                 "Geometry": {
                     "type": "object",
-                    "description": "GeoJson geometry",
+                    "description": "A GeoJson geometry.",
+                    "oneOf": [
+                        {
+                            "$ref": "#/components/schemas/LineString"
+                        },
+                        {
+                            "$ref": "#/components/schemas/MultiLineString"
+                        },
+                        {
+                            "$ref": "#/components/schemas/MultiPoint"
+                        },
+                        {
+                            "$ref": "#/components/schemas/MultiPolygon"
+                        },
+                        {
+                            "$ref": "#/components/schemas/Point"
+                        },
+                        {
+                            "$ref": "#/components/schemas/Polygon"
+                        }
+                    ],
                     "discriminator": {
                         "propertyName": "type",
                         "mapping": {
+                            "LineString": "#/components/schemas/LineString",
+                            "MultiLineString": "#/components/schemas/MultiLineString",
+                            "MultiPoint": "#/components/schemas/MultiPoint",
+                            "MultiPolygon": "#/components/schemas/MultiPolygon",
                             "Point": "#/components/schemas/Point",
                             "Polygon": "#/components/schemas/Polygon"
-                        }
-                    },
-                    "properties": {
-                        "type": {
-                            "type": "string"
                         }
                     }
                 },
@@ -888,43 +907,106 @@
                 },
                 "Point": {
                     "type": "object",
-                    "description": "GeoJSon geometry",
-                    "allOf": [
-                        {
-                            "$ref": "#/components/schemas/Geometry"
+                    "description": "A GeoJSON Point.",
+                    "properties": {
+                        "type": {
+                            "type": "string"
                         },
-                        {
-                            "type": "object",
-                            "properties": {
-                                "coordinates": {
+                        "coordinates": {
+                            "$ref": "#/components/schemas/Point2D"
+                        }
+                    }
+                },
+                "MultiPoint": {
+                    "type": "object",
+                    "description": "A GeoJSON MultiPoint.",
+                    "properties": {
+                        "type": {
+                            "type": "string"
+                        },
+                        "coordinates": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/components/schemas/Point2D"
+                            }
+                        }
+                    }
+                },
+                "LineString": {
+                    "type": "object",
+                    "description": "A GeoJSON LineString.",
+                    "properties": {
+                        "type": {
+                            "type": "string"
+                        },
+                        "coordinates": {
+                            "type": "array",
+                            "minItems": 2,
+                            "items": {
+                                "$ref": "#/components/schemas/Point2D"
+                            }
+                        }
+                    }
+                },
+                "MultiLineString": {
+                    "type": "object",
+                    "description": "A GeoJSON MultiLineString.",
+                    "properties": {
+                        "type": {
+                            "type": "string"
+                        },
+                        "coordinates": {
+                            "type": "array",
+                            "items": {
+                                "type": "array",
+                                "minItems": 2,
+                                "items": {
                                     "$ref": "#/components/schemas/Point2D"
                                 }
                             }
                         }
-                    ]
+                    }
                 },
                 "Polygon": {
                     "type": "object",
-                    "description": "GeoJSon geometry",
-                    "allOf": [
-                        {
-                            "$ref": "#/components/schemas/Geometry"
+                    "description": "A GeoJSON Polygon.",
+                    "properties": {
+                        "type": {
+                            "type": "string"
                         },
-                        {
-                            "type": "object",
-                            "properties": {
-                                "coordinates": {
+                        "coordinates": {
+                            "type": "array",
+                            "items": {
+                                "type": "array",
+                                "minItems": 4,
+                                "items": {
+                                    "$ref": "#/components/schemas/Point2D"
+                                }
+                            }
+                        }
+                    }
+                },
+                "MultiPolygon": {
+                    "type": "object",
+                    "description": "A GeoJSON MultiPolygon.",
+                    "properties": {
+                        "type": {
+                            "type": "string"
+                        },
+                        "coordinates": {
+                            "type": "array",
+                            "items": {
+                                "type": "array",
+                                "items": {
                                     "type": "array",
+                                    "minItems": 4,
                                     "items": {
-                                        "type": "array",
-                                        "items": {
-                                            "$ref": "#/components/schemas/Point2D"
-                                        }
+                                        "$ref": "#/components/schemas/Point2D"
                                     }
                                 }
                             }
                         }
-                    ]
+                    }
                 }
             }
         },

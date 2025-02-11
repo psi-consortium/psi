@@ -7,12 +7,14 @@
 
 **Absolute Path:** /productCatalog/v1/productTemplate/{id}
 
+**TOD Reference:** TOD-04-03-04-View_Product_Template
+
 **Summary:** Retrieves a ProductTemplate by ID.
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | id | string | Yes | The identifier of the ProductTemplate. |
 | fields | string | No | Comma-separated properties to provide in response. |
 
@@ -33,6 +35,4 @@ Table: Parameters of GET productTemplate/{id}. {#tbl:productTemplate-id.get.md:p
 
 Table: Responses of GET productTemplate/{id}. {#tbl:productTemplate-id.get.md:responses}
 
-## TOD Reference
-
-TOD-04-03-04-View_Product_Template
+{#page:break}

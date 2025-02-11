@@ -7,12 +7,14 @@
 
 **Absolute Path:** /serviceQuality/v1/serviceLevelObjective/{id}
 
+**TOD Reference:** TOD-06-01-02-Update_Service_Level_Objective
+
 **Summary:** Updates partially a ServiceLevelObjective
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | id | string | Yes | Identifier of the ServiceLevelObjective |
 
 Table: Parameters of PATCH serviceLevelObjective/{id}. {#tbl:serviceLevelObjective-id.patch.md:parameters}
@@ -40,6 +42,4 @@ Table: Request Body of PATCH serviceLevelObjective/{id}. {#tbl:serviceLevelObjec
 
 Table: Responses of PATCH serviceLevelObjective/{id}. {#tbl:serviceLevelObjective-id.patch.md:responses}
 
-## TOD Reference
-
-TOD-06-01-02-Update_Service_Level_Objective
+{#page:break}

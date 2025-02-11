@@ -46,7 +46,7 @@ I3 --           Operation
 @enduml
 ```
 
-![**TOD-01-03-10**: View All Attachments](../../common/pixel.png){#fig:TOD-01-03-10-View_All_Attachments}
+![TOD-01-03-10: View All Attachments](../../common/pixel.png){#fig:TOD-01-03-10-View_All_Attachments}
 
 **Prerequisites**
 

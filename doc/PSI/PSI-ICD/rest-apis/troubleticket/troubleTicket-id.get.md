@@ -7,12 +7,14 @@
 
 **Absolute Path:** /troubleTicket/v1/troubleTicket/{id}
 
+**TOD Reference:** TOD-01-04-04-View_Trouble_Ticket
+
 **Summary:** Retrieves a TroubleTicket by ID
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | id | string | Yes | Identifier of the TroubleTicket |
 | fields | string | No | Comma-separated properties to provide in response |
 
@@ -33,6 +35,4 @@ Table: Parameters of GET troubleTicket/{id}. {#tbl:troubleTicket-id.get.md:param
 
 Table: Responses of GET troubleTicket/{id}. {#tbl:troubleTicket-id.get.md:responses}
 
-## TOD Reference
-
-TOD-01-04-04-View_Trouble_Ticket
+{#page:break}

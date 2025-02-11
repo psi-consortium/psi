@@ -7,12 +7,14 @@
 
 **Absolute Path:** /customerBillManagement/v1/customerBill/{id}
 
+**TOD Reference:** TOD-03-03-05-Withdraw_Customer_Bill
+
 **Summary:** Withdraw a CustomerBill
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | id | string | Yes | The identifier of the CustomerBill. |
 
 Table: Parameters of DELETE customerBill/{id}. {#tbl:customerBill-id.delete.md:parameters}
@@ -32,6 +34,4 @@ Table: Parameters of DELETE customerBill/{id}. {#tbl:customerBill-id.delete.md:p
 
 Table: Responses of DELETE customerBill/{id}. {#tbl:customerBill-id.delete.md:responses}
 
-## TOD Reference
-
-TOD-03-03-05-Withdraw_Customer_Bill
+{#page:break}

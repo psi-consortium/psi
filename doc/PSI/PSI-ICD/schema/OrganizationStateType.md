@@ -8,7 +8,9 @@
 Valid values for the lifecycle state of the organization
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | OrganizationStateType | string | oneOf[initialized, validated, closed] | No |
 
 Table: Fields of OrganizationStateType. {#tbl:OrganizationStateType.md:OrganizationStateType}
+
+{#page:break}

@@ -7,12 +7,14 @@
 
 **Absolute Path:** /serviceInventory/v1/service/{id}
 
+**TOD Reference:** TOD-05-02-03-Remove_Service
+
 **Summary:** Deletes a Service
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | id | string | Yes | Identifier of the Service |
 
 Table: Parameters of DELETE service/{id}. {#tbl:service-id.delete.md:parameters}
@@ -32,6 +34,4 @@ Table: Parameters of DELETE service/{id}. {#tbl:service-id.delete.md:parameters}
 
 Table: Responses of DELETE service/{id}. {#tbl:service-id.delete.md:responses}
 
-## TOD Reference
-
-TOD-05-02-03-Remove_Service
+{#page:break}

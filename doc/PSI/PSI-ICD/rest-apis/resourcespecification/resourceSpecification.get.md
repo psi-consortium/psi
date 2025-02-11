@@ -7,12 +7,14 @@
 
 **Absolute Path:** /resourceCatalog/v1/resourceSpecification
 
+**TOD Reference:** TOD-02-01-05-View_All_Resource_Specifications
+
 **Summary:** List or find ResourceSpecification objects
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | fields | string | No | Comma-separated properties to be provided in response |
 | offset | integer | No | Requested index for start of resources to be provided in response |
 | limit | integer | No | Requested number of resources to be provided in response |
@@ -34,6 +36,4 @@ Table: Parameters of GET resourceSpecification. {#tbl:resourceSpecification.get.
 
 Table: Responses of GET resourceSpecification. {#tbl:resourceSpecification.get.md:responses}
 
-## TOD Reference
-
-TOD-02-01-05-View_All_Resource_Specifications
+{#page:break}

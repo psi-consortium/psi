@@ -7,12 +7,14 @@
 
 **Absolute Path:** /resourceCatalog/v1/resourceTemplate/{id}
 
+**TOD Reference:** TOD-04-01-04-View_Resource_Template
+
 **Summary:** Retrieves a ResourceTemplate by ID
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | id | string | Yes | The identifier of the ResourceTemplate. |
 | fields | string | No | Comma-separated properties to provide in response. |
 
@@ -33,6 +35,4 @@ Table: Parameters of GET resourceTemplate/{id}. {#tbl:resourceTemplate-id.get.md
 
 Table: Responses of GET resourceTemplate/{id}. {#tbl:resourceTemplate-id.get.md:responses}
 
-## TOD Reference
-
-TOD-04-01-04-View_Resource_Template
+{#page:break}

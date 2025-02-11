@@ -39,7 +39,7 @@ I1 --           Operation
 
 ```
 
-![**TOD-06-02-01**: Create Service Level Specification](../../common/pixel.png){#fig:TOD-06-02-01-Create_Service_Level_Specification}
+![TOD-06-02-01: Create Service Level Specification](../../common/pixel.png){#fig:TOD-06-02-01-Create_Service_Level_Specification}
 
 **Prerequisites**
 

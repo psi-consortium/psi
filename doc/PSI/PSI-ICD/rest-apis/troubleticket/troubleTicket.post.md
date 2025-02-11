@@ -7,6 +7,8 @@
 
 **Absolute Path:** /troubleTicket/v1/troubleTicket
 
+**TOD Reference:** TOD-01-04-01-Create_Trouble_Ticket
+
 **Summary:** Creates a TroubleTicket
 
 ## Request Body
@@ -31,6 +33,4 @@ Table: Request Body of POST troubleTicket. {#tbl:troubleTicket.post.md:request_b
 
 Table: Responses of POST troubleTicket. {#tbl:troubleTicket.post.md:responses}
 
-## TOD Reference
-
-TOD-01-04-01-Create_Trouble_Ticket
+{#page:break}

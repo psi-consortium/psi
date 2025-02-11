@@ -22,28 +22,36 @@ skinparam entity{
   BorderColor<< 2 >> 		Orange
 }
 
+Customer << 0 >>
 Provider << 1 >>
 entity PSS << 2 >> as PSS1
+Governance << 3 >>
 
 rectangle "PSI" {
+  interface "PSS-USR I/F" as I0
   interface "PSS-PVD I/F" as I1
   interface "PSS-PSS I/F" as I2
+  interface "PSS-GOV I/F" as I4
 }
 
 package "PSS" {
   rectangle "View All Product Specifications" as Operation
 }
 
+Customer --	    I0
+I0 --           Operation
 Provider --	    I1
 I1 --           Operation
 PSS1 --         I2
 I2 --           Operation
+Governance --   I4
+I4 --           Operation
 
 @enduml
 
 ```
 
-![**TOD-02-03-05**: View All Product Specifications](../../common/pixel.png){#fig:TOD-02-03-05-View_All_Product_Specifications}
+![TOD-02-03-05: View All Product Specifications](../../common/pixel.png){#fig:TOD-02-03-05-View_All_Product_Specifications}
 
 **Prerequisites**
 

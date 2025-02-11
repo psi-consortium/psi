@@ -25,11 +25,13 @@ skinparam entity{
 Customer << 0 >>
 Provider << 1 >>
 entity PSS << 2 >> as PSS1
+Governance << 3 >>
 
 rectangle "PSI" {
   interface "PSS-PVD I/F" as I1
   interface "PSS-PSS I/F" as I2
   interface "PSS-USR I/F" as I3
+  interface "PSS-GOV I/F" as I4
 }
 
 package "PSS" {
@@ -42,12 +44,14 @@ PSS1 --         I2
 I2 --           Operation
 Customer --     I3
 I3 --           Operation
+Governance --   I4
+I4 --           Operation
 
 @enduml
 
 ```
 
-![**TOD-02-01-05**: View All Resource Specifications](../../common/pixel.png){#fig:TOD-02-01-05-View_All_Resource_Specifications}
+![TOD-02-01-05: View All Resource Specifications](../../common/pixel.png){#fig:TOD-02-01-05-View_All_Resource_Specifications}
 
 **Prerequisites**
 

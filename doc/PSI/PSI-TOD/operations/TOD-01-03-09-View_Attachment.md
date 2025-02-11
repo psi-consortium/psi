@@ -47,7 +47,7 @@ I3 --           Operation
 
 ```
 
-![**TOD-01-03-09**: View Attachment](../../common/pixel.png){#fig:TOD-01-03-09-View_Attachment}
+![TOD-01-03-09: View Attachment](../../common/pixel.png){#fig:TOD-01-03-09-View_Attachment}
 
 **Prerequisites**
 

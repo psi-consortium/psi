@@ -25,7 +25,7 @@ In case the provider exceeds the given deadline, its product offering(s) will no
 
 The customer inquiry result may contain
 
-* Concrete product offerings which can be ordered directly (see [TOD-03-02](#tod-03-02-product_order_management))
+* Concrete product offerings which can be ordered directly (see [TOD-03-02](#tod-03-02-productordermanagement))
 * Product instances from the inventory that are available to fulfil the order
 * Matching product specifications to request a tailored offering for (RFQ or ITT)
 
@@ -51,7 +51,7 @@ Task  ..> O5    : <<includes>>
 
 ```
 
-![**TOD-03-01**: Customer Inquiry Management](../../common/pixel.png){#fig:TOD-03-01-Customer_Inquiry_Management}
+![TOD-03-01: Customer Inquiry Management](../../common/pixel.png){#fig:TOD-03-01-Customer_Inquiry_Management}
 
 |                             |  Customer  |  Provider  |  Other PSS   | Governance |
 |-----------------------------|:----------:|:----------:|:------------:|:----------:|
@@ -64,7 +64,7 @@ Task  ..> O5    : <<includes>>
 Table: Customer Inquiry Management Matrix. {#tbl:customer-inquiry-management-matrix}
 
 Please note, Checkmarks in parentheses indicate that these operations
-are carried out via events (see [TOD-01-02](#tod-01-02-event_management)), not via direct call of the REST endpoints.
+are carried out via events (see [TOD-01-02](#tod-01-02-eventmanagement)), not via direct call of the REST endpoints.
 
 **eTOM Reference**
 

@@ -8,7 +8,9 @@
 Possible values of the availability result check for CheckProductStockItem.
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | AvailabilityResultType | string | oneOf[available, notAvailable, alternate] | No |
 
 Table: Fields of AvailabilityResultType. {#tbl:AvailabilityResultType.md:AvailabilityResultType}
+
+{#page:break}

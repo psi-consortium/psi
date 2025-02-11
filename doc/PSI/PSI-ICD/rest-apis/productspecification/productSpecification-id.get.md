@@ -7,12 +7,14 @@
 
 **Absolute Path:** /productCatalog/v1/productSpecification/{id}
 
+**TOD Reference:** TOD-02-03-04-View_Product_Specification
+
 **Summary:** Retrieves a ProductSpecification by ID
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | id | string | Yes | Identifier of the ProductSpecification |
 | fields | string | No | Comma-separated properties to provide in response |
 
@@ -33,6 +35,4 @@ Table: Parameters of GET productSpecification/{id}. {#tbl:productSpecification-i
 
 Table: Responses of GET productSpecification/{id}. {#tbl:productSpecification-id.get.md:responses}
 
-## TOD Reference
-
-TOD-02-03-04-View_Product_Specification
+{#page:break}

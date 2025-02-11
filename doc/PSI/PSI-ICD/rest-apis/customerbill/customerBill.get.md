@@ -7,12 +7,14 @@
 
 **Absolute Path:** /customerBillManagement/v1/customerBill
 
+**TOD Reference:** TOD-03-03-04-View_All_Customer_Bills
+
 **Summary:** List or find CustomerBill objects
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | fields | string | No | Comma-separated properties to be provided in response |
 | offset | integer | No | Requested index for start of resources to be provided in response |
 | limit | integer | No | Requested number of resources to be provided in response |
@@ -34,6 +36,4 @@ Table: Parameters of GET customerBill. {#tbl:customerBill.get.md:parameters}
 
 Table: Responses of GET customerBill. {#tbl:customerBill.get.md:responses}
 
-## TOD Reference
-
-TOD-03-03-04-View_All_Customer_Bills
+{#page:break}

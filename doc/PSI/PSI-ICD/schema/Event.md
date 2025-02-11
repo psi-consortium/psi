@@ -8,7 +8,7 @@
 event with common attributes.
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | id | string | N/A | No |
 | href | string | uri | No |
 | description | string | N/A | No |
@@ -25,8 +25,10 @@ event with common attributes.
 | relatedParty | array | RelatedParty | No |
 | reportingSystem | EntityRef | N/A | No |
 | source | EntityRef | N/A | No |
-| \@baseType | string | N/A | No |
-| \@schemaLocation | string | uri | No |
-| \@type | string | N/A | No |
+| @baseType | string | N/A | No |
+| @schemaLocation | string | uri | No |
+| @type | string | N/A | No |
 
 Table: Fields of Event. {#tbl:Event.md:Event}
+
+{#page:break}

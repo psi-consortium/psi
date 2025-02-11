@@ -56,7 +56,7 @@ PSI2_I1 --      Operation2
 
 ```
 
-![**TOD-01-02-04**: Deregister Event Callback](../../common/pixel.png){#fig:TOD-01-02-04-Deregister_Event_Callback}
+![TOD-01-02-04: Deregister Event Callback](../../common/pixel.png){#fig:TOD-01-02-04-Deregister_Event_Callback}
 
 **Prerequisites**
 

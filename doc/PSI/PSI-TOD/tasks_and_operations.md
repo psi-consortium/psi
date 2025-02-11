@@ -319,6 +319,30 @@ This task contains all operations to order products (and therefore services and 
 
 @include [TOD-03-03-05-Withdraw_Customer_Bill](operations/TOD-03-03-05-Withdraw_Customer_Bill.md)
 
+### TOD-03-04-Mission_Management
+
+@include [TOD-03-04-Mission_Management](tasks/TOD-03-04-Mission_Management.md)
+
+#### TOD-03-04-01-Create_Mission
+
+@include [TOD-03-04-01-Create_Mission](operations/TOD-03-04-01-Create_Mission.md)
+
+#### TOD-03-04-02-Update_Mission
+
+@include [TOD-03-04-02-Update_Mission](operations/TOD-03-04-02-Update_Mission.md)
+
+#### TOD-03-04-03-Remove_Mission
+
+@include [TOD-03-04-03-Remove_Mission](operations/TOD-03-04-03-Remove_Mission.md)
+
+#### TOD-03-04-04-View_Mission
+
+@include [TOD-03-04-04-View_Mission](operations/TOD-03-04-04-View_Mission.md)
+
+#### TOD-03-04-05-View_All_Missions
+
+@include [TOD-03-04-05-View_All_Missions](operations/TOD-03-04-05-View_All_Missions.md)
+
 ## TOD-04-Template_Management
 
 The category consists of tasks and operations related to managing templates for resources, services and products.
@@ -483,7 +507,7 @@ While services (and products containing them) are created in the order process, 
 
 ## TOD-06-Quality_Management
 
-The category consists of tasks and operations related to managing the service level objectives (SLO) and service level specifications (SLS), which in turn are used to define service level agreements (SLAs) and declare monitoring of services and resources on provider side.
+The category consists of tasks and operations related to managing the service level objectives (SLO) and service level specifications (SLS), which in turn are used to define service level agreements (SLAs) and declare monitoring of services and resources on provider side. It also contains tasks and operations related to performance monitoring jobs and performance monitoring reports which allow for assessing the performance characteristics of a service.
 
 ### TOD-06-01-Service_Level_Objective_Management
 
@@ -532,3 +556,79 @@ The category consists of tasks and operations related to managing the service le
 #### TOD-06-02-05-View_All_Service_Level_Specification
 
 @include [TOD-06-02-05-View_All_Service_Level_Specification](operations/TOD-06-02-05-View_All_Service_Level_Specification.md)
+
+### TOD-06-03-Key_Indicator_Management
+
+@include [TOD-06-03-Key_Indicator_Management](tasks/TOD-06-03-Key_Indicator_Management.md)
+
+#### TOD-06-03-01-Create_Key_Indicator
+
+@include [TOD-06-03-01-Create_Key_Indicator](operations/TOD-06-03-01-Create_Key_Indicator.md)
+
+#### TOD-06-03-02-Update_Key_Indicator
+
+@include [TOD-06-03-02-Update_Key_Indicator](operations/TOD-06-03-02-Update_Key_Indicator.md)
+
+#### TOD-06-03-03-Remove_Key_Indicator
+
+@include [TOD-06-03-03-Remove_Key_Indicator](operations/TOD-06-03-03-Remove_Key_Indicator.md)
+
+#### TOD-06-03-04-View_Key_Indicator
+
+@include [TOD-06-03-04-View_Key_Indicator](operations/TOD-06-03-04-View_Key_Indicator.md)
+
+#### TOD-06-03-05-View_All_Key_Indicator
+
+@include [TOD-06-03-05-View_All_Key_Indicator](operations/TOD-06-03-05-View_All_Key_Indicator.md)
+
+### TOD-06-04-Performance_Monitoring_Job_Management
+
+@include [TOD-06-04-Performance_Monitoring_Job_Management](tasks/TOD-06-04-Performance_Monitoring_Job_Management.md)
+
+#### TOD-06-04-01-Create_Performance_Monitoring_Job
+
+@include [TOD-06-04-01-Create_Performance_Monitoring_Job](operations/TOD-06-04-01-Create_Performance_Monitoring_Job.md)
+
+#### TOD-06-04-02-Update_Performance_Monitoring_Job
+
+@include [TOD-06-04-02-Update_Performance_Monitoring_Job](operations/TOD-06-04-02-Update_Performance_Monitoring_Job.md)
+
+#### TOD-06-04-03-Cancel_Performance_Monitoring_Job
+
+@include [TOD-06-04-03-Cancel_Performance_Monitoring_Job](operations/TOD-06-04-03-Cancel_Performance_Monitoring_Job.md)
+
+#### TOD-06-04-04-View_Performance_Monitoring_Job
+
+@include [TOD-06-04-04-View_Performance_Monitoring_Job](operations/TOD-06-04-04-View_Performance_Monitoring_Job.md)
+
+#### TOD-06-04-05-View_All_Performance_Monitoring_Job
+
+@include [TOD-06-04-05-View_All_Performance_Monitoring_Job](operations/TOD-06-04-05-View_All_Performance_Monitoring_Job.md)
+
+### TOD-06-05-Performance_Monitoring_Report_Management
+
+@include [TOD-06-05-Performance_Monitoring_Report_Management](tasks/TOD-06-05-Performance_Monitoring_Report_Management.md)
+
+#### TOD-06-05-01-Create_Performance_Monitoring_Report
+
+@include [TOD-06-05-01-Create_Performance_Monitoring_Report](operations/TOD-06-05-01-Create_Performance_Monitoring_Report.md)
+
+#### TOD-06-05-02-View_Performance_Monitoring_Report
+
+@include [TOD-06-05-02-View_Performance_Monitoring_Report](operations/TOD-06-05-02-View_Performance_Monitoring_Report.md)
+
+#### TOD-06-05-03-View_All_Performance_Monitoring_Report
+
+@include [TOD-06-05-03-View_All_Performance_Monitoring_Report](operations/TOD-06-05-03-View_All_Performance_Monitoring_Report.md)
+
+### TOD-06-06-Alarm_Management
+
+@include [TOD-06-06-Alarm_Management](tasks/TOD-06-06-Alarm_Management.md)
+
+#### TOD-06-06-01-View_Alarm
+
+@include [TOD-06-06-01-View_Alarm](operations/TOD-06-06-01-View_Alarm.md)
+
+#### TOD-06-06-02-View_All_Alarm
+
+@include [TOD-06-06-02-View_All_Alarm](operations/TOD-06-06-02-View_All_Alarm.md)

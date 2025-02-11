@@ -43,7 +43,7 @@ I2 --           Operation
 
 ```
 
-![**TOD-05-01-01**: Create Resource](../../common/pixel.png){#fig:TOD-05-01-01-Create_Resource}
+![TOD-05-01-01: Create Resource](../../common/pixel.png){#fig:TOD-05-01-01-Create_Resource}
 
 **Prerequisites**
 

@@ -1,0 +1,774 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Alarm",
+    "description": "Alarm Management API",
+    "version": "4.0.0"
+  },
+  "servers": [
+    {
+      "url": "/psi-api/alarm/v1/"
+    }
+  ],
+  "tags": [
+    {
+      "name": "alarm",
+      "description": "Alarm API"
+    }
+  ],
+  "paths": {
+    "/alarm": {
+      "get": {
+        "tags": [
+          "alarm"
+        ],
+        "summary": "List or find Alarm objects",
+        "description": "This operation list or find Alarm entities",
+        "operationId": "listAlarm",
+        "parameters": [
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "Comma-separated properties to be provided in response",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Requested index for start of resources to be provided in response",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Requested number of resources to be provided in response",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "headers": {
+              "X-Total-Count": {
+                "description": "Total number of items matching criteria",
+                "schema": {
+                  "type": "integer"
+                }
+              },
+              "X-Result-Count": {
+                "description": "Actual number of items returned in the response body",
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            },
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Alarm"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method Not allowed",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/alarm/{id}": {
+      "get": {
+        "tags": [
+          "alarm"
+        ],
+        "summary": "Retrieves a Alarm by ID",
+        "description": "This operation retrieves a Alarm entity. Attribute selection is enabled for all first level attributes.",
+        "operationId": "retrieveAlarm",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Identifier of the Alarm",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "Comma-separated properties to provide in response",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Alarm"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method Not allowed",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AffectedService": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "href": {
+            "type": "string",
+            "description": "Provides the identifier of the service affected by the alarm",
+            "format": "uri"
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class"
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships",
+            "format": "uri"
+          },
+          "@type": {
+            "type": "string",
+            "description": "When sub-classing, this defines the sub-class entity name"
+          }
+        }
+      },
+      "Alarm": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Identifier of the alarm, determined by the alarm owning system"
+          },
+          "href": {
+            "type": "string",
+            "description": "A reference to the alarm.",
+            "format": "uri"
+          },
+          "ackState": {
+            "type": "string",
+            "description": "Provides the Acknowledgement State of the alarm (unacknowledged | acknowledged)."
+          },
+          "ackSystemId": {
+            "type": "string",
+            "description": "Provides the name of the system that last changed the ackState of an alarm, i.e. acknowledged or unacknowledged the alarm."
+          },
+          "ackUserId": {
+            "type": "string",
+            "description": "Provides the id of the user who has last changed the ack state of the alarm, i.e. acknowledged or unacknowledged the alarm."
+          },
+          "alarmChangedTime": {
+            "type": "string",
+            "description": "Indicates the last date and time when the alarm is changed on the alarm-owning system. Any change to the alarm whether coming from the alarmed resource, or triggered by a change from the client is changing this time.",
+            "format": "date-time"
+          },
+          "alarmClearedTime": {
+            "type": "string",
+            "description": "Indicates the time (as a date + time) at which the alarm is cleared at the source. ",
+            "format": "date-time"
+          },
+          "alarmDetails": {
+            "type": "string",
+            "description": "Contains further information on the alarm."
+          },
+          "alarmEscalation": {
+            "type": "boolean",
+            "description": "Indicates if this alarm has been escalated or not. "
+          },
+          "alarmRaisedTime": {
+            "type": "string",
+            "description": "Indicates the time (as a date + time) at which the alarm occurred at its source.",
+            "format": "date-time"
+          },
+          "alarmReportingTime": {
+            "type": "string",
+            "description": "Indicates the time (as a date + time) at which the alarm was reported by the owning OSS. It might be different from the alarmRaisedTime. For instance, if the alarm list is maintained by an EMS, the alarmRaisedtime would be the time the alarm\n  was detected by the NE, while the alarmReportingTime would be the time this alarm was stored in the alarm list of the EMS.",
+            "format": "date-time"
+          },
+          "alarmedObjectType": {
+            "type": "string",
+            "description": "The type (class) of the managed object associated with the event."
+          },
+          "clearSystemId": {
+            "type": "string",
+            "description": "Provides the id of the system where the user who invoked the alarmCleared operation is located. "
+          },
+          "clearUserId": {
+            "type": "string",
+            "description": "Provides the id of the user who invoked the alarmCleared operation"
+          },
+          "externalAlarmId": {
+            "type": "string",
+            "description": "An identifier of the alarm in the source system."
+          },
+          "isRootCause": {
+            "type": "boolean",
+            "description": "Indicates whether the alarm is a root cause alarm.. "
+          },
+          "plannedOutageIndicator": {
+            "type": "string",
+            "description": "Indicates that the Managed Object (related to this alarm) is in planned outage (in planned maintenance, or out-of-service). "
+          },
+          "probableCause": {
+            "type": "string",
+            "description": "Provides the probable cause of the alarm. The values are consistent with ITU-T Recommendation X.733 or 3GPP TS 32.111-2 Annex B."
+          },
+          "proposedRepairedActions": {
+            "type": "string",
+            "description": "Indicates proposed repair actions, if known to the system emitting the alarm."
+          },
+          "reportingSystemId": {
+            "type": "string",
+            "description": "Reporting system identity."
+          },
+          "serviceAffecting": {
+            "type": "boolean",
+            "description": "Indicates whether the alarm affects service or not."
+          },
+          "sourceSystemId": {
+            "type": "string",
+            "description": "Source system identity."
+          },
+          "specificProblem": {
+            "type": "string",
+            "description": "Provides more specific information about the alarm."
+          },
+          "state": {
+            "type": "string",
+            "description": "Defines the alarm state during its life cycle (raised | updated | cleared).",
+            "enum": [
+              "raised",
+              "updated",
+              "cleared"
+            ]
+          },
+          "affectedService": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AffectedService"
+            }
+          },
+          "alarmType": {
+            "$ref": "#/components/schemas/AlarmType"
+          },
+          "alarmedObject": {
+            "$ref": "#/components/schemas/AlarmedObject"
+          },
+          "comment": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Comment"
+            }
+          },
+          "correlatedAlarm": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AlarmRef"
+            }
+          },
+          "crossedThresholdInformation": {
+            "$ref": "#/components/schemas/CrossedThresholdInformation"
+          },
+          "parentAlarm": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AlarmRef"
+            }
+          },
+          "perceivedSeverity": {
+            "$ref": "#/components/schemas/PerceivedSeverity"
+          },
+          "place": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RelatedPlaceRefOrValue"
+            }
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "The base type of this alarm."
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A reference to the schema describing this alarm."
+          },
+          "@type": {
+            "type": "string",
+            "description": "The type for this alarm."
+          }
+        },
+        "description": "This resource represents an alarm supporting the information model defined in ITU-T X.733."
+      },
+      "AlarmRef": {
+        "required": [
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "unique identifier"
+          },
+          "href": {
+            "type": "string",
+            "description": "Hyperlink reference",
+            "format": "uri"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the related entity."
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class",
+            "example": "ResourceSpecification"
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships",
+            "format": "uri",
+            "example": "https://mycsp.com:8080/tmf-api/schema/Resource/LogicalResourceSpecification.schema.json"
+          },
+          "@type": {
+            "type": "string",
+            "description": "When sub-classing, this defines the sub-class Extensible name",
+            "example": "LogicalResourceSpecification"
+          },
+          "@referredType": {
+            "type": "string",
+            "description": "The actual type of the target instance when needed for disambiguation."
+          }
+        }
+      },
+      "AlarmType": {
+        "type": "string",
+        "description": "Categorizes the alarm (X.733 8.1.1, 3GPP TS 32.111-2 Annex A)",
+        "enum": [
+          "communicationsAlarm",
+          "processingErrorAlarm",
+          "environmentalAlarm",
+          "qualityOfServiceAlarm",
+          "equipmentAlarm",
+          "integrityViolation",
+          "operationalViolation",
+          "physicalViolation",
+          "securityService",
+          "mechanismViolation",
+          "timeDomainViolation"
+        ]
+      },
+      "AlarmedObject": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The identifier of the managed object associated with the event."
+          },
+          "href": {
+            "type": "string",
+            "description": "A reference to the managed object associated with the event.",
+            "format": "uri"
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class"
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships",
+            "format": "uri"
+          },
+          "@type": {
+            "type": "string",
+            "description": "When sub-classing, this defines the sub-class entity name"
+          }
+        },
+        "description": "Identifies the managed object instance associated with the alarm."
+      },
+      "Comment": {
+        "type": "object",
+        "properties": {
+          "comment": {
+            "type": "string",
+            "description": "Indicates the text of the comment."
+          },
+          "systemId": {
+            "type": "string",
+            "description": "Indicates the system identifier on which the client set the comment."
+          },
+          "time": {
+            "type": "string",
+            "description": "Indicates the time commenting the alarm",
+            "format": "date-time"
+          },
+          "userId": {
+            "type": "string",
+            "description": "Indicates the user commenting the alarm."
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class"
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships",
+            "format": "uri"
+          },
+          "@type": {
+            "type": "string",
+            "description": "When sub-classing, this defines the sub-class entity name"
+          }
+        },
+        "description": "Indicates the comments entered on the alarm."
+      },
+      "CrossedThresholdInformation": {
+        "type": "object",
+        "properties": {
+          "direction": {
+            "type": "string",
+            "description": "Indicates the threshold crossing direction: up or down."
+          },
+          "granularity": {
+            "type": "string",
+            "description": "Indicates the granularity at which the indicator is evaluated for threshold crossing"
+          },
+          "indicatorName": {
+            "type": "string",
+            "description": "Indicates the name of indicator which crossed the threshold."
+          },
+          "indicatorUnit": {
+            "type": "string",
+            "description": "Indicates the unit of the measurement of the indicator corresponding to the threshold that has been crossed."
+          },
+          "observedValue": {
+            "type": "string",
+            "description": "Indicates the value of the indicator which crossed the threshold."
+          },
+          "thresholdCrossingDescription": {
+            "type": "string",
+            "description": "Indicates further information on the threshold crossing alarm."
+          },
+          "threshold": {
+            "$ref": "#/components/schemas/ThresholdRef"
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class"
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships",
+            "format": "uri"
+          },
+          "@type": {
+            "type": "string",
+            "description": "When sub-classing, this defines the sub-class entity name"
+          }
+        },
+        "description": "Identifies the details of the threshold that has been crossed."
+      },
+      "PerceivedSeverity": {
+        "type": "string",
+        "description": "Lists the possible severities that can be allocated to an Alarm. The values are consistent with ITU-T Recommendation X.733.\nOnce an alarm has been cleared, its perceived severity is set to 'cleared' and can no longer be set.",
+        "enum": [
+          "critical",
+          "major",
+          "minor",
+          "warning",
+          "indeterminate",
+          "cleared"
+        ]
+      },
+      "RelatedPlaceRefOrValue": {
+        "required": [
+          "role"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the place"
+          },
+          "href": {
+            "type": "string",
+            "description": "Unique reference of the place",
+            "format": "uri"
+          },
+          "name": {
+            "type": "string",
+            "description": "A user-friendly name for the place, such as [Paris Store], [London Store], [Main Home]"
+          },
+          "role": {
+            "type": "string"
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class",
+            "example": "ResourceSpecification"
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships",
+            "format": "uri",
+            "example": "https://mycsp.com:8080/tmf-api/schema/Resource/LogicalResourceSpecification.schema.json"
+          },
+          "@type": {
+            "type": "string",
+            "description": "When sub-classing, this defines the sub-class Extensible name",
+            "example": "LogicalResourceSpecification"
+          },
+          "@referredType": {
+            "type": "string",
+            "description": "The actual type of the target instance when needed for disambiguation."
+          }
+        },
+        "description": "Related Entity reference. A related place defines a place described by reference or by value linked to a specific entity. The polymorphic attributes @type, @schemaLocation & @referredType are related to the place entity and not the RelatedPlaceRefOrValue class itself"
+      },
+      "ThresholdRef": {
+        "required": [
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "unique identifier"
+          },
+          "href": {
+            "type": "string",
+            "description": "Hyperlink reference",
+            "format": "uri"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the related entity."
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class",
+            "example": "ResourceSpecification"
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships",
+            "format": "uri",
+            "example": "https://mycsp.com:8080/tmf-api/schema/Resource/LogicalResourceSpecification.schema.json"
+          },
+          "@type": {
+            "type": "string",
+            "description": "When sub-classing, this defines the sub-class Extensible name",
+            "example": "LogicalResourceSpecification"
+          },
+          "@referredType": {
+            "type": "string",
+            "description": "The actual type of the target instance when needed for disambiguation."
+          }
+        }
+      },
+      "Error": {
+        "required": [
+          "code",
+          "reason"
+        ],
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Application relevant detail, defined in the API or a common list."
+          },
+          "reason": {
+            "type": "string",
+            "description": "Explanation of the reason for the error which can be shown to a client user."
+          },
+          "message": {
+            "type": "string",
+            "description": "More details and corrective actions related to the error which can be shown to a client user."
+          },
+          "status": {
+            "type": "string",
+            "description": "HTTP Error code extension"
+          },
+          "referenceError": {
+            "type": "string",
+            "description": "URI of documentation describing the error.",
+            "format": "uri"
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class."
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships",
+            "format": "uri"
+          },
+          "@type": {
+            "type": "string",
+            "description": "When sub-classing, this defines the sub-class entity name."
+          }
+        },
+        "description": "Used when an API throws an Error, typically with a HTTP error response-code (3xx, 4xx, 5xx)"
+      }
+    }
+  },
+  "x-original-swagger-version": "2.0"
+}

@@ -5,16 +5,18 @@
 
 # Price
 
-Provides all amounts (tax included, duty free, tax rate), used currency and percentage to apply for Price Alteration.
+Provides all amounts (tax included, duty free, tax rate), used currency and percentage.
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | percentage | number | float | No |
 | taxRate | number | float | No |
 | dutyFreeAmount | Money | N/A | No |
 | taxIncludedAmount | Money | N/A | No |
-| \@baseType | string | N/A | No |
-| \@schemaLocation | string | uri | No |
-| \@type | string | N/A | No |
+| @baseType | string | N/A | No |
+| @schemaLocation | string | uri | No |
+| @type | string | N/A | No |
 
 Table: Fields of Price. {#tbl:Price.md:Price}
+
+{#page:break}

@@ -9,7 +9,7 @@ event with common attributes.
 Skipped properties: id,href
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | description | string | N/A | No |
 | correlationId | string | N/A | No |
 | domain | string | N/A | No |
@@ -24,8 +24,10 @@ Skipped properties: id,href
 | relatedParty | array | RelatedParty | No |
 | reportingSystem | EntityRef | N/A | No |
 | source | EntityRef | N/A | No |
-| \@baseType | string | N/A | No |
-| \@schemaLocation | string | uri | No |
-| \@type | string | N/A | No |
+| @baseType | string | N/A | No |
+| @schemaLocation | string | uri | No |
+| @type | string | N/A | No |
 
 Table: Fields of Event_Create. {#tbl:Event_Create.md:Event_Create}
+
+{#page:break}

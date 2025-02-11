@@ -7,12 +7,14 @@
 
 **Absolute Path:** /resourceCatalog/v1/resourceTemplate/{id}
 
+**TOD Reference:** TOD-04-01-02-Update_Resource_Template
+
 **Summary:** Updates partially a ResourceTemplate
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | id | string | Yes | The identifier of the ResourceTemplate. |
 
 Table: Parameters of PATCH resourceTemplate/{id}. {#tbl:resourceTemplate-id.patch.md:parameters}
@@ -40,6 +42,4 @@ Table: Request Body of PATCH resourceTemplate/{id}. {#tbl:resourceTemplate-id.pa
 
 Table: Responses of PATCH resourceTemplate/{id}. {#tbl:resourceTemplate-id.patch.md:responses}
 
-## TOD Reference
-
-TOD-04-01-02-Update_Resource_Template
+{#page:break}

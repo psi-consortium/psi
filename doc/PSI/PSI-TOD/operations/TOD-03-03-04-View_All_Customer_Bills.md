@@ -43,7 +43,7 @@ I2 --           Operation
 
 ```
 
-![**TOD-03-03-04**: View All Customer Bills](../../common/pixel.png){#fig:TOD-03-03-04-View_All_Customer_Bills}
+![TOD-03-03-04: View All Customer Bills](../../common/pixel.png){#fig:TOD-03-03-04-View_All_Customer_Bills}
 
 **Prerequisites**
 

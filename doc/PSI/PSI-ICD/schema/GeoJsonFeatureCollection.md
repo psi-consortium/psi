@@ -8,8 +8,10 @@
 The GeoJSon FeatureCollection.
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | features | array | GeoJsonFeature | No |
 | type | string | "FeatureCollection" | Yes |
 
 Table: Fields of GeoJsonFeatureCollection. {#tbl:GeoJsonFeatureCollection.md:GeoJsonFeatureCollection}
+
+{#page:break}

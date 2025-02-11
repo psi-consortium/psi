@@ -39,7 +39,7 @@ I1 --           Operation
 
 ```
 
-![**TOD-04-03-02**: Update Product Template](../../common/pixel.png){#fig:TOD-04-03-02-Update_Product_Template}
+![TOD-04-03-02: Update Product Template](../../common/pixel.png){#fig:TOD-04-03-02-Update_Product_Template}
 
 **Prerequisites**
 

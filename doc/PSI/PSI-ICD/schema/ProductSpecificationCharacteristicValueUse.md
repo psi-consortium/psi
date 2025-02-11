@@ -14,7 +14,7 @@ White and Blue in an associated product offering.
 It should be noted that the list of values in 'ProductSpecificationCharacteristicValueUse' is a strict subset of the list of values as defined in the corresponding product specification characteristics.
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | id | string | N/A | No |
 | name | string | N/A | No |
 | description | string | N/A | No |
@@ -24,8 +24,10 @@ It should be noted that the list of values in 'ProductSpecificationCharacteristi
 | productSpecCharacteristicValue | array | CharacteristicValueSpecification | No |
 | productSpecification | ProductSpecificationRef | N/A | No |
 | validFor | TimePeriod | N/A | No |
-| \@baseType | string | N/A | No |
-| \@schemaLocation | string | uri | No |
-| \@type | string | N/A | No |
+| @baseType | string | N/A | No |
+| @schemaLocation | string | uri | No |
+| @type | string | N/A | No |
 
 Table: Fields of ProductSpecificationCharacteristicValueUse. {#tbl:ProductSpecificationCharacteristicValueUse.md:ProductSpecificationCharacteristicValueUse}
+
+{#page:break}

@@ -9,7 +9,7 @@ A ranked result of an inquiry.
 Must contain at least one ProductSpecification, optionally complemented by an offering.
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | id | string | N/A | Yes |
 | priority | number | N/A | No |
 | note | array | Note | No |
@@ -20,3 +20,5 @@ Must contain at least one ProductSpecification, optionally complemented by an of
 | productOffering | array | ProductOffering | No |
 
 Table: Fields of InquiryResult. {#tbl:InquiryResult.md:InquiryResult}
+
+{#page:break}

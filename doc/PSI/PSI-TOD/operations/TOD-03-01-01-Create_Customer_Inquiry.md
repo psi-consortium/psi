@@ -39,7 +39,7 @@ I1 --           Operation
 
 ```
 
-![**TOD-03-01-01**: Create Customer Inquiry](../../common/pixel.png){#fig:TOD-03-01-01-Create_Customer_Inquiry}
+![TOD-03-01-01: Create Customer Inquiry](../../common/pixel.png){#fig:TOD-03-01-01-Create_Customer_Inquiry}
 
 **Prerequisites**
 

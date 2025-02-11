@@ -1,0 +1,83 @@
+=begin
+
+# TOD-06-05-01-Create_Performance_Monitoring_Report
+
+> The heading has to be included in the document including this document.
+
+=end
+
+```plantuml
+@startuml
+skinparam actor {
+  BackgroundColor<< 0 >> 	SteelBlue
+  BorderColor<< 0 >> 		SteelBlue
+  BackgroundColor<< 1 >> 	Green
+  BorderColor<< 1 >> 		Green
+  BackgroundColor<< 3 >> 	Red
+  BorderColor<< 3 >> 		Red
+}
+
+skinparam entity{
+  BackgroundColor<< 2 >> 	Orange
+  BorderColor<< 2 >> 		Orange
+}
+
+Customer << 0 >> 
+entity PSS << 2 >> as PSS1
+
+rectangle "PSI" {
+  interface "PSS-USR I/F" as I1
+  interface "PSS-PSS I/F" as I2
+}
+
+package "PSS" {
+  rectangle "Create Performance Monitoring Report" as Operation
+}
+
+Customer --	I1
+I1 -- Operation
+PSS1 -- I2
+I2 -- Operation
+
+
+@enduml
+
+```
+
+![**TOD-06-05-01**: Create Performance Monitoring Report](../../common/pixel.png){#fig:TOD-06-05-01-Create_Performance_Monitoring_Report}
+
+**Prerequisites**
+
+Service for which PM Report needs to be generated exists in the PSS datastore.
+Applicable key indicators are defined in the PSS datastore.
+
+**Main operation**
+
+Creates a new Performance Monitoring Report instance via a standard interface.
+
+Some properties of a Performance Monitoring Report are:
+
+* *granularity* - Sampling rate of the collection of performance indicators, e.g. 10 milliseconds, 1 second, 5 minutes, 24 hours
+* *outputFormat* - Output formats for the Performance Report: json, xml, avro, csv
+* *reportingTimeframe* - Defines the interval for data to be included in the report
+* *resultFormat* - Defines how the provider will deliver the Performance Report to the PSS:
+  * payload data will be delivered directly in the "Get Report" API response
+  * attachment data will be stored in the file and the API response will contain a URL to the file
+* *scheduleDefinition* - The schedule definition for running jobs
+* *servicePayloadSpecificAttributes* - an extension point for service-specific performance monitoring configuration. It includes a definition of observed service and applicable performance monitoring objectives.
+
+**REST Endpoints**
+
+@include [TOD-06-05-01 Create Performance Monitoring Report](endpoints/TOD-06-05-01-Create_Performance_Monitoring_Report-endpoints.md)
+
+**Post Conditions**
+
+The PM report is successfully created in the PSS datastore.
+
+**Applicable Requirements**
+
+@include [TOD-06-05-01 Create Performance Monitoring Report](requirements/TOD-06-05-01-Create_Performance_Monitoring_Report-requirements.md)
+
+**eTOM Reference**
+
+The operation is based on the 1.4.7 process identifier from the eTOM.

@@ -7,12 +7,14 @@
 
 **Absolute Path:** /productCatalog/v1/productOffering/{id}
 
+**TOD Reference:** TOD-02-04-04-View_Product_Offering
+
 **Summary:** Retrieves a ProductOffering by ID
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | id | string | Yes | Identifier of the ProductOffering |
 | fields | string | No | Comma-separated properties to provide in response |
 
@@ -33,6 +35,4 @@ Table: Parameters of GET productOffering/{id}. {#tbl:productOffering-id.get.md:p
 
 Table: Responses of GET productOffering/{id}. {#tbl:productOffering-id.get.md:responses}
 
-## TOD Reference
-
-TOD-02-04-04-View_Product_Offering
+{#page:break}

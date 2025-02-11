@@ -8,7 +8,9 @@
 Valid values for the lifecycle state of the individual
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | IndividualStateType | string | oneOf[initialized, validated, deceased] | No |
 
 Table: Fields of IndividualStateType. {#tbl:IndividualStateType.md:IndividualStateType}
+
+{#page:break}

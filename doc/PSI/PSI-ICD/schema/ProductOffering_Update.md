@@ -9,7 +9,7 @@ Represents entities that are orderable from the provider of the catalog, this re
 Skipped properties: id,href,lastUpdate,@type,@baseType
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | name | string | N/A | No |
 | description | string | N/A | No |
 | isBundle | boolean | N/A | No |
@@ -31,11 +31,13 @@ Skipped properties: id,href,lastUpdate,@type,@baseType
 | productSpecification | ProductSpecificationRef | N/A | No |
 | resourceCandidate | ResourceCandidateRef | N/A | No |
 | serviceCandidate | ServiceCandidateRef | N/A | No |
-| serviceLevelAgreement | SLARef | N/A | No |
+| serviceLevelSpecification | ServiceLevelSpecificationRef | N/A | No |
 | validFor | TimePeriod | N/A | No |
 | accessProbability | integer | N/A | No |
 | relatedParty | array | RelatedParty | No |
 | bundledGroupProductOffering | array | BundledGroupProductOffering | No |
-| \@schemaLocation | string | uri | No |
+| @schemaLocation | string | uri | No |
 
 Table: Fields of ProductOffering_Update. {#tbl:ProductOffering_Update.md:ProductOffering_Update}
+
+{#page:break}

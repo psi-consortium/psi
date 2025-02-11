@@ -43,7 +43,7 @@ I2 --           Operation
 
 ```
 
-![**TOD-02-01-01**: Create Resource Specification](../../common/pixel.png){#fig:TOD-02-01-01-Create_Resource_Specification}
+![TOD-02-01-01: Create Resource Specification](../../common/pixel.png){#fig:TOD-02-01-01-Create_Resource_Specification}
 
 **Prerequisites**
 
@@ -61,12 +61,12 @@ Some properties of a resource specification are:
 * *description* - Description of the target resource
 * *category* - Category (resource type) of the target resource like terminals, bandwidth, etc.
 * *targetResourceSchema* - Name and reference to the JSON Schema defining the type of resource described by this specification.
-* *resourceSpecCharacteristic* - List of characteristics i.e. technical specifications of the resource such as frequency band, Tx/Rx frequency, etc. Beam footprints are described as a characteristic of a special BeamArea type including the beam geometry in GeoJSON data format as a polygon or point (e.g. to describe "holes") and the EIRP value.
+* *resourceSpecCharacteristic* - List of characteristics i.e. technical specifications of the resource such as frequency band, Tx/Rx frequency, etc. Beam footprints are described as a characteristic of a *GeoJSON FeatureCollection* that contains one or more beam geometries in the GeoJSON data format (e.g. as a polygon) with corresponding properties, like the EIRP value.
 * *relatedParty* - Usually reference to the provider that offers the resource
 * *lifecycleStatus* - Current lifecycle status of the resource specification (e.g. active, draft, etc.)
 * *validFor* - Time period of validity of the resource specification
 
-Before creating a new resource specification, the provider or customer can request available resource templates from the PSS via the [TOD-04-01-05-View_All_Resource_Templates](TOD-04-01-05-View_All_Resource_Templates.md) operation.
+Before creating a new resource specification, the provider or customer can request available resource templates from the PSS via the [TOD-04-01-05-View_All_Resource_Templates](#tod-04-01-05-viewallresourcetemplates) operation.
 The templates are prepared by the governance of the PSS, and they contain default values for the characteristics of a resource specification.
 For instance, if the provider wants to register a modem to the PSS, they can request available resource templates for modems.
 Once they identify the target template for the resource specification they want to create, they need to replace the default values with specific ones and invoke the endpoint.

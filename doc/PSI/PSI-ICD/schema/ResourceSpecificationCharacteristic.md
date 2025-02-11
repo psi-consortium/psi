@@ -10,7 +10,7 @@ Every ResourceSpecification has a variety of important attributes, methods, cons
 relationships, which distinguish a resource specification from other resource specifications.
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | id | string | N/A | No |
 | name | string | N/A | No |
 | description | string | N/A | No |
@@ -24,9 +24,11 @@ relationships, which distinguish a resource specification from other resource sp
 | resourceSpecCharRelationship | array | ResourceSpecificationCharacteristicRelationship | No |
 | resourceSpecCharacteristicValue | array | CharacteristicValueSpecification | No |
 | validFor | TimePeriod | N/A | No |
-| \@baseType | string | N/A | No |
-| \@schemaLocation | string | uri | No |
-| \@type | string | N/A | No |
-| \@valueSchemaLocation | string | N/A | No |
+| @baseType | string | N/A | No |
+| @schemaLocation | string | uri | No |
+| @type | string | N/A | No |
+| @valueSchemaLocation | string | N/A | No |
 
 Table: Fields of ResourceSpecificationCharacteristic. {#tbl:ResourceSpecificationCharacteristic.md:ResourceSpecificationCharacteristic}
+
+{#page:break}

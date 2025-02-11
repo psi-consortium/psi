@@ -8,8 +8,10 @@
 An amount in a given unit
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | amount | number | float | No |
 | units | string | N/A | No |
 
 Table: Fields of Quantity. {#tbl:Quantity.md:Quantity}
+
+{#page:break}

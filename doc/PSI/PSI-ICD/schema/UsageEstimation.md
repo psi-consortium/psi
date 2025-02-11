@@ -9,7 +9,7 @@ The estimated usage of a product.
 The customer may provide this to allow the provider to optimize the returned products.
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | name | string | N/A | No |
 | value | integer | N/A | No |
 | unitOfMeasure | string | N/A | No |
@@ -17,3 +17,5 @@ The customer may provide this to allow the provider to optimize the returned pro
 | recurringChargePeriodLength | integer | N/A | No |
 
 Table: Fields of UsageEstimation. {#tbl:UsageEstimation.md:UsageEstimation}
+
+{#page:break}

@@ -39,7 +39,7 @@ I1 --           Operation
 
 ```
 
-![**TOD-02-04-01**: Create Product Offering](../../common/pixel.png){#fig:TOD-02-04-01-Create_Product_Offering}
+![TOD-02-04-01: Create Product Offering](../../common/pixel.png){#fig:TOD-02-04-01-Create_Product_Offering}
 
 **Prerequisites**
 
@@ -47,7 +47,7 @@ The product offering does not exist in the PSS datastore.
 
 **Main operation**
 
-Creates a new product offering with product price, SLA, etc. via a standard interface specification.
+Creates a new product offering with product price, SLS, etc. via a standard interface specification.
 
 > Note: It is possible to create a product offering which will be available in the future by setting the *validFor* property with a future time reference.
 
@@ -57,7 +57,7 @@ Some properties of a product offering are:
 * *description* - Description of the target offering
 * *productOfferingTerm* - Condition under which the offering is made available to customers, for example different commitment periods
 * *productSpecification* - Reference to the product specification the target offering is about
-* *serviceLevelAgreement* - SLA for the product offering
+* *serviceLevelSpecification* - SLS for the product offering
 * *prodSpecCharValueUse* - Applied characteristics of the product specification, when there are variants
 * *productOfferingPrice* - Price components for the offered product.
   Combinations of different types or multiple entries of the same type are possible.

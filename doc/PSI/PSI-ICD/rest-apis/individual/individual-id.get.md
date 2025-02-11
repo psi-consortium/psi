@@ -7,12 +7,14 @@
 
 **Absolute Path:** /partyManagement/v1/individual/{id}
 
+**TOD Reference:** TOD-01-01-04-View_Party_Profile
+
 **Summary:** Retrieves a Individual by ID
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | id | string | Yes | Identifier of the Individual |
 | fields | string | No | Comma-separated properties to provide in response |
 
@@ -33,6 +35,4 @@ Table: Parameters of GET individual/{id}. {#tbl:individual-id.get.md:parameters}
 
 Table: Responses of GET individual/{id}. {#tbl:individual-id.get.md:responses}
 
-## TOD Reference
-
-TOD-01-01-04-View_Party_Profile
+{#page:break}

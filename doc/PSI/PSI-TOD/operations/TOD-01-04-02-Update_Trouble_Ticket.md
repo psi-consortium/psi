@@ -45,7 +45,7 @@ I3 --           Operation
 
 ```
 
-![**TOD-01-04-02**: Update Trouble Ticket](../../common/pixel.png){#fig:TOD-01-04-02-Update_Trouble_Ticket}
+![TOD-01-04-02: Update Trouble Ticket](../../common/pixel.png){#fig:TOD-01-04-02-Update_Trouble_Ticket}
 
 **Prerequisites**
 

@@ -8,7 +8,9 @@
 Possible values for the state of a task
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | TaskStateType | string | oneOf[accepted, terminatedWithError, inProgress, done] | No |
 
 Table: Fields of TaskStateType. {#tbl:TaskStateType.md:TaskStateType}
+
+{#page:break}

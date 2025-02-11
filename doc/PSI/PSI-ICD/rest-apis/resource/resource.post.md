@@ -7,6 +7,8 @@
 
 **Absolute Path:** /resourceInventory/v1/resource
 
+**TOD Reference:** TOD-05-01-01-Create_Resource
+
 **Summary:** Creates a Resource
 
 ## Request Body
@@ -31,6 +33,4 @@ Table: Request Body of POST resource. {#tbl:resource.post.md:request_body}
 
 Table: Responses of POST resource. {#tbl:resource.post.md:responses}
 
-## TOD Reference
-
-TOD-05-01-01-Create_Resource
+{#page:break}

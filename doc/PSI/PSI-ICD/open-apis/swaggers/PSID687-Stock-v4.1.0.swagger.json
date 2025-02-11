@@ -291,7 +291,7 @@
             "format": "date-time"
           },
           "alternatePlace": {
-            "$ref": "#/components/schemas/PlaceRefOrValue"
+            "$ref": "#/components/schemas/PlaceRef"
           },
           "alternateProduct": {
             "$ref": "#/components/schemas/ProductRefOrValue"
@@ -527,7 +527,7 @@
             }
           },
           "place": {
-            "$ref": "#/components/schemas/PlaceRefOrValue"
+            "$ref": "#/components/schemas/PlaceRef"
           },
           "relatedParty": {
             "type": "array",
@@ -588,7 +588,7 @@
             }
           },
           "place": {
-            "$ref": "#/components/schemas/PlaceRefOrValue"
+            "$ref": "#/components/schemas/PlaceRef"
           },
           "relatedParty": {
             "type": "array",
@@ -794,42 +794,6 @@
           }
         },
         "description": "Place reference. PlaceRef defines the placeRefs where the products are sold or delivered."
-      },
-      "PlaceRefOrValue": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "Unique identifier of the place"
-          },
-          "href": {
-            "type": "string",
-            "description": "Unique reference of the place",
-            "format": "uri"
-          },
-          "name": {
-            "type": "string",
-            "description": "A user-friendly name for the place, such as [Paris Store], [London Store], [Main Home]"
-          },
-          "@baseType": {
-            "type": "string",
-            "description": "When sub-classing, this defines the super-class"
-          },
-          "@schemaLocation": {
-            "type": "string",
-            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships",
-            "format": "uri"
-          },
-          "@type": {
-            "type": "string",
-            "description": "When sub-classing, this defines the sub-class Extensible name"
-          },
-          "@referredType": {
-            "type": "string",
-            "description": "The actual type of the target instance when needed for disambiguation."
-          }
-        },
-        "description": "A place defines a place described by reference or by value linked to a specific entity. The polymorphic attributes @type, @schemaLocation & @referredType are related to the place entity and not the RelatedPlaceRefOrValue class itself"
       },
       "Price": {
         "type": "object",

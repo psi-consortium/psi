@@ -226,6 +226,9 @@
         {
             "@jdt.path": "$.components.schemas.RelatedPlaceRefOrValue.required[?(@ == '@referredType')]"
         },
+        {
+            "@jdt.path": "$.components.schemas.PlaceRefOrValue"
+        },
 
         {
             "@jdt.path": "$.components.schemas.CheckProductStock_Create.properties['requestedAvailabilityDate']"
@@ -248,74 +251,11 @@
         },
 
         {
-            "@jdt.path": "$.components.schemas.CheckProductStock.properties.href",
+            "@jdt.path": "$.components.schemas.*.properties.href",
             "@jdt.value": {
                 "format": "uri"
             }
         },
-        {
-            "@jdt.path": "$.components.schemas.PlaceRefOrValue.properties.href",
-            "@jdt.value": {
-                "format": "uri"
-            }
-        },
-        {
-            "@jdt.path": "$.components.schemas.Product.properties",
-            "@jdt.value": {
-                "href": {
-                    "format": "uri"
-                }
-            }
-        },
-        {
-            "@jdt.path": "$.components.schemas.ProductRefOrValue.properties",
-            "@jdt.value": {
-                "href": {
-                    "format": "uri"
-                }
-            }
-        },
-        {
-            "@jdt.path": "$.components.schemas.MarketSegmentRef.properties",
-            "@jdt.value": {
-                "href": {
-                    "format": "uri"
-                }
-            }
-        },
-        {
-            "@jdt.path": "$.components.schemas.ProductStock.properties",
-            "@jdt.value": {
-                "href": {
-                    "format": "uri"
-                }
-            }
-        },
-        {
-            "@jdt.path": "$.components.schemas.RelatedPlaceRefOrValue.properties",
-            "@jdt.value": {
-                "href": {
-                    "format": "uri"
-                }
-            }
-        },
-        {
-            "@jdt.path": "$.components.schemas.BillingAccountRef.properties",
-            "@jdt.value": {
-                "href": {
-                    "format": "uri"
-                }
-            }
-        },
-        {
-            "@jdt.path": "$.components.schemas.Place.properties",
-            "@jdt.value": {
-                "href": {
-                    "format": "uri"
-                }
-            }
-        },
-
         {
             "@jdt.path": "$.components.schemas.Characteristic.properties",
             "@jdt.value": {
@@ -351,6 +291,12 @@
                     "$ref": "#/components/schemas/TimePeriod",
                     "description": "Period for which the product is to be booked, i.e. the stock has to be available."
                 }
+            }
+        },
+        {
+            "@jdt.path": "$.components.schemas['AlternateProductStock','CheckProductStock','CheckProductStock_Create'].properties.['alternatePlace','place']",
+            "@jdt.value": {
+                "$ref": "#/components/schemas/PlaceRef"
             }
         },
 

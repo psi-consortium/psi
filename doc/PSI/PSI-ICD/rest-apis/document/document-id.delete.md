@@ -7,12 +7,14 @@
 
 **Absolute Path:** /documentManagement/v1/document/{id}
 
+**TOD Reference:** TOD-01-03-03-Remove_Document
+
 **Summary:** Deletes a Document
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | id | string | Yes | Identifier of the Document |
 
 Table: Parameters of DELETE document/{id}. {#tbl:document-id.delete.md:parameters}
@@ -32,6 +34,4 @@ Table: Parameters of DELETE document/{id}. {#tbl:document-id.delete.md:parameter
 
 Table: Responses of DELETE document/{id}. {#tbl:document-id.delete.md:responses}
 
-## TOD Reference
-
-TOD-01-03-03-Remove_Document
+{#page:break}

@@ -8,9 +8,11 @@
 Base Extensible schema for use in TMForum Open-APIs
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
-| \@baseType | string | N/A | No |
-| \@schemaLocation | string | uri | No |
-| \@type | string | N/A | No |
+| ------- | ------- | ------- | --- |
+| @baseType | string | N/A | No |
+| @schemaLocation | string | uri | No |
+| @type | string | N/A | Yes |
 
 Table: Fields of Extensible. {#tbl:Extensible.md:Extensible}
+
+{#page:break}

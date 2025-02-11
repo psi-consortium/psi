@@ -7,12 +7,14 @@
 
 **Absolute Path:** /serviceCatalog/v1/serviceTemplate/{id}
 
+**TOD Reference:** TOD-04-02-03-Remove_Service_Template
+
 **Summary:** Deletes a ServiceTemplate
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | id | string | Yes | The identifier of the ServiceTemplate. |
 
 Table: Parameters of DELETE serviceTemplate/{id}. {#tbl:serviceTemplate-id.delete.md:parameters}
@@ -32,6 +34,4 @@ Table: Parameters of DELETE serviceTemplate/{id}. {#tbl:serviceTemplate-id.delet
 
 Table: Responses of DELETE serviceTemplate/{id}. {#tbl:serviceTemplate-id.delete.md:responses}
 
-## TOD Reference
-
-TOD-04-02-03-Remove_Service_Template
+{#page:break}

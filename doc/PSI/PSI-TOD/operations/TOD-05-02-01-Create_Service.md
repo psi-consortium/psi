@@ -39,7 +39,7 @@ I1 --           Operation
 
 ```
 
-![**TOD-05-02-01**: Create Service](../../common/pixel.png){#fig:TOD-05-02-01-Create_Service}
+![TOD-05-02-01: Create Service](../../common/pixel.png){#fig:TOD-05-02-01-Create_Service}
 
 **Prerequisites**
 

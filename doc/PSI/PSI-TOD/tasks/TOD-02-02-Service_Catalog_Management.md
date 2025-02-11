@@ -34,19 +34,18 @@ Task  ..> O5    : <<includes>>
 
 ```
 
-![**TOD-02-02**: Service Catalog Management](../../common/pixel.png){#fig:TOD-02-02-Service_Catalog_Management}
+![TOD-02-02: Service Catalog Management](../../common/pixel.png){#fig:TOD-02-02-Service_Catalog_Management}
 
 |                                     |  Customer  |  Provider  | Other PSS  | Governance |
 |-------------------------------------|:----------:|:----------:|:----------:|:----------:|
 | **Create Service Specification**    |            | \checkmark |            |            |
 | **Update Service Specification**    |            | \checkmark |            |            |
 | **Remove Service Specification**    |            | \checkmark |            |            |
-| **View Service Specification**      | \checkmark | \checkmark | \checkmark |            |
-| **View All Service Specifications** | \checkmark | \checkmark | \checkmark |            |
+| **View Service Specification**      | \checkmark | \checkmark | \checkmark | \checkmark |
+| **View All Service Specifications** | \checkmark | \checkmark | \checkmark | \checkmark |
 
 Table: Service Catalog Management Matrix. {#tbl:service-catalog-management-matrix}
 
 **eTOM Reference**
 
 The task is based on the 1.4.15 and 1.4.3 process identifiers from the eTOM.
-

@@ -8,8 +8,10 @@
 A time interval in a given unit of time
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | amount | integer | N/A | No |
 | units | string | N/A | No |
 
 Table: Fields of Duration. {#tbl:Duration.md:Duration}
+
+{#page:break}

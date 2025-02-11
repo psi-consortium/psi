@@ -45,12 +45,12 @@ map "InquiredProduct: Bandwidth at Location XY" as f1 #ffc399 {
     targetEntityType => BandwidthProduct
     servicePeriod => 07/2023 to 08/2023
     frequencyBand => C
-    allocatedBandwidth => >= 5 Mhz
-    uplinkFrequencyStart => 4 Ghz
-    uplinkFrequencyEnd => 8 Ghz
+    allocatedBandwidth => >= 5 MHz
+    uplinkFrequencyStart => 4 GHz
+    uplinkFrequencyEnd => 8 GHz
     uplinkGeometry => { "type": "...", "coordinates": [...] }
-    downlinkFrequencyStart => 4 Ghz
-    downlinkFrequencyEnd => 8 Ghz
+    downlinkFrequencyStart => 4 GHz
+    downlinkFrequencyEnd => 8 GHz
     downlinkGeometry => { "type": "...", "coordinates": [...] }
 }
 in --> f1
@@ -64,7 +64,7 @@ Results:
 ```plantuml
 @startuml
 map "ProductOffering" as offering1 {
-    allocatedBandwidth => 6 Mhz
+    allocatedBandwidth => 6 MHz
     price => ...
 }
 map "ProductSpecification A" as prodA #ffc399 {
@@ -72,13 +72,13 @@ map "ProductSpecification A" as prodA #ffc399 {
     targetEntityType => BandwidthProduct
     validFor => 04/2022 to 04/2024
     frequencyBand => C
-    allocatedBandwidth => [3, 6, 9, 12] Mhz
+    allocatedBandwidth => [3, 6, 9, 12] MHz
     uplinkFrequencyStart => 4000 MHz
-    uplinkFrequencyEnd => 4012 Mhz
+    uplinkFrequencyEnd => 4012 MHz
     uplinkPolarization => [vertical, horizontal]
     uplinkGeometry => { "type": "...", "coordinates": [...] }
-    downlinkFrequencyStart => 4100 Mhz
-    downlinkFrequencyEnd => 4112 Mhz
+    downlinkFrequencyStart => 4100 MHz
+    downlinkFrequencyEnd => 4112 MHz
     downlinkPolarization => [vertical, horizontal]
     downlinkGeometry => { "type": "...", "coordinates": [...] }
 }
@@ -86,7 +86,7 @@ map "ResourceSpecification A" as spec1 #d6a5b1 {
     id => 4f04cba2
     targetEntityType => BandwidthResource
     frequencyBand => C
-    allocatedBandwidth => [3, 6, 9, 12] Mhz
+    allocatedBandwidth => [3, 6, 9, 12] MHz
     latency => 100 ms
 }
 map "ResourceSpecification B" as f1 #cbc3e6 {
@@ -95,7 +95,7 @@ map "ResourceSpecification B" as f1 #cbc3e6 {
     direction => UPLINK
     steerable => false
     frequencyStart => 4000 MHz
-    frequencyEnd => 4012 Mhz
+    frequencyEnd => 4012 MHz
     polarization => [vertical, horizontal]
     geometry => { "type": "...", "coordinates": [...] }
 }
@@ -104,8 +104,8 @@ map "ResourceSpecification C" as f2 #cbc3e6 {
     targetEntityType => BeamResource
     direction => DOWNLINK
     steerable => false
-    frequencyStart => 4100 Mhz
-    frequencyEnd => 4112 Mhz
+    frequencyStart => 4100 MHz
+    frequencyEnd => 4112 MHz
     polarization => [vertical, horizontal]
     geometry => { "type": "...", "coordinates": [...] }
 }
@@ -140,12 +140,12 @@ map "Product A" as prodA #ffc399 {
     specificationId => 8843c69c
     validFor => 07/2023 to 08/2023
     frequencyBand => C
-    allocatedBandwidth => 6 Mhz
-    uplinkFrequencyStart => 4003 Mhz
-    uplinkFrequencyEnd => 4009 Mhz
+    allocatedBandwidth => 6 MHz
+    uplinkFrequencyStart => 4003 MHz
+    uplinkFrequencyEnd => 4009 MHz
     uplinkPolarization => vertical
-    downlinkFrequencyStart => 4106 Mhz
-    downlinkFrequencyEnd => 4112 Mhz
+    downlinkFrequencyStart => 4106 MHz
+    downlinkFrequencyEnd => 4112 MHz
     downlinkPolarization => horizontal
 }
 map "Resource A" as spec1 #d6a5b1 {
@@ -154,7 +154,7 @@ map "Resource A" as spec1 #d6a5b1 {
     satelliteId => 123
     customerId => 3195814b
     specificationId => 4f04cba2
-    allocatedBandwidth => 6 Mhz
+    allocatedBandwidth => 6 MHz
     frequencyBand => C
 }
 map "Resource B" as f1 #cbc3e6 {
@@ -163,8 +163,8 @@ map "Resource B" as f1 #cbc3e6 {
     specificationId => e6c071cf
     direction => UPLINK
     steerable => false
-    frequencyStart => 4003 Mhz
-    frequencyEnd => 4009 Mhz
+    frequencyStart => 4003 MHz
+    frequencyEnd => 4009 MHz
     polarization => horizontal
 }
 map "Resource C" as f2 #cbc3e6 {
@@ -173,8 +173,8 @@ map "Resource C" as f2 #cbc3e6 {
     specificationId => 94d49605
     direction => DOWNLINK
     steerable => false
-    frequencyStart => 4106 Mhz
-    frequencyEnd => 4112 Mhz
+    frequencyStart => 4106 MHz
+    frequencyEnd => 4112 MHz
     polarization => horizontal
 }
 prodA --> spec1
@@ -495,12 +495,12 @@ map "InquiredProduct: Bandwidth at Location XY" as f3 #ffc399 {
     targetEntityType => BandwidthProduct
     servicePeriod => 08/2023 to 11/2023
     frequencyBand => C
-    allocatedBandwidth => >= 5 Mhz
-    uplinkFrequencyStart => 4 Ghz
-    uplinkFrequencyEnd => 8 Ghz
+    allocatedBandwidth => >= 5 MHz
+    uplinkFrequencyStart => 4 GHz
+    uplinkFrequencyEnd => 8 GHz
     uplinkGeometry => { "type": "...", "coordinates": [...] }
-    downlinkFrequencyStart => 4 Ghz
-    downlinkFrequencyEnd => 8 Ghz
+    downlinkFrequencyStart => 4 GHz
+    downlinkFrequencyEnd => 8 GHz
     downlinkGeometry => { "type": "...", "coordinates": [...] }
 }
 in --> f1
@@ -540,20 +540,20 @@ json "JSON Schema: InternetAccessService" as prodSchema {
         "forwardCIR": {
             "type": "integer",
             "default": 0,
-            "description": "Measured in kbsp"
+            "description": "Measured in kbps"
         },
         "forwardPIR": {
             "type": "integer",
-            "description": "Measured in kbsp"
+            "description": "Measured in kbps"
         },
         "returnCIR": {
             "type": "integer",
             "default": 0,
-            "description": "Measured in kbsp"
+            "description": "Measured in kbps"
         },
         "returnPIR": {
             "type": "integer",
-            "description": "Measured in kbsp"
+            "description": "Measured in kbps"
         },
         "latency": {
             "type": "integer",
@@ -571,5 +571,151 @@ json "JSON Schema: InternetAccessService" as prodSchema {
 
 ![JSON Schema for InternetAccessService](../common/pixel.png){#fig:json-schema}
 
-More example schemas (including space assets and user terminals) can be found in Annex II of this document.
+More example schemas (including space assets and user terminals) can be found in [PSI-ICD-Annex-II] of this document.
 They are extracted from the prototype, which was designed based on input of different providers.
+
+## Integration of Service Monitoring Specification into Performance Monitoring API
+
+The performance Monitoring API delivered by the PSS API is a generic envelope that allows for the lifecycle management of relevant performance monitoring objects.
+The API itself does not provide explicit definitions for configuring performance monitoring or prescribing the structure of output data.
+However, it offers flexible extensibility to accommodate the configuration of service-specific performance objectives and results.
+This allows for customization and adaptation to various monitoring requirements and desired data formats.
+These monitoring configuration and result schemas can be defined using the JsonSchema (draft 7) format and can be integrated into the PerformanceJob and PerformanceReport using the TMF extension pattern.
+The extension hosting types in the API data model are:
+
+* ServicePayloadSpecificAttributes - this type is extended with the Service monitoring configuration schema which typically contains information about the subject of the monitoring (i.e., service) and key indicators that need to be measured
+* ResultPayload - this type is extended with a Service monitoring result schema which defines the structure of performance monitoring data returned by the provider
+
+Selection of the appropriate schema for the extension points is done by providing the @type attribute which must be set to a value that uniquely identifies the service monitoring configuration.
+This identifier is provided as root schema $id and must be agreed upon between the PSS and service provider.
+
+PSS implementation might opt to integrate the selected performance monitoring specifications into the data model during development.
+In such a case an integrated data model is built and monitoring specifications are in an inheritance relationship according to either ServicePayloadSpecificAttributes or ResultPayload as described in the OAS specification.
+This pattern is called Static Binding. The snippets below present an example of a static binding of the envelope API based on an exemplary MEF monitoring specifications, for both extension points.
+
+```yaml
+ServicePayloadSpecificAttributes:
+  type: object
+  description: ServicePayloadSpecificAttributes is used as an extension point
+    for MEF specific service performance monitoring configuration. It includes
+    definition of service/entity and applicable performance monitoring objectives.
+    The `@type` attribute is used as a discriminator
+  discriminator:
+    mapping:
+      urn:mef:lso:spec:legato:ip-performance-monitoring-configuration:v0.0.1:all: '#/components/schemas/IpPerformanceMonitoringConfiguration'
+    propertyName: '@type'
+  properties:
+    '@type':
+      type: string
+      description:
+        The name that uniquely identifies type of performance monitoring configuration
+        that specifies PM objectives. In case of MEF services this is the URN
+        provided in performance monitoring configuration specification.
+        The named type must be a subclass of ServicePayloadSpecificAttributes.
+```
+
+```yaml
+IpPerformanceMonitoringConfiguration:
+  allOf:
+    - $ref: '#/components/schemas/ServicePayloadSpecificAttributes'
+    - type: object
+      description: IP Performance Monitoring Configuration Schema.
+```
+
+```yaml
+ResultPayload:
+  type: object
+  description:
+    ResultPayload is used as an extension point for MEF specific service
+    performance monitoring results. The `@type` attribute is used as a discriminator
+  discriminator:
+    mapping:
+      urn:mef:lso:spec:legato:ip-performance-monitoring-results:v0.0.1:all: '#/components/schemas/IpPerformanceMonitoringResults'
+    propertyName: '@type'
+  properties:
+    '@type':
+      type: string
+      description:
+        The name that uniquely identifies type of performance monitoring
+        results that are returned by the Performance Report. In case of MEF services this
+        is the URN provided in performance monitoring results specification.
+        The named type must be a subclass of ResultPayload.
+```
+
+```yaml
+IpPerformanceMonitoringResults:
+  allOf:
+    - $ref: '#/components/schemas/ResultPayload'
+    - type: object
+      description: IP Performance Monitoring Results Schema.
+```
+
+The following figure presents two MEF performance monitoring schemas that represent configuration and result classes for IP services.
+When these schemas are used, the @type of ServicePayloadSpecificAttributes takes the "urn:mef:lso:spec:legato:ip-performancemonitoring-configuration:v0.0.1:all" value to indicate which performance specification should be used to interpret a set of service-specific attributes included in the payload.
+Similarly, for ResultPayload, the @type attribute takes "urn:mef:lso:spec:legato:ip-performancemonitoring-results:v0.0.1:all" value which indicates how the resulting performance collection should be interpreted.
+
+```plantuml
+@startuml extensionPattern
+skinparam {
+    ClassBackgroundColor White
+    ClassBorderColor Black
+    ClassBorderColor<<ServicePayloadSpecificAttributes>> FireBrick
+    ClassBorderColor<<ResultPayload>> FireBrick
+}
+set namespaceSeparator none
+
+class PerformanceJob {
+
+    id: string 
+    href: string 
+    jobType: JobType
+    reportingPeriod: ReportingPeriod
+    scheduleDefinition: ScheduleDefinition
+    <<... attributes are skipped ...>>
+}
+
+
+class ServicePayloadSpecificAttributes {
+    @type*: string <<discriminator>>
+}
+
+
+PerformanceJob *-->"1" ServicePayloadSpecificAttributes : servicePayloadSpecificAttributes
+
+class urn:mef:lso:spec:legato:ip-performance-monitoring-configuration:v0.0.1:all <<ServicePayloadSpecificAttributes>> {
+
+    <<... attributes are skipped ...>>
+}
+ServicePayloadSpecificAttributes <|-- "urn:mef:lso:spec:legato:ip-performance-monitoring-configuration:v0.0.1:all"
+
+
+
+class PerformanceReport {
+
+    id: string 
+    href: string 
+    <<... attributes are skipped ...>>
+}
+
+class ReportContent {
+
+}
+
+class ResultPayload {
+    @type*: string <<discriminator>>
+}
+
+PerformanceReport *-->"0..1" ReportContent : reportContent
+ReportContent *-->"*" ResultPayload : measurementDataPoints
+
+class urn:mef:lso:spec:legato:ip-performance-monitoring-results:v0.0.1:all <<ResultPayload>> {
+
+    <<... attributes are skipped ...>>
+}
+ResultPayload <|-- "urn:mef:lso:spec:legato:ip-performance-monitoring-results:v0.0.1:all"
+
+
+@enduml
+```
+
+![Performance Monitoring.](../common/pixel.png){#fig:performance-monitoring}

@@ -7,12 +7,14 @@
 
 **Absolute Path:** /documentManagement/v1/document/{documentId}/attachment/{attachmentId}/content
 
+**TOD Reference:** TOD-01-03-11-Fetch_Attachment_Content
+
 **Summary:** Retrieves an Attachment content by ID
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | documentId | string | Yes | The identifier of the Document. |
 | attachmentId | string | Yes | The identifier of the Attachment. |
 
@@ -34,6 +36,4 @@ Table: Parameters of GET document/{documentId}/attachment/{attachmentId}/content
 
 Table: Responses of GET document/{documentId}/attachment/{attachmentId}/content. {#tbl:document-documentId-attachment-attachmentId-content.get.md:responses}
 
-## TOD Reference
-
-TOD-01-03-11-Fetch_Attachment_Content
+{#page:break}

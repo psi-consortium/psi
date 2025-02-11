@@ -7,12 +7,14 @@
 
 **Absolute Path:** /productCatalog/v1/productTemplate
 
+**TOD Reference:** TOD-04-03-05-View_All_Product_Templates
+
 **Summary:** List or find ProductTemplate objects
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | fields | string | No | Comma-separated properties to be provided in response. |
 | offset | integer | No | Requested index for start of resources to be provided in response. |
 | limit | integer | No | Requested number of resources to be provided in response. |
@@ -34,6 +36,4 @@ Table: Parameters of GET productTemplate. {#tbl:productTemplate.get.md:parameter
 
 Table: Responses of GET productTemplate. {#tbl:productTemplate.get.md:responses}
 
-## TOD Reference
-
-TOD-04-03-05-View_All_Product_Templates
+{#page:break}

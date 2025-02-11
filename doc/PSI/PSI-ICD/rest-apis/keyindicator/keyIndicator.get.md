@@ -1,0 +1,40 @@
+<!--
+    ATTENTION: This file was generated via gradle!
+               Do NOT manually edit this file! Any such changes will be overwritten!
+-->
+
+# GET /keyIndicator
+
+**Absolute Path:** /serviceQuality/v1/keyIndicator
+
+**TOD Reference:** TOD-06-03-05-View_All_Key_Indicator
+
+**Summary:** List or find KeyIndicator objects
+
+## Parameters
+
+| Name | Type | Required | Description |
+| ------ | ------ | --- | ------------ |
+| fields | string | No | Comma-separated properties to be provided in response |
+| offset | integer | No | Requested index for start of resources to be provided in response |
+| limit | integer | No | Requested number of resources to be provided in response |
+
+Table: Parameters of GET keyIndicator. {#tbl:keyIndicator.get.md:parameters}
+
+## Responses
+
+| Code | Description | Content |
+|------|-------------|---------|
+| 200 | Success | KeyIndicator |
+| 400 | Bad Request | Error |
+| 401 | Unauthorized | Error |
+| 403 | Forbidden | Error |
+| 404 | Not Found | Error |
+| 405 | Method Not allowed | Error |
+| 500 | Internal Server Error | Error |
+| 501 | Not Implemented | Error |
+| 503 | Service Unavailable | Error |
+
+Table: Responses of GET keyIndicator. {#tbl:keyIndicator.get.md:responses}
+
+{#page:break}

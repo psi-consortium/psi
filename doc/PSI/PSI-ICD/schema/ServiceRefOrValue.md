@@ -9,7 +9,7 @@ A Service to be created defined by value or existing defined by reference.
 The polymorphic attributes @type, @schemaLocation & @referredType are related to the Service entity and not the RelatedServiceRefOrValue class itself
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | id | string | N/A | Yes |
 | href | string | N/A | No |
 | name | string | N/A | No |
@@ -36,9 +36,11 @@ The polymorphic attributes @type, @schemaLocation & @referredType are related to
 | state | ServiceStateType | N/A | No |
 | supportingResource | array | ResourceRef | No |
 | supportingService | array | ServiceRefOrValue | No |
-| \@baseType | string | N/A | No |
-| \@schemaLocation | string | uri | No |
-| \@type | string | N/A | No |
-| \@referredType | string | N/A | No |
+| @baseType | string | N/A | No |
+| @schemaLocation | string | uri | No |
+| @type | string | N/A | No |
+| @referredType | string | N/A | No |
 
 Table: Fields of ServiceRefOrValue. {#tbl:ServiceRefOrValue.md:ServiceRefOrValue}
+
+{#page:break}

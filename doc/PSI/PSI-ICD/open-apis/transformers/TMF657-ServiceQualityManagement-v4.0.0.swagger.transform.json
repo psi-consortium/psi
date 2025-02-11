@@ -5,6 +5,23 @@
             "@jdt.value": "/psi-api/serviceQuality/v1/"
         },
         {
+            "@jdt.path": "$.tags",
+            "@jdt.value": [
+                {
+                    "name": "serviceLevelObjective",
+                    "description": "Service Level Objective API"
+                },
+                {
+                    "name": "serviceLevelSpecification",
+                    "description": "Service Level Specification API"
+                },
+                {
+                    "name": "keyIndicator",
+                    "description": "Key Indicator API"
+                }
+            ]
+        },
+        {
             "@jdt.path": "$.components.schemas.ServiceLevelObjective",
             "@jdt.value": {
                 "type": "object",
@@ -92,19 +109,8 @@
             "@jdt.value": {
                 "type": "object",
                 "description": "Service level objectives are defined in terms of parameters and metrics, thresholds, and tolerances associated with the parameters.",
-                "required": [
-                    "conformanceTarget",
-                    "keyIndicator"
-                ],
+                "required": ["conformanceTarget", "keyIndicator"],
                 "properties": {
-                    "href": {
-                        "type": "string",
-                        "description": "The hyperlink reference."
-                    },
-                    "id": {
-                        "type": "string",
-                        "description": "The unique identifier."
-                    },
                     "conformancePeriod": {
                         "$ref": "#/components/schemas/TimePeriod"
                     },
@@ -261,7 +267,8 @@
                         "description": "A description of a Consequence."
                     },
                     "prescribedAction": {
-                        "$ref": "#/components/schemas/PrescribedAction"
+                        "type": "string",
+                        "description": "Contains information on a prescribed action that should be applied."
                     },
                     "@baseType": {
                         "type": "string",
@@ -276,12 +283,15 @@
                     }
                 }
             }
+        },
+        {
+            "@jdt.path": "$.components.schemas.RelatedEntity.properties.href",
+            "@jdt.value": {
+                "format": "uri"
+            }
         }
     ],
     "@jdt.remove": [
-        {
-            "@jdt.path": "$.tags[?(@.name!='serviceLevelObjective' && @.name!='serviceLevelSpecification')]"
-        },
         {
             "@jdt.path": "$.paths['/hub']"
         },
@@ -375,25 +385,634 @@
     ],
     "@jdt.merge": [
         {
-            "@jdt.path": "$.tags[?(@.name=='serviceLevelObjective')]",
+            "@jdt.path": "$.paths",
             "@jdt.value": {
-                "description": "Service Level Objective API"
-            }
-        },
-        {
-            "@jdt.path": "$.tags[?(@.name=='serviceLevelSpecification')]",
-            "@jdt.value": {
-                "description": "Service Level Specification API"
+                "/keyIndicator": {
+                    "get": {
+                        "tags": ["keyIndicator"],
+                        "summary": "List or find KeyIndicator objects",
+                        "description": "This operation retrieves KeyIndicator entities. Attribute selection enabled for all first level attributes.",
+                        "operationId": "listKeyIndicator",
+                        "parameters": [
+                            {
+                                "name": "fields",
+                                "in": "query",
+                                "description": "Comma-separated properties to be provided in response",
+                                "schema": {
+                                    "type": "string"
+                                }
+                            },
+                            {
+                                "name": "offset",
+                                "in": "query",
+                                "description": "Requested index for start of resources to be provided in response",
+                                "schema": {
+                                    "type": "integer"
+                                }
+                            },
+                            {
+                                "name": "limit",
+                                "in": "query",
+                                "description": "Requested number of resources to be provided in response",
+                                "schema": {
+                                    "type": "integer"
+                                }
+                            }
+                        ],
+                        "responses": {
+                            "200": {
+                                "description": "Success",
+                                "headers": {
+                                    "X-Total-Count": {
+                                        "description": "Total number of items matching criteria",
+                                        "schema": {
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "X-Result-Count": {
+                                        "description": "Actual number of items returned in the response body",
+                                        "schema": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                },
+                                "content": {
+                                    "application/json": {
+                                        "schema": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/KeyIndicator"
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "400": {
+                                "description": "Bad Request",
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            },
+                            "401": {
+                                "description": "Unauthorized",
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            },
+                            "403": {
+                                "description": "Forbidden",
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            },
+                            "404": {
+                                "description": "Not Found",
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            },
+                            "405": {
+                                "description": "Method Not allowed",
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            },
+                            "500": {
+                                "description": "Internal Server Error",
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            },
+                            "501": {
+                                "description": "Not Implemented",
+                                "content": {
+                                    "application/json": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            },
+                            "503": {
+                                "description": "Service Unavailable",
+                                "content": {
+                                    "application/json": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "post": {
+                        "tags": ["keyIndicator"],
+                        "summary": "Creates a KeyIndicator",
+                        "description": "This operation creates a KeyIndicator entity.",
+                        "operationId": "createKeyIndicator",
+                        "requestBody": {
+                            "description": "The KeyIndicator to be created",
+                            "content": {
+                                "application/json;charset=utf-8": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/KeyIndicator_Create"
+                                    }
+                                }
+                            },
+                            "required": true
+                        },
+                        "responses": {
+                            "201": {
+                                "description": "Created",
+                                "content": {
+                                    "application/json": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/KeyIndicator"
+                                        }
+                                    }
+                                }
+                            },
+                            "202": {
+                                "description": "Accepted"
+                            },
+                            "400": {
+                                "description": "Bad Request",
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            },
+                            "401": {
+                                "description": "Unauthorized",
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            },
+                            "403": {
+                                "description": "Forbidden",
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            },
+                            "405": {
+                                "description": "Method Not allowed",
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            },
+                            "409": {
+                                "description": "Conflict",
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            },
+                            "500": {
+                                "description": "Internal Server Error",
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            },
+                            "501": {
+                                "description": "Not Implemented",
+                                "content": {
+                                    "application/json": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            },
+                            "503": {
+                                "description": "Service Unavailable",
+                                "content": {
+                                    "application/json": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "/keyIndicator/{id}": {
+                    "get": {
+                        "tags": ["keyIndicator"],
+                        "summary": "Retrieves a KeyIndicator by ID",
+                        "description": "This operation retrieves a KeyIndicator entity. Attribute selection is enabled for all first level attributes.",
+                        "operationId": "retrieveKeyIndicator",
+                        "parameters": [
+                            {
+                                "name": "id",
+                                "required": true,
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "in": "path",
+                                "description": "Identifier of the Resource"
+                            },
+                            {
+                                "name": "fields",
+                                "in": "query",
+                                "description": "Comma-separated properties to be provided in response",
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        ],
+                        "responses": {
+                            "200": {
+                                "description": "Success",
+                                "content": {
+                                    "application/json": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/KeyIndicator"
+                                        }
+                                    }
+                                }
+                            },
+                            "400": {
+                                "description": "Bad Request",
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            },
+                            "401": {
+                                "description": "Unauthorized",
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            },
+                            "403": {
+                                "description": "Forbidden",
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            },
+                            "404": {
+                                "description": "Not Found",
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            },
+                            "405": {
+                                "description": "Method Not allowed",
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            },
+                            "500": {
+                                "description": "Internal Server Error",
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            },
+                            "501": {
+                                "description": "Not Implemented",
+                                "content": {
+                                    "application/json": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            },
+                            "503": {
+                                "description": "Service Unavailable",
+                                "content": {
+                                    "application/json": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "delete": {
+                        "tags": ["keyIndicator"],
+                        "summary": "Deletes a KeyIndicator",
+                        "description": "This operation deletes a KeyIndicator entity.",
+                        "operationId": "deleteKeyIndicator",
+                        "parameters": [
+                            {
+                                "name": "id",
+                                "required": true,
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "in": "path",
+                                "description": "Identifier of the Resource"
+                            }
+                        ],
+                        "responses": {
+                            "202": {
+                                "description": "Accepted"
+                            },
+                            "204": {
+                                "description": "Deleted"
+                            },
+                            "400": {
+                                "description": "Bad Request",
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            },
+                            "401": {
+                                "description": "Unauthorized",
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            },
+                            "403": {
+                                "description": "Forbidden",
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            },
+                            "404": {
+                                "description": "Not Found",
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            },
+                            "405": {
+                                "description": "Method Not allowed",
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            },
+                            "409": {
+                                "description": "Conflict",
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            },
+                            "500": {
+                                "description": "Internal Server Error",
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            },
+                            "501": {
+                                "description": "Not Implemented",
+                                "content": {
+                                    "application/json": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            },
+                            "503": {
+                                "description": "Service Unavailable",
+                                "content": {
+                                    "application/json": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "patch": {
+                        "tags": ["keyIndicator"],
+                        "summary": "Updates partially a KeyIndicator",
+                        "description": "This operation updates partially a KeyIndicator entity.",
+                        "operationId": "patchKeyIndicator",
+                        "parameters": [
+                            {
+                                "name": "id",
+                                "required": true,
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "in": "path",
+                                "description": "Identifier of the Resource"
+                            }
+                        ],
+                        "requestBody": {
+                            "description": "The KeyIndicator to be updated",
+                            "content": {
+                                "application/json;charset=utf-8": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/KeyIndicator_Update"
+                                    }
+                                }
+                            },
+                            "required": true
+                        },
+                        "responses": {
+                            "200": {
+                                "description": "Updated",
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/KeyIndicator"
+                                        }
+                                    }
+                                }
+                            },
+                            "202": {
+                                "description": "Accepted"
+                            },
+                            "400": {
+                                "description": "Bad Request",
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            },
+                            "401": {
+                                "description": "Unauthorized",
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            },
+                            "403": {
+                                "description": "Forbidden",
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            },
+                            "404": {
+                                "description": "Not Found",
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            },
+                            "405": {
+                                "description": "Method Not allowed",
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            },
+                            "409": {
+                                "description": "Conflict",
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            },
+                            "500": {
+                                "description": "Internal Server Error",
+                                "content": {
+                                    "application/json;charset=utf-8": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            },
+                            "501": {
+                                "description": "Not Implemented",
+                                "content": {
+                                    "application/json": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            },
+                            "503": {
+                                "description": "Service Unavailable",
+                                "content": {
+                                    "application/json": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/Error"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         },
         {
             "@jdt.path": "$.components.schemas.EntityRef.properties.href",
-            "@jdt.value": {
-                "format": "uri"
-            }
-        },
-        {
-            "@jdt.path": "$.components.schemas.RelatedEntity.properties.href",
             "@jdt.value": {
                 "format": "uri"
             }
@@ -441,10 +1060,7 @@
                         "indicatorType": {
                             "type": "string",
                             "description": "Type of Key Indicator are Key Quality Indicator (KQI) or Key Performance Indicator (KPI).",
-                            "enum": [
-                                "KQI",
-                                "KPI"
-                            ]
+                            "enum": ["KQI", "KPI"]
                         },
                         "validFor": {
                             "$ref": "#/components/schemas/TimePeriod"
@@ -459,6 +1075,115 @@
                         "relatedEntity": {
                             "type": "array",
                             "description": "A list of entities related to this parameter.",
+                            "items": {
+                                "$ref": "#/components/schemas/RelatedEntity"
+                            }
+                        },
+                        "@type": {
+                            "type": "string",
+                            "description": "When sub-classing, this defines the sub-class Extensible name."
+                        },
+                        "@baseType": {
+                            "type": "string",
+                            "description": "When sub-classing, this defines the super-class."
+                        },
+                        "@schemaLocation": {
+                            "type": "string",
+                            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships."
+                        }
+                    }
+                },
+                "KeyIndicator_Create": {
+                    "type": "object",
+                    "description": "KeyIndicator are defined in terms of parameters and metrics, thresholds, and tolerances \nassociated with the parameters.",
+                    "properties": {
+                        "name": {
+                            "type": "string",
+                            "description": "The name of the key indicator"
+                        },
+                        "category": {
+                            "type": "string",
+                            "description": "A string that specifies whether the key indicator is technology specific, service specific, or technology/service independent"
+                        },
+                        "isBundled": {
+                            "type": "boolean",
+                            "description": "A boolean that specifies whether the key indicator represents a single key indicator (false) or a key indicator that represents an aggregation (true)"
+                        },
+                        "transformationAlgorithmOfKQI": {
+                            "type": "string",
+                            "description": "The description of a logical step-by-step procedure used to calculate the value of a KQI"
+                        },
+                        "indicatorType": {
+                            "type": "string",
+                            "description": "Type of Key Indicator are Key Quality Indicator (KQI) or Key Performance Indicator (KPI)",
+                            "enum": ["KQI", "KPI"]
+                        },
+                        "validFor": {
+                            "$ref": "#/components/schemas/TimePeriod"
+                        },
+                        "keyIndicatorRelationship": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/components/schemas/KeyIndicatorRelationship"
+                            },
+                            "description": "A list of key indicator relationships related to this object"
+                        },
+                        "relatedEntity": {
+                            "type": "array",
+                            "description": "A list of entities related to this parameter",
+                            "items": {
+                                "$ref": "#/components/schemas/RelatedEntity"
+                            }
+                        },
+                        "@type": {
+                            "type": "string",
+                            "description": "When sub-classing, this defines the sub-class Extensible name"
+                        },
+                        "@baseType": {
+                            "type": "string",
+                            "description": "When sub-classing, this defines the super-class"
+                        },
+                        "@schemaLocation": {
+                            "type": "string",
+                            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships"
+                        }
+                    }
+                },
+                "KeyIndicator_Update": {
+                    "type": "object",
+                    "description": "KeyIndicator are defined in terms of parameters and metrics, thresholds, and tolerances \nassociated with the parameters.",
+                    "properties": {
+                        "name": {
+                            "type": "string",
+                            "description": "The name of the key indicator."
+                        },
+                        "category": {
+                            "type": "string",
+                            "description": "A string that specifies whether the key indicator is technology specific, service specific, or technology/service independent"
+                        },
+                        "isBundled": {
+                            "type": "boolean",
+                            "description": "A boolean that specifies whether the key indicator represents a single key indicator (false) or a key indicator that represents an aggregation (true)"
+                        },
+                        "transformationAlgorithmOfKQI": {
+                            "type": "string",
+                            "description": "The description of a logical step-by-step procedure used to calculate the value of a KQI"
+                        },
+                        "indicatorType": {
+                            "type": "string",
+                            "description": "Type of Key Indicator are Key Quality Indicator (KQI) or Key Performance Indicator (KPI)",
+                            "enum": ["KQI", "KPI"]
+                        },
+                        "keyIndicatorRelationship": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/components/schemas/KeyIndicatorRelationship"
+                            },
+                            "description": "A list of key indicator relationships related to this object"
+                        },
+                        "relatedEntity": {
+                            "type": "array",
+                            "description": "A list of entities related to this parameter",
                             "items": {
                                 "$ref": "#/components/schemas/RelatedEntity"
                             }
@@ -523,62 +1248,8 @@
                         "@type": {
                             "type": "string"
                         }
-                    }
-                }
-            }
-        },
-        {
-            "@jdt.path": "$.components.schemas",
-            "@jdt.value": {
-                "PrescribedAction": {
-                    "type": "object",
-                    "description": "Contains information on a prescribed action that should be applied.",
-                    "properties": {
-                        "id": {
-                            "type": "string",
-                            "description": "The id given to the action."
-                        },
-                        "href": {
-                            "type": "string"
-                        },
-                        "name": {
-                            "type": "string",
-                            "description": "The name given to the action."
-                        },
-                        "actionType": {
-                            "type": "string",
-                            "description": "The type of action.",
-                            "enum": [
-                                "ProcessFlow",
-                                "Task",
-                                "Notification"
-                            ]
-                        },
-                        "input": {
-                            "$ref": "#/components/schemas/Any"
-                        },
-                        "output": {
-                            "$ref": "#/components/schemas/Any"
-                        },
-                        "headers": {
-                            "$ref": "#/components/schemas/Any"
-                        },
-                        "description": {
-                            "type": "string",
-                            "description": "A free-form description of the prescribed action."
-                        },
-                        "@baseType": {
-                            "type": "string",
-                            "description": "When sub-classing, this defines the super-class."
-                        },
-                        "@schemaLocation": {
-                            "type": "string",
-                            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships."
-                        },
-                        "@type": {
-                            "type": "string"
-                        }
-                    }
+                    },
+                    "required": ["relationshipType", "associationSpec", "@referredType"]
                 }
             }
         },
@@ -640,10 +1311,7 @@
                         "thresholdType": {
                             "type": "string",
                             "description": "The Threshold Type may be either LogicDefinition or PreDefined.",
-                            "enum": [
-                                "LogicDefinition",
-                                "PreDefined"
-                            ]
+                            "enum": ["LogicDefinition", "PreDefined"]
                         },
                         "consequence": {
                             "type": "array",
@@ -654,10 +1322,7 @@
                         },
                         "thresholdCondition": {
                             "type": "string",
-                            "enum": [
-                                "Raise",
-                                "Clear"
-                            ],
+                            "enum": ["Raise", "Clear"],
                             "description": "A concrete threshold may have two possible values: \\\"Raise\\\" - a threshold was crossed or \\\"Clear\\\" - a threshold ceased crossing."
                         },
                         "applicability": {
@@ -721,10 +1386,7 @@
             "@jdt.path": "$.components.schemas",
             "@jdt.value": {
                 "TimeInterval": {
-                    "required": [
-                        "startTime",
-                        "endTime"
-                    ],
+                    "required": ["startTime", "endTime"],
                     "type": "object",
                     "properties": {
                         "startTime": {
@@ -744,6 +1406,36 @@
                     },
                     "description": "An interval of time from start- to endTime. If a time zone is required, it must be determined from the context."
                 }
+            }
+        },
+        {
+            "@jdt.path": "$.components.schemas.ServiceLevelObjective.properties.href",
+            "@jdt.value": {
+                "format": "uri"
+            }
+        },
+        {
+            "@jdt.path": "$.components.schemas.ServiceLevelObjectiveRef.properties.href",
+            "@jdt.value": {
+                "format": "uri"
+            }
+        },
+        {
+            "@jdt.path": "$.components.schemas.ServiceLevelSpecification.properties.href",
+            "@jdt.value": {
+                "format": "uri"
+            }
+        },
+        {
+            "@jdt.path": "$.components.schemas.KeyIndicator.properties.href",
+            "@jdt.value": {
+                "format": "uri"
+            }
+        },
+        {
+            "@jdt.path": "$.components.schemas.KeyIndicatorRelationship.properties.href",
+            "@jdt.value": {
+                "format": "uri"
             }
         }
     ]

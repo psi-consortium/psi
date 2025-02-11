@@ -8,7 +8,9 @@
 Possible values for the status of the stock  level
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | ProductStockStatusType | string | oneOf[reserved, available, unavailable, unknown] | No |
 
 Table: Fields of ProductStockStatusType. {#tbl:ProductStockStatusType.md:ProductStockStatusType}
+
+{#page:break}

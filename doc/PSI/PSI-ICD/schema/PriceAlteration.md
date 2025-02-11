@@ -8,7 +8,7 @@
 Is an amount, usually of money, that modifies the price charged for an order item.
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | name | string | N/A | No |
 | description | string | N/A | No |
 | applicationDuration | integer | N/A | No |
@@ -18,8 +18,10 @@ Is an amount, usually of money, that modifies the price charged for an order ite
 | unitOfMeasure | string | N/A | No |
 | price | Price | N/A | Yes |
 | productOfferingPrice | ProductOfferingPriceRef | N/A | No |
-| \@baseType | string | N/A | No |
-| \@schemaLocation | string | uri | No |
-| \@type | string | N/A | No |
+| @baseType | string | N/A | No |
+| @schemaLocation | string | uri | No |
+| @type | string | N/A | No |
 
 Table: Fields of PriceAlteration. {#tbl:PriceAlteration.md:PriceAlteration}
+
+{#page:break}

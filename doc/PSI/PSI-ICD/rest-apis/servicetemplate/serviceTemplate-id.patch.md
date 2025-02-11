@@ -7,12 +7,14 @@
 
 **Absolute Path:** /serviceCatalog/v1/serviceTemplate/{id}
 
+**TOD Reference:** TOD-04-02-02-Update_Service_Template
+
 **Summary:** Updates partially a ServiceTemplate
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | id | string | Yes | The identifier of the ServiceTemplate. |
 
 Table: Parameters of PATCH serviceTemplate/{id}. {#tbl:serviceTemplate-id.patch.md:parameters}
@@ -40,6 +42,4 @@ Table: Request Body of PATCH serviceTemplate/{id}. {#tbl:serviceTemplate-id.patc
 
 Table: Responses of PATCH serviceTemplate/{id}. {#tbl:serviceTemplate-id.patch.md:responses}
 
-## TOD Reference
-
-TOD-04-02-02-Update_Service_Template
+{#page:break}

@@ -9,7 +9,7 @@ The customer bill to be created.
 Can be a regular recurring bill or an extra bill on demand by the customer or the csp.
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | billDate | string | date-time | No |
 | billNo | string | N/A | No |
 | category | string | N/A | No |
@@ -32,8 +32,10 @@ Can be a regular recurring bill or an extra bill on demand by the customer or th
 | taxIncludedAmount | Money | N/A | No |
 | taxItem | array | TaxItem | No |
 | productOrder | ProductOrderRef | N/A | No |
-| \@baseType | string | N/A | No |
-| \@schemaLocation | string | uri | No |
-| \@type | string | N/A | No |
+| @baseType | string | N/A | No |
+| @schemaLocation | string | uri | No |
+| @type | string | N/A | No |
 
 Table: Fields of CustomerBill_Create. {#tbl:CustomerBill_Create.md:CustomerBill_Create}
+
+{#page:break}

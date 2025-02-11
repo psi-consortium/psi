@@ -7,12 +7,14 @@
 
 **Absolute Path:** /resourceCatalog/v1/resourceSpecification/{id}
 
+**TOD Reference:** TOD-02-01-03-Remove_Resource_Specification
+
 **Summary:** Deletes a ResourceSpecification
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | id | string | Yes | Identifier of the ResourceSpecification |
 
 Table: Parameters of DELETE resourceSpecification/{id}. {#tbl:resourceSpecification-id.delete.md:parameters}
@@ -32,6 +34,4 @@ Table: Parameters of DELETE resourceSpecification/{id}. {#tbl:resourceSpecificat
 
 Table: Responses of DELETE resourceSpecification/{id}. {#tbl:resourceSpecification-id.delete.md:responses}
 
-## TOD Reference
-
-TOD-02-01-03-Remove_Resource_Specification
+{#page:break}

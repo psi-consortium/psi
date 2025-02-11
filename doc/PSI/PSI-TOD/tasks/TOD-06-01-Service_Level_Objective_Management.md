@@ -8,10 +8,10 @@
 
 The Service Level Objective Management task takes care of the maintenance of service level objectives (SLOs) in the PSS.
 These SLOs direct and control the performance of services to meet the expectations of the customers.
+They are combined in SLSs (see [TOD-06-02](#tod-06-02-servicelevelspecificationmanagement)), which are part of service specifications and product offerings.
 
-The SLOs can either be specified in advance as part of the service specifications and are therefore part of an offering.
-Or the SLOs are defined as part of a negotiation step in ordering process of the PSS.
-Regardless of how the SLOs were created, they are referenced in the SLA concluded between the provider and the customer - possibly indirectly via an SLS.
+Expected performance of the service is defined by thresholds attached to key indicators.
+The service provider creates an SLO based on the key indicators (KPIs/KQIs) which are pre-defined by the governance (see [TOD-06-03](#tod-06-03-keyindicatormanagement)).
 
 ```plantuml
 @startuml
@@ -31,7 +31,7 @@ Task  ..> O5    : <<includes>>
 @enduml
 ```
 
-![**TOD-06-01**: Service Level Objective (SLO) Management](../../common/pixel.png){#fig:TOD-06-01-Service_Level_Objective_Management}
+![TOD-06-01: Service Level Objective (SLO) Management](../../common/pixel.png){#fig:TOD-06-01-Service_Level_Objective_Management}
 
 |                   |  Customer  |  Provider  | Other PSS | Governance |
 |-------------------|:----------:|:----------:|:---------:|:----------:|

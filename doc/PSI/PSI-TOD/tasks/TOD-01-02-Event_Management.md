@@ -19,8 +19,9 @@ All named operations and endpoints can also be implemented in a monolithic appli
 
 The Event Management task is based on the exchange of events between two systems.
 *Topics* are target containers for events which exist to store different events separated into domains.
-A PSS must have at least two topics: *order* and *inquiry*.
+A PSS must have at least three topics: *order*, *inquiry* and *alarm*.
 Hence, all events related to orders are collected in the *order* topic, while the events of the inquiries are stored in the *inquiry* topic.
+Alarms related to breaching service level specification are stored in the *alarm* topic.
 However, PSS and provider systems are allowed to define additional topics, if needed, to organise the events in their interface implementation.
 
 The following diagram illustrates a usual execution sequence, using the "order" topic as an example:
@@ -52,7 +53,7 @@ return Ack
 @enduml
 ```
 
-![**TOD-01-02**: Event Management Sequence](../../common/pixel.png){#fig:TOD-01-02-Event_Management-sequence}
+![TOD-01-02: Event Management Sequence](../../common/pixel.png){#fig:TOD-01-02-Event_Management-sequence}
 
 The shown steps are further described in the following operations:
 
@@ -73,7 +74,7 @@ Task  ..> O4    : <<includes>>
 
 ```
 
-![**TOD-01-02**: Event Management](../../common/pixel.png){#fig:TOD-01-02-Event_Management}
+![TOD-01-02: Event Management](../../common/pixel.png){#fig:TOD-01-02-Event_Management}
 
 |                               | Customer |  Provider  | Other PSS  | Governance |
 |-------------------------------|:--------:|:----------:|:----------:|:----------:|

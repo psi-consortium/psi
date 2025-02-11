@@ -7,12 +7,14 @@
 
 **Absolute Path:** /productInventory/v1/product
 
+**TOD Reference:** TOD-05-03-05-View_All_Products
+
 **Summary:** List or find Product objects
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | fields | string | No | Comma-separated properties to be provided in response |
 | offset | integer | No | Requested index for start of resources to be provided in response |
 | limit | integer | No | Requested number of resources to be provided in response |
@@ -34,6 +36,4 @@ Table: Parameters of GET product. {#tbl:product.get.md:parameters}
 
 Table: Responses of GET product. {#tbl:product.get.md:responses}
 
-## TOD Reference
-
-TOD-05-03-05-View_All_Products
+{#page:break}

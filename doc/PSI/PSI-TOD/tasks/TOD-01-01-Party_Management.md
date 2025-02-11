@@ -36,7 +36,7 @@ Task  ..> O5    : <<includes>>
 
 ```
 
-![**TOD-01-01**: Party Management](../../common/pixel.png){#fig:TOD-01-01-Party_Management}
+![TOD-01-01: Party Management](../../common/pixel.png){#fig:TOD-01-01-Party_Management}
 
 |                             |  Customer  |  Provider  | Other PSS  | Governance |
 |-----------------------------|:----------:|:----------:|:----------:|:----------:|

@@ -51,7 +51,7 @@ I4 --           Operation
 
 ```
 
-![**TOD-01-01-02**: Update Party Profile](../../common/pixel.png){#fig:TOD-01-01-02-Update_Party_Profile}
+![TOD-01-01-02: Update Party Profile](../../common/pixel.png){#fig:TOD-01-01-02-Update_Party_Profile}
 
 **Prerequisites**
 
@@ -81,3 +81,4 @@ The profile for the party is successfully updated in the PSS datastore.
 **eTOM Reference**
 
 The operation is based on 1.3.6.2 and 1.6.21.2 process identifiers from the eTOM.
+

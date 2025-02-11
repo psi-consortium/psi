@@ -39,7 +39,7 @@ I1 --           Operation
 
 ```
 
-![**TOD-02-02-02**: Update Service Specification](../../common/pixel.png){#fig:TOD-02-02-02-Update_Service_Specification}
+![TOD-02-02-02: Update Service Specification](../../common/pixel.png){#fig:TOD-02-02-02-Update_Service_Specification}
 
 **Prerequisites**
 

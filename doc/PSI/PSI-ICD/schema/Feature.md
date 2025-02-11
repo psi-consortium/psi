@@ -8,7 +8,7 @@
 Configuration feature.
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | id | string | N/A | No |
 | name | string | N/A | Yes |
 | isBundle | boolean | N/A | No |
@@ -18,3 +18,5 @@ Configuration feature.
 | featureRelationship | array | FeatureRelationship | No |
 
 Table: Fields of Feature. {#tbl:Feature.md:Feature}
+
+{#page:break}

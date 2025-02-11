@@ -7,12 +7,14 @@
 
 **Absolute Path:** /customerBillManagement/v1/customerBill/{id}
 
+**TOD Reference:** TOD-03-03-02-Update_Customer_Bill
+
 **Summary:** Updates partially a CustomerBill
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | id | string | Yes | Identifier of the CustomerBill |
 
 Table: Parameters of PATCH customerBill/{id}. {#tbl:customerBill-id.patch.md:parameters}
@@ -40,6 +42,4 @@ Table: Request Body of PATCH customerBill/{id}. {#tbl:customerBill-id.patch.md:r
 
 Table: Responses of PATCH customerBill/{id}. {#tbl:customerBill-id.patch.md:responses}
 
-## TOD Reference
-
-TOD-03-03-02-Update_Customer_Bill
+{#page:break}

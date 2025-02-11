@@ -7,12 +7,14 @@
 
 **Absolute Path:** /eventManagement/v1/topic
 
+**TOD Reference:** TOD-01-02-01-View_Event_Topics
+
 **Summary:** List or find Topic objects
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | fields | string | No | Comma-separated properties to be provided in response |
 | offset | integer | No | Requested index for start of resources to be provided in response |
 | limit | integer | No | Requested number of resources to be provided in response |
@@ -34,6 +36,4 @@ Table: Parameters of GET topic. {#tbl:topic.get.md:parameters}
 
 Table: Responses of GET topic. {#tbl:topic.get.md:responses}
 
-## TOD Reference
-
-TOD-01-02-01-View_Event_Topics
+{#page:break}

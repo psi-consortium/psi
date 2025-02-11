@@ -7,6 +7,8 @@
 
 **Absolute Path:** /productCatalog/v1/productOffering
 
+**TOD Reference:** TOD-02-04-01-Create_Product_Offering
+
 **Summary:** Creates a ProductOffering
 
 ## Request Body
@@ -31,6 +33,4 @@ Table: Request Body of POST productOffering. {#tbl:productOffering.post.md:reque
 
 Table: Responses of POST productOffering. {#tbl:productOffering.post.md:responses}
 
-## TOD Reference
-
-TOD-02-04-01-Create_Product_Offering
+{#page:break}

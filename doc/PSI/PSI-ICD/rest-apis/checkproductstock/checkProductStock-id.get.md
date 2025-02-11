@@ -7,12 +7,14 @@
 
 **Absolute Path:** /stock/v1/checkProductStock/{id}
 
+**TOD Reference:** TOD-05-04-01-Check_Product_Stock
+
 **Summary:** Retrieves a CheckProductStock by ID
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | id | string | Yes | Identifier of the CheckProductStock |
 | fields | string | No | Comma-separated properties to provide in response |
 
@@ -33,6 +35,4 @@ Table: Parameters of GET checkProductStock/{id}. {#tbl:checkProductStock-id.get.
 
 Table: Responses of GET checkProductStock/{id}. {#tbl:checkProductStock-id.get.md:responses}
 
-## TOD Reference
-
-TOD-05-04-01-Check_Product_Stock
+{#page:break}

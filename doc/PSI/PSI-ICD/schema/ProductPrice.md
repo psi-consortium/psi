@@ -9,7 +9,7 @@ An amount, usually of money, that represents the actual price paid by a Customer
 The price is valid for a defined period of time.
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | name | string | N/A | No |
 | description | string | N/A | No |
 | priceType | string | N/A | Yes |
@@ -19,8 +19,10 @@ The price is valid for a defined period of time.
 | price | Price | N/A | Yes |
 | productOfferingPrice | ProductOfferingPriceRef | N/A | No |
 | productPriceAlteration | array | PriceAlteration | No |
-| \@baseType | string | N/A | No |
-| \@schemaLocation | string | uri | No |
-| \@type | string | N/A | No |
+| @baseType | string | N/A | No |
+| @schemaLocation | string | uri | No |
+| @type | string | N/A | No |
 
 Table: Fields of ProductPrice. {#tbl:ProductPrice.md:ProductPrice}
+
+{#page:break}

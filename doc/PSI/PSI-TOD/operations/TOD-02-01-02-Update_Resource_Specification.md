@@ -41,7 +41,7 @@ I2 --           Operation
 
 ```
 
-![**TOD-02-01-02**: Update Resource Specification](../../common/pixel.png){#fig:TOD-02-01-02-Update_Resource_Specification}
+![TOD-02-01-02: Update Resource Specification](../../common/pixel.png){#fig:TOD-02-01-02-Update_Resource_Specification}
 
 **Prerequisites**
 

@@ -33,7 +33,7 @@ Task  ..> O5    : <<includes>>
 
 ```
 
-![**TOD-02-04**: Product Offering Management](../../common/pixel.png){#fig:TOD-02-04-Product_Offering_Management}
+![TOD-02-04: Product Offering Management](../../common/pixel.png){#fig:TOD-02-04-Product_Offering_Management}
 
 |                                |  Customer  |  Provider  | Other PSS  | Governance |
 |--------------------------------|:----------:|:----------:|:----------:|:----------:|

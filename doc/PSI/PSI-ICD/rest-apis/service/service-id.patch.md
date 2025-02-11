@@ -7,12 +7,14 @@
 
 **Absolute Path:** /serviceInventory/v1/service/{id}
 
+**TOD Reference:** TOD-05-02-02-Update_Service
+
 **Summary:** Updates partially a Service
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | id | string | Yes | Identifier of the Service |
 
 Table: Parameters of PATCH service/{id}. {#tbl:service-id.patch.md:parameters}
@@ -40,6 +42,4 @@ Table: Request Body of PATCH service/{id}. {#tbl:service-id.patch.md:request_bod
 
 Table: Responses of PATCH service/{id}. {#tbl:service-id.patch.md:responses}
 
-## TOD Reference
-
-TOD-05-02-02-Update_Service
+{#page:break}

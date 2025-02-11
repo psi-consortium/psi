@@ -17,7 +17,7 @@ For example, suppose the PSS is the server that exposes the resource registratio
 In that case, the "PSS-Provider interface (I/F)" is involved.
 
 The connection between the task and its subsidiary operations is displayed graphically below, while the matrix represents which clients can perform which operation.
-Checkmarks in parentheses indicate that these operations are carried out via events (see [TOD-01-02](#tod-01-02-event_management)).
+Checkmarks in parentheses indicate that these operations are carried out via events (see [TOD-01-02](#tod-01-02-eventmanagement)).
 The interfaces covered by the task are graphically represented in the respective sections of the related operations.
 
 =begin
@@ -44,7 +44,7 @@ Task  ..> O4    : <<includes>>
 
 ```
 
-![**TOD-XX-XX**: Task Template](../../common/pixel.png){#fig:TOD-XX-XX-Task_Template}
+![TOD-XX-XX: Task Template](../../common/pixel.png){#fig:TOD-XX-XX-Task_Template}
 
 |                 |  Customer  |  Provider  |  Other PSS   | Governance |
 |-----------------|:----------:|:----------:|:------------:|:----------:|
@@ -87,5 +87,5 @@ The task is based on X.X.X process identifiers from the eTOM v22.0.0.
 
 =end
 
-[^eTOM-Decomposition-L3]: See https://www.tmforum.org/resources/reference/gb921d-l3-process-decompositions-v22-0-0  
-[^eTOM-Decomposition-L4]: See https://www.tmforum.org/resources/reference/gb921dx-l4-process-decompositions-v22-0-0
+[^eTOM-Decomposition-L3]: See <https://www.tmforum.org/resources/reference/gb921d-l3-process-decompositions-v22-0-0>  
+[^eTOM-Decomposition-L4]: See <https://www.tmforum.org/resources/reference/gb921dx-l4-process-decompositions-v22-0-0>

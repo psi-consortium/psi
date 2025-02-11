@@ -7,12 +7,14 @@
 
 **Absolute Path:** /productCatalog/v1/productOffering
 
+**TOD Reference:** TOD-02-04-05-View_All_Product_Offerings
+
 **Summary:** List or find ProductOffering objects
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | fields | string | No | Comma-separated properties to be provided in response |
 | offset | integer | No | Requested index for start of resources to be provided in response |
 | limit | integer | No | Requested number of resources to be provided in response |
@@ -34,6 +36,4 @@ Table: Parameters of GET productOffering. {#tbl:productOffering.get.md:parameter
 
 Table: Responses of GET productOffering. {#tbl:productOffering.get.md:responses}
 
-## TOD Reference
-
-TOD-02-04-05-View_All_Product_Offerings
+{#page:break}

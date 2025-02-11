@@ -7,12 +7,14 @@
 
 **Absolute Path:** /customerInquiry/v1/customerInquiry/{id}
 
+**TOD Reference:** TOD-03-01-05-Cancel_Customer_Inquiry
+
 **Summary:** Cancels a CustomerInquiry
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | id | string | Yes | Identifier of the CustomerInquiry |
 
 Table: Parameters of DELETE customerInquiry/{id}. {#tbl:customerInquiry-id.delete.md:parameters}
@@ -32,6 +34,4 @@ Table: Parameters of DELETE customerInquiry/{id}. {#tbl:customerInquiry-id.delet
 
 Table: Responses of DELETE customerInquiry/{id}. {#tbl:customerInquiry-id.delete.md:responses}
 
-## TOD Reference
-
-TOD-03-01-05-Cancel_Customer_Inquiry
+{#page:break}

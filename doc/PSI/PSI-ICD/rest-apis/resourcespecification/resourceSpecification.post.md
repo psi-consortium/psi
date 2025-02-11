@@ -7,6 +7,8 @@
 
 **Absolute Path:** /resourceCatalog/v1/resourceSpecification
 
+**TOD Reference:** TOD-02-01-01-Create_Resource_Specification
+
 **Summary:** Creates a ResourceSpecification
 
 ## Request Body
@@ -31,6 +33,4 @@ Table: Request Body of POST resourceSpecification. {#tbl:resourceSpecification.p
 
 Table: Responses of POST resourceSpecification. {#tbl:resourceSpecification.post.md:responses}
 
-## TOD Reference
-
-TOD-02-01-01-Create_Resource_Specification
+{#page:break}

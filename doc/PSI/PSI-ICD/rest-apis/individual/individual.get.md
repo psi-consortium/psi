@@ -7,12 +7,14 @@
 
 **Absolute Path:** /partyManagement/v1/individual
 
+**TOD Reference:** TOD-01-01-05-View_All_Party_Profiles
+
 **Summary:** List or find Individual objects
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | fields | string | No | Comma-separated properties to be provided in response |
 | offset | integer | No | Requested index for start of resources to be provided in response |
 | limit | integer | No | Requested number of resources to be provided in response |
@@ -34,6 +36,4 @@ Table: Parameters of GET individual. {#tbl:individual.get.md:parameters}
 
 Table: Responses of GET individual. {#tbl:individual.get.md:responses}
 
-## TOD Reference
-
-TOD-01-01-05-View_All_Party_Profiles
+{#page:break}

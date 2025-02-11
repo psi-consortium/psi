@@ -9,7 +9,7 @@ A Product Order is a type of order which  can  be used to place an order between
 Skipped properties: id,href,completionDate,orderDate,state,expectedCompletionDate,productOrderItem.state
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | description | string | N/A | No |
 | cancellationDate | string | date-time | No |
 | cancellationReason | string | N/A | No |
@@ -29,8 +29,10 @@ Skipped properties: id,href,completionDate,orderDate,state,expectedCompletionDat
 | productOrderItem | array | ProductOrderItem | Yes |
 | quote | array | QuoteRef | No |
 | relatedParty | array | RelatedParty | No |
-| \@baseType | string | N/A | No |
-| \@schemaLocation | string | uri | No |
-| \@type | string | N/A | No |
+| @baseType | string | N/A | No |
+| @schemaLocation | string | uri | No |
+| @type | string | N/A | No |
 
 Table: Fields of ProductOrder_Create. {#tbl:ProductOrder_Create.md:ProductOrder_Create}
+
+{#page:break}

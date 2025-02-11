@@ -7,12 +7,14 @@
 
 **Absolute Path:** /customerInquiry/v1/customerInquiry/{id}/results
 
+**TOD Reference:** TOD-03-01-03-View_Inquiry_Results
+
 **Summary:** Retrieves the InquiryResults matching the CustomerInquiry
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | id | string | Yes | Identifier of the CustomerInquiry |
 | fields | string | No | Comma-separated properties to be provided in response |
 | offset | integer | No | Requested index for start of resources to be provided in response |
@@ -36,6 +38,4 @@ Table: Parameters of GET customerInquiry/{id}/results. {#tbl:customerInquiry-id-
 
 Table: Responses of GET customerInquiry/{id}/results. {#tbl:customerInquiry-id-results.get.md:responses}
 
-## TOD Reference
-
-TOD-03-01-03-View_Inquiry_Results
+{#page:break}

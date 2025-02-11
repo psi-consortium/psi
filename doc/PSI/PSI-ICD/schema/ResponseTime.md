@@ -9,10 +9,12 @@ The response time for an inquiry.
 At least the maximum estimated time must be filled on creation, the actual value is filled on completion.
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | minimum | string | date-time | No |
 | average | string | date-time | No |
 | maximum | string | date-time | Yes |
 | actual | string | date-time | No |
 
 Table: Fields of ResponseTime. {#tbl:ResponseTime.md:ResponseTime}
+
+{#page:break}

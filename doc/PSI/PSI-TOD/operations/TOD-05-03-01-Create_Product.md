@@ -39,7 +39,7 @@ I1 --           Operation
 
 ```
 
-![**TOD-05-03-01**: Create Product](../../common/pixel.png){#fig:TOD-05-03-01-Create_Product}
+![TOD-05-03-01: Create Product](../../common/pixel.png){#fig:TOD-05-03-01-Create_Product}
 
 **Prerequisites**
 

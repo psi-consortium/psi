@@ -333,6 +333,14 @@
         {
             "@jdt.path": "$.components.schemas.AttachmentRefOrValue",
             "@jdt.value": "AttachmentOrDocumentRef"
+        },
+        {
+            "@jdt.path": "$.components.schemas.SLARef",
+            "@jdt.value": "ServiceLevelSpecificationRef"
+        },
+        {
+            "@jdt.path": "$.components.schemas.['ProductOffering','ProductOffering_Create','ProductOffering_Update'].properties.serviceLevelAgreement",
+            "@jdt.value": "serviceLevelSpecification"
         }
     ],
     "@jdt.merge": [
@@ -384,6 +392,9 @@
         {
             "@jdt.path": "$.components.schemas['ProductOffering','ProductOffering_Create','ProductOffering_Update'].properties",
             "@jdt.value": {
+                "serviceLevelSpecification": {
+                    "$ref": "#/components/schemas/ServiceLevelSpecificationRef"
+                },
                 "accessProbability": {
                     "type": "integer",
                     "description": "Probability that an order of this offering can be fulfilled (in %).",
@@ -404,6 +415,27 @@
                     "description": "A group of product offerings that can be selected for instantiation, e.g. between 2 and 7 from a list of 15 channel packs.",
                     "items": {
                         "$ref": "#/components/schemas/BundledGroupProductOffering"
+                    }
+                }
+            }
+        },
+        {
+            "@jdt.path": "$.components.schemas.ServiceLevelSpecificationRef",
+            "@jdt.value": {
+                "description": "A Service Level Specification represents a pre-defined or negotiated set of Service Level \nObjectives. In addition, certain consequences are associated with not meeting the Service Level \nObjectives. Service Level Agreements are expressed in terms of Service Level Specifications.",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "unique identifier"
+                    },
+                    "href": {
+                        "type": "string",
+                        "description": "Hyperlink reference",
+                        "format": "uri"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Name of the related entity."
                     }
                 }
             }
@@ -973,16 +1005,35 @@
                 "Geometry": {
                     "type": "object",
                     "description": "A GeoJson geometry.",
+                    "oneOf": [
+                        {
+                            "$ref": "#/components/schemas/LineString"
+                        },
+                        {
+                            "$ref": "#/components/schemas/MultiLineString"
+                        },
+                        {
+                            "$ref": "#/components/schemas/MultiPoint"
+                        },
+                        {
+                            "$ref": "#/components/schemas/MultiPolygon"
+                        },
+                        {
+                            "$ref": "#/components/schemas/Point"
+                        },
+                        {
+                            "$ref": "#/components/schemas/Polygon"
+                        }
+                    ],
                     "discriminator": {
                         "propertyName": "type",
                         "mapping": {
+                            "LineString": "#/components/schemas/LineString",
+                            "MultiLineString": "#/components/schemas/MultiLineString",
+                            "MultiPoint": "#/components/schemas/MultiPoint",
+                            "MultiPolygon": "#/components/schemas/MultiPolygon",
                             "Point": "#/components/schemas/Point",
                             "Polygon": "#/components/schemas/Polygon"
-                        }
-                    },
-                    "properties": {
-                        "type": {
-                            "type": "string"
                         }
                     }
                 },
@@ -996,43 +1047,106 @@
                 },
                 "Point": {
                     "type": "object",
-                    "description": "A GeoJSon geometry.",
-                    "allOf": [
-                        {
-                            "$ref": "#/components/schemas/Geometry"
+                    "description": "A GeoJSON Point.",
+                    "properties": {
+                        "type": {
+                            "type": "string"
                         },
-                        {
-                            "type": "object",
-                            "properties": {
-                                "coordinates": {
+                        "coordinates": {
+                            "$ref": "#/components/schemas/Point2D"
+                        }
+                    }
+                },
+                "MultiPoint": {
+                    "type": "object",
+                    "description": "A GeoJSON MultiPoint.",
+                    "properties": {
+                        "type": {
+                            "type": "string"
+                        },
+                        "coordinates": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/components/schemas/Point2D"
+                            }
+                        }
+                    }
+                },
+                "LineString": {
+                    "type": "object",
+                    "description": "A GeoJSON LineString.",
+                    "properties": {
+                        "type": {
+                            "type": "string"
+                        },
+                        "coordinates": {
+                            "type": "array",
+                            "minItems": 2,
+                            "items": {
+                                "$ref": "#/components/schemas/Point2D"
+                            }
+                        }
+                    }
+                },
+                "MultiLineString": {
+                    "type": "object",
+                    "description": "A GeoJSON MultiLineString.",
+                    "properties": {
+                        "type": {
+                            "type": "string"
+                        },
+                        "coordinates": {
+                            "type": "array",
+                            "items": {
+                                "type": "array",
+                                "minItems": 2,
+                                "items": {
                                     "$ref": "#/components/schemas/Point2D"
                                 }
                             }
                         }
-                    ]
+                    }
                 },
                 "Polygon": {
                     "type": "object",
-                    "description": "A GeoJSon geometry.",
-                    "allOf": [
-                        {
-                            "$ref": "#/components/schemas/Geometry"
+                    "description": "A GeoJSON Polygon.",
+                    "properties": {
+                        "type": {
+                            "type": "string"
                         },
-                        {
-                            "type": "object",
-                            "properties": {
-                                "coordinates": {
+                        "coordinates": {
+                            "type": "array",
+                            "items": {
+                                "type": "array",
+                                "minItems": 4,
+                                "items": {
+                                    "$ref": "#/components/schemas/Point2D"
+                                }
+                            }
+                        }
+                    }
+                },
+                "MultiPolygon": {
+                    "type": "object",
+                    "description": "A GeoJSON MultiPolygon.",
+                    "properties": {
+                        "type": {
+                            "type": "string"
+                        },
+                        "coordinates": {
+                            "type": "array",
+                            "items": {
+                                "type": "array",
+                                "items": {
                                     "type": "array",
+                                    "minItems": 4,
                                     "items": {
-                                        "type": "array",
-                                        "items": {
-                                            "$ref": "#/components/schemas/Point2D"
-                                        }
+                                        "$ref": "#/components/schemas/Point2D"
                                     }
                                 }
                             }
                         }
-                    ]
+                    }
                 }
             }
         },

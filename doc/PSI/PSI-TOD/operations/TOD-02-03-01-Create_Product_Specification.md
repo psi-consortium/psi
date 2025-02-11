@@ -39,7 +39,7 @@ I1 --           Operation
 
 ```
 
-![**TOD-02-03-01**: Create Product Specification](../../common/pixel.png){#fig:TOD-02-03-01-Create_Product_Specification}
+![TOD-02-03-01: Create Product Specification](../../common/pixel.png){#fig:TOD-02-03-01-Create_Product_Specification}
 
 **Prerequisites**
 

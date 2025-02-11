@@ -10,7 +10,7 @@ The individual can be a customer, an employee or any other person that the organ
 Skipped properties: id,href
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | aristocraticTitle | string | N/A | No |
 | birthDate | string | date-time | No |
 | countryOfBirth | string | N/A | No |
@@ -42,8 +42,10 @@ Skipped properties: id,href
 | skill | array | Skill | No |
 | status | IndividualStateType | N/A | No |
 | taxExemptionCertificate | array | TaxExemptionCertificate | No |
-| \@baseType | string | N/A | No |
-| \@schemaLocation | string | uri | No |
-| \@type | string | N/A | No |
+| @baseType | string | N/A | No |
+| @schemaLocation | string | uri | No |
+| @type | string | N/A | No |
 
 Table: Fields of Individual_Update. {#tbl:Individual_Update.md:Individual_Update}
+
+{#page:break}

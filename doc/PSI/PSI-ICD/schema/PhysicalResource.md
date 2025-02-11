@@ -9,7 +9,7 @@ Physical resource is a type of resource that describes the common set of attribu
 EQUIPMENT) in the inventory.
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | id | string | N/A | Yes |
 | href | string | uri | Yes |
 | name | string | N/A | No |
@@ -34,8 +34,10 @@ EQUIPMENT) in the inventory.
 | resourceSpecification | ResourceSpecificationRef | N/A | No |
 | resourceStatus | ResourceStatusType | N/A | No |
 | usageState | ResourceUsageStateType | N/A | No |
-| \@baseType | string | N/A | No |
-| \@schemaLocation | string | uri | No |
-| \@type | string | "PhysicalResource" | Yes |
+| @baseType | string | N/A | No |
+| @schemaLocation | string | uri | No |
+| @type | string | "PhysicalResource" | Yes |
 
 Table: Fields of PhysicalResource. {#tbl:PhysicalResource.md:PhysicalResource}
+
+{#page:break}

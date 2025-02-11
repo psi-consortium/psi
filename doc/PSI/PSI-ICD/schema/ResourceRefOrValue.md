@@ -9,7 +9,7 @@ Resource is an abstract entity that describes the common set of attributes share
 The polymorphic attributes @type, @schemaLocation & @referredType are related to the Resource entity and not the related ResourceRefOrValue class itself
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | id | string | N/A | Yes |
 | href | string | N/A | Yes |
 | name | string | N/A | No |
@@ -30,9 +30,11 @@ The polymorphic attributes @type, @schemaLocation & @referredType are related to
 | resourceSpecification | ResourceSpecificationRef | N/A | No |
 | resourceStatus | ResourceStatusType | N/A | No |
 | usageState | ResourceUsageStateType | N/A | No |
-| \@baseType | string | N/A | No |
-| \@schemaLocation | string | uri | No |
-| \@type | string | N/A | No |
-| \@referredType | string | N/A | No |
+| @baseType | string | N/A | No |
+| @schemaLocation | string | uri | No |
+| @type | string | N/A | No |
+| @referredType | string | N/A | No |
 
 Table: Fields of ResourceRefOrValue. {#tbl:ResourceRefOrValue.md:ResourceRefOrValue}
+
+{#page:break}

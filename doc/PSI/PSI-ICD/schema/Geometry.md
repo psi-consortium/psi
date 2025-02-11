@@ -5,10 +5,12 @@
 
 # Geometry
 
-GeoJson geometry
+A GeoJson geometry.
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
-| type | string | oneOf["[Point](#point)", "[Polygon](#polygon)"] | Yes |
+| ------- | ------- | ------- | --- |
+| type | string | oneOf["[LineString](#linestring)", "[MultiLineString](#multilinestring)", "[MultiPoint](#multipoint)", "[MultiPolygon](#multipolygon)", "[Point](#point)", "[Polygon](#polygon)"] | Yes |
 
 Table: Fields of Geometry. {#tbl:Geometry.md:Geometry}
+
+{#page:break}

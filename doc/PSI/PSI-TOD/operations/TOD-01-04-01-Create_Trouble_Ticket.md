@@ -41,7 +41,7 @@ I2 --           Operation
 
 ```
 
-![**TOD-01-04-01**: Create Trouble Ticket](../../common/pixel.png){#fig:TOD-01-04-01-Create_Trouble_Ticket}
+![TOD-01-04-01: Create Trouble Ticket](../../common/pixel.png){#fig:TOD-01-04-01-Create_Trouble_Ticket}
 
 **Prerequisites**
 

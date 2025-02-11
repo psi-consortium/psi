@@ -43,7 +43,7 @@ I2 --           Operation
 
 ```
 
-![**TOD-01-03-08**: Remove Attachment](../../common/pixel.png){#fig:TOD-01-03-08-Remove_Attachment}
+![TOD-01-03-08: Remove Attachment](../../common/pixel.png){#fig:TOD-01-03-08-Remove_Attachment}
 
 **Prerequisites**
 

@@ -7,12 +7,14 @@
 
 **Absolute Path:** /productInventory/v1/product/{id}
 
+**TOD Reference:** TOD-05-03-02-Update_Product
+
 **Summary:** Updates partially a Product
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | id | string | Yes | Identifier of the Product |
 
 Table: Parameters of PATCH product/{id}. {#tbl:product-id.patch.md:parameters}
@@ -40,6 +42,4 @@ Table: Request Body of PATCH product/{id}. {#tbl:product-id.patch.md:request_bod
 
 Table: Responses of PATCH product/{id}. {#tbl:product-id.patch.md:responses}
 
-## TOD Reference
-
-TOD-05-03-02-Update_Product
+{#page:break}

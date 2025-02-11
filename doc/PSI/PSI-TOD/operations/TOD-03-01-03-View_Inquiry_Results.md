@@ -43,7 +43,7 @@ I2 --       	Operation
 
 ```
 
-![**TOD-03-01-03**: View Inquiry Results](../../common/pixel.png){#fig:TOD-03-01-03-View_Inquiry_Results}
+![TOD-03-01-03: View Inquiry Results](../../common/pixel.png){#fig:TOD-03-01-03-View_Inquiry_Results}
 
 **Prerequisites**
 
@@ -60,7 +60,7 @@ These can be of different nature:
   This allows the customer to order the product immediately without a (possibly lengthy) RFQ process.
   If more than one offering for the same product is matching the inquiry (e.g. with different conditions), the provider system can either return them as multiple results with different priorities or in a single entry.
   The PSS must support both variants, but may split an entry depending on the subsequent processing needs.
-  When there is no more data, the actual availability is unknown and may be checked via [TOD-05-04-01](#tod-05-04-01-check_product_stock).
+  When there is no more data, the actual availability is unknown and may be checked via [TOD-05-04-01](#tod-05-04-01-checkproductstock).
 * Lastly, the results can contain available product instances from the inventory.
   In this case, the PSS can show the availability and no further checks are necessary, which may result in higher ranking.
   Note that this does not imply a reservation, so the actual order may still be rejected if the resource was booked in the meantime.

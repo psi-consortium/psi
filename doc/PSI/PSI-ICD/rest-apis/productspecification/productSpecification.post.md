@@ -7,6 +7,8 @@
 
 **Absolute Path:** /productCatalog/v1/productSpecification
 
+**TOD Reference:** TOD-02-03-01-Create_Product_Specification
+
 **Summary:** Creates a ProductSpecification
 
 ## Request Body
@@ -31,6 +33,4 @@ Table: Request Body of POST productSpecification. {#tbl:productSpecification.pos
 
 Table: Responses of POST productSpecification. {#tbl:productSpecification.post.md:responses}
 
-## TOD Reference
-
-TOD-02-03-01-Create_Product_Specification
+{#page:break}

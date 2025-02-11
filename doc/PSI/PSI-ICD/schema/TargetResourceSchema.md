@@ -8,8 +8,10 @@
 The reference object to the schema and type of target resource which is described by resource specification
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
-| \@schemaLocation | string | uri | Yes |
-| \@type | string | N/A | Yes |
+| ------- | ------- | ------- | --- |
+| @schemaLocation | string | uri | Yes |
+| @type | string | N/A | Yes |
 
 Table: Fields of TargetResourceSchema. {#tbl:TargetResourceSchema.md:TargetResourceSchema}
+
+{#page:break}

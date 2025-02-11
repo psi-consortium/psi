@@ -9,7 +9,7 @@ The customer bill.
 Can be a regular recurring bill or an extra bill on demand by the customer or the csp.
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | id | string | N/A | No |
 | href | string | N/A | No |
 | billDate | string | date-time | No |
@@ -34,8 +34,10 @@ Can be a regular recurring bill or an extra bill on demand by the customer or th
 | taxIncludedAmount | Money | N/A | No |
 | taxItem | array | TaxItem | No |
 | productOrder | ProductOrderRef | N/A | No |
-| \@baseType | string | N/A | No |
-| \@schemaLocation | string | uri | No |
-| \@type | string | N/A | No |
+| @baseType | string | N/A | No |
+| @schemaLocation | string | uri | No |
+| @type | string | N/A | No |
 
 Table: Fields of CustomerBill. {#tbl:CustomerBill.md:CustomerBill}
+
+{#page:break}

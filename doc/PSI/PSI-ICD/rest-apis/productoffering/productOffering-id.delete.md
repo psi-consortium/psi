@@ -7,12 +7,14 @@
 
 **Absolute Path:** /productCatalog/v1/productOffering/{id}
 
+**TOD Reference:** TOD-02-04-03-Remove_Product_Offering
+
 **Summary:** Deletes a ProductOffering
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | id | string | Yes | Identifier of the ProductOffering |
 
 Table: Parameters of DELETE productOffering/{id}. {#tbl:productOffering-id.delete.md:parameters}
@@ -32,6 +34,4 @@ Table: Parameters of DELETE productOffering/{id}. {#tbl:productOffering-id.delet
 
 Table: Responses of DELETE productOffering/{id}. {#tbl:productOffering-id.delete.md:responses}
 
-## TOD Reference
-
-TOD-02-04-03-Remove_Product_Offering
+{#page:break}

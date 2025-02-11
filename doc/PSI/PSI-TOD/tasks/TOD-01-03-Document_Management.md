@@ -58,10 +58,11 @@ Task2  ..> O10    : <<includes>>
 Task2  ..> O11    : <<includes>>
 Task2  ..> O12    : <<includes>>
 @enduml
-
 ```
 
-![**TOD-01-03**: Document Management](../../common/pixel.png){#fig:TOD-01-03-Document_Management}
+![TOD-01-03: Document Management](../../common/pixel.png){#fig:TOD-01-03-Document_Management}
+
+{#page:break}
 
 |                               |  Customer  |  Provider  | Other PSS  | Governance |
 |-------------------------------|:----------:|:----------:|:----------:|:----------:|

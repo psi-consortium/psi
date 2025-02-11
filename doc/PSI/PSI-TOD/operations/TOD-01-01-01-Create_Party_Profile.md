@@ -51,7 +51,7 @@ I4 --           Operation
 
 ```
 
-![**TOD-01-01-01**: Create Party Profile](../../common/pixel.png){#fig:TOD-01-01-01-Create_Party_Profile}
+![TOD-01-01-01: Create Party Profile](../../common/pixel.png){#fig:TOD-01-01-01-Create_Party_Profile}
 
 **Prerequisites**
 
@@ -78,3 +78,4 @@ The profile for the party is successfully created in the PSS datastore.
 **eTOM Reference**
 
 The operation is based on 1.3.6.1 and 1.6.21.2 process identifiers from the eTOM.
+

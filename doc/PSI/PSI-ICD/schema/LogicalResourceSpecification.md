@@ -8,7 +8,7 @@
 This is an example of a derived class of ResourceSpecification, and is used to define the invariant characteristics and behavior (attributes, methods, constraints, and relationships) of a LogicalResource.
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | id | string | N/A | No |
 | href | string | uri | No |
 | name | string | N/A | No |
@@ -25,8 +25,10 @@ This is an example of a derived class of ResourceSpecification, and is used to d
 | resourceSpecRelationship | array | ResourceSpecificationRelationship | No |
 | targetResourceSchema | TargetResourceSchema | N/A | No |
 | validFor | TimePeriod | N/A | No |
-| \@baseType | string | N/A | No |
-| \@schemaLocation | string | uri | No |
-| \@type | string | "LogicalResourceSpecification" | Yes |
+| @baseType | string | N/A | No |
+| @schemaLocation | string | uri | No |
+| @type | string | "LogicalResourceSpecification" | Yes |
 
 Table: Fields of LogicalResourceSpecification. {#tbl:LogicalResourceSpecification.md:LogicalResourceSpecification}
+
+{#page:break}

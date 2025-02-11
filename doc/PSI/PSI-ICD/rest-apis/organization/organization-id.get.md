@@ -7,12 +7,14 @@
 
 **Absolute Path:** /partyManagement/v1/organization/{id}
 
+**TOD Reference:** TOD-01-01-04-View_Party_Profile
+
 **Summary:** Retrieves a Organization by ID
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | id | string | Yes | Identifier of the Organization |
 | fields | string | No | Comma-separated properties to provide in response |
 
@@ -33,6 +35,4 @@ Table: Parameters of GET organization/{id}. {#tbl:organization-id.get.md:paramet
 
 Table: Responses of GET organization/{id}. {#tbl:organization-id.get.md:responses}
 
-## TOD Reference
-
-TOD-01-01-04-View_Party_Profile
+{#page:break}

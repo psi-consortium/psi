@@ -37,7 +37,7 @@ Task  ..> O5    : <<includes>>
 
 ```
 
-![**TOD-02-01**: Resource Catalog Management](../../common/pixel.png){#fig:TOD-02-01-Resource_Catalog_Management}
+![TOD-02-01: Resource Catalog Management](../../common/pixel.png){#fig:TOD-02-01-Resource_Catalog_Management}
 
 |                                      |  Customer  |  Provider  | Other PSS  | Governance |
 |--------------------------------------|:----------:|:----------:|:----------:|:----------:|
@@ -52,4 +52,3 @@ Table: Resource Catalog Management Matrix. {#tbl:resource-catalog-management-mat
 **eTOM Reference**
 
 The task is based on the 1.5.17 and 1.5.3 process identifiers from the eTOM.
-

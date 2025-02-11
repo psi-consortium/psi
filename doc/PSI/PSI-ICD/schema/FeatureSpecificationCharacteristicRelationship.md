@@ -8,7 +8,7 @@
 An aggregation, migration, substitution, dependency or exclusivity relationship between/among FeatureSpecificationCharacteristics.
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | id | string | N/A | No |
 | href | string | uri | No |
 | name | string | N/A | No |
@@ -18,8 +18,10 @@ An aggregation, migration, substitution, dependency or exclusivity relationship 
 | resourceSpecificationHref | string | uri | No |
 | resourceSpecificationId | string | N/A | No |
 | validFor | TimePeriod | N/A | No |
-| \@baseType | string | N/A | No |
-| \@schemaLocation | string | uri | No |
-| \@type | string | N/A | No |
+| @baseType | string | N/A | No |
+| @schemaLocation | string | uri | No |
+| @type | string | N/A | No |
 
 Table: Fields of FeatureSpecificationCharacteristicRelationship. {#tbl:FeatureSpecificationCharacteristicRelationship.md:FeatureSpecificationCharacteristicRelationship}
+
+{#page:break}

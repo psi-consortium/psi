@@ -7,12 +7,14 @@
 
 **Absolute Path:** /productCatalog/v1/productTemplate/{id}
 
+**TOD Reference:** TOD-04-03-02-Update_Product_Template
+
 **Summary:** Updates partially a ProductTemplate
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | id | string | Yes | The identifier of the ProductTemplate |
 
 Table: Parameters of PATCH productTemplate/{id}. {#tbl:productTemplate-id.patch.md:parameters}
@@ -40,6 +42,4 @@ Table: Request Body of PATCH productTemplate/{id}. {#tbl:productTemplate-id.patc
 
 Table: Responses of PATCH productTemplate/{id}. {#tbl:productTemplate-id.patch.md:responses}
 
-## TOD Reference
-
-TOD-04-03-02-Update_Product_Template
+{#page:break}

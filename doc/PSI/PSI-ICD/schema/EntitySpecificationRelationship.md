@@ -8,7 +8,7 @@
 A migration, substitution, dependency or exclusivity relationship between/among entity specifications.
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | id | string | N/A | No |
 | href | string | uri | No |
 | name | string | N/A | No |
@@ -16,9 +16,11 @@ A migration, substitution, dependency or exclusivity relationship between/among 
 | role | string | N/A | No |
 | associationSpec | AssociationSpecificationRef | N/A | No |
 | validFor | TimePeriod | N/A | No |
-| \@baseType | string | N/A | No |
-| \@schemaLocation | string | uri | No |
-| \@type | string | N/A | No |
-| \@referredType | string | N/A | No |
+| @baseType | string | N/A | No |
+| @schemaLocation | string | uri | No |
+| @type | string | N/A | No |
+| @referredType | string | N/A | No |
 
 Table: Fields of EntitySpecificationRelationship. {#tbl:EntitySpecificationRelationship.md:EntitySpecificationRelationship}
+
+{#page:break}

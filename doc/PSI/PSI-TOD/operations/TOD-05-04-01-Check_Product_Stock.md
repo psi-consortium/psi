@@ -39,7 +39,7 @@ I1   --  Operation
 
 ```
 
-![**TOD-05-04-01**: Check Product Stock](../../common/pixel.png){#fig:TOD-05-04-01-Check_Product_Stock}
+![TOD-05-04-01: Check Product Stock](../../common/pixel.png){#fig:TOD-05-04-01-Check_Product_Stock}
 
 **Prerequisites**
 

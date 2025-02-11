@@ -12,7 +12,9 @@ customer request).
 This could be indicated by 'offCycle'
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | CustomerBillRunType | string | oneOf[onCycle, offCycle] | No |
 
 Table: Fields of CustomerBillRunType. {#tbl:CustomerBillRunType.md:CustomerBillRunType}
+
+{#page:break}

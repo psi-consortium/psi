@@ -8,7 +8,7 @@
 Complements the description of an element (for instance a product) through video, pictures...
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | name | string | N/A | No |
 | description | string | N/A | No |
 | attachmentType | string | N/A | No |
@@ -19,3 +19,5 @@ Complements the description of an element (for instance a product) through video
 | validFor | TimePeriod | N/A | No |
 
 Table: Fields of Attachment_Create. {#tbl:Attachment_Create.md:Attachment_Create}
+
+{#page:break}

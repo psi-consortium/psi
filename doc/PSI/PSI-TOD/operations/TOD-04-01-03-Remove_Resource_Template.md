@@ -39,7 +39,7 @@ I1 --           Operation
 
 ```
 
-![**TOD-04-01-03**: Remove Resource Template](../../common/pixel.png){#fig:TOD-04-01-03-Remove_Resource_Template}
+![TOD-04-01-03: Remove Resource Template](../../common/pixel.png){#fig:TOD-04-01-03-Remove_Resource_Template}
 
 **Prerequisites**
 

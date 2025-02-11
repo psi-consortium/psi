@@ -9,7 +9,7 @@ A product to be created defined by value or existing defined by reference.
 The polymorphic attributes @type, @schemaLocation & @referredType are related to the product entity and not the RelatedProductRefOrValue class itself
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | id | string | N/A | No |
 | href | string | uri | No |
 | name | string | N/A | No |
@@ -35,9 +35,11 @@ The polymorphic attributes @type, @schemaLocation & @referredType are related to
 | realizingService | array | ServiceRef | No |
 | relatedParty | array | RelatedParty | No |
 | status | ProductStatusType | N/A | No |
-| \@baseType | string | N/A | No |
-| \@schemaLocation | string | uri | No |
-| \@type | string | N/A | No |
-| \@referredType | string | N/A | No |
+| @baseType | string | N/A | No |
+| @schemaLocation | string | uri | No |
+| @type | string | N/A | No |
+| @referredType | string | N/A | No |
 
 Table: Fields of ProductRefOrValue. {#tbl:ProductRefOrValue.md:ProductRefOrValue}
+
+{#page:break}

@@ -8,7 +8,9 @@
 Possible values for the usage of the stock level - This is illustrative
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | ProductStockUsageType | string | oneOf[inTransit, onDisplay, damaged, returned, replenishmentInProgress, inShop] | No |
 
 Table: Fields of ProductStockUsageType. {#tbl:ProductStockUsageType.md:ProductStockUsageType}
+
+{#page:break}

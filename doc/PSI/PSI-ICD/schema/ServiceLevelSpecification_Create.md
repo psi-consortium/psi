@@ -13,13 +13,15 @@ Service Level Agreements are expressed in terms of Service Level Specifications.
 Skipped properties: id,href
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | name | string | N/A | Yes |
 | description | string | N/A | No |
 | relatedServiceLevelObjective | array | ServiceLevelObjectiveRef | Yes |
 | validFor | TimePeriod | N/A | No |
-| \@baseType | string | N/A | No |
-| \@schemaLocation | string | uri | No |
-| \@type | string | N/A | No |
+| @baseType | string | N/A | No |
+| @schemaLocation | string | uri | No |
+| @type | string | N/A | No |
 
 Table: Fields of ServiceLevelSpecification_Create. {#tbl:ServiceLevelSpecification_Create.md:ServiceLevelSpecification_Create}
+
+{#page:break}

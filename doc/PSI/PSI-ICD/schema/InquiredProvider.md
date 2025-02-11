@@ -8,7 +8,7 @@
 A provider to which the customer inquiry will be sent.
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | id | string | N/A | No |
 | href | string | uri | No |
 | name | string | N/A | No |
@@ -16,3 +16,5 @@ A provider to which the customer inquiry will be sent.
 | actualResponseTime | string | date-time | No |
 
 Table: Fields of InquiredProvider. {#tbl:InquiredProvider.md:InquiredProvider}
+
+{#page:break}

@@ -12,7 +12,7 @@ A ResourceSpecification is a base class that represents a generic means for impl
 In essence, a ResourceSpecification defines the common attributes and relationships of a set of related Resources, while Resource defines a specific instance that is based on a particular ResourceSpecification.
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | id | string | N/A | No |
 | href | string | uri | No |
 | name | string | N/A | No |
@@ -29,8 +29,10 @@ In essence, a ResourceSpecification defines the common attributes and relationsh
 | resourceSpecRelationship | array | ResourceSpecificationRelationship | No |
 | targetResourceSchema | TargetResourceSchema | N/A | No |
 | validFor | TimePeriod | N/A | No |
-| \@baseType | string | N/A | No |
-| \@schemaLocation | string | uri | No |
-| \@type | string | oneOf["LogicalResourceSpecification", "PhysicalResourceSpecification", "ResourceSpecification"] | Yes |
+| @baseType | string | N/A | No |
+| @schemaLocation | string | uri | No |
+| @type | string | oneOf["LogicalResourceSpecification", "PhysicalResourceSpecification", "ResourceSpecification"] | Yes |
 
 Table: Fields of ResourceSpecification. {#tbl:ResourceSpecification.md:ResourceSpecification}
+
+{#page:break}

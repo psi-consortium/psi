@@ -7,12 +7,14 @@
 
 **Absolute Path:** /partyManagement/v1/individual/{id}
 
+**TOD Reference:** TOD-01-01-03-Remove_Party_Profile
+
 **Summary:** Deletes a Individual
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | id | string | Yes | Identifier of the Individual |
 
 Table: Parameters of DELETE individual/{id}. {#tbl:individual-id.delete.md:parameters}
@@ -32,6 +34,4 @@ Table: Parameters of DELETE individual/{id}. {#tbl:individual-id.delete.md:param
 
 Table: Responses of DELETE individual/{id}. {#tbl:individual-id.delete.md:responses}
 
-## TOD Reference
-
-TOD-01-01-03-Remove_Party_Profile
+{#page:break}

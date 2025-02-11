@@ -5,11 +5,13 @@
 
 # Polygon
 
-GeoJSon geometry
+A GeoJSON Polygon.
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | coordinates | array | Point2D | No |
 | type | string | "Polygon" | Yes |
 
 Table: Fields of Polygon. {#tbl:Polygon.md:Polygon}
+
+{#page:break}

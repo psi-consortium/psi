@@ -9,7 +9,7 @@ An identified part of the order.
 A product order is decomposed into one or more order items.
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | id | string | N/A | Yes |
 | quantity | integer | N/A | No |
 | action | OrderItemActionType | N/A | Yes |
@@ -29,8 +29,10 @@ A product order is decomposed into one or more order items.
 | state | ProductOrderItemStateType | N/A | No |
 | requestedStartDate | string | date-time | No |
 | requestedEndDate | string | date-time | No |
-| \@baseType | string | N/A | No |
-| \@schemaLocation | string | uri | No |
-| \@type | string | N/A | No |
+| @baseType | string | N/A | No |
+| @schemaLocation | string | uri | No |
+| @type | string | N/A | No |
 
 Table: Fields of ProductOrderItem. {#tbl:ProductOrderItem.md:ProductOrderItem}
+
+{#page:break}

@@ -7,12 +7,14 @@
 
 **Absolute Path:** /productCatalog/v1/productSpecification
 
+**TOD Reference:** TOD-02-03-05-View_All_Product_Specifications
+
 **Summary:** List or find ProductSpecification objects
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | fields | string | No | Comma-separated properties to be provided in response |
 | offset | integer | No | Requested index for start of resources to be provided in response |
 | limit | integer | No | Requested number of resources to be provided in response |
@@ -34,6 +36,4 @@ Table: Parameters of GET productSpecification. {#tbl:productSpecification.get.md
 
 Table: Responses of GET productSpecification. {#tbl:productSpecification.get.md:responses}
 
-## TOD Reference
-
-TOD-02-03-05-View_All_Product_Specifications
+{#page:break}

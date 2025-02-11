@@ -8,7 +8,9 @@
 Possible values for the state of the product order item
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | ProductOrderItemStateType | string | oneOf[acknowledged, rejected, pending, held, inProgress, cancelled, completed, failed, assessingCancellation, pendingCancellation] | No |
 
 Table: Fields of ProductOrderItemStateType. {#tbl:ProductOrderItemStateType.md:ProductOrderItemStateType}
+
+{#page:break}

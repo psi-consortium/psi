@@ -7,12 +7,14 @@
 
 **Absolute Path:** /productOrdering/v1/productOrder/{id}
 
+**TOD Reference:** TOD-03-02-03-View_Product_Order
+
 **Summary:** Retrieves a ProductOrder by ID
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | id | string | Yes | Identifier of the ProductOrder |
 | fields | string | No | Comma-separated properties to provide in response |
 
@@ -33,6 +35,4 @@ Table: Parameters of GET productOrder/{id}. {#tbl:productOrder-id.get.md:paramet
 
 Table: Responses of GET productOrder/{id}. {#tbl:productOrder-id.get.md:responses}
 
-## TOD Reference
-
-TOD-03-02-03-View_Product_Order
+{#page:break}

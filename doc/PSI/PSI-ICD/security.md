@@ -69,7 +69,7 @@ This could be implemented by using an access control list (ACL).
 As long as not stated otherwise, every party is only allowed to read and update entities they previously created themselves.
 The owner will extend this access as side effects to other actions:
 
-* As part of resource accreditation, the resource is made visible to SATCOM users.
+* As part of resource accreditation, the resource is made visible to (Gov)SatCom users.
 * When an order is created, the party information of the customer is made visible to the provider.
 
 The system might also provide further internal processes to make data *writable* by other parties, e.g. for other persons in the same organization or a mission expert that supports the customer in the process of service acquisition.

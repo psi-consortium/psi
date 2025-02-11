@@ -7,12 +7,14 @@
 
 **Absolute Path:** /serviceCatalog/v1/serviceSpecification/{id}
 
+**TOD Reference:** TOD-02-02-03-Remove_Service_Specification
+
 **Summary:** Deletes a ServiceSpecification
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | id | string | Yes | Identifier of the ServiceSpecification |
 
 Table: Parameters of DELETE serviceSpecification/{id}. {#tbl:serviceSpecification-id.delete.md:parameters}
@@ -32,6 +34,4 @@ Table: Parameters of DELETE serviceSpecification/{id}. {#tbl:serviceSpecificatio
 
 Table: Responses of DELETE serviceSpecification/{id}. {#tbl:serviceSpecification-id.delete.md:responses}
 
-## TOD Reference
-
-TOD-02-02-03-Remove_Service_Specification
+{#page:break}

@@ -9,7 +9,7 @@ A trouble ticket is a record of an issue that is created, tracked, and managed b
 Skipped properties: id,href,creationDate,lastUpdate,statusChange,statusChangeDate
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | name | string | N/A | No |
 | description | string | N/A | No |
 | expectedResolutionDate | string | date-time | No |
@@ -27,8 +27,10 @@ Skipped properties: id,href,creationDate,lastUpdate,statusChange,statusChangeDat
 | relatedParty | array | RelatedParty | No |
 | status | TroubleTicketStatusType | N/A | No |
 | troubleTicketRelationship | array | TroubleTicketRelationship | No |
-| \@baseType | string | N/A | No |
-| \@schemaLocation | string | uri | No |
-| \@type | string | N/A | No |
+| @baseType | string | N/A | No |
+| @schemaLocation | string | uri | No |
+| @type | string | N/A | No |
 
 Table: Fields of TroubleTicket_Update. {#tbl:TroubleTicket_Update.md:TroubleTicket_Update}
+
+{#page:break}

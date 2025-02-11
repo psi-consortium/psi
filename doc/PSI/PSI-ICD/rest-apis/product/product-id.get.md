@@ -7,12 +7,14 @@
 
 **Absolute Path:** /productInventory/v1/product/{id}
 
+**TOD Reference:** TOD-05-03-04-View_Product
+
 **Summary:** Retrieves a Product by ID
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | id | string | Yes | Identifier of the Product |
 | fields | string | No | Comma-separated properties to provide in response |
 
@@ -33,6 +35,4 @@ Table: Parameters of GET product/{id}. {#tbl:product-id.get.md:parameters}
 
 Table: Responses of GET product/{id}. {#tbl:product-id.get.md:responses}
 
-## TOD Reference
-
-TOD-05-03-04-View_Product
+{#page:break}

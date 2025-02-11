@@ -7,12 +7,14 @@
 
 **Absolute Path:** /serviceCatalog/v1/serviceTemplate/{id}
 
+**TOD Reference:** TOD-04-02-04-View_Service_Template
+
 **Summary:** Retrieves a ServiceTemplate by ID
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | id | string | Yes | The identifier of the ServiceTemplate. |
 | fields | string | No | Comma-separated properties to provide in response. |
 
@@ -33,6 +35,4 @@ Table: Parameters of GET serviceTemplate/{id}. {#tbl:serviceTemplate-id.get.md:p
 
 Table: Responses of GET serviceTemplate/{id}. {#tbl:serviceTemplate-id.get.md:responses}
 
-## TOD Reference
-
-TOD-04-02-04-View_Service_Template
+{#page:break}

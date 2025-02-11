@@ -8,7 +8,7 @@
 Specification for resource, service or product features
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | id | string | N/A | No |
 | href | string | uri | No |
 | name | string | N/A | No |
@@ -19,8 +19,10 @@ Specification for resource, service or product features
 | featureSpecCharacteristic | array | FeatureSpecificationCharacteristic | No |
 | featureSpecRelationship | array | FeatureSpecificationRelationship | No |
 | validFor | TimePeriod | N/A | No |
-| \@baseType | string | N/A | No |
-| \@schemaLocation | string | uri | No |
-| \@type | string | N/A | No |
+| @baseType | string | N/A | No |
+| @schemaLocation | string | uri | No |
+| @type | string | N/A | No |
 
 Table: Fields of FeatureSpecification. {#tbl:FeatureSpecification.md:FeatureSpecification}
+
+{#page:break}

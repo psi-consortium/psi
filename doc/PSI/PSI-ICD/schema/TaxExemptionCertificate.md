@@ -10,7 +10,7 @@ An exemption has a certificate identifier (received from the jurisdiction that l
 An exemption is per tax types and determines for each type of tax what portion of the tax is exempted (partial by percentage or complete) via the tax definition.
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | id | string | N/A | No |
 | certificateNumber | string | N/A | No |
 | issuingJurisdiction | string | N/A | No |
@@ -18,8 +18,10 @@ An exemption is per tax types and determines for each type of tax what portion o
 | attachment | AttachmentOrDocumentRef | N/A | No |
 | taxDefinition | array | TaxDefinition | No |
 | validFor | TimePeriod | N/A | No |
-| \@baseType | string | N/A | No |
-| \@schemaLocation | string | uri | No |
-| \@type | string | N/A | No |
+| @baseType | string | N/A | No |
+| @schemaLocation | string | uri | No |
+| @type | string | N/A | No |
 
 Table: Fields of TaxExemptionCertificate. {#tbl:TaxExemptionCertificate.md:TaxExemptionCertificate}
+
+{#page:break}

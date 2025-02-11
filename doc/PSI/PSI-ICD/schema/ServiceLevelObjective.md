@@ -8,9 +8,9 @@
 Service level objectives are defined in terms of parameters and metrics, thresholds, and tolerances associated with the parameters.
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | id | string | N/A | No |
-| href | string | N/A | No |
+| href | string | uri | No |
 | name | string | N/A | No |
 | conformancePeriod | TimePeriod | N/A | No |
 | conformanceTarget | string | N/A | No |
@@ -23,8 +23,10 @@ Service level objectives are defined in terms of parameters and metrics, thresho
 | consequence | array | ServiceLevelSpecConsequence | No |
 | threshold | array | ServiceLevelObjectiveThreshold | No |
 | applicability | array | ApplicableTimePeriod | No |
-| \@baseType | string | N/A | No |
-| \@schemaLocation | string | N/A | No |
-| \@type | string | N/A | No |
+| @baseType | string | N/A | No |
+| @schemaLocation | string | N/A | No |
+| @type | string | N/A | No |
 
 Table: Fields of ServiceLevelObjective. {#tbl:ServiceLevelObjective.md:ServiceLevelObjective}
+
+{#page:break}

@@ -7,12 +7,14 @@
 
 **Absolute Path:** /partyManagement/v1/organization/{id}
 
+**TOD Reference:** TOD-01-01-03-Remove_Party_Profile
+
 **Summary:** Deletes a Organization
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | id | string | Yes | Identifier of the Organization |
 
 Table: Parameters of DELETE organization/{id}. {#tbl:organization-id.delete.md:parameters}
@@ -32,6 +34,4 @@ Table: Parameters of DELETE organization/{id}. {#tbl:organization-id.delete.md:p
 
 Table: Responses of DELETE organization/{id}. {#tbl:organization-id.delete.md:responses}
 
-## TOD Reference
-
-TOD-01-01-03-Remove_Party_Profile
+{#page:break}

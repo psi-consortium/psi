@@ -7,12 +7,14 @@
 
 **Absolute Path:** /documentManagement/v1/document/{documentId}/attachment/{attachmentId}
 
+**TOD Reference:** TOD-01-03-08-Remove_Attachment
+
 **Summary:** Deletes an Attachment
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | documentId | string | Yes | Identifier of the document. |
 | attachmentId | string | Yes | Identifier of the attachment. |
 
@@ -33,6 +35,4 @@ Table: Parameters of DELETE document/{documentId}/attachment/{attachmentId}. {#t
 
 Table: Responses of DELETE document/{documentId}/attachment/{attachmentId}. {#tbl:document-documentId-attachment-attachmentId.delete.md:responses}
 
-## TOD Reference
-
-TOD-01-03-08-Remove_Attachment
+{#page:break}

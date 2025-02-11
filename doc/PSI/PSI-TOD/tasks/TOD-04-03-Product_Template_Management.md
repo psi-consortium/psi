@@ -36,7 +36,7 @@ Task  ..> O5    : <<includes>>
 
 ```
 
-![**TOD-04-03**: Product Template Management](../../common/pixel.png){#fig:TOD-04-03-Product_Template_Management}
+![TOD-04-03: Product Template Management](../../common/pixel.png){#fig:TOD-04-03-Product_Template_Management}
 
 |                                | Customer |  Provider  | Other PSS | Governance |
 |--------------------------------|:--------:|:----------:|:---------:|:----------:|

@@ -7,6 +7,8 @@
 
 **Absolute Path:** /serviceInventory/v1/service
 
+**TOD Reference:** TOD-05-02-01-Create_Service
+
 **Summary:** Creates a Service
 
 ## Request Body
@@ -31,6 +33,4 @@ Table: Request Body of POST service. {#tbl:service.post.md:request_body}
 
 Table: Responses of POST service. {#tbl:service.post.md:responses}
 
-## TOD Reference
-
-TOD-05-02-01-Create_Service
+{#page:break}

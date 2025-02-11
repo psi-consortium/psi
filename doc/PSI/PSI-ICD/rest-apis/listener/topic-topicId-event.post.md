@@ -7,12 +7,14 @@
 
 **Absolute Path:** /eventManagement/v1/topic/{topicId}/event
 
+**TOD Reference:** TOD-01-02-03-Dispatch_Event
+
 **Summary:** Creates a Event
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | topicId | string | Yes | Identifier of the parent Topic entity |
 
 Table: Parameters of POST topic/{topicId}/event. {#tbl:topic-topicId-event.post.md:parameters}
@@ -39,6 +41,4 @@ Table: Request Body of POST topic/{topicId}/event. {#tbl:topic-topicId-event.pos
 
 Table: Responses of POST topic/{topicId}/event. {#tbl:topic-topicId-event.post.md:responses}
 
-## TOD Reference
-
-TOD-01-02-03-Dispatch_Event
+{#page:break}

@@ -9,7 +9,7 @@ Logic resource is a type of resource that describes the common set of attributes
 TPE, MSISDN, IP Addresses) in the inventory.
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | id | string | N/A | Yes |
 | href | string | uri | Yes |
 | name | string | N/A | No |
@@ -31,8 +31,10 @@ TPE, MSISDN, IP Addresses) in the inventory.
 | resourceSpecification | ResourceSpecificationRef | N/A | No |
 | resourceStatus | ResourceStatusType | N/A | No |
 | usageState | ResourceUsageStateType | N/A | No |
-| \@baseType | string | N/A | No |
-| \@schemaLocation | string | uri | No |
-| \@type | string | "LogicalResource" | Yes |
+| @baseType | string | N/A | No |
+| @schemaLocation | string | uri | No |
+| @type | string | "LogicalResource" | Yes |
 
 Table: Fields of LogicalResource. {#tbl:LogicalResource.md:LogicalResource}
+
+{#page:break}

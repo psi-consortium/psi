@@ -1023,6 +1023,12 @@
             }
         },
         {
+            "@jdt.path": "$.components.schemas.Extensible",
+            "@jdt.value": {
+                "required": ["@type"]
+            }
+        },
+        {
             "@jdt.path": "$.components.schemas.RelatedParty",
             "@jdt.value": {
                 "description": "Related Party reference. A related party defines party or party role linked to a specific entity."

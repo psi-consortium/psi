@@ -7,6 +7,8 @@
 
 **Absolute Path:** /serviceCatalog/v1/serviceTemplate
 
+**TOD Reference:** TOD-04-02-01-Create_Service_Template
+
 **Summary:** Creates a ServiceTemplate
 
 ## Request Body
@@ -31,6 +33,4 @@ Table: Request Body of POST serviceTemplate. {#tbl:serviceTemplate.post.md:reque
 
 Table: Responses of POST serviceTemplate. {#tbl:serviceTemplate.post.md:responses}
 
-## TOD Reference
-
-TOD-04-02-01-Create_Service_Template
+{#page:break}

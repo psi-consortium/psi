@@ -1,0 +1,301 @@
+{
+    "@jdt.replace": [
+        {
+            "@jdt.path": "$.servers[*].url",
+            "@jdt.value": "/psi-api/alarm/v1/"
+        }
+    ],
+    "@jdt.remove": [
+        {
+            "@jdt.path": "$.tags[?(@.name!='alarm')]"
+        },
+        {
+            "@jdt.path": "$.paths['/alarm'].post"
+        },
+        {
+            "@jdt.path": "$.paths['/alarm/{id}'].delete"
+        },
+        {
+            "@jdt.path": "$.paths['/alarm/{id}'].patch"
+        },
+        {
+            "@jdt.path": "$.paths['/ackAlarms']"
+        },
+        {
+            "@jdt.path": "$.paths['/ackAlarms/{id}']"
+        },
+        {
+            "@jdt.path": "$.paths['/unAckAlarms']"
+        },
+        {
+            "@jdt.path": "$.paths['/unAckAlarms/{id}']"
+        },
+        {
+            "@jdt.path": "$.paths['/clearAlarms']"
+        },
+        {
+            "@jdt.path": "$.paths['/clearAlarms/{id}']"
+        },
+        {
+            "@jdt.path": "$.paths['/commentAlarms']"
+        },
+        {
+            "@jdt.path": "$.paths['/commentAlarms/{id}']"
+        },
+        {
+            "@jdt.path": "$.paths['/groupAlarms']"
+        },
+        {
+            "@jdt.path": "$.paths['/groupAlarms/{id}']"
+        },
+        {
+            "@jdt.path": "$.paths['/unGroupAlarms']"
+        },
+        {
+            "@jdt.path": "$.paths['/unGroupAlarms/{id}']"
+        },
+        {
+            "@jdt.path": "$.paths['/hub']"
+        },
+        {
+            "@jdt.path": "$.paths['/hub/{id}']"
+        },
+        {
+            "@jdt.path": "$.paths['/listener/alarmCreateEvent']"
+        },
+        {
+            "@jdt.path": "$.paths['/listener/alarmAttributeValueChangeEvent']"
+        },
+        {
+            "@jdt.path": "$.paths['/listener/alarmStateChangeEvent']"
+        },
+        {
+            "@jdt.path": "$.paths['/listener/alarmDeleteEvent']"
+        },
+        {
+            "@jdt.path": "$.paths['/listener/ackAlarmsCreateEvent']"
+        },
+        {
+            "@jdt.path": "$.paths['/listener/ackAlarmsStateChangeEvent']"
+        },
+        {
+            "@jdt.path": "$.paths['/listener/unAckAlarmsCreateEvent']"
+        },
+        {
+            "@jdt.path": "$.paths['/listener/unAckAlarmsStateChangeEvent']"
+        },
+        {
+            "@jdt.path": "$.paths['/listener/clearAlarmsCreateEvent']"
+        },
+        {
+            "@jdt.path": "$.paths['/listener/clearAlarmsStateChangeEvent']"
+        },
+        {
+            "@jdt.path": "$.paths['/listener/commentAlarmsCreateEvent']"
+        },
+        {
+            "@jdt.path": "$.paths['/listener/commentAlarmsStateChangeEvent']"
+        },
+        {
+            "@jdt.path": "$.paths['/listener/groupAlarmsCreateEvent']"
+        },
+        {
+            "@jdt.path": "$.paths['/listener/groupAlarmsStateChangeEvent']"
+        },
+        {
+            "@jdt.path": "$.paths['/listener/unGroupAlarmsCreateEvent']"
+        },
+        {
+            "@jdt.path": "$.paths['/listener/unGroupAlarmsStateChangeEvent']"
+        },
+        {
+            "@jdt.path": "$.components.schemas.Addressable"
+        },
+        {
+            "@jdt.path": "$.components.schemas.Extensible"
+        },
+        {
+            "@jdt.path": "$.components.schemas.AlarmRefOrValue"
+        },
+        {
+            "@jdt.path": "$.components.schemas.AckAlarms"
+        },
+        {
+            "@jdt.path": "$.components.schemas.AckAlarms_Create"
+        },
+        {
+            "@jdt.path": "$.components.schemas.Alarm_Create"
+        },
+        {
+            "@jdt.path": "$.components.schemas.Alarm_Update"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ClearAlarms"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ClearAlarms_Create"
+        },
+        {
+            "@jdt.path": "$.components.schemas.CommentAlarms"
+        },
+        {
+            "@jdt.path": "$.components.schemas.CommentAlarms_Create"
+        },
+        {
+            "@jdt.path": "$.components.schemas.EntityRef"
+        },
+        {
+            "@jdt.path": "$.components.schemas.GroupAlarms"
+        },
+        {
+            "@jdt.path": "$.components.schemas.GroupAlarms_Create"
+        },
+        {
+            "@jdt.path": "$.components.schemas.Place"
+        },
+        {
+            "@jdt.path": "$.components.schemas.PlaceRef"
+        },
+        {
+            "@jdt.path": "$.components.schemas.UnAckAlarms"
+        },
+        {
+            "@jdt.path": "$.components.schemas.UnAckAlarms_Create"
+        },
+        {
+            "@jdt.path": "$.components.schemas.UnGroupAlarms"
+        },
+        {
+            "@jdt.path": "$.components.schemas.UnGroupAlarms_Create"
+        },
+        {
+            "@jdt.path": "$.components.schemas.EventSubscription"
+        },
+        {
+            "@jdt.path": "$.components.schemas.EventSubscriptionInput"
+        },
+        {
+            "@jdt.path": "$.components.schemas.AlarmCreateEvent"
+        },
+        {
+            "@jdt.path": "$.components.schemas.AlarmCreateEventPayload"
+        },
+        {
+            "@jdt.path": "$.components.schemas.AlarmAttributeValueChangeEvent"
+        },
+        {
+            "@jdt.path": "$.components.schemas.AlarmAttributeValueChangeEventPayload"
+        },
+        {
+            "@jdt.path": "$.components.schemas.AlarmStateChangeEvent"
+        },
+        {
+            "@jdt.path": "$.components.schemas.AlarmStateChangeEventPayload"
+        },
+        {
+            "@jdt.path": "$.components.schemas.AlarmDeleteEvent"
+        },
+        {
+            "@jdt.path": "$.components.schemas.AlarmDeleteEventPayload"
+        },
+        {
+            "@jdt.path": "$.components.schemas.AckAlarmsCreateEvent"
+        },
+        {
+            "@jdt.path": "$.components.schemas.AckAlarmsCreateEventPayload"
+        },
+        {
+            "@jdt.path": "$.components.schemas.AckAlarmsStateChangeEvent"
+        },
+        {
+            "@jdt.path": "$.components.schemas.AckAlarmsStateChangeEventPayload"
+        },
+        {
+            "@jdt.path": "$.components.schemas.UnAckAlarmsCreateEvent"
+        },
+        {
+            "@jdt.path": "$.components.schemas.UnAckAlarmsCreateEventPayload"
+        },
+        {
+            "@jdt.path": "$.components.schemas.UnAckAlarmsStateChangeEvent"
+        },
+        {
+            "@jdt.path": "$.components.schemas.UnAckAlarmsStateChangeEventPayload"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ClearAlarmsCreateEvent"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ClearAlarmsCreateEventPayload"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ClearAlarmsStateChangeEvent"
+        },
+        {
+            "@jdt.path": "$.components.schemas.ClearAlarmsStateChangeEventPayload"
+        },
+        {
+            "@jdt.path": "$.components.schemas.CommentAlarmsCreateEvent"
+        },
+        {
+            "@jdt.path": "$.components.schemas.CommentAlarmsCreateEventPayload"
+        },
+        {
+            "@jdt.path": "$.components.schemas.CommentAlarmsStateChangeEvent"
+        },
+        {
+            "@jdt.path": "$.components.schemas.CommentAlarmsStateChangeEventPayload"
+        },
+        {
+            "@jdt.path": "$.components.schemas.GroupAlarmsCreateEvent"
+        },
+        {
+            "@jdt.path": "$.components.schemas.GroupAlarmsCreateEventPayload"
+        },
+        {
+            "@jdt.path": "$.components.schemas.GroupAlarmsStateChangeEvent"
+        },
+        {
+            "@jdt.path": "$.components.schemas.GroupAlarmsStateChangeEventPayload"
+        },
+        {
+            "@jdt.path": "$.components.schemas.UnGroupAlarmsCreateEvent"
+        },
+        {
+            "@jdt.path": "$.components.schemas.UnGroupAlarmsCreateEventPayload"
+        },
+        {
+            "@jdt.path": "$.components.schemas.UnGroupAlarmsStateChangeEvent"
+        },
+        {
+            "@jdt.path": "$.components.schemas.UnGroupAlarmsStateChangeEventPayload"
+        }
+    ],
+    "@jdt.rename": [],
+    "@jdt.merge": [
+        {
+            "@jdt.path": "$.tags[?(@.name=='alarm')]",
+            "@jdt.value": {
+                "description": "Alarm API"
+            }
+        },
+        {
+            "@jdt.path": "$.components.schemas.*.properties.href",
+            "@jdt.value": {
+                "format": "uri"
+            }
+        },
+        {
+            "@jdt.path": "$.components.schemas.Alarm.properties.id",
+            "@jdt.value": {
+                "type": "string"
+            }
+        },
+        {
+            "@jdt.path": "$.components.schemas.Alarm.properties.state",
+            "@jdt.value": {
+                "enum": ["raised", "updated", "cleared"]
+            }
+        }
+    ]
+}

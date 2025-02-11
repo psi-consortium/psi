@@ -7,12 +7,14 @@
 
 **Absolute Path:** /customerInquiry/v1/customerInquiry/{id}
 
+**TOD Reference:** TOD-03-01-04-Update_Customer_Inquiry
+
 **Summary:** Updates partially a CustomerInquiry
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | id | string | Yes | Identifier of the CustomerInquiry |
 
 Table: Parameters of PATCH customerInquiry/{id}. {#tbl:customerInquiry-id.patch.md:parameters}
@@ -40,6 +42,4 @@ Table: Request Body of PATCH customerInquiry/{id}. {#tbl:customerInquiry-id.patc
 
 Table: Responses of PATCH customerInquiry/{id}. {#tbl:customerInquiry-id.patch.md:responses}
 
-## TOD Reference
-
-TOD-03-01-04-Update_Customer_Inquiry
+{#page:break}

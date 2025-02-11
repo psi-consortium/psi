@@ -11,7 +11,7 @@ The Product Inventory Management task takes care of the maintenance of products 
 There are two different scenarios to do this:
 
 * A product is created if an order of the corresponding service or resource is fulfilled.
-* As stated in [TOD-05-01](#tod-05-01-resource_inventory_management), a product can be stocked and therefore created any time along with its resource.
+* As stated in [TOD-05-01](#tod-05-01-resourceinventorymanagement), a product can be stocked and therefore created any time along with its resource.
 
 The PSS manages a priority for each active product instance, which stems from the customer profile or their inquiry.
 It is to be stored in a characteristic and can be used for conflict resolution (e.g. pre-emption) when higher priority requests can otherwise not be fulfilled.
@@ -37,7 +37,7 @@ Task  ..> O5    : <<includes>>
 @enduml
 ```
 
-![**TOD-05-03**: Product Inventory Management](../../common/pixel.png){#fig:TOD-05-03-Product_Inventory_Management}
+![TOD-05-03: Product Inventory Management](../../common/pixel.png){#fig:TOD-05-03-Product_Inventory_Management}
 
 |                       |  Customer  |  Provider  | Other PSS | Governance |
 |-----------------------|:----------:|:----------:|:---------:|:----------:|

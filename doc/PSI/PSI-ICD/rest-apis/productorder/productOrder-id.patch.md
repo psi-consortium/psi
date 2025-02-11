@@ -7,12 +7,14 @@
 
 **Absolute Path:** /productOrdering/v1/productOrder/{id}
 
+**TOD Reference:** TOD-03-02-02-Update_Product_Order
+
 **Summary:** Updates partially a ProductOrder
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | id | string | Yes | Identifier of the ProductOrder |
 
 Table: Parameters of PATCH productOrder/{id}. {#tbl:productOrder-id.patch.md:parameters}
@@ -40,6 +42,4 @@ Table: Request Body of PATCH productOrder/{id}. {#tbl:productOrder-id.patch.md:r
 
 Table: Responses of PATCH productOrder/{id}. {#tbl:productOrder-id.patch.md:responses}
 
-## TOD Reference
-
-TOD-03-02-02-Update_Product_Order
+{#page:break}

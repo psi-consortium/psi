@@ -39,7 +39,7 @@ I1 --           Operation
 
 ```
 
-![**TOD-06-01-02**: Update Service Level Objective](../../common/pixel.png){#fig:TOD-06-01-02-Update_Service_Level_Objective}
+![TOD-06-01-02: Update Service Level Objective](../../common/pixel.png){#fig:TOD-06-01-02-Update_Service_Level_Objective}
 
 **Prerequisites**
 

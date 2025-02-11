@@ -19,7 +19,7 @@ Task  ..> O1    : <<includes>>
 @enduml
 ```
 
-![**TOD-05-04**: Stock Management](../../common/pixel.png){#fig:TOD-05-04-Stock_Management}
+![TOD-05-04: Stock Management](../../common/pixel.png){#fig:TOD-05-04-Stock_Management}
 
 |                         | Customer | Provider | Other PSS | Governance |    PSS     |
 |-------------------------|:--------:|:--------:|:---------:|:----------:|:----------:|

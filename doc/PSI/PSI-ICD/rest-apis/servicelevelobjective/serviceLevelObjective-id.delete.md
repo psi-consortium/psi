@@ -7,12 +7,14 @@
 
 **Absolute Path:** /serviceQuality/v1/serviceLevelObjective/{id}
 
+**TOD Reference:** TOD-06-01-03-Remove_Service_Level_Objective
+
 **Summary:** Deletes a ServiceLevelObjective
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | id | string | Yes | Identifier of the ServiceLevelObjective |
 
 Table: Parameters of DELETE serviceLevelObjective/{id}. {#tbl:serviceLevelObjective-id.delete.md:parameters}
@@ -32,6 +34,4 @@ Table: Parameters of DELETE serviceLevelObjective/{id}. {#tbl:serviceLevelObject
 
 Table: Responses of DELETE serviceLevelObjective/{id}. {#tbl:serviceLevelObjective-id.delete.md:responses}
 
-## TOD Reference
-
-TOD-06-01-03-Remove_Service_Level_Objective
+{#page:break}

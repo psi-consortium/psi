@@ -47,7 +47,7 @@ I3 --       	Operation
 
 ```
 
-![**TOD-03-01-02**: View Customer Inquiry](../../common/pixel.png){#fig:TOD-03-01-02-View_Customer_Inquiry}
+![TOD-03-01-02: View Customer Inquiry](../../common/pixel.png){#fig:TOD-03-01-02-View_Customer_Inquiry}
 
 **Prerequisites**
 

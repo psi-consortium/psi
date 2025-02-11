@@ -8,7 +8,7 @@
 specification of a value (number or text or an object) that can be assigned to a Characteristic.
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | isDefault | boolean | N/A | No |
 | rangeInterval | string | N/A | No |
 | regex | string | N/A | No |
@@ -18,8 +18,10 @@ specification of a value (number or text or an object) that can be assigned to a
 | valueType | string | N/A | No |
 | validFor | TimePeriod | N/A | No |
 | value | any | N/A | No |
-| \@baseType | string | N/A | No |
-| \@schemaLocation | string | uri | No |
-| \@type | string | N/A | No |
+| @baseType | string | N/A | No |
+| @schemaLocation | string | uri | No |
+| @type | string | N/A | No |
 
 Table: Fields of CharacteristicValueSpecification. {#tbl:CharacteristicValueSpecification.md:CharacteristicValueSpecification}
+
+{#page:break}

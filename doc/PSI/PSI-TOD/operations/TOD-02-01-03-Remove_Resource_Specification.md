@@ -41,7 +41,7 @@ I2 --           Operation
 
 ```
 
-![**TOD-02-01-03**: Remove Resource Specification](../../common/pixel.png){#fig:TOD-02-01-03-Remove_Resource_Specification}
+![TOD-02-01-03: Remove Resource Specification](../../common/pixel.png){#fig:TOD-02-01-03-Remove_Resource_Specification}
 
 **Prerequisites**
 

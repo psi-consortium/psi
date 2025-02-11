@@ -7,12 +7,14 @@
 
 **Absolute Path:** /productCatalog/v1/productOffering/{id}
 
+**TOD Reference:** TOD-02-04-02-Update_Product_Offering
+
 **Summary:** Updates partially a ProductOffering
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | id | string | Yes | Identifier of the ProductOffering |
 
 Table: Parameters of PATCH productOffering/{id}. {#tbl:productOffering-id.patch.md:parameters}
@@ -40,6 +42,4 @@ Table: Request Body of PATCH productOffering/{id}. {#tbl:productOffering-id.patc
 
 Table: Responses of PATCH productOffering/{id}. {#tbl:productOffering-id.patch.md:responses}
 
-## TOD Reference
-
-TOD-02-04-02-Update_Product_Offering
+{#page:break}

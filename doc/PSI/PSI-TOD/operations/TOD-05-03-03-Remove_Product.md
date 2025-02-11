@@ -39,7 +39,7 @@ I1 --           Operation
 
 ```
 
-![**TOD-05-03-03**: Remove Product](../../common/pixel.png){#fig:TOD-05-03-03-Remove_Product}
+![TOD-05-03-03: Remove Product](../../common/pixel.png){#fig:TOD-05-03-03-Remove_Product}
 
 **Prerequisites**
 

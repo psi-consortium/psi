@@ -7,12 +7,14 @@
 
 **Absolute Path:** /eventManagement/v1/topic/{topicId}/hub/{id}
 
+**TOD Reference:** TOD-01-02-04-Deregister_Event_Callback
+
 **Summary:** Unregister listener from a Hub
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | topicId | string | Yes | Identifier of the parent Topic entity |
 | id | string | Yes | Identifier of the Hub |
 
@@ -33,6 +35,4 @@ Table: Parameters of DELETE topic/{topicId}/hub/{id}. {#tbl:topic-topicId-hub-id
 
 Table: Responses of DELETE topic/{topicId}/hub/{id}. {#tbl:topic-topicId-hub-id.delete.md:responses}
 
-## TOD Reference
-
-TOD-01-02-04-Deregister_Event_Callback
+{#page:break}

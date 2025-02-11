@@ -9,7 +9,7 @@ Document is a tangible output from an activity
 Skipped properties: id,href
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | name | string | N/A | No |
 | description | string | N/A | No |
 | creationDate | string | date-time | No |
@@ -23,3 +23,5 @@ Skipped properties: id,href
 | relatedParty | array | RelatedParty | No |
 
 Table: Fields of Document_Create. {#tbl:Document_Create.md:Document_Create}
+
+{#page:break}

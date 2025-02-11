@@ -12,15 +12,17 @@ Objectives.
 Service Level Agreements are expressed in terms of Service Level Specifications.
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | id | string | N/A | No |
-| href | string | N/A | No |
+| href | string | uri | No |
 | name | string | N/A | No |
 | description | string | N/A | No |
 | relatedServiceLevelObjective | array | ServiceLevelObjectiveRef | No |
 | validFor | TimePeriod | N/A | No |
-| \@baseType | string | N/A | No |
-| \@schemaLocation | string | uri | No |
-| \@type | string | N/A | No |
+| @baseType | string | N/A | No |
+| @schemaLocation | string | uri | No |
+| @type | string | N/A | No |
 
 Table: Fields of ServiceLevelSpecification. {#tbl:ServiceLevelSpecification.md:ServiceLevelSpecification}
+
+{#page:break}

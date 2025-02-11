@@ -7,12 +7,14 @@
 
 **Absolute Path:** /eventManagement/v1/topic/{topicId}/hub
 
+**TOD Reference:** TOD-01-02-02-Register_Event_Callback
+
 **Summary:** Register listener to a Hub
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | topicId | string | Yes | Identifier of the parent Topic entity |
 
 Table: Parameters of POST topic/{topicId}/hub. {#tbl:topic-topicId-hub.post.md:parameters}
@@ -39,6 +41,4 @@ Table: Request Body of POST topic/{topicId}/hub. {#tbl:topic-topicId-hub.post.md
 
 Table: Responses of POST topic/{topicId}/hub. {#tbl:topic-topicId-hub.post.md:responses}
 
-## TOD Reference
-
-TOD-01-02-02-Register_Event_Callback
+{#page:break}

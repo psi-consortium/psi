@@ -7,12 +7,14 @@
 
 **Absolute Path:** /troubleTicket/v1/troubleTicket
 
+**TOD Reference:** TOD-01-04-05-View_All_Trouble_Tickets
+
 **Summary:** List or find TroubleTicket objects
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | fields | string | No | Comma-separated properties to be provided in response |
 | offset | integer | No | Requested index for start of resources to be provided in response |
 | limit | integer | No | Requested number of resources to be provided in response |
@@ -34,6 +36,4 @@ Table: Parameters of GET troubleTicket. {#tbl:troubleTicket.get.md:parameters}
 
 Table: Responses of GET troubleTicket. {#tbl:troubleTicket.get.md:responses}
 
-## TOD Reference
-
-TOD-01-04-05-View_All_Trouble_Tickets
+{#page:break}

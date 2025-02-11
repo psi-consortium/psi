@@ -39,7 +39,7 @@ I1 --           Operation
 
 ```
 
-![**TOD-04-01-01**: Create Resource Template](../../common/pixel.png){#fig:TOD-04-01-01-Create_Resource_Template}
+![TOD-04-01-01: Create Resource Template](../../common/pixel.png){#fig:TOD-04-01-01-Create_Resource_Template}
 
 **Prerequisites**
 

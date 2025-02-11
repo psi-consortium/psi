@@ -1841,7 +1841,10 @@
             "description": "When sub-classing, this defines the sub-class Extensible name"
           }
         },
-        "description": "Base Extensible schema for use in TMForum Open-APIs"
+        "description": "Base Extensible schema for use in TMForum Open-APIs",
+        "required": [
+          "@type"
+        ]
       },
       "Quantity": {
         "type": "object",

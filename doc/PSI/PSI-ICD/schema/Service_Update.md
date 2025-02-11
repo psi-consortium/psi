@@ -11,7 +11,7 @@ This gives rise to the two subclasses of Service: CustomerFacingService and Reso
 Skipped properties: id,href,serviceDate
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | name | string | N/A | No |
 | description | string | N/A | No |
 | category | string | N/A | No |
@@ -35,8 +35,10 @@ Skipped properties: id,href,serviceDate
 | state | ServiceStateType | N/A | No |
 | supportingResource | array | ResourceRef | No |
 | supportingService | array | ServiceRefOrValue | No |
-| \@baseType | string | N/A | No |
-| \@schemaLocation | string | uri | No |
-| \@type | string | N/A | No |
+| @baseType | string | N/A | No |
+| @schemaLocation | string | uri | No |
+| @type | string | N/A | No |
 
 Table: Fields of Service_Update. {#tbl:Service_Update.md:Service_Update}
+
+{#page:break}

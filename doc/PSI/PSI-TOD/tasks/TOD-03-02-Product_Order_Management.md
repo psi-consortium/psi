@@ -40,7 +40,7 @@ Task  ..> O4    : <<includes>>
 
 ```
 
-![**TOD-03-02**: Product Order Management](../../common/pixel.png){#fig:TOD-03-02-Product_Order_Management}
+![TOD-03-02: Product Order Management](../../common/pixel.png){#fig:TOD-03-02-Product_Order_Management}
 
 |                             |  Customer  |  Provider  |  Other PSS   | Governance |
 |-----------------------------|:----------:|:----------:|:------------:|:----------:|

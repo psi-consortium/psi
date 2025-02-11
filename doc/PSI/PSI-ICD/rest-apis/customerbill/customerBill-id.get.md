@@ -7,12 +7,14 @@
 
 **Absolute Path:** /customerBillManagement/v1/customerBill/{id}
 
+**TOD Reference:** TOD-03-03-03-View_Customer_Bill
+
 **Summary:** Retrieves a CustomerBill by ID
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | id | string | Yes | Identifier of the CustomerBill |
 | fields | string | No | Comma-separated properties to provide in response |
 
@@ -33,6 +35,4 @@ Table: Parameters of GET customerBill/{id}. {#tbl:customerBill-id.get.md:paramet
 
 Table: Responses of GET customerBill/{id}. {#tbl:customerBill-id.get.md:responses}
 
-## TOD Reference
-
-TOD-03-03-03-View_Customer_Bill
+{#page:break}

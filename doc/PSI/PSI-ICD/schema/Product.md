@@ -9,7 +9,7 @@ A product offering procured by a customer or other interested party playing a pa
 A product is realized as one or more service(s) and / or resource(s).
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | id | string | N/A | No |
 | href | string | uri | No |
 | name | string | N/A | No |
@@ -35,8 +35,10 @@ A product is realized as one or more service(s) and / or resource(s).
 | realizingService | array | ServiceRef | No |
 | relatedParty | array | RelatedParty | No |
 | status | ProductStatusType | N/A | No |
-| \@baseType | string | N/A | No |
-| \@schemaLocation | string | uri | No |
-| \@type | string | N/A | No |
+| @baseType | string | N/A | No |
+| @schemaLocation | string | uri | No |
+| @type | string | N/A | No |
 
 Table: Fields of Product. {#tbl:Product.md:Product}
+
+{#page:break}

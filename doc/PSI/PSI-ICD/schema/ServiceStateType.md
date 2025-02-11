@@ -8,7 +8,9 @@
 Valid values for the lifecycle state of the service
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | ServiceStateType | string | oneOf[feasibilityChecked, designed, reserved, inactive, active, terminated] | No |
 
 Table: Fields of ServiceStateType. {#tbl:ServiceStateType.md:ServiceStateType}
+
+{#page:break}

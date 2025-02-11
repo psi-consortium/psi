@@ -7,12 +7,14 @@
 
 **Absolute Path:** /serviceQuality/v1/serviceLevelSpecification/{id}
 
+**TOD Reference:** TOD-06-02-03-Remove_Service_Level_Specification
+
 **Summary:** Deletes a ServiceLevelSpecification
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | id | string | Yes | Identifier of the ServiceLevelSpecification |
 
 Table: Parameters of DELETE serviceLevelSpecification/{id}. {#tbl:serviceLevelSpecification-id.delete.md:parameters}
@@ -32,6 +34,4 @@ Table: Parameters of DELETE serviceLevelSpecification/{id}. {#tbl:serviceLevelSp
 
 Table: Responses of DELETE serviceLevelSpecification/{id}. {#tbl:serviceLevelSpecification-id.delete.md:responses}
 
-## TOD Reference
-
-TOD-06-02-03-Remove_Service_Level_Specification
+{#page:break}

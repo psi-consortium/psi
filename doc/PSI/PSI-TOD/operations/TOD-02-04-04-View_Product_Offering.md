@@ -43,7 +43,7 @@ I2 --           Operation
 
 ```
 
-![**TOD-02-04-04**: View Product Offering](../../common/pixel.png){#fig:TOD-02-04-04-View_Product_Offering}
+![TOD-02-04-04: View Product Offering](../../common/pixel.png){#fig:TOD-02-04-04-View_Product_Offering}
 
 **Prerequisites**
 

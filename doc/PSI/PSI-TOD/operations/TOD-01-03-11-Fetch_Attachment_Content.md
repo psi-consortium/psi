@@ -47,7 +47,7 @@ I3 --           Operation
 
 ```
 
-![**TOD-01-03-11**: Fetch Attachment Content](../../common/pixel.png){#fig:TOD-01-03-11-Fetch_Attachment_Content}
+![TOD-01-03-11: Fetch Attachment Content](../../common/pixel.png){#fig:TOD-01-03-11-Fetch_Attachment_Content}
 
 **Prerequisites**
 

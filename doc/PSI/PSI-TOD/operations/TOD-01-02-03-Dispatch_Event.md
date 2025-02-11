@@ -56,7 +56,7 @@ PSI2_I1 --      Operation2
 
 ```
 
-![**TOD-01-02-03**: Dispatch Event](../../common/pixel.png){#fig:TOD-01-02-03-Dispatch_Event}
+![TOD-01-02-03: Dispatch Event](../../common/pixel.png){#fig:TOD-01-02-03-Dispatch_Event}
 
 **Prerequisites**
 
@@ -64,7 +64,7 @@ At least one callback is registered in the system.
 
 **Main operation**
 
-Whenever an event occurs in a system (e.g. an entity is created, updated or deleted), it notifies all qualified callbacks previously registered by [TOD-01-02-02](#tod-01-02-02-register_event_callback).
+Whenever an event occurs in a system (e.g. an entity is created, updated or deleted), it notifies all qualified callbacks previously registered by [TOD-01-02-02](#tod-01-02-02-registereventcallback).
 They are selected by:
 
 * Event topic

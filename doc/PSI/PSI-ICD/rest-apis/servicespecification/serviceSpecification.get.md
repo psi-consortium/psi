@@ -7,12 +7,14 @@
 
 **Absolute Path:** /serviceCatalog/v1/serviceSpecification
 
+**TOD Reference:** TOD-02-02-05-View_All_Service_Specifications
+
 **Summary:** List or find ServiceSpecification objects
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | fields | string | No | Comma-separated properties to be provided in response |
 | offset | integer | No | Requested index for start of resources to be provided in response |
 | limit | integer | No | Requested number of resources to be provided in response |
@@ -34,6 +36,4 @@ Table: Parameters of GET serviceSpecification. {#tbl:serviceSpecification.get.md
 
 Table: Responses of GET serviceSpecification. {#tbl:serviceSpecification.get.md:responses}
 
-## TOD Reference
-
-TOD-02-02-05-View_All_Service_Specifications
+{#page:break}

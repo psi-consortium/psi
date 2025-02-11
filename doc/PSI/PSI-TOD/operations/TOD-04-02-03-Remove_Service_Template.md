@@ -39,7 +39,7 @@ I1 --           Operation
 
 ```
 
-![**TOD-04-02-03**: Remove Service Template](../../common/pixel.png){#fig:TOD-04-02-03-Remove_Service_Template}
+![TOD-04-02-03: Remove Service Template](../../common/pixel.png){#fig:TOD-04-02-03-Remove_Service_Template}
 
 **Prerequisites**
 

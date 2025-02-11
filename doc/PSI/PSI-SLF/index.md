@@ -10,40 +10,88 @@ subtitle: "PSI-SLF"
 reference: "PSI-SLF"
 ---
 dcr_overrides:
-- dcr:
-   from: '2022-04-01'
-   to: '2024-04-09'
-   version: '1.0.0'
+ - dcr:
+   from: '2022-01-01'
+   to: '2022-09-30'
+   version: 'MS2'
+   author: 'Wolfgang Robben'
+   message: 'Initial version'
+ - dcr:
+   from: '2022-10-01'
+   to: '2022-12-31'
+   version: 'MS3'
+   author: 'Wolfgang Robben'
+   message: 'Minor updates due to MS2 action items'
+ - dcr:
+   from: '2023-01-01'
+   to: '2023-04-19'
+   version: 'MS4'
+   author: 'Wolfgang Robben'
+   message: 'Formatting updates'
+ - dcr:
+   from: '2023-04-20'
+   to: '2023-07-27'
+   version: 'MS5'
+   author: 'Wolfgang Robben'
+   message: 'Formatting updates'
+ - dcr:
+   from: '2023-07-28'
+   to: '2023-10-06'
+   version: 'MS6'
+   author: 'Wolfgang Robben'
+   message: 'Formatting updates'
+ - dcr:
+   from: '2023-10-07'
+   to: '2024-01-25'
+   version: 'MS7'
+   author: 'Wolfgang Robben'
+   message: 'Only milestone updates'
+ - dcr:
+   from: '2024-01-26'
+   to: '2024-09-11'
+   version: 'MS8 [1.2.0]'
    author: 'Hendrik Oppenberg'
-   message: 'Release of Version 1.0.0'
-- dcr:
-   from: '2024-04-09'
-   to: '2024-07-29'
-   version: '1.1.0'
+   message: 'Added GID, public release adjustments.'
+ - dcr:
+   from: '2024-09-12'
+   to: '2024-12-09'
+   version: 'MS9 [1.2.1]'
    author: 'Hendrik Oppenberg'
-   message: 'Re-Release of Version 1.1.0'
+   message: 'No updates, just version bump.'
+ - dcr:
+   from: '2024-12-10'
+   to: '2025-02-03'
+   version: 'MS10 [1.2.2]'
+   author: 'Wolfgang Robben'
+   message: 'No update, just version bump.'
 =end
 
 # Document Meta Information
 
-## Document Change Record
+## Document Signature Table
 
-Changes to this document are tracked electronically.
-No signature is required by the authors.
-The following information can prove the integrity of the document and reveal any change.
+|           | Name              | Function                       | Company         |
+| --------- | ----------------- | ------------------------------ | --------------- |
+| Author    | Wolfgang Robben   | Project Manager                | CGI             |
+| Approval  | Rui Goncalves     | Project Manager                | SES             |
+| Checked   | Pepijn Witte      | Quality Assurance Manager      | CGI             |
 
-@dcr(git_qr_code){#fig:dcr_qr_code}
+
+Table: Signature Table. {#tbl:signature_table}
+
+@include [Document Change Record](../common/document-change-record.md)
 
 ## Documents
 
 ### Reference Documents
 
-| Acronym | Reference | Title                                | Version |
-|---------|-----------|--------------------------------------|---------|
-| PSI-DL  | PSI-DL    | PSI Document List                    | 1.1.0   |
-| PSI-SLF | PSI-SLF   | Software License File                | 1.1.0   |
-| PSI-TAD | PSI-TAD   | Terms, Abbreviations and Definitions | 1.1.0   |
-| PSI-TOD | PSI-TOD   | Tasks and Operations Dictionary      | 1.1.0   |
+| Acronym  | Reference | Title                                        | Version                  |
+|----------|-----------|----------------------------------------------|--------------------------|
+| PSI-DL   | PSI-DL    | PSI CGI Document List                        | current MS (doc version) |
+| PSI-MADR | PSI-MADR  | PSI Markdown Administrative Decision Records | see before               |
+| PSI-TAD  | PSI-TAD   | PSI Terms, Abbreviations and Definitions     | see before               |
+| PSI-TOD  | PSI-TOD   | PSI Tasks and Operations Dictionary          | see before               |
+| PSI-GID  | PSI-GID   | PSI Graphical Interface Definitions          | see before               |
 
 Table: Reference Documents. {#tbl:reference-documents}
 
@@ -64,6 +112,8 @@ All artefacts produced by the PSI consortium are implicitly licensed under the A
 
 @include [generated document warning](../common/generated_document.md)
 
+@include [development_state](../common/development_state.md)
+
 @include [Release Notes](../common/release_notes.md)
 
 # TM Forum Heritage
@@ -74,7 +124,6 @@ That is, TM Forum artefacts, "code" and documentation is licensed under the Apac
 This includes re-releasing the API.
 This project will work in close concert with the TM Forum API Project and will abide by its governance and use the output from that group in the forms for specifications, user stories, etc. as the input to the development process.
 Therefore, it's necessary to apply the same license to PSI creations.
-User stories are recorded in the [PSI-TOD].
 
 
 [^tmf_license]: https://www.tmforum.org/collaboration/api-apache-2-0-project/
@@ -92,6 +141,11 @@ Specifically, as part of our project development, we have utilized Draw.io for t
 
 Draw.io is a web-based diagramming tool based on Apache, which enables to create various types of diagrams.
 For additional information, please refer to the official Draw.io website [https://www.drawio.com](https://www.drawio.com).
+
+Penpot is a rapid prototyping tool for UIs by Kaleidos.
+Kaleidos' Products & Services open-source modules are licensed under open-source licenses (such as Mozilla Public License 2.0 (MPL 2.0) and other licenses endorsed by the Open-Source Initiative).
+It has been used to create wireframes of a possible UI of a PSS (see [PSI-GID]) and to get a better understanding of the proceeses the PSI will be involved in.
+For more information, please refer to the official penpot website [https://penpot.app/](https://penpot.app/).
 
 # TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
 
@@ -117,15 +171,15 @@ For additional information, please refer to the official Draw.io website [https:
 
 "Contributor" shall mean Licensor and any individual or Legal Entity on behalf of whom a Contribution has been received by Licensor and subsequently incorporated within the Work.
 
-## 2. Grant of Copyright License. 
+## 2. Grant of Copyright License.
 
 Subject to the terms and conditions of this License, each Contributor hereby grants to You a perpetual, worldwide, non-exclusive, no-charge, royalty-free, irrevocable copyright license to reproduce, prepare Derivative Works of, publicly display, publicly perform, sublicense, and distribute the Work and such Derivative Works in Source or Object form.
 
-## 3. Grant of Patent License. 
+## 3. Grant of Patent License.
 
 Subject to the terms and conditions of this License, each Contributor hereby grants to You a perpetual, worldwide, non-exclusive, no-charge, royalty-free, irrevocable (except as stated in this section) patent license to make, have made, use, offer to sell, sell, import, and otherwise transfer the Work, where such license applies only to those patent claims licensable by such Contributor that are necessarily infringed by their Contribution(s) alone or by combination of their Contribution(s) with the Work to which such Contribution(s) was submitted. If You institute patent litigation against any entity (including a cross-claim or counterclaim in a lawsuit) alleging that the Work or a Contribution incorporated within the Work constitutes direct or contributory patent infringement, then any patent licenses granted to You under this License for that Work shall terminate as of the date such litigation is filed.
 
-## 4. Redistribution. 
+## 4. Redistribution.
 
 You may reproduce and distribute copies of the Work or Derivative Works thereof in any medium, with or without modifications, and in Source or Object form, provided that You meet the following conditions:
 
@@ -136,23 +190,23 @@ If the Work includes a "NOTICE" text file as part of its distribution, then any 
 
 You may add Your own copyright statement to Your modifications and may provide additional or different license terms and conditions for use, reproduction, or distribution of Your modifications, or for any such Derivative Works as a whole, provided Your use, reproduction, and distribution of the Work otherwise complies with the conditions stated in this License.
 
-## 5. Submission of Contributions. 
+## 5. Submission of Contributions.
 
 Unless You explicitly state otherwise, any Contribution intentionally submitted for inclusion in the Work by You to the Licensor shall be under the terms and conditions of this License, without any additional terms or conditions. Notwithstanding the above, nothing herein shall supersede or modify the terms of any separate license agreement you may have executed with Licensor regarding such Contributions.
 
-## 6. Trademarks. 
+## 6. Trademarks.
 
 This License does not grant permission to use the trade names, trademarks, service marks, or product names of the Licensor, except as required for reasonable and customary use in describing the origin of the Work and reproducing the content of the NOTICE file.
 
-## 7. Disclaimer of Warranty. 
+## 7. Disclaimer of Warranty.
 
 Unless required by applicable law or agreed to in writing, Licensor provides the Work (and each Contributor provides its Contributions) on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied, including, without limitation, any warranties or conditions of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A PARTICULAR PURPOSE. You are solely responsible for determining the appropriateness of using or redistributing the Work and assume any risks associated with Your exercise of permissions under this License.
 
-## 8. Limitation of Liability. 
+## 8. Limitation of Liability.
 
 In no event and under no legal theory, whether in tort (including negligence), contract, or otherwise, unless required by applicable law (such as deliberate and grossly negligent acts) or agreed to in writing, shall any Contributor be liable to You for damages, including any direct, indirect, special, incidental, or consequential damages of any character arising as a result of this License or out of the use or inability to use the Work (including but not limited to damages for loss of goodwill, work stoppage, computer failure or malfunction, or any and all other commercial damages or losses), even if such Contributor has been advised of the possibility of such damages.
 
-## 9. Accepting Warranty or Additional Liability. 
+## 9. Accepting Warranty or Additional Liability.
 
 While redistributing the Work or Derivative Works thereof, You may choose to offer, and charge a fee for, acceptance of support, warranty, indemnity, or other liability obligations and/or rights consistent with this License. However, in accepting such obligations, You may act only on Your own behalf and on Your sole responsibility, not on behalf of any other Contributor, and only if You agree to indemnify, defend, and hold each Contributor harmless for any liability incurred by, or claims asserted against, such Contributor by reason of your accepting any such warranty or additional liability.
 
@@ -164,7 +218,7 @@ Include a copy of the Apache License, typically in a file called LICENSE, in you
 
 To apply the Apache License to specific files in your work, attach the following boilerplate declaration, replacing the fields enclosed by brackets "[]" with your own identifying information. (Don't include the brackets!) Enclose the text in the appropriate comment syntax for the file format. We also recommend that you include a file or class name and description of purpose on the same "printed page" as the copyright notice for easier identification within third-party archives.
 
-## License File Template 
+## License File Template
 
 The following template should be applied to code files and `LICENSE.txt` files that have to be included with all deliverables.
 

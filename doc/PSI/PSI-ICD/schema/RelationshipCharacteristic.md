@@ -8,7 +8,7 @@
 A characteristic property or distinguishing feature of this relationship.
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | id | string | N/A | No |
 | name | string | N/A | No |
 | deviation | string | N/A | No |
@@ -16,3 +16,5 @@ A characteristic property or distinguishing feature of this relationship.
 | relationshipCharacteristicValue | array | CharacteristicValueSpecification | No |
 
 Table: Fields of RelationshipCharacteristic. {#tbl:RelationshipCharacteristic.md:RelationshipCharacteristic}
+
+{#page:break}

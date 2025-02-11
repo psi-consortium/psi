@@ -8,7 +8,7 @@
 Document is a tangible output from an activity
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | id | string | N/A | No |
 | href | string | uri | No |
 | name | string | N/A | No |
@@ -25,3 +25,5 @@ Document is a tangible output from an activity
 | relatedParty | array | RelatedParty | No |
 
 Table: Fields of Document. {#tbl:Document.md:Document}
+
+{#page:break}

@@ -12,7 +12,7 @@
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | topicId | string | Yes | Identifier of the parent Topic entity |
 | fields | string | No | Comma-separated properties to be provided in response |
 | offset | integer | No | Requested index for start of resources to be provided in response |
@@ -34,3 +34,5 @@ Table: Parameters of GET topic/{topicId}/event. {#tbl:topic-topicId-event.get.md
 | 500 | Internal Server Error | Error |
 
 Table: Responses of GET topic/{topicId}/event. {#tbl:topic-topicId-event.get.md:responses}
+
+{#page:break}

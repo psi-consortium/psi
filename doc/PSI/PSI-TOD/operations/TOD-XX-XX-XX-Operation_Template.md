@@ -67,7 +67,7 @@ I4 --           Operation
 
 ```
 
-![**TOD-XX-XX-XX**: Operation Template](../../common/pixel.png){#fig:TOD-XX-XX-XX-Operation_Template}
+![TOD-XX-XX-XX: Operation Template](../../common/pixel.png){#fig:TOD-XX-XX-XX-Operation_Template}
 
 **Prerequisites**
 
@@ -109,7 +109,7 @@ They may look like listed below and can be referenced in the [PSI-ICD].
 **Post Conditions**
 
 Most operations have a post condition, i.e., there is a system change that can be checked.
-For example, if the operation [TOD-01-01-01-Create_Party_Profile](#TOD-01-01-01-Create_Party_Profile) is performed successfully, the profile for the party is successfully created in the PSS datastore.
+For example, if the operation [TOD-01-01-01-Create_Party_Profile](#tod-01-01-01-createpartyprofile) is performed successfully, the profile for the party is successfully created in the PSS datastore.
 
 **Applicable Requirements**
 
@@ -143,5 +143,5 @@ The operation is based on X.X.X.X process identifiers from the eTOM v22.0.0.
 
 =end
 
-[^eTOM-Decomposition-L3]: See https://www.tmforum.org/resources/reference/gb921d-l3-process-decompositions-v22-0-0  
-[^eTOM-Decomposition-L4]: See https://www.tmforum.org/resources/reference/gb921dx-l4-process-decompositions-v22-0-0
+[^eTOM-Decomposition-L3]: See <https://www.tmforum.org/resources/reference/gb921d-l3-process-decompositions-v22-0-0>  
+[^eTOM-Decomposition-L4]: See <https://www.tmforum.org/resources/reference/gb921dx-l4-process-decompositions-v22-0-0>

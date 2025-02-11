@@ -7,12 +7,14 @@
 
 **Absolute Path:** /serviceQuality/v1/serviceLevelSpecification/{id}
 
+**TOD Reference:** TOD-06-02-02-Update_Service_Level_Specification
+
 **Summary:** Updates partially a ServiceLevelSpecification
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | id | string | Yes | Identifier of the ServiceLevelSpecification |
 
 Table: Parameters of PATCH serviceLevelSpecification/{id}. {#tbl:serviceLevelSpecification-id.patch.md:parameters}
@@ -40,6 +42,4 @@ Table: Request Body of PATCH serviceLevelSpecification/{id}. {#tbl:serviceLevelS
 
 Table: Responses of PATCH serviceLevelSpecification/{id}. {#tbl:serviceLevelSpecification-id.patch.md:responses}
 
-## TOD Reference
-
-TOD-06-02-02-Update_Service_Level_Specification
+{#page:break}

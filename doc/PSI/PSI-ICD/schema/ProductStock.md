@@ -8,7 +8,7 @@
 ProductStock is a base class for defining a product (or configured product with values characteristic) stock level.
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | id | string | N/A | No |
 | href | string | uri | No |
 | name | string | N/A | No |
@@ -32,8 +32,10 @@ ProductStock is a base class for defining a product (or configured product with 
 | resource | array | ResourceRef | No |
 | stockLevelAlert | Quantity | N/A | No |
 | stockedProduct | ProductRefOrValue | N/A | No |
-| \@baseType | string | N/A | No |
-| \@schemaLocation | string | uri | No |
-| \@type | string | N/A | No |
+| @baseType | string | N/A | No |
+| @schemaLocation | string | uri | No |
+| @type | string | N/A | No |
 
 Table: Fields of ProductStock. {#tbl:ProductStock.md:ProductStock}
+
+{#page:break}

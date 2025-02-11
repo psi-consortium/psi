@@ -7,12 +7,14 @@
 
 **Absolute Path:** /serviceCatalog/v1/serviceSpecification/{id}
 
+**TOD Reference:** TOD-02-02-04-View_Service_Specification
+
 **Summary:** Retrieves a ServiceSpecification by ID
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | id | string | Yes | Identifier of the ServiceSpecification |
 | fields | string | No | Comma-separated properties to provide in response |
 
@@ -33,6 +35,4 @@ Table: Parameters of GET serviceSpecification/{id}. {#tbl:serviceSpecification-i
 
 Table: Responses of GET serviceSpecification/{id}. {#tbl:serviceSpecification-id.get.md:responses}
 
-## TOD Reference
-
-TOD-02-02-04-View_Service_Specification
+{#page:break}

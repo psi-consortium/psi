@@ -10,7 +10,7 @@ Functionally, it acts as a template by which Services may be instantiated.
 By sharing the same specification, these services would therefore share the same set of characteristics.
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | id | string | N/A | No |
 | href | string | uri | No |
 | name | string | N/A | No |
@@ -31,8 +31,10 @@ By sharing the same specification, these services would therefore share the same
 | targetEntitySchema | TargetEntitySchema | N/A | No |
 | validFor | TimePeriod | N/A | No |
 | category | string | N/A | No |
-| \@baseType | string | N/A | No |
-| \@schemaLocation | string | uri | No |
-| \@type | string | N/A | No |
+| @baseType | string | N/A | No |
+| @schemaLocation | string | uri | No |
+| @type | string | N/A | No |
 
 Table: Fields of ServiceSpecification. {#tbl:ServiceSpecification.md:ServiceSpecification}
+
+{#page:break}

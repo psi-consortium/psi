@@ -39,7 +39,7 @@ I1 --           Operation
 
 ```
 
-![**TOD-04-02-01**: Create Service Template](../../common/pixel.png){#fig:TOD-04-02-01-Create_Service_Template}
+![TOD-04-02-01: Create Service Template](../../common/pixel.png){#fig:TOD-04-02-01-Create_Service_Template}
 
 **Prerequisites**
 

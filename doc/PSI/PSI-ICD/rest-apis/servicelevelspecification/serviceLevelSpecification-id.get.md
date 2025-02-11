@@ -7,12 +7,14 @@
 
 **Absolute Path:** /serviceQuality/v1/serviceLevelSpecification/{id}
 
+**TOD Reference:** TOD-06-02-04-View_Service_Level_Specification
+
 **Summary:** Retrieves a ServiceLevelSpecification by ID
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | id | string | Yes | Identifier of the ServiceLevelSpecification |
 | fields | string | No | Comma-separated properties to provide in response |
 
@@ -33,6 +35,4 @@ Table: Parameters of GET serviceLevelSpecification/{id}. {#tbl:serviceLevelSpeci
 
 Table: Responses of GET serviceLevelSpecification/{id}. {#tbl:serviceLevelSpecification-id.get.md:responses}
 
-## TOD Reference
-
-TOD-06-02-04-View_Service_Level_Specification
+{#page:break}

@@ -10,7 +10,7 @@ TPE, EQUIPMENT) in the inventory.
 Skipped properties: id,href
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | name | string | N/A | Yes |
 | description | string | N/A | No |
 | category | string | N/A | No |
@@ -34,8 +34,10 @@ Skipped properties: id,href
 | powerState | string | N/A | No |
 | serialNumber | string | N/A | No |
 | versionNumber | string | N/A | No |
-| \@baseType | string | N/A | No |
-| \@schemaLocation | string | uri | No |
-| \@type | string | N/A | No |
+| @baseType | string | N/A | No |
+| @schemaLocation | string | uri | No |
+| @type | string | N/A | No |
 
 Table: Fields of Resource_Create. {#tbl:Resource_Create.md:Resource_Create}
+
+{#page:break}

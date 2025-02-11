@@ -8,7 +8,7 @@
 A Product Order is a type of order which  can  be used to place an order between a customer and a service provider or between a service provider and a partner and vice versa,
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | id | string | N/A | No |
 | href | string | uri | No |
 | description | string | N/A | No |
@@ -34,8 +34,10 @@ A Product Order is a type of order which  can  be used to place an order between
 | quote | array | QuoteRef | No |
 | relatedParty | array | RelatedParty | No |
 | state | ProductOrderStateType | N/A | No |
-| \@baseType | string | N/A | No |
-| \@schemaLocation | string | uri | No |
-| \@type | string | N/A | No |
+| @baseType | string | N/A | No |
+| @schemaLocation | string | uri | No |
+| @type | string | N/A | No |
 
 Table: Fields of ProductOrder. {#tbl:ProductOrder.md:ProductOrder}
+
+{#page:break}

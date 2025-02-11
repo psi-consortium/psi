@@ -9,8 +9,10 @@ An interval of time from start- to endTime.
 If a time zone is required, it must be determined from the context.
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | startTime | string | time | Yes |
 | endTime | string | time | Yes |
 
 Table: Fields of TimeInterval. {#tbl:TimeInterval.md:TimeInterval}
+
+{#page:break}

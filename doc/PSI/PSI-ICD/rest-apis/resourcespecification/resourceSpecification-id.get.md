@@ -7,12 +7,14 @@
 
 **Absolute Path:** /resourceCatalog/v1/resourceSpecification/{id}
 
+**TOD Reference:** TOD-02-01-04-View_Resource_Specification
+
 **Summary:** Retrieves a ResourceSpecification by ID
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | id | string | Yes | Identifier of the ResourceSpecification |
 | fields | string | No | Comma-separated properties to provide in response |
 
@@ -33,6 +35,4 @@ Table: Parameters of GET resourceSpecification/{id}. {#tbl:resourceSpecification
 
 Table: Responses of GET resourceSpecification/{id}. {#tbl:resourceSpecification-id.get.md:responses}
 
-## TOD Reference
-
-TOD-02-01-04-View_Resource_Specification
+{#page:break}

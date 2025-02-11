@@ -12,7 +12,7 @@
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | id | string | Yes | Identifier of the ProductOrder |
 
 Table: Parameters of DELETE productOrder/{id}. {#tbl:productOrder-id.delete.md:parameters}
@@ -31,3 +31,5 @@ Table: Parameters of DELETE productOrder/{id}. {#tbl:productOrder-id.delete.md:p
 | 500 | Internal Server Error | Error |
 
 Table: Responses of DELETE productOrder/{id}. {#tbl:productOrder-id.delete.md:responses}
+
+{#page:break}

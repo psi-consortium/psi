@@ -43,7 +43,7 @@ I2 --           Operation
 
 ```
 
-![**TOD-03-02-02**: Update Product Order](../../common/pixel.png){#fig:TOD-03-02-02-Update_Product_Order}
+![TOD-03-02-02: Update Product Order](../../common/pixel.png){#fig:TOD-03-02-02-Update_Product_Order}
 
 **Prerequisites**
 

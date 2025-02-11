@@ -32,7 +32,7 @@ Task  ..> O5    : <<includes>>
 @enduml
 ```
 
-![**TOD-05-02**: Service Inventory Management](../../common/pixel.png){#fig:TOD-05-02-Service_Inventory_Management}
+![TOD-05-02: Service Inventory Management](../../common/pixel.png){#fig:TOD-05-02-Service_Inventory_Management}
 
 |                       |  Customer  |  Provider  | Other PSS | Governance |
 |-----------------------|:----------:|:----------:|:---------:|:----------:|

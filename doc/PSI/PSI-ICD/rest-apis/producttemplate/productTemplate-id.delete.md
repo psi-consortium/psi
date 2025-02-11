@@ -7,12 +7,14 @@
 
 **Absolute Path:** /productCatalog/v1/productTemplate/{id}
 
+**TOD Reference:** TOD-04-03-03-Remove_Product_Template
+
 **Summary:** Deletes a ProductTemplate
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | id | string | Yes | The identifier of the ProductTemplate |
 
 Table: Parameters of DELETE productTemplate/{id}. {#tbl:productTemplate-id.delete.md:parameters}
@@ -32,6 +34,4 @@ Table: Parameters of DELETE productTemplate/{id}. {#tbl:productTemplate-id.delet
 
 Table: Responses of DELETE productTemplate/{id}. {#tbl:productTemplate-id.delete.md:responses}
 
-## TOD Reference
-
-TOD-04-03-03-Remove_Product_Template
+{#page:break}

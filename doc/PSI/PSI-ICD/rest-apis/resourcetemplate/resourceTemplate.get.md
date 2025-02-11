@@ -7,12 +7,14 @@
 
 **Absolute Path:** /resourceCatalog/v1/resourceTemplate
 
+**TOD Reference:** TOD-04-01-05-View_All_Resource_Templates
+
 **Summary:** List or find ResourceTemplate objects
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | fields | string | No | Comma-separated properties to be provided in response. |
 | offset | integer | No | The requested index for start of resources to be provided in response. |
 | limit | integer | No | The requested number of resources to be provided in response. |
@@ -34,6 +36,4 @@ Table: Parameters of GET resourceTemplate. {#tbl:resourceTemplate.get.md:paramet
 
 Table: Responses of GET resourceTemplate. {#tbl:resourceTemplate.get.md:responses}
 
-## TOD Reference
-
-TOD-04-01-05-View_All_Resource_Templates
+{#page:break}

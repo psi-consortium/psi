@@ -8,7 +8,7 @@
 Keeps track of other names, for example the old name of a woman before marriage or an artist name.
 
 | Field | Type | Format | Required |
-|-------|---|--------|---|
+| ------- | ------- | ------- | --- |
 | id | string | N/A | No |
 | href | string | uri | No |
 | aristocraticTitle | string | N/A | No |
@@ -23,8 +23,10 @@ Keeps track of other names, for example the old name of a woman before marriage 
 | preferredGivenName | string | N/A | No |
 | title | string | N/A | No |
 | validFor | TimePeriod | N/A | No |
-| \@baseType | string | N/A | No |
-| \@schemaLocation | string | uri | No |
-| \@type | string | N/A | No |
+| @baseType | string | N/A | No |
+| @schemaLocation | string | uri | No |
+| @type | string | N/A | No |
 
 Table: Fields of OtherNameIndividual. {#tbl:OtherNameIndividual.md:OtherNameIndividual}
+
+{#page:break}

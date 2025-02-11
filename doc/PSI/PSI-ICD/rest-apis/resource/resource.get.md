@@ -7,12 +7,14 @@
 
 **Absolute Path:** /resourceInventory/v1/resource
 
+**TOD Reference:** TOD-05-01-05-View_All_Resources
+
 **Summary:** List or find Resource objects
 
 ## Parameters
 
 | Name | Type | Required | Description |
-|------|------|----------|-------------|
+| ------ | ------ | --- | ------------ |
 | fields | string | No | Comma-separated properties to be provided in response |
 | offset | integer | No | Requested index for start of resources to be provided in response |
 | limit | integer | No | Requested number of resources to be provided in response |
@@ -34,6 +36,4 @@ Table: Parameters of GET resource. {#tbl:resource.get.md:parameters}
 
 Table: Responses of GET resource. {#tbl:resource.get.md:responses}
 
-## TOD Reference
-
-TOD-05-01-05-View_All_Resources
+{#page:break}
