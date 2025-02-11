@@ -34,7 +34,7 @@ When possible, it should also allow for import/export of XLSX files.
 ## Decision Outcome
 
 It was decided not to provide a dedicated prototype UI for the interface, because the maintenance does not justify the little value added by it.
-The interface will be showcased in actual software by SES ("REACH") and CGI ("UCSM") at a later stage.
+The interface will be showcased in actual software at a later stage.
 Appsmith and Angular Material may be considered for other objectives in the future.
 
 ## Compliance

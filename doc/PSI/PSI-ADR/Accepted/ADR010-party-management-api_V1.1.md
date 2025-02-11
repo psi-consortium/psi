@@ -60,18 +60,18 @@ map "SES (Organization)" as SesOrganization {
   relatedParty => John Doe
 }
 
-map "UCSM (Organization)" as UcsmOrganization {
-  tradingName => UCSM
-  relatedParty => SES
+map "PSS (Organization)" as PSSOrganization {
+  tradingName => PSS
+  relatedParty => Provider
 }
 
 map Individual {
   fullName => John Doe
-  relatedParty => SES
+  relatedParty => Provider
 }
 
-UcsmOrganization::relatedParty --> SesOrganization : Role: Service Provider
-SesOrganization::relatedParty --> Individual : Role: Director
+PSSOrganization::relatedParty --> SesOrganization : Role: Service Provider
+ProviderOrganization::relatedParty --> Individual : Role: Director
 
 @enduml
 
