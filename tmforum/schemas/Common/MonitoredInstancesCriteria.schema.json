@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "MonitoredInstancesCriteria.schema.json",
+  "title": "MonitoredInstancesCriteria",
+  "definitions": {
+    "MonitoredInstancesCriteria": {
+      "$id": "#MonitoredInstancesCriteria",
+      "description": "List of monitored instances",
+      "type": "object",
+      "properties": {
+        "monitoredObjectInstances": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems":0
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../Common/Extensible.schema.json#Extensible"
+        }
+      ]
+    }
+  }
+}

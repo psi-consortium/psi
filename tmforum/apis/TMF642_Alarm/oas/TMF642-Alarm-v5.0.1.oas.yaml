@@ -1,0 +1,5160 @@
+openapi: 3.0.1
+info:
+  title: Alarm
+  description: Alarm Management API
+  version: 5.0.1
+servers:
+  - url: '{apiRoot}/tmf-api/alarmManagement/v4/'
+    variables:
+      apiRoot:
+        default: 'https://serverRoot'
+        enum:
+          - 'https://serverRoot'
+tags:
+  - name: alarm
+    description: Operations for Alarm Resource
+  - name: ackAlarm
+    description: Operations for AckAlarm Resource
+  - name: unAckAlarm
+    description: Operations for UnAckAlarm Resource
+  - name: clearAlarm
+    description: Operations for ClearAlarm Resource
+  - name: commentAlarm
+    description: Operations for CommentAlarm Resource
+  - name: groupAlarm
+    description: Operations for GroupAlarm Resource
+  - name: unGroupAlarm
+    description: Operations for UnGroupAlarm Resource
+  - name: notification listener
+    description: Notifications for Resource Lifecycle and event notifications
+  - name: events subscription
+    description: Endpoints to register and terminate an Event Listener
+paths:
+  /ackAlarm:
+    get:
+      tags:
+        - ackAlarm
+      summary: List or find AckAlarm objects
+      description: List or find AckAlarm objects
+      operationId: listAckAlarm
+      parameters:
+        - $ref: '#/components/parameters/Fields'
+        - $ref: '#/components/parameters/Offset'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          $ref: '#/components/responses/200AckAlarmArray'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+    post:
+      tags:
+        - ackAlarm
+      summary: Creates a AckAlarm
+      description: This operation creates a AckAlarm entity.
+      operationId: createAckAlarm
+      parameters:
+        - $ref: '#/components/parameters/Fields'
+      requestBody:
+        $ref: '#/components/requestBodies/AckAlarm_FVO'
+      responses:
+        '201':
+          $ref: '#/components/responses/201AckAlarm'
+        '202':
+          description: Accepted
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '409':
+          $ref: '#/components/responses/409'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  '/ackAlarm/{id}':
+    get:
+      tags:
+        - ackAlarm
+      summary: Retrieves a AckAlarm by ID
+      description: >-
+        This operation retrieves a AckAlarm entity. Attribute selection enabled for all first level
+        attributes.
+      operationId: retrieveAckAlarm
+      parameters:
+        - $ref: '#/components/parameters/Id'
+        - $ref: '#/components/parameters/Fields'
+      responses:
+        '200':
+          $ref: '#/components/responses/200AckAlarm_Get'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  /alarm:
+    get:
+      tags:
+        - alarm
+      summary: List or find Alarm objects
+      description: List or find Alarm objects
+      operationId: listAlarm
+      parameters:
+        - $ref: '#/components/parameters/Fields'
+        - $ref: '#/components/parameters/Offset'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          $ref: '#/components/responses/200AlarmArray'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+    post:
+      tags:
+        - alarm
+      summary: Creates a Alarm
+      description: This operation creates a Alarm entity.
+      operationId: createAlarm
+      parameters:
+        - $ref: '#/components/parameters/Fields'
+      requestBody:
+        $ref: '#/components/requestBodies/Alarm_FVO'
+      responses:
+        '201':
+          $ref: '#/components/responses/201Alarm'
+        '202':
+          description: Accepted
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '409':
+          $ref: '#/components/responses/409'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  '/alarm/{id}':
+    get:
+      tags:
+        - alarm
+      summary: Retrieves a Alarm by ID
+      description: >-
+        This operation retrieves a Alarm entity. Attribute selection enabled for all first level
+        attributes.
+      operationId: retrieveAlarm
+      parameters:
+        - $ref: '#/components/parameters/Id'
+        - $ref: '#/components/parameters/Fields'
+      responses:
+        '200':
+          $ref: '#/components/responses/200Alarm_Get'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+    patch:
+      tags:
+        - alarm
+      summary: Updates partially a Alarm
+      description: This operation updates partially a Alarm entity.
+      operationId: patchAlarm
+      parameters:
+        - $ref: '#/components/parameters/Id'
+        - $ref: '#/components/parameters/Fields'
+      requestBody:
+        $ref: '#/components/requestBodies/Alarm_MVO'
+      responses:
+        '200':
+          $ref: '#/components/responses/200Alarm_Patch'
+        '202':
+          description: Accepted
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '409':
+          $ref: '#/components/responses/409'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+    delete:
+      tags:
+        - alarm
+      summary: Deletes a Alarm
+      description: This operation deletes a Alarm entity.
+      operationId: deleteAlarm
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '202':
+          $ref: '#/components/responses/202'
+        '204':
+          $ref: '#/components/responses/204'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '409':
+          $ref: '#/components/responses/409'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  /clearAlarm:
+    get:
+      tags:
+        - clearAlarm
+      summary: List or find ClearAlarm objects
+      description: List or find ClearAlarm objects
+      operationId: listClearAlarm
+      parameters:
+        - $ref: '#/components/parameters/Fields'
+        - $ref: '#/components/parameters/Offset'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          $ref: '#/components/responses/200ClearAlarmArray'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+    post:
+      tags:
+        - clearAlarm
+      summary: Creates a ClearAlarm
+      description: This operation creates a ClearAlarm entity.
+      operationId: createClearAlarm
+      parameters:
+        - $ref: '#/components/parameters/Fields'
+      requestBody:
+        $ref: '#/components/requestBodies/ClearAlarm_FVO'
+      responses:
+        '201':
+          $ref: '#/components/responses/201ClearAlarm'
+        '202':
+          description: Accepted
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '409':
+          $ref: '#/components/responses/409'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  '/clearAlarm/{id}':
+    get:
+      tags:
+        - clearAlarm
+      summary: Retrieves a ClearAlarm by ID
+      description: >-
+        This operation retrieves a ClearAlarm entity. Attribute selection enabled for all first
+        level attributes.
+      operationId: retrieveClearAlarm
+      parameters:
+        - $ref: '#/components/parameters/Id'
+        - $ref: '#/components/parameters/Fields'
+      responses:
+        '200':
+          $ref: '#/components/responses/200ClearAlarm_Get'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  /commentAlarm:
+    get:
+      tags:
+        - commentAlarm
+      summary: List or find CommentAlarm objects
+      description: List or find CommentAlarm objects
+      operationId: listCommentAlarm
+      parameters:
+        - $ref: '#/components/parameters/Fields'
+        - $ref: '#/components/parameters/Offset'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          $ref: '#/components/responses/200CommentAlarmArray'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+    post:
+      tags:
+        - commentAlarm
+      summary: Creates a CommentAlarm
+      description: This operation creates a CommentAlarm entity.
+      operationId: createCommentAlarm
+      parameters:
+        - $ref: '#/components/parameters/Fields'
+      requestBody:
+        $ref: '#/components/requestBodies/CommentAlarm_FVO'
+      responses:
+        '201':
+          $ref: '#/components/responses/201CommentAlarm'
+        '202':
+          description: Accepted
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '409':
+          $ref: '#/components/responses/409'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  '/commentAlarm/{id}':
+    get:
+      tags:
+        - commentAlarm
+      summary: Retrieves a CommentAlarm by ID
+      description: >-
+        This operation retrieves a CommentAlarm entity. Attribute selection enabled for all first
+        level attributes.
+      operationId: retrieveCommentAlarm
+      parameters:
+        - $ref: '#/components/parameters/Id'
+        - $ref: '#/components/parameters/Fields'
+      responses:
+        '200':
+          $ref: '#/components/responses/200CommentAlarm_Get'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  /groupAlarm:
+    get:
+      tags:
+        - groupAlarm
+      summary: List or find GroupAlarm objects
+      description: List or find GroupAlarm objects
+      operationId: listGroupAlarm
+      parameters:
+        - $ref: '#/components/parameters/Fields'
+        - $ref: '#/components/parameters/Offset'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          $ref: '#/components/responses/200GroupAlarmArray'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+    post:
+      tags:
+        - groupAlarm
+      summary: Creates a GroupAlarm
+      description: This operation creates a GroupAlarm entity.
+      operationId: createGroupAlarm
+      parameters:
+        - $ref: '#/components/parameters/Fields'
+      requestBody:
+        $ref: '#/components/requestBodies/GroupAlarm_FVO'
+      responses:
+        '201':
+          $ref: '#/components/responses/201GroupAlarm'
+        '202':
+          description: Accepted
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '409':
+          $ref: '#/components/responses/409'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  '/groupAlarm/{id}':
+    get:
+      tags:
+        - groupAlarm
+      summary: Retrieves a GroupAlarm by ID
+      description: >-
+        This operation retrieves a GroupAlarm entity. Attribute selection enabled for all first
+        level attributes.
+      operationId: retrieveGroupAlarm
+      parameters:
+        - $ref: '#/components/parameters/Id'
+        - $ref: '#/components/parameters/Fields'
+      responses:
+        '200':
+          $ref: '#/components/responses/200GroupAlarm_Get'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  /hub:
+    post:
+      operationId: createHub
+      summary: Create a subscription (hub) to receive Events
+      description: Sets the communication endpoint to receive Events.
+      tags:
+        - events subscription
+      requestBody:
+        $ref: '#/components/requestBodies/Hub_FVO'
+      responses:
+        '201':
+          $ref: '#/components/responses/Hub'
+        default:
+          $ref: '#/components/responses/Error'
+  '/hub/{id}':
+    get:
+      operationId: hubGet
+      summary: Retrieve a subscription (hub)
+      description: ''
+      tags:
+        - events subscription
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          $ref: '#/components/responses/Hub'
+        default:
+          $ref: '#/components/responses/Error'
+    delete:
+      operationId: hubDelete
+      summary: Remove a subscription (hub) to receive Events
+      description: ''
+      tags:
+        - events subscription
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '204':
+          description: Deleted
+        default:
+          $ref: '#/components/responses/Error'
+  /listener/ackAlarmCreateEvent:
+    post:
+      tags:
+        - notification listener
+      summary: Client listener for entity AckAlarmCreateEvent
+      description: Example of a client listener for receiving the notification AckAlarmCreateEvent
+      operationId: ackAlarmCreateEvent
+      requestBody:
+        $ref: '#/components/requestBodies/AckAlarmCreateEvent'
+      responses:
+        '204':
+          description: Notified
+        default:
+          $ref: '#/components/responses/Error'
+  /listener/ackAlarmStateChangeEvent:
+    post:
+      tags:
+        - notification listener
+      summary: Client listener for entity AckAlarmStateChangeEvent
+      description: Example of a client listener for receiving the notification AckAlarmStateChangeEvent
+      operationId: ackAlarmStateChangeEvent
+      requestBody:
+        $ref: '#/components/requestBodies/AckAlarmStateChangeEvent'
+      responses:
+        '204':
+          description: Notified
+        default:
+          $ref: '#/components/responses/Error'
+  /listener/alarmAttributeValueChangeEvent:
+    post:
+      tags:
+        - notification listener
+      summary: Client listener for entity AlarmAttributeValueChangeEvent
+      description: Example of a client listener for receiving the notification AlarmAttributeValueChangeEvent
+      operationId: alarmAttributeValueChangeEvent
+      requestBody:
+        $ref: '#/components/requestBodies/AlarmAttributeValueChangeEvent'
+      responses:
+        '204':
+          description: Notified
+        default:
+          $ref: '#/components/responses/Error'
+  /listener/alarmCreateEvent:
+    post:
+      tags:
+        - notification listener
+      summary: Client listener for entity AlarmCreateEvent
+      description: Example of a client listener for receiving the notification AlarmCreateEvent
+      operationId: alarmCreateEvent
+      requestBody:
+        $ref: '#/components/requestBodies/AlarmCreateEvent'
+      responses:
+        '204':
+          description: Notified
+        default:
+          $ref: '#/components/responses/Error'
+  /listener/alarmDeleteEvent:
+    post:
+      tags:
+        - notification listener
+      summary: Client listener for entity AlarmDeleteEvent
+      description: Example of a client listener for receiving the notification AlarmDeleteEvent
+      operationId: alarmDeleteEvent
+      requestBody:
+        $ref: '#/components/requestBodies/AlarmDeleteEvent'
+      responses:
+        '204':
+          description: Notified
+        default:
+          $ref: '#/components/responses/Error'
+  /listener/alarmStateChangeEvent:
+    post:
+      tags:
+        - notification listener
+      summary: Client listener for entity AlarmStateChangeEvent
+      description: Example of a client listener for receiving the notification AlarmStateChangeEvent
+      operationId: alarmStateChangeEvent
+      requestBody:
+        $ref: '#/components/requestBodies/AlarmStateChangeEvent'
+      responses:
+        '204':
+          description: Notified
+        default:
+          $ref: '#/components/responses/Error'
+  /listener/clearAlarmCreateEvent:
+    post:
+      tags:
+        - notification listener
+      summary: Client listener for entity ClearAlarmCreateEvent
+      description: Example of a client listener for receiving the notification ClearAlarmCreateEvent
+      operationId: clearAlarmCreateEvent
+      requestBody:
+        $ref: '#/components/requestBodies/ClearAlarmCreateEvent'
+      responses:
+        '204':
+          description: Notified
+        default:
+          $ref: '#/components/responses/Error'
+  /listener/clearAlarmStateChangeEvent:
+    post:
+      tags:
+        - notification listener
+      summary: Client listener for entity ClearAlarmStateChangeEvent
+      description: Example of a client listener for receiving the notification ClearAlarmStateChangeEvent
+      operationId: clearAlarmStateChangeEvent
+      requestBody:
+        $ref: '#/components/requestBodies/ClearAlarmStateChangeEvent'
+      responses:
+        '204':
+          description: Notified
+        default:
+          $ref: '#/components/responses/Error'
+  /listener/commentAlarmCreateEvent:
+    post:
+      tags:
+        - notification listener
+      summary: Client listener for entity CommentAlarmCreateEvent
+      description: Example of a client listener for receiving the notification CommentAlarmCreateEvent
+      operationId: commentAlarmCreateEvent
+      requestBody:
+        $ref: '#/components/requestBodies/CommentAlarmCreateEvent'
+      responses:
+        '204':
+          description: Notified
+        default:
+          $ref: '#/components/responses/Error'
+  /listener/commentAlarmStateChangeEvent:
+    post:
+      tags:
+        - notification listener
+      summary: Client listener for entity CommentAlarmStateChangeEvent
+      description: Example of a client listener for receiving the notification CommentAlarmStateChangeEvent
+      operationId: commentAlarmStateChangeEvent
+      requestBody:
+        $ref: '#/components/requestBodies/CommentAlarmStateChangeEvent'
+      responses:
+        '204':
+          description: Notified
+        default:
+          $ref: '#/components/responses/Error'
+  /listener/groupAlarmCreateEvent:
+    post:
+      tags:
+        - notification listener
+      summary: Client listener for entity GroupAlarmCreateEvent
+      description: Example of a client listener for receiving the notification GroupAlarmCreateEvent
+      operationId: groupAlarmCreateEvent
+      requestBody:
+        $ref: '#/components/requestBodies/GroupAlarmCreateEvent'
+      responses:
+        '204':
+          description: Notified
+        default:
+          $ref: '#/components/responses/Error'
+  /listener/groupAlarmStateChangeEvent:
+    post:
+      tags:
+        - notification listener
+      summary: Client listener for entity GroupAlarmStateChangeEvent
+      description: Example of a client listener for receiving the notification GroupAlarmStateChangeEvent
+      operationId: groupAlarmStateChangeEvent
+      requestBody:
+        $ref: '#/components/requestBodies/GroupAlarmStateChangeEvent'
+      responses:
+        '204':
+          description: Notified
+        default:
+          $ref: '#/components/responses/Error'
+  /listener/unAckAlarmCreateEvent:
+    post:
+      tags:
+        - notification listener
+      summary: Client listener for entity UnAckAlarmCreateEvent
+      description: Example of a client listener for receiving the notification UnAckAlarmCreateEvent
+      operationId: unAckAlarmCreateEvent
+      requestBody:
+        $ref: '#/components/requestBodies/UnAckAlarmCreateEvent'
+      responses:
+        '204':
+          description: Notified
+        default:
+          $ref: '#/components/responses/Error'
+  /listener/unAckAlarmStateChangeEvent:
+    post:
+      tags:
+        - notification listener
+      summary: Client listener for entity UnAckAlarmStateChangeEvent
+      description: Example of a client listener for receiving the notification UnAckAlarmStateChangeEvent
+      operationId: unAckAlarmStateChangeEvent
+      requestBody:
+        $ref: '#/components/requestBodies/UnAckAlarmStateChangeEvent'
+      responses:
+        '204':
+          description: Notified
+        default:
+          $ref: '#/components/responses/Error'
+  /listener/unGroupAlarmCreateEvent:
+    post:
+      tags:
+        - notification listener
+      summary: Client listener for entity UnGroupAlarmCreateEvent
+      description: Example of a client listener for receiving the notification UnGroupAlarmCreateEvent
+      operationId: unGroupAlarmCreateEvent
+      requestBody:
+        $ref: '#/components/requestBodies/UnGroupAlarmCreateEvent'
+      responses:
+        '204':
+          description: Notified
+        default:
+          $ref: '#/components/responses/Error'
+  /listener/unGroupAlarmStateChangeEvent:
+    post:
+      tags:
+        - notification listener
+      summary: Client listener for entity UnGroupAlarmStateChangeEvent
+      description: Example of a client listener for receiving the notification UnGroupAlarmStateChangeEvent
+      operationId: unGroupAlarmStateChangeEvent
+      requestBody:
+        $ref: '#/components/requestBodies/UnGroupAlarmStateChangeEvent'
+      responses:
+        '204':
+          description: Notified
+        default:
+          $ref: '#/components/responses/Error'
+  /unAckAlarm:
+    get:
+      tags:
+        - unAckAlarm
+      summary: List or find UnAckAlarm objects
+      description: List or find UnAckAlarm objects
+      operationId: listUnAckAlarm
+      parameters:
+        - $ref: '#/components/parameters/Fields'
+        - $ref: '#/components/parameters/Offset'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          $ref: '#/components/responses/200UnAckAlarmArray'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+    post:
+      tags:
+        - unAckAlarm
+      summary: Creates a UnAckAlarm
+      description: This operation creates a UnAckAlarm entity.
+      operationId: createUnAckAlarm
+      parameters:
+        - $ref: '#/components/parameters/Fields'
+      requestBody:
+        $ref: '#/components/requestBodies/UnAckAlarm_FVO'
+      responses:
+        '201':
+          $ref: '#/components/responses/201UnAckAlarm'
+        '202':
+          description: Accepted
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '409':
+          $ref: '#/components/responses/409'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  '/unAckAlarm/{id}':
+    get:
+      tags:
+        - unAckAlarm
+      summary: Retrieves a UnAckAlarm by ID
+      description: >-
+        This operation retrieves a UnAckAlarm entity. Attribute selection enabled for all first
+        level attributes.
+      operationId: retrieveUnAckAlarm
+      parameters:
+        - $ref: '#/components/parameters/Id'
+        - $ref: '#/components/parameters/Fields'
+      responses:
+        '200':
+          $ref: '#/components/responses/200UnAckAlarm_Get'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  /unGroupAlarm:
+    get:
+      tags:
+        - unGroupAlarm
+      summary: List or find UnGroupAlarm objects
+      description: List or find UnGroupAlarm objects
+      operationId: listUnGroupAlarm
+      parameters:
+        - $ref: '#/components/parameters/Fields'
+        - $ref: '#/components/parameters/Offset'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          $ref: '#/components/responses/200UnGroupAlarmArray'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+    post:
+      tags:
+        - unGroupAlarm
+      summary: Creates a UnGroupAlarm
+      description: This operation creates a UnGroupAlarm entity.
+      operationId: createUnGroupAlarm
+      parameters:
+        - $ref: '#/components/parameters/Fields'
+      requestBody:
+        $ref: '#/components/requestBodies/UnGroupAlarm_FVO'
+      responses:
+        '201':
+          $ref: '#/components/responses/201UnGroupAlarm'
+        '202':
+          description: Accepted
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '409':
+          $ref: '#/components/responses/409'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  '/unGroupAlarm/{id}':
+    get:
+      tags:
+        - unGroupAlarm
+      summary: Retrieves a UnGroupAlarm by ID
+      description: >-
+        This operation retrieves a UnGroupAlarm entity. Attribute selection enabled for all first
+        level attributes.
+      operationId: retrieveUnGroupAlarm
+      parameters:
+        - $ref: '#/components/parameters/Id'
+        - $ref: '#/components/parameters/Fields'
+      responses:
+        '200':
+          $ref: '#/components/responses/200UnGroupAlarm_Get'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+components:
+  schemas:
+    AckAlarm:
+      allOf:
+        - $ref: '#/components/schemas/Entity'
+        - type: object
+          description: Task resource for the acknowledge alarms operation
+          properties:
+            state:
+              description: Current state of the operation task
+              type: string
+              enum:
+                - acknowledged
+                - terminatedWithError
+                - inProgress
+                - done
+                - cancel
+                - canceled
+            ackSystemId:
+              description: Name of the acknowledging system
+              type: string
+            ackTime:
+              description: Time of the acknowledgement
+              type: string
+              format: date-time
+            ackUserId:
+              description: Name of the acknowledging user
+              type: string
+            ackedAlarm:
+              description: The successfully acknowledged alarms
+              type: array
+              items:
+                $ref: '#/components/schemas/AlarmRefOrValue'
+            alarmPattern:
+              description: >-
+                Alarm patterns to match target alarms. An alarm will match if all of the attributes
+                in any of the patterns compare equal to those attributes of the alarm.
+              type: array
+              items:
+                $ref: '#/components/schemas/AlarmRefOrValue'
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          AckAlarm: '#/components/schemas/AckAlarm'
+    AckAlarmCreateEvent:
+      allOf:
+        - $ref: '#/components/schemas/Event'
+        - type: object
+          description: AckAlarmCreateEvent generic structure
+          properties:
+            event:
+              $ref: '#/components/schemas/AckAlarmCreateEventPayload'
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          AckAlarmCreateEvent: '#/components/schemas/AckAlarmCreateEvent'
+    AckAlarmCreateEventPayload:
+      type: object
+      description: AckAlarmCreateEventPayload generic structure
+      properties:
+        ackAlarm:
+          $ref: '#/components/schemas/AckAlarm'
+    AckAlarmStateChangeEvent:
+      allOf:
+        - $ref: '#/components/schemas/Event'
+        - type: object
+          description: AckAlarmStateChangeEvent generic structure
+          properties:
+            event:
+              $ref: '#/components/schemas/AckAlarmStateChangeEventPayload'
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          AckAlarmStateChangeEvent: '#/components/schemas/AckAlarmStateChangeEvent'
+    AckAlarmStateChangeEventPayload:
+      type: object
+      description: AckAlarmStateChangeEventPayload generic structure
+      properties:
+        ackAlarm:
+          $ref: '#/components/schemas/AckAlarm'
+    AckAlarm_FVO:
+      allOf:
+        - $ref: '#/components/schemas/Entity'
+        - type: object
+          description: Task resource for the acknowledge alarms operation
+          properties:
+            state:
+              description: Current state of the operation task
+              type: string
+              enum:
+                - acknowledged
+                - terminatedWithError
+                - inProgress
+                - done
+                - cancel
+                - canceled
+            ackSystemId:
+              description: Name of the acknowledging system
+              type: string
+            ackTime:
+              description: Time of the acknowledgement
+              type: string
+              format: date-time
+            ackUserId:
+              description: Name of the acknowledging user
+              type: string
+            ackedAlarm:
+              description: The successfully acknowledged alarms
+              type: array
+              items:
+                $ref: '#/components/schemas/AlarmRefOrValue'
+            alarmPattern:
+              description: >-
+                Alarm patterns to match target alarms. An alarm will match if all of the attributes
+                in any of the patterns compare equal to those attributes of the alarm.
+              type: array
+              items:
+                $ref: '#/components/schemas/AlarmRefOrValue'
+          required:
+            - ackSystemId
+            - ackUserId
+            - alarmPattern
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          AckAlarm: '#/components/schemas/AckAlarm_FVO'
+    Addressable:
+      type: object
+      description: Base schema for addressable entities
+      properties:
+        href:
+          type: string
+          description: Hyperlink reference
+        id:
+          type: string
+          description: unique identifier
+    Addressable_MVO:
+      type: object
+      description: Base schema for addressable entities
+    Alarm:
+      allOf:
+        - $ref: '#/components/schemas/Entity'
+        - type: object
+          description: >-
+            This resource represents an alarm supporting the information model defined in ITU-T
+            X.733.
+          properties:
+            externalAlarmId:
+              type: string
+              description: An identifier of the alarm in the source system.
+            state:
+              type: string
+              description: 'Defines the alarm state during its life cycle (raised, updated, cleared).'
+              enum:
+                - raised
+                - updated
+                - cleared
+            alarmType:
+              $ref: '#/components/schemas/AlarmType'
+            perceivedSeverity:
+              $ref: '#/components/schemas/PerceivedSeverity'
+            probableCause:
+              type: string
+              description: >-
+                Provides the probable cause of the alarm. The values are consistent with ITU-T
+                Recommendation X.733 or 3GPP TS 32.111-2 Annex B.
+            specificProblem:
+              type: string
+              description: Provides more specific information about the alarm.
+            alarmedObjectType:
+              type: string
+              description: The type (class) of the managed object associated with the event.
+            alarmedObject:
+              $ref: '#/components/schemas/AlarmedObjectRef'
+            reportingSystemId:
+              type: string
+              description: Reporting system identity.
+            sourceSystemId:
+              type: string
+              description: Source system identity.
+            alarmDetails:
+              type: string
+              description: Contains further information on the alarm.
+            alarmRaisedTime:
+              type: string
+              format: date-time
+              description: Indicates the time (as a date + time) at which the alarm occurred at its source.
+            alarmChangedTime:
+              type: string
+              format: date-time
+              description: >-
+                Indicates the last date and time when the alarm is changed on the alarm-owning
+                system. Any change to the alarm whether coming from the alarmed resource, or
+                triggered by a change from the client is changing this time.
+            alarmClearedTime:
+              type: string
+              format: date-time
+              description: 'Indicates the time (as a date + time) at which the alarm is cleared at the source. '
+            alarmReportingTime:
+              type: string
+              format: date-time
+              description: >-
+                Indicates the time (as a date + time) at which the alarm was reported by the owning
+                OSS. It might be different from the alarmRaisedTime. For instance, if the alarm list
+                is maintained by an EMS, the alarmRaisedtime would be the time the alarm
+                  was detected by the NE, while the alarmReportingTime would be the time this alarm was stored in the alarm list of the EMS.
+            ackState:
+              type: string
+              description: 'Provides the Acknowledgement State of the alarm (unacknowledged, acknowledged).'
+              enum:
+                - unacknowledged
+                - acknowledged
+            ackSystemId:
+              type: string
+              description: >-
+                Provides the name of the system that last changed the ackState of an alarm, i.e.
+                acknowledged or unacknowledged the alarm.
+            ackUserId:
+              type: string
+              description: >-
+                Provides the id of the user who has last changed the ack state of the alarm, i.e.
+                acknowledged or unacknowledged the alarm.
+            affectedService:
+              type: array
+              description: Provides list of affected services.
+              items:
+                $ref: '#/components/schemas/ServiceRef'
+            alarmEscalation:
+              type: boolean
+              description: 'Indicates if this alarm has been escalated or not. '
+            clearSystemId:
+              type: string
+              description: >-
+                Provides the id of the system where the user who invoked the alarmCleared operation
+                is located. 
+            clearUserId:
+              type: string
+              description: Provides the id of the user who invoked the alarmCleared operation
+            comment:
+              type: array
+              description: Provides list of Comments regards Alarm.
+              items:
+                $ref: '#/components/schemas/Comment'
+            correlatedAlarm:
+              type: array
+              description: Provides list of correlated Alarms.
+              items:
+                $ref: '#/components/schemas/AlarmRef'
+            crossedThresholdInformation:
+              $ref: '#/components/schemas/CrossedThresholdInformation'
+            isRootCause:
+              type: boolean
+              description: 'Indicates whether the alarm is a root cause alarm.. '
+            parentAlarm:
+              type: array
+              description: Provides list of parrent Alarms.
+              items:
+                $ref: '#/components/schemas/AlarmRef'
+            plannedOutageIndicator:
+              type: string
+              description: >-
+                Indicates that the Managed Object (related to this alarm) is in planned outage (in
+                planned maintenance, or out-of-service). 
+              enum:
+                - InService
+                - OutOfService
+            proposedRepairedActions:
+              type: string
+              description: 'Indicates proposed repair actions, if known to the system emitting the alarm.'
+            serviceAffecting:
+              type: boolean
+              description: Indicates whether the alarm affects service or not.
+            place:
+              type: array
+              description: 'List of related places, which are affected by Alarm.'
+              items:
+                $ref: '#/components/schemas/RelatedPlace'
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          Alarm: '#/components/schemas/Alarm'
+    AlarmAttributeValueChangeEvent:
+      allOf:
+        - $ref: '#/components/schemas/Event'
+        - type: object
+          description: AlarmAttributeValueChangeEvent generic structure
+          properties:
+            event:
+              $ref: '#/components/schemas/AlarmAttributeValueChangeEventPayload'
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          AlarmAttributeValueChangeEvent: '#/components/schemas/AlarmAttributeValueChangeEvent'
+    AlarmAttributeValueChangeEventPayload:
+      type: object
+      description: AlarmAttributeValueChangeEventPayload generic structure
+      properties:
+        alarm:
+          $ref: '#/components/schemas/Alarm'
+    AlarmCreateEvent:
+      allOf:
+        - $ref: '#/components/schemas/Event'
+        - type: object
+          description: AlarmCreateEvent generic structure
+          properties:
+            event:
+              $ref: '#/components/schemas/AlarmCreateEventPayload'
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          AlarmCreateEvent: '#/components/schemas/AlarmCreateEvent'
+    AlarmCreateEventPayload:
+      type: object
+      description: AlarmCreateEventPayload generic structure
+      properties:
+        alarm:
+          $ref: '#/components/schemas/Alarm'
+    AlarmDeleteEvent:
+      allOf:
+        - $ref: '#/components/schemas/Event'
+        - type: object
+          description: AlarmDeleteEvent generic structure
+          properties:
+            event:
+              $ref: '#/components/schemas/AlarmDeleteEventPayload'
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          AlarmDeleteEvent: '#/components/schemas/AlarmDeleteEvent'
+    AlarmDeleteEventPayload:
+      type: object
+      description: AlarmDeleteEventPayload generic structure
+      properties:
+        alarm:
+          $ref: '#/components/schemas/Alarm'
+    AlarmRef:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/EntityRef'
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          AlarmRef: '#/components/schemas/AlarmRef'
+    AlarmRefOrValue:
+      type: object
+      description: >-
+        An alarm defined by reference or value. The polymorphic attributes @type, @schemaLocation &
+        @referredType are related to the Alarm entity and not the AlarmRefOrValue class itself
+      oneOf:
+        - $ref: '#/components/schemas/Alarm'
+        - $ref: '#/components/schemas/AlarmRef'
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          Alarm: '#/components/schemas/Alarm'
+          AlarmRef: '#/components/schemas/AlarmRef'
+    AlarmRef_MVO:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/EntityRef_MVO'
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          AlarmRef: '#/components/schemas/AlarmRef_MVO'
+    AlarmStateChangeEvent:
+      allOf:
+        - $ref: '#/components/schemas/Event'
+        - type: object
+          description: AlarmStateChangeEvent generic structure
+          properties:
+            event:
+              $ref: '#/components/schemas/AlarmStateChangeEventPayload'
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          AlarmStateChangeEvent: '#/components/schemas/AlarmStateChangeEvent'
+    AlarmStateChangeEventPayload:
+      type: object
+      description: AlarmStateChangeEventPayload generic structure
+      properties:
+        alarm:
+          $ref: '#/components/schemas/Alarm'
+    AlarmType:
+      enum:
+        - communicationsAlarm
+        - processingErrorAlarm
+        - environmentalAlarm
+        - qualityOfServiceAlarm
+        - equipmentAlarm
+        - integrityViolation
+        - operationalViolation
+        - physicalViolation
+        - securityService
+        - mechanismViolation
+        - timeDomainViolation
+      type: string
+      description: 'Categorizes the alarm (X.733 8.1.1, 3GPP TS 32.111-2 Annex A)'
+    Alarm_FVO:
+      allOf:
+        - $ref: '#/components/schemas/Entity'
+        - type: object
+          description: >-
+            This resource represents an alarm supporting the information model defined in ITU-T
+            X.733.
+          properties:
+            externalAlarmId:
+              type: string
+              description: An identifier of the alarm in the source system.
+            state:
+              type: string
+              description: 'Defines the alarm state during its life cycle (raised, updated, cleared).'
+              enum:
+                - raised
+                - updated
+                - cleared
+            alarmType:
+              $ref: '#/components/schemas/AlarmType'
+            perceivedSeverity:
+              $ref: '#/components/schemas/PerceivedSeverity'
+            probableCause:
+              type: string
+              description: >-
+                Provides the probable cause of the alarm. The values are consistent with ITU-T
+                Recommendation X.733 or 3GPP TS 32.111-2 Annex B.
+            specificProblem:
+              type: string
+              description: Provides more specific information about the alarm.
+            alarmedObjectType:
+              type: string
+              description: The type (class) of the managed object associated with the event.
+            alarmedObject:
+              $ref: '#/components/schemas/AlarmedObjectRef'
+            reportingSystemId:
+              type: string
+              description: Reporting system identity.
+            sourceSystemId:
+              type: string
+              description: Source system identity.
+            alarmDetails:
+              type: string
+              description: Contains further information on the alarm.
+            alarmRaisedTime:
+              type: string
+              format: date-time
+              description: Indicates the time (as a date + time) at which the alarm occurred at its source.
+            alarmChangedTime:
+              type: string
+              format: date-time
+              description: >-
+                Indicates the last date and time when the alarm is changed on the alarm-owning
+                system. Any change to the alarm whether coming from the alarmed resource, or
+                triggered by a change from the client is changing this time.
+            alarmClearedTime:
+              type: string
+              format: date-time
+              description: 'Indicates the time (as a date + time) at which the alarm is cleared at the source. '
+            alarmReportingTime:
+              type: string
+              format: date-time
+              description: >-
+                Indicates the time (as a date + time) at which the alarm was reported by the owning
+                OSS. It might be different from the alarmRaisedTime. For instance, if the alarm list
+                is maintained by an EMS, the alarmRaisedtime would be the time the alarm
+                  was detected by the NE, while the alarmReportingTime would be the time this alarm was stored in the alarm list of the EMS.
+            ackState:
+              type: string
+              description: 'Provides the Acknowledgement State of the alarm (unacknowledged, acknowledged).'
+              enum:
+                - unacknowledged
+                - acknowledged
+            ackSystemId:
+              type: string
+              description: >-
+                Provides the name of the system that last changed the ackState of an alarm, i.e.
+                acknowledged or unacknowledged the alarm.
+            ackUserId:
+              type: string
+              description: >-
+                Provides the id of the user who has last changed the ack state of the alarm, i.e.
+                acknowledged or unacknowledged the alarm.
+            affectedService:
+              type: array
+              description: Provides list of affected services.
+              items:
+                $ref: '#/components/schemas/ServiceRef'
+            alarmEscalation:
+              type: boolean
+              description: 'Indicates if this alarm has been escalated or not. '
+            clearSystemId:
+              type: string
+              description: >-
+                Provides the id of the system where the user who invoked the alarmCleared operation
+                is located. 
+            clearUserId:
+              type: string
+              description: Provides the id of the user who invoked the alarmCleared operation
+            comment:
+              type: array
+              description: Provides list of Comments regards Alarm.
+              items:
+                $ref: '#/components/schemas/Comment'
+            correlatedAlarm:
+              type: array
+              description: Provides list of correlated Alarms.
+              items:
+                $ref: '#/components/schemas/AlarmRef'
+            crossedThresholdInformation:
+              $ref: '#/components/schemas/CrossedThresholdInformation'
+            isRootCause:
+              type: boolean
+              description: 'Indicates whether the alarm is a root cause alarm.. '
+            parentAlarm:
+              type: array
+              description: Provides list of parrent Alarms.
+              items:
+                $ref: '#/components/schemas/AlarmRef'
+            plannedOutageIndicator:
+              type: string
+              description: >-
+                Indicates that the Managed Object (related to this alarm) is in planned outage (in
+                planned maintenance, or out-of-service). 
+              enum:
+                - InService
+                - OutOfService
+            proposedRepairedActions:
+              type: string
+              description: 'Indicates proposed repair actions, if known to the system emitting the alarm.'
+            serviceAffecting:
+              type: boolean
+              description: Indicates whether the alarm affects service or not.
+            place:
+              type: array
+              description: 'List of related places, which are affected by Alarm.'
+              items:
+                $ref: '#/components/schemas/RelatedPlace_FVO'
+          required:
+            - alarmType
+            - perceivedSeverity
+            - probableCause
+            - alarmedObject
+            - sourceSystemId
+            - state
+            - alarmRaisedTime
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          Alarm: '#/components/schemas/Alarm_FVO'
+    Alarm_MVO:
+      allOf:
+        - $ref: '#/components/schemas/Entity'
+        - type: object
+          description: >-
+            This resource represents an alarm supporting the information model defined in ITU-T
+            X.733.
+          properties:
+            externalAlarmId:
+              type: string
+              description: An identifier of the alarm in the source system.
+            state:
+              type: string
+              description: 'Defines the alarm state during its life cycle (raised, updated, cleared).'
+              enum:
+                - raised
+                - updated
+                - cleared
+            alarmType:
+              $ref: '#/components/schemas/AlarmType'
+            perceivedSeverity:
+              $ref: '#/components/schemas/PerceivedSeverity'
+            probableCause:
+              type: string
+              description: >-
+                Provides the probable cause of the alarm. The values are consistent with ITU-T
+                Recommendation X.733 or 3GPP TS 32.111-2 Annex B.
+            specificProblem:
+              type: string
+              description: Provides more specific information about the alarm.
+            alarmedObjectType:
+              type: string
+              description: The type (class) of the managed object associated with the event.
+            alarmedObject:
+              $ref: '#/components/schemas/AlarmedObjectRef_MVO'
+            reportingSystemId:
+              type: string
+              description: Reporting system identity.
+            alarmDetails:
+              type: string
+              description: Contains further information on the alarm.
+            alarmChangedTime:
+              type: string
+              format: date-time
+              description: >-
+                Indicates the last date and time when the alarm is changed on the alarm-owning
+                system. Any change to the alarm whether coming from the alarmed resource, or
+                triggered by a change from the client is changing this time.
+            alarmClearedTime:
+              type: string
+              format: date-time
+              description: 'Indicates the time (as a date + time) at which the alarm is cleared at the source. '
+            alarmReportingTime:
+              type: string
+              format: date-time
+              description: >-
+                Indicates the time (as a date + time) at which the alarm was reported by the owning
+                OSS. It might be different from the alarmRaisedTime. For instance, if the alarm list
+                is maintained by an EMS, the alarmRaisedtime would be the time the alarm
+                  was detected by the NE, while the alarmReportingTime would be the time this alarm was stored in the alarm list of the EMS.
+            ackState:
+              type: string
+              description: 'Provides the Acknowledgement State of the alarm (unacknowledged, acknowledged).'
+              enum:
+                - unacknowledged
+                - acknowledged
+            ackSystemId:
+              type: string
+              description: >-
+                Provides the name of the system that last changed the ackState of an alarm, i.e.
+                acknowledged or unacknowledged the alarm.
+            ackUserId:
+              type: string
+              description: >-
+                Provides the id of the user who has last changed the ack state of the alarm, i.e.
+                acknowledged or unacknowledged the alarm.
+            affectedService:
+              type: array
+              description: Provides list of affected services.
+              items:
+                $ref: '#/components/schemas/ServiceRef_MVO'
+            alarmEscalation:
+              type: boolean
+              description: 'Indicates if this alarm has been escalated or not. '
+            clearSystemId:
+              type: string
+              description: >-
+                Provides the id of the system where the user who invoked the alarmCleared operation
+                is located. 
+            clearUserId:
+              type: string
+              description: Provides the id of the user who invoked the alarmCleared operation
+            comment:
+              type: array
+              description: Provides list of Comments regards Alarm.
+              items:
+                $ref: '#/components/schemas/Comment_MVO'
+            correlatedAlarm:
+              type: array
+              description: Provides list of correlated Alarms.
+              items:
+                $ref: '#/components/schemas/AlarmRef_MVO'
+            crossedThresholdInformation:
+              $ref: '#/components/schemas/CrossedThresholdInformation_MVO'
+            isRootCause:
+              type: boolean
+              description: 'Indicates whether the alarm is a root cause alarm.. '
+            parentAlarm:
+              type: array
+              description: Provides list of parrent Alarms.
+              items:
+                $ref: '#/components/schemas/AlarmRef_MVO'
+            plannedOutageIndicator:
+              type: string
+              description: >-
+                Indicates that the Managed Object (related to this alarm) is in planned outage (in
+                planned maintenance, or out-of-service). 
+              enum:
+                - InService
+                - OutOfService
+            proposedRepairedActions:
+              type: string
+              description: 'Indicates proposed repair actions, if known to the system emitting the alarm.'
+            serviceAffecting:
+              type: boolean
+              description: Indicates whether the alarm affects service or not.
+            place:
+              type: array
+              description: 'List of related places, which are affected by Alarm.'
+              items:
+                $ref: '#/components/schemas/RelatedPlace_MVO'
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          Alarm: '#/components/schemas/Alarm_MVO'
+    AlarmedObjectRef:
+      type: object
+      description: Reference to object which affected by Alarm (AlarmedObject).
+      allOf:
+        - $ref: '#/components/schemas/EntityRef'
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          AlarmedObjectRef: '#/components/schemas/AlarmedObjectRef'
+    AlarmedObjectRef_MVO:
+      type: object
+      description: Reference to object which affected by Alarm (AlarmedObject).
+      allOf:
+        - $ref: '#/components/schemas/EntityRef_MVO'
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          AlarmedObjectRef: '#/components/schemas/AlarmedObjectRef_MVO'
+    BaseEvent:
+      allOf:
+        - $ref: '#/components/schemas/Entity'
+        - type: object
+          description: Base event with common attributes.
+          properties:
+            event:
+              type: object
+              description: The event linked to the involved resource object
+            eventId:
+              type: string
+              description: The identifier of the notification.
+            eventTime:
+              type: string
+              format: date-time
+              description: Time of the event occurrence.
+            eventType:
+              type: string
+              description: The type of the notification.
+            correlationId:
+              type: string
+              description: The correlation id for this event.
+            domain:
+              type: string
+              description: The domain of the event.
+            title:
+              type: string
+              description: The title of the event.
+            description:
+              type: string
+              description: An explanatory of the event.
+            priority:
+              type: string
+              description: A priority.
+            timeOcurred:
+              type: string
+              format: date-time
+              description: The time the event occurred.
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          BaseEvent: '#/components/schemas/BaseEvent'
+    Characteristic:
+      allOf:
+        - $ref: '#/components/schemas/Extensible'
+        - type: object
+          description: >-
+            Describes a given characteristic of an object or entity through a name/value pair. This
+            is an abstract base class, the actual value is in one of the strongly-typed subclasses :
+            StringCharacteristic, ObjectCharacteristic, FloatCharacteristic, BooleanCharacteristic,
+            NumberCharacteristic, IntegerCharacteristic, StringArrayCharacteristic,
+            ObjectArrayCharacteristic, BooleanArrayCharacteristic, NumberArrayCharacteristic,
+            IntegerArrayCharacteristic...
+          properties:
+            id:
+              type: string
+              description: Unique identifier of the characteristic
+            name:
+              type: string
+              description: Name of the characteristic
+            valueType:
+              type: string
+              description: Data type of the value of the characteristic
+            characteristicRelationship:
+              type: array
+              description: Collection of characteristic relationships
+              items:
+                $ref: '#/components/schemas/CharacteristicRelationship'
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          Characteristic: '#/components/schemas/Characteristic'
+    CharacteristicRelationship:
+      allOf:
+        - $ref: '#/components/schemas/Extensible'
+        - type: object
+          description: Another Characteristic that is related to the current Characteristic;
+          properties:
+            id:
+              type: string
+              description: Unique identifier of the characteristic
+            relationshipType:
+              type: string
+              description: The type of relationship
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          CharacteristicRelationship: '#/components/schemas/CharacteristicRelationship'
+    ClearAlarm:
+      allOf:
+        - $ref: '#/components/schemas/Entity'
+        - type: object
+          description: Task resource for clear alarms operation
+          properties:
+            state:
+              description: Current state of the operation task
+              type: string
+              enum:
+                - acknowledged
+                - terminatedWithError
+                - inProgress
+                - done
+                - cancel
+                - canceled
+            clearSystemId:
+              description: Name of the clearing system
+              type: string
+            clearUserId:
+              description: Name of the clearing user
+              type: string
+            alarmClearedTime:
+              description: Time of the alarm clearing
+              type: string
+              format: date-time
+            alarmPattern:
+              description: >-
+                Alarm patterns to match target alarms. An alarm will match if all of the sttributes
+                in any of the patterns compare equal to those attributes of the alarm.
+              type: array
+              items:
+                $ref: '#/components/schemas/AlarmRefOrValue'
+            clearedAlarm:
+              description: The successfully cleared alarms
+              type: array
+              items:
+                $ref: '#/components/schemas/AlarmRefOrValue'
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          ClearAlarm: '#/components/schemas/ClearAlarm'
+    ClearAlarmCreateEvent:
+      allOf:
+        - $ref: '#/components/schemas/Event'
+        - type: object
+          description: ClearAlarmCreateEvent generic structure
+          properties:
+            event:
+              $ref: '#/components/schemas/ClearAlarmCreateEventPayload'
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          ClearAlarmCreateEvent: '#/components/schemas/ClearAlarmCreateEvent'
+    ClearAlarmCreateEventPayload:
+      type: object
+      description: ClearAlarmCreateEventPayload generic structure
+      properties:
+        clearAlarm:
+          $ref: '#/components/schemas/ClearAlarm'
+    ClearAlarmStateChangeEvent:
+      allOf:
+        - $ref: '#/components/schemas/Event'
+        - type: object
+          description: ClearAlarmStateChangeEvent generic structure
+          properties:
+            event:
+              $ref: '#/components/schemas/ClearAlarmStateChangeEventPayload'
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          ClearAlarmStateChangeEvent: '#/components/schemas/ClearAlarmStateChangeEvent'
+    ClearAlarmStateChangeEventPayload:
+      type: object
+      description: ClearAlarmStateChangeEventPayload generic structure
+      properties:
+        clearAlarm:
+          $ref: '#/components/schemas/ClearAlarm'
+    ClearAlarm_FVO:
+      allOf:
+        - $ref: '#/components/schemas/Entity'
+        - type: object
+          description: Task resource for clear alarms operation
+          properties:
+            state:
+              description: Current state of the operation task
+              type: string
+              enum:
+                - acknowledged
+                - terminatedWithError
+                - inProgress
+                - done
+                - cancel
+                - canceled
+            clearSystemId:
+              description: Name of the clearing system
+              type: string
+            clearUserId:
+              description: Name of the clearing user
+              type: string
+            alarmClearedTime:
+              description: Time of the alarm clearing
+              type: string
+              format: date-time
+            alarmPattern:
+              description: >-
+                Alarm patterns to match target alarms. An alarm will match if all of the sttributes
+                in any of the patterns compare equal to those attributes of the alarm.
+              type: array
+              items:
+                $ref: '#/components/schemas/AlarmRefOrValue'
+            clearedAlarm:
+              description: The successfully cleared alarms
+              type: array
+              items:
+                $ref: '#/components/schemas/AlarmRefOrValue'
+          required:
+            - clearSystemId
+            - clearUserId
+            - alarmClearedTime
+            - alarmPattern
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          ClearAlarm: '#/components/schemas/ClearAlarm_FVO'
+    Comment:
+      allOf:
+        - $ref: '#/components/schemas/Extensible'
+        - type: object
+          description: Indicates the comments entered on the alarm.
+          properties:
+            userId:
+              type: string
+              description: Indicates the user commenting the alarm.
+            systemId:
+              type: string
+              description: Indicates the system identifier on which the client set the comment.
+            time:
+              type: string
+              format: date-time
+              description: Indicates the time commenting the alarm
+            comment:
+              type: string
+              description: Indicates the text of the comment.
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          Comment: '#/components/schemas/Comment'
+    CommentAlarm:
+      allOf:
+        - $ref: '#/components/schemas/Entity'
+        - type: object
+          description: Task resource for comment alarms operation
+          properties:
+            id:
+              description: The identifier of the task
+              type: string
+            href:
+              description: A reference to the task
+              type: string
+            state:
+              description: Current state of the operation task
+              type: string
+              enum:
+                - acknowledged
+                - terminatedWithError
+                - inProgress
+                - done
+                - cancel
+                - canceled
+            comment:
+              $ref: '#/components/schemas/Comment'
+            alarmPattern:
+              description: >-
+                Alarm patterns to match target alarms. An alarm will match if all of the sttributes
+                in any of the patterns compare equal to those attributes of the alarm.
+              type: array
+              items:
+                $ref: '#/components/schemas/AlarmRefOrValue'
+            commentedAlarm:
+              description: The successfully commented alarms
+              type: array
+              items:
+                $ref: '#/components/schemas/AlarmRefOrValue'
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          CommentAlarm: '#/components/schemas/CommentAlarm'
+    CommentAlarmCreateEvent:
+      allOf:
+        - $ref: '#/components/schemas/Event'
+        - type: object
+          description: CommentAlarmCreateEvent generic structure
+          properties:
+            event:
+              $ref: '#/components/schemas/CommentAlarmCreateEventPayload'
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          CommentAlarmCreateEvent: '#/components/schemas/CommentAlarmCreateEvent'
+    CommentAlarmCreateEventPayload:
+      type: object
+      description: CommentAlarmCreateEventPayload generic structure
+      properties:
+        commentAlarm:
+          $ref: '#/components/schemas/CommentAlarm'
+    CommentAlarmStateChangeEvent:
+      allOf:
+        - $ref: '#/components/schemas/Event'
+        - type: object
+          description: CommentAlarmStateChangeEvent generic structure
+          properties:
+            event:
+              $ref: '#/components/schemas/CommentAlarmStateChangeEventPayload'
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          CommentAlarmStateChangeEvent: '#/components/schemas/CommentAlarmStateChangeEvent'
+    CommentAlarmStateChangeEventPayload:
+      type: object
+      description: CommentAlarmStateChangeEventPayload generic structure
+      properties:
+        commentAlarm:
+          $ref: '#/components/schemas/CommentAlarm'
+    CommentAlarm_FVO:
+      allOf:
+        - $ref: '#/components/schemas/Entity'
+        - type: object
+          description: Task resource for comment alarms operation
+          properties:
+            id:
+              description: The identifier of the task
+              type: string
+            href:
+              description: A reference to the task
+              type: string
+            state:
+              description: Current state of the operation task
+              type: string
+              enum:
+                - acknowledged
+                - terminatedWithError
+                - inProgress
+                - done
+                - cancel
+                - canceled
+            comment:
+              $ref: '#/components/schemas/Comment'
+            alarmPattern:
+              description: >-
+                Alarm patterns to match target alarms. An alarm will match if all of the sttributes
+                in any of the patterns compare equal to those attributes of the alarm.
+              type: array
+              items:
+                $ref: '#/components/schemas/AlarmRefOrValue'
+            commentedAlarm:
+              description: The successfully commented alarms
+              type: array
+              items:
+                $ref: '#/components/schemas/AlarmRefOrValue'
+          required:
+            - comment
+            - alarmPattern
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          CommentAlarm: '#/components/schemas/CommentAlarm_FVO'
+    Comment_MVO:
+      allOf:
+        - $ref: '#/components/schemas/Extensible'
+        - type: object
+          description: Indicates the comments entered on the alarm.
+          properties:
+            userId:
+              type: string
+              description: Indicates the user commenting the alarm.
+            systemId:
+              type: string
+              description: Indicates the system identifier on which the client set the comment.
+            time:
+              type: string
+              format: date-time
+              description: Indicates the time commenting the alarm
+            comment:
+              type: string
+              description: Indicates the text of the comment.
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          Comment: '#/components/schemas/Comment_MVO'
+    CrossedThresholdInformation:
+      type: object
+      description: Identifies the details of the threshold that has been crossed.
+      properties:
+        threshold:
+          $ref: '#/components/schemas/ThresholdRef'
+        direction:
+          type: string
+          description: 'Indicates the threshold crossing direction: up or down.'
+        granularity:
+          type: string
+          description: Indicates the granularity at which the indicator is evaluated for threshold crossing
+        indicatorName:
+          type: string
+          description: Indicates the name of indicator which crossed the threshold.
+        indicatorUnit:
+          type: string
+          description: >-
+            Indicates the unit of the measurement of the indicator corresponding to the threshold
+            that has been crossed.
+        observedValue:
+          type: string
+          description: Indicates the value of the indicator which crossed the threshold.
+        thresholdCrossingDescription:
+          type: string
+          description: Indicates further information on the threshold crossing alarm.
+    CrossedThresholdInformation_MVO:
+      type: object
+      description: Identifies the details of the threshold that has been crossed.
+      properties:
+        threshold:
+          $ref: '#/components/schemas/ThresholdRef_MVO'
+        direction:
+          type: string
+          description: 'Indicates the threshold crossing direction: up or down.'
+        granularity:
+          type: string
+          description: Indicates the granularity at which the indicator is evaluated for threshold crossing
+        indicatorName:
+          type: string
+          description: Indicates the name of indicator which crossed the threshold.
+        indicatorUnit:
+          type: string
+          description: >-
+            Indicates the unit of the measurement of the indicator corresponding to the threshold
+            that has been crossed.
+        observedValue:
+          type: string
+          description: Indicates the value of the indicator which crossed the threshold.
+        thresholdCrossingDescription:
+          type: string
+          description: Indicates further information on the threshold crossing alarm.
+    Entity:
+      type: object
+      description: Base entity schema for use in TMForum Open-APIs. Property.
+      allOf:
+        - $ref: '#/components/schemas/Extensible'
+        - $ref: '#/components/schemas/Addressable'
+    EntityRef:
+      allOf:
+        - $ref: '#/components/schemas/Extensible'
+        - $ref: '#/components/schemas/Addressable'
+        - type: object
+          description: Entity reference schema to be use for all entityRef class.
+          properties:
+            id:
+              type: string
+              description: The identifier of the referred entity.
+            href:
+              type: string
+              description: The URI of the referred entity.
+            name:
+              type: string
+              description: Name of the referred entity.
+            '@referredType':
+              type: string
+              description: The actual type of the target instance when needed for disambiguation.
+          required:
+            - id
+    EntityRef_MVO:
+      allOf:
+        - $ref: '#/components/schemas/Extensible'
+        - $ref: '#/components/schemas/Addressable'
+        - type: object
+          description: Entity reference schema to be use for all entityRef class.
+          properties:
+            name:
+              type: string
+              description: Name of the referred entity.
+            '@referredType':
+              type: string
+              description: The actual type of the target instance when needed for disambiguation.
+    Entity_MVO:
+      type: object
+      description: Base entity schema for use in TMForum Open-APIs. Property.
+      allOf:
+        - $ref: '#/components/schemas/Extensible'
+    Event:
+      allOf:
+        - $ref: '#/components/schemas/Extensible'
+        - type: object
+          description: event with common attributes.
+          properties:
+            href:
+              type: string
+              description: Hyperlink reference
+            id:
+              type: string
+              description: unique identifier
+            correlationId:
+              type: string
+              description: The correlation id for this event.
+            domain:
+              type: string
+              description: The domain of the event.
+            title:
+              type: string
+              description: The title of the event.
+            description:
+              type: string
+              description: An explanation of the event.
+            priority:
+              type: string
+              description: A priority.
+            timeOccurred:
+              type: string
+              format: date-time
+              description: The time the event occurred.
+            source:
+              $ref: '#/components/schemas/EntityRef'
+            reportingSystem:
+              $ref: '#/components/schemas/EntityRef'
+            relatedParty:
+              type: array
+              description: Collection of related parties
+              items:
+                $ref: '#/components/schemas/RelatedPartyRefOrPartyRoleRef'
+            analyticCharacteristic:
+              type: array
+              description: Collection of analytic characteristics
+              items:
+                $ref: '#/components/schemas/Characteristic'
+            eventId:
+              type: string
+              description: The identifier of the notification.
+            eventTime:
+              type: string
+              format: date-time
+              description: Time of the event occurrence.
+            eventType:
+              type: string
+              description: The type of the notification.
+            event:
+              description: The event linked to the involved resource object
+              type: object
+    Extensible:
+      type: object
+      description: >-
+        Base Extensible schema for use in TMForum Open-APIs - When used for in a schema it means
+        that the Entity described by the schema  MUST be extended with the @type
+      properties:
+        '@type':
+          type: string
+          description: 'When sub-classing, this defines the sub-class Extensible name'
+        '@baseType':
+          type: string
+          description: 'When sub-classing, this defines the super-class'
+        '@schemaLocation':
+          type: string
+          description: A URI to a JSON-Schema file that defines additional attributes and relationships
+      required:
+        - '@type'
+    ExternalIdentifier:
+      allOf:
+        - $ref: '#/components/schemas/Extensible'
+        - type: object
+          description: >-
+            An identification of an entity that is owned by or originates in a software system
+            different from the current system, for example a ProductOrder handed off from a commerce
+            platform into an order handling system. The structure identifies the system itself, the
+            nature of the entity within the system (e.g. class name) and the unique ID of the entity
+            within the system. It is anticipated that multiple external IDs can be held for a single
+            entity, e.g. if the entity passed through multiple systems on the way to the current
+            system. In this case the consumer is expected to sequence the IDs in the array in
+            reverse order of provenance, i.e. most recent system first in the list.
+          properties:
+            owner:
+              type: string
+              description: Name of the external system that owns the entity.
+              example: MagentoCommerce
+            externalIdentifierType:
+              type: string
+              description: >-
+                Type of the identification, typically would be the type of the entity within the
+                external system
+              example: ProductOrder
+            id:
+              type: string
+              description: identification of the entity within the external system.
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          ExternalIdentifier: '#/components/schemas/ExternalIdentifier'
+    ExternalIdentifier_FVO:
+      allOf:
+        - $ref: '#/components/schemas/Extensible'
+        - type: object
+          description: >-
+            An identification of an entity that is owned by or originates in a software system
+            different from the current system, for example a ProductOrder handed off from a commerce
+            platform into an order handling system. The structure identifies the system itself, the
+            nature of the entity within the system (e.g. class name) and the unique ID of the entity
+            within the system. It is anticipated that multiple external IDs can be held for a single
+            entity, e.g. if the entity passed through multiple systems on the way to the current
+            system. In this case the consumer is expected to sequence the IDs in the array in
+            reverse order of provenance, i.e. most recent system first in the list.
+          properties:
+            owner:
+              type: string
+              description: Name of the external system that owns the entity.
+              example: MagentoCommerce
+            externalIdentifierType:
+              type: string
+              description: >-
+                Type of the identification, typically would be the type of the entity within the
+                external system
+              example: ProductOrder
+            id:
+              type: string
+              description: identification of the entity within the external system.
+          required:
+            - id
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          ExternalIdentifier: '#/components/schemas/ExternalIdentifier_FVO'
+    ExternalIdentifier_MVO:
+      allOf:
+        - $ref: '#/components/schemas/Extensible'
+        - type: object
+          description: >-
+            An identification of an entity that is owned by or originates in a software system
+            different from the current system, for example a ProductOrder handed off from a commerce
+            platform into an order handling system. The structure identifies the system itself, the
+            nature of the entity within the system (e.g. class name) and the unique ID of the entity
+            within the system. It is anticipated that multiple external IDs can be held for a single
+            entity, e.g. if the entity passed through multiple systems on the way to the current
+            system. In this case the consumer is expected to sequence the IDs in the array in
+            reverse order of provenance, i.e. most recent system first in the list.
+          properties:
+            owner:
+              type: string
+              description: Name of the external system that owns the entity.
+              example: MagentoCommerce
+            externalIdentifierType:
+              type: string
+              description: >-
+                Type of the identification, typically would be the type of the entity within the
+                external system
+              example: ProductOrder
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          ExternalIdentifier: '#/components/schemas/ExternalIdentifier_MVO'
+    GroupAlarm:
+      allOf:
+        - $ref: '#/components/schemas/Entity'
+        - type: object
+          description: Task resource for group alarms operation
+          properties:
+            id:
+              description: The identifier of the task
+              type: string
+            href:
+              description: A reference to the task
+              type: string
+            state:
+              description: Current state of the operation task
+              type: string
+              enum:
+                - acknowledged
+                - terminatedWithError
+                - inProgress
+                - done
+                - cancel
+                - canceled
+            sourceSystemId:
+              description: Source system identifier
+              type: string
+            alarmChangedTime:
+              description: Time of the correlation
+              type: string
+              format: date-time
+            parentAlarm:
+              $ref: '#/components/schemas/AlarmRefOrValue'
+            correlatedAlarm:
+              description: Correlated alarms
+              type: array
+              items:
+                $ref: '#/components/schemas/AlarmRefOrValue'
+            groupedAlarm:
+              description: The successfully correlated alarms
+              type: array
+              items:
+                $ref: '#/components/schemas/AlarmRefOrValue'
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          GroupAlarm: '#/components/schemas/GroupAlarm'
+    GroupAlarmCreateEvent:
+      allOf:
+        - $ref: '#/components/schemas/Event'
+        - type: object
+          description: GroupAlarmCreateEvent generic structure
+          properties:
+            event:
+              $ref: '#/components/schemas/GroupAlarmCreateEventPayload'
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          GroupAlarmCreateEvent: '#/components/schemas/GroupAlarmCreateEvent'
+    GroupAlarmCreateEventPayload:
+      type: object
+      description: GroupAlarmCreateEventPayload generic structure
+      properties:
+        groupAlarm:
+          $ref: '#/components/schemas/GroupAlarm'
+    GroupAlarmStateChangeEvent:
+      allOf:
+        - $ref: '#/components/schemas/Event'
+        - type: object
+          description: GroupAlarmStateChangeEvent generic structure
+          properties:
+            event:
+              $ref: '#/components/schemas/GroupAlarmStateChangeEventPayload'
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          GroupAlarmStateChangeEvent: '#/components/schemas/GroupAlarmStateChangeEvent'
+    GroupAlarmStateChangeEventPayload:
+      type: object
+      description: GroupAlarmStateChangeEventPayload generic structure
+      properties:
+        groupAlarm:
+          $ref: '#/components/schemas/GroupAlarm'
+    GroupAlarm_FVO:
+      allOf:
+        - $ref: '#/components/schemas/Entity'
+        - type: object
+          description: Task resource for group alarms operation
+          properties:
+            id:
+              description: The identifier of the task
+              type: string
+            href:
+              description: A reference to the task
+              type: string
+            state:
+              description: Current state of the operation task
+              type: string
+              enum:
+                - acknowledged
+                - terminatedWithError
+                - inProgress
+                - done
+                - cancel
+                - canceled
+            sourceSystemId:
+              description: Source system identifier
+              type: string
+            alarmChangedTime:
+              description: Time of the correlation
+              type: string
+              format: date-time
+            parentAlarm:
+              $ref: '#/components/schemas/AlarmRefOrValue'
+            correlatedAlarm:
+              description: Correlated alarms
+              type: array
+              items:
+                $ref: '#/components/schemas/AlarmRefOrValue'
+            groupedAlarm:
+              description: The successfully correlated alarms
+              type: array
+              items:
+                $ref: '#/components/schemas/AlarmRefOrValue'
+          required:
+            - sourceSystemId
+            - alarmChangedTime
+            - parentAlarm
+            - correlatedAlarm
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          GroupAlarm: '#/components/schemas/GroupAlarm_FVO'
+    PartyRef:
+      type: object
+      description: A Party reference
+      allOf:
+        - $ref: '#/components/schemas/EntityRef'
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          PartyRef: '#/components/schemas/PartyRef'
+    PartyRefOrPartyRoleRef:
+      type: object
+      description: ''
+      oneOf:
+        - $ref: '#/components/schemas/PartyRef'
+        - $ref: '#/components/schemas/PartyRoleRef'
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          PartyRef: '#/components/schemas/PartyRef'
+          PartyRoleRef: '#/components/schemas/PartyRoleRef'
+    PartyRoleRef:
+      allOf:
+        - $ref: '#/components/schemas/EntityRef'
+        - type: object
+          description: >-
+            Party role reference. A party role represents the part played by a party in a given
+            context.
+          properties:
+            partyId:
+              type: string
+              description: The identifier of the engaged party that is linked to the PartyRole object.
+            partyName:
+              type: string
+              description: The name of the engaged party that is linked to the PartyRole object.
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          PartyRoleRef: '#/components/schemas/PartyRoleRef'
+    PerceivedSeverity:
+      enum:
+        - critical
+        - major
+        - minor
+        - warning
+        - indeterminate
+        - cleared
+      type: string
+      description: >-
+        Lists the possible severities that can be allocated to an Alarm. The values are consistent
+        with ITU-T Recommendation X.733.
+
+        Once an alarm has been cleared, its perceived severity is set to 'cleared' and can no longer
+        be set.
+    Place:
+      allOf:
+        - $ref: '#/components/schemas/Entity'
+        - type: object
+          description: Place reference.
+          properties:
+            externalIdentifier:
+              type: array
+              description: Collection of external identifiers
+              items:
+                $ref: '#/components/schemas/ExternalIdentifier'
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          Place: '#/components/schemas/Place'
+    Place_FVO:
+      allOf:
+        - $ref: '#/components/schemas/Entity'
+        - type: object
+          description: Place reference.
+          properties:
+            externalIdentifier:
+              type: array
+              description: Collection of external identifiers
+              items:
+                $ref: '#/components/schemas/ExternalIdentifier_FVO'
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          Place: '#/components/schemas/Place_FVO'
+    Place_MVO:
+      allOf:
+        - $ref: '#/components/schemas/Entity'
+        - type: object
+          description: Place reference.
+          properties:
+            externalIdentifier:
+              type: array
+              description: Collection of external identifiers
+              items:
+                $ref: '#/components/schemas/ExternalIdentifier_MVO'
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          Place: '#/components/schemas/Place_MVO'
+    RelatedPartyRefOrPartyRoleRef:
+      allOf:
+        - $ref: '#/components/schemas/Extensible'
+        - type: object
+          description: >-
+            RelatedParty reference. A related party defines party or party role or its reference,
+            linked to a specific entity
+          properties:
+            role:
+              description: >-
+                Role played by the related party or party role in the context of the specific entity
+                it is linked to. Such as 'initiator', 'customer',  'salesAgent', 'user'
+              type: string
+            partyOrPartyRole:
+              $ref: '#/components/schemas/PartyRefOrPartyRoleRef'
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          RelatedPartyRefOrPartyRoleRef: '#/components/schemas/RelatedPartyRefOrPartyRoleRef'
+    RelatedPlace:
+      allOf:
+        - $ref: '#/components/schemas/Extensible'
+        - type: object
+          description: 'A  Place and an associated role as installation address, delivery address, etc....'
+          properties:
+            role:
+              type: string
+            relatedPlace:
+              $ref: '#/components/schemas/Place'
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          RelatedPlace: '#/components/schemas/RelatedPlace'
+    RelatedPlace_FVO:
+      allOf:
+        - $ref: '#/components/schemas/Extensible'
+        - type: object
+          description: 'A  Place and an associated role as installation address, delivery address, etc....'
+          properties:
+            role:
+              type: string
+            relatedPlace:
+              $ref: '#/components/schemas/Place_FVO'
+          required:
+            - role
+            - relatedPlace
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          RelatedPlace: '#/components/schemas/RelatedPlace_FVO'
+    RelatedPlace_MVO:
+      allOf:
+        - $ref: '#/components/schemas/Extensible'
+        - type: object
+          description: 'A  Place and an associated role as installation address, delivery address, etc....'
+          properties:
+            role:
+              type: string
+            relatedPlace:
+              $ref: '#/components/schemas/Place_MVO'
+          required:
+            - role
+            - relatedPlace
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          RelatedPlace: '#/components/schemas/RelatedPlace_MVO'
+    ServiceRef:
+      type: object
+      description: 'Service reference, for when Service is used by other entities.'
+      allOf:
+        - $ref: '#/components/schemas/Extensible'
+        - $ref: '#/components/schemas/EntityRef'
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          ServiceRef: '#/components/schemas/ServiceRef'
+    ServiceRef_MVO:
+      type: object
+      description: 'Service reference, for when Service is used by other entities.'
+      allOf:
+        - $ref: '#/components/schemas/Extensible'
+        - $ref: '#/components/schemas/EntityRef_MVO'
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          ServiceRef: '#/components/schemas/ServiceRef_MVO'
+    ThresholdRef:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/EntityRef'
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          ThresholdRef: '#/components/schemas/ThresholdRef'
+    ThresholdRef_MVO:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/EntityRef_MVO'
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          ThresholdRef: '#/components/schemas/ThresholdRef_MVO'
+    UnAckAlarm:
+      allOf:
+        - $ref: '#/components/schemas/Entity'
+        - type: object
+          description: Task resource for unacknowledge alarms operation
+          properties:
+            id:
+              description: The identifier of the task
+              type: string
+            href:
+              description: A reference to the task
+              type: string
+            state:
+              description: Current state of the operation task
+              type: string
+              enum:
+                - acknowledged
+                - terminatedWithError
+                - inProgress
+                - done
+                - cancel
+                - canceled
+            ackSystemId:
+              description: Name of the unacknowledging system
+              type: string
+            ackUserId:
+              description: Name of the unacknowledging user
+              type: string
+            ackTime:
+              description: Time of the unacknowledgement
+              type: string
+              format: date-time
+            alarmPattern:
+              description: >-
+                Alarm patterns to match target alarms. An alarm will match if all of the sttributes
+                in any of the patterns compare equal to those attributes of the alarm.
+              type: array
+              items:
+                $ref: '#/components/schemas/AlarmRefOrValue'
+            unAckedAlarm:
+              description: The successfully unacknowledged alarms
+              type: array
+              items:
+                $ref: '#/components/schemas/AlarmRefOrValue'
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          UnAckAlarm: '#/components/schemas/UnAckAlarm'
+    UnAckAlarmCreateEvent:
+      allOf:
+        - $ref: '#/components/schemas/Event'
+        - type: object
+          description: UnAckAlarmCreateEvent generic structure
+          properties:
+            event:
+              $ref: '#/components/schemas/UnAckAlarmCreateEventPayload'
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          UnAckAlarmCreateEvent: '#/components/schemas/UnAckAlarmCreateEvent'
+    UnAckAlarmCreateEventPayload:
+      type: object
+      description: UnAckAlarmCreateEventPayload generic structure
+      properties:
+        unAckAlarm:
+          $ref: '#/components/schemas/UnAckAlarm'
+    UnAckAlarmStateChangeEvent:
+      allOf:
+        - $ref: '#/components/schemas/Event'
+        - type: object
+          description: UnAckAlarmStateChangeEvent generic structure
+          properties:
+            event:
+              $ref: '#/components/schemas/UnAckAlarmStateChangeEventPayload'
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          UnAckAlarmStateChangeEvent: '#/components/schemas/UnAckAlarmStateChangeEvent'
+    UnAckAlarmStateChangeEventPayload:
+      type: object
+      description: UnAckAlarmStateChangeEventPayload generic structure
+      properties:
+        unAckAlarm:
+          $ref: '#/components/schemas/UnAckAlarm'
+    UnAckAlarm_FVO:
+      allOf:
+        - $ref: '#/components/schemas/Entity'
+        - type: object
+          description: Task resource for unacknowledge alarms operation
+          properties:
+            id:
+              description: The identifier of the task
+              type: string
+            href:
+              description: A reference to the task
+              type: string
+            state:
+              description: Current state of the operation task
+              type: string
+              enum:
+                - acknowledged
+                - terminatedWithError
+                - inProgress
+                - done
+                - cancel
+                - canceled
+            ackSystemId:
+              description: Name of the unacknowledging system
+              type: string
+            ackUserId:
+              description: Name of the unacknowledging user
+              type: string
+            ackTime:
+              description: Time of the unacknowledgement
+              type: string
+              format: date-time
+            alarmPattern:
+              description: >-
+                Alarm patterns to match target alarms. An alarm will match if all of the sttributes
+                in any of the patterns compare equal to those attributes of the alarm.
+              type: array
+              items:
+                $ref: '#/components/schemas/AlarmRefOrValue'
+            unAckedAlarm:
+              description: The successfully unacknowledged alarms
+              type: array
+              items:
+                $ref: '#/components/schemas/AlarmRefOrValue'
+          required:
+            - ackSystemId
+            - ackUserId
+            - alarmPattern
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          UnAckAlarm: '#/components/schemas/UnAckAlarm_FVO'
+    UnGroupAlarm:
+      allOf:
+        - $ref: '#/components/schemas/Entity'
+        - type: object
+          description: Task resource for ungroup alarms operation
+          properties:
+            id:
+              description: The identifier of the task
+              type: string
+            href:
+              description: A reference to the task
+              type: string
+            state:
+              description: Current state of the operation task
+              type: string
+              enum:
+                - acknowledged
+                - terminatedWithError
+                - inProgress
+                - done
+                - cancel
+                - canceled
+            sourceSystemId:
+              description: Source system identifier
+              type: string
+            alarmChangedTime:
+              description: Time of the uncorrelation
+              type: string
+              format: date-time
+            parentAlarm:
+              $ref: '#/components/schemas/AlarmRefOrValue'
+            correlatedAlarm:
+              description: Correlated alarms
+              type: array
+              items:
+                $ref: '#/components/schemas/AlarmRefOrValue'
+            unGroupedAlarm:
+              description: The successfully uncorrelated alarms
+              type: array
+              items:
+                $ref: '#/components/schemas/AlarmRefOrValue'
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          UnGroupAlarm: '#/components/schemas/UnGroupAlarm'
+    UnGroupAlarmCreateEvent:
+      allOf:
+        - $ref: '#/components/schemas/Event'
+        - type: object
+          description: UnGroupAlarmCreateEvent generic structure
+          properties:
+            event:
+              $ref: '#/components/schemas/UnGroupAlarmCreateEventPayload'
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          UnGroupAlarmCreateEvent: '#/components/schemas/UnGroupAlarmCreateEvent'
+    UnGroupAlarmCreateEventPayload:
+      type: object
+      description: UnGroupAlarmCreateEventPayload generic structure
+      properties:
+        unGroupAlarm:
+          $ref: '#/components/schemas/UnGroupAlarm'
+    UnGroupAlarmStateChangeEvent:
+      allOf:
+        - $ref: '#/components/schemas/Event'
+        - type: object
+          description: UnGroupAlarmStateChangeEvent generic structure
+          properties:
+            event:
+              $ref: '#/components/schemas/UnGroupAlarmStateChangeEventPayload'
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          UnGroupAlarmStateChangeEvent: '#/components/schemas/UnGroupAlarmStateChangeEvent'
+    UnGroupAlarmStateChangeEventPayload:
+      type: object
+      description: UnGroupAlarmStateChangeEventPayload generic structure
+      properties:
+        unGroupAlarm:
+          $ref: '#/components/schemas/UnGroupAlarm'
+    UnGroupAlarm_FVO:
+      allOf:
+        - $ref: '#/components/schemas/Entity'
+        - type: object
+          description: Task resource for ungroup alarms operation
+          properties:
+            id:
+              description: The identifier of the task
+              type: string
+            href:
+              description: A reference to the task
+              type: string
+            state:
+              description: Current state of the operation task
+              type: string
+              enum:
+                - acknowledged
+                - terminatedWithError
+                - inProgress
+                - done
+                - cancel
+                - canceled
+            sourceSystemId:
+              description: Source system identifier
+              type: string
+            alarmChangedTime:
+              description: Time of the uncorrelation
+              type: string
+              format: date-time
+            parentAlarm:
+              $ref: '#/components/schemas/AlarmRefOrValue'
+            correlatedAlarm:
+              description: Correlated alarms
+              type: array
+              items:
+                $ref: '#/components/schemas/AlarmRefOrValue'
+            unGroupedAlarm:
+              description: The successfully uncorrelated alarms
+              type: array
+              items:
+                $ref: '#/components/schemas/AlarmRefOrValue'
+          required:
+            - sourceSystemId
+            - alarmChangedTime
+            - parentAlarm
+            - correlatedAlarm
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          UnGroupAlarm: '#/components/schemas/UnGroupAlarm_FVO'
+    Error:
+      discriminator:
+        propertyName: '@type'
+        mapping:
+          Error: '#/components/schemas/Error'
+      allOf:
+        - $ref: '#/components/schemas/Extensible'
+        - type: object
+          required:
+            - code
+            - reason
+          properties:
+            code:
+              type: string
+              description: 'Application relevant detail, defined in the API or a common list.'
+            reason:
+              type: string
+              description: Explanation of the reason for the error which can be shown to a client user.
+            message:
+              type: string
+              description: >-
+                More details and corrective actions related to the error which can be shown to a
+                client user.
+            status:
+              type: string
+              description: HTTP Error code extension
+            referenceError:
+              type: string
+              description: URI of documentation describing the error.
+      description: 'Used when an API throws an Error, typically with a HTTP error response-code (3xx, 4xx, 5xx)'
+    Hub_FVO:
+      type: object
+      description: >-
+        Sets the communication endpoint address the service instance must use to deliver
+        notification information
+      required:
+        - callback
+      allOf:
+        - $ref: '#/components/schemas/Extensible'
+        - properties:
+            callback:
+              type: string
+              description: The callback being registered.
+            query:
+              type: string
+              description: additional data to be passed
+    Hub:
+      type: object
+      description: >-
+        Sets the communication endpoint address the service instance must use to deliver
+        notification information
+      allOf:
+        - $ref: '#/components/schemas/Entity'
+        - properties:
+            id:
+              type: string
+              description: Id of the listener
+            callback:
+              type: string
+              description: The callback being registered.
+            query:
+              type: string
+              description: additional data to be passed
+          required:
+            - callback
+    JsonPatch:
+      type: object
+      description: A JSONPatch document as defined by RFC 6902
+      required:
+        - op
+        - path
+      properties:
+        op:
+          type: string
+          description: The operation to be performed
+          enum:
+            - add
+            - remove
+            - replace
+            - move
+            - copy
+            - test
+        path:
+          type: string
+          description: A JSON-Pointer
+        value:
+          description: The value to be used within the operations.
+        from:
+          type: string
+          description: A string containing a JSON Pointer value.
+    JsonPatchOperations:
+      description: JSONPatch Operations document as defined by RFC 6902
+      type: array
+      items:
+        $ref: '#/components/schemas/JsonPatch'
+  parameters:
+    Id:
+      name: id
+      required: true
+      schema:
+        type: string
+      in: path
+      description: Identifier of the Resource
+    Fields:
+      name: fields
+      in: query
+      description: Comma-separated properties to be provided in response
+      schema:
+        type: string
+    Offset:
+      name: offset
+      in: query
+      description: Requested index for start of resources to be provided in response
+      schema:
+        type: integer
+    Limit:
+      name: limit
+      in: query
+      description: Requested number of resources to be provided in response
+      schema:
+        type: integer
+  requestBodies:
+    Alarm_FVO:
+      description: The Alarm to be created
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Alarm_FVO'
+          examples:
+            Alarm_create_example_01:
+              $ref: '#/components/examples/Alarm_create_example_01_request'
+      required: true
+    Alarm_MVO:
+      description: The Alarm to be patched
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Alarm_MVO'
+          examples:
+            Alarm_partialupdate_example_11:
+              $ref: '#/components/examples/Alarm_partialupdate_example_11_request'
+        application/merge-patch+json:
+          schema:
+            $ref: '#/components/schemas/Alarm_MVO'
+          examples:
+            Alarm_partialupdate_example_12:
+              $ref: '#/components/examples/Alarm_partialupdate_example_12_request'
+        application/json-patch+json:
+          schema:
+            $ref: '#/components/schemas/JsonPatchOperations'
+          examples:
+            Alarm_partialupdate_example_01:
+              $ref: '#/components/examples/Alarm_partialupdate_example_01_request'
+            Alarm_partialupdate_example_21:
+              $ref: '#/components/examples/Alarm_partialupdate_example_21_request'
+        application/json-patch-query+json:
+          schema:
+            $ref: '#/components/schemas/JsonPatchOperations'
+          examples:
+            Alarm_partialupdate_example_31:
+              $ref: '#/components/examples/Alarm_partialupdate_example_31_request'
+      required: true
+    AlarmCreateEvent:
+      description: Alarm create Event payload
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AlarmCreateEvent'
+          examples:
+            Create:
+              $ref: '#/components/examples/Create_request'
+      required: true
+    AlarmAttributeValueChangeEvent:
+      description: Alarm attributeValueChange Event payload
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AlarmAttributeValueChangeEvent'
+          examples:
+            AttributeValueChange:
+              $ref: '#/components/examples/AttributeValueChange_request'
+      required: true
+    AlarmStateChangeEvent:
+      description: Alarm stateChange Event payload
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AlarmStateChangeEvent'
+          examples:
+            StateChange:
+              $ref: '#/components/examples/StateChange_request'
+      required: true
+    AlarmDeleteEvent:
+      description: Alarm delete Event payload
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AlarmDeleteEvent'
+          examples:
+            Delete:
+              $ref: '#/components/examples/Delete_request'
+      required: true
+    AckAlarm_FVO:
+      description: The AckAlarm to be created
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AckAlarm_FVO'
+          examples:
+            AckAlarm_create_example_01:
+              $ref: '#/components/examples/AckAlarm_create_example_01_request'
+      required: true
+    AckAlarmCreateEvent:
+      description: AckAlarm create Event payload
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AckAlarmCreateEvent'
+          examples:
+            Create:
+              $ref: '#/components/examples/Create_request'
+      required: true
+    AckAlarmStateChangeEvent:
+      description: AckAlarm stateChange Event payload
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AckAlarmStateChangeEvent'
+          examples:
+            StateChange:
+              $ref: '#/components/examples/StateChange_request'
+      required: true
+    UnAckAlarm_FVO:
+      description: The UnAckAlarm to be created
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UnAckAlarm_FVO'
+          examples:
+            UnAckAlarm_create_example:
+              $ref: '#/components/examples/UnAckAlarm_create_example_request'
+      required: true
+    UnAckAlarmCreateEvent:
+      description: UnAckAlarm create Event payload
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UnAckAlarmCreateEvent'
+          examples:
+            Create:
+              $ref: '#/components/examples/Create_request'
+      required: true
+    UnAckAlarmStateChangeEvent:
+      description: UnAckAlarm stateChange Event payload
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UnAckAlarmStateChangeEvent'
+          examples:
+            StateChange:
+              $ref: '#/components/examples/StateChange_request'
+      required: true
+    ClearAlarm_FVO:
+      description: The ClearAlarm to be created
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ClearAlarm_FVO'
+          examples:
+            ClearAlarm_create_example:
+              $ref: '#/components/examples/ClearAlarm_create_example_request'
+      required: true
+    ClearAlarmCreateEvent:
+      description: ClearAlarm create Event payload
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ClearAlarmCreateEvent'
+          examples:
+            Create:
+              $ref: '#/components/examples/Create_request'
+      required: true
+    ClearAlarmStateChangeEvent:
+      description: ClearAlarm stateChange Event payload
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ClearAlarmStateChangeEvent'
+          examples:
+            StateChange:
+              $ref: '#/components/examples/StateChange_request'
+      required: true
+    CommentAlarm_FVO:
+      description: The CommentAlarm to be created
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CommentAlarm_FVO'
+          examples:
+            CommentAlarm_create_example:
+              $ref: '#/components/examples/CommentAlarm_create_example_request'
+      required: true
+    CommentAlarmCreateEvent:
+      description: CommentAlarm create Event payload
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CommentAlarmCreateEvent'
+          examples:
+            Create:
+              $ref: '#/components/examples/Create_request'
+      required: true
+    CommentAlarmStateChangeEvent:
+      description: CommentAlarm stateChange Event payload
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CommentAlarmStateChangeEvent'
+          examples:
+            StateChange:
+              $ref: '#/components/examples/StateChange_request'
+      required: true
+    GroupAlarm_FVO:
+      description: The GroupAlarm to be created
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GroupAlarm_FVO'
+          examples:
+            GroupAlarm_create_example:
+              $ref: '#/components/examples/GroupAlarm_create_example_request'
+      required: true
+    GroupAlarmCreateEvent:
+      description: GroupAlarm create Event payload
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GroupAlarmCreateEvent'
+          examples:
+            Create:
+              $ref: '#/components/examples/Create_request'
+      required: true
+    GroupAlarmStateChangeEvent:
+      description: GroupAlarm stateChange Event payload
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GroupAlarmStateChangeEvent'
+          examples:
+            StateChange:
+              $ref: '#/components/examples/StateChange_request'
+      required: true
+    UnGroupAlarm_FVO:
+      description: The UnGroupAlarm to be created
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UnGroupAlarm_FVO'
+          examples:
+            UnGroupAlarm_create_example:
+              $ref: '#/components/examples/UnGroupAlarm_create_example_request'
+      required: true
+    UnGroupAlarmCreateEvent:
+      description: UnGroupAlarm create Event payload
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UnGroupAlarmCreateEvent'
+          examples:
+            Create:
+              $ref: '#/components/examples/Create_request'
+      required: true
+    UnGroupAlarmStateChangeEvent:
+      description: UnGroupAlarm stateChange Event payload
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UnGroupAlarmStateChangeEvent'
+          examples:
+            StateChange:
+              $ref: '#/components/examples/StateChange_request'
+      required: true
+    Hub_FVO:
+      description: Data containing the callback endpoint to deliver the information
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Hub_FVO'
+          examples:
+            Basic Hub Example Request:
+              value:
+                '@type': Hub
+                callback: 'https://host/tmf-api/specificAPIName/v5/listener/specificEventListener'
+                query: data
+      required: true
+  responses:
+    '200':
+      description: OK
+    '202':
+      description: Accepted
+    '204':
+      description: Deleted
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            basic:
+              summary: Bad Request Error
+              value:
+                '@type': Error
+                code: ERR400
+                reason: Bad Request
+                message: >-
+                  The server could not understand the request due to invalid syntax. Please correct
+                  the syntax and try again.
+                referenceError: 'https://host/errors'
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            basic:
+              summary: Unauthorized Error
+              value:
+                '@type': Error
+                code: ERR401
+                reason: Unauthorized
+                message: >-
+                  You are not authorized to access the requested resource. Please provide the
+                  correct credentials.
+                referenceError: 'https://host/errors'
+    '403':
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            basic:
+              summary: Forbidden Error
+              value:
+                '@type': Error
+                code: ERR403
+                reason: Forbidden
+                message: >-
+                  You don't have the permission to access the requested resource. It is either
+                  read-protected or not readable by the server.
+                referenceError: 'https://host/errors'
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            basic:
+              summary: Not Found Error
+              value:
+                '@type': Error
+                code: ERR404
+                reason: Not Found
+                message: The requested URL was not found on the server.
+                referenceError: 'https://host/errors'
+    '405':
+      description: Method Not allowed
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            basic:
+              summary: Method Not allowed Error
+              value:
+                '@type': Error
+                code: ERR405
+                reason: Method Not allowed
+                message: The method is not allowed for the requested URL.
+                referenceError: 'https://host/errors'
+    '409':
+      description: Conflict
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            basic:
+              summary: Conflict Error
+              value:
+                '@type': Error
+                code: ERR409
+                reason: Conflict
+                message: >-
+                  The request could not be completed due to a conflict with the current state of the
+                  target resource.
+                referenceError: 'https://host/errors'
+    '500':
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            basic:
+              summary: Internal Server Error example
+              value:
+                '@type': Error
+                code: ERR500
+                reason: Internal Server Error
+                message: The server encountered an internal error. Please contact the system administrator.
+                referenceError: 'https://host/errors'
+    '501':
+      description: Not Implemented
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            basic:
+              summary: Not Implemented Error
+              value:
+                '@type': Error
+                code: ERR501
+                reason: The requested operation is not implemented
+                message: >-
+                  The requested operation is not implemented. Please contact the system
+                  administrator.
+                referenceError: 'https://host/errors'
+    '503':
+      description: Service Unavailable
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            basic:
+              summary: Service Unavailable Error
+              value:
+                '@type': Error
+                code: ERR503
+                reason: Service Unavailable
+                message: The service is currently unavailable. Please try again later.
+                referenceError: 'https://host/errors'
+    200AlarmArray:
+      description: Success
+      headers:
+        X-Total-Count:
+          $ref: '#/components/headers/X-Total-Count'
+        X-Result-Count:
+          $ref: '#/components/headers/X-Result-Count'
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Alarm'
+          examples:
+            Alarm_list_example:
+              $ref: '#/components/examples/Alarm_list_example_response'
+    200Alarm_Get:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Alarm'
+          examples:
+            Alarm_retrieve_example:
+              $ref: '#/components/examples/Alarm_retrieve_example_response'
+    200Alarm_Patch:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Alarm'
+          examples:
+            Alarm_partialupdate_example_11:
+              $ref: '#/components/examples/Alarm_partialupdate_example_11_response'
+    201Alarm:
+      description: OK/Created
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Alarm'
+          examples:
+            Alarm_create_example_01:
+              $ref: '#/components/examples/Alarm_create_example_01_response'
+    200AckAlarmArray:
+      description: Success
+      headers:
+        X-Total-Count:
+          $ref: '#/components/headers/X-Total-Count'
+        X-Result-Count:
+          $ref: '#/components/headers/X-Result-Count'
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/AckAlarm'
+          examples:
+            AckAlarm_list_example:
+              $ref: '#/components/examples/AckAlarm_list_example_response'
+    200AckAlarm_Get:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AckAlarm'
+          examples:
+            AckAlarm_retrieve_example:
+              $ref: '#/components/examples/AckAlarm_retrieve_example_response'
+    200AckAlarm_Patch:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AckAlarm'
+    201AckAlarm:
+      description: OK/Created
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AckAlarm'
+          examples:
+            AckAlarm_create_example_01:
+              $ref: '#/components/examples/AckAlarm_create_example_01_response'
+    200UnAckAlarmArray:
+      description: Success
+      headers:
+        X-Total-Count:
+          $ref: '#/components/headers/X-Total-Count'
+        X-Result-Count:
+          $ref: '#/components/headers/X-Result-Count'
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/UnAckAlarm'
+          examples:
+            UnAckAlarm_list_example:
+              $ref: '#/components/examples/UnAckAlarm_list_example_response'
+    200UnAckAlarm_Get:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UnAckAlarm'
+          examples:
+            UnAckAlarm_retrieve_example:
+              $ref: '#/components/examples/UnAckAlarm_retrieve_example_response'
+    200UnAckAlarm_Patch:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UnAckAlarm'
+    201UnAckAlarm:
+      description: OK/Created
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UnAckAlarm'
+          examples:
+            UnAckAlarm_create_example:
+              $ref: '#/components/examples/UnAckAlarm_create_example_response'
+    200ClearAlarmArray:
+      description: Success
+      headers:
+        X-Total-Count:
+          $ref: '#/components/headers/X-Total-Count'
+        X-Result-Count:
+          $ref: '#/components/headers/X-Result-Count'
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/ClearAlarm'
+          examples:
+            ClearAlarm_list_example:
+              $ref: '#/components/examples/ClearAlarm_list_example_response'
+    200ClearAlarm_Get:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ClearAlarm'
+          examples:
+            ClearAlarm_retrieve_example:
+              $ref: '#/components/examples/ClearAlarm_retrieve_example_response'
+    200ClearAlarm_Patch:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ClearAlarm'
+    201ClearAlarm:
+      description: OK/Created
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ClearAlarm'
+          examples:
+            ClearAlarm_create_example:
+              $ref: '#/components/examples/ClearAlarm_create_example_response'
+    200CommentAlarmArray:
+      description: Success
+      headers:
+        X-Total-Count:
+          $ref: '#/components/headers/X-Total-Count'
+        X-Result-Count:
+          $ref: '#/components/headers/X-Result-Count'
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/CommentAlarm'
+          examples:
+            CommentAlarm_list_example:
+              $ref: '#/components/examples/CommentAlarm_list_example_response'
+    200CommentAlarm_Get:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CommentAlarm'
+          examples:
+            CommentAlarm_retrieve_example:
+              $ref: '#/components/examples/CommentAlarm_retrieve_example_response'
+    200CommentAlarm_Patch:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CommentAlarm'
+    201CommentAlarm:
+      description: OK/Created
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CommentAlarm'
+          examples:
+            CommentAlarm_create_example:
+              $ref: '#/components/examples/CommentAlarm_create_example_response'
+    200GroupAlarmArray:
+      description: Success
+      headers:
+        X-Total-Count:
+          $ref: '#/components/headers/X-Total-Count'
+        X-Result-Count:
+          $ref: '#/components/headers/X-Result-Count'
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/GroupAlarm'
+          examples:
+            GroupAlarm_list_example:
+              $ref: '#/components/examples/GroupAlarm_list_example_response'
+    200GroupAlarm_Get:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GroupAlarm'
+          examples:
+            GroupAlarm_retrieve_example:
+              $ref: '#/components/examples/GroupAlarm_retrieve_example_response'
+    200GroupAlarm_Patch:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GroupAlarm'
+    201GroupAlarm:
+      description: OK/Created
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GroupAlarm'
+          examples:
+            GroupAlarm_create_example:
+              $ref: '#/components/examples/GroupAlarm_create_example_response'
+    200UnGroupAlarmArray:
+      description: Success
+      headers:
+        X-Total-Count:
+          $ref: '#/components/headers/X-Total-Count'
+        X-Result-Count:
+          $ref: '#/components/headers/X-Result-Count'
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/UnGroupAlarm'
+          examples:
+            UnGroupAlarm_list_example:
+              $ref: '#/components/examples/UnGroupAlarm_list_example_response'
+    200UnGroupAlarm_Get:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UnGroupAlarm'
+          examples:
+            UnGroupAlarm_retrieve_example:
+              $ref: '#/components/examples/UnGroupAlarm_retrieve_example_response'
+    200UnGroupAlarm_Patch:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UnGroupAlarm'
+    201UnGroupAlarm:
+      description: OK/Created
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UnGroupAlarm'
+          examples:
+            UnGroupAlarm_create_example:
+              $ref: '#/components/examples/UnGroupAlarm_create_example_response'
+    Error:
+      description: Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            basic:
+              summary: Error example
+              value:
+                '@type': Error
+                code: ERR001
+                reason: Missing information
+                message: Please provide the additional example information
+                referenceError: 'https://host/errors'
+    Hub:
+      description: Notified
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Hub'
+          examples:
+            basic:
+              summary: Hub example
+              value:
+                '@type': Hub
+                callback: 'https://host/tmf-api/specificAPIName/v5/listener/specificEventListener'
+  headers:
+    X-Total-Count:
+      description: Total number of items matching criteria
+      schema:
+        type: integer
+    X-Result-Count:
+      description: Actual number of items returned in the response body
+      schema:
+        type: integer
+  securitySchemes: {}
+  examples:
+    Alarm_list_example_response:
+      value:
+        - id: '8675309'
+          href: /alarmManagement/v5/alarm/8675309
+          '@type': Alarm
+          externalAlarmId: '5551212'
+          state: updated
+          alarmType: environmentalAlarm
+          perceivedSeverity: major
+          probableCause: rectifierLowVoltage
+          specificProblem: 'ps=3,sl=1,in=8'
+          alarmedObjectType: Rectifier
+          alarmedObject:
+            '@type': AlarmedObjectRef
+            '@referredType': Resource
+            id: '93051825'
+            href: /resourceInventoryManagement/v5/resource/93051825
+          sourceSystemId: ems-1
+          alarmDetails: voltage=95
+          alarmRaisedTime: '2019-07-03T03:32:17.235Z'
+          alarmReportingTime: '2019-07-03T03:32:17.552Z'
+          alarmChangedTime: '2019-07-03T03:32:24.715Z'
+        - id: '8675399'
+          href: /alarmManagement/v5/alarm/8675399
+          '@type': Alarm
+          externalAlarmId: '5551234'
+          state: updated
+          alarmType: equipmentAlarm
+          perceivedSeverity: minor
+          probableCause: powerSupplyFailure
+          specificProblem: 'ch=1,ps=3'
+          alarmedObjectType: Chassis
+          alarmedObject:
+            '@type': AlarmedObjectRef
+            '@referredType': Resource
+            id: '93051831'
+            href: /resourceInventoryManagement/v5/resource/93051831
+          sourceSystemId: ems-1
+          alarmRaisedTime: '2019-07-03T03:32:17.843Z'
+          alarmReportingTime: '2019-07-03T03:32:18.102Z'
+      description: 'Example of a request for retrieving a list of alarms:'
+    Alarm_retrieve_example_response:
+      value:
+        id: '8675309'
+        href: /alarmManagement/v5/alarm/8675309
+        '@type': Alarm
+        externalAlarmId: '5551212'
+        state: updated
+        alarmType: environmentalAlarm
+        perceivedSeverity: major
+        probableCause: rectifierLowVoltage
+        specificProblem: 'ps=3,sl=1,in=8'
+        alarmedObjectType: Rectifier
+        alarmedObject:
+          '@type': AlarmedObjectRef
+          '@referredType': Resource
+          id: '93051825'
+          href: /resourceInventoryManagement/v5/resource/93051825
+        sourceSystemId: ems-1
+        alarmDetails: voltage=95
+        alarmRaisedTime: '2019-07-03T03:32:17.235Z'
+        alarmReportingTime: '2019-07-03T03:32:17.552Z'
+        alarmChangedTime: '2019-07-03T03:32:24.715Z'
+        ackState: unacknowledged
+      description: 'Example of a request for retrieving an alarm:'
+    AckAlarm_list_example_response:
+      value:
+        - id: '1038'
+          '@type': AckAlarm
+          href: /alarmManagement/v5/ackAlarm/1038
+          ackSystemId: ems-1
+          ackUserId: bob@example.net
+          ackTime: '2019-07-03T03:33:12.623Z'
+          alarmPattern:
+            - '@type': Alarm
+              id: '8675309'
+            - '@type': Alarm
+              id: '8675399'
+          state: inProgress
+          ackedAlarm: []
+      description: 'Example of a request for retrieving a list of acknowledge alarms tasks:'
+    AckAlarm_retrieve_example_response:
+      value:
+        id: '1038'
+        '@type': AckAlarm
+        href: /alarmManagement/v5/ackAlarm/1038
+        ackSystemId: ems-1
+        ackUserId: bob@example.net
+        ackTime: '2019-07-03T03:33:12.623Z'
+        alarmPattern:
+          - '@type': Alarm
+            id: '8675309'
+          - '@type': Alarm
+            id: '8675399'
+        state: inProgress
+        ackedAlarm: []
+      description: 'Example of a request for retrieving an acknowledge alarms task:'
+    UnAckAlarm_list_example_response:
+      value:
+        - '@type': UnAckAlarm
+          id: '1052'
+          href: /alarmManagement/v5/unAckAlarm/1052
+          ackSystemId: ems-1
+          ackUserId: bob@example.net
+          ackTime: '2019-07-03T03:38:06.890Z'
+          alarmPattern:
+            - '@type': Alarm
+              id: '8675309'
+            - '@type': Alarm
+              id: '8675399'
+          state: inProgress
+          unAckedAlarm: []
+      description: 'Example of a request for retrieving a list of unacknowledge alarms tasks:'
+    UnAckAlarm_retrieve_example_response:
+      value:
+        id: '1052'
+        '@type': UnAckAlarm
+        href: /alarmManagement/v5/unAckAlarm/1052
+        ackSystemId: ems-1
+        ackUserId: bob@example.net
+        ackTime: '2019-07-03T03:38:06.890Z'
+        alarmPattern:
+          - '@type': Alarm
+            id: '8675309'
+          - '@type': Alarm
+            id: '8675399'
+        state: inProgress
+        unAckedAlarm: []
+      description: 'Example of a request for retrieving an unacknowledge alarms task:'
+    ClearAlarm_list_example_response:
+      value:
+        - id: '1089'
+          href: /alarmManagement/v5/clearAlarm/1089
+          '@type': ClearAlarm
+          clearSystemId: ems-1
+          clearUserId: bob@example.net
+          alarmClearedTime: '2019-07-03T03:55:45.937Z'
+          alarmPattern:
+            - '@type': Alarm
+              id: '8675309'
+            - '@type': Alarm
+              id: '8675399'
+          state: done
+          clearedAlarm:
+            - id: '8675309'
+              href: /alarmManagement/v5/alarm/8675309
+              '@type': Alarm
+              externalAlarmId: '5551212'
+              state: cleared
+              alarmType: environmentalAlarm
+              perceivedSeverity: cleared
+              probableCause: rectifierLowVoltage
+              specificProblem: 'ps=3,sl=1,in=8'
+              alarmedObjectType: Rectifier
+              alarmedObject:
+                '@type': AlarmedObjectRef
+                '@referredType': Resource
+                id: '93051825'
+                href: /resourceInventoryManagement/v5/resource/93051825
+              sourceSystemId: ems-1
+              alarmDetails: voltage=95
+              alarmRaisedTime: '2019-07-03T03:32:17.235Z'
+              alarmReportingTime: '2019-07-03T03:32:17.552Z'
+              alarmChangedTime: '2019-07-03T03:42:12.861Z'
+              ackSystemId: ems-1
+              ackUserId: bob@example.net
+              ackState: unacknowledged
+              comment:
+                - '@type': Comment
+                  userId: bob@example.net
+                  systemId: ems-1
+                  time: '2019-07-03T03:37:33.827Z'
+                  comment: Dispatched
+              clearSystemId: ems-1
+              clearUserId: bob@example.net
+              alarmClearedTime: '2019-07-03T03:55:45.937Z'
+            - id: '8675399'
+              href: /alarmManagement/v5/alarm/8675399
+              '@type': Alarm
+              externalAlarmId: '5551234'
+              state: cleared
+              alarmType: equipmentAlarm
+              perceivedSeverity: cleared
+              probableCause: powerSupplyFailure
+              specificProblem: 'ch=1,ps=3'
+              alarmedObjectType: Chassis
+              alarmedObject:
+                '@type': AlarmedObjectRef
+                '@referredType': Resource
+                id: '95830731'
+                href: /resourceInventoryManagement/v5/resource/95830731
+              sourceSystemId: ems-1
+              alarmRaisedTime: '2019-07-03T03:32:17.843Z'
+              alarmReportingTime: '2019-07-03T03:32:18.102Z'
+              alarmChangedTime: '2019-07-03T03:42:12.861Z'
+              ackSystemId: ems-1
+              ackUserId: bob@example.net
+              ackState: unacknowledged
+              comment:
+                - '@type': Comment
+                  userId: bob@example.net
+                  systemId: ems-1
+                  time: '2019-07-03T03:37:33.827Z'
+                  comment: Dispatched
+              clearSystemId: ems-1
+              clearUserId: bob@example.net
+              alarmClearedTime: '2019-07-03T03:55:45.937Z'
+      description: 'Example of a request for retrieving a list of clear alarms tasks:'
+    ClearAlarm_retrieve_example_response:
+      value:
+        id: '1089'
+        href: /alarmManagement/v5/clearAlarm/1089
+        '@type': ClearAlarm
+        clearSystemId: ems-1
+        clearUserId: bob@example.net
+        alarmClearedTime: '2019-07-03T03:55:45.937Z'
+        alarmPattern:
+          - '@type': Alarm
+            id: '8675309'
+          - '@type': Alarm
+            id: '8675399'
+        state: done
+        clearedAlarm:
+          - id: '8675309'
+            href: /alarmManagement/v5/alarm/8675309
+            '@type': Alarm
+            externalAlarmId: '5551212'
+            state: cleared
+            alarmType: environmentalAlarm
+            perceivedSeverity: cleared
+            probableCause: rectifierLowVoltage
+            specificProblem: 'ps=3,sl=1,in=8'
+            alarmedObjectType: Rectifier
+            alarmedObject:
+              '@type': AlarmedObjectRef
+              '@referredType': Resource
+              id: '93051825'
+              href: /resourceInventoryManagement/v5/resource/93051825
+            sourceSystemId: ems-1
+            alarmDetails: voltage=95
+            alarmRaisedTime: '2019-07-03T03:32:17.235Z'
+            alarmReportingTime: '2019-07-03T03:32:17.552Z'
+            alarmChangedTime: '2019-07-03T03:42:12.861Z'
+            ackSystemId: ems-1
+            ackUserId: bob@example.net
+            ackState: unacknowledged
+            comment:
+              - '@type': Comment
+                userId: bob@example.net
+                systemId: ems-1
+                time: '2019-07-03T03:37:33.827Z'
+                comment: Dispatched
+            clearSystemId: ems-1
+            clearUserId: bob@example.net
+            alarmClearedTime: '2019-07-03T03:55:45.937Z'
+          - id: '8675399'
+            href: /alarmManagement/v5/alarm/8675399
+            '@type': Alarm
+            externalAlarmId: '5551234'
+            state: cleared
+            alarmType: equipmentAlarm
+            perceivedSeverity: cleared
+            probableCause: powerSupplyFailure
+            specificProblem: 'ch=1,ps=3'
+            alarmedObjectType: Chassis
+            alarmedObject:
+              '@type': AlarmedObjectRef
+              '@referredType': Resource
+              id: '95830731'
+              href: /resourceInventoryManagement/v5/resource/95830731
+            sourceSystemId: ems-1
+            alarmRaisedTime: '2019-07-03T03:32:17.843Z'
+            alarmReportingTime: '2019-07-03T03:32:18.102Z'
+            alarmChangedTime: '2019-07-03T03:42:12.861Z'
+            ackSystemId: ems-1
+            ackUserId: bob@example.net
+            ackState: unacknowledged
+            comment:
+              - '@type': Comment
+                userId: bob@example.net
+                systemId: ems-1
+                time: '2019-07-03T03:37:33.827Z'
+                comment: Dispatched
+            clearSystemId: ems-1
+            clearUserId: bob@example.net
+            alarmClearedTime: '2019-07-03T03:55:45.937Z'
+      description: 'Example of a request for retrieving a clear alarms task:'
+    CommentAlarm_list_example_response:
+      value:
+        - '@type': CommentAlarm
+          id: '1045'
+          href: /alarmManagement/v5/ackAlarm/1045
+          comment:
+            '@type': Comment
+            userId: bob@example.net
+            systemId: ems-1
+            time: '2019-07-03T03:37:33.827Z'
+            comment: Dispatched
+          alarmPattern:
+            - '@type': Alarm
+              id: '8675309'
+            - '@type': Alarm
+              id: '8675399'
+          state: inProgress
+          commentedAlarm: []
+      description: 'Example of a request for retrieving a list of comment alarms tasks:'
+    CommentAlarm_retrieve_example_response:
+      value:
+        '@type': CommentAlarm
+        id: '1045'
+        href: /alarmManagement/v5/ackAlarm/1045
+        comment:
+          '@type': Comment
+          userId: bob@example.net
+          systemId: ems-1
+          time: '2019-07-03T03:37:33.827Z'
+          comment: Dispatched
+        alarmPattern:
+          - '@type': Alarm
+            id: '8675309'
+          - '@type': Alarm
+            id: '8675399'
+        state: inProgress
+        commentedAlarm: []
+      description: 'Example of a request for retrieving a comment alarms task:'
+    GroupAlarm_list_example_response:
+      value:
+        - id: '1029'
+          '@type': GroupAlarm
+          href: /alarmManagement/v5/groupAlarm/1029
+          sourceSystemId: ems-1
+          alarmChangedTime: '2019-07-03T03:32:52.744Z'
+          parentAlarm:
+            '@type': Alarm
+            id: '8675309'
+          correlatedAlarm:
+            - '@type': Alarm
+              id: '8675399'
+          state: inProgress
+          groupedAlarm: []
+      description: 'Example of a request for retrieving a list of group alarms tasks:'
+    GroupAlarm_retrieve_example_response:
+      value:
+        id: '1029'
+        '@type': GroupAlarm
+        href: /alarmManagement/v5/groupAlarm/1029
+        sourceSystemId: ems-1
+        alarmChangedTime: '2019-07-03T03:32:52.744Z'
+        parentAlarm:
+          '@type': Alarm
+          id: '8675309'
+        correlatedAlarm:
+          - '@type': Alarm
+            id: '8675399'
+        state: inProgress
+        groupedAlarm: []
+      description: 'Example of a request for retrieving an group alarms task:'
+    UnGroupAlarm_list_example_response:
+      value:
+        - id: '1069'
+          '@type': UnGroupAlarm
+          href: /alarmManagement/v5/unGroupAlarm/1069
+          sourceSystemId: ems-1
+          alarmChangedTime: '2019-07-03T03:42:12.861Z'
+          parentAlarm:
+            '@type': Alarm
+            id: '8675309'
+          correlatedAlarm:
+            - '@type': Alarm
+              id: '8675399'
+            - '@type': Alarm
+              id: '8675399'
+          state: inProgress
+          unGroupedAlarm: []
+      description: 'Example of a request for retrieving a list of unhgroup alarms tasks:'
+    UnGroupAlarm_retrieve_example_response:
+      value:
+        id: '1069'
+        '@type': UnGroupAlarm
+        href: 'https://host:port/alarmManagement/v5/groupAlarm/1069'
+        sourceSystemId: ems-1
+        alarmChangedTime: '2019-07-03T03:42:12.861Z'
+        parentAlarm:
+          '@type': Alarm
+          id: '8675309'
+        correlatedAlarm:
+          - '@type': Alarm
+            id: '8675399'
+          - '@type': Alarm
+            id: '8675399'
+        state: inProgress
+        unGroupedAlarm: []
+      description: 'Example of a request for retrieving an ungroup alarms task:'
+    Alarm_create_example_01_request:
+      value:
+        externalAlarmId: '5551212'
+        state: raised
+        '@type': Alarm
+        alarmType: environmentalAlarm
+        perceivedSeverity: minor
+        probableCause: rectifierLowVoltage
+        specificProblem: 'ps=3,sl=1,in=8'
+        alarmedObjectType: NePowerSupply
+        alarmedObject:
+          '@type': AlarmedObjectRef
+          '@referredType': Resource
+          id: '93051825'
+          href: /resourceInventoryManagement/v5/resource/93051825
+        sourceSystemId: ems-1
+        alarmDetails: voltage=204
+        alarmRaisedTime: '2019-07-03T03:32:17.235Z'
+        alarmReportingTime: '2019-07-03T03:32:17.552Z'
+      description: 'Example of a request for creating an alarm:'
+    Alarm_create_example_01_response:
+      value:
+        id: '8675309'
+        '@type': Alarm
+        href: /alarmManagement/v5/alarm/8675309
+        externalAlarmId: '5551212'
+        state: raised
+        alarmType: environmentalAlarm
+        perceivedSeverity: minor
+        probableCause: rectifierLowVoltage
+        specificProblem: 'ps=3,sl=1,in=8'
+        alarmedObjectType: Rectifier
+        alarmedObject:
+          '@type': AlarmedObjectRef
+          '@referredType': Resource
+          id: '93051825'
+          href: /resourceInventoryManagement/v5/resource/93051825
+        sourceSystemId: ems-1
+        alarmDetails: voltage=204
+        alarmRaisedTime: '2019-07-03T03:32:17.235Z'
+        alarmReportingTime: '2019-07-03T03:32:17.552Z'
+      description: Response message
+    AckAlarm_create_example_01_request:
+      value:
+        ackSystemId: ems-1
+        ackUserId: bob@example.net
+        ackTime: '2019-07-03T03:33:12.623Z'
+        '@type': AckAlarm
+        alarmPattern:
+          - '@type': AlarmRef
+            id: '8675309'
+          - '@type': AlarmRef
+            id: '8675399'
+      description: 'Example of a request for creating a task to acknowledge alarms:'
+    AckAlarm_create_example_01_response:
+      value:
+        id: '1038'
+        href: /alarmManagement/v5/ackAlarm/1038
+        '@type': AckAlarm
+        ackSystemId: ems-1
+        ackUserId: bob@example.net
+        ackTime: '2019-07-03T03:33:12.623Z'
+        alarmPattern:
+          - '@type': Alarm
+            id: '8675309'
+          - '@type': Alarm
+            id: '8675399'
+        state: done
+        ackedAlarm:
+          - id: '8675309'
+            href: /alarmManagement/v5/alarm/8675309
+            '@type': Alarm
+            externalAlarmId: '5551212'
+            state: updated
+            alarmType: environmentalAlarm
+            perceivedSeverity: major
+            probableCause: rectifierLowVoltage
+            specificProblem: 'ps=3,sl=1,in=8'
+            alarmedObjectType: Rectifier
+            alarmedObject:
+              '@type': Resource
+              id: '93051825'
+              href: /resourceInventoryManagement/v5/resource/93051825
+            sourceSystemId: ems-1
+            alarmDetails: voltage=204
+            alarmRaisedTime: '2019-07-03T03:32:17.235Z'
+            alarmReportingTime: '2019-07-03T03:32:17.552Z'
+            alarmChangedTime: '2019-07-03T03:32:24.715Z'
+            ackSystemId: ems-1
+            ackUserId: bob@example.net
+            ackTime: '2019-07-03T03:33:12.623Z'
+            ackState: acknowledged
+            correlatedAlarm:
+              - '@type': Alarm
+                id: '8675399'
+                href: /alarmManagement/v5/alarm/868675399
+          - id: '8675399'
+            href: /alarmManagement/v5/alarm/8675399
+            '@type': Alarm
+            externalAlarmId: '5551234'
+            state: raised
+            alarmType: Equipment Alarm
+            perceivedSeverity: minor
+            probableCause: powerSupplyFailure
+            specificProblem: 'ch=1,ps=3'
+            alarmedObjectType: Chassis
+            alarmedObject:
+              '@type': Resource
+              id: '95830731'
+              href: /resourceInventoryManagement/v5/resource/95830731
+            sourceSystemId: ems-1
+            alarmRaisedTime: '2019-07-03T03:32:17.843Z'
+            alarmReportingTime: '2019-07-03T03:32:18.102Z'
+            ackSystemId: ems-1
+            ackUserId: bob@example.net
+            ackTime: '2019-07-03T03:33:12.623Z'
+            ackState: acknowledged
+            parentAlarm:
+              - '@type': Alarm
+                id: '8675309'
+                href: /alarmManagement/v5/alarm/868675309
+      description: Response message
+    UnAckAlarm_create_example_request:
+      value:
+        '@type': UnAckAlarm
+        ackSystemId: ems-1
+        ackUserId: bob@example.net
+        ackTime: '2019-07-03T03:38:06.890Z'
+        alarmPattern:
+          - '@type': AlarmRef
+            id: '8675309'
+          - '@type': AlarmRef
+            id: '8675399'
+      description: 'Example of a request for creating an UnAckAlarm:'
+    UnAckAlarm_create_example_response:
+      value:
+        '@type': UnAckAlarm
+        id: '1052'
+        href: /alarmManagement/v5/unAckAlarm/1052
+        ackSystemId: ems-1
+        ackUserId: bob@example.net
+        ackTime: '2019-07-03T03:38:06.890Z'
+        alarmPattern:
+          - '@type': AlarmRef
+            id: '8675309'
+          - '@type': AlarmRef
+            id: '8675399'
+        state: done
+        unAckedAlarm:
+          - id: '8675309'
+            href: /alarmManagement/v5/alarm/8675309
+            '@type': Alarm
+            externalAlarmId: '5551212'
+            state: updated
+            alarmType: environmentalAlarm
+            perceivedSeverity: major
+            probableCause: rectifierLowVoltage
+            specificProblem: 'ps=3,sl=1,in=8'
+            alarmedObjectType: Rectifier
+            alarmedObject:
+              '@type': AlarmedObjectRef
+              '@referredType': Resource
+              id: '93051825'
+              href: /resourceInventoryManagement/v5/resource/93051825
+            sourceSystemId: ems-1
+            alarmDetails: voltage=95
+            alarmRaisedTime: '2019-07-03T03:32:17.235Z'
+            alarmReportingTime: '2019-07-03T03:32:17.552Z'
+            ackSystemId: ems-1
+            ackUserId: bob@example.net
+            ackState: unacknowledged
+            correlatedAlarm:
+              - '@type': AlarmRef
+                id: '8675399'
+                href: /alarmManagement/v5/alarm/868675399
+            comment:
+              - '@type': Comment
+                userId: bob@example.net
+                systemId: ems-1
+                time: '2019-07-03T03:37:33.827Z'
+                comment: Dispatched
+          - id: '8675399'
+            href: /alarmManagement/v5/alarm/8675399
+            '@type': Alarm
+            externalAlarmId: '5551234'
+            state: raised
+            alarmType: equipmentAlarm
+            perceivedSeverity: minor
+            probableCause: powerSupplyFailure
+            specificProblem: 'ch=1,ps=3'
+            alarmedObjectType: Chassis
+            alarmedObject:
+              '@type': AlarmedObjectRef
+              '@referredType': Resource
+              id: '95830731'
+              href: /resourceInventoryManagement/v5/resource/95830731
+            sourceSystemId: ems-1
+            alarmRaisedTime: '2019-07-03T03:32:17.843Z'
+            alarmReportingTime: '2019-07-03T03:32:18.102Z'
+            alarmChangedTime: '2019-07-03T03:32:52.744Z'
+            ackSystemId: ems-1
+            ackUserId: bob@example.net
+            ackState: unacknowledged
+            parentAlarm:
+              - '@type': AlarmRef
+                id: '8675309'
+                href: /alarmManagement/v5/alarm/868675309
+            comment:
+              - '@type': Comment
+                userId: bob@example.net
+                systemId: ems-1
+                time: '2019-07-03T03:37:33.827Z'
+                comment: Dispatched
+      description: Response message
+    ClearAlarm_create_example_request:
+      value:
+        '@type': ClearAlarm
+        clearSystemId: ems-1
+        clearUserId: bob@example.net
+        alarmClearedTime: '2019-07-03T03:55:45.937Z'
+        alarmPattern:
+          - '@type': AlarmRef
+            id: '8675309'
+          - '@type': AlarmRef
+            id: '8675399'
+      description: 'Example of a request for creating a ClearAlarm:'
+    ClearAlarm_create_example_response:
+      value:
+        id: '1089'
+        href: /alarmManagement/v5/clearAlarm/1089
+        '@type': ClearAlarm
+        clearSystemId: ems-1
+        clearUserId: bob@example.net
+        alarmClearedTime: '2019-07-03T03:55:45.937Z'
+        alarmPattern:
+          - '@type': AlarmRef
+            id: '8675309'
+          - '@type': AlarmRef
+            id: '8675399'
+        state: done
+        clearedAlarm:
+          - id: '8675309'
+            href: /alarmManagement/v5/alarm/8675309
+            '@type': Alarm
+            externalAlarmId: '5551212'
+            state: cleared
+            alarmType: environmentalAlarm
+            perceivedSeverity: cleared
+            probableCause: rectifierLowVoltage
+            specificProblem: 'ps=3,sl=1,in=8'
+            alarmedObjectType: Rectifier
+            alarmedObject:
+              '@type': AlarmedObjectRef
+              '@referredType': Resource
+              id: '93051825'
+              href: /resourceInventoryManagement/v5/resource/93051825
+            sourceSystemId: ems-1
+            alarmDetails: voltage=95
+            alarmRaisedTime: '2019-07-03T03:32:17.235Z'
+            alarmReportingTime: '2019-07-03T03:32:17.552Z'
+            alarmChangedTime: '2019-07-03T03:42:12.861Z'
+            ackSystemId: ems-1
+            ackUserId: bob@example.net
+            ackState: unacknowledged
+            comment:
+              - '@type': Comment
+                userId: bob@example.net
+                systemId: ems-1
+                time: '2019-07-03T03:37:33.827Z'
+                comment: Dispatched
+            clearSystemId: ems-1
+            clearUserId: bob@example.net
+            alarmClearedTime: '2019-07-03T03:55:45.937Z'
+          - id: '8675399'
+            href: /alarmManagement/v5/alarm/8675399
+            '@type': Alarm
+            externalAlarmId: '5551234'
+            state: cleared
+            alarmType: equipmentAlarm
+            perceivedSeverity: cleared
+            probableCause: powerSupplyFailure
+            specificProblem: 'ch=1,ps=3'
+            alarmedObjectType: Chassis
+            alarmedObject:
+              '@type': AlarmedObjectRef
+              '@referredType': Resource
+              id: '95830731'
+              href: /resourceInventoryManagement/v5/resource/95830731
+            sourceSystemId: ems-1
+            alarmRaisedTime: '2019-07-03T03:32:17.843Z'
+            alarmReportingTime: '2019-07-03T03:32:18.102Z'
+            alarmChangedTime: '2019-07-03T03:42:12.861Z'
+            ackSystemId: ems-1
+            ackUserId: bob@example.net
+            ackState: unacknowledged
+            comment:
+              - '@type': Comment
+                userId: bob@example.net
+                systemId: ems-1
+                time: '2019-07-03T03:37:33.827Z'
+                comment: Dispatched
+            clearSystemId: ems-1
+            clearUserId: bob@example.net
+            alarmClearedTime: '2019-07-03T03:55:45.937Z'
+      description: Response message
+    CommentAlarm_create_example_request:
+      value:
+        '@type': CommentAlarm
+        comment:
+          '@type': Comment
+          userId: bob@example.net
+          systemId: ems-1
+          time: '2019-07-03T03:37:33.827Z'
+          comment: Dispatched
+        alarmPattern:
+          - '@type': Alarm
+            id: '8675309'
+          - '@type': Alarm
+            id: '8675399'
+      description: 'Example of a request for creating an CommentAlarm:'
+    CommentAlarm_create_example_response:
+      value:
+        '@type': CommentAlarm
+        id: '1045'
+        href: /alarmManagement/v5/ackAlarm/1045
+        comment:
+          '@type': Comment
+          userId: bob@example.net
+          systemId: ems-1
+          time: '2019-07-03T03:37:33.827Z'
+          comment: Dispatched
+        alarmPattern:
+          - '@type': Alarm
+            id: '8675309'
+          - '@type': Alarm
+            id: '8675399'
+        state: inProgress
+        commentedAlarm: []
+      description: Response message
+    GroupAlarm_create_example_request:
+      value:
+        '@type': GroupAlarm
+        sourceSystemId: ems-1
+        alarmChangedTime: '2019-07-03T03:32:52.744Z'
+        parentAlarm:
+          '@type': AlarmRef
+          id: '8675309'
+        correlatedAlarm:
+          - '@type': AlarmRef
+            id: '8675399'
+      description: 'Example of a request for creating a group of alarms:'
+    GroupAlarm_create_example_response:
+      value:
+        id: '1029'
+        '@type': GroupAlarm
+        href: /alarmManagement/v5/groupAlarm/1029
+        sourceSystemId: ems-1
+        alarmChangedTime: '2019-07-03T03:32:52.744Z'
+        parentAlarm:
+          '@type': AlarmRef
+          id: '8675309'
+        correlatedAlarm:
+          - '@type': AlarmRef
+            id: '8675399'
+        state: done
+        groupedAlarm:
+          - id: '8675309'
+            href: /alarmManagement/v5/alarm/8675309
+            '@type': Alarm
+            externalAlarmId: '5551212'
+            state: updated
+            alarmType: environmentalAlarm
+            perceivedSeverity: major
+            probableCause: rectifierLowVoltage
+            specificProblem: 'ps=3,sl=1,in=8'
+            alarmedObjectType: Rectifier
+            alarmedObject:
+              '@type': AlarmedObjectRef
+              '@referredType': Resource
+              id: '93051825'
+              href: /resourceInventoryManagement/v5/resource/93051825
+            sourceSystemId: ems-1
+            alarmDetails: voltage=95
+            alarmRaisedTime: '2019-07-03T03:32:17.235Z'
+            alarmReportingTime: '2019-07-03T03:32:17.552Z'
+            alarmChangedTime: '2019-07-03T03:32:52.744Z'
+            correlatedAlarm:
+              - '@type': AlarmRef
+                id: '8675399'
+                href: /alarmManagement/v5/alarm/868675399
+          - id: '8675399'
+            href: /alarmManagement/v5/alarm/8675399
+            '@type': Alarm
+            externalAlarmId: '5551234'
+            state: raised
+            alarmType: equipmentAlarm
+            perceivedSeverity: minor
+            probableCause: powerSupplyFailure
+            specificProblem: 'ch=1,ps=3'
+            alarmedObjectType: Chassis
+            alarmedObject:
+              '@type': AlarmedObjectRef
+              '@referredType': Resource
+              id: '95830731'
+              href: /resourceInventoryManagement/v5/resource/95830731
+            sourceSystemId: ems-1
+            alarmRaisedTime: '2019-07-03T03:32:17.843Z'
+            alarmReportingTime: '2019-07-03T03:32:18.102Z'
+            alarmChangedTime: '2019-07-03T03:32:52.744Z'
+            parentAlarm:
+              - '@type': AlarmRef
+                id: '8675309'
+                href: /alarmManagement/v5/alarm/868675309
+      description: Response message
+    UnGroupAlarm_create_example_request:
+      value:
+        '@type': UnGroupAlarm
+        sourceSystemId: ems-1
+        alarmChangedTime: '2019-07-03T03:42:12.861Z'
+        parentAlarm:
+          '@type': Alarm
+          id: '8675309'
+        correlatedAlarm:
+          - '@type': Alarm
+            id: '8675399'
+          - '@type': Alarm
+            id: '8675399'
+      description: 'Example of a request for creating an UnGroupAlarm:'
+    UnGroupAlarm_create_example_response:
+      value:
+        id: '1069'
+        '@type': UnGroupAlarm
+        href: /alarmManagement/v5/unGroupAlarm/1069
+        sourceSystemId: ems-1
+        alarmChangedTime: '2019-07-03T03:42:12.861Z'
+        parentAlarm:
+          '@type': Alarm
+          id: '8675309'
+        correlatedAlarm:
+          - '@type': Alarm
+            id: '8675399'
+          - '@type': Alarm
+            id: '8675399'
+        state: done
+        unGroupedAlarm:
+          - id: '8675309'
+            href: /alarmManagement/v5/alarm/8675309
+            '@type': Alarm
+            externalAlarmId: '5551212'
+            state: updated
+            alarmType: environmentalAlarm
+            perceivedSeverity: major
+            probableCause: rectifierLowVoltage
+            specificProblem: 'ps=3,sl=1,in=8'
+            alarmedObjectType: Rectifier
+            alarmedObject:
+              '@type': AlarmedObjectRef
+              '@referredType': Resource
+              id: '93051825'
+              href: /resourceInventoryManagement/v5/resource/93051825
+            sourceSystemId: ems-1
+            alarmDetails: voltage=95
+            alarmRaisedTime: '2019-07-03T03:32:17.235Z'
+            alarmReportingTime: '2019-07-03T03:32:17.552Z'
+            alarmChangedTime: '2019-07-03T03:42:12.861Z'
+            ackSystemId: ems-1
+            ackUserId: bob@example.net
+            ackState: unacknowledged
+            comment:
+              - '@type': Comment
+                userId: bob@example.net
+                systemId: ems-1
+                time: '2019-07-03T03:37:33.827Z'
+                comment: Dispatched
+          - id: '8675399'
+            href: /alarmManagement/v5/alarm/8675399
+            '@type': Alarm
+            externalAlarmId: '5551234'
+            state: updated
+            alarmType: equipmentAlarm
+            perceivedSeverity: minor
+            probableCause: powerSupplyFailure
+            specificProblem: 'ch=1,ps=3'
+            alarmedObjectType: Chassis
+            alarmedObject:
+              '@type': AlarmedObjectRef
+              '@referredType': Resource
+              id: '95830731'
+              href: /resourceInventoryManagement/v5/resource/95830731
+            sourceSystemId: ems-1
+            alarmRaisedTime: '2019-07-03T03:32:17.843Z'
+            alarmReportingTime: '2019-07-03T03:32:18.102Z'
+            alarmChangedTime: '2019-07-03T03:42:12.861Z'
+            ackSystemId: ems-1
+            ackUserId: bob@example.net
+            ackState: unacknowledged
+            comment:
+              - '@type': Comment
+                userId: bob@example.net
+                systemId: ems-1
+                time: '2019-07-03T03:37:33.827Z'
+                comment: Dispatched
+      description: Response message
+    Alarm_partialupdate_example_01_request:
+      value:
+        - op: replace
+          path: /state
+          value: updated
+        - op: replace
+          path: /perceivedSeverity
+          value: major
+        - op: replace
+          path: /alarmChangedTime
+          value: '2019-07-03T03:32:24.715Z'
+        - op: replace
+          path: /alarmDetails
+          value: voltage=95
+      description: 'Example of updating an alarm using json-patch:'
+    Alarm_partialupdate_example_01_response:
+      value:
+        id: '8675309'
+        '@type': Alarm
+        href: /alarmManagement/v5/alarm/8675309
+        externalAlarmId: '5551212'
+        state: updated
+        alarmType: environmentalAlarm
+        perceivedSeverity: major
+        probableCause: rectifierLowVoltage
+        specificProblem: 'ps=3,sl=1,in=8'
+        alarmedObjectType: Rectifier
+        alarmedObject:
+          '@type': AlarmedObjectRef
+          '@referredType': Resource
+          id: '93051825'
+          href: /resourceInventoryManagement/v5/resource/93051825
+        sourceSystemId: ems-1
+        alarmDetails: voltage=95
+        alarmRaisedTime: '2019-07-03T03:32:17.235Z'
+        alarmReportingTime: '2019-07-03T03:32:17.552Z'
+        alarmChangedTime: '2019-07-03T03:32:24.715Z'
+      description: Response message
+    Alarm_partialupdate_example_11_request:
+      value:
+        '@type': Alarm
+        state: updated
+        perceivedSeverity: major
+        alarmDetails: voltage=95
+        alarmChangedTime: '2019-07-03T03:32:24.715Z'
+      description: 'Example of updating an alarm using merge-patch:'
+    Alarm_partialupdate_example_11_response:
+      value:
+        id: '8675309'
+        '@type': Alarm
+        href: /alarmManagement/v5/alarm/8675309
+        externalAlarmId: '5551212'
+        state: updated
+        alarmType: environmentalAlarm
+        perceivedSeverity: major
+        probableCause: rectifierLowVoltage
+        specificProblem: 'ps=3,sl=1,in=8'
+        alarmedObjectType: Rectifier
+        alarmedObject:
+          '@type': AlarmedObjectRef
+          '@referredType': Resource
+          id: '93051825'
+          href: /resourceInventoryManagement/v5/resource/93051825
+        sourceSystemId: ems-1
+        alarmDetails: voltage=95
+        alarmRaisedTime: '2019-07-03T03:32:17.235Z'
+        alarmReportingTime: '2019-07-03T03:32:17.552Z'
+        alarmChangedTime: '2019-07-03T03:32:24.715Z'
+      description: Response message
+    Alarm_partialupdate_example_12_request:
+      value:
+        '@type': Alarm
+        state: updated
+        perceivedSeverity: major
+        alarmDetails: voltage=95
+        alarmChangedTime: '2019-07-03T03:32:24.715Z'
+      description: 'Example of updating an alarm using merge-patch:'
+    Alarm_partialupdate_example_12_response:
+      value:
+        id: '8675309'
+        '@type': Alarm
+        href: /alarmManagement/v5/alarm/8675309
+        externalAlarmId: '5551212'
+        state: updated
+        alarmType: environmentalAlarm
+        perceivedSeverity: major
+        probableCause: rectifierLowVoltage
+        specificProblem: 'ps=3,sl=1,in=8'
+        alarmedObjectType: Rectifier
+        alarmedObject:
+          '@type': AlarmedObjectRef
+          '@referredType': Resource
+          id: '93051825'
+          href: /resourceInventoryManagement/v5/resource/93051825
+        sourceSystemId: ems-1
+        alarmDetails: voltage=95
+        alarmRaisedTime: '2019-07-03T03:32:17.235Z'
+        alarmReportingTime: '2019-07-03T03:32:17.552Z'
+        alarmChangedTime: '2019-07-03T03:32:24.715Z'
+      description: Response message
+    Alarm_partialupdate_example_21_request:
+      value:
+        - op: replace
+          path: /ackState
+          value: acknowledged
+        - op: replace
+          path: /ackSystemId
+          value: ems-1
+        - op: replace
+          path: /ackUserId
+          value: bob@example.net
+        - op: replace
+          path: /ackTime
+          value: '2019-07-03T03:33:12.623Z'
+      description: 'Example of acknowledging an alarm:'
+    Alarm_partialupdate_example_21_response:
+      value:
+        id: '8675309'
+        '@type': Alarm
+        href: /alarmManagement/v5/alarm/8675309
+        externalAlarmId: '5551212'
+        state: updated
+        alarmType: environmentalAlarm
+        perceivedSeverity: major
+        probableCause: rectifierLowVoltage
+        specificProblem: 'ps=3,sl=1,in=8'
+        alarmedObjectType: Rectifier
+        alarmedObject:
+          '@type': AlarmedObjectRef
+          '@referredType': Resource
+          id: '93051825'
+          href: /resourceInventoryManagement/v5/resource/93051825
+        sourceSystemId: ems-1
+        alarmDetails: voltage=95
+        alarmRaisedTime: '2019-07-03T03:32:17.235Z'
+        alarmReportingTime: '2019-07-03T03:32:17.552Z'
+        alarmChangedTime: '2019-07-03T03:32:24.715Z'
+        ackState: acknowledged
+        ackSystemId: ems-1
+        ackUserId: bob@example.net
+      description: Response message
+    Alarm_partialupdate_example_31_request:
+      value:
+        - op: replace
+          path: /parentAlarm/name?id=556698533215846321
+          value: Root cause
+      description: 'Updating the alarm using json-patch-query+json:'
+    Alarm_partialupdate_example_31_response:
+      value:
+        id: '8675309'
+        '@type': Alarm
+        href: /alarmManagement/v5/alarm/8675309
+        externalAlarmId: '5551212'
+        state: cleared
+        alarmType: environmentalAlarm
+        perceivedSeverity: cleared
+        probableCause: rectifierLowVoltage
+        specificProblem: 'ps=3,sl=1,in=8'
+        alarmedObjectType: Rectifier
+        alarmedObject:
+          '@type': AlarmedObjectRef
+          '@referredType': Resource
+          id: '93051825'
+          href: /resourceInventoryManagement/v5/resource/93051825
+        sourceSystemId: ems-1
+        alarmDetails: voltage=95
+        alarmRaisedTime: '2019-07-03T03:32:17.235Z'
+        alarmReportingTime: '2019-07-03T03:32:17.552Z'
+        alarmChangedTime: '2019-07-03T03:35:45.923Z'
+        alarmClearedTime: '2019-07-03T03:55:45.937Z'
+        clearSystemId: ems-1
+        clearUserId: bob@example.net
+        parentAlarm:
+          - '@type': AlarmRef
+            id: '556698533215846321'
+            name: Root cause
+      description: Response message
+    Create_request:
+      value:
+        correlationId: 96b37351-efde
+        description: UnGroupAlarmCreateEvent illustration
+        domain: Commercial
+        eventId: 4505-85a4-b1a0c5587ebc
+        eventTime: '2022-08-25T12:20:19.700Z'
+        eventType: UnGroupAlarmCreateEvent
+        priority: '3'
+        timeOccurred: '2022-08-25T12:20:10.499Z'
+        title: UnGroupCreateEvent
+        event:
+          unGroupAlarm:
+            '@type': UnGroupAlarm
+            id: '1069'
+            href: 'http://servername/unGroupAlarm/1069'
+            sourceSystemId: ems-1
+            alarmChangedTime: '2019-07-03T03:42:12.861Z'
+            parentAlarm:
+              '@type': Alarm
+              id: '8675309'
+            correlatedAlarm:
+              - '@type': Alarm
+                id: '8675399'
+              - '@type': Alarm
+                id: '8675399'
+            state: done
+            unGroupedAlarm:
+              - id: '8675309'
+                href: /alarmManagement/v5/alarm/8675309
+                '@type': Alarm
+                externalAlarmId: '5551212'
+                state: raised
+                alarmType: environmentalAlarm
+                perceivedSeverity: minor
+                probableCause: rectifierLowVoltage
+                specificProblem: 'ps=3,sl=1,in=8'
+                alarmedObjectType: Rectifier
+                alarmedObject:
+                  '@type': AlarmedObjectRef
+                  id: '93051825'
+                  href: /resourceInventoryManagement/v5/resource/93051825
+                  '@referredType': Resource
+                sourceSystemId: ems-1
+                alarmDetails: voltage=204
+                alarmRaisedTime: '2019-07-03T03:32:17.235Z'
+                alarmReportingTime: '2019-07-03T03:32:17.552Z'
+                alarmChangedTime: '2019-07-03T03:42:12.861Z'
+                ackSystemId: ems-1
+                ackUserId: bob@example.net
+                ackState: unacknowledged
+                comment:
+                  - '@type': Comment
+                    userId: bob@example.net
+                    systemId: ems-1
+                    time: '2019-07-03T03:37:33.827Z'
+                    comment: Dispatched
+              - id: '8675399'
+                href: /alarmManagement/v5/alarm/8675399
+                '@type': Alarm
+                externalAlarmId: '5551234'
+                state: raised
+                alarmType: equipmentAlarm
+                perceivedSeverity: minor
+                probableCause: powerSupplyFailure
+                specificProblem: 'ch=1,ps=3'
+                alarmedObjectType: Chassis
+                alarmedObject:
+                  '@type': AlarmedObjectRef
+                  id: '95830731'
+                  href: /resourceInventoryManagement/v5/resource/95830731
+                  '@referredType': Resource
+                sourceSystemId: ems-1
+                alarmRaisedTime: '2019-07-03T03:32:17.843Z'
+                alarmReportingTime: '2019-07-03T03:32:18.102Z'
+                alarmChangedTime: '2019-07-03T03:42:12.861Z'
+                ackSystemId: ems-1
+                ackUserId: bob@example.net
+                ackState: unacknowledged
+                comment:
+                  - '@type': Comment
+                    userId: bob@example.net
+                    systemId: ems-1
+                    time: '2019-07-03T03:37:33.827Z'
+                    comment: Dispatched
+        reportingSystem:
+          id: '815'
+          name: APP-663
+          '@type': ReportingResource
+          '@referredType': LogicalResource
+        source:
+          id: '103'
+          name: APP-57
+          '@type': ReportingResource
+          '@referredType': LogicalResource
+        '@type': UnGroupAlarmCreateEvent
+      description: Message example for UnGroupAlarmCreateEvent event
+    AttributeValueChange_request:
+      value:
+        correlationId: bc449e2c-34c0
+        description: AlarmAttributeValueChangeEvent illustration
+        domain: Commercial
+        eventId: 441f-9380-4858c53114c2
+        eventTime: '2022-08-25T12:20:19.535Z'
+        eventType: AlarmAttributeValueChangeEvent
+        priority: '1'
+        timeOccurred: '2022-08-25T12:20:19.184Z'
+        title: AlarmAttributeValueChangeEvent
+        event:
+          alarm:
+            href: 'http://servername/alarm/8675309'
+            id: '8675309'
+            '@type': Alarm
+            comment:
+              - '@type': Comment
+                userId: bob@example.net
+                systemId: ems-1
+                time: '2019-07-03T03:37:33.827Z'
+                comment: Dispatched
+        reportingSystem:
+          id: '815'
+          name: APP-663
+          '@type': ReportingResource
+          '@referredType': LogicalResource
+        source:
+          id: '103'
+          name: APP-57
+          '@type': ReportingResource
+          '@referredType': LogicalResource
+        '@baseType': Event
+        '@type': AlarmAttributeValueChangeEvent
+      description: Message example for AlarmAttributeValueChangeEvent event
+    StateChange_request:
+      value:
+        correlationId: 2bb14d44-8dd6
+        description: UnGroupAlarmStateChangeEvent illustration
+        domain: Commercial
+        eventId: 4d5c-a34c-38218ba1fd66
+        eventTime: '2022-08-25T12:20:19.710Z'
+        eventType: UnGroupAlarmStateChangeEvent
+        priority: '3'
+        timeOccurred: '2022-08-25T12:20:15.920Z'
+        title: UnGroupAlarmStateChangeEvent
+        event:
+          unGroupAlarm:
+            '@type': UnGroupAlarm
+            id: '1069'
+            href: /alarmManagement/v5/unGroupAlarm/1069
+            sourceSystemId: ems-1
+            alarmChangedTime: '2019-07-03T03:42:12.861Z'
+            parentAlarm:
+              '@type': Alarm
+              id: '8675309'
+            correlatedAlarm:
+              - '@type': Alarm
+                id: '8675399'
+              - '@type': Alarm
+                id: '8675399'
+            state: done
+            unGroupedAlarm:
+              - id: '8675309'
+                href: /alarmManagement/v5/alarm/8675309
+                '@type': Alarm
+                externalAlarmId: '5551212'
+                state: updated
+                alarmType: environmentalAlarm
+                perceivedSeverity: major
+                probableCause: rectifierLowVoltage
+                specificProblem: 'ps=3,sl=1,in=8'
+                alarmedObjectType: Rectifier
+                alarmedObject:
+                  '@type': AlarmedObjectRef
+                  id: '93051825'
+                  href: /resourceInventoryManagement/v5/resource/93051825
+                  '@referredType': Resource
+                sourceSystemId: ems-1
+                alarmDetails: voltage=95
+                alarmRaisedTime: '2019-07-03T03:32:17.235Z'
+                alarmReportingTime: '2019-07-03T03:32:17.552Z'
+                alarmChangedTime: '2019-07-03T03:42:12.861Z'
+                ackSystemId: ems-1
+                ackUserId: bob@example.net
+                ackState: unacknowledged
+                comment:
+                  - '@type': Comment
+                    userId: bob@example.net
+                    systemId: ems-1
+                    time: '2019-07-03T03:37:33.827Z'
+                    comment: Dispatched
+              - id: '8675399'
+                href: /alarmManagement/v5/alarm/8675399
+                '@type': Alarm
+                externalAlarmId: '5551234'
+                state: updated
+                alarmType: equipmentAlarm
+                perceivedSeverity: minor
+                probableCause: powerSupplyFailure
+                specificProblem: 'ch=1,ps=3'
+                alarmedObjectType: Chassis
+                alarmedObject:
+                  '@type': AlarmedObjectRef
+                  id: '95830731'
+                  href: /resourceInventoryManagement/v5/resource/95830731
+                  '@referredType': Resource
+                sourceSystemId: ems-1
+                alarmRaisedTime: '2019-07-03T03:32:17.843Z'
+                alarmReportingTime: '2019-07-03T03:32:18.102Z'
+                alarmChangedTime: '2019-07-03T03:42:12.861Z'
+                ackSystemId: ems-1
+                ackUserId: bob@example.net
+                ackState: unacknowledged
+                comment:
+                  - '@type': Comment
+                    userId: bob@example.net
+                    systemId: ems-1
+                    time: '2019-07-03T03:37:33.827Z'
+                    comment: Dispatched
+        reportingSystem:
+          id: '815'
+          name: APP-663
+          '@type': ReportingResource
+          '@referredType': LogicalResource
+        source:
+          id: '103'
+          name: APP-57
+          '@type': ReportingResource
+          '@referredType': LogicalResource
+        '@baseType': Event
+        '@type': UnGroupAlarmStateChangeEvent
+      description: Message example for UnGroupAlarmStateChangeEvent event
+    Delete_request:
+      value:
+        correlationId: a15a9002-cd5f
+        description: AlarmDeleteEvent illustration
+        domain: Commercial
+        eventId: 4e92-b13d-4e9a81761f13
+        eventTime: '2022-08-25T12:20:19.557Z'
+        eventType: AlarmDeleteEvent
+        priority: '3'
+        timeOccurred: '2022-08-25T12:20:17.467Z'
+        title: AlarmDeleteEvent
+        event:
+          alarm:
+            id: '8675309'
+            href: 'http://servername/alarm/8675309'
+            '@type': Alarm
+        reportingSystem:
+          id: '815'
+          name: APP-663
+          '@type': ReportingResource
+          '@referredType': LogicalResource
+        source:
+          id: '103'
+          name: APP-57
+          '@type': ReportingResource
+          '@referredType': LogicalResource
+        '@type': AlarmDeleteEvent
+      description: Message example for AlarmDeleteEvent event

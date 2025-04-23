@@ -1,0 +1,35 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "AiModel.schema.json",
+    "title": "AiModel",
+    "definitions": {
+        "AiModel": {
+            "$id": "#AiModel",
+            "description": "AiModel is a base class for defining the AiModel hierarchy",
+            "type": "object",
+            "properties": {
+                "software": {
+                    "type": "array",
+                    "description": "Reference to Software in Inventory",
+                    "items": {"$ref": "../Resource/SoftwareRef.schema.json#/definitions/SoftwareRef"}
+                },
+                "gpu": {
+                    "description": "Reference to GPU in Inventory",
+                     "$ref": "../Resource/ResourceRef.schema.json#/definitions/ResourceRef"
+                },
+                "trainingData": {
+                    "description": "Reference to training data set",
+                    "$ref": "../Common/EntityRef.schema.json#/definitions/EntityRef"
+                },
+                "aiModelSpecification": {
+                    "$ref": "../Common/AiModelSpecification.schema.json#/definitions/AiModelSpecification"
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "../Service/Service.schema.json#Service"
+                }
+            ]
+        }
+    }
+}

@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "LoyaltyAccountRef.schema.json",
+  "title": "LoyaltyAccountRef",
+  "definitions": {
+    "LoyaltyAccountRef": {
+      "$id": "#LoyaltyAccountRef",
+      "description": "Reference to a loyalty account.",
+      "type": "object",
+      "properties": {},
+      "allOf": [
+        {
+          "$ref": "../Common/EntityRef.schema.json#EntityRef"
+        }
+      ]
+    }
+  }
+}

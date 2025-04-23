@@ -1,0 +1,16 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "SignatureRequiredByType.schema.json",
+    "title": "SignatureRequiredByType",
+    "definitions": {
+        "SignatureRequiredByType": {
+            "$id": "#SignatureRequiredByType",
+            "type": "string",
+            "description": "Possible values for the signature requirement upon receiving the shipment",
+            "enum": [
+                "adult",
+                "receiver"
+            ]
+        }
+    }
+}

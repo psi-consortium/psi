@@ -1,0 +1,24 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "LogicalResourceRef.schema.json",
+    "title": "LogicalResourceRef",
+    "definitions": {
+        "LogicalResourceRef": {
+            "$id": "#LogicalResourceRef",
+            "description": "reference to the LogicalResource eg MSISDN",
+            "type": "object",
+            "properties": {
+                "value": {
+                    "type": "string",
+                    "description": "The value of the logical resource"
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "ResourceRef.schema.json#ResourceRef"
+                }
+            ]
+
+	}
+    }
+}

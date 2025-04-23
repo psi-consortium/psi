@@ -1,0 +1,74 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "Promotion.schema.json",
+  "title": "Promotion",
+  "definitions": {
+    "Promotion": {
+      "$id": "#Promotion",
+      "type": "object",
+      "description": "Promotion is used to provide the additional discount, voucher, bonus or gift to the customer who meets the pre-defined criteria. Using promotion, the enterprise is able to attract the users and encourage more consumption, especially continuous purchases. Normally Promotion is not regarded as one type of product or product offering. It is often applied when the customer buys the product offerings with the price or amount surpassing the certain limit.",
+      "properties": {
+        "@baseType": {
+          "type": "string",
+          "description": "The base type for use in polymorphic collections."
+        },
+        "@schemaLocation": {
+          "type": "string",
+          "description": "A link to the schema describing a resource (for type extension)."
+        },
+        "@type": {
+          "type": "string",
+          "description": "The class type of the actual resource (for type extension)."
+        },
+        "description": {
+          "type": "string",
+          "description": "Details about the purpose of this promotion."
+        },
+        "href": {
+          "type": "string",
+          "description": "Hyperlink to access the promotion."
+        },
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of promotion."
+        },
+        "lastUpdate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Latest update date of promotion."
+        },
+        "lifecycleStatus": {
+          "type": "string",
+          "description": "Value of promotion status. Our suggestion would be: draft/test/waitForApproval/release/suspend/retirement."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of promotion."
+        },
+        "pattern": {
+          "type": "array",
+          "items": {
+            "$ref": "../Product/PromotionPattern.schema.json#PromotionPattern"
+          }
+        },
+        "promotionType": {
+          "type": "string",
+          "description": "Type of promotion. The basic type are Award/Discount/Reduction."
+        },
+        "validFor": {
+          "description": "The period for which the promotion is valid.",
+          "$ref": "../Common/TimePeriod.schema.json#TimePeriod"
+        },
+        "attachment": {
+          "type": "array",
+          "items": {
+            "$ref": "../Common/AttachmentRefOrValue.schema.json#AttachmentRefOrValue"
+          }
+        }
+      },
+      "required": [
+        "name"
+      ]
+    }
+  }
+}

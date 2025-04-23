@@ -1,0 +1,113 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "Resource.schema.json",
+    "title": "Resource",
+    "definitions": {
+        "Resource": {
+            "type": "object",
+            "description": "Resource is an abstract entity that describes the common set of attributes shared by all concrete resources (e.g. TPE, EQUIPMENT) in the inventory.",
+            "properties": {
+                "category": {
+                    "type": "string",
+                    "description": "Category of the concrete resource. e.g Gold, Silver for MSISDN concrete resource"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "free-text description of the resource"
+                },
+                "endOperatingDate": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "A date time( DateTime). The date till the resource is operating"
+                },
+                "href": {
+                    "type": "string",
+                    "description": "The URI for the object itself."
+                },
+                "id": {
+                    "type": "string",
+                    "description": "Identifier of an instance of the resource. Required to be unique within the resource type.  Used in URIs as the identifier for specific instances of a type."
+                },
+                "administrativeState": {
+                    "$ref": "../Resource/ResourceAdministrativeStateType.schema.json#ResourceAdministrativeStateType",
+                    "description": "Tracks the lifecycle status of the resource, such as planning, installing, opereating, retiring and so on."
+                },
+                "operationalState": {
+                    "$ref": "../Resource/ResourceOperationalStateType.schema.json#ResourceOperationalStateType",
+                    "description": "Tracks the lifecycle status of the resource, such as planning, installing, opereating, retiring and so on."
+                },
+                "resourceStatus": {
+                    "$ref": "../Resource/ResourceStatusType.schema.json#ResourceStatusType",
+                    "description": "Tracks the lifecycle status of the resource, such as planning, installing, opereating, retiring and so on."
+                },
+                "usageState": {
+                    "$ref": "../Resource/ResourceUsageStateType.schema.json#ResourceUsageStateType",
+                    "description": "Tracks the lifecycle status of the resource, such as planning, installing, opereating, retiring and so on."
+                },
+                "name": {
+                    "type": "string",
+                    "description": "A string used to give a name to the resource"
+                },
+                "note": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "../Common/Note.schema.json#/definitions/Note"
+                    }
+                },
+                "place": {
+                    "$ref": "../Common/RelatedPlaceRefOrValue.schema.json#RelatedPlaceRefOrValue"
+                },
+                "relatedParty": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "../EngagedParty/RelatedParty.schema.json#/definitions/RelatedParty"
+                    }
+                },
+                "resourceRelationship": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "../Resource/ResourceRelationship.schema.json#/definitions/ResourceRelationship"
+                    }
+                },
+                "resourceCharacteristic": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "../Common/Characteristic.schema.json#/definitions/Characteristic"
+                    }
+                },
+                "attachment": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "../Common/AttachmentRefOrValue.schema.json#AttachmentRefOrValue"
+                    }
+                },
+                "resourceSpecification": {
+                    "$ref": "../Resource/ResourceSpecificationRef.schema.json#/definitions/ResourceSpecificationRef"
+                },
+                "startOperatingDate": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "A date time( DateTime). The date from which the resource is operating"
+                },
+                "resourceVersion": {
+                    "type": "string",
+                    "description": "A field that identifies the specific version of an instance of a resource."
+                },
+                "activationFeature": {
+                    "description": "Configuration features",
+                    "type": "array",
+                    "items": {
+                        "$ref": "../Common/Feature.schema.json#/definitions/Feature"
+                    }
+                }
+            },
+            "allOf": [{
+                "$ref": "../Common/Entity.schema.json#Entity"
+            }],
+            "required": [
+                "id",
+                "href"
+            ]
+        }
+    }
+}

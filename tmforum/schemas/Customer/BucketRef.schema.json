@@ -1,0 +1,24 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "BucketRef.schema.json",
+    "title": "BucketRef",
+    "definitions": {
+        "BucketRef": {
+            "$id": "#BucketRef",
+            "description": "link to the resource that holds bucket information",
+            "type": "object",
+            "properties": {
+                "usageType": {
+                    "type": "string",
+                    "description": "defines the type of the underlying Balance eg data,voice, any currency eg EUR, USD etc"
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "../Common/EntityRef.schema.json#EntityRef"
+                }
+            ]
+
+	}
+    }
+}

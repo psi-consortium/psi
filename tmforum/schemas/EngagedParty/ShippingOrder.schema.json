@@ -1,0 +1,102 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "ShippingOrder.schema.json",
+  "title": "ShippingOrder",
+  "definitions": {
+    "ShippingOrder": {
+      "$id": "#ShippingOrder",
+      "type": "object",
+      "description": "A Shipping Order is a document used by a business to specify what items are to be transferred from a storage location or warehouse to which person and to which new location. A Shipping Order can typically be sent along with a shipment of goods so that the person receiving them can verify that the document correctly reflects the items that they actually received.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier of the Shipping Order",
+          "example": "4aafacbd-11ff-4dc8-b445-305f2215715f123"
+        },
+        "href": {
+          "type": "string",
+          "description": "Shipping Order unique reference",
+          "example": "http://host/Attachment/4aafacbd-11ff-4dc8-b445-305f2215715f"
+        },
+        "creationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date of the Shipping Order",
+          "example": "2020-11-10T08:00:00Z"
+        },
+        "lastUpdateDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date of the Shipping Order",
+          "example": "2020-11-10T08:00:00Z"
+        },
+        "relatedParty": {
+          "type": "array",
+          "description": "An existing related party that has some form of correlation with the given shipping order. It can be recipient, payer, etc.",
+          "items": {
+            "$ref": "../EngagedParty/RelatedPartyWithContactInfo.schema.json#RelatedPartyWithContactInfo"
+          }
+        },
+        "relatedShippingOrder": {
+          "$ref": "../EngagedParty/RelatedShippingOrder.schema.json#RelatedShippingOrder",
+          "description": "An existing shipping order that has some form of correlation with the given shipping order"
+        },
+        "productOrder": {
+          "$ref": "../Customer/ProductOrderRef.schema.json#ProductOrderRef",
+          "description": "The product order for which the shipping order is created, if supplied as input the attribute id must be populated"
+        },
+        "shippingInstruction": {
+          "$ref": "../EngagedParty/ShippingInstruction.schema.json#ShippingInstruction",
+          "description": "The product order for which the shipping order is created, if supplied as input the attribute id must be populated"
+        },
+        "shippingOrderItem": {
+          "type": "array",
+          "description": "A list of shipping order items. Each shipping order item has a corresponding Shipment(e.g. parcel) which has one or multiple products in it",
+          "items": {
+            "$ref": "../EngagedParty/ShippingOrderItem.schema.json#ShippingOrderItem"
+          }
+        },
+        "shippingOrderCharacteristic": {
+          "type": "array",
+          "description": "List of characteristics with values",
+          "items": {
+            "$ref": "../Common/Characteristic.schema.json#Characteristic"
+          }
+        },
+        "note": {
+          "type": "array",
+          "description": "A list of notes made on this shipping shipment",
+          "items": {
+            "$ref": "../Common/Note.schema.json#Note"
+          }
+        },
+        "shippingOrderPrice": {
+          "description": "Shipping Order price",
+          "$ref": "../Product/ProductPrice.schema.json#ProductPrice"
+        },
+        "shippingOrderOffering": {
+          "description": "Shipping order can have a corresponding entry in the product catalog (product offering)",
+          "$ref": "../Product/ProductOfferingRef.schema.json#ProductOfferingRef"
+        },
+        "status": {
+          "type": "string",
+          "description": "status of shipping order e.g \"active\" , \"savedForLater\"",
+          "example": "active"
+        },
+        "placeFrom": {
+          "description": "Source location of the item. E.g. warehouse or shop location. The location can be specified at the shipping order level or at the shipping order item level if multiple sources are specified part of the same shipping order.",
+          "$ref": "../Common/RelatedPlaceRefOrValue.schema.json#RelatedPlaceRefOrValue"
+        },
+        "placeTo": {
+          "description": "Destination of the item. E.g. customer home address. The location can be specified at the shipping order level or at the shipping order item level if multiple destinations are specified part of the same shipping order.",
+          "$ref": "../Common/RelatedPlaceRefOrValue.schema.json#RelatedPlaceRefOrValue"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../Common/Entity.schema.json#Entity"
+        }
+      ]
+    }
+  }
+}

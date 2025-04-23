@@ -1,0 +1,70 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "ServiceQualification.schema.json",
+    "title": "ServiceQualification",
+    "definitions": {
+        "ServiceQualification": {
+            "$id": "#ServiceQualification",
+            "type": "object",
+            "description": "ServiceQualification is used to perform a technical eligibility. It allows to retrieve a list of services that are technically available in the context of the interaction (place, party, service characteristics, ...).",
+            "properties": {
+                "href": {
+                    "type": "string",
+                    "description": "Hyperlink to access the serviceQualification"
+                },
+                "id": {
+                    "type": "string",
+                    "description": "Unique identifier of the serviceQualification resource"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Description of the serviceQualification"
+                },
+                "effectiveQualificationDate": {
+                    "type": "string",
+                    "description": "Effective date to serviceQualification completion", 
+                    "format": "date-time"
+                },
+                "instantSyncQualification": {
+                    "type": "boolean",
+                    "description": "An indicator which when the value is \"true\" means that requester expects to get qualifcation result immediately in the response. If the indicator is true then the response code of 200 indicates the operation is successful otherwise a task is created with a response 201."
+                   },
+                "estimatedResponseDate": {
+                    "type": "string",
+                    "description": "Date when the requester expect to provide an answer for the qualification request.", 
+                    "format": "date-time"
+                },
+                "expectedQualificationDate": {
+                    "type": "string",
+                    "description": "A date (DateTime). Deadline date when the requester expected a qualification answer.", 
+                    "format": "date-time"
+                },
+                "expirationDate": {
+                    "type": "string",
+                    "description": "Date when the qualification response expires", 
+                    "format": "date-time"
+                },
+                "state": {
+                    "$ref": "TaskStateType.schema.json#/definitions/TaskStateType",
+                    "description": "State of the serviceQualification (acknowledged, inProgress, terminatedWithError, done)"
+                },
+                "relatedParty": {
+                    "type": "array",
+                    "description": "A list of related party references, defines party or party role linked to this request.",
+                    "items": {
+                        "$ref": "../EngagedParty/RelatedParty.schema.json#RelatedParty"
+                    }
+                },
+                "externalId": {
+                    "description": "Identifier provided by the requester",
+                    "type": "string"
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "../Common/Entity.schema.json#Entity"
+                }
+            ]
+        }
+    }
+}

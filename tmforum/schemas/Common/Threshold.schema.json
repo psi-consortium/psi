@@ -1,0 +1,31 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "Threshold.schema.json",
+    "title": "Threshold",
+    "definitions": {
+        "Threshold": {
+            "type": "object",
+            "description": "A threshold base entity containing threshold rules.This entity  is  mandatoryThis entity  is  extendableThis entity   does not generate Object Creation notifications (NA)This entity   generates Object Deletion notificationsThis entity   does not generate Object Discovery notifications (NA)This entity supports the Common Get Operation.This entity supports the Common Get Multiple Operation.This entity supports the Common Create Operation.This entity supports the Common Delete Operation.",
+            "properties": {
+                "description": {
+                    "type": "string",
+                    "description": "A description of the threshold"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "A word, term, or phrase by which a Performance threshold is known and distinguished from other thresholds."
+                },
+                "thresholdRule": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "../Common/ThresholdRule.schema.json#/definitions/ThresholdRule"
+                    },
+                    "description": "A Performance Threshold contains a set of Performance threshold rules of different conditions (Raise, Clear) and different severities"
+                }
+            },
+            "allOf": [{
+                "$ref": "../Common/Entity.schema.json#Entity"
+            }]
+        }
+    }
+}

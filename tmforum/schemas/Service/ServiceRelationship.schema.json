@@ -1,0 +1,32 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "ServiceRelationship.schema.json",
+    "title": "ServiceRelationship",
+    "definitions": {
+        "ServiceRelationship": {
+            "type": "object",
+            "properties": {
+                "relationshipType": {
+                    "type": "string"
+                },
+                "serviceRelationshipCharacteristic": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "Characteristic.schema.json#/definitions/Characteristic"
+                    }
+                },
+                "service": {
+                    "$ref": "../Service/ServiceRefOrValue.schema.json#ServiceRefOrValue"
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "../Common/Entity.schema.json#Entity"
+                }
+            ],
+            "required": [
+                "relationshipType"
+            ]
+        }
+    }
+}

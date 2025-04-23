@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "PerformanceIndicatorGroupSpecification.schema.json",
+  "title": "PerformanceIndicatorGroupSpecification",
+  "definitions": {
+    "PerformanceIndicatorGroupSpecification": {
+      "$id": "#PerformanceIndicatorGroupSpecification",
+      "description": "",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of Group specification",
+          "type": "string"
+        },
+        "performanceIndicatorSpecification": {
+            "type":"array",
+            "items": {
+              "$ref": "#/definitions/PerformanceIndicatorSpecificationRef"
+            },
+            "minItems":1
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../Common/Addressable.schema.json#/definitions/Addressable"
+        },
+        {
+           "$ref": "../Common/Extensible.schema.json#/definitions/Extensible"
+        } 
+      ],
+      "required":[
+        "name"
+      ]
+    }
+  }
+}

@@ -1,0 +1,48 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "ServiceSpecification.schema.json",
+    "title": "ServiceSpecification",
+    "definitions": {
+        "ServiceSpecification": {
+            "type": "object",
+            "description": "ServiceSpecification is a class that offers characteristics to describe a type of service.\nFunctionally, it acts as a template by which Services may be instantiated. By sharing the same specification, these services would therefore share the same set of characteristics.",
+            "properties": {
+                
+                "resourceSpecification": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "../Resource/ResourceSpecificationRef.schema.json#/definitions/ResourceSpecificationRef"
+                    },
+                    "description": "A list of resource specification references (ResourceSpecificationRef [*]). The ResourceSpecification is required for a service specification with type ResourceFacingServiceSpecification (RFSS)."
+                },
+                "serviceLevelSpecification": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "../Service/ServiceLevelSpecificationRef.schema.json#/definitions/ServiceLevelSpecificationRef"
+                    },
+                    "description": "A list of service level specifications related to this service specification, and which will need to be satisifiable for corresponding service instances; e.g. Gold, Platinum"
+                },
+                "serviceSpecRelationship": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "../Service/ServiceSpecRelationship.schema.json#/definitions/ServiceSpecRelationship"
+                    },
+                    "description": "A list of service specifications related to this specification, e.g. migration, substitution, dependency or exclusivity relationship"
+                },
+                "featureSpecification": {
+                    "type": "array", 
+                    "description": "A list of Features for this specification.",
+                    "items": {
+                        "$ref": "../Service/ServiceFeatureSpecification.schema.json#/definitions/ServiceFeatureSpecification"
+                    }
+                }
+              
+            },
+            "allOf": [
+                {
+                  "$ref": "../Common/EntitySpecification.schema.json#/definitions/EntitySpecification"
+                }
+              ]
+        }
+    }
+}

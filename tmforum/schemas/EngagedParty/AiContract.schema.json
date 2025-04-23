@@ -1,0 +1,36 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "AiContract.schema.json",
+    "title": "AiContract",
+    "definitions": {
+        "AiContract": {
+            "$id": "#AiContract",
+            "type": "object",
+            "description": "An Ai Contract represents a contract or arrangement, either written or verbal and sometimes enforceable by law, such as a service level agreement or a customer price agreement. An agreement involves a number of other business entities, such as products, services, and resources and/or their specifications.",
+            "properties": {
+
+                "aiModel": {
+                    "description": "Reference to the AI Model ",
+                    "$ref": "../Common/EntityRef.schema.json#/definitions/EntityRef"
+
+                },
+                "aiContractSpecification": {
+                    "description": "Reference to the AI Model Specification",
+                    "$ref": "../Common/EntityRef.schema.json#/definitions/EntityRef"
+
+                },
+                "characteristic": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "../Common/Characteristic.schema.json#Characteristic"
+                    }
+
+
+                }
+            },
+            "allOf": [{
+                "$ref": "../EngagedParty/SLA.schema.json#SLA"
+            }]
+        }
+    }
+}

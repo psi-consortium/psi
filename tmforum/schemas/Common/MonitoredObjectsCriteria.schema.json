@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "MonitoredObjectsCriteria.schema.json",
+  "title": "MonitoredObjectsCriteria",
+  "definitions": {
+    "MonitoredObjectsCriteria": {
+      "$id": "#MonitoredObjectsCriteria",
+      "description": "Monitored objects are specified by the MonitoredObjectsCriteria.",
+      "type": "object",
+      "properties": {
+        "monitoredObjectFilter": {
+            "description": "A filter that can be used in conjunction with the monitored object class for specifying the set of instances that are referenced",
+            "type": "string"
+        }
+      }
+    }
+  }
+}

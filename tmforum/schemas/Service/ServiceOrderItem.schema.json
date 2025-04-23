@@ -1,0 +1,58 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "ServiceOrderItem.schema.json",
+    "title": "ServiceOrderItem",
+    "definitions": {
+        "ServiceOrderItem": {
+            "$id": "#ServiceOrderItem",
+            "type": "object",
+            "required": ["id"],
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "Identifier of the individual line item"
+                },
+                "action": {
+                    "description": "The action to be carried out on the Service. Can be: add, modify, delete, noChange",
+                    "$ref": "../Customer/OrderItemActionType.schema.json#/definitions/OrderItemActionType"
+                }, 
+                "quantity": {
+                    "type": "integer",
+                    "description": "Quantity ordered",
+                    "minItems": 0
+                },
+                "state": {
+                    "description": "State of the order item: described in the state machine diagram. This is the requested state.",
+                    "$ref": "../Service/ServiceOrderItemStateType.schema.json#/definitions/ServiceOrderItemStateType"
+                },
+                "service": {
+                    "description": "The Service to be acted on by the order item",
+                    "$ref": "../Service/ServiceRefOrValue.schema.json#/definitions/ServiceRefOrValue"
+                }, 
+                "appointment": {
+                    "description": "An appointment that was set up with a related party for this order item",
+                    "$ref": "../Customer/AppointmentRef.schema.json#/definitions/AppointmentRef"
+                },
+                "serviceOrderItemRelationship": {
+                    "type": "array",
+                    "description": "A list of order items related to this order item",
+                    "items": {
+                        "$ref": "../Service/ServiceOrderItemRelationship.schema.json#/definitions/ServiceOrderItemRelationship"
+                    }
+                },
+                "serviceOrderItem": {
+                    "type": "array",
+                    "description": "A list of order items embedded to this order item",
+                    "items": {
+                        "$ref": "../Service/ServiceOrderItem.schema.json#/definitions/ServiceOrderItem"
+                    }
+                }                
+            },
+            "allOf": [
+                {
+                    "$ref": "../Common/Extensible.schema.json#Extensible"
+                }
+            ]
+        }
+    }
+}

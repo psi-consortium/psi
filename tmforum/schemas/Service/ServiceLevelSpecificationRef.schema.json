@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "ServiceLevelSpecificationRef.schema.json",
+  "title": "ServiceLevelSpecificationRef",
+  "definitions": {
+    "ServiceLevelSpecificationRef": {
+      "$id": "#ServiceLevelSpecificationRef",
+      "description": "A Service Level Specification represents a pre-defined or negotiated set of Service Level \nObjectives. In addition, certain consequences are associated with not meeting the Service Level \nObjectives. Service Level Agreements are expressed in terms of Service Level Specifications.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../Common/EntityRef.schema.json#/definitions/EntityRef"
+        }
+      ]
+    }
+  }
+}

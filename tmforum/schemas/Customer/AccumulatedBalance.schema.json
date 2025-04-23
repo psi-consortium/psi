@@ -1,0 +1,70 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "AccumulatedBalance.schema.json",
+    "title": "AccumulatedBalance",
+    "definitions": {
+        "AccumulatedBalance": {
+	     "$id": "#AccumulatedBalance",
+            "description": "Represents and tracks the aggregated amount remained or owed in certain account which is owned by certain customer for a set of buckets.",
+            "properties": {
+                "href": {
+                    "type": "string",
+                    "description": "A resource URI pointing to the resource in the OB that stores the detailed information."
+                },
+                "id": {
+                    "type": "string",
+                    "description": "Unique Identifier within the server for the recharge operation request"
+                },
+                "bucket": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "BucketRef.schema.json#BucketRef"
+                    },
+                    "description": "A reference to the buckets involved in the aggregation"
+                },
+                "logicalResource": {
+		    "type": "array",
+		    "items" :{
+                    "$ref": "../Resource/LogicalResourceRef.schema.json#LogicalResourceRef",
+                    "description": "A reference to the logical resources that can be used to identify the bucket balance for example where product ids are not unique."
+		    }
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Text describing the contents of the aggregated balance"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Friendly name to identify the aggregated balance"
+                },
+                "partyAccount": {
+                        "$ref": "../EngagedParty/PartyAccountRef.schema.json#PartyAccountRef",
+                    "description": "A reference to the account that owns the buckets aggregated"
+                },
+                "product": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "../Product/ProductRef.schema.json#ProductRef"
+                    },
+                    "description": "A reference to the product whose consumption is managed by the bucket . This is an array to allow scenarios where a buckets are shared between different products"
+                },
+                "relatedParty": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "../EngagedParty/RelatedParty.schema.json#RelatedParty"
+                    },
+                    "description": "Used to provide information about any other entity with relation to the balance, for instance to define customer hierarchy for the balance (e.g.: customerId, userId, )"
+                },
+                "totalBalance": {
+                    "description": "Aggregated for a set of prepay balance buckets associated to the product",
+                    "$ref": "../Common/Quantity.schema.json#/Quantity"
+                }
+            },
+	    "allOf" :[
+                {
+                    "$ref": "../Common/Entity.schema.json#Entity"
+                } 
+	    ]
+        }
+    }
+}

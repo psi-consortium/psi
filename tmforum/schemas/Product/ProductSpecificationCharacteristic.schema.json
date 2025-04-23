@@ -1,0 +1,33 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "ProductSpecificationCharacteristic.schema.json",
+    "title": "ProductSpecificationCharacteristic",
+    "definitions": {
+        "ProductSpecificationCharacteristic": {
+            "$id": "#ProductSpecificationCharacteristic",
+            "description": "A characteristic quality or distinctive feature of a ProductSpecification.  The characteristic can be take on a discrete value, such as color, can take on a range of values, (for example, sensitivity of 100-240 mV), or can be derived from a formula (for example, usage time (hrs) = 30 - talk time *3). Certain characteristics, such as color, may be configured during the ordering or some other process.",
+            "type": "object",
+            "properties": {
+                "productSpecCharacteristicValue": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "../Common/CharacteristicValueSpecification.schema.json#CharacteristicValueSpecification"
+                    },
+                    "description": "A ProductSpecificationCharacteristicValue object is used to define a set of attributes, each of which can be assigned to a corresponding set of attributes in a ProductSpecificationCharacteristic object. The values of the attributes in the ProductSpecificationCharacteristicValue object describe the values of the attributes that a corresponding ProductSpecificationCharacteristic object can take on."
+                },
+                "productSpecCharRelationship": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "ProductSpecificationCharacteristicRelationship.schema.json#ProductSpecificationCharacteristicRelationship"
+                    },
+                    "description": "An aggregation, migration, substitution, dependency or exclusivity relationship between/among Specification Characteristics."
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "../Common/CharacteristicSpecificationBase.schema.json#CharacteristicSpecificationBase"
+                }
+            ]
+        }
+    }
+}

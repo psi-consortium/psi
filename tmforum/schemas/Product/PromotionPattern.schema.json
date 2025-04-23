@@ -1,0 +1,67 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "PromotionPattern.schema.json",
+  "title": "PromotionPattern",
+  "definitions": {
+    "PromotionPattern": {
+      "$id": "#PromotionPattern",
+      "type": "object",
+      "description": "Contains the conditions and benefits of the promotion toan eligible party",
+      "properties": {
+        "@baseType": {
+          "type": "string",
+          "description": "The base type for use in polymorphic collections"
+        },
+        "@schemaLocation": {
+          "type": "string",
+          "description": "A link to the schema describing a resource (for type extension)."
+        },
+        "@type": {
+          "type": "string",
+          "description": "The class type of the actual resource (for type extension)."
+        },
+        "action": {
+          "type": "array",
+          "items": {
+            "$ref": "../Product/PromotionAction.schema.json#PromotionAction"
+          }
+        },
+        "criteriaGroup": {
+          "type": "array",
+          "items": {
+            "$ref": "../Product/PromotionCriteriaGroup.schema.json#PromotionCriteriaGroup"
+          }
+        },
+        "description": {
+          "type": "string",
+          "description": "Small description to clarify the pattern details."
+        },
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of promotion pattern."
+        },
+        "name": {
+          "type": "string",
+          "description": "Alias to promotion pattern. This way is easily mentioned."
+        },
+        "priority": {
+          "type": "integer",
+          "description": "Priority. Smaller number means high."
+        },
+        "criteriaGroupLogicalRelationship": {
+          "type": "string",
+          "description": "Logical relation followed by the criteria group.",
+          "enum": ["AND","OR"]
+        },
+        "validFor": {
+          "description": "The period  for which the promotion pattern is valid.",
+          "$ref": "../Common/TimePeriod.schema.json#TimePeriod"
+        }
+      },
+      "required": [
+        "action",
+        "criteriaGroup"
+      ]
+    }
+  }
+}

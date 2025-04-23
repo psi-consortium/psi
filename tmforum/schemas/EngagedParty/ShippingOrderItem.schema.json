@@ -1,0 +1,81 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "ShippingOrderItem.schema.json",
+  "title": "ShippingOrderItem",
+  "definitions": {
+    "ShippingOrderItem": {
+      "$id": "#ShippingOrderItem",
+      "description": "A list of shipping order items",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier of the Shipping Order Item",
+          "example": "4aafacbd-11ff-4dc8-b445-305f2215715f"
+        },
+        "action": {
+          "$ref": "../EngagedParty/ShippingOrderItemActionType.schema.json#ShippingOrderItemActionType",
+          "description": "The action to be carried out on the Product. Can be: add, modify, delete, noChange"
+        },
+        "productOrderItem": {
+          "$ref": "../Customer/ProductOrderItemRef.schema.json#ProductOrderItemRef",
+          "description": "The product order item for which the shipping order is created, if supplied as input the attribute id must be populated"
+        },
+        "product": {
+          "$ref": "../Product/ProductRef.schema.json#ProductRef",
+          "description": "The product for which the shipping order is created, if supplied as input the attribute id must be populated"
+        },
+        "relatedParty": {
+          "type": "array",
+          "description": "A party which is involved in this shipment and the role they are playing and address. In case of shipping to addresses where a geo location is needed than then PlaceTo,PlaceFrom can be used.",
+          "items": {
+            "$ref": "../EngagedParty/RelatedPartyWithContactInfo.schema.json#RelatedPartyWithContactInfo"
+          }
+        },
+        "quantity": {
+          "type": "string",
+          "description": "Quantity the individual shipment line item",
+          "example": "10 units"
+        },
+        "status": {
+          "type": "string",
+          "description": "status of shipping order item. e.g \"active\" , \"savedForLater\"",
+          "example": "active"
+        },
+        "shippingInstruction": {
+          "description": "Shipping instructions, usually relevant for the carrier.",
+          "$ref": "../EngagedParty/ShippingInstruction.schema.json#ShippingInstruction"
+        },
+        "shippingOrderItemOffering": {
+          "description": "Each shipping order item can have a corresponding product offer in the product catalog.",
+          "$ref": "../Product/ProductOfferingRef.schema.json#ProductOfferingRef"
+        },
+        "productOffering": {
+          "description": "Item has a corresponding offering in the product catalog.",
+          "$ref": "../Product/ProductOfferingRef.schema.json#ProductOfferingRef"
+        },        
+        "shipment": {
+          "description": "A set of goods to be shipped",
+          "$ref": "../EngagedParty/ShipmentRefOrValue.schema.json#ShipmentRefOrValue"
+        },
+        "shippingOrderItemPrice": {
+          "description": "Shipping Order Item price. The price of shipping this item. It depends if there is a ShippingOrder level price or per each individual item.",
+          "$ref": "../Product/ProductPrice.schema.json#ProductPrice"
+        },
+        "placeFrom": {
+          "description": "Source location of the item. E.g. warehouse or shop location",
+          "$ref": "../Common/RelatedPlaceRefOrValue.schema.json#RelatedPlaceRefOrValue"
+        },
+        "placeTo": {
+          "description": "Destination of the item. E.g. customer home address. ",
+          "$ref": "../Common/RelatedPlaceRefOrValue.schema.json#RelatedPlaceRefOrValue"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../Common/Entity.schema.json#Entity"
+        }
+      ]
+    }
+  }
+}
