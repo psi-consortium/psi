@@ -54,10 +54,10 @@ dcr_overrides:
    message: 'Updates for MS10 delivery'
  - dcr:
    from: '2025-02-04'
-   to: '2025-04-30'
-   version: 'MS11pre [1.2.3]'
+   to: '2025-04-23'
+   version: 'MS11 [1.3.0]'
    author: 'Wolfgang Robben'
-   message: 'Updates for MS11 pre delivery'
+   message: 'Updates for MS11 delivery'
 =end
 
 # Document Meta Information

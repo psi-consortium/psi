@@ -78,7 +78,7 @@ dcr_overrides:
    message: 'Mission API: mission assets, products and mission management stubs.'
  - dcr:
    from: '2025-02-04'
-   to: '2025-04-30'
+   to: '2025-04-23'
    version: 'MS11 [1.3.0]'
    author: 'Wolfgang Robben'
    message: 'SatCom Ontology, Geospatial, EU CID 2023/1054.'

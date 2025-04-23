@@ -72,8 +72,8 @@ dcr_overrides:
    message: 'Relative times in Mision-API, implicit subtypes, Open-API 3.0 type update.'
  - dcr:
    from: '2025-02-04'
-   to: '2025-12-31'
-   version: 'MS11pre [1.2.3]'
+   to: '2025-04-23'
+   version: 'MS11 [1.2.3]'
    author: 'Christian Grubert'
    message: 'TMF5 Updates (migrations) to all APIs.'  
 =end

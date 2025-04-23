@@ -12,7 +12,7 @@ reference: "PSI-DAC"
 dcr_overrides:
  - dcr:
    from: '2022-01-01'
-   to: '2025-04-30'
+   to: '2025-04-23'
    version: 'MS11 [1.3.0]'
    author: 'Christine Glaesser'
    message: 'Initial version'

@@ -72,7 +72,7 @@ dcr_overrides:
    message: 'No update, just version bump.'
  - dcr:
    from: '2025-02-04'
-   to: '2025-04-30'
+   to: '2025-04-23'
    version: 'MS11 [1.3.0]'
    author: 'Christian Grubert'
    message: 'PS28 Updated due to TMF5 update and advanced OAS patching.'

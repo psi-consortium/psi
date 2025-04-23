@@ -36,7 +36,7 @@ dcr_overrides:
    message: 'Added sub-level mission planning.'
  - dcr:
    from: '2025-02-04'
-   to: '2025-04-30'
+   to: '2025-04-23'
    version: 'MS11 [1.3.0]'
    author: 'Bela Mueller'
    message: 'ODA mission planning component added.'     

@@ -96,7 +96,7 @@ dcr_overrides:
    message: 'Updates for MS10 delivery'
  - dcr:
    from: '2025-02-04'
-   to: '2025-04-30'
+   to: '2025-04-23'
    version: 'MS11pre [1.2.3]'
    author: 'Wolfgang Robben'
    message: 'Advanced OAS patching, MEF convergence.'     

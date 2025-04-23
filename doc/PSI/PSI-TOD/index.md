@@ -72,7 +72,7 @@ dcr_overrides:
    message: 'Relative time model in mission API, mission asset management.'
  - dcr:
    from: '2025-02-04'
-   to: '2025-04-30'
+   to: '2025-04-23'
    version: 'MS11 [1.3.0]'
    author: 'Christian Grubert'
    message: 'Alarm Management, Monitoring API, Performance Management.'

@@ -28,6 +28,12 @@ dcr_overrides:
   version: '1.2.2'
   author: 'Wolfgang Robben'
   message: 'Release of Version 1.2.2'
+- dcr:
+  from: '2025-02-13'
+  to: '2025-04-23'
+  version: '1.3.0'
+  author: 'Christian Grubert'
+  message: 'Release of Version 1.3.0'
 =end
 
 # Document Meta Information
