@@ -1,0 +1,761 @@
+plugins {
+  id 'org.openapi.generator'
+  id 'com.github.jk1.dependency-license-report'
+  id 'io.freefair.aggregate-javadoc'
+  id 'io.freefair.javadoc-links'
+  id 'org.sonarqube'
+}
+
+repositories {
+  mavenCentral()
+}
+
+/* Registers Gradle Tasks for generating api and model classes for each of TM Forum's Open APIs.
+   The generated classes are based on the respective swagger json files. */
+
+def swaggerList = []
+def openApiSwaggersDir = file("$rootDir/doc/PSI/PSI-ICD/open-apis/oas")
+openApiSwaggersDir.eachFileRecurse(groovy.io.FileType.FILES) { file ->
+    if (file.isFile() && file.name.endsWith(".oas.json")) {
+        swaggerList.add(file)
+    }
+}
+
+def packageName = "com.cgi.space.psi.generated"
+swaggerList.each { swaggerItem ->
+    def apiName = createApiName(swaggerItem.name)
+    def taskName = "openApiGenerate" + apiName
+    tasks.register(taskName, org.openapitools.generator.gradle.plugin.tasks.GenerateTask.class, {
+        group = "PSI Open APIs"
+        generatorName = "spring"
+        inputSpec = swaggerItem.path.toString()
+        outputDir = "$rootDir/source/generated".toString()
+        apiPackage = "${packageName}" + ".api." + "${apiName}"
+        modelPackage = "${packageName}" + ".model." + "${apiName}"
+        configOptions = [
+            dateLibrary: "java8",
+            useBeanValidation: "true",
+            interfaceOnly: "true",
+            useOptional: "true",
+            useLombok: "true",
+            openApiNullable: "false",
+            hideGenerationTimestamp: "true",
+            library: "spring-cloud",
+            singleContentTypes: "false"
+        ]
+    })
+}
+
+/**
+ * The method creates a clean API name for a TM Forum Open API from the respective swagger file.
+ * <br />
+ * For example, for <code>swaggerName</code> = TMF662-EntityCatalog-v4.0.0.oas.json,
+ * the name of the API will be EntityCatalog-TMF662-v400.
+ * <br />
+ * If the <code>swaggerName</code> does not follow the pattern, only the .oas.json extension
+ * is removed.
+ *
+ * @param swaggerName the name of the swagger file.
+ * @return the newly created name for the API.
+ */
+def createApiName(swaggerName) {
+    def apiName = swaggerName.replace(".oas.json", "").replace(".", "").capitalize()
+    def namePattern = /(TMF\d{3})-(\w+)-(v\d+[-\w+]?)-PSID/
+    try {
+        def (_, tmfNumber, name, version) = (apiName =~ namePattern)[0]
+        return name + "-" + tmfNumber + "-" + version + "-PSID"
+    } catch (IndexOutOfBoundsException e) {
+        logger.info (swaggerName + " does not match the pattern. The api name will be: " + apiName)
+    }
+    return apiName
+}
+
+// The "aggregateJavadoc" task is delegated to a plugin.
+// The configuration goes here:
+configurations {
+    umlDoclet
+}
+dependencies {
+    umlDoclet 'nl.talsmasoftware:umldoclet:2.0.15'
+}
+aggregateJavadoc {
+  title = "CGI $project.name $version CODE DOCUMENTATION"
+  options.author(true)
+  destinationDir = new File(buildDir, 'javadoc')
+  failOnError = false
+  options {
+    links('http://docs.spring.io/spring/docs/4.3.x/javadoc-api/',
+                    'http://docs.oracle.com/javase/8/docs/api/',
+                    'http://docs.spring.io/spring-ws/docs/2.3.0.RELEASE/api/',
+                    'http://docs.spring.io/spring-security/site/docs/4.0.4.RELEASE/apidocs/',
+                    "https://docs.gradle.org/${gradle.gradleVersion}/javadoc/")
+    addBooleanOption('Xdoclint:-missing', true)
+    addStringOption('Xdoclint:none', '-quiet')
+    docletpath = configurations.umlDoclet.files.asType(List)
+    doclet = 'nl.talsmasoftware.umldoclet.UMLDoclet'
+  }
+}
+
+// Configure the license report plugin
+licenseReport.outputDir = "${project.buildDir}/licensereport"
+licenseReport.renderers = [
+  new com.github.jk1.license.render.CsvReportRenderer(),
+  new com.github.jk1.license.render.InventoryHtmlReportRenderer()
+]
+
+def taskGenerateRestApiSchemas = tasks.register('generateRestApiSchemas', com.cgi.space.psi.tasks.GenerateRestApiSchemasTask) {
+    description = 'Generate REST API schema documentation.'
+    group = 'Documentation'
+
+    openApiDocsDir = file("$rootDir/doc/PSI/PSI-ICD/open-apis/oas")
+    outputDir = file("$rootDir/doc/PSI/PSI-ICD/schema")
+
+    outputs.upToDateWhen { false }
+    mustRunAfter 'transformSwaggerJson'
+}
+
+def taskGenreateRestApiSchemIndex = tasks.register('generateRestApiSchemaIndex', com.cgi.space.psi.tasks.GenerateRestApiSchemaIndexTask) {
+  group = 'Documentation'
+  description = 'Generate an index containing all generated schema files.'
+
+  inputDir = file("$projectDir/doc/PSI/PSI-ICD/schema")
+  outputFile = file("$projectDir/doc/PSI/PSI-ICD/schema/index.md")
+
+  dependsOn 'generateRestApiSchemas'
+}
+
+taskGenerateRestApiSchemas.configure {
+    finalizedBy taskGenreateRestApiSchemIndex
+}
+
+tasks.register('parseMockupEndpoints', com.cgi.space.psi.tasks.ParseMockupEndpointsTask) {
+  description = 'Parse mockup endpoints.'
+  dependsOn(':source:psid-mockup:compileJava')
+
+  mockupClassDir = file("$projectDir/source/psid-mockup/build/classes/java/main/")
+}
+
+tasks.register('generateRestApiDocs', com.cgi.space.psi.tasks.GenerateRestApiDocsTask) {
+  description = 'Generate our REST API documentation.'
+  group = 'Documentation'
+  dependsOn 'transformSwaggerJson', 'generateRestApiSchemaIndex', 'parseMockupEndpoints'
+
+  openApiDocsDir = file("$rootDir/doc/PSI/PSI-ICD/open-apis/oas")
+  todOperations = fileTree(dir: "$rootDir/doc/PSI/PSI-TOD/operations", include: '*.md')
+  operationsMap = tasks.parseMockupEndpoints.operationsMap
+}
+
+def removeEvents = { transformations ->
+  transformations.removePaths("/hub(.*)")
+  transformations.removePaths("/listener(.*)")
+}
+
+def adjustAttachmentRef = { transformations ->
+  transformations.renameSchema("AttachmentRef", "AttachmentOrDocumentRef")
+  transformations.overwriteProperty("(.*)", "(attachment|billDocument)", '''
+    {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/AttachmentOrDocumentRef"
+      }
+    }
+  ''')
+  transformations.overwriteProperty("(.*)(Certificate|Individual|Organization)(.*)", "attachment", '''
+    {
+      "$ref": "#/components/schemas/AttachmentOrDocumentRef"
+    }
+  ''')
+}
+
+def importBaseTypes = { transformations ->
+  transformations.importSchema("(Addressable|Entity|Error|Extensible)(.*)", file("tmforum/apis/TMF637_Product_Inventory/oas/TMF637-ProductInventory-v5.0.0.oas.yaml"))
+}
+
+tasks.register('transformPerformanceMonitoring', com.cgi.space.psi.tasks.TransformOASTask) { transformations ->
+  input = file('mef/apis/MEFW143_Performance_Monitoring/swaggers/MEFW143-PerformanceMonitoring-v2.0.0-RC.swagger.json')
+  output = file('doc/PSI/PSI-ICD/open-apis/oas/PSID143-PerformanceMonitoring-v2.0.0-RC.oas.json')
+
+  // Adjust metadata
+  replaceServerUrl("https://{serverBase}/mefApi/legato/", "/psi-api/")
+  addTagDescription("(.*)erformanceJob(.*)", "Performance Monitoring Job API")
+  addTagDescription("performanceReport(.*)", "Performance Monitoring Report API")
+  // Remove explicitly unwanted things
+  removeEvents(transformations)
+  removePaths("/performanceProfile(.*)")
+  removePaths("/trackingRecord(.*)")
+  removeOneOf("MeasurementTime")
+  // unify schemas
+  importBaseTypes(transformations)
+  // PSI specific adjustments
+  overwriteProperty("PerformanceJob(.*)", "performanceProfile", '''
+    {
+      "$ref": "#/components/schemas/PerformanceProfileValue"
+    }
+  ''')
+  overwritePropertyFormat("(.*)", "href", "uri")
+  removeProperty("Error(.+)", "code")
+  importSchema("(.*)", file("doc/PSI/PSI-ICD/open-apis/extensions/PSID143-PerformanceMonitoring-v2.0.0-RC.oas.json"))
+  // Prune things that became superfluous because of above transformations
+  pruneAll()
+}
+
+tasks.register('transformProductCatalog', com.cgi.space.psi.tasks.TransformOASTask) { transformations ->
+  input = file('tmforum/apis/TMF620_Product_Catalog/oas/TMF620-Product_Catalog_Management-v5.0.0.oas.yaml')
+  output = file('doc/PSI/PSI-ICD/open-apis/oas/PSID620-Product_Catalog_Management-v5.0.0.oas.json')
+
+  // Adjust metadata
+  replaceServerUrl()
+  // Remove explicitly unwanted things
+  removeEvents(transformations)
+  removePaths("/category(.*)")
+  removePaths("/productCatalog(.*)")
+  removePaths("/productOfferingPrice(.*)")
+  removePaths("/(.*)Job(.*)")
+  importPath('/productTemplate(.*)', file("doc/PSI/PSI-ICD/open-apis/extensions/PSID620-Product_Catalog_Management-v5.0.0.oas.json"))
+  // unify schemas
+  importSchema("^(Place)(.*)", file("doc/PSI/PSI-ICD/open-apis/extensions/PSID675-Geographic_Location.oas.json"))
+  removeSchema("Catalog(.*)")
+  removeSchema("BundledGroupProductOffering_(FVO|MVO)")
+  removeRequiredProperty("(.*)_FVO", "lastUpdate")
+  overwritePropertyFormat("(.*)", "href", "uri")
+  adjustAttachmentRef(transformations)
+  renameSchema("SLARef", "ServiceLevelSpecificationRef")
+  importSchema("ServiceLevelSpecificationRef", file("tmforum/apis/TMF633_Service_Catalog/oas/TMF633-Service_Catalog_Management-v5.0.0.oas.yaml"))
+  renameProperty("ProductOffering(.*)", "serviceLevelAgreement", "serviceLevelSpecification")
+  importSchema('(.*)', file("doc/PSI/PSI-ICD/open-apis/extensions/PSID620-Product_Catalog_Management-v5.0.0.oas.json"))
+  overwriteProperty("ProductOffering(.*)", "serviceLevelSpecification", '''
+    {
+      "$ref": "#/components/schemas/ServiceLevelSpecificationRef"
+    }
+  ''')
+  overwriteProperty("ProductOffering(.*)", "productOfferingPrice", '''
+    {
+      "type": "array",
+      "description": "An amount, usually of money, that is asked for or allowed when a ProductOffering is bought, rented, or leased. The price is valid for a defined period of time and may not represent the actual price paid by a customer.",
+      "items": {
+        "$ref": "#/components/schemas/ProductOfferingPrice"
+      }
+    }
+  ''')
+  addProperty("ProductOffering(|_FVO|_MVO)", "accessProbability", '''
+    {
+      "type": "integer",
+      "description": "Probability that an order of this offering can be fulfilled (in %).",
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "default": 1.0,
+      "example": 0.75
+    }
+  ''')
+  addProperty("ProductOffering(|_FVO|_MVO)", "relatedParty", '''
+    {
+      "type": "array",
+      "description": "A related party defines party or party role linked to a specific entity.",
+      "items": {
+        "$ref": "#/components/schemas/RelatedPartyRefOrPartyRoleRef"
+      }
+    }
+  ''')
+  addProperty("ProductOffering(|_FVO|_MVO)", "bundledGroupProductOffering", '''
+    {
+      "type": "array",
+      "description": "A group of product offerings that can be selected for instantiation, e.g. between 2 and 7 from a list of 15 channel packs.",
+      "items": {
+        "$ref": "#/components/schemas/BundledGroupProductOffering"
+      }
+    }
+  ''')
+  // Prune things that became superfluous because of above transformations
+  pruneAll()
+}
+
+tasks.register('transformTroubleTicket', com.cgi.space.psi.tasks.TransformOASTask) { transformations ->
+  input = file('tmforum/apis/TMF621_Trouble_Ticket/oas/TMF621-Trouble_Ticket-v5.0.0.oas.yaml')
+  output = file('doc/PSI/PSI-ICD/open-apis/oas/PSID621-Trouble_Ticket-v5.0.0.oas.json')
+
+  // Adjust metadata
+  replaceServerUrl("https://serverRoot", "/psi-api/troubleTicket/v2/")
+  // Remove explicitly unwanted things
+  removeEvents(transformations)
+  // unify schemas
+  importSchema("CharacteristicSpecification(.*)", file("tmforum/apis/TMF634_Resource_Catalog/oas/TMF634-Resource_Catalog_Management-v5.0.0.oas.yaml"))
+  importSchema("(.*)", file("doc/PSI/PSI-ICD/open-apis/extensions/Characteristic.oas.json"))
+  removeSchema("(.*)ContactMedium")
+  // PSI specific adjustments
+  overwritePropertyFormat("(.*)", "href", "uri")
+  adjustAttachmentRef(transformations)
+  // Prune things that became superfluous because of above transformations
+  pruneAll()
+}
+
+tasks.register('transformProductOrdering', com.cgi.space.psi.tasks.TransformOASTask) { transformations ->
+  input = file('tmforum/apis/TMF622_Product_Ordering/oas/TMF622-ProductOrdering-v5.0.0.oas.yaml')
+  output = file('doc/PSI/PSI-ICD/open-apis/oas/PSID622-ProductOrdering-v5.0.0.oas.json')
+
+  // Adjust metadata
+  replaceServerUrl("https://serverRoot", "/psi-api/productOrdering/v2/")
+  // Remove explicitly unwanted things
+  removeEvents(transformations)
+  removePaths("/cancelProductOrder(.*)")
+  // unify schemas
+  importSchema("(.*)Product(.*)", file("tmforum/apis/TMF637_Product_Inventory/oas/TMF637-ProductInventory-v5.0.0.oas.yaml"))
+  importSchema("(.*)(Certificate|Individual|Organization|Party)(.*)", file("tmforum/apis/TMF632_Party/oas/TMF632-Party_Management-v5.0.0.oas.yaml"))
+  importSchema("RelatedPartyRefOrPartyRoleRef_MVO", file("tmforum/apis/TMF634_Resource_Catalog/oas/TMF634-Resource_Catalog_Management-v5.0.0.oas.yaml"))
+  importSchema("(.*)", file("doc/PSI/PSI-ICD/open-apis/extensions/PSID675-Geographic_Location.oas.json"))
+  importSchema("(ProductOfferingRef|BundledProductOfferingOption)(.*)", file("tmforum/apis/TMF620_Product_Catalog/oas/TMF620-Product_Catalog_Management-v5.0.0.oas.yaml"))
+  importSchema('BundledProductOffering(.*)', file("doc/PSI/PSI-ICD/open-apis/extensions/PSID620-Product_Catalog_Management-v5.0.0.oas.json"))
+  importSchema('(.*)', file("doc/PSI/PSI-ICD/open-apis/extensions/PSID622-ProductOrdering-v5.0.0.oas.json"))
+  importSchema("(.*)", file("doc/PSI/PSI-ICD/open-apis/extensions/Characteristic.oas.json"))
+  // PSI specific adjustments
+  overwritePropertyFormat("(.*)", "href", "uri")
+  adjustAttachmentRef(transformations)
+  removeProperty("(Money|TimePeriod|Quantity)", "\\@(.*)")
+  addProperty("ProductOrderItem(|_FVO|_MVO)", "requestedStartDate", '''
+    {
+      "type": "string",
+      "description": "Order fulfillment start date wished by the requestor. This is used when, for any reason, the requestor cannot allow the seller to operationally begin the fulfillment before a date. ",
+      "format": "date-time"
+    }
+  ''')
+  addProperty("ProductOrderItem(|_FVO|_MVO)", "requestedEndDate", '''
+    {
+      "type": "string",
+      "description": "Order fulfillment end date wished by the requestor. This is used when, for any reason, the requestor cannot allow the seller to operationally shutdown before a date.",
+      "format": "date-time"
+    }
+  ''')
+  // Prune things that became superfluous because of above transformations
+  pruneAll()
+}
+
+tasks.register('transformPartyManagement', com.cgi.space.psi.tasks.TransformOASTask) { transformations ->
+  input = file('tmforum/apis/TMF632_Party/oas/TMF632-Party_Management-v5.0.0.oas.yaml')
+  output = file('doc/PSI/PSI-ICD/open-apis/oas/PSID632-Party_Management-v5.0.0.oas.json')
+
+  // Adjust metadata
+  replaceServerUrl()
+  // Remove explicitly unwanted things
+  removeEvents(transformations)
+  // unify schemas
+  adjustAttachmentRef(transformations)
+  importSchema("(.*)", file("doc/PSI/PSI-ICD/open-apis/extensions/Characteristic.oas.json"))
+  overwritePropertyFormat("(.*)", "href", "uri")
+  // Prune things that became superfluous because of above transformations
+  pruneAll()
+}
+
+tasks.register('transformServiceCatalog', com.cgi.space.psi.tasks.TransformOASTask) { transformations ->
+  input = file('tmforum/apis/TMF633_Service_Catalog/oas/TMF633-Service_Catalog_Management-v5.0.0.oas.yaml')
+  output = file('doc/PSI/PSI-ICD/open-apis/oas/PSID633-Service_Catalog_Management-v5.0.0.oas.json')
+
+  // Adjust metadata
+  replaceServerUrl("https://serverRoot", "/psi-api/serviceManagement/v2/")
+  // Remove explicitly unwanted things
+  removeEvents(transformations)
+  removePaths("/serviceCatalog(.*)")
+  removePaths("/serviceCandidate(.*)")
+  removePaths("/serviceCategory(.*)")
+  removePaths("/(.*)Job(.*)")
+  // unify schemas
+  importSchema("(Feature|ResourceSpecificationRef|CharacteristicSpecification|RelatedPartyRefOrPartyRoleRef)(.*)", file("tmforum/apis/TMF634_Resource_Catalog/oas/TMF634-Resource_Catalog_Management-v5.0.0.oas.yaml"))
+  // PSI specific adjustments
+  importPath('/serviceTemplate(.*)', file("doc/PSI/PSI-ICD/open-apis/extensions/PSID633-Service_Catalog_Management-v5.0.0.oas.json"))
+  removeSchema("Catalog(.*)")
+  adjustAttachmentRef(transformations)
+  overwritePropertyFormat("(.*)", "href", "uri")
+  addProperty("ServiceSpecification(|_FVO|_MVO)", "category", '''
+    {
+      "type": "string",
+      "description": "Category of the target service like Telephony, InternetAccess, IP-Trunk and so on."
+    }
+  ''')
+  // Prune things that became superfluous because of above transformations
+  pruneAll()
+}
+
+tasks.register('transformResourceCatalog', com.cgi.space.psi.tasks.TransformOASTask) { transformations ->
+  input = file('tmforum/apis/TMF634_Resource_Catalog/oas/TMF634-Resource_Catalog_Management-v5.0.0.oas.yaml')
+  output = file('doc/PSI/PSI-ICD/open-apis/oas/PSID634-Resource_Catalog_Management-v5.0.0.oas.json')
+
+  // Adjust metadata
+  replaceServerUrl()
+  // Remove explicitly unwanted things
+  removeEvents(transformations)
+  removePaths("/resourceCandidate(.*)")
+  removePaths("/resourceCatalog(.*)")
+  removePaths("/resourceCategory(.*)")
+  removePaths("/(.*)Job(.*)")
+  // unify schemas
+  importSchema("(.*)(CharacteristicValueSpecification|PolicyRef)(.*)", file("tmforum/apis/TMF620_Product_Catalog/oas/TMF620-Product_Catalog_Management-v5.0.0.oas.yaml"))
+  // PSI specific adjustments
+  importPath('/resourceTemplate(.*)', file("doc/PSI/PSI-ICD/open-apis/extensions/PSID634-Resource_Catalog_Management-v5.0.0.oas.json"))
+  removeSchema("Catalog(.*)")
+  adjustAttachmentRef(transformations)
+  overwritePropertyFormat("(.*)", "href", "uri")
+  // Prune things that became superfluous because of above transformations
+  pruneAll()
+}
+
+tasks.register('transformProductInventory', com.cgi.space.psi.tasks.TransformOASTask) { transformations ->
+  input = file('tmforum/apis/TMF637_Product_Inventory/oas/TMF637-ProductInventory-v5.0.0.oas.yaml')
+  output = file('doc/PSI/PSI-ICD/open-apis/oas/PSID637-ProductInventory-v5.0.0.oas.json')
+
+  // Adjust metadata
+  replaceServerUrl("https://serverRoot", "/psi-api/productInventory/v2/")
+  // Remove explicitly unwanted things
+  removeEvents(transformations)
+  // unify schemas
+  importSchema("(.*)(Certificate|Individual|Organization|Party)(.*)", file("tmforum/apis/TMF632_Party/oas/TMF632-Party_Management-v5.0.0.oas.yaml"))
+  importSchema("RelatedPartyRefOrPartyRoleRef_MVO", file("tmforum/apis/TMF634_Resource_Catalog/oas/TMF634-Resource_Catalog_Management-v5.0.0.oas.yaml"))
+  importSchema("(.*)", file("doc/PSI/PSI-ICD/open-apis/extensions/PSID675-Geographic_Location.oas.json"))
+  importSchema("(ProductOfferingRef|BundledProductOfferingOption)(.*)", file("tmforum/apis/TMF620_Product_Catalog/oas/TMF620-Product_Catalog_Management-v5.0.0.oas.yaml"))
+  importSchema('BundledProductOffering(.*)', file("doc/PSI/PSI-ICD/open-apis/extensions/PSID620-Product_Catalog_Management-v5.0.0.oas.json"))
+  importSchema("(.*)", file("doc/PSI/PSI-ICD/open-apis/extensions/Characteristic.oas.json"))
+  // PSI specific adjustments
+  overwritePropertyFormat("(.*)", "href", "uri")
+  adjustAttachmentRef(transformations)
+  // Prune things that became superfluous because of above transformations
+  pruneAll()
+}
+
+tasks.register('transformServiceInventory', com.cgi.space.psi.tasks.TransformOASTask) { transformations ->
+  input = file('tmforum/apis/TMF638_Service_Inventory/oas/TMF638-Service_Inventory_Management-v5.0.0.oas.yaml')
+  output = file('doc/PSI/PSI-ICD/open-apis/oas/PSID638-Service_Inventory_Management-v5.0.0.oas.json')
+
+  // Adjust metadata
+  replaceServerUrl("https://serverRoot", "/psi-api/serviceInventory/v2/")
+  // Remove explicitly unwanted things
+  removeEvents(transformations)
+  // unify schemas
+  importBaseTypes(transformations)
+  importSchema("(EntityRef_MVO|PolicyRef|Feature)(.*)", file("tmforum/apis/TMF639_Resource_Inventory/oas/TMF639-Resource_Inventory_Management-v5.0.0.oas.yaml"))
+  importSchema("(.*)(Certificate|Individual|Organization|Party)(.*)", file("tmforum/apis/TMF632_Party/oas/TMF632-Party_Management-v5.0.0.oas.yaml"))
+  importSchema("RelatedPartyRefOrPartyRoleRef_MVO", file("tmforum/apis/TMF634_Resource_Catalog/oas/TMF634-Resource_Catalog_Management-v5.0.0.oas.yaml"))
+  importSchema("(.*)", file("doc/PSI/PSI-ICD/open-apis/extensions/PSID675-Geographic_Location.oas.json"))
+  importSchema("(RelatedEntity)(.*)", file("tmforum/apis/TMF621_Trouble_Ticket/oas/TMF621-Trouble_Ticket-v5.0.0.oas.yaml"))
+  importSchema("(.*)", file("doc/PSI/PSI-ICD/open-apis/extensions/Characteristic.oas.json"))
+  // PSI specific adjustments
+  adjustAttachmentRef(transformations)
+  overwritePropertyFormat("(.*)", "href", "uri")
+  overwriteProperty("Service", "relatedEntity", '''
+    {
+      "type": "array",
+      "description": "A list of related entities in relationship with this service",
+      "items": {
+        "$ref": "#/components/schemas/RelatedEntity"
+      }
+    }
+  ''')
+  overwriteProperty("Service_FVO", "relatedEntity", '''
+    {
+      "type": "array",
+      "description": "A list of related entities in relationship with this service",
+      "items": {
+        "$ref": "#/components/schemas/RelatedEntity_FVO"
+      }
+    }
+  ''')
+  overwriteProperty("Service_MVO", "relatedEntity", '''
+    {
+      "type": "array",
+      "description": "A list of related entities in relationship with this service",
+      "items": {
+        "$ref": "#/components/schemas/RelatedEntity_MVO"
+      }
+    }
+  ''')
+  // Prune things that became superfluous because of above transformations
+  pruneAll()
+}
+
+tasks.register('transformResourceInventory', com.cgi.space.psi.tasks.TransformOASTask) { transformations ->
+  input = file('tmforum/apis/TMF639_Resource_Inventory/oas/TMF639-Resource_Inventory_Management-v5.0.0.oas.yaml')
+  output = file('doc/PSI/PSI-ICD/open-apis/oas/PSID639-Resource_Inventory_Management-v5.0.0.oas.json')
+
+  // Adjust metadata
+  replaceServerUrl("{apiRoot}", "/psi-api/resourceInventory/v2/")
+  // Remove explicitly unwanted things
+  removeEvents(transformations)
+  // unify schemas
+  importBaseTypes(transformations)
+  importSchema("(.*)", file("doc/PSI/PSI-ICD/open-apis/extensions/Characteristic.oas.json"))
+  adjustAttachmentRef(transformations)
+  replaceResponseContent("Resource_RES", "Resource")
+  overwritePropertyFormat("(.*)", "href", "uri")
+  // Prune things that became superfluous because of above transformations
+  pruneAll()
+}
+
+tasks.register('transformAlarm', com.cgi.space.psi.tasks.TransformOASTask) { transformations ->
+  input = file('tmforum/apis/TMF642_Alarm/oas/TMF642-Alarm-v5.0.1.oas.yaml')
+  output = file('doc/PSI/PSI-ICD/open-apis/oas/PSID642-Alarm-v5.0.1.oas.json')
+
+  // Adjust metadata
+  replaceServerUrl("{apiRoot}/tmf-api/", "/psi-api/")
+  replaceServerUrl("v4", "v2")
+  // Remove explicitly unwanted things
+  removeEvents(transformations)
+  removeOperation("/alarm(.*)", "(post|delete|patch)")
+  removePaths("/(.+)Alarm(.*)")
+  // PSI specific adjustments
+  overwritePropertyFormat("(.*)", "href", "uri")
+  importSchema("(RelatedPlaceRef|PlaceRef)", file("tmforum/apis/TMF639_Resource_Inventory/oas/TMF639-Resource_Inventory_Management-v5.0.0.oas.yaml"))
+  overwriteProperty("Alarm(.*)", "place", '''
+    {
+      "type": "array",
+      "description": "List of related places, which are affected by Alarm.",
+      "items": {
+        "$ref": "#/components/schemas/RelatedPlaceRef"
+      }
+    }
+  ''')
+  // Prune things that became superfluous because of above transformations
+  pruneAll()
+}
+
+tasks.register('transformServiceQualityManagement', com.cgi.space.psi.tasks.TransformOASTask) { transformations ->
+  input = file('tmforum/apis/TMF657_Service_Quality_Management/swaggers/TMF657-ServiceQualityManagement-v4.0.0.swagger.json')
+  output = file('doc/PSI/PSI-ICD/open-apis/oas/PSID657-ServiceQualityManagement-v4.0.0.oas.json')
+
+  // Adjust metadata
+  replaceServerUrl()
+  addTagDescription("serviceLevelObjective", "Service Level Objective API")
+  addTagDescription("serviceLevelSpecification", "Service Level Specification API")
+  // Remove explicitly unwanted things
+  removeEvents(transformations)
+  // unify schemas
+  importBaseTypes(transformations)
+  importSchema("(.*)(Characteristic)(.*)", file("tmforum/apis/TMF620_Product_Catalog/oas/TMF620-Product_Catalog_Management-v5.0.0.oas.yaml"))
+  importSchema("(RelatedEntity)(.*)", file("tmforum/apis/TMF621_Trouble_Ticket/oas/TMF621-Trouble_Ticket-v5.0.0.oas.yaml"))
+  // PSI specific adjustments
+  removeSchema("(.*)CharacteristicValueSpecification(.*)")
+  overwritePropertyFormat("(.*)", "href", "uri")
+  removeProperty("TimePeriod", "\\@(.*)")
+  addProperty("ServiceLevelObjectiveRef", "name", '''
+    {
+      "type": "string",
+      "description": "The name of Service Level Objective."
+    }
+  ''')
+  importPath('(.*)', file("doc/PSI/PSI-ICD/open-apis/extensions/PSID657-ServiceQualityManagement-v4.0.0.oas.json"))
+  importSchema("(.*)", file("doc/PSI/PSI-ICD/open-apis/extensions/PSID657-ServiceQualityManagement-v4.0.0.oas.json"))
+  // Prune things that became superfluous because of above transformations
+  pruneAll()
+}
+
+tasks.register('transformDocument', com.cgi.space.psi.tasks.TransformOASTask) { transformations ->
+  input = file('tmforum/apis/TMF667_Document/oas/TMF667-Document-v5.0.0.oas.yaml')
+  output = file('doc/PSI/PSI-ICD/open-apis/oas/PSID667-Document-v5.0.0.oas.json')
+
+  // Adjust metadata
+  replaceServerUrl("{apiRoot}/tmf-api/", "https://serverRoot/psi-api/")
+  replaceServerUrl("v5", "v2")
+  // Remove explicitly unwanted things
+  removeEvents(transformations)
+  removePaths("/documentSpecification(.*)")
+  // unify schemas
+  importBaseTypes(transformations)
+  importSchema("(TargetEntitySchema)(.*)", file("tmforum/apis/TMF633_Service_Catalog/oas/TMF633-Service_Catalog_Management-v5.0.0.oas.yaml"))
+  importSchema("(.*)Characteristic(.*)", file("tmforum/apis/TMF637_Product_Inventory/oas/TMF637-ProductInventory-v5.0.0.oas.yaml"))
+  importSchema("(.*)", file("doc/PSI/PSI-ICD/open-apis/extensions/Characteristic.oas.json"))
+  // PSI specific adjustments
+  removePaths("/attachment(.*)")
+  importPath('(.*)', file("doc/PSI/PSI-ICD/open-apis/extensions/PSID667-Document-v5.0.0.oas.json"))
+  removeSchema("(.*)CharacteristicValueSpecification(.*)")
+  removeSchema("(CharacteristicSpecification|EntitySpecification)(.*)")
+  removeProperty("(.*)", "documentSpecification")
+  removeProperty("Document_(.*)", "attachment")
+  removeProperty("Attachment", "content")
+  overwritePropertyFormat("Attachment(.*)", "content", "binary")
+  overwritePropertyFormat("(.*)", "(href|url)", "uri")
+  overwriteProperty("Document", "attachment", '''
+    {
+      "type": "array",
+      "description": "Collection of attachments",
+      "items": {
+        "$ref": "#/components/schemas/Attachment"
+      }
+    }
+  ''')
+  // Prune things that became superfluous because of above transformations
+  pruneAll()
+}
+
+tasks.register('transformCustomerBill', com.cgi.space.psi.tasks.TransformOASTask) { transformations ->
+  input = file('tmforum/apis/TMF678_Customer_Bill/oas/TMF678-CustomerBill-v5.0.0.oas.yaml')
+  output = file('doc/PSI/PSI-ICD/open-apis/oas/PSID678-CustomerBill-v5.0.0.oas.json')
+
+  // Adjust metadata
+  replaceServerUrl("https://serverRoot", "/psi-api/customerBillManagement/v2/")
+  // Remove explicitly unwanted things
+  removeEvents(transformations)
+  removePaths("/customerBillOnDemand(.*)")
+  removePaths("/appliedCustomerBillingRate(.*)")
+  removePaths("/billCycle(.*)")
+  // PSI specific adjustments
+  removeSchema("(.*)Characteristic")
+  overwritePropertyFormat("(.*)", "href", "uri")
+  adjustAttachmentRef(transformations)
+  importSchema("ProductOrderRef", file("tmforum/apis/TMF622_Product_Ordering/oas/TMF622-ProductOrdering-v5.0.0.oas.yaml"))
+  addProperty("CustomerBill", "productOrder", '''
+    {
+      "$ref": "#/components/schemas/ProductOrderRef",
+      "description": "Reference to the Product Order this customer bill is about."
+    }
+  ''')
+  importPath('(.*)', file("doc/PSI/PSI-ICD/open-apis/extensions/PSID678-CustomerBill-v5.0.0.oas.json"))
+  importSchema("(.*)", file("doc/PSI/PSI-ICD/open-apis/extensions/PSID678-CustomerBill-v5.0.0.oas.json"))
+  // Prune things that became superfluous because of above transformations
+  pruneAll()
+}
+
+tasks.register('transformStock', com.cgi.space.psi.tasks.TransformOASTask) { transformations ->
+  input = file('tmforum/apis/TMF687_Stock/swaggers/TMF687-Stock-v4.1.0.swagger.json')
+  output = file('doc/PSI/PSI-ICD/open-apis/oas/PSID687-Stock-v4.1.0.oas.json')
+
+  // Adjust metadata
+  replaceServerUrl()
+  addTagDescription("checkProductStock", "Stock Check API")
+  // Remove explicitly unwanted things
+  removeEvents(transformations)
+  removePaths("/productStock(.*)")
+  removePaths("/adjustProductStock(.*)")
+  removeOperation("/checkProductStock", "get")
+  removePaths("/reserveProductStock(.*)")
+  removePaths("/queryProductStock(.*)")
+  // unify schemas
+  importBaseTypes(transformations)
+  importSchema("(.*)(Product|Price|RelatedOrderItem|PartyOrPartyRole|Intent|Duration|Expression|RelatedPartyRefOrPartyRoleRef)(.*)", file("tmforum/apis/TMF637_Product_Inventory/oas/TMF637-ProductInventory-v5.0.0.oas.yaml"))
+  importSchema("(Geo|RelatedPlaceRefOrValue|Place|ItemActionType|StandardIdentifier|ExternalIdentifier|CalendarPeriod|HourPeriod)(.*)", file("tmforum/apis/TMF637_Product_Inventory/oas/TMF637-ProductInventory-v5.0.0.oas.yaml"))
+  importSchema("(.*)", file("doc/PSI/PSI-ICD/open-apis/extensions/PSID675-Geographic_Location.oas.json"))
+  importSchema("(.*)Ref(.*)", file("tmforum/apis/TMF637_Product_Inventory/oas/TMF637-ProductInventory-v5.0.0.oas.yaml"))
+  importSchema("(.*)(ChannelRef|MarketSegmentRef|Quantity)(.*)", file("tmforum/apis/TMF620_Product_Catalog/oas/TMF620-Product_Catalog_Management-v5.0.0.oas.yaml"))
+  importSchema("(Characteristic|CharacteristicRelationship)(.*)", file("tmforum/apis/TMF637_Product_Inventory/oas/TMF637-ProductInventory-v5.0.0.oas.yaml"))
+  importSchema("(.*)(Certificate|Individual|Organization|Party|Supplier|BusinessPartner|Consumer|Producer|Disability|LanguageAbility|Skill|ContactMedium|CreditProfile|TaxDefinition|GeographicAddressRef)(.*)", file("tmforum/apis/TMF632_Party/oas/TMF632-Party_Management-v5.0.0.oas.yaml"))
+  importSchema("RelatedPartyRefOrPartyRoleRef_MVO", file("tmforum/apis/TMF634_Resource_Catalog/oas/TMF634-Resource_Catalog_Management-v5.0.0.oas.yaml"))
+  importSchema("(.*)", file("doc/PSI/PSI-ICD/open-apis/extensions/Characteristic.oas.json"))
+  // PSI specific adjustments
+  removeProperty("(.*)", "randomAtt")
+  removeSchema("(.*)CharacteristicValueSpecification(.*)")
+  removeSchema("(Characteristic_FVO|Characteristic_MVO)")
+  removeSchema("(Party|Individual|Organization|PartyRole|PartyOrPartyRole|RelatedPartyOrPartyRole)_(FVO|MVO)")
+  removeSchema("(Product|Place|GeographicSite|GeographicLocation|GeographicAddress)_(FVO|MVO)")
+  removeProperty("CheckProductStock_Create", "(state|creationDate|completedCheckProductStockDate)")
+  overwritePropertyFormat("(.*)", "href", "uri")
+  importSchema("(.*)", file("doc/PSI/PSI-ICD/open-apis/extensions/PSID687-Stock-v4.1.0.oas.json"))
+  overwriteProperty("CheckProductStockItem", "availabilityResult", '''
+    {
+      "$ref": "#/components/schemas/AvailabilityResultType",
+      "description": "The result of the availability check (available, notAvailable, alternate)."
+    }
+  ''')
+  renameProperty("(.*)", "requestedAvailabilityDate", "requestedAvailability")
+  overwriteProperty("(.*)", "requestedAvailability", '''
+    {
+      "$ref": "#/components/schemas/TimePeriod",
+      "description": "Period for which the product is to be booked, i.e. the stock has to be available."
+    }
+  ''')
+  adjustAttachmentRef(transformations)
+  // Prune things that became superfluous because of above transformations
+  pruneAll()
+}
+
+tasks.register('transformEvent', com.cgi.space.psi.tasks.TransformOASTask) { transformations ->
+  input = file('tmforum/apis/TMF688_Event/swaggers/TMF688-Event-v4.0.0.swagger.json')
+  output = file('doc/PSI/PSI-ICD/open-apis/oas/PSID688-Event-v4.0.0.oas.json')
+
+  // Adjust metadata
+  replaceServerUrl()
+  addTagDescription("hub", "Event Hub API")
+  addTagDescription("event", "Event Listener API")
+  addTagDescription("topic", "Event Topic API")
+  // Remove explicitly unwanted things
+  removeEvents(transformations)
+  removePaths("/topic/\\{topicId\\}/event/\\{id\\}")
+  removeOperation("/topic", "post")
+  removePaths("/topic/\\{id\\}")
+  removeOperation("/topic/\\{topicId\\}/hub/\\{id\\}", "get")
+  // unify schemas
+  importBaseTypes(transformations)
+  importSchema("(.*)(Characteristic|TimePeriod)(.*)", file("tmforum/apis/TMF620_Product_Catalog/oas/TMF620-Product_Catalog_Management-v5.0.0.oas.yaml"))
+  importSchema("(.*)", file("doc/PSI/PSI-ICD/open-apis/extensions/Characteristic.oas.json"))
+  // PSI specific adjustments
+  removeSchema("(.*)CharacteristicValueSpecification(.*)")
+  removeSchema("(Characteristic_FVO|Characteristic_MVO)")
+  overwritePropertyFormat("(.*)", "href", "uri")
+  renameSchema("Hub", "HubSubscription")
+  renameSchema("Hub_Create", "HubSubscription_Create")
+  renameSchema("Hub_Update", "HubSubscription_Update")
+  importPath('(.*)', file("doc/PSI/PSI-ICD/open-apis/extensions/PSID688-Event-v4.0.0.oas.json"))
+  // Prune things that became superfluous because of above transformations
+  pruneAll()
+}
+
+def transformSwaggerJson = tasks.register('transformSwaggerJson') {
+  description = 'Transforms all OpenAPI Specifications'
+  group = 'Documentation'
+  dependsOn 'transformPerformanceMonitoring'
+  dependsOn 'transformProductCatalog'
+  dependsOn 'transformTroubleTicket'
+  dependsOn 'transformProductOrdering'
+  dependsOn 'transformPartyManagement'
+  dependsOn 'transformServiceCatalog'
+  dependsOn 'transformResourceCatalog'
+  dependsOn 'transformProductInventory'
+  dependsOn 'transformServiceInventory'
+  dependsOn 'transformResourceInventory'
+  dependsOn 'transformAlarm'
+  dependsOn 'transformServiceQualityManagement'
+  dependsOn 'transformDocument'
+  dependsOn 'transformCustomerBill'
+  dependsOn 'transformStock'
+  dependsOn 'transformEvent'
+}
+
+tasks.register('generateDocReferences', com.cgi.space.psi.tasks.GenerateDocReferences.class) {
+  group = 'Documentation'
+  description = 'Generate documentation references (TOD - REQ).'
+  dependsOn('parseMockupEndpoints')
+
+  requirementsBaseline = file("$projectDir/doc/PSI/PSI-REQ/requirements/")
+  endpointMap = tasks.parseMockupEndpoints.endpointMap
+  todTaskRequirements = file("$projectDir/doc/PSI/PSI-TOD/tasks/requirements/")
+  todOpsRequirements = file("$projectDir/doc/PSI/PSI-TOD/operations/requirements/")
+  todOpsEndpoints = file("$projectDir/doc/PSI/PSI-TOD/operations/endpoints/")
+}
+
+tasks.register('generateMadrIndex') {
+  group = 'Documentation'
+  description = 'Generate MADR index.'
+}
+
+['Accepted', 'Deprecated', 'Proposed', 'Rejected', 'Superseded'].each { madrStatus ->
+  tasks.register("generateMadrIndex$madrStatus", com.cgi.space.psi.tasks.GenerateMadrIndexTask.class) {
+    madrDir = file("$projectDir/doc/PSI/PSI-MADR/$madrStatus")
+    outputFile = file("$projectDir/doc/PSI/PSI-MADR/$madrStatus/list-of-decisions.md")
+  }
+  tasks.generateMadrIndex.dependsOn "generateMadrIndex$madrStatus"
+}
+
+tasks.register('generateCandidateReqReferences', com.cgi.space.psi.tasks.GenerateCandidateReqReferences.class) {
+  group = 'Documentation'
+  description = 'Collect references to candidate requirments in MADR and REQ.'
+
+  candidateInput = file("$projectDir/doc/PSI/PSI-REQ/candidate_requirements/")
+  madrInput = fileTree("$projectDir/doc/PSI/PSI-MADR/").matching {
+    include "Accepted/????-??-??-*.md"
+    include "Proposed/????-??-??-*.md"
+    include "Rejected/????-??-??-*.md"
+  }
+  madrOutput = file("$projectDir/doc/PSI/PSI-REQ/candidate_requirements/MADRs/")
+  reqInput = fileTree("$projectDir/doc/PSI/PSI-REQ/requirements/").matching {
+    include "REQ-*.md"
+    exclude "*-index.md"
+  }
+  reqOutput = file("$projectDir/doc/PSI/PSI-REQ/candidate_requirements/requirements/")
+}
+
+tasks.register('generate') {
+    dependsOn 'generateRestApiDocs', 'generateRestApiSchemaIndex', 'generateDocReferences', 'generateMadrIndex', 'generateCandidateReqReferences'
+}

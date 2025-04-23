@@ -1,0 +1,10 @@
+apiVersion: v2
+name: mission-management
+description: Mission Management
+type: application
+version: 1.0.0
+appVersion: "1.0.0"
+dependencies:
+  - name: mongodb
+    version: "16.5.0"
+    repository: "oci://registry-1.docker.io/bitnamicharts"

@@ -1,0 +1,45 @@
+replicaCount: 1
+
+imagePullSecrets: []
+image:
+  repository: localhost/mission-management-backend
+  pullPolicy: IfNotPresent
+  tag:
+
+podAnnotations: {}
+
+podSecurityContext: {}
+securityContext: {}
+
+ingress:
+  enabled: false
+  host: ""
+  path: "/psi-api/missionManagement/v2"
+
+resources:
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+nodeSelector: {}
+affinity: {}
+
+database:
+  host: "mongodb"
+  port: "27017"
+  user:
+  password:
+    secret:
+    key:
+  name: "MissionManagement"
+  authSource: "MissionManagement"
+  collections: 
+    mission: "Missions"
+    missionTemplates: "MissionTemplates"
+
+logging:
+  level: "INFO"
+  handler: "JSON"

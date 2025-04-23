@@ -1,0 +1,11 @@
+server.port: 8001
+
+spring:
+  data:
+    mongodb:
+      database: pssdb
+
+psi:
+  pss:
+    inquiry:
+      maxResponseTime: PT15S

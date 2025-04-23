@@ -1,0 +1,173 @@
+---
+$schema: http://json-schema.org/draft-07/schema#
+title:
+  PSI Satellite Communication Common Types
+# ---------------------
+# Disclaimer
+#
+# Creator: THE PSI CONSORTIUM 2025.
+# This document is based on content originally published by the MEF Forum but has been modified and/or adapted. 
+# It is not an official publication of the MEF Forum.
+# It is a pre-release before an official endoresement by MEF Forum.
+#
+# The original document is available at <https://github.com/MEF-GIT/MEF-LSO-Sonata-SDK/tree/irene/productSchema>.
+#
+# The modifications to this document were made by the publisher of this version. 
+# The MEF Forum is not responsible for the content, accuracy, or applicability of this modified version and assumes no liability for its use.
+#
+# The publisher of this version acknowledges the copyrights of the MEF Forum and expressly states that this document must not be used or cited as an official MEF document.
+#
+# ---------------------
+#
+# © MEF Forum 2023. All Rights Reserved.
+#
+# The information in this publication is freely available for reproduction
+# and use by any recipient and is believed to be accurate as of its
+# publication date. Such information is subject to change without notice
+# and MEF Forum (MEF) is not responsible for any errors. MEF does not
+# assume responsibility to update or correct any information in this
+# publication. No representation or warranty, expressed or implied, is
+# made by MEF concerning the completeness, accuracy, or applicability of
+# any information contained herein and no liability of any kind shall be
+# assumed by MEF as a result of reliance upon such information.
+#
+# The information contained herein is intended to be used without
+# modification by the recipient or user of this document. MEF is not
+# responsible or liable for any modifications to this document made by any
+# other party.
+#
+# The receipt or any use of this document or its contents
+# does not in any way create, by implication or otherwise:
+#
+# a) any express or implied license or right to or under any patent,
+# copyright, trademark or trade secret rights held or claimed by any MEF
+# member which are or may be associated with the ideas, techniques,
+# concepts or expressions contained herein; nor
+#
+# b) any warranty or representation that any MEF members will announce
+# any product(s) and/or service(s) related thereto, or if such
+# announcements are made, that such announced product(s) and/or service(s)
+# embody any or all of the ideas, technologies, or concepts contained
+# herein; nor
+#
+# c) any form of relationship between any MEF member and the recipient
+# or user of this document.
+#
+# Implementation or use of specific MEF standards, specifications, or
+# recommendations will be voluntary, and no Member shall be obliged to
+# implement them by virtue of participation in MEF Forum. MEF is a
+# non-profit international organization to enable the development and
+# worldwide adoption of agile, assured and orchestrated network services.
+# MEF does not, expressly or otherwise, endorse or promote any specific
+# products or services.
+# ---------------------
+#
+definitions:
+  AmplificationMode:
+    description: |
+      Enumeration representing the amplification mode used in satellite communication.
+    type: string
+    enum:
+    - FGM
+    - ALC
+  FrequencyBand:
+    description: |
+      Enumeration representing the frequency band used in satellite communication.
+    type: string
+    enum:
+    - P
+    - L
+    - S
+    - C
+    - X
+    - Ka
+    - Mil_Ka
+    - Ku
+  Frequency:
+    description: >-
+      This class is used to describe frequencys expressed as a 2-tuple, (value,
+      units). The units from from Hz to GHz.
+    type: object
+    properties:
+      frequencyValue:
+        description: >-
+          The value of the frequency. For example, if the frequency is 20 MHz, this
+          element is 20.
+        type: number
+        minimum: 0
+      frequencyUnits:
+        description: >-
+          The unit of measure in the frequency. For example, if an frequency is
+          20 MHz, this element is MHZ.
+        $ref: '#/definitions/FrequencyUnits'
+  FrequencyUnits:
+    description: Enum listing the units of measure for a frequency
+    type: string
+    enum:
+      - 'HZ'
+      - 'KHZ'
+      - 'MHZ'
+      - 'GHZ'
+  FrequencyRange:
+    description: |
+      Data type representing a frequency range.
+    properties:
+      startFrequency:
+        description: |
+          The start frequency of this range.
+        $ref: '#/definitions/Frequency'
+      centerFrequency:
+        description: |
+          The center frequency of this range.
+        $ref: '#/definitions/Frequency'
+      endFrequency:
+        description: |
+          The end frequency of this range.
+        $ref: '#/definitions/Frequency'
+      width:
+        description: |
+          The total width of this range.
+        $ref: '#/definitions/Frequency'
+  SatellitePhysicalLink:
+    description: |
+      Data type representing UNI Access Link Trunk List of Satellite Links.
+    properties:
+      identifier:
+        description: |
+          Identifier of the Physical Link
+        $ref: '#/definitions/IdentifierString'
+      frequencyBand:
+        description: |
+          The frequency band used for this link.
+        $ref: '#/definitions/FrequencyBand'
+      waveform:
+        description: |
+          The waveform used for this link.
+        $ref: '#/definitions/Waveform'
+      amplificationMode:
+        description: |
+          The amplification mode used for this link.
+        $ref: '#/definitions/AmplificationMode'
+      allocatedFrequency:
+        description: |
+          The allocated frequencys for this link.
+        $ref: '#/definitions/FrequencyRange'
+      beamIdentifier:
+        description: |
+          Identifier of the beam this link is connected to
+        $ref: '#/definitions/IdentifierString'
+  IdentifierString:
+    description: Identifier String - max 53 alpha-numerical characters
+    type: string
+    maxLength: 53
+    pattern: "[ -\x7F]+"
+  Waveform:
+    description: |
+      Enumeration representing the waveform used in satellite communication.
+    type: string
+    enum:
+    - S2
+    - RCS2
+    - FDMA
+    - 4606_ED3
+    - 4606_ED4

@@ -1,0 +1,38 @@
+replicaCount: 1
+
+imagePullSecrets: []
+image:
+  repository: localhost/mission-management-frontend
+  pullPolicy: IfNotPresent
+  tag:
+
+podAnnotations: {}
+
+podSecurityContext: {}
+securityContext: {}
+
+ingress:
+  host: ""
+  path: "/"
+
+resources:
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+nodeSelector: {}
+affinity: {}
+
+urls:
+  public:
+    mission: "/psi-api/missionManagement/v2/mission"
+    missionTemplate: "/psi-api/missionManagement/v2/missionTemplate"
+    party: "/api/organization"
+    team: "/api/teams"
+    serviceTemplate: "/api/serviceTemplates"
+  internal:
+    mission: "oda-mission-management-backend:7000"
+    missionTemplate: "oda-mission-template-management-backend:7000"

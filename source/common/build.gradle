@@ -1,0 +1,172 @@
+plugins {
+    id 'psi.java-library-conventions'
+}
+
+description = 'PSI Commons'
+
+dependencies {
+    implementation('org.springframework.data:spring-data-commons')
+    implementation('com.fasterxml.jackson.dataformat:jackson-dataformat-yaml')
+    implementation('com.fasterxml.jackson.datatype:jackson-datatype-jsr310')
+    implementation('org.springframework.boot:spring-boot-starter-aop')
+    implementation('org.springframework.boot:spring-boot-starter-validation')
+    implementation('org.springframework.boot:spring-boot-starter-data-mongodb')
+    implementation('org.springframework.boot:spring-boot-starter-web')
+    implementation('org.springframework.boot:spring-boot-starter-webflux')
+    implementation('com.fasterxml.jackson.core:jackson-databind')
+    implementation('org.springdoc:springdoc-openapi-ui')
+    implementation('org.openapitools:jackson-databind-nullable')
+    compileOnly('com.google.code.findbugs:jsr305')
+    compileOnly("com.github.lookfirst:sardine:5.10")
+    compileOnly("io.minio:minio:8.5.11")
+    testImplementation("org.mockito:mockito-junit-jupiter")
+    testImplementation("com.github.lookfirst:sardine:5.10")
+    testImplementation("io.minio:minio:8.5.11")
+}
+
+sonarqube {
+    properties {
+        property "sonar.exclusions", "src/main/java/com/cgi/space/psi/common/model/**/*.java"
+        property 'sonar.coverage.exclusions', "src/main/java/com/cgi/space/psi/common/model/**/*.java"
+    }
+}
+
+task streamlineOutput(type: Delete) {
+  delete files(fileTree(dir:'src/main/java', includes:['**/model/**/*AllOf.java']))
+}
+
+tasks.register("buildCommonModelSpecification", com.cgi.space.psi.tasks.TransformOASTask) {
+  group = "PSID generate Open API MODEL as Java files"
+  input = rootProject.file('doc/PSI/PSI-ICD/open-apis/oas/PSID620-Product_Catalog_Management-v5.0.0.oas.json')
+  output = file('build/CombinedSchema.oas.json')
+
+  removePaths("(.*)")
+  pruneTags()
+  pruneRequestBodies()
+  pruneResponses()
+  pruneExamples()
+
+  importSchema("(.*)", rootProject.file("doc/PSI/PSI-ICD/open-apis/oas/PSID001-CustomerInquiry.oas.json"))
+  importSchema("(.*)", rootProject.file("doc/PSI/PSI-ICD/open-apis/oas/PSID002-MissionManagement.oas.json"))
+  importSchema("(.*)", rootProject.file("doc/PSI/PSI-ICD/open-apis/oas/PSID143-PerformanceMonitoring-v2.0.0-RC.oas.json"))
+  importSchema("(.*)", rootProject.file("doc/PSI/PSI-ICD/open-apis/oas/PSID621-Trouble_Ticket-v5.0.0.oas.json"))
+  importSchema("(.*)", rootProject.file("doc/PSI/PSI-ICD/open-apis/oas/PSID622-ProductOrdering-v5.0.0.oas.json"))
+  importSchema("(.*)", rootProject.file("doc/PSI/PSI-ICD/open-apis/oas/PSID632-Party_Management-v5.0.0.oas.json"))
+  importSchema("(.*)", rootProject.file("doc/PSI/PSI-ICD/open-apis/oas/PSID633-Service_Catalog_Management-v5.0.0.oas.json"))
+  importSchema("(.*)", rootProject.file("doc/PSI/PSI-ICD/open-apis/oas/PSID634-Resource_Catalog_Management-v5.0.0.oas.json"))
+  importSchema("(.*)", rootProject.file("doc/PSI/PSI-ICD/open-apis/oas/PSID637-ProductInventory-v5.0.0.oas.json"))
+  importSchema("(.*)", rootProject.file("doc/PSI/PSI-ICD/open-apis/oas/PSID638-Service_Inventory_Management-v5.0.0.oas.json"))
+  importSchema("(.*)", rootProject.file("doc/PSI/PSI-ICD/open-apis/oas/PSID639-Resource_Inventory_Management-v5.0.0.oas.json"))
+  importSchema("(.*)", rootProject.file("doc/PSI/PSI-ICD/open-apis/oas/PSID642-Alarm-v5.0.1.oas.json"))
+  importSchema("(.*)", rootProject.file("doc/PSI/PSI-ICD/open-apis/oas/PSID657-ServiceQualityManagement-v4.0.0.oas.json"))
+  importSchema("(.*)", rootProject.file("doc/PSI/PSI-ICD/open-apis/oas/PSID667-Document-v5.0.0.oas.json"))
+  importSchema("(.*)", rootProject.file("doc/PSI/PSI-ICD/open-apis/oas/PSID678-CustomerBill-v5.0.0.oas.json"))
+  importSchema("(.*)", rootProject.file("doc/PSI/PSI-ICD/open-apis/oas/PSID687-Stock-v4.1.0.oas.json"))
+  importSchema("(.*)", rootProject.file("doc/PSI/PSI-ICD/open-apis/oas/PSID688-Event-v4.0.0.oas.json"))
+
+  // flatten references in CustomerInquiry API
+  overwriteProperty("CustomerInquiry(.*)", "customerResource", '''
+    {
+      "type": "array",
+      "description": "List of ResourceSpecifications the customer already posseses and wants to re-use.",
+      "items": {
+        "$ref": "#/components/schemas/ResourceSpecification"
+      }
+    }
+  ''')
+  overwriteProperty("InquiryResult", "productSpecification", '''
+    {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/ProductSpecification"
+      }
+    }
+  ''')
+  overwriteProperty("InquiryResult", "product", '''
+    {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Product"
+      }
+    }
+  ''')
+  overwriteProperty("InquiryResult", "productOffering", '''
+    {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/ProductOffering"
+      }
+    }
+  ''')
+  overwriteProperty("InquiredProductRelationship", "productOfferingRef", '''
+    {
+      "$ref": "#/components/schemas/ProductOfferingRef"
+    }
+  ''')
+  overwriteProperty("InquiredProductRelationship", "productSpecificationRef", '''
+    {
+      "$ref": "#/components/schemas/ProductSpecificationRef"
+    }
+  ''')
+  overwriteProperty("InquiredProductRelationship", "productRef", '''
+    {
+      "$ref": "#/components/schemas/ProductRef"
+    }
+  ''')
+  overwriteProperty("RelationshipCharacteristic", "relationshipCharacteristicValue", '''
+    {
+      "type": "array",
+      "description": "A RelationshipCharacteristicValue object is used to define a set of attributes.",
+      "items": {
+        "$ref": "#/components/schemas/CharacteristicValueSpecification"
+      }
+    }
+  ''')
+}
+
+tasks.register("generateMapStructFactory", com.cgi.space.psi.tasks.GenerateMapStructFactoryTask.class) {
+  group = "Build"
+  modelFiles = project.fileTree("src/main/java/com/cgi/space/psi/common/model/")
+  outputFile = rootProject.file("source/psid-mockup/src/main/java/com/cgi/space/psi/pss/stub/mapper/TMFactory.java")
+
+  shouldRunAfter "streamlineOutput"
+}
+
+tasks.register("psid-genModel", org.openapitools.generator.gradle.plugin.tasks.GenerateTask.class) {
+  group = "PSID generate Open API MODEL as Java files"
+  dependsOn("buildCommonModelSpecification")
+  generatorName = "spring"
+  inputSpec = "$projectDir/build/CombinedSchema.oas.json"
+  outputDir = "$projectDir"
+  apiPackage = "com.cgi.space.psi.pss.stub.api"
+  modelPackage = "com.cgi.space.psi.common.model"
+  configOptions = [
+      dateLibrary: "java8",
+      useBeanValidation: "true",
+      interfaceOnly: "true",
+      useOptional: "true",
+      useLombok: "true",
+      openApiNullable: "false",
+      hideGenerationTimestamp: "true",
+      library: "spring-cloud",
+      additionalModelTypeAnnotations: "@com.fasterxml.jackson.annotation.JsonFilter(com.cgi.space.psi.common.config.DynamicJacksonFilterProvider.NAME)",
+  ]
+
+  globalProperties = [
+    apis: "false", // false == none api-generation here in common
+    /* for manual interface generation -> see build.gradle inside mockup */
+    models: "", // "" --> (empty String) == only model generation
+    supportingFiles: "false",
+    verbose: "true"
+  ]
+
+  typeMappings = [
+    "string+duration": "Period"
+  ]
+  importMappings = [
+    "Period": "java.time.Period"
+  ]
+
+  finalizedBy streamlineOutput
+  finalizedBy "generateMapStructFactory"
+}

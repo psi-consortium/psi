@@ -1,0 +1,39 @@
+database:
+  Scheme: "mongodb"
+  Host: "localhost"
+  Port: "27017"
+  User: "your user"
+  Password: "your password"
+  Name: "MissionManagement"
+  authSource: "admin"
+  collection: "Missions"
+
+app:
+  port: "7000"
+  pathPrefix: "mission"
+  name: "PSI-MissionApi"
+  timeout: 30
+  cors:
+    allowOrigins: ""
+    allowHeaders: ""
+  releaseMode: true
+  demoData: true
+  extCorrelationKeys:
+    - RequestId
+    - ReqId
+    - CorrelationId
+  openApi:
+    validation: true
+    includeResponseValidation: false
+    definition: "./internal/api/PSID002-MissionManagement_v2.oas.json"
+  security:
+    # openIdConnect:
+    #   publicKeyEndpoint: "https://your-authority"
+    #   claims:
+    #     partyId: "customer_id"
+    #     userId: "sub"
+    #     name: "name"
+
+logging:
+  level: "INFO"
+  handler: "JSON"

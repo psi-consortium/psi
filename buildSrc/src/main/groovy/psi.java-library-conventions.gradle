@@ -1,0 +1,8 @@
+plugins {
+    id 'psi.java-common-conventions'
+    id 'java-library'
+}
+
+dependencies {
+    testImplementation 'org.hamcrest:hamcrest'
+}

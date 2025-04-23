@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+@theme {
+    --color-primary-500: oklch(30.55% 0.1004 266.7);
+    --color-primary-600: oklch(21.94% 0.103 263.72);
+    --color-secondary: oklch(51.52% 0.0999 268.97);
+    --color-dark-blue: oklch(0.24 0.0456 268.37);
+}
+
+body {
+    color: var(--color-primary-600);
+}
+
+h1 {
+    font-size: 1.5rem;
+    line-height: calc(2 / 1.5);
+    font-weight: 700;
+    color: var(--color-primary-600);
+}
+
+h2 {
+    font-size: 1.5rem;
+    line-height: calc(2 / 1.5);
+    color: var(--color-primary-600);
+}
+
+h3 {
+    font-size: 1.25rem;
+    line-height: calc(2 / 1.25);
+    color: var(--color-primary-600);
+}

@@ -1,0 +1,100 @@
+plugins {
+  id 'psi.java-application-conventions'
+}
+
+description = 'PSID-Mockup'
+
+dependencies {
+  implementation project(':source:common')
+  implementation('org.springframework.boot:spring-boot-starter-web')
+  implementation('org.springframework.boot:spring-boot-starter-hateoas')
+  implementation('org.springframework.boot:spring-boot-starter-data-mongodb')
+  implementation('org.springframework.boot:spring-boot-starter-webflux')
+  implementation('org.springdoc:springdoc-openapi-ui')
+  testRuntimeOnly('de.flapdoodle.embed:de.flapdoodle.embed.mongo')
+  testImplementation('com.squareup.okhttp3:mockwebserver')
+}
+
+sonarqube {
+  properties {
+    property 'sonar.exclusions', "src/main/java/com/cgi/space/psi/pss/stub/api/*.java"
+    property 'sonar.coverage.exclusions', "src/main/java/com/cgi/space/psi/pss/stub/api/*.java,src/main/java/com/cgi/space/psi/pss/stub/filter/*.java,src/main/java/com/cgi/space/psi/pss/stub/mapper/TMFactory.java"
+  }
+}
+
+test {
+	testLogging {
+		events "PASSED", "SKIPPED", "FAILED"
+	}
+}
+
+def createApiName(swaggerName) {
+    def apiName = swaggerName.replace(".oas.json", "").replace(".", "").capitalize()
+    def namePattern = /(TMF\d{3})-(\w+)-(v\d+[-\w+]?)-PSID/
+    try {
+        def (_, tmfNumber, name, version) = (apiName =~ namePattern)[0]
+        return name
+    } catch (IndexOutOfBoundsException e) {
+        logger.info (swaggerName + " does not match the pattern. The api name will be: " + apiName)
+    }
+    return apiName
+}
+
+
+def swaggerList = []
+def openApiSpecsDir = file("$rootDir/doc/PSI/PSI-ICD/open-apis/oas")
+openApiSpecsDir.eachFileRecurse(groovy.io.FileType.FILES) { file ->
+    if (file.isFile() && file.name.endsWith(".oas.json")) {
+        swaggerList.add(file)
+    }
+}
+
+tasks.register('psid-openApi-generate') {
+  group = "PSID-Mockup generate Open API API as Java files"
+}
+
+def swaggerTaskNames = []
+swaggerList.each { swaggerItem ->
+
+    // The current api interfaces have moved away from a generated version!
+    // As the psid mockup interfaces are customised/extended with filter,
+    // in addition with renaming & splitting of some apis like Listener vs. Topic,Document + Attachment
+    // !! this gradle task must be operated only with caution and only manual !!
+
+    def apiName = createApiName(swaggerItem.name)
+    // to run allInOne: `gradle task | grep -0 psid-common-openApi-api-generate | sort -hr | xargs -p gradle`
+    def taskName = "psid-openApi-generate-" + apiName
+    swaggerTaskNames.add(taskName)
+    tasks.register(taskName, org.openapitools.generator.gradle.plugin.tasks.GenerateTask.class, {
+        group = "PSID-Mockup generate Open API API as Java files"
+        generatorName = "spring" // https://openapi-generator.tech/docs/generators/spring
+        inputSpec = swaggerItem.path.toString()
+        outputDir = "$projectDir"
+        apiPackage = "com.cgi.space.psi.pss.stub.api"
+        modelPackage = "com.cgi.space.psi.common.model"
+        configOptions = [
+            dateLibrary: "java8",
+            useBeanValidation: "true",
+            interfaceOnly: "true",
+            useOptional: "true",
+            useLombok: "true",
+            openApiNullable: "false",
+            hideGenerationTimestamp: "true",
+            //useRequestMappingOnInterface: "false",
+            legacyDiscriminatorBehavior:"false",
+            skipDefaultInterface: "true",
+            library: "spring-cloud",
+            additionalModelTypeAnnotations: "@com.fasterxml.jackson.annotation.JsonFilter(com.cgi.space.psi.common.config.DynamicJacksonFilterProvider.NAME)",
+            singleContentTypes: "false" // --> https://github.com/OpenAPITools/openapi-generator/issues/6708 // https://github.com/OpenAPITools/openapi-generator/issues/144
+        ]
+
+        globalProperties = [
+          apis: "", // "" == true == only api-generation
+          models: "false", // "false" == no model generation
+          supportingFiles: "false",
+          verbose: "true"
+        ]
+    })
+    tasks.getByName("psid-openApi-generate").dependsOn(taskName)
+
+}

@@ -1,0 +1,17 @@
+spring:
+  data:
+    mongodb:
+      port: 27017
+      host: localhost
+      username: admin
+      password: admin
+      authentication-database: admin
+      repositories.enabled: true
+      auto-index-creation: true
+
+psi:
+  demo-data:
+    enabled: true
+  storage:
+      type: local
+      path: build/storage

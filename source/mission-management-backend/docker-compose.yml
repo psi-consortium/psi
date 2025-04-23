@@ -1,0 +1,67 @@
+version: '3.8'
+
+services:
+  web:
+    image: 'docker.io/library/mongo-express'
+    container_name: mongo-web
+    restart: always
+    ports:
+      - '8888:8081'
+    environment:
+      ME_CONFIG_BASICAUTH_USERNAME: admin
+      ME_CONFIG_BASICAUTH_PASSWORD: admin
+      ME_CONFIG_MONGODB_ADMINUSERNAME: admin
+      ME_CONFIG_MONGODB_ADMINPASSWORD: admin
+      ME_CONFIG_MONGODB_SERVER: mongo-db
+    depends_on:
+      - db
+    links:
+      - db
+  db:
+    image: 'docker.io/library/mongo:8.0.3'
+    container_name: 'mongo-db'
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin
+    ports:
+      - '27017:27017'
+    volumes:
+      - database-data:/data/db
+
+  mis:
+    image: mission-management-backend:latest
+    container_name: mission-backend
+    build: .
+    depends_on:
+      - db
+    env_file:
+      - "./.env"
+    environment:
+      DB_HOST: db
+      APP_OPENAPI_DEFINITION: /app/PSID002-MissionManagement_v2.oas.json
+    ports:
+      - 7000:7000
+    volumes:
+      - /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem:/etc/ssl/certs/cert.pem:ro
+
+  tmpl:
+    image: mission-management-backend:latest
+    container_name: template-backend
+    depends_on:
+      - mis
+    env_file:
+      - "./.env"
+    environment:
+      DB_HOST: db
+      APP_OPENAPI_DEFINITION: /app/PSID002-MissionManagement_v2.oas.json
+      APP_PATHPREFIX: "missionTemplate"
+      DB_COLLECTION: "MissionTemplates"
+    ports:
+      - 7001:7000
+    volumes:
+      - /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem:/etc/ssl/certs/cert.pem:ro
+
+
+volumes:
+  database-data: {}

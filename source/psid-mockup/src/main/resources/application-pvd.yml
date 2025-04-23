@@ -1,0 +1,6 @@
+server.port: 8002
+
+spring:
+  data:
+    mongodb:
+      database: providerdb

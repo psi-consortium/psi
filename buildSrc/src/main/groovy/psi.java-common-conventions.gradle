@@ -1,0 +1,77 @@
+plugins {
+  id 'java'
+  id 'eclipse'
+  id 'jacoco'
+  id 'com.diffplug.eclipse.apt'
+  id 'org.springframework.boot' apply false
+  id 'io.spring.dependency-management'
+  id 'io.freefair.lombok'
+}
+
+dependencyManagement {
+  dependencies {
+    dependency('org.springdoc:springdoc-openapi-ui:1.6.4')
+    dependency('com.google.code.findbugs:jsr305:3.0.2')
+    dependency('com.fasterxml.jackson:jackson-bom:2.17.1')
+    dependency('com.fasterxml.jackson.core:jackson-core:2.17.1')
+    dependency('com.fasterxml.jackson.core:jackson-annotations:2.17.1')
+    dependency('com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.17.1')
+    dependency('com.fasterxml.jackson.core:jackson-databind:2.17.1')
+    dependency('com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.17.1')
+    dependency('org.openapitools:jackson-databind-nullable:0.2.6')
+    dependencySet(group:'org.mapstruct', version: '1.6.3') {
+      entry 'mapstruct'
+      entry 'mapstruct-processor'
+    }
+    dependency('org.springdoc:springdoc-openapi-data-rest:1.6.8')
+    dependency('org.springdoc:springdoc-openapi-webmvc-core:1.6.8')
+    dependency('com.squareup.okhttp3:mockwebserver:4.10.0')
+  }
+}
+
+dependencies {
+  testImplementation('org.springframework:spring-test')
+}
+
+bootJar.enabled = false
+jar.enabled = true
+
+repositories {
+  mavenCentral()
+  gradlePluginPortal()
+}
+
+configurations {
+  compileOnly {
+    extendsFrom annotationProcessor
+  }
+}
+
+testing {
+    suites {
+        test {
+            useJUnitJupiter()
+        }
+    }
+}
+
+jacocoTestReport {
+  reports {
+    csv.required = true
+    html.required = true
+    xml.required = true
+  }
+}
+
+test {
+  useJUnitPlatform()
+  finalizedBy 'jacocoTestReport'
+}
+
+eclipseJdtApt {
+  jdtApt.genSrcDir = file('build/generated/sources/annotationProcessor/java/main')
+  jdtApt.genTestSrcDir = file('build/generated/sources/annotationProcessor/java/test')
+}
+tasks.named("eclipse") {
+  dependsOn assemble
+}

@@ -1,0 +1,16 @@
+spring:
+  mongodb:
+    embedded:
+      version: 5.0.6
+
+psi:
+  provider-stub:
+    url: http://localhost:8002/psi-api/
+  storage:
+    type: local
+    path: build/test-storage
+
+logging:
+  level:
+    org.springframework.boot.autoconfigure.mongo.embedded: off
+    org.mongodb: off

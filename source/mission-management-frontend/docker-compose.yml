@@ -1,0 +1,94 @@
+version: '3.8'
+
+services:
+
+  frontend:
+    image: mission-management-frontend:latest
+    build: .
+    container_name: mission-frontend
+    depends_on:
+      - mis
+      - tmpl
+    environment:
+      PUBLIC_BASE_URL: "http://localhost:3000"
+      MISSION_MANAGEMENT_URL: "http://mission-backend:7000/mission"
+      MISSIONTEMPLATE_MANAGEMENT_URL: "http://template-backend:7000/missionTemplate"
+      PUBLIC_MISSION_MANAGEMENT_URL: "http://localhost:7000/mission"
+      PUBLIC_MISSIONTEMPLATE_MANAGEMENT_URL: "http://localhost:7001/missionTemplate"
+      PUBLIC_PARTY_MANAGEMENT_URL: "http://localhost:3000/api/organization"
+      PUBLIC_TEAM_URL: "http://localhost:3000/api/teams"
+      PUBLIC_SERVICETEMPLATE_URL: "http://localhost:3000/api/serviceTemplates"
+    ports:
+      - 3000:3000
+    volumes:
+      - /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem:/etc/ssl/certs/cert.pem:ro
+
+  web:
+    image: 'docker.io/library/mongo-express'
+    container_name: mongo-web
+    restart: always
+    ports:
+      - '8888:8081'
+    environment:
+      ME_CONFIG_BASICAUTH_USERNAME: admin
+      ME_CONFIG_BASICAUTH_PASSWORD: admin
+      ME_CONFIG_MONGODB_ADMINUSERNAME: admin
+      ME_CONFIG_MONGODB_ADMINPASSWORD: admin
+      ME_CONFIG_MONGODB_SERVER: mongo-db
+    depends_on:
+      - db
+    links:
+      - db
+  db:
+    image: 'docker.io/library/mongo:8.0.3'
+    container_name: 'mongo-db'
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin
+    ports:
+      - '27017:27017'
+    volumes:
+      - database-data:/data/db
+
+  mis:
+    image: mission-management-backend:latest
+    container_name: mission-backend
+    build: .
+    depends_on:
+      - db
+    env_file:
+      - "./.env"
+    environment:
+      DB_HOST: db
+      APP_OPENAPI_VALIDATION: true
+      APP_OPENAPI_DEFINITION: /app/PSID002-MissionManagement_v2.oas.json
+      APP_CORS_ALLOWORIGINS: "*"
+      APP_CORS_ALLOWHEADERS: "*"
+    ports:
+      - 7000:7000
+    volumes:
+      - /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem:/etc/ssl/certs/cert.pem:ro
+
+  tmpl:
+    image: mission-management-backend:latest
+    container_name: template-backend
+    depends_on:
+      - mis
+    env_file:
+      - "./.env"
+    environment:
+      DB_HOST: db
+      APP_PATHPREFIX: "missionTemplate"
+      DB_COLLECTION: "MissionTemplates"
+      APP_OPENAPI_VALIDATION: true
+      APP_OPENAPI_DEFINITION: /app/PSID002-MissionManagement_v2.oas.json
+      APP_CORS_ALLOWORIGINS: "*"
+      APP_CORS_ALLOWHEADERS: "*"
+    ports:
+      - 7001:7000
+    volumes:
+      - /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem:/etc/ssl/certs/cert.pem:ro
+
+volumes:
+  database-data: {}

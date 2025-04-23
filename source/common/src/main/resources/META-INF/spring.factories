@@ -1,0 +1,8 @@
+# Auto Configure
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.cgi.space.psi.common.config.LocalStorageServiceAutoConfiguration,\
+com.cgi.space.psi.common.config.MinioStorageServiceAutoConfiguration,\
+com.cgi.space.psi.common.config.PSIMongoDBAutoConfiguration,\
+com.cgi.space.psi.common.config.PSIJacksonAutoConfiguration,\
+com.cgi.space.psi.common.config.OperationLoggerAutoConfiguration,\
+com.cgi.space.psi.common.config.WebDavStorageServiceAutoConfiguration

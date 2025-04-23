@@ -1,0 +1,75 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "mission-management-frontend.fullname" . }}
+  labels:
+    {{- include "mission-management-frontend.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "mission-management-frontend.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "mission-management-frontend.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      volumes:
+        - name: config-volume
+          configMap:
+            name: {{ include "mission-management-frontend.fullname" . }}-config
+      containers:
+        - name: mission-management-frontend
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: PUBLIC_BASE_URL
+              value: {{ printf "http://%s/" .Values.ingress.host | quote }}
+            - name: PUBLIC_MISSION_MANAGEMENT_URL
+              value: {{ printf "http://%s%s" .Values.ingress.host .Values.urls.public.mission | quote }}
+            - name: PUBLIC_MISSIONTEMPLATE_MANAGEMENT_URL
+              value: {{ printf "http://%s%s" .Values.ingress.host .Values.urls.public.missionTemplate | quote }}
+            - name: PUBLIC_PARTY_MANAGEMENT_URL
+              value: {{ printf "http://%s%s" .Values.ingress.host .Values.urls.public.party | quote }}
+            - name: PUBLIC_TEAM_URL
+              value: {{ printf "http://%s%s" .Values.ingress.host .Values.urls.public.team | quote }}
+            - name: PUBLIC_SERVICETEMPLATE_URL
+              value: {{ printf "http://%s%s" .Values.ingress.host .Values.urls.public.serviceTemplate | quote }}
+            - name: MISSION_MANAGEMENT_URL
+              value: {{ printf "http://%s" .Values.urls.internal.mission | quote }}
+            - name: MISSIONTEMPLATE_MANAGEMENT_URL
+              value: {{ printf "http://%s" .Values.urls.internal.missionTemplate | quote }}
+          ports:
+            - name: http
+              containerPort: 3000
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

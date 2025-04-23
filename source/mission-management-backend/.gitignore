@@ -1,0 +1,11 @@
+# env file
+.env
+
+# test/coverage
+**/cov*.*
+
+# openapi examples
+petstore3.json
+
+# build artifacts
+/mission-management

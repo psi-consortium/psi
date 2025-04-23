@@ -1,0 +1,4 @@
+rootProject.name = 'PSI'
+
+include('source:common')
+include('source:psid-mockup')

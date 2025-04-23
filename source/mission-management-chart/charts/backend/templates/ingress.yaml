@@ -1,0 +1,37 @@
+{{- if .Values.ingress.enabled -}}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "mission-management.fullname" . }}
+  labels:
+    {{- include "mission-management.labels" . | nindent 4 }}
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  {{- if .Values.ingress.tls }}
+  tls:
+    {{- range .Values.ingress.tls }}
+    - hosts:
+        - {{ .Values.ingress.host | quote }}
+      secretName: {{ .secretName }}
+    {{- end }}
+  {{- end }}
+  rules:
+    - host: {{ .Values.ingress.host | quote }}
+      http:
+        paths:
+          - path: {{ printf "%s/mission(/|$)(.*)" .Values.ingress.path }}
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: {{ include "mission-management.fullname" . }}
+                port:
+                  number: 7000
+          - path: {{ printf "%s/missionTemplate(/|$)(.*)" .Values.ingress.path }}
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: {{ include "mission-template-management.fullname" . }}
+                port:
+                  number: 7000
+{{- end }}

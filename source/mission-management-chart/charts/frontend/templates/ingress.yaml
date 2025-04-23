@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "mission-management-frontend.fullname" . }}
+  labels:
+    {{- include "mission-management-frontend.labels" . | nindent 4 }}
+spec:
+  {{- if .Values.ingress.tls }}
+  tls:
+    {{- range .Values.ingress.tls }}
+    - hosts:
+        - {{ .Values.ingress.host | quote }}
+      secretName: {{ .secretName }}
+    {{- end }}
+  {{- end }}
+  rules:
+    - host: {{ if not (regexMatch "(?:[0-9]{1,3}\\.){3}[0-9]{1,3}$" .Values.ingress.host) }}{{ .Values.ingress.host | quote }}{{ end }}
+      http:
+        paths:
+          - path: {{ .Values.ingress.path | quote }}
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: {{ include "mission-management-frontend.fullname" . }}
+                port:
+                  number: 3000

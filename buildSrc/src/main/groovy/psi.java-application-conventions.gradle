@@ -1,0 +1,19 @@
+plugins {
+  id 'psi.java-common-conventions'
+}
+
+bootRun.args '--debug', '--spring.profiles.active=pss'
+bootJar.enabled = true
+jar.enabled = false
+
+group = 'com.cgi.space.psi'
+
+dependencies {
+  annotationProcessor 'org.mapstruct:mapstruct-processor'
+  implementation 'org.springframework.boot:spring-boot-starter'
+  implementation 'org.mapstruct:mapstruct'
+  developmentOnly 'org.springframework.boot:spring-boot-devtools'
+  testImplementation 'org.springframework.boot:spring-boot-starter-test'
+  compileOnly "org.springdoc:springdoc-openapi-data-rest"
+  runtimeOnly 'org.springdoc:springdoc-openapi-webmvc-core'
+}

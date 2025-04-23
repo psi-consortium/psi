@@ -1,0 +1,24 @@
+with-expecter: True
+resolve-type-alias: False
+issue-845-fix: True
+packages:
+    github.com/psi-consortium/oda/mission-management/mission:
+        # place your package-specific config here
+        config:
+          # dir: "mocks/mission"
+          # outpkg: "mockmission"
+          dir: "{{.InterfaceDir}}/mocks"
+          outpkg: "mockmission"
+        interfaces:
+            # select the interfaces you want mocked
+            MissionRepository:
+                # Modify package-level config for this specific interface (if applicable)
+                config:
+                  # dir: "{{.InterfaceDir}}/mocks"
+                  # outpkg: "{{.PackageName}}"
+                  # outpkg: "mockmission"
+            MissionHandler:
+                config:
+                  # dir: "mocks"
+            MissionService:
+                config:
