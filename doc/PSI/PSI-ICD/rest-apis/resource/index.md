@@ -5,7 +5,7 @@
 
 # resource (/resourceInventory)
 
-Resource Inventory API
+Operations for Resource Resource
 
 @include [resource.get.md](resource.get.md)
 @include [resource.post.md](resource.post.md)

@@ -5,34 +5,36 @@
 
 # LogicalResource
 
-Logic resource is a type of resource that describes the common set of attributes shared by all concrete logical resources (e.g.
-TPE, MSISDN, IP Addresses) in the inventory.
-
 | Field | Type | Format | Required |
 | ------- | ------- | ------- | --- |
-| id | string | N/A | Yes |
-| href | string | uri | Yes |
+| id | string | N/A | No |
+| href | string | uri | No |
 | name | string | N/A | No |
 | description | string | N/A | No |
-| value | string | N/A | No |
 | category | string | N/A | No |
 | endOperatingDate | string | date-time | No |
-| resourceVersion | string | N/A | No |
-| startOperatingDate | string | date-time | No |
-| activationFeature | array | Feature | No |
 | administrativeState | ResourceAdministrativeStateType | N/A | No |
-| attachment | array | AttachmentOrDocumentRef | No |
-| note | array | Note | No |
 | operationalState | ResourceOperationalStateType | N/A | No |
-| place | RelatedPlaceRefOrValue | N/A | No |
-| relatedParty | array | RelatedParty | No |
-| resourceCharacteristic | array | Characteristic | No |
-| resourceRelationship | array | ResourceRelationship | No |
-| resourceSpecification | ResourceSpecificationRef | N/A | No |
 | resourceStatus | ResourceStatusType | N/A | No |
 | usageState | ResourceUsageStateType | N/A | No |
+| validFor | TimePeriod | N/A | No |
+| note | array | Note | No |
+| resourceOrderItem | array | RelatedResourceOrderItem | No |
+| place | array | RelatedPlaceRef | No |
+| relatedParty | array | RelatedPartyRefOrPartyRoleRef | No |
+| supportingResource | array | ResourceRefOrValue | No |
+| resourceRelationship | array | ResourceRelationship | No |
+| resourceCharacteristic | array | Characteristic | No |
+| attachment | array | AttachmentOrDocumentRef | No |
+| resourceSpecification | ResourceSpecificationRef | N/A | No |
+| startOperatingDate | string | date-time | No |
+| resourceVersion | string | N/A | No |
+| activationFeature | array | Feature | No |
+| intent | IntentRef | N/A | No |
+| externalIdentifier | array | ExternalIdentifier | No |
+| value | string | N/A | No |
 | @baseType | string | N/A | No |
-| @schemaLocation | string | uri | No |
+| @schemaLocation | string | N/A | No |
 | @type | string | "LogicalResource" | Yes |
 
 Table: Fields of LogicalResource. {#tbl:LogicalResource.md:LogicalResource}

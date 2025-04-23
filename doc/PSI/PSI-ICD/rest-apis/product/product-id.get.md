@@ -5,7 +5,7 @@
 
 # GET /product/{id}
 
-**Absolute Path:** /productInventory/v1/product/{id}
+**Absolute Path:** /productInventory/v2/product/{id}
 
 **TOD Reference:** TOD-05-03-04-View_Product
 
@@ -15,8 +15,8 @@
 
 | Name | Type | Required | Description |
 | ------ | ------ | --- | ------------ |
-| id | string | Yes | Identifier of the Product |
-| fields | string | No | Comma-separated properties to provide in response |
+| id | string | Yes | Identifier of the Resource |
+| fields | string | No | Comma-separated properties to be provided in response |
 
 Table: Parameters of GET product/{id}. {#tbl:product-id.get.md:parameters}
 
@@ -30,8 +30,9 @@ Table: Parameters of GET product/{id}. {#tbl:product-id.get.md:parameters}
 | 403 | Forbidden | Error |
 | 404 | Not Found | Error |
 | 405 | Method Not allowed | Error |
-| 409 | Conflict | Error |
 | 500 | Internal Server Error | Error |
+| 501 | Not Implemented | Error |
+| 503 | Service Unavailable | Error |
 
 Table: Responses of GET product/{id}. {#tbl:product-id.get.md:responses}
 

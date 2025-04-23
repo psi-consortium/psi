@@ -113,7 +113,7 @@ The user can still go back to make any changes or trigger the matchmaking proces
 
 Table: Parameters of all Distributed Matchmaking Views - User. {#tbl:parameters-distributed-matchmaking-views-user}
 
-The basis for the wireframes is the UCSM study (a CGI IP developed together with ESA).
+The basis for the wireframes is the UCSM study.
 
 ![User Defined Mission](img/User/Distributed-Matchmaking/MissionSummary.png){#fig:mission-summary}
 

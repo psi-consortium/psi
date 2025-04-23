@@ -16,6 +16,7 @@ Performance Job Complex Query entity is used to perform  searches on Performance
 | granularity | Interval | N/A | No |
 | jobPriority | integer | N/A | No |
 | jobType | JobType | N/A | No |
+| performanceProfile | PerformanceProfileValue | N/A | No |
 | producingApplicationId | string | N/A | No |
 | reportingPeriod | Interval | N/A | No |
 | scheduleDefinition | ScheduleDefinition | N/A | No |

@@ -6,7 +6,7 @@
 
 Documents referenced in this page:
 
-* PSI-ADR
+* PSI-MADR
 
 ## internal, general comments
 
@@ -17,9 +17,9 @@ Documents referenced in this page:
 @include [common meta information like version docdate etc..](../common/common_metadata.md)
 
 =begin metadata
-title: "PSI Administrative Decision Records"
-subtitle: "PSI ADR"
-reference: "PSI-ADR"
+title: "PSI Markdown Administrative Decision Records"
+subtitle: "PSI MADR"
+reference: "PSI-MADR"
 ---
 dcr_overrides:
  - dcr:
@@ -94,6 +94,12 @@ dcr_overrides:
    version: 'MS10 [1.2.2]'
    author: 'Wolfgang Robben'
    message: 'Updates for MS10 delivery'
+ - dcr:
+   from: '2025-02-04'
+   to: '2025-04-30'
+   version: 'MS11pre [1.2.3]'
+   author: 'Wolfgang Robben'
+   message: 'Advanced OAS patching, MEF convergence.'     
  =end
 
 # Document Meta Information
@@ -113,25 +119,7 @@ dcr_overrides:
 
 Table: Signature Table. {#tbl:signature_table}
 
-## Document Change Record
-
-### Changes
-
-@dcr(dcr_table)
-
-Table: Document Change Record. {#tbl:dcr}
-
-### Source Control
-
-Changes to this document are tracked electronically.
-No signature is required by the authors.
-The following information can prove the integrity of the document and reveal any change.
-
-@dcr(git_table)
-
-Table: Git log. {#tbl:git_log}
-
-@dcr(git_qr_code){#fig:dcr_qr_code}
+@include [Document Change Record](../common/document-change-record.md)
 
 ## Documents
 
@@ -176,6 +164,8 @@ The following sections heavily refer to terms, abbreviations and definitions def
 @include [generated document warning](../common/generated_document.md)
 
 @include [development_state](../common/development_state.md)
+
+@include [Release Notes](../common/release_notes.md)
 
 ### Security Considerations
 

@@ -5,7 +5,7 @@
 
 # POST /performanceReportComplexQuery
 
-**Absolute Path:** /performanceMonitoring/v1/performanceReportComplexQuery
+**Absolute Path:** /performanceMonitoring/v2/performanceReportComplexQuery
 
 **TOD Reference:** TOD-06-05-03-View_All_Performance_Monitoring_Report
 
@@ -23,11 +23,11 @@ Table: Request Body of POST performanceReportComplexQuery. {#tbl:performanceRepo
 
 | Code | Description | Content |
 |------|-------------|---------|
-| 200 | 'OK. (https://tools.ietf.org/html/rfc7231#section-6.3.1)' | PerformanceReportComplexQuery |
+| 200 | 'OK. (https://tools.ietf.org/html/rfc7231#section-6.3.1)' | N/A |
 | 400 | Bad Request | Error400 |
 | 401 | Unauthorized | Error401 |
 | 403 | Forbidden | Error403 |
-| 422 | Unprocessable entity due to the business validation problems | Error422 |
+| 422 | Unprocessable entity due to the business validation problems | N/A |
 | 500 | Internal Server Error | Error500 |
 
 Table: Responses of POST performanceReportComplexQuery. {#tbl:performanceReportComplexQuery.post.md:responses}

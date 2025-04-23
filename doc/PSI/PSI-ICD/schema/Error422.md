@@ -10,15 +10,15 @@ Unprocessable entity due to a business validation problem.
 
 | Field | Type | Format | Required |
 | ------- | ------- | ------- | --- |
-| code | Error422Code | N/A | Yes |
+| code | string | N/A | Yes |
 | reason | string | N/A | Yes |
 | message | string | N/A | No |
 | status | string | N/A | No |
-| referenceError | string | uri | No |
+| referenceError | string | N/A | No |
 | propertyPath | string | N/A | No |
 | @baseType | string | N/A | No |
-| @schemaLocation | string | uri | No |
-| @type | string | N/A | No |
+| @schemaLocation | string | N/A | No |
+| @type | string | N/A | Yes |
 
 Table: Fields of Error422. {#tbl:Error422.md:Error422}
 

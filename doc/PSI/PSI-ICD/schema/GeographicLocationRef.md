@@ -11,7 +11,7 @@
 | href | string | uri | No |
 | name | string | N/A | No |
 | @baseType | string | N/A | No |
-| @schemaLocation | string | uri | No |
+| @schemaLocation | string | N/A | No |
 | @referredType | string | N/A | No |
 | @type | string | "GeographicLocationRef" | Yes |
 

@@ -5,7 +5,7 @@
 
 # DELETE /individual/{id}
 
-**Absolute Path:** /partyManagement/v1/individual/{id}
+**Absolute Path:** /partyManagement/v2/individual/{id}
 
 **TOD Reference:** TOD-01-01-03-Remove_Party_Profile
 
@@ -15,7 +15,7 @@
 
 | Name | Type | Required | Description |
 | ------ | ------ | --- | ------------ |
-| id | string | Yes | Identifier of the Individual |
+| id | string | Yes | Identifier of the Resource |
 
 Table: Parameters of DELETE individual/{id}. {#tbl:individual-id.delete.md:parameters}
 
@@ -23,6 +23,7 @@ Table: Parameters of DELETE individual/{id}. {#tbl:individual-id.delete.md:param
 
 | Code | Description | Content |
 |------|-------------|---------|
+| 202 | Accepted | N/A |
 | 204 | Deleted | N/A |
 | 400 | Bad Request | Error |
 | 401 | Unauthorized | Error |
@@ -31,6 +32,8 @@ Table: Parameters of DELETE individual/{id}. {#tbl:individual-id.delete.md:param
 | 405 | Method Not allowed | Error |
 | 409 | Conflict | Error |
 | 500 | Internal Server Error | Error |
+| 501 | Not Implemented | Error |
+| 503 | Service Unavailable | Error |
 
 Table: Responses of DELETE individual/{id}. {#tbl:individual-id.delete.md:responses}
 

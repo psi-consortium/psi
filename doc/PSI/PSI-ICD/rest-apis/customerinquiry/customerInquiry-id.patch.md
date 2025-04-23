@@ -5,7 +5,7 @@
 
 # PATCH /customerInquiry/{id}
 
-**Absolute Path:** /customerInquiry/v1/customerInquiry/{id}
+**Absolute Path:** /customerInquiry/v2/customerInquiry/{id}
 
 **TOD Reference:** TOD-03-01-04-Update_Customer_Inquiry
 
@@ -23,7 +23,7 @@ Table: Parameters of PATCH customerInquiry/{id}. {#tbl:customerInquiry-id.patch.
 
 | Content Type | Reference |
 |--------------|-----------|
-| application/json | CustomerInquiry_Update |
+| application/json | CustomerInquiry_MVO |
 
 Table: Request Body of PATCH customerInquiry/{id}. {#tbl:customerInquiry-id.patch.md:request_body}
 

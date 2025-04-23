@@ -13,7 +13,7 @@
 | geoJson | Geometry | N/A | No |
 | bbox | array | number | No |
 | @baseType | string | N/A | No |
-| @schemaLocation | string | uri | No |
+| @schemaLocation | string | N/A | No |
 | @type | string | "GeographicLocation" | Yes |
 
 Table: Fields of GeographicLocation. {#tbl:GeographicLocation.md:GeographicLocation}

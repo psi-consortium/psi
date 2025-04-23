@@ -1,0 +1,251 @@
+{
+    "openapi": "3.0.1",
+    "tags": [
+        {
+            "name": "serviceTemplate",
+            "description": "Operations for ServiceTemplate Resource"
+        }
+    ],
+    "paths": {
+        "/serviceTemplate": {
+            "get": {
+                "tags": ["serviceTemplate"],
+                "summary": "List or find ServiceTemplate objects",
+                "description": "List or find ServiceTemplate objects",
+                "operationId": "listServiceTemplate",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/Fields"
+                    },
+                    {
+                        "$ref": "#/components/parameters/Offset"
+                    },
+                    {
+                        "$ref": "#/components/parameters/Limit"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/200ServiceSpecificationArray"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "405": {
+                        "$ref": "#/components/responses/405"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    },
+                    "501": {
+                        "$ref": "#/components/responses/501"
+                    },
+                    "503": {
+                        "$ref": "#/components/responses/503"
+                    }
+                }
+            },
+            "post": {
+                "tags": ["serviceTemplate"],
+                "summary": "Creates a ServiceTemplate",
+                "description": "This operation creates a ServiceTemplate entity.",
+                "operationId": "createServiceTemplate",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/Fields"
+                    }
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/ServiceSpecification_FVO"
+                },
+                "responses": {
+                    "201": {
+                        "$ref": "#/components/responses/201ServiceSpecification"
+                    },
+                    "202": {
+                        "description": "Accepted"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "405": {
+                        "$ref": "#/components/responses/405"
+                    },
+                    "409": {
+                        "$ref": "#/components/responses/409"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    },
+                    "501": {
+                        "$ref": "#/components/responses/501"
+                    },
+                    "503": {
+                        "$ref": "#/components/responses/503"
+                    }
+                }
+            }
+        },
+        "/serviceTemplate/{id}": {
+            "get": {
+                "tags": ["serviceTemplate"],
+                "summary": "Retrieves a ServiceTemplate by ID",
+                "description": "This operation retrieves a ServiceTemplate entity. Attribute selection enabled for all first level attributes.",
+                "operationId": "retrieveServiceTemplate",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/Id"
+                    },
+                    {
+                        "$ref": "#/components/parameters/Fields"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/200ServiceSpecification_Get"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "405": {
+                        "$ref": "#/components/responses/405"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    },
+                    "501": {
+                        "$ref": "#/components/responses/501"
+                    },
+                    "503": {
+                        "$ref": "#/components/responses/503"
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["serviceTemplate"],
+                "summary": "Deletes a ServiceTemplate",
+                "description": "This operation deletes a ServiceTemplate entity.",
+                "operationId": "deleteServiceTemplate",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/Id"
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "$ref": "#/components/responses/202"
+                    },
+                    "204": {
+                        "$ref": "#/components/responses/204"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "405": {
+                        "$ref": "#/components/responses/405"
+                    },
+                    "409": {
+                        "$ref": "#/components/responses/409"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    },
+                    "501": {
+                        "$ref": "#/components/responses/501"
+                    },
+                    "503": {
+                        "$ref": "#/components/responses/503"
+                    }
+                }
+            },
+            "patch": {
+                "tags": ["serviceTemplate"],
+                "summary": "Updates partially a ServiceTemplate",
+                "description": "This operation updates partially a ServiceTemplate entity.",
+                "operationId": "patchServiceTemplate",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/Id"
+                    },
+                    {
+                        "$ref": "#/components/parameters/Fields"
+                    }
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/ServiceSpecification_MVO"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/200ServiceSpecification_Patch"
+                    },
+                    "202": {
+                        "description": "Accepted"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "405": {
+                        "$ref": "#/components/responses/405"
+                    },
+                    "409": {
+                        "$ref": "#/components/responses/409"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    },
+                    "501": {
+                        "$ref": "#/components/responses/501"
+                    },
+                    "503": {
+                        "$ref": "#/components/responses/503"
+                    }
+                }
+            }
+        }
+    }
+}

@@ -5,7 +5,7 @@
 
 # PATCH /customerBill/{id}
 
-**Absolute Path:** /customerBillManagement/v1/customerBill/{id}
+**Absolute Path:** /customerBillManagement/v2/customerBill/{id}
 
 **TOD Reference:** TOD-03-03-02-Update_Customer_Bill
 
@@ -15,7 +15,8 @@
 
 | Name | Type | Required | Description |
 | ------ | ------ | --- | ------------ |
-| id | string | Yes | Identifier of the CustomerBill |
+| id | string | Yes | Identifier of the Resource |
+| fields | string | No | Comma-separated properties to be provided in response |
 
 Table: Parameters of PATCH customerBill/{id}. {#tbl:customerBill-id.patch.md:parameters}
 
@@ -23,7 +24,10 @@ Table: Parameters of PATCH customerBill/{id}. {#tbl:customerBill-id.patch.md:par
 
 | Content Type | Reference |
 |--------------|-----------|
-| application/json;charset=utf-8 | CustomerBill_Update |
+| application/json | CustomerBill_MVO |
+| application/merge-patch+json | CustomerBill_MVO |
+| application/json-patch+json | JsonPatchOperations |
+| application/json-patch-query+json | JsonPatchOperations |
 
 Table: Request Body of PATCH customerBill/{id}. {#tbl:customerBill-id.patch.md:request_body}
 
@@ -31,7 +35,8 @@ Table: Request Body of PATCH customerBill/{id}. {#tbl:customerBill-id.patch.md:r
 
 | Code | Description | Content |
 |------|-------------|---------|
-| 200 | Updated | CustomerBill |
+| 200 | Success | CustomerBill |
+| 202 | Accepted | N/A |
 | 400 | Bad Request | Error |
 | 401 | Unauthorized | Error |
 | 403 | Forbidden | Error |
@@ -39,6 +44,8 @@ Table: Request Body of PATCH customerBill/{id}. {#tbl:customerBill-id.patch.md:r
 | 405 | Method Not allowed | Error |
 | 409 | Conflict | Error |
 | 500 | Internal Server Error | Error |
+| 501 | Not Implemented | Error |
+| 503 | Service Unavailable | Error |
 
 Table: Responses of PATCH customerBill/{id}. {#tbl:customerBill-id.patch.md:responses}
 

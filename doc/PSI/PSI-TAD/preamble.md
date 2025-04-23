@@ -26,3 +26,6 @@ The actual API specification is based on the Open APIs of TM Forum, which is cer
 PSID applies a set of patches to create tailored OpenApi files, which are then used to generate the code stubs of the prototypes.
 
 Note that we distinguish between the definition (PSID) and its implementation, the Pooling & Sharing Interface (PSI).
+
+In addition, we make use of MEF's standardization approach for products via schemas.
+MEF (formerly Metro Ethernet Forum) is a nonprofit, global industry consortium of network, cloud, and technology providers that develops and promotes technical standards, certification programs, and best practices to drive interoperable and agile Carrier Ethernet and digital service delivery.

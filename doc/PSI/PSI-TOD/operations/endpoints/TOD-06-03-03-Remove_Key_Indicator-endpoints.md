@@ -3,4 +3,4 @@
                Do NOT manually edit this file! Any such changes will be overwritten!
 -->
 
-* DELETE /serviceQuality/v1/keyIndicator/{id}
+* DELETE /serviceQualityManagement/v2/keyIndicator/{id}

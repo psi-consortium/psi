@@ -5,6 +5,8 @@
 
 @include [ADR010 Party Management API (V1.0)](ADR010-party-management-api_V1.0.md)
 
+@include [ADR012 Swagger (JSON) File Patching for ICD Generation](ADR012-json-patching-for-icd-generation_V1.0.md)
+
 @include [ADR017 Beam Handling (V1.0)](ADR017-beam-handling_V1.0.md)
 
 @include [ADR019 Security Scope (V1.0)](ADR019-security-scope_V1.0.md)

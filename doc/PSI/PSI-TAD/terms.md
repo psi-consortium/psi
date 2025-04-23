@@ -177,6 +177,129 @@ In the former case, a standardised PSS-provider interface is required, in the la
 This way, a standardised interface enables several automated interactions that currently require a lot of human intervention.
 Additionally, it facilitates connections that were not thought of initially.
 
+# SatCom Ontology
+
+A Satellite Communication (SatCom) ontology is a structured framework that systematically categorizes and defines the various components, relationships, and parameters within the satellite communication domain.
+By establishing clear definitions and interconnections among elements such as service types, network topologies, frequency bands, and security levels, the ontology provides a comprehensive understanding of the complex SatCom ecosystem.
+This structured approach facilitates effective communication among stakeholders, including service providers, regulatory bodies, and end-users, by ensuring a common understanding of terms and concepts.
+
+Applying the SatCom ontology enables the precise characterization of services by mapping specific service offerings to defined categories and parameters within the framework.
+For instance, a governmental communication service can be described in terms of its service type (e.g., End-to-End Service), network topology (e.g., Star Topology), frequency band (e.g., Ka-Band), and security level (e.g., Assured).
+This detailed characterization aids in identifying suitable services for specific operational needs, ensuring compatibility between different system components, and supporting decision-making processes related to service selection, system design, and policy development.
+Moreover, the ontology's structured nature allows for the integration of new technologies and evolving service requirements, ensuring its relevance in the dynamic field of satellite communications.
+
+1. **Service Types:**
+   * **Fixed-Satellite Service (FSS):** Enables communication between fixed ground stations, commonly utilised for broadcasting and internet backbone connections.
+   * **Mobile-Satellite Service (MSS):** Facilitates communication for mobile users, including land vehicles, maritime vessels, and aircraft.
+   * **Broadcasting-Satellite Service (BSS):** Delivers content such as television and radio directly to consumers.
+2. **Network Topologies:**
+   * **Point-to-Point:** Direct communication link between two ground stations via a satellite.
+   * **Star Topology:** A central hub station communicates with multiple remote stations, commonly used in Very Small Aperture Terminal (VSAT) networks.
+   * **Mesh Topology:** Allows direct communication between multiple ground stations without a central hub, enhancing redundancy and reducing latency.
+   * **Cloud Access:** Allows direct communication between one ground station and either _the internet_ or a specific cloud service.
+3. **Service Management:** (According to [EU CID 2023/1054](#service-types-according-to-eu-cid-20231054))
+   * **Raw Capacity Service:** Provides users with unprocessed satellite bandwidth without additional infrastructure or management services, allowing for customised configurations.
+   * **Anchored Capacity Service:** Offers users satellite capacity along with access to associated anchoring station facilities, facilitating the integration of satellite and terrestrial networks.
+   * **End-to-End Service:** Provides users with a complete communication pathway, enabling connection to a network capable of delivering comprehensive services.
+4. **Infrastructure Components:**
+   * **Anchored Services:** Utilises terrestrial infrastructure, such as teleports, to interface between the satellite and ground networks, facilitating services like internet access.
+   * **Unanchored Services:** Operates without fixed terrestrial gateways, often employing inter-satellite links for data relay.
+5. **Demarcation Points:**
+   * **Satellite Access Only:** The provider offers solely the satellite link, with the user responsible for ground segment operations.
+   * **Satellite Access with Teleport Management:** Includes satellite connectivity and management of the teleport facilities, ensuring reliable signal transmission to and from the satellite.
+   * **End-to-End Managed Service:** Encompasses the entire communication chain, from user terminals through satellite links to terrestrial networks, managed by the service provider.
+6. **Value-Added Services and Add-Ons (this list is not exhaustive and will be updated with new technological and commercial applications):**
+   * **Content Delivery Networks (CDNs):** Optimises the distribution of media content to end-users.
+   * **Data Encryption:** Ensures secure transmission of sensitive information.
+   * **Traffic Management:** Prioritises data flows to maintain quality of service for critical applications.
+7. **Orbital Classifications:**
+   * **Low Earth Orbit (LEO):** Satellites orbiting at altitudes between approximately 160 to 2,000 km, offering low latency and suitable for services like real-time communications.
+   * **Medium Earth Orbit (MEO):** Positioned between 2,000 and 35,786 km, balancing coverage area and latency; often used for navigation systems.
+   * **Geostationary Earth Orbit (GEO):** Located at 35,786 km, these satellites remain fixed relative to a point on Earth, providing extensive coverage ideal for broadcasting.
+   * **Highly Elliptical Orbit (HEO):** Characterised by elongated orbits, offering prolonged coverage over specific regions, beneficial for high-latitude areas.
+8. **Frequency Bands:**
+   * **L-Band (1–2 GHz):** Offers reliable performance under various weather conditions; commonly used for MSS.
+   * **C-Band (4–8 GHz):** Provides a balance between performance and resistance to rain fade; widely used for FSS.
+   * **Ku-Band (12–18 GHz):** Supports higher data rates but is more susceptible to weather-related attenuation; popular for broadcasting and broadband services.
+   * **Ka-Band (26–40 GHz):** Enables very high data rates, suitable for modern broadband applications, though highly sensitive to atmospheric conditions.
+   * **X-Band (7-12 GHz, depending on the source):** Sometimes also called SHF (Super High Frequency) spectrum, is mainly used for radar, but includes a narrow bandwidth widely used by military forces for beyond line of sight communications.
+   * **S-band (2-4 GHz):** Used by airport surveillance radar for air traffic control, weather radar, surface ship radar, and some communications satellites, particularly satellites used by NASA to communicate with the Space Shuttle and the International Space Station.
+9. **Security Levels:**
+   * **Enhanced:** Services with basic security measures suitable for general governmental communications.
+   * **Robust:** Services with advanced security features designed to handle sensitive information and withstand potential threats.
+   * **Assured:** Services with the highest level of security, ensuring maximum protection for critical and classified communications.
+10. **Service Availability:**
+    * **Basic Availability:** Services with operational uptime below 99%, acceptable for non-critical applications.
+    * **Standard Availability:** Services with operational uptime between 99% and 99.9%, appropriate for regular governmental use.
+    * **High Availability:** Services designed to be operational more than 99.9% of the time, suitable for mission-critical applications.
+11. **Coverage Types:**
+    * **Regional Coverage:** Services covering specific geographical areas, tailored to regional operational needs.
+    * **Global Coverage:** Services providing worldwide connectivity, essential for international missions and operations. Note that _worldwide_ may exclude the poles and polar regions due to the orbits required for coverage.
+    * **Spot Beam Coverage:** Services focusing on concentrated areas with high-demand, offering increased capacity and performance.
+
+## Service Types According to EU CID 2023/1054
+
+In satellite communications, service types are designed to address diverse user requirements and operational preferences.
+These services cater to varying needs by offering different levels of management and infrastructure support.
+
+### End-to-End Service
+
+The End-to-End Service provides a comprehensive communication solution that encompasses the entire transmission path from the user's terminal to the destination network.
+This includes satellite connectivity, ground station operations, and integration with terrestrial networks.
+The service provider assumes full management responsibility, ensuring seamless interoperability and consistently high performance.
+This approach offers a turnkey solution ideal for users seeking minimal management overhead.
+
+### Anchored Capacity Service
+
+The Anchored Capacity Service combines satellite bandwidth with access to terrestrial anchor stations, also known as teleports.
+These anchor stations serve as gateways between the satellite network and ground-based infrastructure, facilitating data routing to and from terrestrial networks.
+While the service provider supplies the satellite capacity and manages the anchor station facilities, users are responsible for configuring and managing their own network services beyond the anchor point.
+This model balances provider-managed infrastructure with user-controlled network management.
+
+### Raw Capacity Service
+
+The Raw Capacity Service provides unprocessed satellite bandwidth without additional infrastructure or management services.
+In this model, the service provider delivers the satellite capacity, while users are responsible for all implementation aspects, including ground station operations and network configuration.
+This approach offers maximum flexibility, allowing customization to meet unique requirements, though it necessitates a higher level of technical expertise and resource investment from the user.
+
+## Service Profiles According to CID 2023/1053
+
+The Union Secure Connectivity Programme has delineated specific service profiles to cater to the diverse communication needs of governmental users.
+These predefined profiles are designed to ensure secure, reliable, and efficient satellite-based communication services across various operational scenarios.
+Each of these profiles is structured to meet specific operational requirements, ensuring that governmental users have access to tailored communication solutions that align with their mission-critical needs.
+
+### Robust Worldwide Low-latency Service
+
+This profile offers global coverage with an emphasis on low-latency communications, ensuring rapid data transmission essential for time-sensitive governmental operations.
+It is engineered to provide robust security measures, safeguarding the integrity and confidentiality of transmitted information.
+This service is particularly suitable for applications requiring immediate data exchange, such as real-time situational awareness and command-and-control communications.
+
+### Space Data Relay
+
+The Space Data Relay profile facilitates real-time data transmission between satellites, aerial platforms, and ground stations.
+This service is crucial for continuous monitoring and data collection activities, enabling seamless communication links for Earth observation missions, unmanned aerial systems, and other platforms that demand uninterrupted data flow to ground-based users.
+
+### Assured Worldwide Low-latency Service
+
+Designed to provide secure and reliable low-latency communication on a global scale, this profile ensures that critical governmental communications are delivered promptly and securely.
+It is tailored for operations that cannot tolerate delays, ensuring that mission-critical information is transmitted efficiently, supporting activities such as emergency response and military operations.
+
+### Assured Worldwide Narrowband Service
+
+This profile delivers secure narrowband communication services globally, focusing on applications that require lower data rates but demand high reliability and security.
+It is ideal for services such as telemetry, tracking, and command functions, as well as for connecting Internet of Things (IoT) devices used in various governmental applications, including environmental monitoring and infrastructure management.
+
+## Profile and Service Type Use Cases
+
+| Profile \ Service Type | End-to-End Service | Anchored Capacity Service | Raw Capacity Service |
+| --- | --- | --- | --- |
+| **Robust Worldwide Low-latency Service** | Provides a complete communication pathway with robust security and low latency, suitable for critical applications requiring high reliability. | Offers robust, low-latency communication with integration into existing terrestrial networks via anchor stations. | Supplies raw satellite capacity with robust features, allowing users to implement custom low-latency solutions. |
+| **Space Data Relay** | Delivers comprehensive data relay services, facilitating real-time data transmission between satellites, aerial platforms, and ground stations. | Provides data relay capabilities with access to anchoring station facilities for integration with terrestrial networks. | Offers raw data relay capacity, enabling users to establish customised relay networks. |
+| **Assured Worldwide Low-latency Service** | Ensures a secure, low-latency communication pathway, ideal for sensitive governmental operations. | Provides assured, low-latency communication with anchoring station access for seamless integration. | Delivers raw satellite capacity with assured security features, allowing for tailored low-latency implementations. |
+| **Assured Worldwide Narrowband Service** | Offers a secure narrowband communication pathway, suitable for applications like IoT devices. | Provides narrowband capacity with assured security and anchoring station access. | Supplies raw narrowband satellite capacity with assured features for custom solutions. |
+
+Table: Service profiles and service types {#tbl:service_profile_type}
+
 # Parties
 
 Business interactions are executed between two or more parties, which are either natural persons ("individuals") or organizations.

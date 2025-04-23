@@ -3,4 +3,4 @@
                Do NOT manually edit this file! Any such changes will be overwritten!
 -->
 
-* GET /productOrdering/v1/productOrder/{id}
+* GET /productOrdering/v2/productOrder/{id}

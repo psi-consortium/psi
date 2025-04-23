@@ -22,10 +22,13 @@
 | streetNrSuffix | string | N/A | No |
 | streetSuffix | string | N/A | No |
 | streetType | string | N/A | No |
+| countryCode | array | StandardIdentifier | No |
+| externalIdentifier | array | ExternalIdentifier | No |
 | geographicLocation | GeographicLocationRefOrValue | N/A | No |
+| geographicSubAddress | array | GeographicSubAddress | No |
 | geographicAddressType | string | N/A | No |
 | @baseType | string | N/A | No |
-| @schemaLocation | string | uri | No |
+| @schemaLocation | string | N/A | No |
 | @type | string | "GeographicAddress" | Yes |
 
 Table: Fields of GeographicAddress. {#tbl:GeographicAddress.md:GeographicAddress}

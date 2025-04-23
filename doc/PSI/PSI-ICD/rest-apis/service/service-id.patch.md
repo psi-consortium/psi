@@ -5,7 +5,7 @@
 
 # PATCH /service/{id}
 
-**Absolute Path:** /serviceInventory/v1/service/{id}
+**Absolute Path:** /serviceInventory/v2/service/{id}
 
 **TOD Reference:** TOD-05-02-02-Update_Service
 
@@ -15,7 +15,8 @@
 
 | Name | Type | Required | Description |
 | ------ | ------ | --- | ------------ |
-| id | string | Yes | Identifier of the Service |
+| id | string | Yes | Identifier of the Resource |
+| fields | string | No | Comma-separated properties to be provided in response |
 
 Table: Parameters of PATCH service/{id}. {#tbl:service-id.patch.md:parameters}
 
@@ -23,7 +24,10 @@ Table: Parameters of PATCH service/{id}. {#tbl:service-id.patch.md:parameters}
 
 | Content Type | Reference |
 |--------------|-----------|
-| application/json;charset=utf-8 | Service_Update |
+| application/json | Service_MVO |
+| application/merge-patch+json | Service_MVO |
+| application/json-patch+json | JsonPatchOperations |
+| application/json-patch-query+json | JsonPatchOperations |
 
 Table: Request Body of PATCH service/{id}. {#tbl:service-id.patch.md:request_body}
 
@@ -31,7 +35,8 @@ Table: Request Body of PATCH service/{id}. {#tbl:service-id.patch.md:request_bod
 
 | Code | Description | Content |
 |------|-------------|---------|
-| 200 | Updated | Service |
+| 200 | Success | Service |
+| 202 | Accepted | N/A |
 | 400 | Bad Request | Error |
 | 401 | Unauthorized | Error |
 | 403 | Forbidden | Error |
@@ -39,6 +44,8 @@ Table: Request Body of PATCH service/{id}. {#tbl:service-id.patch.md:request_bod
 | 405 | Method Not allowed | Error |
 | 409 | Conflict | Error |
 | 500 | Internal Server Error | Error |
+| 501 | Not Implemented | Error |
+| 503 | Service Unavailable | Error |
 
 Table: Responses of PATCH service/{id}. {#tbl:service-id.patch.md:responses}
 

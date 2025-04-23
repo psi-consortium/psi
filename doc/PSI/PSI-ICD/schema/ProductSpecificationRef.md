@@ -5,8 +5,6 @@
 
 # ProductSpecificationRef
 
-Product specification reference: A ProductSpecification is a detailed description of a tangible or intangible object made available externally in the form of a ProductOffering to customers or other parties playing a party role.
-
 | Field | Type | Format | Required |
 | ------- | ------- | ------- | --- |
 | id | string | N/A | Yes |
@@ -15,9 +13,9 @@ Product specification reference: A ProductSpecification is a detailed descriptio
 | version | string | N/A | No |
 | targetProductSchema | TargetProductSchema | N/A | No |
 | @baseType | string | N/A | No |
-| @schemaLocation | string | uri | No |
-| @type | string | N/A | No |
+| @schemaLocation | string | N/A | No |
 | @referredType | string | N/A | No |
+| @type | string | "ProductSpecificationRef" | Yes |
 
 Table: Fields of ProductSpecificationRef. {#tbl:ProductSpecificationRef.md:ProductSpecificationRef}
 

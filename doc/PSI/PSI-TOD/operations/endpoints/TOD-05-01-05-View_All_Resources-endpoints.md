@@ -3,4 +3,4 @@
                Do NOT manually edit this file! Any such changes will be overwritten!
 -->
 
-* GET /resourceInventory/v1/resource
+* GET /resourceInventory/v2/resource

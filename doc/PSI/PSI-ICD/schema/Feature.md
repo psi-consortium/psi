@@ -5,17 +5,18 @@
 
 # Feature
 
-Configuration feature.
-
 | Field | Type | Format | Required |
 | ------- | ------- | ------- | --- |
 | id | string | N/A | No |
-| name | string | N/A | Yes |
+| name | string | N/A | No |
 | isBundle | boolean | N/A | No |
-| isEnabled | boolean | N/A | No |
-| constraint | array | ConstraintRef | No |
-| featureCharacteristic | array | Characteristic | Yes |
 | featureRelationship | array | FeatureRelationship | No |
+| featureCharacteristic | array | Characteristic | No |
+| policyConstraint | array | PolicyRef | No |
+| isEnabled | boolean | N/A | No |
+| @baseType | string | N/A | No |
+| @schemaLocation | string | N/A | No |
+| @type | string | "Feature" | Yes |
 
 Table: Fields of Feature. {#tbl:Feature.md:Feature}
 

@@ -3,4 +3,4 @@
                Do NOT manually edit this file! Any such changes will be overwritten!
 -->
 
-* POST /customerInquiry/v1/customerInquiry
+* POST /customerInquiry/v2/customerInquiry

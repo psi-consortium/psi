@@ -20,15 +20,15 @@ participant Provider as PVD
 
 autonumber
 
-Customer -> PSS ++: POST https://pss.com/psi-api/productOrdering/v1/productOrder
+Customer -> PSS ++: POST https://pss.com/psi-api/productOrdering/v2/productOrder
 PSS -> Customer: {"id": "620b78f9-c3ab-4869-8956-6cb88c27e434"}
 note over PSS: Order with attached SLS fulfillment
-Customer -> PSS: GET https://pss.com/psi-api/productOrdering/v1/productOrder/620b78f9-c3ab-4869-8956-6cb88c27e434
+Customer -> PSS: GET https://pss.com/psi-api/productOrdering/v2/productOrder/620b78f9-c3ab-4869-8956-6cb88c27e434
 return {"state": "Completed"}
 
 note over PVD: Start performance monitoring
 ...
-PSS -> PVD ++ : POST http://pss.com/psi-api/performanceMonitoring/v1/performanceReport\n{<report_configuration>}
+PSS -> PVD ++ : POST http://pss.com/psi-api/performanceMonitoring/v2/performanceReport\n{<report_configuration>}
 return {"id": "c285ce32-3cf1-4d47-9fc5-0bff88a196c6",\n"reportContent": "..."}
 
 @enduml

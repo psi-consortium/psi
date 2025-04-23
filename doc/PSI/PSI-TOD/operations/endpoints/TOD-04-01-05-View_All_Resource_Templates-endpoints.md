@@ -3,4 +3,4 @@
                Do NOT manually edit this file! Any such changes will be overwritten!
 -->
 
-* GET /resourceCatalog/v1/resourceTemplate
+* GET /resourceCatalog/v2/resourceTemplate

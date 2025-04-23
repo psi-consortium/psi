@@ -10,7 +10,7 @@ Is a event channel provided by the Event Streaming API
 | Field | Type | Format | Required |
 | ------- | ------- | ------- | --- |
 | id | string | N/A | No |
-| href | string | N/A | No |
+| href | string | uri | No |
 | name | string | N/A | No |
 | contentQuery | string | N/A | No |
 | headerQuery | string | N/A | No |

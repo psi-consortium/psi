@@ -3,9 +3,9 @@
                Do NOT manually edit this file! Any such changes will be overwritten!
 -->
 
-# document (/documentManagement)
+# document (/document)
 
-Document Management API
+Operations for Document Resource
 
 @include [document.get.md](document.get.md)
 @include [document.post.md](document.post.md)

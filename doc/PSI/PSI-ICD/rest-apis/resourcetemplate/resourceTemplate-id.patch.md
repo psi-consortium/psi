@@ -5,7 +5,7 @@
 
 # PATCH /resourceTemplate/{id}
 
-**Absolute Path:** /resourceCatalog/v1/resourceTemplate/{id}
+**Absolute Path:** /resourceCatalog/v2/resourceTemplate/{id}
 
 **TOD Reference:** TOD-04-01-02-Update_Resource_Template
 
@@ -15,7 +15,8 @@
 
 | Name | Type | Required | Description |
 | ------ | ------ | --- | ------------ |
-| id | string | Yes | The identifier of the ResourceTemplate. |
+| id | string | Yes | Identifier of the Resource |
+| fields | string | No | Comma-separated properties to be provided in response |
 
 Table: Parameters of PATCH resourceTemplate/{id}. {#tbl:resourceTemplate-id.patch.md:parameters}
 
@@ -23,7 +24,10 @@ Table: Parameters of PATCH resourceTemplate/{id}. {#tbl:resourceTemplate-id.patc
 
 | Content Type | Reference |
 |--------------|-----------|
-| application/json;charset=utf-8 | ResourceSpecification_Update |
+| application/json | ResourceSpecification_MVO |
+| application/merge-patch+json | ResourceSpecification_MVO |
+| application/json-patch+json | JsonPatchOperations |
+| application/json-patch-query+json | JsonPatchOperations |
 
 Table: Request Body of PATCH resourceTemplate/{id}. {#tbl:resourceTemplate-id.patch.md:request_body}
 
@@ -31,7 +35,8 @@ Table: Request Body of PATCH resourceTemplate/{id}. {#tbl:resourceTemplate-id.pa
 
 | Code | Description | Content |
 |------|-------------|---------|
-| 200 | Updated | ResourceSpecification |
+| 200 | Success | ResourceSpecification |
+| 202 | Accepted | N/A |
 | 400 | Bad Request | Error |
 | 401 | Unauthorized | Error |
 | 403 | Forbidden | Error |
@@ -39,6 +44,8 @@ Table: Request Body of PATCH resourceTemplate/{id}. {#tbl:resourceTemplate-id.pa
 | 405 | Method Not allowed | Error |
 | 409 | Conflict | Error |
 | 500 | Internal Server Error | Error |
+| 501 | Not Implemented | Error |
+| 503 | Service Unavailable | Error |
 
 Table: Responses of PATCH resourceTemplate/{id}. {#tbl:resourceTemplate-id.patch.md:responses}
 

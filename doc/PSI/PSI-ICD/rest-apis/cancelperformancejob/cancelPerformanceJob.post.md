@@ -5,7 +5,7 @@
 
 # POST /cancelPerformanceJob
 
-**Absolute Path:** /performanceMonitoring/v1/cancelPerformanceJob
+**Absolute Path:** /performanceMonitoring/v2/cancelPerformanceJob
 
 **TOD Reference:** TOD-06-04-03-Cancel_Performance_Monitoring_Job
 
@@ -26,7 +26,7 @@ Table: Request Body of POST cancelPerformanceJob. {#tbl:cancelPerformanceJob.pos
 | 400 | Bad Request | Error400 |
 | 401 | Unauthorized | Error401 |
 | 403 | Forbidden | Error403 |
-| 422 | Unprocessable entity due to the business validation problems | Error422 |
+| 422 | Unprocessable entity due to the business validation problems | N/A |
 | 500 | Internal Server Error | Error500 |
 | 501 | Method not implemented. | Error501 |
 

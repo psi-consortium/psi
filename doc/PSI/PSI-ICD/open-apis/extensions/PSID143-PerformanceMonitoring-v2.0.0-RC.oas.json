@@ -1,0 +1,56 @@
+{
+    "openapi": "3.0.1",
+    "components": {
+        "schemas": {
+            "Error422Code": {
+                "type": "string",
+                "description": "One of the following error codes:\n- missingProperty: The property that was expected is not present in the\n  payload\n- invalidValue: The property has an incorrect value\n- invalidFormat: The property value does not comply with the expected \n  value format\n- referenceNotFound: The object referenced by the property cannot be \n  identified in the target system\n- unexpectedProperty: Additional, not expected property has been \n  provided\n- tooLargeDataset: The requested entity will produce too much data\n- tooManyRecords: The number of records to be provided in the response\n  exceeds the  threshold\n- tooManyRequests: The number of simultaneous requests from one API \n  client exceeds the threshold\n- otherIssue: Other problem was identified (detailed information\n  provided in a reason).",
+                "enum": [
+                    "missingProperty",
+                    "invalidValue",
+                    "invalidFormat",
+                    "referenceNotFound",
+                    "unexpectedProperty",
+                    "tooLargeDataset",
+                    "tooManyRecords",
+                    "tooManyRequests",
+                    "otherIssue"
+                ]
+            },
+            "PerformanceProfileValue": {
+                "properties": {
+                    "granularity": {
+                        "$ref": "#/components/schemas/Interval",
+                        "description": "Sampling rate of the collection or production of performance indicators"
+                    },
+                    "jobPriority": {
+                        "type": "integer",
+                        "default": 5,
+                        "description": "The priority of the Performance Job. The way the management application will use the Job priority to schedule Job execution is application-specific and out the scope."
+                    },
+                    "jobType": {
+                        "$ref": "#/components/schemas/JobType"
+                    },
+                    "outputFormat": {
+                        "$ref": "#/components/schemas/OutputFormat"
+                    },
+                    "reportingPeriod": {
+                        "$ref": "#/components/schemas/Interval",
+                        "description": "Defines the interval for the report generation."
+                    },
+                    "resultFormat": {
+                        "$ref": "#/components/schemas/ResultFormat"
+                    }
+                },
+                "type": "object",
+                "required": ["jobType", "outputFormat", "resultFormat"],
+                "description": "Direct assignment of values defined by PerformanceProfile type to PerformanceJob object. Necessary when PerformanceJob is created without reference to PerformanceProfile."
+            },
+            "JobType": {
+                "type": "string",
+                "description": "The type of PM Job",
+                "enum": ["on-demand"]
+            }
+        }
+    }
+}

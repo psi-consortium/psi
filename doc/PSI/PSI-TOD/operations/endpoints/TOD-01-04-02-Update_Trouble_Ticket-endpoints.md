@@ -3,4 +3,4 @@
                Do NOT manually edit this file! Any such changes will be overwritten!
 -->
 
-* PATCH /troubleTicket/v1/troubleTicket/{id}
+* PATCH /troubleTicket/v2/troubleTicket/{id}

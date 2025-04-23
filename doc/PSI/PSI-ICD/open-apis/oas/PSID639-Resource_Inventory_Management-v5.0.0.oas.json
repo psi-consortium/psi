@@ -1,0 +1,4493 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Resource Inventory Management",
+    "description": "Resource Inventory  API goal is to provide the ability to manage Resources.\n### Operations\nResource Inventory API performs the following operations on the resources :\n- Retrieve an entity or a collection of entities depending on filter criteria\n- Partial update of an entity (including updating rules)\n- Create an entity (including default values and creation rules)\n- Delete an entity (for administration purposes)\n- Manage notification of events",
+    "version": "5.0.0"
+  },
+  "servers": [
+    {
+      "url": "/psi-api/resourceInventory/v2/"
+    }
+  ],
+  "tags": [
+    {
+      "name": "resource",
+      "description": "Operations for Resource Resource"
+    }
+  ],
+  "paths": {
+    "/resource": {
+      "get": {
+        "tags": [
+          "resource"
+        ],
+        "summary": "List or find Resource objects",
+        "description": "List or find Resource objects",
+        "operationId": "listResource",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Fields"
+          },
+          {
+            "$ref": "#/components/parameters/Offset"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          },
+          {
+            "$ref": "#/components/parameters/Before"
+          },
+          {
+            "$ref": "#/components/parameters/After"
+          },
+          {
+            "$ref": "#/components/parameters/Sort"
+          },
+          {
+            "$ref": "#/components/parameters/Filter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200ResourceArray"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "405": {
+            "$ref": "#/components/responses/405"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+          "501": {
+            "$ref": "#/components/responses/501"
+          },
+          "503": {
+            "$ref": "#/components/responses/503"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "resource"
+        ],
+        "summary": "Creates a Resource",
+        "description": "This operation creates a Resource entity.",
+        "operationId": "createResource",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Fields"
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/Resource_FVO"
+        },
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/201Resource"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "405": {
+            "$ref": "#/components/responses/405"
+          },
+          "409": {
+            "$ref": "#/components/responses/409"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+          "501": {
+            "$ref": "#/components/responses/501"
+          },
+          "503": {
+            "$ref": "#/components/responses/503"
+          }
+        }
+      }
+    },
+    "/resource/{id}": {
+      "get": {
+        "tags": [
+          "resource"
+        ],
+        "summary": "Retrieves a Resource by ID",
+        "description": "This operation retrieves a Resource entity. Attribute selection enabled for all first level attributes.",
+        "operationId": "retrieveResource",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Id"
+          },
+          {
+            "$ref": "#/components/parameters/Fields"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200Resource_Get"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "405": {
+            "$ref": "#/components/responses/405"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+          "501": {
+            "$ref": "#/components/responses/501"
+          },
+          "503": {
+            "$ref": "#/components/responses/503"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "resource"
+        ],
+        "summary": "Deletes a Resource",
+        "description": "This operation deletes a Resource entity.",
+        "operationId": "deleteResource",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Id"
+          }
+        ],
+        "responses": {
+          "202": {
+            "$ref": "#/components/responses/202"
+          },
+          "204": {
+            "$ref": "#/components/responses/204"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "405": {
+            "$ref": "#/components/responses/405"
+          },
+          "409": {
+            "$ref": "#/components/responses/409"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+          "501": {
+            "$ref": "#/components/responses/501"
+          },
+          "503": {
+            "$ref": "#/components/responses/503"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "resource"
+        ],
+        "summary": "Updates partially a Resource",
+        "description": "This operation updates partially a Resource entity.",
+        "operationId": "patchResource",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Id"
+          },
+          {
+            "$ref": "#/components/parameters/Fields"
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/Resource_MVO"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200Resource_Patch"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "405": {
+            "$ref": "#/components/responses/405"
+          },
+          "409": {
+            "$ref": "#/components/responses/409"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+          "501": {
+            "$ref": "#/components/responses/501"
+          },
+          "503": {
+            "$ref": "#/components/responses/503"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Addressable": {
+        "type": "object",
+        "properties": {
+          "href": {
+            "type": "string",
+            "description": "Hyperlink reference",
+            "format": "uri"
+          },
+          "id": {
+            "type": "string",
+            "description": "unique identifier"
+          }
+        },
+        "description": "Base schema for adressable entities"
+      },
+      "AttachmentOrDocumentRef": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "AttachmentRef": "#/components/schemas/AttachmentOrDocumentRef"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "description": {
+                "type": "string",
+                "description": "A narrative text describing the content of the attachment"
+              },
+              "url": {
+                "type": "string",
+                "description": "Link to the attachment media/content"
+              }
+            },
+            "description": "Attachment reference. An attachment complements the description of an element (for instance a product) through video, pictures"
+          }
+        ]
+      },
+      "Characteristic": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "Characteristic": "#/components/schemas/Characteristic",
+            "StringCharacteristic": "#/components/schemas/StringCharacteristic",
+            "StringArrayCharacteristic": "#/components/schemas/StringArrayCharacteristic",
+            "ObjectCharacteristic": "#/components/schemas/ObjectCharacteristic",
+            "ObjectArrayCharacteristic": "#/components/schemas/ObjectArrayCharacteristic",
+            "NumberCharacteristic": "#/components/schemas/NumberCharacteristic",
+            "NumberArrayCharacteristic": "#/components/schemas/NumberArrayCharacteristic",
+            "IntegerCharacteristic": "#/components/schemas/IntegerCharacteristic",
+            "IntegerArrayCharacteristic": "#/components/schemas/IntegerArrayCharacteristic",
+            "FloatCharacteristic": "#/components/schemas/FloatCharacteristic",
+            "FloatArrayCharacteristic": "#/components/schemas/FloatArrayCharacteristic",
+            "BooleanCharacteristic": "#/components/schemas/BooleanCharacteristic",
+            "BooleanArrayCharacteristic": "#/components/schemas/BooleanArrayCharacteristic"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Unique identifier of the characteristic"
+              },
+              "name": {
+                "type": "string",
+                "description": "Name of the characteristic"
+              },
+              "valueType": {
+                "type": "string",
+                "description": "Data type of the value of the characteristic"
+              },
+              "characteristicRelationship": {
+                "type": "array",
+                "description": "Collection of characteristic relationships",
+                "items": {
+                  "$ref": "#/components/schemas/CharacteristicRelationship"
+                }
+              },
+              "unitOfMeasure": {
+                "type": "string",
+                "description": "A length, surface, volume, dry measure, liquid measure, money, weight, time, and the like. In general, a determinate quantity or magnitude of the kind designated, taken as a standard of comparison for others of the same kind, in assigning them to numerical values, as 1 foot, 1 yard, 1 mile, 1 square foot."
+              }
+            },
+            "description": "Describes a given characteristic of an object or entity through a name/value pair."
+          }
+        ]
+      },
+      "CharacteristicRelationship": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "CharacteristicRelationship": "#/components/schemas/CharacteristicRelationship"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Unique identifier of the characteristic"
+              },
+              "relationshipType": {
+                "type": "string",
+                "description": "The type of relationship"
+              }
+            },
+            "description": "Another Characteristic that is related to the current Characteristic;"
+          }
+        ]
+      },
+      "CharacteristicRelationship_FVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "CharacteristicRelationship": "#/components/schemas/CharacteristicRelationship_FVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible_FVO"
+          },
+          {
+            "required": [
+              "id",
+              "relationshipType"
+            ],
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Unique identifier of the characteristic"
+              },
+              "relationshipType": {
+                "type": "string",
+                "description": "The type of relationship"
+              }
+            },
+            "description": "Another Characteristic that is related to the current Characteristic;"
+          }
+        ]
+      },
+      "CharacteristicRelationship_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "CharacteristicRelationship": "#/components/schemas/CharacteristicRelationship_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Unique identifier of the characteristic"
+              },
+              "relationshipType": {
+                "type": "string",
+                "description": "The type of relationship"
+              }
+            },
+            "description": "Another Characteristic that is related to the current Characteristic;"
+          }
+        ]
+      },
+      "Characteristic_FVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "Characteristic": "#/components/schemas/Characteristic_FVO",
+            "StringCharacteristic": "#/components/schemas/StringCharacteristic_FVO",
+            "StringArrayCharacteristic": "#/components/schemas/StringArrayCharacteristic_FVO",
+            "ObjectCharacteristic": "#/components/schemas/ObjectCharacteristic_FVO",
+            "ObjectArrayCharacteristic": "#/components/schemas/ObjectArrayCharacteristic_FVO",
+            "NumberCharacteristic": "#/components/schemas/NumberCharacteristic_FVO",
+            "NumberArrayCharacteristic": "#/components/schemas/NumberArrayCharacteristic_FVO",
+            "IntegerCharacteristic": "#/components/schemas/IntegerCharacteristic_FVO",
+            "IntegerArrayCharacteristic": "#/components/schemas/IntegerArrayCharacteristic_FVO",
+            "FloatCharacteristic": "#/components/schemas/FloatCharacteristic_FVO",
+            "FloatArrayCharacteristic": "#/components/schemas/FloatArrayCharacteristic_FVO",
+            "BooleanCharacteristic": "#/components/schemas/BooleanCharacteristic_FVO",
+            "BooleanArrayCharacteristic": "#/components/schemas/BooleanArrayCharacteristic_FVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible_FVO"
+          },
+          {
+            "required": [
+              "name"
+            ],
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Unique identifier of the characteristic"
+              },
+              "name": {
+                "type": "string",
+                "description": "Name of the characteristic"
+              },
+              "valueType": {
+                "type": "string",
+                "description": "Data type of the value of the characteristic"
+              },
+              "characteristicRelationship": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CharacteristicRelationship_FVO"
+                }
+              },
+              "unitOfMeasure": {
+                "type": "string",
+                "description": "A length, surface, volume, dry measure, liquid measure, money, weight, time, and the like. In general, a determinate quantity or magnitude of the kind designated, taken as a standard of comparison for others of the same kind, in assigning them to numerical values, as 1 foot, 1 yard, 1 mile, 1 square foot."
+              }
+            },
+            "description": "Describes a given characteristic of an object or entity through a name/value pair."
+          }
+        ]
+      },
+      "Characteristic_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "Characteristic": "#/components/schemas/Characteristic_MVO",
+            "StringCharacteristic": "#/components/schemas/StringCharacteristic_MVO",
+            "StringArrayCharacteristic": "#/components/schemas/StringArrayCharacteristic_MVO",
+            "ObjectCharacteristic": "#/components/schemas/ObjectCharacteristic_MVO",
+            "ObjectArrayCharacteristic": "#/components/schemas/ObjectArrayCharacteristic_MVO",
+            "NumberCharacteristic": "#/components/schemas/NumberCharacteristic_MVO",
+            "NumberArrayCharacteristic": "#/components/schemas/NumberArrayCharacteristic_MVO",
+            "IntegerCharacteristic": "#/components/schemas/IntegerCharacteristic_MVO",
+            "IntegerArrayCharacteristic": "#/components/schemas/IntegerArrayCharacteristic_MVO",
+            "FloatCharacteristic": "#/components/schemas/FloatCharacteristic_MVO",
+            "FloatArrayCharacteristic": "#/components/schemas/FloatArrayCharacteristic_MVO",
+            "BooleanCharacteristic": "#/components/schemas/BooleanCharacteristic_MVO",
+            "BooleanArrayCharacteristic": "#/components/schemas/BooleanArrayCharacteristic_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Unique identifier of the characteristic"
+              },
+              "name": {
+                "type": "string",
+                "description": "Name of the characteristic"
+              },
+              "valueType": {
+                "type": "string",
+                "description": "Data type of the value of the characteristic"
+              },
+              "characteristicRelationship": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CharacteristicRelationship_MVO"
+                }
+              },
+              "unitOfMeasure": {
+                "type": "string",
+                "description": "A length, surface, volume, dry measure, liquid measure, money, weight, time, and the like. In general, a determinate quantity or magnitude of the kind designated, taken as a standard of comparison for others of the same kind, in assigning them to numerical values, as 1 foot, 1 yard, 1 mile, 1 square foot."
+              }
+            },
+            "description": "Describes a given characteristic of an object or entity through a name/value pair."
+          }
+        ]
+      },
+      "Entity": {
+        "type": "object",
+        "description": "Base entity schema for use in TMForum Open-APIs. Property.",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "$ref": "#/components/schemas/Addressable"
+          }
+        ]
+      },
+      "EntityRef": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "$ref": "#/components/schemas/Addressable"
+          },
+          {
+            "required": [
+              "id"
+            ],
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "The identifier of the referred entity."
+              },
+              "href": {
+                "type": "string",
+                "description": "The URI of the referred entity.",
+                "format": "uri"
+              },
+              "name": {
+                "type": "string",
+                "description": "Name of the referred entity."
+              },
+              "@referredType": {
+                "type": "string",
+                "description": "The actual type of the target instance when needed for disambiguation."
+              }
+            },
+            "description": "Entity reference schema to be use for all entityRef class."
+          }
+        ]
+      },
+      "EntityRef_MVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "$ref": "#/components/schemas/Addressable"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "The identifier of the referred entity."
+              },
+              "href": {
+                "type": "string",
+                "description": "The URI of the referred entity.",
+                "format": "uri"
+              },
+              "name": {
+                "type": "string",
+                "description": "Name of the referred entity."
+              },
+              "@referredType": {
+                "type": "string",
+                "description": "The actual type of the target instance when needed for disambiguation."
+              }
+            },
+            "description": "Entity reference schema to be use for all entityRef class."
+          }
+        ]
+      },
+      "Extensible": {
+        "required": [
+          "@type"
+        ],
+        "type": "object",
+        "properties": {
+          "@type": {
+            "type": "string",
+            "description": "When sub-classing, this defines the sub-class Extensible name"
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class"
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships"
+          }
+        },
+        "description": "Base Extensible schema for use in TMForum Open-APIs - When used for in a schema it means that the Entity described by the schema  MUST be extended with the @type"
+      },
+      "ExternalIdentifier": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "ExternalIdentifier": "#/components/schemas/ExternalIdentifier"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "owner": {
+                "type": "string",
+                "description": "Name of the external system that owns the entity.",
+                "example": "MagentoCommerce"
+              },
+              "externalIdentifierType": {
+                "type": "string",
+                "description": "Type of the identification, typically would be the type of the entity within the external system",
+                "example": "ProductOrder"
+              },
+              "id": {
+                "type": "string",
+                "description": "identification of the entity within the external system."
+              }
+            },
+            "description": "An identification of an entity that is owned by or originates in a software system different from the current system, for example a ProductOrder handed off from a commerce platform into an order handling system. The structure identifies the system itself, the nature of the entity within the system (e.g. class name) and the unique ID of the entity within the system. It is anticipated that multiple external IDs can be held for a single entity, e.g. if the entity passed through multiple systems on the way to the current system. In this case the consumer is expected to sequence the IDs in the array in reverse order of provenance, i.e. most recent system first in the list."
+          }
+        ]
+      },
+      "ExternalIdentifier_FVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "ExternalIdentifier": "#/components/schemas/ExternalIdentifier_FVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "required": [
+              "id"
+            ],
+            "type": "object",
+            "properties": {
+              "owner": {
+                "type": "string",
+                "description": "Name of the external system that owns the entity.",
+                "example": "MagentoCommerce"
+              },
+              "externalIdentifierType": {
+                "type": "string",
+                "description": "Type of the identification, typically would be the type of the entity within the external system",
+                "example": "ProductOrder"
+              },
+              "id": {
+                "type": "string",
+                "description": "identification of the entity within the external system."
+              }
+            },
+            "description": "An identification of an entity that is owned by or originates in a software system different from the current system, for example a ProductOrder handed off from a commerce platform into an order handling system. The structure identifies the system itself, the nature of the entity within the system (e.g. class name) and the unique ID of the entity within the system. It is anticipated that multiple external IDs can be held for a single entity, e.g. if the entity passed through multiple systems on the way to the current system. In this case the consumer is expected to sequence the IDs in the array in reverse order of provenance, i.e. most recent system first in the list."
+          }
+        ]
+      },
+      "ExternalIdentifier_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "ExternalIdentifier": "#/components/schemas/ExternalIdentifier_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "owner": {
+                "type": "string",
+                "description": "Name of the external system that owns the entity.",
+                "example": "MagentoCommerce"
+              },
+              "externalIdentifierType": {
+                "type": "string",
+                "description": "Type of the identification, typically would be the type of the entity within the external system",
+                "example": "ProductOrder"
+              },
+              "id": {
+                "type": "string",
+                "description": "identification of the entity within the external system."
+              }
+            },
+            "description": "An identification of an entity that is owned by or originates in a software system different from the current system, for example a ProductOrder handed off from a commerce platform into an order handling system. The structure identifies the system itself, the nature of the entity within the system (e.g. class name) and the unique ID of the entity within the system. It is anticipated that multiple external IDs can be held for a single entity, e.g. if the entity passed through multiple systems on the way to the current system. In this case the consumer is expected to sequence the IDs in the array in reverse order of provenance, i.e. most recent system first in the list."
+          }
+        ]
+      },
+      "Feature": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "Feature": "#/components/schemas/Feature"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "isBundle": {
+                "type": "boolean",
+                "description": "True if this is a feature group. Default is false."
+              },
+              "featureRelationship": {
+                "type": "array",
+                "description": "Collection of feature relationships",
+                "items": {
+                  "$ref": "#/components/schemas/FeatureRelationship"
+                }
+              },
+              "featureCharacteristic": {
+                "type": "array",
+                "description": "This is a list of Characteristics for a particular feature.",
+                "items": {
+                  "$ref": "#/components/schemas/Characteristic"
+                }
+              },
+              "policyConstraint": {
+                "type": "array",
+                "description": "Reference to manage a list of feature specification policy constraints",
+                "items": {
+                  "$ref": "#/components/schemas/PolicyRef"
+                }
+              },
+              "isEnabled": {
+                "type": "boolean",
+                "description": "True if this feature is enabled. Default is true."
+              },
+              "id": {
+                "type": "string",
+                "description": "unique identifier"
+              },
+              "name": {
+                "type": "string",
+                "description": "This is the name for the feature."
+              }
+            },
+            "description": "Configuration feature."
+          }
+        ]
+      },
+      "FeatureRelationship": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "FeatureRelationship": "#/components/schemas/FeatureRelationship"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "relationshipType": {
+                "type": "string",
+                "description": "This is the type of the feature relationship.",
+                "enum": [
+                  "excluded",
+                  "includes",
+                  "may include",
+                  "requires"
+                ]
+              },
+              "name": {
+                "type": "string",
+                "description": "This is the name of the target feature."
+              },
+              "validFor": {
+                "$ref": "#/components/schemas/TimePeriod"
+              }
+            },
+            "description": "Configuration feature"
+          }
+        ]
+      },
+      "FeatureRelationship_FVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "FeatureRelationship": "#/components/schemas/FeatureRelationship_FVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          },
+          {
+            "required": [
+              "id",
+              "relationshipType"
+            ],
+            "type": "object",
+            "properties": {
+              "relationshipType": {
+                "type": "string",
+                "description": "This is the type of the feature relationship.",
+                "enum": [
+                  "excluded",
+                  "includes",
+                  "may include",
+                  "requires"
+                ]
+              },
+              "name": {
+                "type": "string",
+                "description": "This is the name of the target feature."
+              },
+              "validFor": {
+                "$ref": "#/components/schemas/TimePeriod"
+              }
+            },
+            "description": "Configuration feature"
+          }
+        ]
+      },
+      "FeatureRelationship_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "FeatureRelationship": "#/components/schemas/FeatureRelationship_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef_MVO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "relationshipType": {
+                "type": "string",
+                "description": "This is the type of the feature relationship.",
+                "enum": [
+                  "excluded",
+                  "includes",
+                  "may include",
+                  "requires"
+                ]
+              },
+              "name": {
+                "type": "string",
+                "description": "This is the name of the target feature."
+              },
+              "validFor": {
+                "$ref": "#/components/schemas/TimePeriod"
+              }
+            },
+            "description": "Configuration feature"
+          }
+        ]
+      },
+      "Feature_FVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "Feature": "#/components/schemas/Feature_FVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "required": [
+              "name"
+            ],
+            "type": "object",
+            "properties": {
+              "isBundle": {
+                "type": "boolean",
+                "description": "True if this is a feature group. Default is false."
+              },
+              "featureRelationship": {
+                "type": "array",
+                "description": "Collection of feature relationships",
+                "items": {
+                  "$ref": "#/components/schemas/FeatureRelationship_FVO"
+                }
+              },
+              "featureCharacteristic": {
+                "type": "array",
+                "description": "This is a list of Characteristics for a particular feature.",
+                "items": {
+                  "$ref": "#/components/schemas/Characteristic_FVO"
+                }
+              },
+              "policyConstraint": {
+                "type": "array",
+                "description": "Reference to manage a list of feature specification policy constraints",
+                "items": {
+                  "$ref": "#/components/schemas/PolicyRef_FVO"
+                }
+              },
+              "isEnabled": {
+                "type": "boolean",
+                "description": "True if this feature is enabled. Default is true."
+              },
+              "id": {
+                "type": "string",
+                "description": "unique identifier"
+              },
+              "name": {
+                "type": "string",
+                "description": "This is the name for the feature."
+              }
+            },
+            "description": "Configuration feature."
+          }
+        ]
+      },
+      "Feature_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "Feature": "#/components/schemas/Feature_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "isBundle": {
+                "type": "boolean",
+                "description": "True if this is a feature group. Default is false."
+              },
+              "featureRelationship": {
+                "type": "array",
+                "description": "Collection of feature relationships",
+                "items": {
+                  "$ref": "#/components/schemas/FeatureRelationship_MVO"
+                }
+              },
+              "featureCharacteristic": {
+                "type": "array",
+                "description": "This is a list of Characteristics for a particular feature.",
+                "items": {
+                  "$ref": "#/components/schemas/Characteristic_MVO"
+                }
+              },
+              "policyConstraint": {
+                "type": "array",
+                "description": "Reference to manage a list of feature specification policy constraints",
+                "items": {
+                  "$ref": "#/components/schemas/PolicyRef_MVO"
+                }
+              },
+              "isEnabled": {
+                "type": "boolean",
+                "description": "True if this feature is enabled. Default is true."
+              },
+              "id": {
+                "type": "string",
+                "description": "unique identifier"
+              },
+              "name": {
+                "type": "string",
+                "description": "This is the name for the feature."
+              }
+            },
+            "description": "Configuration feature."
+          }
+        ]
+      },
+      "IntentRef": {
+        "type": "object",
+        "description": "Intent reference, for when Intent is used by other entities",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "IntentRef": "#/components/schemas/IntentRef"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          }
+        ]
+      },
+      "IntentRef_FVO": {
+        "type": "object",
+        "description": "Intent reference, for when Intent is used by other entities",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "IntentRef": "#/components/schemas/IntentRef_FVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          }
+        ]
+      },
+      "IntentRef_MVO": {
+        "type": "object",
+        "description": "Intent reference, for when Intent is used by other entities",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "IntentRef": "#/components/schemas/IntentRef_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef_MVO"
+          }
+        ]
+      },
+      "LogicalResource": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Resource"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "string",
+                "description": "the value of the logical resource. E.g '0746712345' for  MSISDN's"
+              }
+            },
+            "description": "Logic resource is a type of resource that describes the common set of attributes shared by all concrete logical resources (e.g. TPE, MSISDN, IP Addresses) in the inventory."
+          }
+        ]
+      },
+      "LogicalResource_FVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Resource_FVO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "string",
+                "description": "the value of the logical resource. E.g '0746712345' for  MSISDN's"
+              }
+            },
+            "description": "Logic resource is a type of resource that describes the common set of attributes shared by all concrete logical resources (e.g. TPE, MSISDN, IP Addresses) in the inventory."
+          }
+        ]
+      },
+      "LogicalResource_MVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Resource_MVO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "string",
+                "description": "the value of the logical resource. E.g '0746712345' for  MSISDN's"
+              }
+            },
+            "description": "Logic resource is a type of resource that describes the common set of attributes shared by all concrete logical resources (e.g. TPE, MSISDN, IP Addresses) in the inventory."
+          }
+        ]
+      },
+      "Note": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "Note": "#/components/schemas/Note"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Identifier of the note within its containing entity",
+                "example": "afa9-3d90aaa8da0f"
+              },
+              "author": {
+                "type": "string",
+                "description": "Author of the note",
+                "example": "Mr. N. Bene"
+              },
+              "date": {
+                "type": "string",
+                "description": "Date of the note",
+                "format": "date-time",
+                "example": "2020-11-20T08:00:00Z"
+              },
+              "text": {
+                "type": "string",
+                "description": "Text of the note",
+                "example": "This is important"
+              }
+            },
+            "description": "Extra information about a given entity"
+          }
+        ]
+      },
+      "Note_FVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "Note": "#/components/schemas/Note_FVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Identifier of the note within its containing entity",
+                "example": "afa9-3d90aaa8da0f"
+              },
+              "author": {
+                "type": "string",
+                "description": "Author of the note",
+                "example": "Mr. N. Bene"
+              },
+              "date": {
+                "type": "string",
+                "description": "Date of the note",
+                "format": "date-time",
+                "example": "2020-11-20T08:00:00Z"
+              },
+              "text": {
+                "type": "string",
+                "description": "Text of the note",
+                "example": "This is important"
+              }
+            },
+            "description": "Extra information about a given entity"
+          }
+        ]
+      },
+      "Note_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "Note": "#/components/schemas/Note_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Identifier of the note within its containing entity",
+                "example": "afa9-3d90aaa8da0f"
+              },
+              "author": {
+                "type": "string",
+                "description": "Author of the note",
+                "example": "Mr. N. Bene"
+              },
+              "date": {
+                "type": "string",
+                "description": "Date of the note",
+                "format": "date-time",
+                "example": "2020-11-20T08:00:00Z"
+              },
+              "text": {
+                "type": "string",
+                "description": "Text of the note",
+                "example": "This is important"
+              }
+            },
+            "description": "Extra information about a given entity"
+          }
+        ]
+      },
+      "OrderItemActionType": {
+        "type": "string",
+        "description": "action to be performed on the product",
+        "enum": [
+          "add",
+          "modify",
+          "delete",
+          "noChange"
+        ]
+      },
+      "PartyRef": {
+        "type": "object",
+        "description": "A Party reference",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "PartyRef": "#/components/schemas/PartyRef"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          }
+        ]
+      },
+      "PartyRefOrPartyRoleRef": {
+        "type": "object",
+        "description": "",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "PartyRef": "#/components/schemas/PartyRef",
+            "PartyRoleRef": "#/components/schemas/PartyRoleRef"
+          }
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/PartyRef"
+          },
+          {
+            "$ref": "#/components/schemas/PartyRoleRef"
+          }
+        ]
+      },
+      "PartyRefOrPartyRoleRef_FVO": {
+        "type": "object",
+        "description": "",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "PartyRef": "#/components/schemas/PartyRef_FVO",
+            "PartyRoleRef": "#/components/schemas/PartyRoleRef_FVO"
+          }
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/PartyRef_FVO"
+          },
+          {
+            "$ref": "#/components/schemas/PartyRoleRef_FVO"
+          }
+        ]
+      },
+      "PartyRefOrPartyRoleRef_MVO": {
+        "type": "object",
+        "description": "",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "PartyRef": "#/components/schemas/PartyRef_MVO",
+            "PartyRoleRef": "#/components/schemas/PartyRoleRef_MVO"
+          }
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/PartyRef_MVO"
+          },
+          {
+            "$ref": "#/components/schemas/PartyRoleRef_MVO"
+          }
+        ]
+      },
+      "PartyRef_FVO": {
+        "type": "object",
+        "description": "A Party reference",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "PartyRef": "#/components/schemas/PartyRef_FVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          }
+        ]
+      },
+      "PartyRef_MVO": {
+        "type": "object",
+        "description": "A Party reference",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "PartyRef": "#/components/schemas/PartyRef_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef_MVO"
+          }
+        ]
+      },
+      "PartyRoleRef": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "PartyRoleRef": "#/components/schemas/PartyRoleRef"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "partyId": {
+                "type": "string",
+                "description": "The identifier of the engaged party that is linked to the PartyRole object."
+              },
+              "partyName": {
+                "type": "string",
+                "description": "The name of the engaged party that is linked to the PartyRole object."
+              }
+            },
+            "description": "Party role reference. A party role represents the part played by a party in a given context."
+          }
+        ]
+      },
+      "PartyRoleRef_FVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "PartyRoleRef": "#/components/schemas/PartyRoleRef_FVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "partyId": {
+                "type": "string",
+                "description": "The identifier of the engaged party that is linked to the PartyRole object."
+              },
+              "partyName": {
+                "type": "string",
+                "description": "The name of the engaged party that is linked to the PartyRole object."
+              }
+            },
+            "description": "Party role reference. A party role represents the part played by a party in a given context."
+          }
+        ]
+      },
+      "PartyRoleRef_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "PartyRoleRef": "#/components/schemas/PartyRoleRef_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef_MVO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "partyId": {
+                "type": "string",
+                "description": "The identifier of the engaged party that is linked to the PartyRole object."
+              },
+              "partyName": {
+                "type": "string",
+                "description": "The name of the engaged party that is linked to the PartyRole object."
+              }
+            },
+            "description": "Party role reference. A party role represents the part played by a party in a given context."
+          }
+        ]
+      },
+      "PhysicalResource": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Resource"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "manufactureDate": {
+                "type": "string",
+                "description": "This is a string attribute that defines the date of manufacture of this item in the fixed format \"dd/mm/yyyy\". This is an optional attribute.",
+                "format": "date-time"
+              },
+              "powerState": {
+                "type": "string",
+                "description": "This defines the current power status of the hardware item. Values include:\n\n  0:  Unknown\n  1:  Not Applicable\n  2:  No Power Applied\n  3: Full Power Applied\n  4:  Power Save - Normal\n  5:  Power Save - Degraded\n  6:  Power Save - Standby\n  7:  Power Save - Critical\n  8:  Power Save - Low Power Mode\n  9:  Power Save - Unknown\n 10: Power Cycle\n 11: Power Warning\n 12: Power Off"
+              },
+              "serialNumber": {
+                "type": "string",
+                "description": "This is a string that represents a manufacturer-allocated number used to identify different instances of the same hardware item. The ModelNumber and PartNumber attributes are used to identify different types of hardware items. This is a REQUIRED attribute."
+              },
+              "versionNumber": {
+                "type": "string",
+                "description": "This is a string that identifies the version of this physical resource. This is an optional attribute."
+              }
+            },
+            "description": "Physical resource is a type of resource that describes the common set of attributes shared by all concrete physical resources (e.g. EQUIPMENT) in the inventory."
+          }
+        ]
+      },
+      "PhysicalResource_FVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Resource_FVO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "manufactureDate": {
+                "type": "string",
+                "description": "This is a string attribute that defines the date of manufacture of this item in the fixed format \"dd/mm/yyyy\". This is an optional attribute.",
+                "format": "date-time"
+              },
+              "powerState": {
+                "type": "string",
+                "description": "This defines the current power status of the hardware item. Values include:\n\n  0:  Unknown\n  1:  Not Applicable\n  2:  No Power Applied\n  3: Full Power Applied\n  4:  Power Save - Normal\n  5:  Power Save - Degraded\n  6:  Power Save - Standby\n  7:  Power Save - Critical\n  8:  Power Save - Low Power Mode\n  9:  Power Save - Unknown\n 10: Power Cycle\n 11: Power Warning\n 12: Power Off"
+              },
+              "serialNumber": {
+                "type": "string",
+                "description": "This is a string that represents a manufacturer-allocated number used to identify different instances of the same hardware item. The ModelNumber and PartNumber attributes are used to identify different types of hardware items. This is a REQUIRED attribute."
+              },
+              "versionNumber": {
+                "type": "string",
+                "description": "This is a string that identifies the version of this physical resource. This is an optional attribute."
+              }
+            },
+            "description": "Physical resource is a type of resource that describes the common set of attributes shared by all concrete physical resources (e.g. EQUIPMENT) in the inventory."
+          }
+        ]
+      },
+      "PhysicalResource_MVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Resource_MVO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "manufactureDate": {
+                "type": "string",
+                "description": "This is a string attribute that defines the date of manufacture of this item in the fixed format \"dd/mm/yyyy\". This is an optional attribute.",
+                "format": "date-time"
+              },
+              "powerState": {
+                "type": "string",
+                "description": "This defines the current power status of the hardware item. Values include:\n\n  0:  Unknown\n  1:  Not Applicable\n  2:  No Power Applied\n  3: Full Power Applied\n  4:  Power Save - Normal\n  5:  Power Save - Degraded\n  6:  Power Save - Standby\n  7:  Power Save - Critical\n  8:  Power Save - Low Power Mode\n  9:  Power Save - Unknown\n 10: Power Cycle\n 11: Power Warning\n 12: Power Off"
+              },
+              "serialNumber": {
+                "type": "string",
+                "description": "This is a string that represents a manufacturer-allocated number used to identify different instances of the same hardware item. The ModelNumber and PartNumber attributes are used to identify different types of hardware items. This is a REQUIRED attribute."
+              },
+              "versionNumber": {
+                "type": "string",
+                "description": "This is a string that identifies the version of this physical resource. This is an optional attribute."
+              }
+            },
+            "description": "Physical resource is a type of resource that describes the common set of attributes shared by all concrete physical resources (e.g. EQUIPMENT) in the inventory."
+          }
+        ]
+      },
+      "PlaceRef": {
+        "type": "object",
+        "description": "Place reference.",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "PlaceRef": "#/components/schemas/PlaceRef"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          }
+        ]
+      },
+      "PlaceRef_FVO": {
+        "type": "object",
+        "description": "Place reference.",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "PlaceRef": "#/components/schemas/PlaceRef_FVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          }
+        ]
+      },
+      "PlaceRef_MVO": {
+        "type": "object",
+        "description": "Place reference.",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "PlaceRef": "#/components/schemas/PlaceRef_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "$ref": "#/components/schemas/EntityRef_MVO"
+          }
+        ]
+      },
+      "PolicyRef": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "PolicyRef": "#/components/schemas/PolicyRef"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "unique identifier"
+              },
+              "href": {
+                "type": "string",
+                "description": "Hyperlink reference",
+                "format": "uri"
+              },
+              "version": {
+                "type": "string"
+              },
+              "@type": {
+                "type": "string",
+                "description": "When sub-classing, this defines the sub-class Extensible name"
+              },
+              "@baseType": {
+                "type": "string",
+                "description": "When sub-classing, this defines the super-class"
+              },
+              "@schemaLocation": {
+                "type": "string",
+                "description": "A URI to a JSON-Schema file that defines additional attributes and relationships"
+              }
+            },
+            "description": "Reference to managed Policy object"
+          }
+        ]
+      },
+      "PolicyRef_FVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "PolicyRef": "#/components/schemas/PolicyRef_FVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          },
+          {
+            "required": [
+              "id"
+            ],
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "unique identifier"
+              },
+              "href": {
+                "type": "string",
+                "description": "Hyperlink reference",
+                "format": "uri"
+              },
+              "version": {
+                "type": "string"
+              },
+              "@type": {
+                "type": "string",
+                "description": "When sub-classing, this defines the sub-class Extensible name"
+              },
+              "@baseType": {
+                "type": "string",
+                "description": "When sub-classing, this defines the super-class"
+              },
+              "@schemaLocation": {
+                "type": "string",
+                "description": "A URI to a JSON-Schema file that defines additional attributes and relationships"
+              }
+            },
+            "description": "Reference to managed Policy object"
+          }
+        ]
+      },
+      "PolicyRef_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "PolicyRef": "#/components/schemas/PolicyRef_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef_MVO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "unique identifier"
+              },
+              "href": {
+                "type": "string",
+                "description": "Hyperlink reference",
+                "format": "uri"
+              },
+              "version": {
+                "type": "string"
+              },
+              "@type": {
+                "type": "string",
+                "description": "When sub-classing, this defines the sub-class Extensible name"
+              },
+              "@baseType": {
+                "type": "string",
+                "description": "When sub-classing, this defines the super-class"
+              },
+              "@schemaLocation": {
+                "type": "string",
+                "description": "A URI to a JSON-Schema file that defines additional attributes and relationships"
+              }
+            },
+            "description": "Reference to managed Policy object"
+          }
+        ]
+      },
+      "RelatedPartyRefOrPartyRoleRef": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "RelatedPartyRefOrPartyRoleRef": "#/components/schemas/RelatedPartyRefOrPartyRoleRef"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "role": {
+                "type": "string",
+                "description": "Role played by the related party or party role in the context of the specific entity it is linked to. Such as 'initiator', 'customer',  'salesAgent', 'user'"
+              },
+              "partyOrPartyRole": {
+                "$ref": "#/components/schemas/PartyRefOrPartyRoleRef"
+              }
+            },
+            "description": "RelatedParty reference. A related party defines party or party role or its reference, linked to a specific entity"
+          }
+        ]
+      },
+      "RelatedPartyRefOrPartyRoleRef_FVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "RelatedPartyRefOrPartyRoleRef": "#/components/schemas/RelatedPartyRefOrPartyRoleRef_FVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "required": [
+              "role"
+            ],
+            "type": "object",
+            "properties": {
+              "role": {
+                "type": "string",
+                "description": "Role played by the related party or party role in the context of the specific entity it is linked to. Such as 'initiator', 'customer',  'salesAgent', 'user'"
+              },
+              "partyOrPartyRole": {
+                "$ref": "#/components/schemas/PartyRefOrPartyRoleRef_FVO"
+              }
+            },
+            "description": "RelatedParty reference. A related party defines party or party role or its reference, linked to a specific entity"
+          }
+        ]
+      },
+      "RelatedPartyRefOrPartyRoleRef_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "RelatedPartyRefOrPartyRoleRef": "#/components/schemas/RelatedPartyRefOrPartyRoleRef_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "role": {
+                "type": "string",
+                "description": "Role played by the related party or party role in the context of the specific entity it is linked to. Such as 'initiator', 'customer',  'salesAgent', 'user'"
+              },
+              "partyOrPartyRole": {
+                "$ref": "#/components/schemas/PartyRefOrPartyRoleRef_MVO"
+              }
+            },
+            "description": "RelatedParty reference. A related party defines party or party role or its reference, linked to a specific entity"
+          }
+        ]
+      },
+      "RelatedPlaceRef": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "RelatedPlaceRef": "#/components/schemas/RelatedPlaceRef"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "role": {
+                "type": "string"
+              },
+              "place": {
+                "$ref": "#/components/schemas/PlaceRef"
+              }
+            },
+            "description": "Entity reference. The polymorphic attributes @type, @schemaLocation & @referredType are related to the RelatedPlace entity and not the RelatedPlaceRef class itself"
+          }
+        ]
+      },
+      "RelatedPlaceRef_FVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "RelatedPlaceRef": "#/components/schemas/RelatedPlaceRef_FVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "required": [
+              "place",
+              "role"
+            ],
+            "type": "object",
+            "properties": {
+              "role": {
+                "type": "string"
+              },
+              "place": {
+                "$ref": "#/components/schemas/PlaceRef_FVO"
+              }
+            },
+            "description": "Entity reference. The polymorphic attributes @type, @schemaLocation & @referredType are related to the RelatedPlace entity and not the RelatedPlaceRef class itself"
+          }
+        ]
+      },
+      "RelatedPlaceRef_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "RelatedPlaceRef": "#/components/schemas/RelatedPlaceRef_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "role": {
+                "type": "string"
+              },
+              "place": {
+                "$ref": "#/components/schemas/PlaceRef_MVO"
+              }
+            },
+            "description": "Entity reference. The polymorphic attributes @type, @schemaLocation & @referredType are related to the RelatedPlace entity and not the RelatedPlaceRef class itself"
+          }
+        ]
+      },
+      "RelatedResourceOrderItem": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "RelatedResourceOrderItem": "#/components/schemas/RelatedResourceOrderItem"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@referredType": {
+                "type": "string",
+                "description": "The actual type of the target instance when needed for disambiguation."
+              },
+              "resourceOrderHref": {
+                "type": "string",
+                "description": "Reference of the related entity."
+              },
+              "resourceOrderId": {
+                "type": "string",
+                "description": "Unique identifier of a related entity."
+              },
+              "itemAction": {
+                "$ref": "#/components/schemas/OrderItemActionType"
+              },
+              "itemId": {
+                "type": "string",
+                "description": "Identifier of the order item where the resource was managed"
+              },
+              "role": {
+                "type": "string",
+                "description": "role of the resource order item for this resource"
+              }
+            },
+            "description": "RelatedResourceOrderItem (a ResourceOrder item) .The resource order item which triggered resource creation/change/termination."
+          }
+        ]
+      },
+      "RelatedResourceOrderItem_FVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "RelatedResourceOrderItem": "#/components/schemas/RelatedResourceOrderItem_FVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@referredType": {
+                "type": "string",
+                "description": "The actual type of the target instance when needed for disambiguation."
+              },
+              "resourceOrderHref": {
+                "type": "string",
+                "description": "Reference of the related entity."
+              },
+              "resourceOrderId": {
+                "type": "string",
+                "description": "Unique identifier of a related entity."
+              },
+              "itemAction": {
+                "$ref": "#/components/schemas/OrderItemActionType"
+              },
+              "itemId": {
+                "type": "string",
+                "description": "Identifier of the order item where the resource was managed"
+              },
+              "role": {
+                "type": "string",
+                "description": "role of the resource order item for this resource"
+              }
+            },
+            "description": "RelatedResourceOrderItem (a ResourceOrder item) .The resource order item which triggered resource creation/change/termination."
+          }
+        ]
+      },
+      "RelatedResourceOrderItem_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "RelatedResourceOrderItem": "#/components/schemas/RelatedResourceOrderItem_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@referredType": {
+                "type": "string",
+                "description": "The actual type of the target instance when needed for disambiguation."
+              },
+              "resourceOrderHref": {
+                "type": "string",
+                "description": "Reference of the related entity."
+              },
+              "resourceOrderId": {
+                "type": "string",
+                "description": "Unique identifier of a related entity."
+              },
+              "itemAction": {
+                "$ref": "#/components/schemas/OrderItemActionType"
+              },
+              "itemId": {
+                "type": "string",
+                "description": "Identifier of the order item where the resource was managed"
+              },
+              "role": {
+                "type": "string",
+                "description": "role of the resource order item for this resource"
+              }
+            },
+            "description": "RelatedResourceOrderItem (a ResourceOrder item) .The resource order item which triggered resource creation/change/termination."
+          }
+        ]
+      },
+      "Resource": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "LogicalResource": "#/components/schemas/LogicalResource",
+            "PhysicalResource": "#/components/schemas/PhysicalResource",
+            "Resource": "#/components/schemas/Resource",
+            "ResourceCollection": "#/components/schemas/ResourceCollection"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Entity"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "category": {
+                "type": "string",
+                "description": "Category of the concrete resource. e.g Gold, Silver for MSISDN concrete resource"
+              },
+              "description": {
+                "type": "string",
+                "description": "free-text description of the resource"
+              },
+              "name": {
+                "type": "string",
+                "description": "the name of the resource"
+              },
+              "endOperatingDate": {
+                "type": "string",
+                "description": "A date time( DateTime). The date till the resource is operating",
+                "format": "date-time"
+              },
+              "administrativeState": {
+                "$ref": "#/components/schemas/ResourceAdministrativeStateType"
+              },
+              "operationalState": {
+                "$ref": "#/components/schemas/ResourceOperationalStateType"
+              },
+              "resourceStatus": {
+                "$ref": "#/components/schemas/ResourceStatusType"
+              },
+              "usageState": {
+                "$ref": "#/components/schemas/ResourceUsageStateType"
+              },
+              "validFor": {
+                "$ref": "#/components/schemas/TimePeriod"
+              },
+              "note": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Note"
+                }
+              },
+              "resourceOrderItem": {
+                "type": "array",
+                "description": "A list of resource order items related to this resource",
+                "items": {
+                  "$ref": "#/components/schemas/RelatedResourceOrderItem"
+                }
+              },
+              "place": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/RelatedPlaceRef"
+                }
+              },
+              "relatedParty": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/RelatedPartyRefOrPartyRoleRef"
+                }
+              },
+              "supportingResource": {
+                "type": "array",
+                "description": "A list of supporting resources (SupportingResource [*]). A collection of resources that support this resource (bundling, link ResourceSpecification)",
+                "items": {
+                  "$ref": "#/components/schemas/ResourceRefOrValue"
+                }
+              },
+              "resourceRelationship": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ResourceRelationship"
+                }
+              },
+              "resourceCharacteristic": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Characteristic"
+                }
+              },
+              "attachment": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/AttachmentOrDocumentRef"
+                }
+              },
+              "resourceSpecification": {
+                "$ref": "#/components/schemas/ResourceSpecificationRef"
+              },
+              "startOperatingDate": {
+                "type": "string",
+                "description": "A date time( DateTime). The date from which the resource is operating",
+                "format": "date-time"
+              },
+              "resourceVersion": {
+                "type": "string",
+                "description": "A field that identifies the specific version of an instance of a resource."
+              },
+              "activationFeature": {
+                "type": "array",
+                "description": "Configuration features",
+                "items": {
+                  "$ref": "#/components/schemas/Feature"
+                }
+              },
+              "intent": {
+                "$ref": "#/components/schemas/IntentRef"
+              },
+              "externalIdentifier": {
+                "type": "array",
+                "description": "An identification of this resource that is owned by or originates in a software system different from the current system. The structure identifies the system itself, the nature of the resource within the system and the unique ID of the resource within the system. It is anticipated that multiple external IDs can be held for a single resource, e.g. if the resource passed through multiple systems on the way to the current system.",
+                "items": {
+                  "$ref": "#/components/schemas/ExternalIdentifier"
+                }
+              }
+            },
+            "description": "Resource is an abstract entity that describes the common set of attributes shared by all concrete resources (e.g. TPE, EQUIPMENT) in the inventory."
+          }
+        ]
+      },
+      "ResourceAdministrativeStateType": {
+        "type": "string",
+        "description": "ResourceAdministrativeStateType enumerations; values defined by ITU X.731: 'locked': The resource is administratively prohibited from performing services for its users; 'shutdown': Use of the resource is administratively permitted to existing instances of use only. While the system remains in the shutting down state the manager may at any time cause the managed object to revert to the unlocked state; 'unlocked': The resource is administratively permitted to perform services for its users. This is independent of its inherent operability.",
+        "enum": [
+          "locked",
+          "unlocked",
+          "shutdown"
+        ]
+      },
+      "ResourceCollection": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Resource"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "containedResource": {
+                "type": "array",
+                "description": "The Resource members of the collection.",
+                "items": {
+                  "$ref": "#/components/schemas/ResourceRefOrValue"
+                }
+              }
+            },
+            "description": "a collection of Resources handled as one Resource"
+          }
+        ]
+      },
+      "ResourceCollection_FVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Resource_FVO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "containedResource": {
+                "type": "array",
+                "description": "The Resource members of the collection.",
+                "items": {
+                  "$ref": "#/components/schemas/ResourceRefOrValue_FVO"
+                }
+              }
+            },
+            "description": "a collection of Resources handled as one Resource"
+          }
+        ]
+      },
+      "ResourceCollection_MVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Resource_MVO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "containedResource": {
+                "type": "array",
+                "description": "The Resource members of the collection.",
+                "items": {
+                  "$ref": "#/components/schemas/ResourceRefOrValue_MVO"
+                }
+              }
+            },
+            "description": "a collection of Resources handled as one Resource"
+          }
+        ]
+      },
+      "ResourceOperationalStateType": {
+        "type": "string",
+        "description": "ResourceOperationalStateType enumerations; values defined by ITU X.731: 'disable': The resource is totally inoperable and unable to provide service to the user(s); 'enable': The resource is partially or fully operable and available for use.",
+        "enum": [
+          "enable",
+          "disable"
+        ]
+      },
+      "ResourceRef": {
+        "type": "object",
+        "description": "Resource reference, for when Resource is used by other entities.",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "ResourceRef": "#/components/schemas/ResourceRef"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          }
+        ]
+      },
+      "ResourceRefOrValue": {
+        "type": "object",
+        "description": "The polymorphic attributes @type, @schemaLocation & @referredType are related to the Resource entity and not the ResourceRefOrValue class itself",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "Resource": "#/components/schemas/Resource",
+            "ResourceRef": "#/components/schemas/ResourceRef",
+            "ResourceCollection": "#/components/schemas/ResourceCollection",
+            "PhysicalResource": "#/components/schemas/PhysicalResource",
+            "LogicalResource": "#/components/schemas/LogicalResource"
+          }
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/Resource"
+          },
+          {
+            "$ref": "#/components/schemas/ResourceRef"
+          }
+        ]
+      },
+      "ResourceRefOrValue_FVO": {
+        "type": "object",
+        "description": "The polymorphic attributes @type, @schemaLocation & @referredType are related to the Resource entity and not the ResourceRefOrValue class itself",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "Resource": "#/components/schemas/Resource_FVO",
+            "ResourceRef": "#/components/schemas/ResourceRef_FVO",
+            "ResourceCollection": "#/components/schemas/ResourceCollection_FVO",
+            "PhysicalResource": "#/components/schemas/PhysicalResource_FVO",
+            "LogicalResource": "#/components/schemas/LogicalResource_FVO"
+          }
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/Resource_FVO"
+          },
+          {
+            "$ref": "#/components/schemas/ResourceRef_FVO"
+          }
+        ]
+      },
+      "ResourceRefOrValue_MVO": {
+        "type": "object",
+        "description": "The polymorphic attributes @type, @schemaLocation & @referredType are related to the Resource entity and not the ResourceRefOrValue class itself",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "Resource": "#/components/schemas/Resource_MVO",
+            "ResourceRef": "#/components/schemas/ResourceRef_MVO",
+            "ResourceCollection": "#/components/schemas/ResourceCollection_MVO",
+            "PhysicalResource": "#/components/schemas/PhysicalResource_MVO",
+            "LogicalResource": "#/components/schemas/LogicalResource_MVO"
+          }
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/Resource_MVO"
+          },
+          {
+            "$ref": "#/components/schemas/ResourceRef_MVO"
+          }
+        ]
+      },
+      "ResourceRef_FVO": {
+        "type": "object",
+        "description": "Resource reference, for when Resource is used by other entities.",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "ResourceRef": "#/components/schemas/ResourceRef_FVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          }
+        ]
+      },
+      "ResourceRef_MVO": {
+        "type": "object",
+        "description": "Resource reference, for when Resource is used by other entities.",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "ResourceRef": "#/components/schemas/ResourceRef_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef_MVO"
+          }
+        ]
+      },
+      "ResourceRelationship": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "ResourceRelationship": "#/components/schemas/ResourceRelationship"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "resourceRelationshipCharacteristic": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Characteristic"
+                }
+              },
+              "resource": {
+                "$ref": "#/components/schemas/ResourceRefOrValue"
+              },
+              "relationshipType": {
+                "type": "string",
+                "description": "Type of the resource relationship, such as [bundled] if the resource is a bundle and you want to describe the bundled resources inside this bundle; [reliesOn] if the resource needs another already owned resource to rely on (eg: an option on an already owned mobile access resource) [targets] or [isTargeted] (depending on the way of expressing the link) for any other kind of links that may be useful"
+              }
+            },
+            "description": "Linked resources to the one instantiate, such as [bundled] if the resource is a bundle and you want to describe the bundled resources inside this bundle; [reliesOn] if the resource needs another already owned resource to rely on (e.g. an option on an already owned mobile access resource) [targets] or [isTargeted] (depending on the way of expressing the link) for any other kind of links that may be useful"
+          }
+        ]
+      },
+      "ResourceRelationship_FVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "ResourceRelationship": "#/components/schemas/ResourceRelationship_FVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          },
+          {
+            "required": [
+              "relationshipType",
+              "resource"
+            ],
+            "type": "object",
+            "properties": {
+              "resourceRelationshipCharacteristic": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Characteristic_FVO"
+                }
+              },
+              "resource": {
+                "$ref": "#/components/schemas/ResourceRefOrValue_FVO"
+              },
+              "relationshipType": {
+                "type": "string",
+                "description": "Type of the resource relationship, such as [bundled] if the resource is a bundle and you want to describe the bundled resources inside this bundle; [reliesOn] if the resource needs another already owned resource to rely on (eg: an option on an already owned mobile access resource) [targets] or [isTargeted] (depending on the way of expressing the link) for any other kind of links that may be useful"
+              }
+            },
+            "description": "Linked resources to the one instantiate, such as [bundled] if the resource is a bundle and you want to describe the bundled resources inside this bundle; [reliesOn] if the resource needs another already owned resource to rely on (e.g. an option on an already owned mobile access resource) [targets] or [isTargeted] (depending on the way of expressing the link) for any other kind of links that may be useful"
+          }
+        ]
+      },
+      "ResourceRelationship_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "ResourceRelationship": "#/components/schemas/ResourceRelationship_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef_MVO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "resourceRelationshipCharacteristic": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Characteristic_MVO"
+                }
+              },
+              "resource": {
+                "$ref": "#/components/schemas/ResourceRefOrValue_MVO"
+              },
+              "relationshipType": {
+                "type": "string",
+                "description": "Type of the resource relationship, such as [bundled] if the resource is a bundle and you want to describe the bundled resources inside this bundle; [reliesOn] if the resource needs another already owned resource to rely on (eg: an option on an already owned mobile access resource) [targets] or [isTargeted] (depending on the way of expressing the link) for any other kind of links that may be useful"
+              }
+            },
+            "description": "Linked resources to the one instantiate, such as [bundled] if the resource is a bundle and you want to describe the bundled resources inside this bundle; [reliesOn] if the resource needs another already owned resource to rely on (e.g. an option on an already owned mobile access resource) [targets] or [isTargeted] (depending on the way of expressing the link) for any other kind of links that may be useful"
+          }
+        ]
+      },
+      "ResourceSpecificationRef": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "ResourceSpecificationRef": "#/components/schemas/ResourceSpecificationRef"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "version": {
+                "type": "string",
+                "description": "Resource Specification version"
+              }
+            },
+            "description": "Resources are physical or non-physical components (or some combination of these) within an enterprise's infrastructure or inventory. They are typically consumed or used by services (for example a physical port assigned to a service) or contribute to the realization of a Product (for example, a SIM card). They can be drawn from the Application, Computing and Network domains, and include, for example, Network Elements, software, IT systems, content and information, and technology components.\nA ResourceSpecification is an abstract base class for representing a generic means for implementing a particular type of Resource. In essence, a ResourceSpecification defines the common attributes and relationships of a set of related Resources, while Resource defines a specific instance that is based on a particular ResourceSpecification."
+          }
+        ]
+      },
+      "ResourceSpecificationRef_FVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "ResourceSpecificationRef": "#/components/schemas/ResourceSpecificationRef_FVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "version": {
+                "type": "string",
+                "description": "Resource Specification version"
+              }
+            },
+            "description": "Resources are physical or non-physical components (or some combination of these) within an enterprise's infrastructure or inventory. They are typically consumed or used by services (for example a physical port assigned to a service) or contribute to the realization of a Product (for example, a SIM card). They can be drawn from the Application, Computing and Network domains, and include, for example, Network Elements, software, IT systems, content and information, and technology components.\nA ResourceSpecification is an abstract base class for representing a generic means for implementing a particular type of Resource. In essence, a ResourceSpecification defines the common attributes and relationships of a set of related Resources, while Resource defines a specific instance that is based on a particular ResourceSpecification."
+          }
+        ]
+      },
+      "ResourceSpecificationRef_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "ResourceSpecificationRef": "#/components/schemas/ResourceSpecificationRef_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef_MVO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "version": {
+                "type": "string",
+                "description": "Resource Specification version"
+              }
+            },
+            "description": "Resources are physical or non-physical components (or some combination of these) within an enterprise's infrastructure or inventory. They are typically consumed or used by services (for example a physical port assigned to a service) or contribute to the realization of a Product (for example, a SIM card). They can be drawn from the Application, Computing and Network domains, and include, for example, Network Elements, software, IT systems, content and information, and technology components.\nA ResourceSpecification is an abstract base class for representing a generic means for implementing a particular type of Resource. In essence, a ResourceSpecification defines the common attributes and relationships of a set of related Resources, while Resource defines a specific instance that is based on a particular ResourceSpecification."
+          }
+        ]
+      },
+      "ResourceStatusType": {
+        "type": "string",
+        "description": "ResourceStatusType enumerations",
+        "enum": [
+          "alarm",
+          "available",
+          "installed",
+          "not exists",
+          "pendingRemoval",
+          "planned",
+          "reserved",
+          "standby",
+          "suspended",
+          "unknown"
+        ]
+      },
+      "ResourceUsageStateType": {
+        "type": "string",
+        "description": "ResourceUsageStateType enumerations; values defined by ITU X.731: 'idle': The resource is not currently in use; 'active': The resource is in use, and has sufficient spare operating capacity to provide for additional users simultaneously; 'busy': The resource is in use, but it has no spare operating capacity to provide for additional users at this instant.",
+        "enum": [
+          "idle",
+          "active",
+          "busy"
+        ]
+      },
+      "Resource_FVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "LogicalResource": "#/components/schemas/LogicalResource_FVO",
+            "PhysicalResource": "#/components/schemas/PhysicalResource_FVO",
+            "Resource": "#/components/schemas/Resource_FVO",
+            "ResourceCollection": "#/components/schemas/ResourceCollection_FVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Entity"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "category": {
+                "type": "string",
+                "description": "Category of the concrete resource. e.g Gold, Silver for MSISDN concrete resource"
+              },
+              "description": {
+                "type": "string",
+                "description": "free-text description of the resource"
+              },
+              "name": {
+                "type": "string",
+                "description": "the name of the resource"
+              },
+              "endOperatingDate": {
+                "type": "string",
+                "description": "A date time( DateTime). The date till the resource is operating",
+                "format": "date-time"
+              },
+              "administrativeState": {
+                "$ref": "#/components/schemas/ResourceAdministrativeStateType"
+              },
+              "operationalState": {
+                "$ref": "#/components/schemas/ResourceOperationalStateType"
+              },
+              "resourceStatus": {
+                "$ref": "#/components/schemas/ResourceStatusType"
+              },
+              "usageState": {
+                "$ref": "#/components/schemas/ResourceUsageStateType"
+              },
+              "validFor": {
+                "$ref": "#/components/schemas/TimePeriod"
+              },
+              "note": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Note_FVO"
+                }
+              },
+              "resourceOrderItem": {
+                "type": "array",
+                "description": "A list of resource order items related to this resource",
+                "items": {
+                  "$ref": "#/components/schemas/RelatedResourceOrderItem_FVO"
+                }
+              },
+              "place": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/RelatedPlaceRef_FVO"
+                }
+              },
+              "relatedParty": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/RelatedPartyRefOrPartyRoleRef_FVO"
+                }
+              },
+              "supportingResource": {
+                "type": "array",
+                "description": "A list of supporting resources (SupportingResource [*]). A collection of resources that support this resource (bundling, link ResourceSpecification)",
+                "items": {
+                  "$ref": "#/components/schemas/ResourceRefOrValue_FVO"
+                }
+              },
+              "resourceRelationship": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ResourceRelationship_FVO"
+                }
+              },
+              "resourceCharacteristic": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Characteristic_FVO"
+                }
+              },
+              "attachment": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/AttachmentOrDocumentRef"
+                }
+              },
+              "resourceSpecification": {
+                "$ref": "#/components/schemas/ResourceSpecificationRef_FVO"
+              },
+              "startOperatingDate": {
+                "type": "string",
+                "description": "A date time( DateTime). The date from which the resource is operating",
+                "format": "date-time"
+              },
+              "resourceVersion": {
+                "type": "string",
+                "description": "A field that identifies the specific version of an instance of a resource."
+              },
+              "activationFeature": {
+                "type": "array",
+                "description": "Configuration features",
+                "items": {
+                  "$ref": "#/components/schemas/Feature_FVO"
+                }
+              },
+              "intent": {
+                "$ref": "#/components/schemas/IntentRef_FVO"
+              },
+              "externalIdentifier": {
+                "type": "array",
+                "description": "An identification of this resource that is owned by or originates in a software system different from the current system. The structure identifies the system itself, the nature of the resource within the system and the unique ID of the resource within the system. It is anticipated that multiple external IDs can be held for a single resource, e.g. if the resource passed through multiple systems on the way to the current system.",
+                "items": {
+                  "$ref": "#/components/schemas/ExternalIdentifier_FVO"
+                }
+              }
+            },
+            "description": "Resource is an abstract entity that describes the common set of attributes shared by all concrete resources (e.g. TPE, EQUIPMENT) in the inventory."
+          }
+        ]
+      },
+      "Resource_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "LogicalResource": "#/components/schemas/LogicalResource_MVO",
+            "PhysicalResource": "#/components/schemas/PhysicalResource_MVO",
+            "Resource": "#/components/schemas/Resource_MVO",
+            "ResourceCollection": "#/components/schemas/ResourceCollection_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Entity"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "category": {
+                "type": "string",
+                "description": "Category of the concrete resource. e.g Gold, Silver for MSISDN concrete resource"
+              },
+              "description": {
+                "type": "string",
+                "description": "free-text description of the resource"
+              },
+              "name": {
+                "type": "string",
+                "description": "the name of the resource"
+              },
+              "endOperatingDate": {
+                "type": "string",
+                "description": "A date time( DateTime). The date till the resource is operating",
+                "format": "date-time"
+              },
+              "administrativeState": {
+                "$ref": "#/components/schemas/ResourceAdministrativeStateType"
+              },
+              "operationalState": {
+                "$ref": "#/components/schemas/ResourceOperationalStateType"
+              },
+              "resourceStatus": {
+                "$ref": "#/components/schemas/ResourceStatusType"
+              },
+              "usageState": {
+                "$ref": "#/components/schemas/ResourceUsageStateType"
+              },
+              "validFor": {
+                "$ref": "#/components/schemas/TimePeriod"
+              },
+              "note": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Note_MVO"
+                }
+              },
+              "resourceOrderItem": {
+                "type": "array",
+                "description": "A list of resource order items related to this resource",
+                "items": {
+                  "$ref": "#/components/schemas/RelatedResourceOrderItem_MVO"
+                }
+              },
+              "place": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/RelatedPlaceRef_MVO"
+                }
+              },
+              "relatedParty": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/RelatedPartyRefOrPartyRoleRef_MVO"
+                }
+              },
+              "supportingResource": {
+                "type": "array",
+                "description": "A list of supporting resources (SupportingResource [*]). A collection of resources that support this resource (bundling, link ResourceSpecification)",
+                "items": {
+                  "$ref": "#/components/schemas/ResourceRefOrValue_MVO"
+                }
+              },
+              "resourceRelationship": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ResourceRelationship_MVO"
+                }
+              },
+              "resourceCharacteristic": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Characteristic_MVO"
+                }
+              },
+              "attachment": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/AttachmentOrDocumentRef"
+                }
+              },
+              "resourceSpecification": {
+                "$ref": "#/components/schemas/ResourceSpecificationRef_MVO"
+              },
+              "startOperatingDate": {
+                "type": "string",
+                "description": "A date time( DateTime). The date from which the resource is operating",
+                "format": "date-time"
+              },
+              "resourceVersion": {
+                "type": "string",
+                "description": "A field that identifies the specific version of an instance of a resource."
+              },
+              "activationFeature": {
+                "type": "array",
+                "description": "Configuration features",
+                "items": {
+                  "$ref": "#/components/schemas/Feature_MVO"
+                }
+              },
+              "intent": {
+                "$ref": "#/components/schemas/IntentRef_MVO"
+              },
+              "externalIdentifier": {
+                "type": "array",
+                "description": "An identification of this resource that is owned by or originates in a software system different from the current system. The structure identifies the system itself, the nature of the resource within the system and the unique ID of the resource within the system. It is anticipated that multiple external IDs can be held for a single resource, e.g. if the resource passed through multiple systems on the way to the current system.",
+                "items": {
+                  "$ref": "#/components/schemas/ExternalIdentifier_MVO"
+                }
+              }
+            },
+            "description": "Resource is an abstract entity that describes the common set of attributes shared by all concrete resources (e.g. TPE, EQUIPMENT) in the inventory."
+          }
+        ]
+      },
+      "TimePeriod": {
+        "type": "object",
+        "properties": {
+          "startDateTime": {
+            "type": "string",
+            "description": "Start of the time period, using IETC-RFC-3339 format",
+            "format": "date-time",
+            "example": "1985-04-12T23:20:50.52Z"
+          },
+          "endDateTime": {
+            "type": "string",
+            "description": "End of the time period, using IETC-RFC-3339 format",
+            "format": "date-time",
+            "example": "1985-04-12T23:20:50.52Z"
+          }
+        },
+        "description": "A period of time, either as a deadline (endDateTime only) a startDateTime only, or both"
+      },
+      "Error": {
+        "description": "Used when an API throws an Error, typically with a HTTP error response-code (3xx, 4xx, 5xx)",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "Error": "#/components/schemas/Error"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "required": [
+              "code",
+              "reason"
+            ],
+            "type": "object",
+            "properties": {
+              "code": {
+                "type": "string",
+                "description": "Application relevant detail, defined in the API or a common list."
+              },
+              "reason": {
+                "type": "string",
+                "description": "Explanation of the reason for the error which can be shown to a client user."
+              },
+              "message": {
+                "type": "string",
+                "description": "More details and corrective actions related to the error which can be shown to a client user."
+              },
+              "status": {
+                "type": "string",
+                "description": "HTTP Error code extension"
+              },
+              "referenceError": {
+                "type": "string",
+                "description": "URI of documentation describing the error."
+              }
+            }
+          }
+        ]
+      },
+      "JsonPatch": {
+        "required": [
+          "op",
+          "path"
+        ],
+        "type": "object",
+        "properties": {
+          "op": {
+            "type": "string",
+            "description": "The operation to be performed",
+            "enum": [
+              "add",
+              "remove",
+              "replace",
+              "move",
+              "copy",
+              "test"
+            ]
+          },
+          "path": {
+            "type": "string",
+            "description": "A JSON-Pointer"
+          },
+          "value": {
+            "description": "The value to be used within the operations."
+          },
+          "from": {
+            "type": "string",
+            "description": "A string containing a JSON Pointer value."
+          }
+        },
+        "description": "A JSONPatch document as defined by RFC 6902"
+      },
+      "JsonPatchOperations": {
+        "type": "array",
+        "description": "JSONPatch Operations document as defined by RFC 6902",
+        "items": {
+          "$ref": "#/components/schemas/JsonPatch"
+        }
+      },
+      "Extensible_FVO": {
+        "required": [
+          "@type"
+        ],
+        "type": "object",
+        "properties": {
+          "@type": {
+            "type": "string",
+            "description": "When sub-classing, this defines the sub-class Extensible name"
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class"
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships"
+          }
+        },
+        "description": "Base Extensible schema for use in TMForum Open-APIs - When used for in a schema it means that the Entity described by the schema  MUST be extended with the @type"
+      },
+      "BooleanArrayCharacteristic": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "array",
+                "items": {
+                  "type": "boolean"
+                }
+              }
+            },
+            "description": "A characteristic which value is an array of Boolean(s)."
+          }
+        ]
+      },
+      "BooleanArrayCharacteristic_FVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic_FVO"
+          },
+          {
+            "required": [
+              "value"
+            ],
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "array",
+                "items": {
+                  "type": "boolean"
+                }
+              }
+            },
+            "description": "A characteristic which value is an array of Boolean(s)."
+          }
+        ]
+      },
+      "BooleanArrayCharacteristic_MVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic_MVO"
+          },
+          {
+            "required": [
+              "value"
+            ],
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "array",
+                "items": {
+                  "type": "boolean"
+                }
+              }
+            },
+            "description": "A characteristic which value is an array of Boolean(s)."
+          }
+        ]
+      },
+      "BooleanCharacteristic": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "boolean",
+                "description": "Value of the characteristic"
+              }
+            },
+            "description": "A characteristic which value is a Boolean."
+          }
+        ]
+      },
+      "BooleanCharacteristic_FVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic_FVO"
+          },
+          {
+            "required": [
+              "value"
+            ],
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "boolean",
+                "description": "Value of the characteristic"
+              }
+            },
+            "description": "A characteristic which value is a Boolean."
+          }
+        ]
+      },
+      "BooleanCharacteristic_MVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic_MVO"
+          },
+          {
+            "required": [
+              "value"
+            ],
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "boolean",
+                "description": "Value of the characteristic"
+              }
+            },
+            "description": "A characteristic which value is a Boolean."
+          }
+        ]
+      },
+      "FloatArrayCharacteristic": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "array",
+                "items": {
+                  "type": "number",
+                  "format": "float"
+                }
+              }
+            },
+            "description": "A characteristic which value is an array of Float(s)."
+          }
+        ]
+      },
+      "FloatArrayCharacteristic_FVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic_FVO"
+          },
+          {
+            "required": [
+              "value"
+            ],
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "array",
+                "items": {
+                  "type": "number",
+                  "format": "float"
+                }
+              }
+            },
+            "description": "A characteristic which value is an array of Float(s)."
+          }
+        ]
+      },
+      "FloatArrayCharacteristic_MVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic_MVO"
+          },
+          {
+            "required": [
+              "value"
+            ],
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "array",
+                "items": {
+                  "type": "number",
+                  "format": "float"
+                }
+              }
+            },
+            "description": "A characteristic which value is an array of Float(s)."
+          }
+        ]
+      },
+      "FloatCharacteristic": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "number",
+                "description": "Value of the characteristic",
+                "format": "float"
+              }
+            },
+            "description": "A characteristic which value is a Float."
+          }
+        ]
+      },
+      "FloatCharacteristic_FVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic_FVO"
+          },
+          {
+            "required": [
+              "value"
+            ],
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "number",
+                "description": "Value of the characteristic",
+                "format": "float"
+              }
+            },
+            "description": "A characteristic which value is a Float."
+          }
+        ]
+      },
+      "FloatCharacteristic_MVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic_MVO"
+          },
+          {
+            "required": [
+              "value"
+            ],
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "number",
+                "description": "Value of the characteristic",
+                "format": "float"
+              }
+            },
+            "description": "A characteristic which value is a Float."
+          }
+        ]
+      }
+    },
+    "responses": {
+      "202": {
+        "description": "Accepted"
+      },
+      "204": {
+        "description": "Deleted"
+      },
+      "400": {
+        "description": "Bad Request",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "examples": {
+              "basic": {
+                "summary": "Bad Request Error",
+                "value": {
+                  "@type": "Error",
+                  "code": "ERR400",
+                  "reason": "Bad Request",
+                  "message": "The server could not understand the request due to invalid syntax. Please correct the syntax and try again.",
+                  "referenceError": "https://host/errors"
+                }
+              }
+            }
+          }
+        }
+      },
+      "401": {
+        "description": "Unauthorized",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "examples": {
+              "basic": {
+                "summary": "Unauthorized Error",
+                "value": {
+                  "@type": "Error",
+                  "code": "ERR401",
+                  "reason": "Unauthorized",
+                  "message": "You are not authorized to access the requested resource. Please provide the correct credentials.",
+                  "referenceError": "https://host/errors"
+                }
+              }
+            }
+          }
+        }
+      },
+      "403": {
+        "description": "Forbidden",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "examples": {
+              "basic": {
+                "summary": "Forbidden Error",
+                "value": {
+                  "@type": "Error",
+                  "code": "ERR403",
+                  "reason": "Forbidden",
+                  "message": "You don't have the permission to access the requested resource. It is either read-protected or not readable by the server.",
+                  "referenceError": "https://host/errors"
+                }
+              }
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "Not Found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "examples": {
+              "basic": {
+                "summary": "Not Found Error",
+                "value": {
+                  "@type": "Error",
+                  "code": "ERR404",
+                  "reason": "Not Found",
+                  "message": "The requested URL was not found on the server.",
+                  "referenceError": "https://host/errors"
+                }
+              }
+            }
+          }
+        }
+      },
+      "405": {
+        "description": "Method Not allowed",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "examples": {
+              "basic": {
+                "summary": "Method Not allowed Error",
+                "value": {
+                  "@type": "Error",
+                  "code": "ERR405",
+                  "reason": "Method Not allowed",
+                  "message": "The method is not allowed for the requested URL.",
+                  "referenceError": "https://host/errors"
+                }
+              }
+            }
+          }
+        }
+      },
+      "409": {
+        "description": "Conflict",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "examples": {
+              "basic": {
+                "summary": "Conflict Error",
+                "value": {
+                  "@type": "Error",
+                  "code": "ERR409",
+                  "reason": "Conflict",
+                  "message": "The request could not be completed due to a conflict with the current state of the target resource.",
+                  "referenceError": "https://host/errors"
+                }
+              }
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "Internal Server Error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "examples": {
+              "basic": {
+                "summary": "Internal Server Error example",
+                "value": {
+                  "@type": "Error",
+                  "code": "ERR500",
+                  "reason": "Internal Server Error",
+                  "message": "The server encountered an internal error. Please contact the system administrator.",
+                  "referenceError": "https://host/errors"
+                }
+              }
+            }
+          }
+        }
+      },
+      "501": {
+        "description": "Not Implemented",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "examples": {
+              "basic": {
+                "summary": "Not Implemented Error",
+                "value": {
+                  "@type": "Error",
+                  "code": "ERR501",
+                  "reason": "The requested operation is not implemented",
+                  "message": "The requested operation is not implemented. Please contact the system administrator.",
+                  "referenceError": "https://host/errors"
+                }
+              }
+            }
+          }
+        }
+      },
+      "503": {
+        "description": "Service Unavailable",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "examples": {
+              "basic": {
+                "summary": "Service Unavailable Error",
+                "value": {
+                  "@type": "Error",
+                  "code": "ERR503",
+                  "reason": "Service Unavailable",
+                  "message": "The service is currently unavailable. Please try again later.",
+                  "referenceError": "https://host/errors"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200ResourceArray": {
+        "description": "Success",
+        "headers": {
+          "X-Total-Count": {
+            "$ref": "#/components/headers/X-Total-Count"
+          },
+          "X-Result-Count": {
+            "$ref": "#/components/headers/X-Result-Count"
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/Resource"
+              }
+            },
+            "examples": {
+              "Resource_list_example": {
+                "$ref": "#/components/examples/Resource_list_example_response"
+              }
+            }
+          }
+        }
+      },
+      "200Resource_Get": {
+        "description": "Success",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Resource"
+            },
+            "examples": {
+              "Resource_retrieve_example_1": {
+                "$ref": "#/components/examples/Resource_retrieve_example_1_response"
+              },
+              "Resource_retrieve_example_2": {
+                "$ref": "#/components/examples/Resource_retrieve_example_2_response"
+              }
+            }
+          }
+        }
+      },
+      "200Resource_Patch": {
+        "description": "Success",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Resource"
+            },
+            "examples": {
+              "updateResource_using_json": {
+                "$ref": "#/components/examples/updateResource_using_json_response"
+              }
+            }
+          }
+        }
+      },
+      "201Resource": {
+        "description": "OK/Created",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Resource"
+            },
+            "examples": {
+              "CreateResource_with_references_to_SubResource": {
+                "$ref": "#/components/examples/CreateResource_with_references_to_SubResource_response"
+              },
+              "CreateResource": {
+                "$ref": "#/components/examples/CreateResource_response"
+              }
+            }
+          }
+        }
+      }
+    },
+    "parameters": {
+      "Id": {
+        "name": "id",
+        "in": "path",
+        "description": "Identifier of the Resource",
+        "required": true,
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "Fields": {
+        "name": "fields",
+        "in": "query",
+        "description": "Comma-separated properties to be provided in response",
+        "required": false,
+        "style": "form",
+        "explode": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "Offset": {
+        "name": "offset",
+        "in": "query",
+        "description": "Requested index for start of resources to be provided in response",
+        "required": false,
+        "style": "form",
+        "explode": true,
+        "schema": {
+          "type": "integer"
+        }
+      },
+      "Limit": {
+        "name": "limit",
+        "in": "query",
+        "description": "Requested number of resources to be provided in response",
+        "required": false,
+        "style": "form",
+        "explode": true,
+        "schema": {
+          "type": "integer"
+        }
+      },
+      "Before": {
+        "name": "before",
+        "in": "query",
+        "description": "An opaque string value representing the page results before the cursor value",
+        "required": false,
+        "style": "form",
+        "explode": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "After": {
+        "name": "after",
+        "in": "query",
+        "description": "An opaque string value representing the page results after the cursor value",
+        "required": false,
+        "style": "form",
+        "explode": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "Sort": {
+        "name": "sort",
+        "in": "query",
+        "description": "The default direction is Ascending order, the use of the modifier in front of the sort field name, “-“, changes the sort order direction.",
+        "required": false,
+        "style": "form",
+        "explode": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "Filter": {
+        "name": "filter",
+        "in": "query",
+        "description": "Filter a collection using JSONPath",
+        "required": false,
+        "style": "form",
+        "explode": true,
+        "schema": {
+          "type": "string",
+          "example": "attachment[?(@size==300)]"
+        }
+      }
+    },
+    "examples": {
+      "Resource_list_example_response": {
+        "description": "Here's an example of a request for retrieving a list of Resource(s). The given criteria is the category (Router) and state (active).",
+        "value": [
+          {
+            "id": "8044",
+            "href": "http://server:port/resourceInventoryManagement/v5/resource/8044",
+            "description": "This is a Router resource with the category Router and with a reserved resourceStatus for organisations.",
+            "category": "Router",
+            "startOperatingDate": "2020-03-04T00:00:00.000Z",
+            "endOperatingDate": "2023-09-04T08:00:00.000Z",
+            "administrativeState": "locked",
+            "operationalState": "enable",
+            "usageState": "active",
+            "resourceStatus": "reserved",
+            "version": "v2",
+            "@type": "Resource",
+            "relatedParty": [
+              {
+                "role": "user",
+                "@type": "RelatedPartyRefOrPartyRoleRef",
+                "partyOrPartyRole": {
+                  "href": "https://server:port/tmf-api/partyManagement/v5/individual/456",
+                  "id": "456",
+                  "name": "John Doe",
+                  "@type": "PartyRef",
+                  "@referredType": "Individual"
+                }
+              }
+            ],
+            "note": [
+              {
+                "text": "something about this resource",
+                "@type": "Note"
+              }
+            ],
+            "place": [
+              {
+                "role": "installationAddress",
+                "@type": "RelatedPlaceRef",
+                "place": {
+                  "id": "9912",
+                  "href": "https://host:port/geographicAddressManagement/v5/geographicAddress/9912",
+                  "@type": "PlaceRef",
+                  "@referredType": "GeographicAddress"
+                }
+              }
+            ],
+            "resourceRelationship": [
+              {
+                "relationshipType": "contains",
+                "@type": "ResourceRelationship",
+                "resource": {
+                  "id": "44",
+                  "href": "http://server:port/resourceInventoryManagement/v5/resource/44",
+                  "@type": "ResourceRef"
+                }
+              },
+              {
+                "relationshipType": "contains",
+                "@type": "ResourceRelationship",
+                "resource": {
+                  "id": "45",
+                  "href": "http://server:port/resourceInventoryManagement/v5/resource/45",
+                  "@type": "ResourceRef"
+                }
+              }
+            ],
+            "resourceSpecification": {
+              "id": "4",
+              "href": " http://server:port/resourceCatalogManagement/v5/resourceSpecification/4",
+              "@type": "ResourceSpecificationRef",
+              "@referredType": "ResourceSpecification"
+            },
+            "externalIdentifier": [
+              {
+                "externalIdentifierType": "Supplier-Router-Id",
+                "id": "XYZ-1174-B",
+                "owner": "Supplier-A",
+                "@type": "ExternalIdentifier"
+              }
+            ],
+            "supportingResource": [
+              {
+                "id": "918273",
+                "href": "http://server:port/resourceInventoryManagement/v5/resource/918273",
+                "@type": "ResourceRef"
+              }
+            ],
+            "resourceCharacteristic": [
+              {
+                "name": "casing size",
+                "valueType": "String",
+                "value": "19\"",
+                "@type": "StringCharacteristic"
+              }
+            ],
+            "resourceOrderItem": [
+              {
+                "role": "supplier purchase",
+                "itemAction": "add",
+                "itemId": "1",
+                "resourceOrderId": "66588438-2",
+                "resourceOrderHref": "http://server:port/resourceOrderManagement/v5/resourceOrder/66588438-2",
+                "@type": "RelatedResourceOrderItem",
+                "@referredType": "ResourceOrderItem"
+              }
+            ],
+            "attachment": [
+              {
+                "id": "D-2024-05-13-X47",
+                "href": "http://server:port/documentManagement/v5/document/D-2024-05-13-X47",
+                "description": "delivery note",
+                "@type": "AttachmentRef",
+                "@referredType": "Document"
+              }
+            ]
+          }
+        ]
+      },
+      "Resource_retrieve_example_1_response": {
+        "description": "Here's an example of a request for retrieving a Resource. The given criteria is the Resource id 8044.",
+        "value": {
+          "id": "8044",
+          "href": "http://server:port/resourceInventoryManagement/v5/resource/8044",
+          "description": "This is a Router resource with the category Router and with a reserved resourceStatus for organisations.",
+          "category": "Router",
+          "startOperatingDate": "2020-08-04T00:00:00.000Z",
+          "endOperatingDate": "2023-09-04T08:00:00.000Z",
+          "administrativeState": "locked",
+          "operationalState": "enable",
+          "usageState": "active",
+          "resourceStatus": "reserved",
+          "version": "v2",
+          "@type": "Resource",
+          "relatedParty": [
+            {
+              "role": "user",
+              "@type": "RelatedPartyRefOrPartyRoleRef",
+              "partyOrPartyRole": {
+                "href": "https://server:port/tmf-api/partyManagement/v5/individual/456",
+                "id": "456",
+                "name": "John Doe",
+                "@type": "PartyRef",
+                "@referredType": "Individual"
+              }
+            }
+          ],
+          "note": [
+            {
+              "text": "something about this resource",
+              "@type": "Note"
+            }
+          ],
+          "place": [
+            {
+              "role": "installationAddress",
+              "@type": "RelatedPlaceRef",
+              "place": {
+                "id": "9912",
+                "href": "https://host:port/geographicAddressManagement/v5/geographicAddress/9912",
+                "@type": "PlaceRef",
+                "@referredType": "GeographicAddress"
+              }
+            }
+          ],
+          "resourceRelationship": [
+            {
+              "relationshipType": "contains",
+              "@type": "ResourceRelationship",
+              "resource": {
+                "id": "44",
+                "href": "http://server:port/resourceInventoryManagement/v5/resource/44",
+                "@type": "ResourceRef"
+              }
+            },
+            {
+              "relationshipType": "contains",
+              "@type": "ResourceRelationship",
+              "resource": {
+                "id": "45",
+                "href": "http://server:port/resourceInventoryManagement/v5/resource/45",
+                "@type": "ResourceRef"
+              }
+            }
+          ],
+          "resourceSpecification": {
+            "id": "4",
+            "href": " http://server:port/resourceCatalogManagement/v5/resourceSpecification/4",
+            "@type": "ResourceSpecificationRef",
+            "@referredType": "ResourceSpecification"
+          },
+          "externalIdentifier": [
+            {
+              "externalIdentifierType": "Supplier-Router-Id",
+              "id": "XYZ-1174-B",
+              "owner": "Supplier-A",
+              "@type": "ExternalIdentifier"
+            }
+          ],
+          "supportingResource": [
+            {
+              "id": "918273",
+              "href": "http://server:port/resourceInventoryManagement/v5/resource/918273",
+              "@type": "ResourceRef"
+            }
+          ],
+          "resourceCharacteristic": [
+            {
+              "name": "casing size",
+              "valueType": "String",
+              "value": "19\"",
+              "@type": "StringCharacteristic"
+            }
+          ],
+          "resourceOrderItem": [
+            {
+              "role": "supplier purchase",
+              "itemAction": "add",
+              "itemId": "1",
+              "resourceOrderId": "66588438-2",
+              "resourceOrderHref": "http://server:port/resourceOrderManagement/v5/resourceOrder/66588438-2",
+              "@type": "RelatedResourceOrderItem",
+              "@referredType": "ResourceOrderItem"
+            }
+          ],
+          "attachment": [
+            {
+              "id": "D-2024-05-13-X47",
+              "href": "http://server:port/documentManagement/v5/document/D-2024-05-13-X47",
+              "description": "delivery note",
+              "@type": "AttachmentRef",
+              "@referredType": "Document"
+            }
+          ]
+        }
+      },
+      "Resource_retrieve_example_2_response": {
+        "description": "Here's an example of a request for retrieving a Resource. The given criteria is the Resource id 8045.",
+        "value": {
+          "id": "8045",
+          "href": "http://server:port/resourceInventoryManagement/v5/resource/8045",
+          "category": "Router",
+          "startOperatingDate": "2020-08-04T00:00:00.000Z",
+          "administrativeState": "locked",
+          "operationalState": "enable",
+          "usageState": "active",
+          "resourceStatus": "reserved",
+          "version": "v2",
+          "@type": "Resource",
+          "resourceCharacteristic": [
+            {
+              "name": "premiumValue",
+              "valueType": "string",
+              "value": "gold",
+              "@type": "StringCharacteristic"
+            }
+          ],
+          "resourceSpecification": {
+            "id": "4",
+            "href": "http://server:port/resourceCatalogManagement/v5/resourceSpecification/4",
+            "@type": "ResourceSpecificationRef",
+            "@referredType": "ResourceSpecification"
+          }
+        }
+      },
+      "CreateResource_with_references_to_SubResource_request": {
+        "description": "POST Resource request example - only a subset of Resource attributes are used in this example",
+        "value": {
+          "category": "Router",
+          "name": "Name of the resource",
+          "startOperatingDate": "2020-08-04T00:00:00.000Z",
+          "administrativeState": "locked",
+          "operationalState": "enable",
+          "usageState": "active",
+          "resourceStatus": "reserved",
+          "version": "v2",
+          "@type": "Resource",
+          "relatedParty": [
+            {
+              "role": "user",
+              "@type": "RelatedPartyRefOrPartyRoleRef",
+              "partyOrPartyRole": {
+                "href": "https://server:port/tmf-api/partyManagement/v5/individual/456",
+                "id": "456",
+                "name": "John Doe",
+                "@type": "PartyRef",
+                "@referredType": "Individual"
+              }
+            }
+          ],
+          "note": [
+            {
+              "text": "router installed at the user's premise",
+              "@type": "Note"
+            }
+          ],
+          "place": [
+            {
+              "role": "installationAddress",
+              "@type": "RelatedPlaceRef",
+              "place": {
+                "id": "9912",
+                "href": "https://host:port/geographicAddressManagement/v5/geographicAddress/9912",
+                "@type": "PlaceRef",
+                "@referredType": "GeographicAddress"
+              }
+            }
+          ],
+          "resourceRelationship": [
+            {
+              "relationshipType": "contains",
+              "@type": "ResourceRelationship",
+              "resource": {
+                "id": "44",
+                "href": "http://server:port/resourceInventoryManagement/v5/resource/44",
+                "@type": "Resource"
+              }
+            },
+            {
+              "relationshipType": "contains",
+              "@type": "ResourceRelationship",
+              "resource": {
+                "id": "45",
+                "href": "http://server:port/resourceInventoryManagement/v5/resource/45",
+                "@type": "Resource"
+              }
+            }
+          ],
+          "resourceSpecification": {
+            "id": "4",
+            "href": " http://server:port/resourceCatalogManagement/v5/resourceSpecification/4",
+            "@type": "ResourceSpecificationRef",
+            "@referredType": "ResourceSpecification"
+          }
+        }
+      },
+      "CreateResource_with_references_to_SubResource_response": {
+        "description": "POST Resource response description.",
+        "value": {
+          "id": "8044",
+          "href": "http://server:port/resourceInventoryManagement/v5/resource/8044",
+          "category": "Router",
+          "name": "Name of the resource",
+          "startOperatingDate": "2020-08-04T00:00:00.000Z",
+          "administrativeState": "locked",
+          "operationalState": "enable",
+          "usageState": "active",
+          "resourceStatus": "reserved",
+          "version": "v2",
+          "@type": "Resource",
+          "relatedParty": [
+            {
+              "role": "user",
+              "@type": "RelatedPartyRefOrPartyRoleRef",
+              "partyOrPartyRole": {
+                "href": "https://server:port/tmf-api/partyManagement/v5/individual/456",
+                "id": "456",
+                "name": "John Doe",
+                "@type": "PartyRef",
+                "@referredType": "Individual"
+              }
+            }
+          ],
+          "note": [
+            {
+              "text": "router installed at the user's premise",
+              "@type": "Note"
+            }
+          ],
+          "place": [
+            {
+              "role": "installationAddress",
+              "@type": "RelatedPlaceRef",
+              "place": {
+                "id": "9912",
+                "href": "https://host:port/geographicAddressManagement/v5/geographicAddress/9912",
+                "@type": "PlaceRef",
+                "@referredType": "GeographicAddress"
+              }
+            }
+          ],
+          "resourceRelationship": [
+            {
+              "relationshipType": "contains",
+              "@type": "ResourceRelationship",
+              "resource": {
+                "id": "44",
+                "href": "http://server:port/resourceInventoryManagement/v5/resource/44",
+                "@type": "Resource"
+              }
+            },
+            {
+              "relationshipType": "contains",
+              "@type": "ResourceRelationship",
+              "resource": {
+                "id": "45",
+                "href": "http://server:port/resourceInventoryManagement/v5/resource/45",
+                "@type": "Resource"
+              }
+            }
+          ],
+          "resourceSpecification": {
+            "id": "4",
+            "href": " http://server:port/resourceCatalogManagement/v5/resourceSpecification/4",
+            "@type": "ResourceSpecificationRef",
+            "@referredType": "ResourceSpecification"
+          },
+          "externalIdentifier": [
+            {
+              "externalIdentifierType": "Supplier-Router-Id",
+              "id": "XYZ-1174-B",
+              "owner": "Supplier-A",
+              "@type": "ExternalIdentifier"
+            }
+          ],
+          "supportingResource": [
+            {
+              "id": "918273",
+              "href": "http://server:port/resourceInventoryManagement/v5/resource/918273",
+              "@type": "ResourceRef"
+            }
+          ],
+          "resourceCharacteristic": [
+            {
+              "name": "casing size",
+              "valueType": "String",
+              "value": "19\"",
+              "@type": "StringCharacteristic"
+            }
+          ],
+          "resourceOrderItem": [
+            {
+              "role": "supplier purchase",
+              "itemAction": "add",
+              "itemId": "1",
+              "resourceOrderId": "66588438-2",
+              "resourceOrderHref": "http://server:port/resourceOrderManagement/v5/resourceOrder/66588438-2",
+              "@type": "RelatedResourceOrderItem",
+              "@referredType": "ResourceOrderItem"
+            }
+          ],
+          "attachment": [
+            {
+              "id": "D-2024-05-13-X47",
+              "href": "http://server:port/documentManagement/v5/document/D-2024-05-13-X47",
+              "description": "delivery note",
+              "@type": "AttachmentRef",
+              "@referredType": "Document"
+            }
+          ]
+        }
+      },
+      "CreateResource_request": {
+        "description": "POST Resource request example - only a subset of Resource attributes are used in this example",
+        "value": {
+          "category": "Router",
+          "name": "Name of the resource",
+          "startOperatingDate": "2020-08-04T00:00:00.000Z",
+          "administrativeState": "locked",
+          "operationalState": "enable",
+          "usageState": "active",
+          "resourceStatus": "reserved",
+          "version": "v2",
+          "@type": "Resource",
+          "relatedParty": [
+            {
+              "role": "user",
+              "@type": "RelatedPartyRefOrPartyRoleRef",
+              "partyOrPartyRole": {
+                "href": "https://server:port/tmf-api/partyManagement/v5/individual/456",
+                "id": "456",
+                "name": "John Doe",
+                "@type": "PartyRef",
+                "@referredType": "Individual"
+              }
+            }
+          ],
+          "note": [
+            {
+              "text": "router installed at the user's premise",
+              "@type": "Note"
+            }
+          ],
+          "place": [
+            {
+              "role": "installationAddress",
+              "@type": "RelatedPlaceRef",
+              "place": {
+                "id": "9912",
+                "href": "https://host:port/geographicAddressManagement/v5/geographicAddress/9912",
+                "@type": "PlaceRef",
+                "@referredType": "GeographicAddress"
+              }
+            }
+          ],
+          "resourceRelationship": [
+            {
+              "relationshipType": "contains",
+              "@type": "ResourceRelationship",
+              "resource": {
+                "id": "44",
+                "href": "http://server:port/resourceInventoryManagement/v5/resource/44",
+                "@type": "Resource"
+              }
+            },
+            {
+              "relationshipType": "contains",
+              "@type": "ResourceRelationship",
+              "resource": {
+                "id": "45",
+                "href": "http://server:port/resourceInventoryManagement/v5/resource/45",
+                "@type": "Resource"
+              }
+            }
+          ],
+          "resourceSpecification": {
+            "id": "4",
+            "href": " http://server:port/resourceCatalogManagement/v5/resourceSpecification/4",
+            "@type": "ResourceSpecificationRef",
+            "@referredType": "ResourceSpecification"
+          }
+        }
+      },
+      "CreateResource_response": {
+        "description": "POST Resource response description.",
+        "value": {
+          "id": "8044",
+          "href": "http://server:port/resourceInventoryManagement/v5/resource/8044",
+          "category": "Router",
+          "name": "Name of the resource",
+          "startOperatingDate": "2020-08-04T00:00:00.000Z",
+          "administrativeState": "locked",
+          "operationalState": "enable",
+          "usageState": "active",
+          "resourceStatus": "reserved",
+          "version": "v2",
+          "@type": "Resource",
+          "relatedParty": [
+            {
+              "role": "user",
+              "@type": "RelatedPartyRefOrPartyRoleRef",
+              "partyOrPartyRole": {
+                "href": "https://server:port/tmf-api/partyManagement/v5/individual/456",
+                "id": "456",
+                "name": "John Doe",
+                "@type": "PartyRef",
+                "@referredType": "Individual"
+              }
+            }
+          ],
+          "note": [
+            {
+              "text": "router installed at the user's premise",
+              "@type": "Note"
+            }
+          ],
+          "place": [
+            {
+              "role": "installationAddress",
+              "@type": "RelatedPlaceRef",
+              "place": {
+                "id": "9912",
+                "href": "https://host:port/geographicAddressManagement/v5/geographicAddress/9912",
+                "@type": "PlaceRef",
+                "@referredType": "GeographicAddress"
+              }
+            }
+          ],
+          "resourceRelationship": [
+            {
+              "relationshipType": "contains",
+              "@type": "ResourceRelationship",
+              "resource": {
+                "id": "44",
+                "href": "http://server:port/resourceInventoryManagement/v5/resource/44",
+                "@type": "Resource"
+              }
+            },
+            {
+              "relationshipType": "contains",
+              "@type": "ResourceRelationship",
+              "resource": {
+                "id": "45",
+                "href": "http://server:port/resourceInventoryManagement/v5/resource/45",
+                "@type": "Resource"
+              }
+            }
+          ],
+          "resourceSpecification": {
+            "id": "4",
+            "href": " http://server:port/resourceCatalogManagement/v5/resourceSpecification/4",
+            "@type": "ResourceSpecificationRef",
+            "@referredType": "ResourceSpecification"
+          },
+          "externalIdentifier": [
+            {
+              "externalIdentifierType": "Supplier-Router-Id",
+              "id": "XYZ-1174-B",
+              "owner": "Supplier-A",
+              "@type": "ExternalIdentifier"
+            }
+          ],
+          "supportingResource": [
+            {
+              "id": "918273",
+              "href": "http://server:port/resourceInventoryManagement/v5/resource/918273",
+              "@type": "ResourceRef"
+            }
+          ],
+          "resourceCharacteristic": [
+            {
+              "name": "casing size",
+              "valueType": "String",
+              "value": "19\"",
+              "@type": "StringCharacteristic"
+            }
+          ],
+          "resourceOrderItem": [
+            {
+              "role": "supplier purchase",
+              "itemAction": "add",
+              "itemId": "1",
+              "resourceOrderId": "66588438-2",
+              "resourceOrderHref": "http://server:port/resourceOrderManagement/v5/resourceOrder/66588438-2",
+              "@type": "RelatedResourceOrderItem",
+              "@referredType": "ResourceOrderItem"
+            }
+          ],
+          "attachment": [
+            {
+              "id": "D-2024-05-13-X47",
+              "href": "http://server:port/documentManagement/v5/document/D-2024-05-13-X47",
+              "description": "delivery note",
+              "@type": "AttachmentRef",
+              "@referredType": "Document"
+            }
+          ]
+        }
+      },
+      "updateResource_using_json-patch-query_json_request": {
+        "description": "PATCH Resource request leveraging json-patch-query+json application example",
+        "value": [
+          {
+            "op": "replace",
+            "path": ".note[?(@.date=='2024-05-18T010:54:42.690Z')]",
+            "value": {
+              "text": "Port 1 configured"
+            }
+          }
+        ]
+      },
+      "updateResource_using_json-patch_json_request": {
+        "description": "PATCH Resource request leveraging json-patch+json application example",
+        "value": [
+          {
+            "op": "replace",
+            "path": "/administrativeState",
+            "value": "unlocked"
+          },
+          {
+            "op": "add",
+            "path": "/resourceRelationship",
+            "value": {
+              "relationshipType": "contains",
+              "@type": "ResourceRelationship",
+              "resource": {
+                "description": "This is Port 15 contained in the Router.",
+                "category": "Port",
+                "@type": "Resource",
+                "resourceSpecification": {
+                  "id": "1004",
+                  "href": " http://server:port/resourceCatalogManagement/v5/resourceSpecification/1004",
+                  "@type": "ResourceSpecificationRef",
+                  "@referredType": "ResourceSpecification"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "updateResource_using_merge-patch_json_request": {
+        "description": "PATCH Resource request leveraging merge-patch+json application example",
+        "value": {
+          "@type": "Resource",
+          "place": [
+            {
+              "@type": "RelatedPlaceRef",
+              "role": "installationAddress",
+              "place": {
+                "id": "9012",
+                "href": "https://host:port/geographicAddressManagement/v5/geographicAddress/9012",
+                "@type": "PlaceRef",
+                "@referredType": "GeographicAddress"
+              }
+            }
+          ]
+        }
+      },
+      "updateResource_using_json_request": {
+        "description": "PATCH Resource request leveraging json application example",
+        "value": {
+          "@type": "Resource",
+          "place": [
+            {
+              "@type": "RelatedPlaceRef",
+              "role": "installationAddress",
+              "place": {
+                "id": "9012",
+                "href": "https://host:port/geographicAddressManagement/v5/geographicAddress/9012",
+                "@type": "PlaceRef",
+                "@referredType": "GeographicAddress"
+              }
+            }
+          ]
+        }
+      },
+      "updateResource_using_json_response": {
+        "description": "Resource representation.",
+        "value": {
+          "id": "8044",
+          "href": "http://server:port/resourceInventoryManagement/v5/resource/8044",
+          "category": "Router",
+          "startOperatingDate": "2020-08-04T00:00:00.000Z",
+          "administrativeState": "locked",
+          "operationalState": "enable",
+          "usageState": "active",
+          "resourceStatus": "reserved",
+          "version": "v2",
+          "@type": "Resource",
+          "relatedParty": [
+            {
+              "role": "user",
+              "@type": "RelatedPartyRefOrPartyRoleRef",
+              "partyOrPartyRole": {
+                "href": "https://server:port/tmf-api/partyManagement/v5/individual/456",
+                "id": "456",
+                "name": "John Doe",
+                "@type": "PartyRef",
+                "@referredType": "Individual"
+              }
+            }
+          ],
+          "note": [
+            {
+              "text": "router installed at the user's premise",
+              "@type": "Note"
+            }
+          ],
+          "place": [
+            {
+              "role": "installationAddress",
+              "@type": "RelatedPlaceRef",
+              "place": {
+                "id": "9012",
+                "href": "https://host:port/geographicAddressManagement/v5/geographicAddress/9012",
+                "@type": "PlaceRef",
+                "@referredType": "GeographicAddress"
+              }
+            }
+          ],
+          "resourceRelationship": [
+            {
+              "relationshipType": "contains",
+              "@type": "ResourceRelationship",
+              "resource": {
+                "id": "44",
+                "href": "http://server:port/resourceInventoryManagement/v5/resource/44",
+                "description": "This is Port 1 contained in the Router.",
+                "category": "Port",
+                "@type": "Resource",
+                "resourceSpecification": {
+                  "id": "1004",
+                  "href": " http://server:port/resourceCatalogManagement/v5/resourceSpecification/1004",
+                  "@type": "ResourceSpecificationRef",
+                  "@referredType": "ResourceSpecification"
+                }
+              }
+            },
+            {
+              "relationshipType": "contains",
+              "@type": "ResourceRelationship",
+              "resource": {
+                "id": "45",
+                "href": "http://server:port/resourceInventoryManagement/v5/resource/45",
+                "description": "This is Port 2 contained in the Router.",
+                "category": "Port",
+                "@type": "Resource",
+                "resourceSpecification": {
+                  "id": "1004",
+                  "href": " http://server:port/resourceCatalogManagement/v5/resourceSpecification/1004",
+                  "@type": "ResourceSpecificationRef",
+                  "@referredType": "ResourceSpecification"
+                }
+              }
+            }
+          ],
+          "resourceSpecification": {
+            "id": "4",
+            "href": " http://server:port/resourceCatalogManagement/v5/resourceSpecification/4",
+            "@type": "ResourceSpecificationRef",
+            "@referredType": "ResourceSpecification"
+          },
+          "externalIdentifier": [
+            {
+              "externalIdentifierType": "Supplier-Router-Id",
+              "id": "XYZ-1174-B",
+              "owner": "Supplier-A",
+              "@type": "ExternalIdentifier"
+            }
+          ],
+          "supportingResource": [
+            {
+              "id": "918273",
+              "href": "http://server:port/resourceInventoryManagement/v5/resource/918273",
+              "@type": "ResourceRef"
+            }
+          ],
+          "resourceCharacteristic": [
+            {
+              "name": "casing size",
+              "valueType": "String",
+              "value": "19\"",
+              "@type": "StringCharacteristic"
+            }
+          ],
+          "resourceOrderItem": [
+            {
+              "role": "supplier purchase",
+              "itemAction": "add",
+              "itemId": "1",
+              "resourceOrderId": "66588438-2",
+              "resourceOrderHref": "http://server:port/resourceOrderManagement/v5/resourceOrder/66588438-2",
+              "@type": "RelatedResourceOrderItem",
+              "@referredType": "ResourceOrderItem"
+            }
+          ],
+          "attachment": [
+            {
+              "id": "D-2024-05-13-X47",
+              "href": "http://server:port/documentManagement/v5/document/D-2024-05-13-X47",
+              "description": "delivery note",
+              "@type": "AttachmentRef",
+              "@referredType": "Document"
+            }
+          ]
+        }
+      }
+    },
+    "requestBodies": {
+      "Resource_FVO": {
+        "description": "The Resource to be created",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Resource_FVO"
+            },
+            "examples": {
+              "CreateResource_with_references_to_SubResource": {
+                "$ref": "#/components/examples/CreateResource_with_references_to_SubResource_request"
+              },
+              "CreateResource": {
+                "$ref": "#/components/examples/CreateResource_request"
+              }
+            }
+          }
+        },
+        "required": true
+      },
+      "Resource_MVO": {
+        "description": "The Resource to be patched",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Resource_MVO"
+            },
+            "examples": {
+              "updateResource_using_json": {
+                "$ref": "#/components/examples/updateResource_using_json_request"
+              }
+            }
+          },
+          "application/merge-patch+json": {
+            "schema": {
+              "$ref": "#/components/schemas/Resource_MVO"
+            },
+            "examples": {
+              "updateResource_using_merge-patch_json": {
+                "$ref": "#/components/examples/updateResource_using_merge-patch_json_request"
+              }
+            }
+          },
+          "application/json-patch+json": {
+            "schema": {
+              "$ref": "#/components/schemas/JsonPatchOperations"
+            },
+            "examples": {
+              "updateResource_using_json-patch_json": {
+                "$ref": "#/components/examples/updateResource_using_json-patch_json_request"
+              }
+            }
+          },
+          "application/json-patch-query+json": {
+            "schema": {
+              "$ref": "#/components/schemas/JsonPatchOperations"
+            },
+            "examples": {
+              "updateResource_using_json-patch-query_json": {
+                "$ref": "#/components/examples/updateResource_using_json-patch-query_json_request"
+              }
+            }
+          }
+        },
+        "required": true
+      }
+    },
+    "headers": {
+      "X-Total-Count": {
+        "description": "Total number of items matching criteria",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "integer"
+        }
+      },
+      "X-Result-Count": {
+        "description": "Actual number of items returned in the response body",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "integer"
+        }
+      }
+    },
+    "securitySchemes": { }
+  }
+}

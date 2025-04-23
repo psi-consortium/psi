@@ -5,8 +5,6 @@
 
 # ServiceSpecificationRef
 
-Service specification reference: ServiceSpecification(s) required to realize a ProductSpecification.
-
 | Field | Type | Format | Required |
 | ------- | ------- | ------- | --- |
 | id | string | N/A | Yes |
@@ -14,9 +12,9 @@ Service specification reference: ServiceSpecification(s) required to realize a P
 | name | string | N/A | No |
 | version | string | N/A | No |
 | @baseType | string | N/A | No |
-| @schemaLocation | string | uri | No |
-| @type | string | N/A | No |
+| @schemaLocation | string | N/A | No |
 | @referredType | string | N/A | No |
+| @type | string | "ServiceSpecificationRef" | Yes |
 
 Table: Fields of ServiceSpecificationRef. {#tbl:ServiceSpecificationRef.md:ServiceSpecificationRef}
 

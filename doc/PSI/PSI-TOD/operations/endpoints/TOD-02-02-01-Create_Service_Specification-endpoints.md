@@ -3,4 +3,4 @@
                Do NOT manually edit this file! Any such changes will be overwritten!
 -->
 
-* POST /serviceCatalog/v1/serviceSpecification
+* POST /serviceCatalog/v2/serviceSpecification

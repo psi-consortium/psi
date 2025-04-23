@@ -3,4 +3,4 @@
                Do NOT manually edit this file! Any such changes will be overwritten!
 -->
 
-* POST /customerBillManagement/v1/customerBill
+* POST /customerBillManagement/v2/customerBill

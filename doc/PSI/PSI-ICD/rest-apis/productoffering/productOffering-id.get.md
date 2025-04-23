@@ -5,9 +5,7 @@
 
 # GET /productOffering/{id}
 
-**Absolute Path:** /productCatalog/v1/productOffering/{id}
-
-**TOD Reference:** TOD-02-04-04-View_Product_Offering
+**Absolute Path:** /productCatalogManagement/v2/productOffering/{id}
 
 **Summary:** Retrieves a ProductOffering by ID
 
@@ -15,8 +13,8 @@
 
 | Name | Type | Required | Description |
 | ------ | ------ | --- | ------------ |
-| id | string | Yes | Identifier of the ProductOffering |
-| fields | string | No | Comma-separated properties to provide in response |
+| id | string | Yes | Identifier of the Resource |
+| fields | string | No | Comma-separated properties to be provided in response |
 
 Table: Parameters of GET productOffering/{id}. {#tbl:productOffering-id.get.md:parameters}
 
@@ -30,8 +28,9 @@ Table: Parameters of GET productOffering/{id}. {#tbl:productOffering-id.get.md:p
 | 403 | Forbidden | Error |
 | 404 | Not Found | Error |
 | 405 | Method Not allowed | Error |
-| 409 | Conflict | Error |
 | 500 | Internal Server Error | Error |
+| 501 | Not Implemented | Error |
+| 503 | Service Unavailable | Error |
 
 Table: Responses of GET productOffering/{id}. {#tbl:productOffering-id.get.md:responses}
 

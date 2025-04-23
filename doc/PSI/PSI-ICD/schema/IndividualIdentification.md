@@ -5,21 +5,17 @@
 
 # IndividualIdentification
 
-Represents our registration of information used as proof of identity by an individual (passport, national identity card, drivers license, social security number, birth certificate)
-
 | Field | Type | Format | Required |
 | ------- | ------- | ------- | --- |
-| id | string | N/A | No |
-| href | string | uri | No |
 | identificationId | string | N/A | No |
-| identificationType | string | N/A | No |
 | issuingAuthority | string | N/A | No |
 | issuingDate | string | date-time | No |
-| attachment | AttachmentOrDocumentRef | N/A | No |
+| identificationType | string | N/A | No |
 | validFor | TimePeriod | N/A | No |
+| attachment | AttachmentOrDocumentRef | N/A | No |
 | @baseType | string | N/A | No |
-| @schemaLocation | string | uri | No |
-| @type | string | N/A | No |
+| @schemaLocation | string | N/A | No |
+| @type | string | "IndividualIdentification" | Yes |
 
 Table: Fields of IndividualIdentification. {#tbl:IndividualIdentification.md:IndividualIdentification}
 

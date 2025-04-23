@@ -9,7 +9,7 @@ ResourceStatusType enumerations
 
 | Field | Type | Format | Required |
 | ------- | ------- | ------- | --- |
-| ResourceStatusType | string | oneOf[standby, alarm, available, reserved, unknown, suspended] | No |
+| ResourceStatusType | string | oneOf[alarm, available, installed, not exists, pendingRemoval, planned, reserved, standby, suspended, unknown] | No |
 
 Table: Fields of ResourceStatusType. {#tbl:ResourceStatusType.md:ResourceStatusType}
 

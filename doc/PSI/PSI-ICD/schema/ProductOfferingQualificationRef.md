@@ -5,7 +5,7 @@
 
 # ProductOfferingQualificationRef
 
-It's a productOfferingQualification that has been executed previously
+A productOfferingQualification that has been executed previously
 
 | Field | Type | Format | Required |
 | ------- | ------- | ------- | --- |
@@ -13,9 +13,9 @@ It's a productOfferingQualification that has been executed previously
 | href | string | uri | No |
 | name | string | N/A | No |
 | @baseType | string | N/A | No |
-| @schemaLocation | string | uri | No |
-| @type | string | N/A | No |
+| @schemaLocation | string | N/A | No |
 | @referredType | string | N/A | No |
+| @type | string | "ProductOfferingQualificationRef" | Yes |
 
 Table: Fields of ProductOfferingQualificationRef. {#tbl:ProductOfferingQualificationRef.md:ProductOfferingQualificationRef}
 

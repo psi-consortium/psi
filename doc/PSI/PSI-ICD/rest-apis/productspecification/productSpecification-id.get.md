@@ -5,9 +5,7 @@
 
 # GET /productSpecification/{id}
 
-**Absolute Path:** /productCatalog/v1/productSpecification/{id}
-
-**TOD Reference:** TOD-02-03-04-View_Product_Specification
+**Absolute Path:** /productCatalogManagement/v2/productSpecification/{id}
 
 **Summary:** Retrieves a ProductSpecification by ID
 
@@ -15,8 +13,8 @@
 
 | Name | Type | Required | Description |
 | ------ | ------ | --- | ------------ |
-| id | string | Yes | Identifier of the ProductSpecification |
-| fields | string | No | Comma-separated properties to provide in response |
+| id | string | Yes | Identifier of the Resource |
+| fields | string | No | Comma-separated properties to be provided in response |
 
 Table: Parameters of GET productSpecification/{id}. {#tbl:productSpecification-id.get.md:parameters}
 
@@ -30,8 +28,9 @@ Table: Parameters of GET productSpecification/{id}. {#tbl:productSpecification-i
 | 403 | Forbidden | Error |
 | 404 | Not Found | Error |
 | 405 | Method Not allowed | Error |
-| 409 | Conflict | Error |
 | 500 | Internal Server Error | Error |
+| 501 | Not Implemented | Error |
+| 503 | Service Unavailable | Error |
 
 Table: Responses of GET productSpecification/{id}. {#tbl:productSpecification-id.get.md:responses}
 

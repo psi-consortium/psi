@@ -1,6 +1,6 @@
 {
     "id": "e058ed59-b184-4f9e-b8ce-0ba7b4e497d8",
-    "href": "https://localhost/psi-api/productCatalog/v1/productSpecification/e058ed59-b184-4f9e-b8ce-0ba7b4e497d8",
+    "href": "https://localhost/psi-api/productCatalog/v2/productSpecification/e058ed59-b184-4f9e-b8ce-0ba7b4e497d8",
     "targetProductSchema": {
         "@type": "InternetAccessProduct",
         "@schemaLocation": "https://localhost/psi-api/schema/Product/InternetAccessProduct.schema.json"
@@ -9,7 +9,7 @@
     "description": "Minimal example of a product specification for internet access.",
     "productSpecCharacteristic": [
         {
-            "id": "frequencyBand",
+            "id": "ipUniAccessLinkTrunk.satellitePhysicalLink.frequencyBand",
             "valueType": "string",
             "characteristicValueSpecification": [
                 {
@@ -18,7 +18,7 @@
             ]
         },
         {
-            "id": "forwardCIR",
+            "id": "ipUni.ingressBandwidthProfileEnvelope.cir",
             "valueType": "integer",
             "characteristicValueSpecification": [
                 {
@@ -36,7 +36,7 @@
             ]
         },
         {
-            "name": "returnCIR",
+            "name": "ipUni.egressBandwidthProfileEnvelope.cir",
             "valueType": "integer",
             "characteristicValueSpecification": [
                 {
@@ -54,7 +54,7 @@
             ]
         },
         {
-            "id": "latency",
+            "id": "ipvc.serviceLevelSpecification.oneWayMeanPacketDelay",
             "valueType": "integer",
             "characteristicValueSpecification": [
                 {
@@ -116,13 +116,13 @@
     "serviceSpecification": [
         {
             "id": "d34cc471-1b43-4661-b475-e261fd28c104",
-            "href": "https://localhost/psi-api/serviceCatalog/v1/serviceSpecification/d34cc471-1b43-4661-b475-e261fd28c104"
+            "href": "https://localhost/psi-api/serviceCatalog/v2/serviceSpecification/d34cc471-1b43-4661-b475-e261fd28c104"
         }
     ],
     "relatedParty": [
         {
             "id": "06046aed-55dc-4062-884c-a30082fa158c",
-            "href": "/psi-api/partyManagement/v1/organization/06046aed-55dc-4062-884c-a30082fa158c",
+            "href": "/psi-api/partyManagement/v2/organization/06046aed-55dc-4062-884c-a30082fa158c",
             "name": "ACME Inc.",
             "role": "Provider"
         }

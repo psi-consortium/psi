@@ -5,7 +5,7 @@
 
 # GET /serviceLevelSpecification/{id}
 
-**Absolute Path:** /serviceQuality/v1/serviceLevelSpecification/{id}
+**Absolute Path:** /serviceQualityManagement/v2/serviceLevelSpecification/{id}
 
 **TOD Reference:** TOD-06-02-04-View_Service_Level_Specification
 

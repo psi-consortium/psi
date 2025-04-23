@@ -64,6 +64,12 @@ dcr_overrides:
    version: 'MS10 [1.2.2]'
    author: 'Wolfgang Robben'
    message: 'No update, just version bump.'
+ - dcr:
+   from: '2025-02-04'
+   to: '2025-04-30'
+   version: 'MS11 [1.3.0]'
+   author: 'Wolfgang Robben'
+   message: 'No update, just version bump.'
 =end
 
 # Document Meta Information
@@ -73,7 +79,7 @@ dcr_overrides:
 |           | Name              | Function                       | Company         |
 | --------- | ----------------- | ------------------------------ | --------------- |
 | Author    | Wolfgang Robben   | Project Manager                | CGI             |
-| Approval  | Rui Goncalves     | Project Manager                | SES             |
+| Approval  | Victoria McCarthy | Project Manager                | SES             |
 | Checked   | Pepijn Witte      | Quality Assurance Manager      | CGI             |
 
 

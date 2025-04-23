@@ -3,4 +3,4 @@
                Do NOT manually edit this file! Any such changes will be overwritten!
 -->
 
-* PATCH /customerBillManagement/v1/customerBill/{id}
+* PATCH /customerBillManagement/v2/customerBill/{id}

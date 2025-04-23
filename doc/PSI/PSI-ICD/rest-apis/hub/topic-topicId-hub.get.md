@@ -5,7 +5,7 @@
 
 # GET /topic/{topicId}/hub
 
-**Absolute Path:** /eventManagement/v1/topic/{topicId}/hub
+**Absolute Path:** /event/v2/topic/{topicId}/hub
 
 **Summary:** List or find Hub subscription objects
 
@@ -24,7 +24,7 @@ Table: Parameters of GET topic/{topicId}/hub. {#tbl:topic-topicId-hub.get.md:par
 
 | Code | Description | Content |
 |------|-------------|---------|
-| 200 | Success | HubSubscription |
+| 200 | Success | N/A |
 | 400 | Bad Request | Error |
 | 401 | Unauthorized | Error |
 | 403 | Forbidden | Error |

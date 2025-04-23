@@ -5,7 +5,7 @@
 
 # GET /resourceTemplate/{id}
 
-**Absolute Path:** /resourceCatalog/v1/resourceTemplate/{id}
+**Absolute Path:** /resourceCatalog/v2/resourceTemplate/{id}
 
 **TOD Reference:** TOD-04-01-04-View_Resource_Template
 
@@ -15,8 +15,8 @@
 
 | Name | Type | Required | Description |
 | ------ | ------ | --- | ------------ |
-| id | string | Yes | The identifier of the ResourceTemplate. |
-| fields | string | No | Comma-separated properties to provide in response. |
+| id | string | Yes | Identifier of the Resource |
+| fields | string | No | Comma-separated properties to be provided in response |
 
 Table: Parameters of GET resourceTemplate/{id}. {#tbl:resourceTemplate-id.get.md:parameters}
 
@@ -30,8 +30,9 @@ Table: Parameters of GET resourceTemplate/{id}. {#tbl:resourceTemplate-id.get.md
 | 403 | Forbidden | Error |
 | 404 | Not Found | Error |
 | 405 | Method Not allowed | Error |
-| 409 | Conflict | Error |
 | 500 | Internal Server Error | Error |
+| 501 | Not Implemented | Error |
+| 503 | Service Unavailable | Error |
 
 Table: Responses of GET resourceTemplate/{id}. {#tbl:resourceTemplate-id.get.md:responses}
 

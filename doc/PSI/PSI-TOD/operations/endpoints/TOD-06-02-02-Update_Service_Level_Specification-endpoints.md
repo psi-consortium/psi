@@ -3,4 +3,4 @@
                Do NOT manually edit this file! Any such changes will be overwritten!
 -->
 
-* PATCH /serviceQuality/v1/serviceLevelSpecification/{id}
+* PATCH /serviceQualityManagement/v2/serviceLevelSpecification/{id}

@@ -3,4 +3,4 @@
                Do NOT manually edit this file! Any such changes will be overwritten!
 -->
 
-* GET /serviceCatalog/v1/serviceSpecification
+* GET /serviceCatalog/v2/serviceSpecification

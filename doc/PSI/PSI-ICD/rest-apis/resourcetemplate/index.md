@@ -5,7 +5,7 @@
 
 # resourceTemplate (/resourceCatalog)
 
-Resource Template API
+Operations for ResourceTemplate Resource
 
 @include [resourceTemplate.get.md](resourceTemplate.get.md)
 @include [resourceTemplate.post.md](resourceTemplate.post.md)

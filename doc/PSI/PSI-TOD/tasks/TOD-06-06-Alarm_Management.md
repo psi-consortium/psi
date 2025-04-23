@@ -18,10 +18,10 @@ participant Provider as PVD
 
 
 opt check available topics
-    PSS -> PVD ++ : GET /eventManagement/v1/topic
+    PSS -> PVD ++ : GET /eventManagement/v2/topic
     return [{"name": "alarm"}, ...]
 
-PSS -> PVD ++ : POST /eventManagement/v1/topic/alarm/hub\n{"callback": "https://.../eventManagement/v1/topic/alarm/event"}
+PSS -> PVD ++ : POST /eventManagement/v2/topic/alarm/hub\n{"callback": "https://.../eventManagement/v2/topic/alarm/event"}
 return
 
 end
@@ -30,10 +30,10 @@ end
 
 autonumber
 
-Customer -> PSS ++: POST /productOrdering/v1/productOrder
+Customer -> PSS ++: POST /productOrdering/v2/productOrder
 PSS -> Customer: {"id": 123}
 note over PSS: Order with attached SLS fulfillment
-Customer -> PSS: GET /productOrdering/v1/productOrder/123
+Customer -> PSS: GET /productOrdering/v2/productOrder/123
 return {"state": "Completed"}
 
 note over PVD: Start performance monitoring
@@ -42,10 +42,10 @@ note over PVD: Start performance monitoring
 
 note over PVD: Threshold crossed\nGenerate alarm
 
-PVD -> PSS ++ : POST /eventManagement/v1/topic/alarm/event\n{"value": {"@type": "Alarm", "id": 456}}
+PVD -> PSS ++ : POST /eventManagement/v2/topic/alarm/event\n{"value": {"@type": "Alarm", "id": 456}}
 return Ack
 
-Customer -> PSS ++: GET /alarm/v1/alarm
+Customer -> PSS ++: GET /alarm/v2/alarm
 return: [{"id": 456}, ...]
 
 @enduml

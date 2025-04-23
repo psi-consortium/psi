@@ -5,7 +5,7 @@
 
 # POST /serviceLevelObjective
 
-**Absolute Path:** /serviceQuality/v1/serviceLevelObjective
+**Absolute Path:** /serviceQualityManagement/v2/serviceLevelObjective
 
 **TOD Reference:** TOD-06-01-01-Create_Service_Level_Objective
 

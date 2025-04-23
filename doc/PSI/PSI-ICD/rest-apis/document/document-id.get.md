@@ -5,9 +5,7 @@
 
 # GET /document/{id}
 
-**Absolute Path:** /documentManagement/v1/document/{id}
-
-**TOD Reference:** TOD-01-03-04-View_Document
+**Absolute Path:** /document/v2/document/{id}
 
 **Summary:** Retrieves a Document by ID
 
@@ -15,8 +13,8 @@
 
 | Name | Type | Required | Description |
 | ------ | ------ | --- | ------------ |
-| id | string | Yes | Identifier of the Document |
-| fields | string | No | Comma-separated properties to provide in response |
+| id | string | Yes | Identifier of the Resource |
+| fields | string | No | Comma-separated properties to be provided in response |
 
 Table: Parameters of GET document/{id}. {#tbl:document-id.get.md:parameters}
 
@@ -30,8 +28,9 @@ Table: Parameters of GET document/{id}. {#tbl:document-id.get.md:parameters}
 | 403 | Forbidden | Error |
 | 404 | Not Found | Error |
 | 405 | Method Not allowed | Error |
-| 409 | Conflict | Error |
 | 500 | Internal Server Error | Error |
+| 501 | Not Implemented | Error |
+| 503 | Service Unavailable | Error |
 
 Table: Responses of GET document/{id}. {#tbl:document-id.get.md:responses}
 

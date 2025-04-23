@@ -5,23 +5,20 @@
 
 # FeatureSpecification
 
-Specification for resource, service or product features
-
 | Field | Type | Format | Required |
 | ------- | ------- | ------- | --- |
 | id | string | N/A | No |
-| href | string | uri | No |
 | name | string | N/A | No |
-| isBundle | boolean | N/A | No |
-| isEnabled | boolean | N/A | No |
 | version | string | N/A | No |
-| constraint | array | ConstraintRef | No |
-| featureSpecCharacteristic | array | FeatureSpecificationCharacteristic | No |
-| featureSpecRelationship | array | FeatureSpecificationRelationship | No |
+| isBundle | boolean | N/A | No |
 | validFor | TimePeriod | N/A | No |
+| featureSpecRelationship | array | FeatureSpecificationRelationship | No |
+| policyConstraint | array | PolicyRef | No |
+| isEnabled | boolean | N/A | No |
+| featureSpecCharacteristic | array | CharacteristicSpecification | No |
 | @baseType | string | N/A | No |
-| @schemaLocation | string | uri | No |
-| @type | string | N/A | No |
+| @schemaLocation | string | N/A | No |
+| @type | string | "FeatureSpecification" | Yes |
 
 Table: Fields of FeatureSpecification. {#tbl:FeatureSpecification.md:FeatureSpecification}
 

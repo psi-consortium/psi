@@ -3,4 +3,4 @@
                Do NOT manually edit this file! Any such changes will be overwritten!
 -->
 
-* DELETE /serviceQuality/v1/serviceLevelObjective/{id}
+* DELETE /serviceQualityManagement/v2/serviceLevelObjective/{id}

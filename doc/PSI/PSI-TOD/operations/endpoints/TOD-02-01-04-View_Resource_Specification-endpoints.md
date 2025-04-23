@@ -3,4 +3,4 @@
                Do NOT manually edit this file! Any such changes will be overwritten!
 -->
 
-* GET /resourceCatalog/v1/resourceSpecification/{id}
+* GET /resourceCatalog/v2/resourceSpecification/{id}

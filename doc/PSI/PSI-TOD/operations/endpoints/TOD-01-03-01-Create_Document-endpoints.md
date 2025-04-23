@@ -3,4 +3,4 @@
                Do NOT manually edit this file! Any such changes will be overwritten!
 -->
 
-* POST /documentManagement/v1/document
+* POST /documentManagement/v2/document

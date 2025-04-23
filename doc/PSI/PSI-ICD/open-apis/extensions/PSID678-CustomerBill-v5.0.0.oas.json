@@ -1,0 +1,345 @@
+{
+    "openapi": "3.0.1",
+    "paths": {
+        "/customerBill": {
+            "post": {
+                "tags": ["customerBill"],
+                "summary": "Creates a CustomerBill",
+                "description": "This operation creates a CustomerBill entity.",
+                "operationId": "createCustomerBill",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/Fields"
+                    }
+                ],
+                "requestBody": {
+                    "description": "The CustomerBill to be created.",
+                    "content": {
+                        "application/json;charset=utf-8": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CustomerBill_FVO"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "$ref": "#/components/responses/201CustomerBill"
+                    },
+                    "202": {
+                        "description": "Accepted"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "405": {
+                        "$ref": "#/components/responses/405"
+                    },
+                    "409": {
+                        "$ref": "#/components/responses/409"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    },
+                    "501": {
+                        "$ref": "#/components/responses/501"
+                    },
+                    "503": {
+                        "$ref": "#/components/responses/503"
+                    }
+                }
+            }
+        },
+        "/customerBill/{id}": {
+            "delete": {
+                "tags": ["customerBill"],
+                "summary": "Deletes a CustomerBill",
+                "description": "This operation deletes a CustomerBill entity.",
+                "operationId": "deleteCustomerBill",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/Id"
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "$ref": "#/components/responses/202"
+                    },
+                    "204": {
+                        "$ref": "#/components/responses/204"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "405": {
+                        "$ref": "#/components/responses/405"
+                    },
+                    "409": {
+                        "$ref": "#/components/responses/409"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    },
+                    "501": {
+                        "$ref": "#/components/responses/501"
+                    },
+                    "503": {
+                        "$ref": "#/components/responses/503"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "CustomerBill_FVO": {
+                "discriminator": {
+                    "propertyName": "@type",
+                    "mapping": {
+                        "CustomerBill": "#/components/schemas/CustomerBill_FVO"
+                    }
+                },
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/Entity_FVO"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "amountDue": {
+                                "$ref": "#/components/schemas/Money"
+                            },
+                            "appliedPayment": {
+                                "type": "array",
+                                "description": "Applied payment is a payment associated with the bill. There may be a partial payment, then there should be several applied payments available. On the other hand, more than one bill could be payed by one payment. In general there is an n:m relation between payment and bill.",
+                                "items": {
+                                    "$ref": "#/components/schemas/AppliedPayment"
+                                }
+                            },
+                            "billDate": {
+                                "type": "string",
+                                "description": "Bill date, external customer view (in consequence: different to the production date of the bill)",
+                                "format": "date-time"
+                            },
+                            "billDocument": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/AttachmentOrDocumentRef"
+                                }
+                            },
+                            "billNo": {
+                                "type": "string",
+                                "description": "Bill reference known by the customer or the party and displayed on the bill. Could be different from the id"
+                            },
+                            "billingAccount": {
+                                "$ref": "#/components/schemas/BillingAccountRef"
+                            },
+                            "billingPeriod": {
+                                "$ref": "#/components/schemas/TimePeriod"
+                            },
+                            "billCycle": {
+                                "$ref": "#/components/schemas/BillCycleRef"
+                            },
+                            "category": {
+                                "type": "string",
+                                "description": "Category of the bill produced : normal, duplicate, interim, last, trial customer or credit note for example"
+                            },
+                            "financialAccount": {
+                                "$ref": "#/components/schemas/FinancialAccountRef"
+                            },
+                            "lastUpdate": {
+                                "type": "string",
+                                "description": "Date of bill last update",
+                                "format": "date-time"
+                            },
+                            "nextBillDate": {
+                                "type": "string",
+                                "description": "). Approximate date of  the next bill production given for information (only used/meaningful for on cycle / regular bills)",
+                                "format": "date-time"
+                            },
+                            "paymentDueDate": {
+                                "type": "string",
+                                "description": "Date at which the amount due should have been paid",
+                                "format": "date-time"
+                            },
+                            "paymentMethod": {
+                                "$ref": "#/components/schemas/PaymentMethodRef"
+                            },
+                            "relatedParty": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/RelatedPartyRefOrPartyRoleRef"
+                                }
+                            },
+                            "remainingAmount": {
+                                "$ref": "#/components/schemas/Money"
+                            },
+                            "runType": {
+                                "$ref": "#/components/schemas/CustomerBillRunType"
+                            },
+                            "taxExcludedAmount": {
+                                "$ref": "#/components/schemas/Money"
+                            },
+                            "taxIncludedAmount": {
+                                "$ref": "#/components/schemas/Money"
+                            },
+                            "taxItem": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/TaxItem"
+                                }
+                            },
+                            "state": {
+                                "$ref": "#/components/schemas/CustomerBillStateType"
+                            },
+                            "productOrder": {
+                                "$ref": "#/components/schemas/ProductOrderRef"
+                            }
+                        },
+                        "description": "The customer bill. Can be a regular recurring bill or an extra bill on demand by the customer or the csp."
+                    }
+                ]
+            },
+            "CustomerBill_MVO": {
+                "discriminator": {
+                    "propertyName": "@type",
+                    "mapping": {
+                        "CustomerBill": "#/components/schemas/CustomerBill_MVO"
+                    }
+                },
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/Entity_MVO"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "amountDue": {
+                                "$ref": "#/components/schemas/Money"
+                            },
+                            "appliedPayment": {
+                                "type": "array",
+                                "description": "Applied payment is a payment associated with the bill. There may be a partial payment, then there should be several applied payments available. On the other hand, more than one bill could be payed by one payment. In general there is an n:m relation between payment and bill.",
+                                "items": {
+                                    "$ref": "#/components/schemas/AppliedPayment"
+                                }
+                            },
+                            "billDate": {
+                                "type": "string",
+                                "description": "Bill date, external customer view (in consequence: different to the production date of the bill)",
+                                "format": "date-time"
+                            },
+                            "billDocument": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/AttachmentOrDocumentRef"
+                                }
+                            },
+                            "billNo": {
+                                "type": "string",
+                                "description": "Bill reference known by the customer or the party and displayed on the bill. Could be different from the id"
+                            },
+                            "billingAccount": {
+                                "$ref": "#/components/schemas/BillingAccountRef"
+                            },
+                            "billingPeriod": {
+                                "$ref": "#/components/schemas/TimePeriod"
+                            },
+                            "billCycle": {
+                                "$ref": "#/components/schemas/BillCycleRef"
+                            },
+                            "category": {
+                                "type": "string",
+                                "description": "Category of the bill produced : normal, duplicate, interim, last, trial customer or credit note for example"
+                            },
+                            "financialAccount": {
+                                "$ref": "#/components/schemas/FinancialAccountRef"
+                            },
+                            "lastUpdate": {
+                                "type": "string",
+                                "description": "Date of bill last update",
+                                "format": "date-time"
+                            },
+                            "nextBillDate": {
+                                "type": "string",
+                                "description": "). Approximate date of  the next bill production given for information (only used/meaningful for on cycle / regular bills)",
+                                "format": "date-time"
+                            },
+                            "paymentDueDate": {
+                                "type": "string",
+                                "description": "Date at which the amount due should have been paid",
+                                "format": "date-time"
+                            },
+                            "paymentMethod": {
+                                "$ref": "#/components/schemas/PaymentMethodRef"
+                            },
+                            "relatedParty": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/RelatedPartyRefOrPartyRoleRef"
+                                }
+                            },
+                            "remainingAmount": {
+                                "$ref": "#/components/schemas/Money"
+                            },
+                            "runType": {
+                                "$ref": "#/components/schemas/CustomerBillRunType"
+                            },
+                            "taxExcludedAmount": {
+                                "$ref": "#/components/schemas/Money"
+                            },
+                            "taxIncludedAmount": {
+                                "$ref": "#/components/schemas/Money"
+                            },
+                            "taxItem": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/TaxItem"
+                                }
+                            },
+                            "state": {
+                                "$ref": "#/components/schemas/CustomerBillStateType"
+                            },
+                            "productOrder": {
+                                "$ref": "#/components/schemas/ProductOrderRef"
+                            }
+                        },
+                        "description": "The customer bill. Can be a regular recurring bill or an extra bill on demand by the customer or the csp."
+                    }
+                ]
+            },
+            "CustomerBillStateType": {
+                "type": "string",
+                "description": "Recommended Enumeration Type (not formal forced in standard): Valid values for the lifecycle state of the bill: new = 'bill is ready to validate or to sent', validated = 'bill is checked (manual / automatic)', sent = 'bill is sent with the channel defined in the billingaccount', settled = 'bill is payed', partiallySettled = 'bill is partially payed', onHold = 'bill will not be in further processing until open issues connected to the bill are solved', withdrawn = 'bill was withdrawn by the seller'",
+                "enum": [
+                    "new",
+                    "onHold",
+                    "validated",
+                    "sent",
+                    "settled",
+                    "partiallyPaid",
+                    "withdrawn"
+                ]
+            }
+        }
+    }
+}

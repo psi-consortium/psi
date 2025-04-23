@@ -5,7 +5,7 @@
 
 # GET /resourceSpecification/{id}
 
-**Absolute Path:** /resourceCatalog/v1/resourceSpecification/{id}
+**Absolute Path:** /resourceCatalog/v2/resourceSpecification/{id}
 
 **TOD Reference:** TOD-02-01-04-View_Resource_Specification
 
@@ -15,8 +15,8 @@
 
 | Name | Type | Required | Description |
 | ------ | ------ | --- | ------------ |
-| id | string | Yes | Identifier of the ResourceSpecification |
-| fields | string | No | Comma-separated properties to provide in response |
+| id | string | Yes | Identifier of the Resource |
+| fields | string | No | Comma-separated properties to be provided in response |
 
 Table: Parameters of GET resourceSpecification/{id}. {#tbl:resourceSpecification-id.get.md:parameters}
 
@@ -30,8 +30,9 @@ Table: Parameters of GET resourceSpecification/{id}. {#tbl:resourceSpecification
 | 403 | Forbidden | Error |
 | 404 | Not Found | Error |
 | 405 | Method Not allowed | Error |
-| 409 | Conflict | Error |
 | 500 | Internal Server Error | Error |
+| 501 | Not Implemented | Error |
+| 503 | Service Unavailable | Error |
 
 Table: Responses of GET resourceSpecification/{id}. {#tbl:resourceSpecification-id.get.md:responses}
 

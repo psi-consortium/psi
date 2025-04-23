@@ -5,7 +5,7 @@
 
 # individual (/partyManagement)
 
-Individual API
+Operations for Individual Resource
 
 @include [individual.get.md](individual.get.md)
 @include [individual.post.md](individual.post.md)

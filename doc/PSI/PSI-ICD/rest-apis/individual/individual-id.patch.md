@@ -5,7 +5,7 @@
 
 # PATCH /individual/{id}
 
-**Absolute Path:** /partyManagement/v1/individual/{id}
+**Absolute Path:** /partyManagement/v2/individual/{id}
 
 **TOD Reference:** TOD-01-01-02-Update_Party_Profile
 
@@ -15,7 +15,8 @@
 
 | Name | Type | Required | Description |
 | ------ | ------ | --- | ------------ |
-| id | string | Yes | Identifier of the Individual |
+| id | string | Yes | Identifier of the Resource |
+| fields | string | No | Comma-separated properties to be provided in response |
 
 Table: Parameters of PATCH individual/{id}. {#tbl:individual-id.patch.md:parameters}
 
@@ -23,7 +24,10 @@ Table: Parameters of PATCH individual/{id}. {#tbl:individual-id.patch.md:paramet
 
 | Content Type | Reference |
 |--------------|-----------|
-| application/json;charset=utf-8 | Individual_Update |
+| application/json | Individual_MVO |
+| application/merge-patch+json | Individual_MVO |
+| application/json-patch+json | JsonPatchOperations |
+| application/json-patch-query+json | JsonPatchOperations |
 
 Table: Request Body of PATCH individual/{id}. {#tbl:individual-id.patch.md:request_body}
 
@@ -31,7 +35,8 @@ Table: Request Body of PATCH individual/{id}. {#tbl:individual-id.patch.md:reque
 
 | Code | Description | Content |
 |------|-------------|---------|
-| 200 | Updated | Individual |
+| 200 | Success | Individual |
+| 202 | Accepted | N/A |
 | 400 | Bad Request | Error |
 | 401 | Unauthorized | Error |
 | 403 | Forbidden | Error |
@@ -39,6 +44,8 @@ Table: Request Body of PATCH individual/{id}. {#tbl:individual-id.patch.md:reque
 | 405 | Method Not allowed | Error |
 | 409 | Conflict | Error |
 | 500 | Internal Server Error | Error |
+| 501 | Not Implemented | Error |
+| 503 | Service Unavailable | Error |
 
 Table: Responses of PATCH individual/{id}. {#tbl:individual-id.patch.md:responses}
 

@@ -5,9 +5,7 @@
 
 # GET /serviceSpecification
 
-**Absolute Path:** /serviceCatalog/v1/serviceSpecification
-
-**TOD Reference:** TOD-02-02-05-View_All_Service_Specifications
+**Absolute Path:** /serviceManagement/v2/serviceSpecification
 
 **Summary:** List or find ServiceSpecification objects
 
@@ -25,14 +23,15 @@ Table: Parameters of GET serviceSpecification. {#tbl:serviceSpecification.get.md
 
 | Code | Description | Content |
 |------|-------------|---------|
-| 200 | Success | ServiceSpecification |
+| 200 | Success | N/A |
 | 400 | Bad Request | Error |
 | 401 | Unauthorized | Error |
 | 403 | Forbidden | Error |
 | 404 | Not Found | Error |
 | 405 | Method Not allowed | Error |
-| 409 | Conflict | Error |
 | 500 | Internal Server Error | Error |
+| 501 | Not Implemented | Error |
+| 503 | Service Unavailable | Error |
 
 Table: Responses of GET serviceSpecification. {#tbl:serviceSpecification.get.md:responses}
 

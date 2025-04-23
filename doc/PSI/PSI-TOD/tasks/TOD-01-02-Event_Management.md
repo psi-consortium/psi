@@ -32,23 +32,23 @@ participant PSS
 participant Provider as PVD
 
 opt check available topics
-    PSS -> PVD ++ : GET http://pvd.com/psi/event/v1/topic
+    PSS -> PVD ++ : GET http://pvd.com/psi/event/v2/topic
     return [{"name": "order"}, {"name": "inquiry"}, ...]
 end
 
 autonumber
 
-PSS -> PVD ++ : POST http://pvd.com/psi/event/v1/topic/order/hub\n{"callback": "http://pss.com/psi/event/v1/topic/order/event"}
+PSS -> PVD ++ : POST http://pvd.com/psi/event/v2/topic/order/hub\n{"callback": "http://pss.com/psi/event/v2/topic/order/event"}
 return {"id": "1a0f2e44-5490-4fe9-b58a-b2e9006c033f"}
 
 ...
 
 loop everytime an event occurs
-    PVD -> PSS ++ : POST http://pss.com/psi/event/v1/topic/order/event\n{"eventType": "updated", "value": {"@type": "Order", "id": "...."}}
+    PVD -> PSS ++ : POST http://pss.com/psi/event/v2/topic/order/event\n{"eventType": "updated", "value": {"@type": "Order", "id": "...."}}
     return Ack
 end
 
-PSS -> PVD ++ : DELETE http://pvd.com/psi/event/v1/topic/order/hub/{id}
+PSS -> PVD ++ : DELETE http://pvd.com/psi/event/v2/topic/order/hub/{id}
 return Ack
 @enduml
 ```

@@ -5,17 +5,25 @@
 
 # POST /resource
 
-**Absolute Path:** /resourceInventory/v1/resource
+**Absolute Path:** /resourceInventory/v2/resource
 
 **TOD Reference:** TOD-05-01-01-Create_Resource
 
 **Summary:** Creates a Resource
 
+## Parameters
+
+| Name | Type | Required | Description |
+| ------ | ------ | --- | ------------ |
+| fields | string | No | Comma-separated properties to be provided in response |
+
+Table: Parameters of POST resource. {#tbl:resource.post.md:parameters}
+
 ## Request Body
 
 | Content Type | Reference |
 |--------------|-----------|
-| application/json;charset=utf-8 | Resource_Create |
+| application/json | Resource_FVO |
 
 Table: Request Body of POST resource. {#tbl:resource.post.md:request_body}
 
@@ -23,13 +31,17 @@ Table: Request Body of POST resource. {#tbl:resource.post.md:request_body}
 
 | Code | Description | Content |
 |------|-------------|---------|
-| 201 | Created | Resource |
+| 201 | OK/Created | Resource |
+| 202 | Accepted | N/A |
 | 400 | Bad Request | Error |
 | 401 | Unauthorized | Error |
 | 403 | Forbidden | Error |
+| 404 | Not Found | Error |
 | 405 | Method Not allowed | Error |
 | 409 | Conflict | Error |
 | 500 | Internal Server Error | Error |
+| 501 | Not Implemented | Error |
+| 503 | Service Unavailable | Error |
 
 Table: Responses of POST resource. {#tbl:resource.post.md:responses}
 

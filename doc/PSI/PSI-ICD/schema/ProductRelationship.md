@@ -5,16 +5,16 @@
 
 # ProductRelationship
 
-Linked products to the one instantiate, such as [bundled] if the product is a bundle and you want to describe the bundled products inside this bundle; [reliesOn] if the product needs another already owned product to rely on (e.g.
-an option on an already owned mobile access product) [targets] or [isTargeted] (depending on the way of expressing the link) for any other kind of links that may be useful
-
 | Field | Type | Format | Required |
 | ------- | ------- | ------- | --- |
-| relationshipType | string | N/A | Yes |
-| product | ProductRefOrValue | N/A | Yes |
+| id | string | N/A | Yes |
+| href | string | uri | No |
+| name | string | N/A | No |
+| relationshipType | string | N/A | No |
 | @baseType | string | N/A | No |
-| @schemaLocation | string | uri | No |
-| @type | string | N/A | No |
+| @schemaLocation | string | N/A | No |
+| @referredType | string | N/A | No |
+| @type | string | "ProductRelationship" | Yes |
 
 Table: Fields of ProductRelationship. {#tbl:ProductRelationship.md:ProductRelationship}
 

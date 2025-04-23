@@ -5,9 +5,7 @@
 
 # PATCH /document/{id}
 
-**Absolute Path:** /documentManagement/v1/document/{id}
-
-**TOD Reference:** TOD-01-03-02-Update_Document
+**Absolute Path:** /document/v2/document/{id}
 
 **Summary:** Updates partially a Document
 
@@ -15,7 +13,8 @@
 
 | Name | Type | Required | Description |
 | ------ | ------ | --- | ------------ |
-| id | string | Yes | Identifier of the Document |
+| id | string | Yes | Identifier of the Resource |
+| fields | string | No | Comma-separated properties to be provided in response |
 
 Table: Parameters of PATCH document/{id}. {#tbl:document-id.patch.md:parameters}
 
@@ -23,7 +22,10 @@ Table: Parameters of PATCH document/{id}. {#tbl:document-id.patch.md:parameters}
 
 | Content Type | Reference |
 |--------------|-----------|
-| application/json;charset=utf-8 | Document_Update |
+| application/json | Document_MVO |
+| application/merge-patch+json | Document_MVO |
+| application/json-patch+json | JsonPatchOperations |
+| application/json-patch-query+json | JsonPatchOperations |
 
 Table: Request Body of PATCH document/{id}. {#tbl:document-id.patch.md:request_body}
 
@@ -31,7 +33,8 @@ Table: Request Body of PATCH document/{id}. {#tbl:document-id.patch.md:request_b
 
 | Code | Description | Content |
 |------|-------------|---------|
-| 200 | Updated | Document |
+| 200 | Success | Document |
+| 202 | Accepted | N/A |
 | 400 | Bad Request | Error |
 | 401 | Unauthorized | Error |
 | 403 | Forbidden | Error |
@@ -39,6 +42,8 @@ Table: Request Body of PATCH document/{id}. {#tbl:document-id.patch.md:request_b
 | 405 | Method Not allowed | Error |
 | 409 | Conflict | Error |
 | 500 | Internal Server Error | Error |
+| 501 | Not Implemented | Error |
+| 503 | Service Unavailable | Error |
 
 Table: Responses of PATCH document/{id}. {#tbl:document-id.patch.md:responses}
 

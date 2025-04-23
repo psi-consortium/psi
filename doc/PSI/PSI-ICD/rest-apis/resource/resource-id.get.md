@@ -5,7 +5,7 @@
 
 # GET /resource/{id}
 
-**Absolute Path:** /resourceInventory/v1/resource/{id}
+**Absolute Path:** /resourceInventory/v2/resource/{id}
 
 **TOD Reference:** TOD-05-01-04-View_Resource
 
@@ -16,7 +16,7 @@
 | Name | Type | Required | Description |
 | ------ | ------ | --- | ------------ |
 | id | string | Yes | Identifier of the Resource |
-| fields | string | No | Comma-separated properties to provide in response |
+| fields | string | No | Comma-separated properties to be provided in response |
 
 Table: Parameters of GET resource/{id}. {#tbl:resource-id.get.md:parameters}
 
@@ -30,8 +30,9 @@ Table: Parameters of GET resource/{id}. {#tbl:resource-id.get.md:parameters}
 | 403 | Forbidden | Error |
 | 404 | Not Found | Error |
 | 405 | Method Not allowed | Error |
-| 409 | Conflict | Error |
 | 500 | Internal Server Error | Error |
+| 501 | Not Implemented | Error |
+| 503 | Service Unavailable | Error |
 
 Table: Responses of GET resource/{id}. {#tbl:resource-id.get.md:responses}
 

@@ -3,4 +3,4 @@
                Do NOT manually edit this file! Any such changes will be overwritten!
 -->
 
-* DELETE /resourceInventory/v1/resource/{id}
+* DELETE /resourceInventory/v2/resource/{id}

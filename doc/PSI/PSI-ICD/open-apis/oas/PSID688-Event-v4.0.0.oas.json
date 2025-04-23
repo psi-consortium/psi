@@ -1,0 +1,1389 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Event Management API",
+    "description": "## TMF API Reference: TMF688 - Event Management \n\n### Release : 19.5 - December 2019\n\nThe TMF688 Event Management API supports the large scale publication and subscription of events, with multiple event types enabling an Event Driven Architecture. The Event Management API supports all notification types by the polymorphic event payload type.",
+    "version": "4.0.0"
+  },
+  "servers": [
+    {
+      "url": "/psi-api/event/v2/"
+    }
+  ],
+  "tags": [
+    {
+      "name": "event",
+      "description": "Event Listener API"
+    },
+    {
+      "name": "topic",
+      "description": "Event Topic API"
+    },
+    {
+      "name": "hub",
+      "description": "Event Hub API"
+    }
+  ],
+  "paths": {
+    "/topic/{topicId}/event": {
+      "get": {
+        "tags": [
+          "event"
+        ],
+        "summary": "List or find Event objects",
+        "description": "This operation list or find Event entities",
+        "operationId": "listEvent",
+        "parameters": [
+          {
+            "name": "topicId",
+            "in": "path",
+            "description": "Identifier of the parent Topic entity",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "Comma-separated properties to be provided in response",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Requested index for start of resources to be provided in response",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Requested number of resources to be provided in response",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "headers": {
+              "X-Total-Count": {
+                "description": "Total number of items matching criteria",
+                "schema": {
+                  "type": "integer"
+                }
+              },
+              "X-Result-Count": {
+                "description": "Actual number of items returned in the response body",
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            },
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Event"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method Not allowed",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "event"
+        ],
+        "summary": "Creates a Event",
+        "description": "This operation creates a Event entity.",
+        "operationId": "createEvent",
+        "parameters": [
+          {
+            "name": "topicId",
+            "in": "path",
+            "description": "Identifier of the parent Topic entity",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The Event to be created",
+          "content": {
+            "application/json;charset=utf-8": {
+              "schema": {
+                "$ref": "#/components/schemas/Event_Create"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Event"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method Not allowed",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "event"
+      }
+    },
+    "/topic": {
+      "get": {
+        "tags": [
+          "topic"
+        ],
+        "summary": "List or find Topic objects",
+        "description": "This operation list or find Topic entities",
+        "operationId": "listTopic",
+        "parameters": [
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "Comma-separated properties to be provided in response",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Requested index for start of resources to be provided in response",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Requested number of resources to be provided in response",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "headers": {
+              "X-Total-Count": {
+                "description": "Total number of items matching criteria",
+                "schema": {
+                  "type": "integer"
+                }
+              },
+              "X-Result-Count": {
+                "description": "Actual number of items returned in the response body",
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            },
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Topic"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method Not allowed",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/topic/{topicId}/hub": {
+      "get": {
+        "tags": [
+          "hub"
+        ],
+        "summary": "List or find Hub subscription objects",
+        "description": "The operation lists or finds Hub subscription entities.",
+        "operationId": "listHubSubscription",
+        "parameters": [
+          {
+            "name": "topicId",
+            "in": "path",
+            "description": "Identifier of the parent Topic entity",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "Comma-separated properties to be provided in response",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Requested index for start of resources to be provided in response",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Requested number of resources to be provided in response",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "headers": {
+              "X-Total-Count": {
+                "description": "Total number of items matching criteria",
+                "style": "simple",
+                "explode": false,
+                "schema": {
+                  "type": "integer"
+                }
+              },
+              "X-Result-Count": {
+                "description": "Actual number of items returned in the response body",
+                "style": "simple",
+                "explode": false,
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            },
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HubSubscription"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method Not allowed",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "hub"
+        ],
+        "summary": "Register listener to a Hub",
+        "description": "The operation registers a listener to a Hub.",
+        "operationId": "registerListener",
+        "parameters": [
+          {
+            "name": "topicId",
+            "in": "path",
+            "description": "Identifier of the parent Topic entity",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The Hub to be created",
+          "content": {
+            "application/json;charset=utf-8": {
+              "schema": {
+                "$ref": "#/components/schemas/HubSubscription_Create"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/HubSubscription"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method Not allowed",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "hub"
+      }
+    },
+    "/topic/{topicId}/hub/{id}": {
+      "delete": {
+        "tags": [
+          "hub"
+        ],
+        "summary": "Unregister listener from a Hub",
+        "description": "The operation unregisters a listener from a Hub.",
+        "operationId": "unregisterListener",
+        "parameters": [
+          {
+            "name": "topicId",
+            "in": "path",
+            "description": "Identifier of the parent Topic entity",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Identifier of the Hub",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Deleted",
+            "content": { }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method Not allowed",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Addressable": {
+        "type": "object",
+        "properties": {
+          "href": {
+            "type": "string",
+            "description": "Hyperlink reference",
+            "format": "uri"
+          },
+          "id": {
+            "type": "string",
+            "description": "unique identifier"
+          }
+        },
+        "description": "Base schema for adressable entities"
+      },
+      "Any": {
+        "type": "object"
+      },
+      "Characteristic": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "Characteristic": "#/components/schemas/Characteristic",
+            "StringCharacteristic": "#/components/schemas/StringCharacteristic",
+            "StringArrayCharacteristic": "#/components/schemas/StringArrayCharacteristic",
+            "ObjectCharacteristic": "#/components/schemas/ObjectCharacteristic",
+            "ObjectArrayCharacteristic": "#/components/schemas/ObjectArrayCharacteristic",
+            "NumberCharacteristic": "#/components/schemas/NumberCharacteristic",
+            "NumberArrayCharacteristic": "#/components/schemas/NumberArrayCharacteristic",
+            "IntegerCharacteristic": "#/components/schemas/IntegerCharacteristic",
+            "IntegerArrayCharacteristic": "#/components/schemas/IntegerArrayCharacteristic",
+            "FloatCharacteristic": "#/components/schemas/FloatCharacteristic",
+            "FloatArrayCharacteristic": "#/components/schemas/FloatArrayCharacteristic",
+            "BooleanCharacteristic": "#/components/schemas/BooleanCharacteristic",
+            "BooleanArrayCharacteristic": "#/components/schemas/BooleanArrayCharacteristic"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Unique identifier of the characteristic"
+              },
+              "name": {
+                "type": "string",
+                "description": "Name of the characteristic"
+              },
+              "valueType": {
+                "type": "string",
+                "description": "Data type of the value of the characteristic"
+              },
+              "characteristicRelationship": {
+                "type": "array",
+                "description": "Collection of characteristic relationships",
+                "items": {
+                  "$ref": "#/components/schemas/CharacteristicRelationship"
+                }
+              },
+              "unitOfMeasure": {
+                "type": "string",
+                "description": "A length, surface, volume, dry measure, liquid measure, money, weight, time, and the like. In general, a determinate quantity or magnitude of the kind designated, taken as a standard of comparison for others of the same kind, in assigning them to numerical values, as 1 foot, 1 yard, 1 mile, 1 square foot."
+              }
+            },
+            "description": "Describes a given characteristic of an object or entity through a name/value pair."
+          }
+        ]
+      },
+      "CharacteristicRelationship": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "CharacteristicRelationship": "#/components/schemas/CharacteristicRelationship"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Unique identifier of the characteristic"
+              },
+              "relationshipType": {
+                "type": "string",
+                "description": "The type of relationship"
+              }
+            },
+            "description": "Another Characteristic that is related to the current Characteristic;"
+          }
+        ]
+      },
+      "EntityRef": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "$ref": "#/components/schemas/Addressable"
+          },
+          {
+            "required": [
+              "id"
+            ],
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "The identifier of the referred entity."
+              },
+              "href": {
+                "type": "string",
+                "description": "The URI of the referred entity.",
+                "format": "uri"
+              },
+              "name": {
+                "type": "string",
+                "description": "Name of the referred entity."
+              },
+              "@referredType": {
+                "type": "string",
+                "description": "The actual type of the target instance when needed for disambiguation."
+              }
+            },
+            "description": "Entity reference schema to be use for all entityRef class."
+          }
+        ]
+      },
+      "Event": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "unique identifier"
+          },
+          "href": {
+            "type": "string",
+            "description": "Hyperlink reference",
+            "format": "uri"
+          },
+          "correlationId": {
+            "type": "string",
+            "description": "The correlation id for this event."
+          },
+          "description": {
+            "type": "string",
+            "description": "An explnatory of the event."
+          },
+          "domain": {
+            "type": "string",
+            "description": "The domain of the event."
+          },
+          "eventId": {
+            "type": "string",
+            "description": "The identifier of the notification."
+          },
+          "eventTime": {
+            "type": "string",
+            "description": "Time of the event occurrence.",
+            "format": "date-time"
+          },
+          "eventType": {
+            "type": "string",
+            "description": "The type of the notification."
+          },
+          "priority": {
+            "type": "string",
+            "description": "A priority."
+          },
+          "timeOccurred": {
+            "type": "string",
+            "description": "The time the event occurred.",
+            "format": "date-time"
+          },
+          "title": {
+            "type": "string",
+            "description": "The title of the event."
+          },
+          "analyticCharacteristic": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Characteristic"
+            }
+          },
+          "event": {
+            "$ref": "#/components/schemas/Any"
+          },
+          "relatedParty": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RelatedParty"
+            }
+          },
+          "reportingSystem": {
+            "$ref": "#/components/schemas/EntityRef"
+          },
+          "source": {
+            "$ref": "#/components/schemas/EntityRef"
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class"
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships",
+            "format": "uri"
+          },
+          "@type": {
+            "type": "string",
+            "description": "When sub-classing, this defines the sub-class Extensible name"
+          }
+        },
+        "description": "event with common attributes."
+      },
+      "Event_Create": {
+        "type": "object",
+        "properties": {
+          "correlationId": {
+            "type": "string",
+            "description": "The correlation id for this event."
+          },
+          "description": {
+            "type": "string",
+            "description": "An explnatory of the event."
+          },
+          "domain": {
+            "type": "string",
+            "description": "The domain of the event."
+          },
+          "eventId": {
+            "type": "string",
+            "description": "The identifier of the notification."
+          },
+          "eventTime": {
+            "type": "string",
+            "description": "Time of the event occurrence.",
+            "format": "date-time"
+          },
+          "eventType": {
+            "type": "string",
+            "description": "The type of the notification."
+          },
+          "priority": {
+            "type": "string",
+            "description": "A priority."
+          },
+          "timeOccurred": {
+            "type": "string",
+            "description": "The time the event occurred.",
+            "format": "date-time"
+          },
+          "title": {
+            "type": "string",
+            "description": "The title of the event."
+          },
+          "analyticCharacteristic": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Characteristic"
+            }
+          },
+          "event": {
+            "$ref": "#/components/schemas/Any"
+          },
+          "relatedParty": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RelatedParty"
+            }
+          },
+          "reportingSystem": {
+            "$ref": "#/components/schemas/EntityRef"
+          },
+          "source": {
+            "$ref": "#/components/schemas/EntityRef"
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class"
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships",
+            "format": "uri"
+          },
+          "@type": {
+            "type": "string",
+            "description": "When sub-classing, this defines the sub-class Extensible name"
+          }
+        },
+        "description": "event with common attributes.\nSkipped properties: id,href"
+      },
+      "Extensible": {
+        "required": [
+          "@type"
+        ],
+        "type": "object",
+        "properties": {
+          "@type": {
+            "type": "string",
+            "description": "When sub-classing, this defines the sub-class Extensible name"
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class"
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships"
+          }
+        },
+        "description": "Base Extensible schema for use in TMForum Open-APIs - When used for in a schema it means that the Entity described by the schema  MUST be extended with the @type"
+      },
+      "HubSubscription": {
+        "required": [
+          "callback",
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique-id for your subscription - referenced when updating or deleting a subscription",
+            "example": "4aafacbd-11ff-4dc8-b445-305f2215715f"
+          },
+          "href": {
+            "type": "string",
+            "description": "Hyperlink reference",
+            "format": "uri"
+          },
+          "callback": {
+            "type": "string",
+            "description": "The URI that will be POSTed to when a notification is triggered",
+            "format": "uri",
+            "example": "http://host/resource/id/listener"
+          },
+          "query": {
+            "type": "string",
+            "description": "This is a query string used to filter notifications in the context of the notifier",
+            "example": "status=active"
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class"
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships",
+            "format": "uri"
+          },
+          "@type": {
+            "type": "string",
+            "description": "When sub-classing, this defines the sub-class Extensible name"
+          }
+        },
+        "description": "A Hub is used to subscribe to an event notification"
+      },
+      "HubSubscription_Create": {
+        "required": [
+          "callback"
+        ],
+        "type": "object",
+        "properties": {
+          "callback": {
+            "type": "string",
+            "description": "The URI that will be POSTed to when a notification is triggered",
+            "format": "uri",
+            "example": "http://host/resource/id/listener"
+          },
+          "query": {
+            "type": "string",
+            "description": "This is a query string used to filter notifications in the context of the notifier",
+            "example": "status=active"
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class"
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships",
+            "format": "uri"
+          },
+          "@type": {
+            "type": "string",
+            "description": "When sub-classing, this defines the sub-class Extensible name"
+          }
+        },
+        "description": "A Hub is used to subscribe to an event notification\nSkipped properties: id,href"
+      },
+      "RelatedParty": {
+        "required": [
+          "@referredType",
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "unique identifier"
+          },
+          "href": {
+            "type": "string",
+            "description": "Hyperlink reference",
+            "format": "uri"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the related entity."
+          },
+          "role": {
+            "type": "string",
+            "description": "Role played by the related party"
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class"
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships",
+            "format": "uri"
+          },
+          "@type": {
+            "type": "string",
+            "description": "When sub-classing, this defines the sub-class Extensible name"
+          },
+          "@referredType": {
+            "type": "string",
+            "description": "The actual type of the target instance when needed for disambiguation."
+          }
+        },
+        "description": "Related Entity reference. A related party defines party or party role linked to a specific entity."
+      },
+      "Topic": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The identifier of the notification."
+          },
+          "href": {
+            "type": "string",
+            "description": "Reference of the related entity.",
+            "format": "uri"
+          },
+          "contentQuery": {
+            "type": "string",
+            "description": "is the filter that will be applied on the content of the Event."
+          },
+          "headerQuery": {
+            "type": "string",
+            "description": "is the filter that will be applied on the Event header properties."
+          },
+          "name": {
+            "type": "string",
+            "description": "use to identify grouping of events, per domain, per event types, per access control-right and so on."
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class"
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships",
+            "format": "uri"
+          },
+          "@type": {
+            "type": "string",
+            "description": "When sub-classing, this defines the sub-class Extensible name"
+          }
+        },
+        "description": "Is a event channel provided by the Event Streaming API"
+      },
+      "Error": {
+        "description": "Used when an API throws an Error, typically with a HTTP error response-code (3xx, 4xx, 5xx)",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "Error": "#/components/schemas/Error"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "required": [
+              "code",
+              "reason"
+            ],
+            "type": "object",
+            "properties": {
+              "code": {
+                "type": "string",
+                "description": "Application relevant detail, defined in the API or a common list."
+              },
+              "reason": {
+                "type": "string",
+                "description": "Explanation of the reason for the error which can be shown to a client user."
+              },
+              "message": {
+                "type": "string",
+                "description": "More details and corrective actions related to the error which can be shown to a client user."
+              },
+              "status": {
+                "type": "string",
+                "description": "HTTP Error code extension"
+              },
+              "referenceError": {
+                "type": "string",
+                "description": "URI of documentation describing the error."
+              }
+            }
+          }
+        ]
+      },
+      "BooleanArrayCharacteristic": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "array",
+                "items": {
+                  "type": "boolean"
+                }
+              }
+            },
+            "description": "A characteristic which value is an array of Boolean(s)."
+          }
+        ]
+      },
+      "BooleanCharacteristic": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "boolean",
+                "description": "Value of the characteristic"
+              }
+            },
+            "description": "A characteristic which value is a Boolean."
+          }
+        ]
+      },
+      "FloatArrayCharacteristic": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "array",
+                "items": {
+                  "type": "number",
+                  "format": "float"
+                }
+              }
+            },
+            "description": "A characteristic which value is an array of Float(s)."
+          }
+        ]
+      },
+      "FloatCharacteristic": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "number",
+                "description": "Value of the characteristic",
+                "format": "float"
+              }
+            },
+            "description": "A characteristic which value is a Float."
+          }
+        ]
+      }
+    }
+  },
+  "x-original-swagger-version": "2.0"
+}

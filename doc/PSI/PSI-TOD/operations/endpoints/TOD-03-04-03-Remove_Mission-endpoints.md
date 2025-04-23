@@ -3,4 +3,4 @@
                Do NOT manually edit this file! Any such changes will be overwritten!
 -->
 
-* DELETE /missionManagement/v1/mission/{id}
+* DELETE /missionManagement/v2/mission/{id}

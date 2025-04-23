@@ -1,0 +1,100 @@
+{
+    "openapi": "3.0.1",
+    "components": {
+        "schemas": {
+            "ProductOrderErrorMessage": {
+                "discriminator": {
+                    "propertyName": "@type",
+                    "mapping": {
+                        "ProductOrderErrorMessage": "#/components/schemas/ProductOrderErrorMessage"
+                    }
+                },
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/ErrorMessage"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "timestamp": {
+                                "type": "string",
+                                "description": "Date when the error happened",
+                                "format": "date-time"
+                            },
+                            "productOrderItem": {
+                                "type": "array",
+                                "description": "A list of order item references corresponded to this error",
+                                "items": {
+                                    "$ref": "#/components/schemas/ProductOrderItemRef"
+                                }
+                            }
+                        },
+                        "description": "A ProductOrderErrorMessage represents an error that causes a status change in a product order."
+                    }
+                ]
+            },
+            "ProductOrderErrorMessage_FVO": {
+                "discriminator": {
+                    "propertyName": "@type",
+                    "mapping": {
+                        "ProductOrderErrorMessage": "#/components/schemas/ProductOrderErrorMessage_FVO"
+                    }
+                },
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/ErrorMessage_FVO"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "timestamp": {
+                                "type": "string",
+                                "description": "Date when the error happened",
+                                "format": "date-time"
+                            },
+                            "productOrderItem": {
+                                "type": "array",
+                                "description": "A list of order item references corresponded to this error",
+                                "items": {
+                                    "$ref": "#/components/schemas/ProductOrderItemRef_FVO"
+                                }
+                            }
+                        },
+                        "description": "A ProductOrderErrorMessage represents an error that causes a status change in a product order."
+                    }
+                ]
+            },
+            "ProductOrderErrorMessage_MVO": {
+                "discriminator": {
+                    "propertyName": "@type",
+                    "mapping": {
+                        "ProductOrderErrorMessage": "#/components/schemas/ProductOrderErrorMessage_MVO"
+                    }
+                },
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/ErrorMessage_MVO"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "timestamp": {
+                                "type": "string",
+                                "description": "Date when the error happened",
+                                "format": "date-time"
+                            },
+                            "productOrderItem": {
+                                "type": "array",
+                                "description": "A list of order item references corresponded to this error",
+                                "items": {
+                                    "$ref": "#/components/schemas/ProductOrderItemRef_MVO"
+                                }
+                            }
+                        },
+                        "description": "A ProductOrderErrorMessage represents an error that causes a status change in a product order."
+                    }
+                ]
+            }
+        }
+    }
+}

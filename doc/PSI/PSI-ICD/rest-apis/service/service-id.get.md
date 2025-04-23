@@ -5,7 +5,7 @@
 
 # GET /service/{id}
 
-**Absolute Path:** /serviceInventory/v1/service/{id}
+**Absolute Path:** /serviceInventory/v2/service/{id}
 
 **TOD Reference:** TOD-05-02-04-View_Service
 
@@ -15,8 +15,8 @@
 
 | Name | Type | Required | Description |
 | ------ | ------ | --- | ------------ |
-| id | string | Yes | Identifier of the Service |
-| fields | string | No | Comma-separated properties to provide in response |
+| id | string | Yes | Identifier of the Resource |
+| fields | string | No | Comma-separated properties to be provided in response |
 
 Table: Parameters of GET service/{id}. {#tbl:service-id.get.md:parameters}
 
@@ -30,8 +30,9 @@ Table: Parameters of GET service/{id}. {#tbl:service-id.get.md:parameters}
 | 403 | Forbidden | Error |
 | 404 | Not Found | Error |
 | 405 | Method Not allowed | Error |
-| 409 | Conflict | Error |
 | 500 | Internal Server Error | Error |
+| 501 | Not Implemented | Error |
+| 503 | Service Unavailable | Error |
 
 Table: Responses of GET service/{id}. {#tbl:service-id.get.md:responses}
 

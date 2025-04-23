@@ -3,4 +3,4 @@
                Do NOT manually edit this file! Any such changes will be overwritten!
 -->
 
-* PATCH /customerInquiry/v1/customerInquiry/{id}
+* PATCH /customerInquiry/v2/customerInquiry/{id}

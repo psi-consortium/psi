@@ -5,7 +5,7 @@
 
 # POST /mission
 
-**Absolute Path:** /missionManagement/v1/mission
+**Absolute Path:** /missionManagement/v2/mission
 
 **TOD Reference:** TOD-03-04-01-Create_Mission
 
@@ -15,7 +15,7 @@
 
 | Content Type | Reference |
 |--------------|-----------|
-| application/json | Mission_Create |
+| application/json | Mission_FVO |
 
 Table: Request Body of POST mission. {#tbl:mission.post.md:request_body}
 

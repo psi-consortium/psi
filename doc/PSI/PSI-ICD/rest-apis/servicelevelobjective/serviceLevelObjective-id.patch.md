@@ -5,7 +5,7 @@
 
 # PATCH /serviceLevelObjective/{id}
 
-**Absolute Path:** /serviceQuality/v1/serviceLevelObjective/{id}
+**Absolute Path:** /serviceQualityManagement/v2/serviceLevelObjective/{id}
 
 **TOD Reference:** TOD-06-01-02-Update_Service_Level_Objective
 

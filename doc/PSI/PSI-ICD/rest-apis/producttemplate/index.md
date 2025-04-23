@@ -3,9 +3,9 @@
                Do NOT manually edit this file! Any such changes will be overwritten!
 -->
 
-# productTemplate (/productCatalog)
+# productTemplate (/productCatalogManagement)
 
-Product Template API
+Operations for ProductTemplate Resource
 
 @include [productTemplate.get.md](productTemplate.get.md)
 @include [productTemplate.post.md](productTemplate.post.md)

@@ -5,7 +5,7 @@
 
 # GET /suspendPerformanceJob
 
-**Absolute Path:** /performanceMonitoring/v1/suspendPerformanceJob
+**Absolute Path:** /performanceMonitoring/v2/suspendPerformanceJob
 
 **Summary:** Lists or finds SuspendPerformanceJob objects.
 
@@ -26,11 +26,11 @@ Table: Parameters of GET suspendPerformanceJob. {#tbl:suspendPerformanceJob.get.
 
 | Code | Description | Content |
 |------|-------------|---------|
-| 200 | Success | SuspendPerformanceJob_Find |
+| 200 | Success | N/A |
 | 400 | Bad Request | Error400 |
 | 401 | Unauthorized | Error401 |
 | 403 | Forbidden | Error403 |
-| 422 | Unprocessable entity due to the business validation problems | Error422 |
+| 422 | Unprocessable entity due to the business validation problems | N/A |
 | 500 | Internal Server Error | Error500 |
 | 501 | Method not implemented. | Error501 |
 

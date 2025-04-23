@@ -3,4 +3,4 @@
                Do NOT manually edit this file! Any such changes will be overwritten!
 -->
 
-* DELETE /serviceQuality/v1/serviceLevelSpecification/{id}
+* DELETE /serviceQualityManagement/v2/serviceLevelSpecification/{id}

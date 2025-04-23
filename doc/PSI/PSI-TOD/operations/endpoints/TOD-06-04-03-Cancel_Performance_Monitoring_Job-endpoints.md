@@ -3,4 +3,4 @@
                Do NOT manually edit this file! Any such changes will be overwritten!
 -->
 
-* POST /performanceMonitoring/v1/cancelPerformanceJob
+* POST /performanceMonitoring/v2/cancelPerformanceJob

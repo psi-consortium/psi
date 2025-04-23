@@ -5,7 +5,7 @@
 
 # GET /checkProductStock/{id}
 
-**Absolute Path:** /stock/v1/checkProductStock/{id}
+**Absolute Path:** /stock/v2/checkProductStock/{id}
 
 **TOD Reference:** TOD-05-04-01-Check_Product_Stock
 

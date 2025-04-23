@@ -5,7 +5,7 @@
 
 # DELETE /productOrder/{id}
 
-**Absolute Path:** /productOrdering/v1/productOrder/{id}
+**Absolute Path:** /productOrdering/v2/productOrder/{id}
 
 **Summary:** Deletes a ProductOrder
 
@@ -13,7 +13,7 @@
 
 | Name | Type | Required | Description |
 | ------ | ------ | --- | ------------ |
-| id | string | Yes | Identifier of the ProductOrder |
+| id | string | Yes | Identifier of the Resource |
 
 Table: Parameters of DELETE productOrder/{id}. {#tbl:productOrder-id.delete.md:parameters}
 
@@ -21,6 +21,7 @@ Table: Parameters of DELETE productOrder/{id}. {#tbl:productOrder-id.delete.md:p
 
 | Code | Description | Content |
 |------|-------------|---------|
+| 202 | Accepted | N/A |
 | 204 | Deleted | N/A |
 | 400 | Bad Request | Error |
 | 401 | Unauthorized | Error |
@@ -29,6 +30,8 @@ Table: Parameters of DELETE productOrder/{id}. {#tbl:productOrder-id.delete.md:p
 | 405 | Method Not allowed | Error |
 | 409 | Conflict | Error |
 | 500 | Internal Server Error | Error |
+| 501 | Not Implemented | Error |
+| 503 | Service Unavailable | Error |
 
 Table: Responses of DELETE productOrder/{id}. {#tbl:productOrder-id.delete.md:responses}
 

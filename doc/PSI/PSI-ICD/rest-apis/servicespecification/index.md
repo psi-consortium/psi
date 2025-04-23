@@ -3,9 +3,9 @@
                Do NOT manually edit this file! Any such changes will be overwritten!
 -->
 
-# serviceSpecification (/serviceCatalog)
+# serviceSpecification (/serviceManagement)
 
-Service Specification API
+Operations for ServiceSpecification Resource
 
 @include [serviceSpecification.get.md](serviceSpecification.get.md)
 @include [serviceSpecification.post.md](serviceSpecification.post.md)

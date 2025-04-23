@@ -5,9 +5,7 @@
 
 # GET /document/{documentId}/attachment/{attachmentId}
 
-**Absolute Path:** /documentManagement/v1/document/{documentId}/attachment/{attachmentId}
-
-**TOD Reference:** TOD-01-03-09-View_Attachment
+**Absolute Path:** /document/v2/document/{documentId}/attachment/{attachmentId}
 
 **Summary:** Retrieves an Attachment by ID
 
@@ -17,7 +15,7 @@
 | ------ | ------ | --- | ------------ |
 | documentId | string | Yes | The identifier of the Document. |
 | attachmentId | string | Yes | The identifier of the Attachment. |
-| fields | string | No | Comma-separated properties to provide in response. |
+| fields | string | No | Comma-separated properties to be provided in response |
 
 Table: Parameters of GET document/{documentId}/attachment/{attachmentId}. {#tbl:document-documentId-attachment-attachmentId.get.md:parameters}
 
@@ -31,8 +29,9 @@ Table: Parameters of GET document/{documentId}/attachment/{attachmentId}. {#tbl:
 | 403 | Forbidden | Error |
 | 404 | Not Found | Error |
 | 405 | Method Not allowed | Error |
-| 409 | Conflict | Error |
 | 500 | Internal Server Error | Error |
+| 501 | Not Implemented | Error |
+| 503 | Service Unavailable | Error |
 
 Table: Responses of GET document/{documentId}/attachment/{attachmentId}. {#tbl:document-documentId-attachment-attachmentId.get.md:responses}
 

@@ -3,4 +3,4 @@
                Do NOT manually edit this file! Any such changes will be overwritten!
 -->
 
-* DELETE /resourceCatalog/v1/resourceTemplate/{id}
+* DELETE /resourceCatalog/v2/resourceTemplate/{id}

@@ -5,7 +5,7 @@
 
 # GET /customerInquiry/{id}
 
-**Absolute Path:** /customerInquiry/v1/customerInquiry/{id}
+**Absolute Path:** /customerInquiry/v2/customerInquiry/{id}
 
 **TOD Reference:** TOD-03-01-02-View_Customer_Inquiry
 

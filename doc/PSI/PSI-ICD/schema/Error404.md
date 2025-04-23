@@ -10,14 +10,14 @@ Resource for the requested path not found.
 
 | Field | Type | Format | Required |
 | ------- | ------- | ------- | --- |
-| code | string | oneOf[notFound] | Yes |
+| code | string | N/A | Yes |
 | reason | string | N/A | Yes |
 | message | string | N/A | No |
 | status | string | N/A | No |
-| referenceError | string | uri | No |
+| referenceError | string | N/A | No |
 | @baseType | string | N/A | No |
-| @schemaLocation | string | uri | No |
-| @type | string | N/A | No |
+| @schemaLocation | string | N/A | No |
+| @type | string | N/A | Yes |
 
 Table: Fields of Error404. {#tbl:Error404.md:Error404}
 

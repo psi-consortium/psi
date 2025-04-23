@@ -1,0 +1,24 @@
+<!--
+    ATTENTION: This file was generated via gradle!
+               Do NOT manually edit this file! Any such changes will be overwritten!
+-->
+
+# ChannelRef_MVO
+
+The channel to which the resource reference to.
+e.g.
+channel for selling product offerings, channel for opening a trouble ticket etc..
+
+| Field | Type | Format | Required |
+| ------- | ------- | ------- | --- |
+| id | string | N/A | Yes |
+| href | string | uri | No |
+| name | string | N/A | No |
+| @baseType | string | N/A | No |
+| @schemaLocation | string | N/A | No |
+| @referredType | string | N/A | No |
+| @type | string | "ChannelRef" | Yes |
+
+Table: Fields of ChannelRef_MVO. {#tbl:ChannelRef_MVO.md:ChannelRef_MVO}
+
+{#page:break}

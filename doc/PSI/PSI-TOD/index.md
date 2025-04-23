@@ -70,6 +70,12 @@ dcr_overrides:
    version: 'MS10 [1.2.2]'
    author: 'Christian Grubert'
    message: 'Relative time model in mission API, mission asset management.'
+ - dcr:
+   from: '2025-02-04'
+   to: '2025-04-30'
+   version: 'MS11 [1.3.0]'
+   author: 'Christian Grubert'
+   message: 'Alarm Management, Monitoring API, Performance Management.'
 =end
 
 # Document Meta Information
@@ -82,7 +88,7 @@ dcr_overrides:
 | Author    | Christian Grubert | PSI Project Team               | CGI             |
 | Author    | Norbert Czeranka  | PSI Project Team               | CGI             |
 | Author    | Hendrik Oppenberg | Technical Officer              | CGI             |
-| Approval  | Rui Goncalves     | Project Manager                | SES             |
+| Approval  | Victoria McCarthy | Project Manager                | SES             |
 | Approval  | Wolfgang Robben   | Project Manager                | CGI             |
 | Checked   | Pepijn Witte      | Quality Assurance Manager      | CGI             |
 

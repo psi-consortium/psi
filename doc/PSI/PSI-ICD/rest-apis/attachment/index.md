@@ -3,9 +3,9 @@
                Do NOT manually edit this file! Any such changes will be overwritten!
 -->
 
-# attachment (/documentManagement)
+# attachment (/document)
 
-Attachment Management API
+Operations for Attachment Resource
 
 @include [document-documentId-attachment.get.md](document-documentId-attachment.get.md)
 @include [document-documentId-attachment.post.md](document-documentId-attachment.post.md)

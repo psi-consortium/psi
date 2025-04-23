@@ -5,7 +5,7 @@
 
 # GET /mission
 
-**Absolute Path:** /missionManagement/v1/mission
+**Absolute Path:** /missionManagement/v2/mission
 
 **TOD Reference:** TOD-03-04-05-View_All_Missions
 
@@ -25,7 +25,7 @@ Table: Parameters of GET mission. {#tbl:mission.get.md:parameters}
 
 | Code | Description | Content |
 |------|-------------|---------|
-| 200 | Success | Mission |
+| 200 | Success | N/A |
 | 400 | Bad Request | Error |
 | 401 | Unauthorized | Error |
 | 403 | Forbidden | Error |

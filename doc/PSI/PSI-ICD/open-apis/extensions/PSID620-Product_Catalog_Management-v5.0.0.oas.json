@@ -1,0 +1,370 @@
+{
+    "openapi": "3.0.1",
+    "tags": [
+        {
+            "name": "productTemplate",
+            "description": "Operations for ProductTemplate Resource"
+        }
+    ],
+    "paths": {
+        "/productTemplate": {
+            "get": {
+                "tags": ["productTemplate"],
+                "summary": "List or find ProductTemplate objects",
+                "description": "List or find ProductTemplate objects",
+                "operationId": "listProductTemplate",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/Fields"
+                    },
+                    {
+                        "$ref": "#/components/parameters/Offset"
+                    },
+                    {
+                        "$ref": "#/components/parameters/Limit"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/200ProductSpecificationArray"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "405": {
+                        "$ref": "#/components/responses/405"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    },
+                    "501": {
+                        "$ref": "#/components/responses/501"
+                    },
+                    "503": {
+                        "$ref": "#/components/responses/503"
+                    }
+                }
+            },
+            "post": {
+                "tags": ["productTemplate"],
+                "summary": "Creates a ProductTemplate",
+                "description": "This operation creates a ProductTemplate entity.",
+                "operationId": "createProductTemplate",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/Fields"
+                    }
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/ProductSpecification_FVO"
+                },
+                "responses": {
+                    "201": {
+                        "$ref": "#/components/responses/201ProductSpecification"
+                    },
+                    "202": {
+                        "description": "Accepted"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "405": {
+                        "$ref": "#/components/responses/405"
+                    },
+                    "409": {
+                        "$ref": "#/components/responses/409"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    },
+                    "501": {
+                        "$ref": "#/components/responses/501"
+                    },
+                    "503": {
+                        "$ref": "#/components/responses/503"
+                    }
+                }
+            }
+        },
+        "/productTemplate/{id}": {
+            "get": {
+                "tags": ["productTemplate"],
+                "summary": "Retrieves a ProductTemplate by ID",
+                "description": "This operation retrieves a ProductTemplate entity. Attribute selection enabled for all first level attributes.",
+                "operationId": "retrieveProductTemplate",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/Id"
+                    },
+                    {
+                        "$ref": "#/components/parameters/Fields"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/200ProductSpecification_Get"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "405": {
+                        "$ref": "#/components/responses/405"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    },
+                    "501": {
+                        "$ref": "#/components/responses/501"
+                    },
+                    "503": {
+                        "$ref": "#/components/responses/503"
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["productTemplate"],
+                "summary": "Deletes a ProductTemplate",
+                "description": "This operation deletes a ProductTemplate entity.",
+                "operationId": "deleteProductTemplate",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/Id"
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "$ref": "#/components/responses/202"
+                    },
+                    "204": {
+                        "$ref": "#/components/responses/204"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "405": {
+                        "$ref": "#/components/responses/405"
+                    },
+                    "409": {
+                        "$ref": "#/components/responses/409"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    },
+                    "501": {
+                        "$ref": "#/components/responses/501"
+                    },
+                    "503": {
+                        "$ref": "#/components/responses/503"
+                    }
+                }
+            },
+            "patch": {
+                "tags": ["productTemplate"],
+                "summary": "Updates partially a ProductTemplate",
+                "description": "This operation updates partially a ProductTemplate entity.",
+                "operationId": "patchProductTemplate",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/Id"
+                    },
+                    {
+                        "$ref": "#/components/parameters/Fields"
+                    }
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/ProductSpecification_MVO"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/200ProductSpecification_Patch"
+                    },
+                    "202": {
+                        "description": "Accepted"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "405": {
+                        "$ref": "#/components/responses/405"
+                    },
+                    "409": {
+                        "$ref": "#/components/responses/409"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    },
+                    "501": {
+                        "$ref": "#/components/responses/501"
+                    },
+                    "503": {
+                        "$ref": "#/components/responses/503"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "BundledGroupProductOffering": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "Locally unique identifier of the group, useful in case the parent product offering or group includes multiple groups.",
+                        "example": "1"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the group of child offerings. Required to distinguish several choice groups.",
+                        "example": "TV Channels"
+                    },
+                    "bundledProductOffering": {
+                        "type": "array",
+                        "description": "Child offerings, from which instances can be created as direct or hierarchically indirect children of the parent offering.",
+                        "items": {
+                            "$ref": "#/components/schemas/BundledProductOffering"
+                        }
+                    },
+                    "bundledGroupProductOffering": {
+                        "type": "array",
+                        "description": "Child groups of product offerings, to enable hierarchical sub-grouping.",
+                        "items": {
+                            "$ref": "#/components/schemas/BundledGroupProductOffering"
+                        }
+                    },
+                    "bundledGroupProductOfferingOption": {
+                        "$ref": "#/components/schemas/BundledGroupProductOfferingOption"
+                    }
+                },
+                "description": "A group of product offerings that can be chosen for instantiation of children of the parent product offering, for example a list of channels for selection under a TV offering. Sometimes known as Selection Group. The group can also hierarchically contain other groups"
+            },
+            "BundledGroupProductOfferingOption": {
+                "type": "object",
+                "properties": {
+                    "numberRelOfferLowerLimit": {
+                        "type": "integer",
+                        "description": "The minimum total number of instances of the child offerings directly of hierarchically in the group that should be instantiated",
+                        "example": 2
+                    },
+                    "numberRelOfferUpperLimit": {
+                        "type": "integer",
+                        "description": "The maximum total number of instances of the child offerings directly of hierarchically in the group that should be instantiated",
+                        "example": 7
+                    }
+                },
+                "description": "Defines for a BundledProductOfferingGroup (i.e. a group of multiple child offerings of a parent product offering), how many instances from the child offerings can be chosen in total. For example facilitate the choice of between 2 and 7 channel packs from a list, and cause certain items to be selected by default"
+            },
+            "BundledProductOffering": {
+                "discriminator": {
+                    "propertyName": "@type",
+                    "mapping": {
+                        "BundledProductOffering": "#/components/schemas/BundledProductOffering"
+                    }
+                },
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/ProductOfferingRef"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "bundledProductOfferingOption": {
+                                "$ref": "#/components/schemas/BundledProductOfferingOption"
+                            }
+                        },
+                        "description": "Represents a containment of a product offering within another product offering, including specification of cardinality (e.g. is the bundled offering mandatory, how many times can it be instantiated in the parent product, etc.)."
+                    }
+                ]
+            },
+            "BundledProductOffering_FVO": {
+                "discriminator": {
+                    "propertyName": "@type",
+                    "mapping": {
+                        "BundledProductOffering": "#/components/schemas/BundledProductOffering_FVO"
+                    }
+                },
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/ProductOfferingRef_FVO"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "bundledProductOfferingOption": {
+                                "$ref": "#/components/schemas/BundledProductOfferingOption_FVO"
+                            }
+                        },
+                        "description": "Represents a containment of a product offering within another product offering, including specification of cardinality (e.g. is the bundled offering mandatory, how many times can it be instantiated in the parent product, etc.)."
+                    }
+                ]
+            },
+            "BundledProductOffering_MVO": {
+                "discriminator": {
+                    "propertyName": "@type",
+                    "mapping": {
+                        "BundledProductOffering": "#/components/schemas/BundledProductOffering_MVO"
+                    }
+                },
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/ProductOfferingRef_MVO"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "bundledProductOfferingOption": {
+                                "$ref": "#/components/schemas/BundledProductOfferingOption_MVO"
+                            }
+                        },
+                        "description": "Represents a containment of a product offering within another product offering, including specification of cardinality (e.g. is the bundled offering mandatory, how many times can it be instantiated in the parent product, etc.)."
+                    }
+                ]
+            }
+        }
+    }
+}

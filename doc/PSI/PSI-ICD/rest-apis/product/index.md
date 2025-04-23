@@ -5,7 +5,7 @@
 
 # product (/productInventory)
 
-Product Inventory API
+Operations for Product Resource
 
 @include [product.get.md](product.get.md)
 @include [product.post.md](product.post.md)

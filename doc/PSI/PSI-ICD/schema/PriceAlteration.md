@@ -5,22 +5,20 @@
 
 # PriceAlteration
 
-Is an amount, usually of money, that modifies the price charged for an order item.
-
 | Field | Type | Format | Required |
 | ------- | ------- | ------- | --- |
 | name | string | N/A | No |
 | description | string | N/A | No |
 | applicationDuration | integer | N/A | No |
-| priceType | string | N/A | Yes |
+| productOfferingPrice | ProductOfferingPriceRef | N/A | No |
+| priceType | string | N/A | No |
 | priority | integer | N/A | No |
 | recurringChargePeriod | string | N/A | No |
 | unitOfMeasure | string | N/A | No |
-| price | Price | N/A | Yes |
-| productOfferingPrice | ProductOfferingPriceRef | N/A | No |
+| price | Price | N/A | No |
 | @baseType | string | N/A | No |
-| @schemaLocation | string | uri | No |
-| @type | string | N/A | No |
+| @schemaLocation | string | N/A | No |
+| @type | string | "PriceAlteration" | Yes |
 
 Table: Fields of PriceAlteration. {#tbl:PriceAlteration.md:PriceAlteration}
 

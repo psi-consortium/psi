@@ -5,20 +5,19 @@
 
 # ProductOfferingRelationship
 
-A relationship between two product Offerings.
-
 | Field | Type | Format | Required |
 | ------- | ------- | ------- | --- |
-| id | string | N/A | No |
+| id | string | N/A | Yes |
 | href | string | uri | No |
 | name | string | N/A | No |
-| relationshipType | string | N/A | No |
 | role | string | N/A | No |
 | validFor | TimePeriod | N/A | No |
+| relationshipType | string | N/A | No |
+| version | string | N/A | No |
 | @baseType | string | N/A | No |
-| @schemaLocation | string | uri | No |
-| @type | string | N/A | No |
+| @schemaLocation | string | N/A | No |
 | @referredType | string | N/A | No |
+| @type | string | "ProductOfferingRelationship" | Yes |
 
 Table: Fields of ProductOfferingRelationship. {#tbl:ProductOfferingRelationship.md:ProductOfferingRelationship}
 

@@ -5,7 +5,7 @@
 
 # POST /customerInquiry
 
-**Absolute Path:** /customerInquiry/v1/customerInquiry
+**Absolute Path:** /customerInquiry/v2/customerInquiry
 
 **TOD Reference:** TOD-03-01-01-Create_Customer_Inquiry
 
@@ -15,7 +15,7 @@
 
 | Content Type | Reference |
 |--------------|-----------|
-| application/json | CustomerInquiry_Create |
+| application/json | CustomerInquiry_FVO |
 
 Table: Request Body of POST customerInquiry. {#tbl:customerInquiry.post.md:request_body}
 

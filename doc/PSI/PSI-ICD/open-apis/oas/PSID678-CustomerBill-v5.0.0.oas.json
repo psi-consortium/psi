@@ -1,0 +1,1885 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "CustomerBill",
+    "description": "The Customer Bill Management API allows to find and retrieve one or several customer bills (also called invoices) produced for a customer. A customer bill is an electronic or paper document produced at the end of the billing process. The customer bill gathers and displays different items (applied customer billing rates generated during the rating and billing processes) to be charged to a customer. It represents a total amount due for all the products during the billing period and all significant information like dates, bill reference...\nThis API provides also operations to find and retrieve the details of applied customer billing rates presented on a customer bill. \nFinally, this API allows to request in real-time a customer bill creation and to manage this request.\n### Resources \n- customerBill\n- appliedCustomerBillingRate\n- customerBillOnDemand\n- billingCycle\n### Operations\nCustomer Bill Management API performs the following operations :\n- Retrieve a customer bill or a collection of customer bills depending on filter criteria.\n- Partial update of  a customer bill (for administration purposes).\n-  Retrieve an applied customer billing rate or a collection of applied customer billing rates depending on filter criteria.\n-  Create a customer bill on demand request, retrieve one or a collection of  customer bill on demand request(s) depending on filter criteria.\n- Manage notification of events on customer bill and customer bill on demand.",
+    "version": "5.0.0"
+  },
+  "servers": [
+    {
+      "url": "/psi-api/customerBillManagement/v2/"
+    }
+  ],
+  "tags": [
+    {
+      "name": "customerBill",
+      "description": "Operations for CustomerBill Resource"
+    }
+  ],
+  "paths": {
+    "/customerBill": {
+      "get": {
+        "tags": [
+          "customerBill"
+        ],
+        "summary": "List or find CustomerBill objects",
+        "description": "List or find CustomerBill objects",
+        "operationId": "listCustomerBill",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Fields"
+          },
+          {
+            "$ref": "#/components/parameters/Offset"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200CustomerBillArray"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "405": {
+            "$ref": "#/components/responses/405"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+          "501": {
+            "$ref": "#/components/responses/501"
+          },
+          "503": {
+            "$ref": "#/components/responses/503"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "customerBill"
+        ],
+        "summary": "Creates a CustomerBill",
+        "description": "This operation creates a CustomerBill entity.",
+        "operationId": "createCustomerBill",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Fields"
+          }
+        ],
+        "requestBody": {
+          "description": "The CustomerBill to be created.",
+          "content": {
+            "application/json;charset=utf-8": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomerBill_FVO"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/201CustomerBill"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "405": {
+            "$ref": "#/components/responses/405"
+          },
+          "409": {
+            "$ref": "#/components/responses/409"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+          "501": {
+            "$ref": "#/components/responses/501"
+          },
+          "503": {
+            "$ref": "#/components/responses/503"
+          }
+        }
+      }
+    },
+    "/customerBill/{id}": {
+      "get": {
+        "tags": [
+          "customerBill"
+        ],
+        "summary": "Retrieves a CustomerBill by ID",
+        "description": "This operation retrieves a CustomerBill entity. Attribute selection enabled for all first level attributes.",
+        "operationId": "retrieveCustomerBill",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Id"
+          },
+          {
+            "$ref": "#/components/parameters/Fields"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200CustomerBill_Get"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "405": {
+            "$ref": "#/components/responses/405"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+          "501": {
+            "$ref": "#/components/responses/501"
+          },
+          "503": {
+            "$ref": "#/components/responses/503"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "customerBill"
+        ],
+        "summary": "Deletes a CustomerBill",
+        "description": "This operation deletes a CustomerBill entity.",
+        "operationId": "deleteCustomerBill",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Id"
+          }
+        ],
+        "responses": {
+          "202": {
+            "$ref": "#/components/responses/202"
+          },
+          "204": {
+            "$ref": "#/components/responses/204"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "405": {
+            "$ref": "#/components/responses/405"
+          },
+          "409": {
+            "$ref": "#/components/responses/409"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+          "501": {
+            "$ref": "#/components/responses/501"
+          },
+          "503": {
+            "$ref": "#/components/responses/503"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "customerBill"
+        ],
+        "summary": "Updates partially a CustomerBill",
+        "description": "This operation updates partially a CustomerBill entity.",
+        "operationId": "patchCustomerBill",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Id"
+          },
+          {
+            "$ref": "#/components/parameters/Fields"
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/CustomerBill_MVO"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200CustomerBill_Patch"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "405": {
+            "$ref": "#/components/responses/405"
+          },
+          "409": {
+            "$ref": "#/components/responses/409"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+          "501": {
+            "$ref": "#/components/responses/501"
+          },
+          "503": {
+            "$ref": "#/components/responses/503"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Addressable": {
+        "type": "object",
+        "properties": {
+          "href": {
+            "type": "string",
+            "description": "Hyperlink reference",
+            "format": "uri"
+          },
+          "id": {
+            "type": "string",
+            "description": "unique identifier"
+          }
+        },
+        "description": "Base schema for adressable entities"
+      },
+      "Addressable_FVO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "unique identifier"
+          }
+        },
+        "description": "Base schema for adressable entities"
+      },
+      "AppliedPayment": {
+        "type": "object",
+        "properties": {
+          "appliedAmount": {
+            "$ref": "#/components/schemas/Money"
+          },
+          "payment": {
+            "$ref": "#/components/schemas/PaymentRef"
+          }
+        },
+        "description": "The applied payment is the result of lettering process. It enables to assign automatically or manually part of incoming payment amount to a bill."
+      },
+      "AttachmentOrDocumentRef": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "AttachmentRef": "#/components/schemas/AttachmentOrDocumentRef"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "description": {
+                "type": "string",
+                "description": "A narrative text describing the content of the attachment"
+              },
+              "url": {
+                "type": "string",
+                "description": "Link to the attachment media/content"
+              }
+            },
+            "description": "Attachment reference. An attachment complements the description of an element (for instance a product) through video, pictures"
+          }
+        ]
+      },
+      "BillCycleRef": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "BillCycleRef": "#/components/schemas/BillCycleRef"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@referredType": {
+                "type": "string",
+                "description": "The actual type of the target instance when needed for disambiguation."
+              }
+            },
+            "description": "...."
+          }
+        ]
+      },
+      "BillingAccountRef": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "BillingAccountRef": "#/components/schemas/BillingAccountRef"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "ratingType": {
+                "type": "string",
+                "description": "Indicates whether the account follows a specific payment option such as prepaid or postpaid"
+              }
+            },
+            "description": "BillingAccount reference. A BillingAccount is a detailed description of a bill structure."
+          }
+        ]
+      },
+      "CustomerBill": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "CustomerBill": "#/components/schemas/CustomerBill"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Entity"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "amountDue": {
+                "$ref": "#/components/schemas/Money"
+              },
+              "appliedPayment": {
+                "type": "array",
+                "description": "Applied payment is a payment associated with the bill. There may be a partial payment, then there should be several applied payments available. On the other hand, more than one bill could be payed by one payment. In general there is an n:m relation between payment and bill.",
+                "items": {
+                  "$ref": "#/components/schemas/AppliedPayment"
+                }
+              },
+              "billDate": {
+                "type": "string",
+                "description": "Bill date, external customer view (in consequence: different to the production date of the bill)",
+                "format": "date-time"
+              },
+              "billDocument": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/AttachmentOrDocumentRef"
+                }
+              },
+              "billNo": {
+                "type": "string",
+                "description": "Bill reference known by the customer or the party and displayed on the bill. Could be different from the id"
+              },
+              "billingAccount": {
+                "$ref": "#/components/schemas/BillingAccountRef"
+              },
+              "billingPeriod": {
+                "$ref": "#/components/schemas/TimePeriod"
+              },
+              "billCycle": {
+                "$ref": "#/components/schemas/BillCycleRef"
+              },
+              "category": {
+                "type": "string",
+                "description": "Category of the bill produced : normal, duplicate, interim, last, trial customer or credit note for example"
+              },
+              "financialAccount": {
+                "$ref": "#/components/schemas/FinancialAccountRef"
+              },
+              "lastUpdate": {
+                "type": "string",
+                "description": "Date of bill last update",
+                "format": "date-time"
+              },
+              "nextBillDate": {
+                "type": "string",
+                "description": "). Approximate date of  the next bill production given for information (only used/meaningful for on cycle / regular bills)",
+                "format": "date-time"
+              },
+              "paymentDueDate": {
+                "type": "string",
+                "description": "Date at which the amount due should have been paid",
+                "format": "date-time"
+              },
+              "paymentMethod": {
+                "$ref": "#/components/schemas/PaymentMethodRef"
+              },
+              "relatedParty": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/RelatedPartyRefOrPartyRoleRef"
+                }
+              },
+              "remainingAmount": {
+                "$ref": "#/components/schemas/Money"
+              },
+              "runType": {
+                "$ref": "#/components/schemas/CustomerBillRunType"
+              },
+              "taxExcludedAmount": {
+                "$ref": "#/components/schemas/Money"
+              },
+              "taxIncludedAmount": {
+                "$ref": "#/components/schemas/Money"
+              },
+              "taxItem": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/TaxItem"
+                }
+              },
+              "state": {
+                "$ref": "#/components/schemas/CustomerBillStateType"
+              },
+              "productOrder": {
+                "$ref": "#/components/schemas/ProductOrderRef"
+              }
+            },
+            "description": "The customer bill. Can be a regular recurring bill or an extra bill on demand by the customer or the csp."
+          }
+        ]
+      },
+      "CustomerBillRunType": {
+        "type": "string",
+        "description": "Recommended Enumeration Type (not formal forced in standard): Valid values for the runType of a bill. The bill could be produced in a regular bill cycle 'onCycle'. Otherwise the bill is produced on a request (e.g. customer request). This could be indicated by 'offCycle'",
+        "enum": [
+          "onCycle",
+          "offCycle"
+        ]
+      },
+      "CustomerBillStateType": {
+        "type": "string",
+        "description": "Recommended Enumeration Type (not formal forced in standard): Valid values for the lifecycle state of the bill: new = 'bill is ready to validate or to sent', validated = 'bill is checked (manual / automatic)', sent = 'bill is sent with the channel defined in the billingaccount', settled = 'bill is payed', partiallySettled = 'bill is partially payed', onHold = 'bill will not be in further processing until open issues connected to the bill are solved', withdrawn = 'bill was withdrawn by the seller'",
+        "enum": [
+          "new",
+          "onHold",
+          "validated",
+          "sent",
+          "settled",
+          "partiallyPaid",
+          "withdrawn"
+        ]
+      },
+      "CustomerBill_FVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "CustomerBill": "#/components/schemas/CustomerBill_FVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Entity_FVO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "amountDue": {
+                "$ref": "#/components/schemas/Money"
+              },
+              "appliedPayment": {
+                "type": "array",
+                "description": "Applied payment is a payment associated with the bill. There may be a partial payment, then there should be several applied payments available. On the other hand, more than one bill could be payed by one payment. In general there is an n:m relation between payment and bill.",
+                "items": {
+                  "$ref": "#/components/schemas/AppliedPayment"
+                }
+              },
+              "billDate": {
+                "type": "string",
+                "description": "Bill date, external customer view (in consequence: different to the production date of the bill)",
+                "format": "date-time"
+              },
+              "billDocument": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/AttachmentOrDocumentRef"
+                }
+              },
+              "billNo": {
+                "type": "string",
+                "description": "Bill reference known by the customer or the party and displayed on the bill. Could be different from the id"
+              },
+              "billingAccount": {
+                "$ref": "#/components/schemas/BillingAccountRef"
+              },
+              "billingPeriod": {
+                "$ref": "#/components/schemas/TimePeriod"
+              },
+              "billCycle": {
+                "$ref": "#/components/schemas/BillCycleRef"
+              },
+              "category": {
+                "type": "string",
+                "description": "Category of the bill produced : normal, duplicate, interim, last, trial customer or credit note for example"
+              },
+              "financialAccount": {
+                "$ref": "#/components/schemas/FinancialAccountRef"
+              },
+              "lastUpdate": {
+                "type": "string",
+                "description": "Date of bill last update",
+                "format": "date-time"
+              },
+              "nextBillDate": {
+                "type": "string",
+                "description": "). Approximate date of  the next bill production given for information (only used/meaningful for on cycle / regular bills)",
+                "format": "date-time"
+              },
+              "paymentDueDate": {
+                "type": "string",
+                "description": "Date at which the amount due should have been paid",
+                "format": "date-time"
+              },
+              "paymentMethod": {
+                "$ref": "#/components/schemas/PaymentMethodRef"
+              },
+              "relatedParty": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/RelatedPartyRefOrPartyRoleRef"
+                }
+              },
+              "remainingAmount": {
+                "$ref": "#/components/schemas/Money"
+              },
+              "runType": {
+                "$ref": "#/components/schemas/CustomerBillRunType"
+              },
+              "taxExcludedAmount": {
+                "$ref": "#/components/schemas/Money"
+              },
+              "taxIncludedAmount": {
+                "$ref": "#/components/schemas/Money"
+              },
+              "taxItem": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/TaxItem"
+                }
+              },
+              "state": {
+                "$ref": "#/components/schemas/CustomerBillStateType"
+              },
+              "productOrder": {
+                "$ref": "#/components/schemas/ProductOrderRef"
+              }
+            },
+            "description": "The customer bill. Can be a regular recurring bill or an extra bill on demand by the customer or the csp."
+          }
+        ]
+      },
+      "CustomerBill_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "CustomerBill": "#/components/schemas/CustomerBill_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Entity_MVO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "amountDue": {
+                "$ref": "#/components/schemas/Money"
+              },
+              "appliedPayment": {
+                "type": "array",
+                "description": "Applied payment is a payment associated with the bill. There may be a partial payment, then there should be several applied payments available. On the other hand, more than one bill could be payed by one payment. In general there is an n:m relation between payment and bill.",
+                "items": {
+                  "$ref": "#/components/schemas/AppliedPayment"
+                }
+              },
+              "billDate": {
+                "type": "string",
+                "description": "Bill date, external customer view (in consequence: different to the production date of the bill)",
+                "format": "date-time"
+              },
+              "billDocument": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/AttachmentOrDocumentRef"
+                }
+              },
+              "billNo": {
+                "type": "string",
+                "description": "Bill reference known by the customer or the party and displayed on the bill. Could be different from the id"
+              },
+              "billingAccount": {
+                "$ref": "#/components/schemas/BillingAccountRef"
+              },
+              "billingPeriod": {
+                "$ref": "#/components/schemas/TimePeriod"
+              },
+              "billCycle": {
+                "$ref": "#/components/schemas/BillCycleRef"
+              },
+              "category": {
+                "type": "string",
+                "description": "Category of the bill produced : normal, duplicate, interim, last, trial customer or credit note for example"
+              },
+              "financialAccount": {
+                "$ref": "#/components/schemas/FinancialAccountRef"
+              },
+              "lastUpdate": {
+                "type": "string",
+                "description": "Date of bill last update",
+                "format": "date-time"
+              },
+              "nextBillDate": {
+                "type": "string",
+                "description": "). Approximate date of  the next bill production given for information (only used/meaningful for on cycle / regular bills)",
+                "format": "date-time"
+              },
+              "paymentDueDate": {
+                "type": "string",
+                "description": "Date at which the amount due should have been paid",
+                "format": "date-time"
+              },
+              "paymentMethod": {
+                "$ref": "#/components/schemas/PaymentMethodRef"
+              },
+              "relatedParty": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/RelatedPartyRefOrPartyRoleRef"
+                }
+              },
+              "remainingAmount": {
+                "$ref": "#/components/schemas/Money"
+              },
+              "runType": {
+                "$ref": "#/components/schemas/CustomerBillRunType"
+              },
+              "taxExcludedAmount": {
+                "$ref": "#/components/schemas/Money"
+              },
+              "taxIncludedAmount": {
+                "$ref": "#/components/schemas/Money"
+              },
+              "taxItem": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/TaxItem"
+                }
+              },
+              "state": {
+                "$ref": "#/components/schemas/CustomerBillStateType"
+              },
+              "productOrder": {
+                "$ref": "#/components/schemas/ProductOrderRef"
+              }
+            },
+            "description": "The customer bill. Can be a regular recurring bill or an extra bill on demand by the customer or the csp."
+          }
+        ]
+      },
+      "Entity": {
+        "type": "object",
+        "description": "Base entity schema for use in TMForum Open-APIs. Property.",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "$ref": "#/components/schemas/Addressable"
+          }
+        ]
+      },
+      "EntityRef": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "$ref": "#/components/schemas/Addressable"
+          },
+          {
+            "required": [
+              "id"
+            ],
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "The identifier of the referred entity."
+              },
+              "href": {
+                "type": "string",
+                "description": "The URI of the referred entity.",
+                "format": "uri"
+              },
+              "name": {
+                "type": "string",
+                "description": "Name of the referred entity."
+              },
+              "@referredType": {
+                "type": "string",
+                "description": "The actual type of the target instance when needed for disambiguation."
+              }
+            },
+            "description": "Entity reference schema to be use for all entityRef class."
+          }
+        ]
+      },
+      "Entity_FVO": {
+        "type": "object",
+        "description": "Base entity schema for use in TMForum Open-APIs. Property.",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible_FVO"
+          },
+          {
+            "$ref": "#/components/schemas/Addressable_FVO"
+          }
+        ]
+      },
+      "Entity_MVO": {
+        "type": "object",
+        "description": "Base entity schema for use in TMForum Open-APIs. Property.",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          }
+        ]
+      },
+      "Extensible": {
+        "required": [
+          "@type"
+        ],
+        "type": "object",
+        "properties": {
+          "@type": {
+            "type": "string",
+            "description": "When sub-classing, this defines the sub-class Extensible name"
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class"
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships"
+          }
+        },
+        "description": "Base Extensible schema for use in TMForum Open-APIs - When used for in a schema it means that the Entity described by the schema  MUST be extended with the @type"
+      },
+      "Extensible_FVO": {
+        "required": [
+          "@type"
+        ],
+        "type": "object",
+        "properties": {
+          "@type": {
+            "type": "string",
+            "description": "When sub-classing, this defines the sub-class Extensible name"
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class"
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships"
+          }
+        },
+        "description": "Base Extensible schema for use in TMForum Open-APIs - When used for in a schema it means that the Entity described by the schema  MUST be extended with the @type"
+      },
+      "FinancialAccountRef": {
+        "type": "object",
+        "description": "AccountReceivable reference. An account of money owed by a party to another entity in exchange for goods or services that have been delivered or used. An account receivable aggregates the amounts of one or more party accounts (billing or settlement) owned by a given party.",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "FinancialAccountRef": "#/components/schemas/FinancialAccountRef"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          }
+        ]
+      },
+      "Money": {
+        "type": "object",
+        "properties": {
+          "unit": {
+            "type": "string",
+            "description": "Currency (ISO4217 norm uses 3 letters to define the currency)"
+          },
+          "value": {
+            "type": "number",
+            "description": "A signed floating point number, the meaning of the sign is according to the context of the API that uses this Data type",
+            "format": "float"
+          }
+        },
+        "description": "A base / value business entity used to represent money"
+      },
+      "PartyRef": {
+        "type": "object",
+        "description": "A Party reference",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "PartyRef": "#/components/schemas/PartyRef"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          }
+        ]
+      },
+      "PartyRefOrPartyRoleRef": {
+        "type": "object",
+        "description": "",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "PartyRef": "#/components/schemas/PartyRef",
+            "PartyRoleRef": "#/components/schemas/PartyRoleRef"
+          }
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/PartyRef"
+          },
+          {
+            "$ref": "#/components/schemas/PartyRoleRef"
+          }
+        ]
+      },
+      "PartyRoleRef": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "PartyRoleRef": "#/components/schemas/PartyRoleRef"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "partyId": {
+                "type": "string",
+                "description": "The identifier of the engaged party that is linked to the PartyRole object."
+              },
+              "partyName": {
+                "type": "string",
+                "description": "The name of the engaged party that is linked to the PartyRole object."
+              }
+            },
+            "description": "Party role reference. A party role represents the part played by a party in a given context."
+          }
+        ]
+      },
+      "PaymentMethodRef": {
+        "type": "object",
+        "description": "PaymentMethod reference. A payment method defines a specific mean of payment (e.g direct debit).",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "PaymentMethodRef": "#/components/schemas/PaymentMethodRef"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          }
+        ]
+      },
+      "PaymentRef": {
+        "type": "object",
+        "description": "If an immediate payment has been done at the product order submission, the payment information are captured and stored (as a reference) in the order.",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "PaymentRef": "#/components/schemas/PaymentRef"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          }
+        ]
+      },
+      "RelatedPartyRefOrPartyRoleRef": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "RelatedPartyRefOrPartyRoleRef": "#/components/schemas/RelatedPartyRefOrPartyRoleRef"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "role": {
+                "type": "string",
+                "description": "Role played by the related party or party role in the context of the specific entity it is linked to. Such as 'initiator', 'customer',  'salesAgent', 'user'"
+              },
+              "partyOrPartyRole": {
+                "$ref": "#/components/schemas/PartyRefOrPartyRoleRef"
+              }
+            },
+            "description": "RelatedParty reference. A related party defines party or party role or its reference, linked to a specific entity"
+          }
+        ]
+      },
+      "TaxItem": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "TaxItem": "#/components/schemas/TaxItem"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "taxAmount": {
+                "$ref": "#/components/schemas/Money"
+              },
+              "taxCategory": {
+                "type": "string",
+                "description": "Tax category"
+              },
+              "taxRate": {
+                "type": "number",
+                "description": "Applied rate of the tax",
+                "format": "float"
+              }
+            },
+            "description": "A tax item is created for each tax rate and tax type used in the bill."
+          }
+        ]
+      },
+      "TimePeriod": {
+        "type": "object",
+        "properties": {
+          "startDateTime": {
+            "type": "string",
+            "description": "Start of the time period, using IETC-RFC-3339 format",
+            "format": "date-time",
+            "example": "1985-04-12T23:20:50.52Z"
+          },
+          "endDateTime": {
+            "type": "string",
+            "description": "End of the time period, using IETC-RFC-3339 format",
+            "format": "date-time",
+            "example": "1985-04-12T23:20:50.52Z"
+          }
+        },
+        "description": "A period of time, either as a deadline (endDateTime only) a startDateTime only, or both"
+      },
+      "Error": {
+        "description": "Used when an API throws an Error, typically with a HTTP error response-code (3xx, 4xx, 5xx)",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "Error": "#/components/schemas/Error"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "required": [
+              "code",
+              "reason"
+            ],
+            "type": "object",
+            "properties": {
+              "code": {
+                "type": "string",
+                "description": "Application relevant detail, defined in the API or a common list."
+              },
+              "reason": {
+                "type": "string",
+                "description": "Explanation of the reason for the error which can be shown to a client user."
+              },
+              "message": {
+                "type": "string",
+                "description": "More details and corrective actions related to the error which can be shown to a client user."
+              },
+              "status": {
+                "type": "string",
+                "description": "HTTP Error code extension"
+              },
+              "referenceError": {
+                "type": "string",
+                "description": "URI of documentation describing the error."
+              }
+            }
+          }
+        ]
+      },
+      "JsonPatch": {
+        "required": [
+          "op",
+          "path"
+        ],
+        "type": "object",
+        "properties": {
+          "op": {
+            "type": "string",
+            "description": "The operation to be performed",
+            "enum": [
+              "add",
+              "remove",
+              "replace",
+              "move",
+              "copy",
+              "test"
+            ]
+          },
+          "path": {
+            "type": "string",
+            "description": "A JSON-Pointer"
+          },
+          "value": {
+            "description": "The value to be used within the operations."
+          },
+          "from": {
+            "type": "string",
+            "description": "A string containing a JSON Pointer value."
+          }
+        },
+        "description": "A JSONPatch document as defined by RFC 6902"
+      },
+      "JsonPatchOperations": {
+        "type": "array",
+        "description": "JSONPatch Operations document as defined by RFC 6902",
+        "items": {
+          "$ref": "#/components/schemas/JsonPatch"
+        }
+      },
+      "ProductOrderRef": {
+        "type": "object",
+        "description": "A reference to an existing Product Order.",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "ProductOrderRef": "#/components/schemas/ProductOrderRef"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          }
+        ]
+      }
+    },
+    "responses": {
+      "202": {
+        "description": "Accepted"
+      },
+      "204": {
+        "description": "Deleted"
+      },
+      "400": {
+        "description": "Bad Request",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "401": {
+        "description": "Unauthorized",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "403": {
+        "description": "Forbidden",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "Not Found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "405": {
+        "description": "Method Not allowed",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "409": {
+        "description": "Conflict",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "Internal Server Error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "501": {
+        "description": "Not Implemented",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "503": {
+        "description": "Service Unavailable",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "200CustomerBillArray": {
+        "description": "Success",
+        "headers": {
+          "X-Total-Count": {
+            "$ref": "#/components/headers/X-Total-Count"
+          },
+          "X-Result-Count": {
+            "$ref": "#/components/headers/X-Result-Count"
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/CustomerBill"
+              }
+            },
+            "examples": {
+              "CustomerBill_list_example": {
+                "$ref": "#/components/examples/CustomerBill_list_example_response"
+              }
+            }
+          }
+        }
+      },
+      "200CustomerBill_Get": {
+        "description": "Success",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/CustomerBill"
+            },
+            "examples": {
+              "CustomerBill_retrieve_example": {
+                "$ref": "#/components/examples/CustomerBill_retrieve_example_response"
+              }
+            }
+          }
+        }
+      },
+      "200CustomerBill_Patch": {
+        "description": "Success",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/CustomerBill"
+            },
+            "examples": {
+              "Customer_Bill_Update_Implied_Merge": {
+                "$ref": "#/components/examples/Customer_Bill_Update_Implied_Merge_response"
+              }
+            }
+          },
+          "application/merge-patch+json": {
+            "schema": {
+              "$ref": "#/components/schemas/CustomerBill"
+            },
+            "examples": {
+              "Customer_Bill_Update_Patch_Merge": {
+                "$ref": "#/components/examples/Customer_Bill_Update_Patch_Merge_response"
+              }
+            }
+          },
+          "application/json-patch+json": {
+            "schema": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/CustomerBill"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CustomerBill"
+                  }
+                },
+                {
+                  "type": "string",
+                  "nullable": true
+                }
+              ]
+            },
+            "examples": {
+              "Customer_Bill_Update_JSON_Patch": {
+                "$ref": "#/components/examples/Customer_Bill_Update_JSON_Patch_response"
+              }
+            }
+          },
+          "application/json-patch-query+json": {
+            "schema": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/CustomerBill"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CustomerBill"
+                  }
+                },
+                {
+                  "type": "string",
+                  "nullable": true
+                }
+              ]
+            },
+            "examples": {
+              "Customer_Bill_Update_JSON_Patch_Query": {
+                "$ref": "#/components/examples/Customer_Bill_Update_JSON_Patch_Query_response"
+              }
+            }
+          }
+        }
+      },
+      "201CustomerBill": {
+        "description": "OK/Created",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/CustomerBill"
+            }
+          }
+        }
+      }
+    },
+    "parameters": {
+      "Id": {
+        "name": "id",
+        "in": "path",
+        "description": "Identifier of the Resource",
+        "required": true,
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "Fields": {
+        "name": "fields",
+        "in": "query",
+        "description": "Comma-separated properties to be provided in response",
+        "required": false,
+        "style": "form",
+        "explode": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "Offset": {
+        "name": "offset",
+        "in": "query",
+        "description": "Requested index for start of resources to be provided in response",
+        "required": false,
+        "style": "form",
+        "explode": true,
+        "schema": {
+          "type": "integer"
+        }
+      },
+      "Limit": {
+        "name": "limit",
+        "in": "query",
+        "description": "Requested number of resources to be provided in response",
+        "required": false,
+        "style": "form",
+        "explode": true,
+        "schema": {
+          "type": "integer"
+        }
+      }
+    },
+    "examples": {
+      "CustomerBill_list_example_response": {
+        "description": "Here is an example of a response  for retrieving a list of CustomerBills (Use Case 1). Fields limited to id, href, billing account.",
+        "value": [
+          {
+            "id": "CB-123",
+            "href": "https://server:port/tmf-api/Customer_Bill_Management/v5/customerBill/CB-123",
+            "@type": "CustomerBill",
+            "billingAccount": {
+              "id": "A0815",
+              "href": "http://host:port/tmf-api/Account_Management/v5/billingAccount/A0815",
+              "name": "BA Peter Retep",
+              "@referredType": "BillingAccount",
+              "@type": "BillingAccountRef"
+            }
+          },
+          {
+            "id": "CB-456",
+            "href": "https://server:port/tmf-api/Customer_Bill_Management/v5/customerBill/CB-456",
+            "@type": "CustomerBill",
+            "billingAccount": {
+              "id": "A4712",
+              "href": "http://host:port/tmf-api/Account_Management/v5/billingAccount/A4712",
+              "name": "BA Claire Erialc",
+              "@referredType": "BillingAccount",
+              "@type": "BillingAccountRef"
+            }
+          }
+        ]
+      },
+      "CustomerBill_retrieve_example_response": {
+        "description": "Here is an example of a response for retrieving a single customer bill (See Use Case 1). The customer bill id is set to CB-123. Fields limited to id, href, billing account, and tax included amount.",
+        "value": {
+          "id": "CB-123",
+          "href": "https://server:port/tmf-api/Customer_Bill_Management/v5/customerBill/CB-123",
+          "billingAccount": {
+            "id": "A0815",
+            "href": "http://host:port/tmf-api/Account_Management/v5/billingAccount/A0815",
+            "name": "BA Peter Retep",
+            "@referredType": "BillingAccount",
+            "@type": "BillingAccountRef"
+          },
+          "taxIncludedAmount": {
+            "unit": "EUR",
+            "value": 50
+          },
+          "@type": "CustomerBill"
+        }
+      },
+      "Customer_Bill_Update_JSON_Patch_request": {
+        "description": "Here is an example of a request for updating a customer bill by changing the state.",
+        "value": [
+          {
+            "op": "replace",
+            "path": "/state",
+            "value": "onHold"
+          }
+        ]
+      },
+      "Customer_Bill_Update_JSON_Patch_response": {
+        "description": "The updated customer bill with changed state",
+        "value": {
+          "id": "CB-123",
+          "href": "https://server:port/tmf-api/Customer_Bill_Management/v5/customerBill/CB-123",
+          "billNo": "780123456",
+          "amountDue": {
+            "unit": "EUR",
+            "value": 0
+          },
+          "billCycle": {
+            "id": "BC-1234",
+            "href": "http://server:port/tmf-api/Customer_Bill_Management/v5/billcycle/BC-1234",
+            "@referredType": "BillCycle",
+            "@type": "BillCycleRef"
+          },
+          "billDate": "2020-01-05T12:00:56.982Z",
+          "billDocument": [
+            {
+              "id": "DOC_1234",
+              "href": "http://server:port/tmf-api/Document_Management/v5/document/DOC_1234",
+              "attachmentType": "application/pdf",
+              "content": "bill",
+              "description": "regular monthly bill",
+              "mimeType": "application/pdf",
+              "size": 172851,
+              "validfor": {
+                "startDateTime": "2020-01-05T12:00:56.982Z",
+                "endDateTime": "9999-12-31T23:59:59.999Z"
+              },
+              "@type": "Attachment"
+            }
+          ],
+          "billingAccount": {
+            "id": "A0815",
+            "href": "http://host:port/tmf-api/Account_Management/v5/billingAccount/A0815",
+            "name": "BA Peter Retep",
+            "@referredType": "BillingAccount",
+            "@type": "BillingAccountRef"
+          },
+          "financialAccount": {
+            "id": "FA12345",
+            "href": "http://host:port/tmf-api/Account_Management/v5/financialAccount/FA12345",
+            "name": "FA Peter Retep",
+            "@referredType": "FinancialAccount",
+            "@type": "FinancialAccountRef"
+          },
+          "category": "normal",
+          "lastUpdate": "2020-01-05T12:00:56.982Z",
+          "nextBillDate": "2020-02-05T12:00:00.000Z",
+          "paymentDueDate": "2020-01-15T00:00:00.000Z",
+          "remainingAmount": {
+            "unit": "EUR",
+            "value": 50
+          },
+          "runType": "onCycle",
+          "status": "onHold",
+          "taxExcludedAmount": {
+            "unit": "EUR",
+            "value": 40
+          },
+          "taxIncludedAmount": {
+            "unit": "EUR",
+            "value": 50
+          },
+          "taxItem": [
+            {
+              "taxAmount": {
+                "unit": "EUR",
+                "value": 10
+              },
+              "taxCategory": "VAT",
+              "taxRate": 0.25,
+              "@type": "TaxItem"
+            }
+          ],
+          "@type": "CustomerBill"
+        }
+      },
+      "Customer_Bill_Update_JSON_Patch_Query_request": {
+        "description": "Here is an example of a request for updating a customer bill by changing the state.",
+        "value": {
+          "op": "replace",
+          "path": "/state?state=new",
+          "value": "onHold"
+        }
+      },
+      "Customer_Bill_Update_JSON_Patch_Query_response": {
+        "description": "The updated customer bill with changed state",
+        "value": {
+          "id": "CB-123",
+          "href": "https://server:port/tmf-api/Customer_Bill_Management/v5/customerBill/CB-123",
+          "billNo": "780123456",
+          "amountDue": {
+            "unit": "EUR",
+            "value": 0
+          },
+          "billCycle": {
+            "id": "BC-1234",
+            "href": "http://server:port/tmf-api/Customer_Bill_Management/v5/billcycle/BC-1234",
+            "@referredType": "BillCycle",
+            "@type": "BillCycleRef"
+          },
+          "billDate": "2020-01-05T12:00:56.982Z",
+          "billDocument": [
+            {
+              "id": "DOC_1234",
+              "href": "http://server:port/tmf-api/Document_Management/v5/document/DOC_1234",
+              "attachmentType": "application/pdf",
+              "content": "bill",
+              "description": "regular monthly bill",
+              "mimeType": "application/pdf",
+              "size": 172851,
+              "validfor": {
+                "startDateTime": "2020-01-05T12:00:56.982Z",
+                "endDateTime": "9999-12-31T23:59:59.999Z"
+              },
+              "@type": "Attachment"
+            }
+          ],
+          "billingAccount": {
+            "id": "A0815",
+            "href": "http://host:port/tmf-api/Account_Management/v5/billingAccount/A0815",
+            "name": "BA Peter Retep",
+            "@referredType": "BillingAccount",
+            "@type": "BillingAccountRef"
+          },
+          "financialAccount": {
+            "id": "FA12345",
+            "href": "http://host:port/tmf-api/Account_Management/v5/financialAccount/FA12345",
+            "name": "FA Peter Retep",
+            "@referredType": "FinancialAccount",
+            "@type": "FinancialAccountRef"
+          },
+          "category": "normal",
+          "lastUpdate": "2020-01-05T12:00:56.982Z",
+          "nextBillDate": "2020-02-05T12:00:00.000Z",
+          "paymentDueDate": "2020-01-15T00:00:00.000Z",
+          "remainingAmount": {
+            "unit": "EUR",
+            "value": 50
+          },
+          "runType": "onCycle",
+          "status": "onHold",
+          "taxExcludedAmount": {
+            "unit": "EUR",
+            "value": 40
+          },
+          "taxIncludedAmount": {
+            "unit": "EUR",
+            "value": 50
+          },
+          "taxItem": [
+            {
+              "taxAmount": {
+                "unit": "EUR",
+                "value": 10
+              },
+              "taxCategory": "VAT",
+              "taxRate": 0.25,
+              "@type": "TaxItem"
+            }
+          ],
+          "@type": "CustomerBill"
+        }
+      },
+      "Customer_Bill_Update_Patch_Merge_request": {
+        "description": "Here is an example of a request for updating a customer bill by changing the state.",
+        "value": {
+          "@type": "CustomerBill",
+          "state": "onHold"
+        }
+      },
+      "Customer_Bill_Update_Patch_Merge_response": {
+        "description": "The updated customer bill with changed state",
+        "value": {
+          "id": "CB-123",
+          "href": "https://server:port/tmf-api/Customer_Bill_Management/v5/customerBill/CB-123",
+          "billNo": "780123456",
+          "amountDue": {
+            "unit": "EUR",
+            "value": 0
+          },
+          "billCycle": {
+            "id": "BC-1234",
+            "href": "http://server:port/tmf-api/Customer_Bill_Management/v5/billcycle/BC-1234",
+            "@referredType": "BillCycle",
+            "@type": "BillCycleRef"
+          },
+          "billDate": "2020-01-05T12:00:56.982Z",
+          "billDocument": [
+            {
+              "id": "DOC_1234",
+              "href": "http://server:port/tmf-api/Document_Management/v5/document/DOC_1234",
+              "attachmentType": "application/pdf",
+              "content": "bill",
+              "description": "regular monthly bill",
+              "mimeType": "application/pdf",
+              "size": 172851,
+              "validfor": {
+                "startDateTime": "2020-01-05T12:00:56.982Z",
+                "endDateTime": "9999-12-31T23:59:59.999Z"
+              },
+              "@type": "Attachment"
+            }
+          ],
+          "billingAccount": {
+            "id": "A0815",
+            "href": "http://host:port/tmf-api/Account_Management/v5/billingAccount/A0815",
+            "name": "BA Peter Retep",
+            "@referredType": "BillingAccount",
+            "@type": "BillingAccountRef"
+          },
+          "financialAccount": {
+            "id": "FA12345",
+            "href": "http://host:port/tmf-api/Account_Management/v5/financialAccount/FA12345",
+            "name": "FA Peter Retep",
+            "@referredType": "FinancialAccount",
+            "@type": "FinancialAccountRef"
+          },
+          "category": "normal",
+          "lastUpdate": "2020-01-05T12:00:56.982Z",
+          "nextBillDate": "2020-02-05T12:00:00.000Z",
+          "paymentDueDate": "2020-01-15T00:00:00.000Z",
+          "remainingAmount": {
+            "unit": "EUR",
+            "value": 50
+          },
+          "runType": "onCycle",
+          "status": "onHold",
+          "taxExcludedAmount": {
+            "unit": "EUR",
+            "value": 40
+          },
+          "taxIncludedAmount": {
+            "unit": "EUR",
+            "value": 50
+          },
+          "taxItem": [
+            {
+              "taxAmount": {
+                "unit": "EUR",
+                "value": 10
+              },
+              "taxCategory": "VAT",
+              "taxRate": 0.25,
+              "@type": "TaxItem"
+            }
+          ],
+          "@type": "CustomerBill"
+        }
+      },
+      "Customer_Bill_Update_Implied_Merge_request": {
+        "description": "Here is an example of a request for updating a customer bill by changing the state.",
+        "value": {
+          "@type": "CustomerBill",
+          "state": "onHold"
+        }
+      },
+      "Customer_Bill_Update_Implied_Merge_response": {
+        "description": "The updated customer bill with changed state",
+        "value": {
+          "id": "CB-123",
+          "href": "https://server:port/tmf-api/Customer_Bill_Management/v5/customerBill/CB-123",
+          "billNo": "780123456",
+          "amountDue": {
+            "unit": "EUR",
+            "value": 0
+          },
+          "billCycle": {
+            "id": "BC-1234",
+            "href": "http://server:port/tmf-api/Customer_Bill_Management/v5/billcycle/BC-1234",
+            "@referredType": "BillCycle",
+            "@type": "BillCycleRef"
+          },
+          "billDate": "2020-01-05T12:00:56.982Z",
+          "billDocument": [
+            {
+              "id": "DOC_1234",
+              "href": "http://server:port/tmf-api/Document_Management/v5/document/DOC_1234",
+              "attachmentType": "application/pdf",
+              "content": "bill",
+              "description": "regular monthly bill",
+              "mimeType": "application/pdf",
+              "size": 172851,
+              "validfor": {
+                "startDateTime": "2020-01-05T12:00:56.982Z",
+                "endDateTime": "9999-12-31T23:59:59.999Z"
+              },
+              "@type": "Attachment"
+            }
+          ],
+          "billingAccount": {
+            "id": "A0815",
+            "href": "http://host:port/tmf-api/Account_Management/v5/billingAccount/A0815",
+            "name": "BA Peter Retep",
+            "@referredType": "BillingAccount",
+            "@type": "BillingAccountRef"
+          },
+          "financialAccount": {
+            "id": "FA12345",
+            "href": "http://host:port/tmf-api/Account_Management/v5/financialAccount/FA12345",
+            "name": "FA Peter Retep",
+            "@referredType": "FinancialAccount",
+            "@type": "FinancialAccountRef"
+          },
+          "category": "normal",
+          "lastUpdate": "2020-01-05T12:00:56.982Z",
+          "nextBillDate": "2020-02-05T12:00:00.000Z",
+          "paymentDueDate": "2020-01-15T00:00:00.000Z",
+          "remainingAmount": {
+            "unit": "EUR",
+            "value": 50
+          },
+          "runType": "onCycle",
+          "status": "onHold",
+          "taxExcludedAmount": {
+            "unit": "EUR",
+            "value": 40
+          },
+          "taxIncludedAmount": {
+            "unit": "EUR",
+            "value": 50
+          },
+          "taxItem": [
+            {
+              "taxAmount": {
+                "unit": "EUR",
+                "value": 10
+              },
+              "taxCategory": "VAT",
+              "taxRate": 0.25,
+              "@type": "TaxItem"
+            }
+          ],
+          "@type": "CustomerBill"
+        }
+      }
+    },
+    "requestBodies": {
+      "CustomerBill_MVO": {
+        "description": "The CustomerBill to be patched",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/CustomerBill_MVO"
+            },
+            "examples": {
+              "Customer_Bill_Update_Implied_Merge": {
+                "$ref": "#/components/examples/Customer_Bill_Update_Implied_Merge_request"
+              }
+            }
+          },
+          "application/merge-patch+json": {
+            "schema": {
+              "$ref": "#/components/schemas/CustomerBill_MVO"
+            },
+            "examples": {
+              "Customer_Bill_Update_Patch_Merge": {
+                "$ref": "#/components/examples/Customer_Bill_Update_Patch_Merge_request"
+              }
+            }
+          },
+          "application/json-patch+json": {
+            "schema": {
+              "$ref": "#/components/schemas/JsonPatchOperations"
+            },
+            "examples": {
+              "Customer_Bill_Update_JSON_Patch": {
+                "$ref": "#/components/examples/Customer_Bill_Update_JSON_Patch_request"
+              }
+            }
+          },
+          "application/json-patch-query+json": {
+            "schema": {
+              "$ref": "#/components/schemas/JsonPatchOperations"
+            },
+            "examples": {
+              "Customer_Bill_Update_JSON_Patch_Query": {
+                "$ref": "#/components/examples/Customer_Bill_Update_JSON_Patch_Query_request"
+              }
+            }
+          }
+        },
+        "required": true
+      }
+    },
+    "headers": {
+      "X-Total-Count": {
+        "description": "Total number of items matching criteria",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "integer"
+        }
+      },
+      "X-Result-Count": {
+        "description": "Actual number of items returned in the response body",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "integer"
+        }
+      }
+    },
+    "securitySchemes": { }
+  }
+}

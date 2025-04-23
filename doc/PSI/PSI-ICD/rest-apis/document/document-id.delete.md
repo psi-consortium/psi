@@ -5,9 +5,7 @@
 
 # DELETE /document/{id}
 
-**Absolute Path:** /documentManagement/v1/document/{id}
-
-**TOD Reference:** TOD-01-03-03-Remove_Document
+**Absolute Path:** /document/v2/document/{id}
 
 **Summary:** Deletes a Document
 
@@ -15,7 +13,7 @@
 
 | Name | Type | Required | Description |
 | ------ | ------ | --- | ------------ |
-| id | string | Yes | Identifier of the Document |
+| id | string | Yes | Identifier of the Resource |
 
 Table: Parameters of DELETE document/{id}. {#tbl:document-id.delete.md:parameters}
 
@@ -23,6 +21,7 @@ Table: Parameters of DELETE document/{id}. {#tbl:document-id.delete.md:parameter
 
 | Code | Description | Content |
 |------|-------------|---------|
+| 202 | Accepted | N/A |
 | 204 | Deleted | N/A |
 | 400 | Bad Request | Error |
 | 401 | Unauthorized | Error |
@@ -31,6 +30,8 @@ Table: Parameters of DELETE document/{id}. {#tbl:document-id.delete.md:parameter
 | 405 | Method Not allowed | Error |
 | 409 | Conflict | Error |
 | 500 | Internal Server Error | Error |
+| 501 | Not Implemented | Error |
+| 503 | Service Unavailable | Error |
 
 Table: Responses of DELETE document/{id}. {#tbl:document-id.delete.md:responses}
 

@@ -5,16 +5,14 @@
 
 # BundledGroupProductOfferingOption
 
-A set of numbers that specifies the lower and upper limits for a ProductOfferingGroup that can be procured as part of the related BundledGroupProductOffering.
-Values can range from 0 to unbounded
+Defines for a BundledProductOfferingGroup (i.e.
+a group of multiple child offerings of a parent product offering), how many instances from the child offerings can be chosen in total.
+For example facilitate the choice of between 2 and 7 channel packs from a list, and cause certain items to be selected by default
 
 | Field | Type | Format | Required |
 | ------- | ------- | ------- | --- |
 | numberRelOfferLowerLimit | integer | N/A | No |
 | numberRelOfferUpperLimit | integer | N/A | No |
-| @baseType | string | N/A | No |
-| @schemaLocation | string | uri | No |
-| @type | string | N/A | No |
 
 Table: Fields of BundledGroupProductOfferingOption. {#tbl:BundledGroupProductOfferingOption.md:BundledGroupProductOfferingOption}
 

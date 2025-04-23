@@ -5,7 +5,7 @@
 
 # GET /resumePerformanceJob
 
-**Absolute Path:** /performanceMonitoring/v1/resumePerformanceJob
+**Absolute Path:** /performanceMonitoring/v2/resumePerformanceJob
 
 **Summary:** Lists or finds ResumePerformanceJob objects
 
@@ -26,11 +26,11 @@ Table: Parameters of GET resumePerformanceJob. {#tbl:resumePerformanceJob.get.md
 
 | Code | Description | Content |
 |------|-------------|---------|
-| 200 | Success | ResumePerformanceJob_Find |
+| 200 | Success | N/A |
 | 400 | Bad Request | Error400 |
 | 401 | Unauthorized | Error401 |
 | 403 | Forbidden | Error403 |
-| 422 | Unprocessable entity due to the business validation problems | Error422 |
+| 422 | Unprocessable entity due to the business validation problems | N/A |
 | 500 | Internal Server Error | Error500 |
 | 501 | Method not implemented. | Error501 |
 

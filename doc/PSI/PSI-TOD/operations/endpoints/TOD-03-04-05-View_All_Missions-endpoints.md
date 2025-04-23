@@ -3,4 +3,4 @@
                Do NOT manually edit this file! Any such changes will be overwritten!
 -->
 
-* GET /missionManagement/v1/mission
+* GET /missionManagement/v2/mission

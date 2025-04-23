@@ -5,7 +5,7 @@
 
 # GET /organization/{id}
 
-**Absolute Path:** /partyManagement/v1/organization/{id}
+**Absolute Path:** /partyManagement/v2/organization/{id}
 
 **TOD Reference:** TOD-01-01-04-View_Party_Profile
 
@@ -15,8 +15,8 @@
 
 | Name | Type | Required | Description |
 | ------ | ------ | --- | ------------ |
-| id | string | Yes | Identifier of the Organization |
-| fields | string | No | Comma-separated properties to provide in response |
+| id | string | Yes | Identifier of the Resource |
+| fields | string | No | Comma-separated properties to be provided in response |
 
 Table: Parameters of GET organization/{id}. {#tbl:organization-id.get.md:parameters}
 
@@ -30,8 +30,9 @@ Table: Parameters of GET organization/{id}. {#tbl:organization-id.get.md:paramet
 | 403 | Forbidden | Error |
 | 404 | Not Found | Error |
 | 405 | Method Not allowed | Error |
-| 409 | Conflict | Error |
 | 500 | Internal Server Error | Error |
+| 501 | Not Implemented | Error |
+| 503 | Service Unavailable | Error |
 
 Table: Responses of GET organization/{id}. {#tbl:organization-id.get.md:responses}
 

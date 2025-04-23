@@ -5,9 +5,7 @@
 
 # DELETE /document/{documentId}/attachment/{attachmentId}
 
-**Absolute Path:** /documentManagement/v1/document/{documentId}/attachment/{attachmentId}
-
-**TOD Reference:** TOD-01-03-08-Remove_Attachment
+**Absolute Path:** /document/v2/document/{documentId}/attachment/{attachmentId}
 
 **Summary:** Deletes an Attachment
 
@@ -24,6 +22,7 @@ Table: Parameters of DELETE document/{documentId}/attachment/{attachmentId}. {#t
 
 | Code | Description | Content |
 |------|-------------|---------|
+| 202 | Accepted | N/A |
 | 204 | Deleted | N/A |
 | 400 | Bad Request | Error |
 | 401 | Unauthorized | Error |
@@ -32,6 +31,8 @@ Table: Parameters of DELETE document/{documentId}/attachment/{attachmentId}. {#t
 | 405 | Method Not allowed | Error |
 | 409 | Conflict | Error |
 | 500 | Internal Server Error | Error |
+| 501 | Not Implemented | Error |
+| 503 | Service Unavailable | Error |
 
 Table: Responses of DELETE document/{documentId}/attachment/{attachmentId}. {#tbl:document-documentId-attachment-attachmentId.delete.md:responses}
 

@@ -14,9 +14,9 @@ A market segment is grouping of Parties, GeographicAreas, SalesChannels, and so 
 | href | string | uri | No |
 | name | string | N/A | No |
 | @baseType | string | N/A | No |
-| @schemaLocation | string | uri | No |
-| @type | string | N/A | No |
+| @schemaLocation | string | N/A | No |
 | @referredType | string | N/A | No |
+| @type | string | "MarketSegmentRef" | Yes |
 
 Table: Fields of MarketSegmentRef. {#tbl:MarketSegmentRef.md:MarketSegmentRef}
 

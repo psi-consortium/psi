@@ -28,7 +28,7 @@ An operation is connected to a REST endpoint of the API and therefore involves t
 1. The server (e.g. a PSS) that *implements* the endpoint of the operation.
 2. The client (e.g. a provider) that *uses* the endpoint.
 
-For example, the operation [TOD-02-03-02-Update_Product_Specification](#tod-02-03-02-updateproductspecification) outlines how the PATCH endpoint `/psi-api/productCatalog/v1/productSpecification/{id}` described in the [PSI-ICD] is to be used to update a product specification in a PSS's product catalog.
+For example, the operation [TOD-02-03-02-Update_Product_Specification](#tod-02-03-02-updateproductspecification) outlines how the PATCH endpoint `/psi-api/productCatalog/v2/productSpecification/{id}` described in the [PSI-ICD] is to be used to update a product specification in a PSS's product catalog.
 Additionally, each operation references the corresponding PSI requirement(s).
 The description of the listed PSI requirements can be found in the [PSI-REQ] document by searching for the requirement ID.
 They define the functionality that should be covered by the implementation of the operation endpoint(s).

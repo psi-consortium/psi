@@ -5,7 +5,7 @@
 
 # PATCH /productOrder/{id}
 
-**Absolute Path:** /productOrdering/v1/productOrder/{id}
+**Absolute Path:** /productOrdering/v2/productOrder/{id}
 
 **TOD Reference:** TOD-03-02-02-Update_Product_Order
 
@@ -15,7 +15,8 @@
 
 | Name | Type | Required | Description |
 | ------ | ------ | --- | ------------ |
-| id | string | Yes | Identifier of the ProductOrder |
+| id | string | Yes | Identifier of the Resource |
+| fields | string | No | Comma-separated properties to be provided in response |
 
 Table: Parameters of PATCH productOrder/{id}. {#tbl:productOrder-id.patch.md:parameters}
 
@@ -23,7 +24,10 @@ Table: Parameters of PATCH productOrder/{id}. {#tbl:productOrder-id.patch.md:par
 
 | Content Type | Reference |
 |--------------|-----------|
-| application/json;charset=utf-8 | ProductOrder_Update |
+| application/json | ProductOrder_MVO |
+| application/merge-patch+json | ProductOrder_MVO |
+| application/json-patch+json | JsonPatchOperations |
+| application/json-patch-query+json | JsonPatchOperations |
 
 Table: Request Body of PATCH productOrder/{id}. {#tbl:productOrder-id.patch.md:request_body}
 
@@ -31,7 +35,8 @@ Table: Request Body of PATCH productOrder/{id}. {#tbl:productOrder-id.patch.md:r
 
 | Code | Description | Content |
 |------|-------------|---------|
-| 200 | Updated | ProductOrder |
+| 200 | Success | ProductOrder |
+| 202 | Accepted | N/A |
 | 400 | Bad Request | Error |
 | 401 | Unauthorized | Error |
 | 403 | Forbidden | Error |
@@ -39,6 +44,8 @@ Table: Request Body of PATCH productOrder/{id}. {#tbl:productOrder-id.patch.md:r
 | 405 | Method Not allowed | Error |
 | 409 | Conflict | Error |
 | 500 | Internal Server Error | Error |
+| 501 | Not Implemented | Error |
+| 503 | Service Unavailable | Error |
 
 Table: Responses of PATCH productOrder/{id}. {#tbl:productOrder-id.patch.md:responses}
 

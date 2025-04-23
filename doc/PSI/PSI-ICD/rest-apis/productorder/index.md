@@ -5,7 +5,7 @@
 
 # productOrder (/productOrdering)
 
-Product Order API
+Operations for ProductOrder Resource
 
 @include [productOrder.get.md](productOrder.get.md)
 @include [productOrder.post.md](productOrder.post.md)

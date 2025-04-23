@@ -5,7 +5,7 @@
 
 # troubleTicket (/troubleTicket)
 
-Trouble Ticket API
+Operations for TroubleTicket Resource
 
 @include [troubleTicket.get.md](troubleTicket.get.md)
 @include [troubleTicket.post.md](troubleTicket.post.md)

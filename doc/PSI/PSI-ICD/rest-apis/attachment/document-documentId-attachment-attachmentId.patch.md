@@ -5,9 +5,7 @@
 
 # PATCH /document/{documentId}/attachment/{attachmentId}
 
-**Absolute Path:** /documentManagement/v1/document/{documentId}/attachment/{attachmentId}
-
-**TOD Reference:** TOD-01-03-07-Update_Attachment
+**Absolute Path:** /document/v2/document/{documentId}/attachment/{attachmentId}
 
 **Summary:** Updates an Attachment
 
@@ -24,8 +22,8 @@ Table: Parameters of PATCH document/{documentId}/attachment/{attachmentId}. {#tb
 
 | Content Type | Reference |
 |--------------|-----------|
-| multipart/form-data | Attachment_Update |
-| application/json;charset=utf-8 | Attachment_Update |
+| multipart/form-data | Attachment_MVO |
+| application/json;charset=utf-8 | Attachment_MVO |
 
 Table: Request Body of PATCH document/{documentId}/attachment/{attachmentId}. {#tbl:document-documentId-attachment-attachmentId.patch.md:request_body}
 
@@ -33,7 +31,8 @@ Table: Request Body of PATCH document/{documentId}/attachment/{attachmentId}. {#
 
 | Code | Description | Content |
 |------|-------------|---------|
-| 200 | Updated | Attachment |
+| 200 | Success | Attachment |
+| 202 | Accepted | N/A |
 | 400 | Bad Request | Error |
 | 401 | Unauthorized | Error |
 | 403 | Forbidden | Error |
@@ -41,6 +40,8 @@ Table: Request Body of PATCH document/{documentId}/attachment/{attachmentId}. {#
 | 405 | Method Not allowed | Error |
 | 409 | Conflict | Error |
 | 500 | Internal Server Error | Error |
+| 501 | Not Implemented | Error |
+| 503 | Service Unavailable | Error |
 
 Table: Responses of PATCH document/{documentId}/attachment/{attachmentId}. {#tbl:document-documentId-attachment-attachmentId.patch.md:responses}
 

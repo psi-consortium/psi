@@ -5,7 +5,7 @@
 
 # POST /performanceReport
 
-**Absolute Path:** /performanceMonitoring/v1/performanceReport
+**Absolute Path:** /performanceMonitoring/v2/performanceReport
 
 **TOD Reference:** TOD-06-05-01-Create_Performance_Monitoring_Report
 
@@ -27,7 +27,7 @@ Table: Request Body of POST performanceReport. {#tbl:performanceReport.post.md:r
 | 400 | Bad Request | Error400 |
 | 401 | Unauthorized | Error401 |
 | 403 | Forbidden | Error403 |
-| 422 | Unprocessable entity due to the business validation problems | Error422 |
+| 422 | Unprocessable entity due to the business validation problems | N/A |
 | 500 | Internal Server Error | Error500 |
 
 Table: Responses of POST performanceReport. {#tbl:performanceReport.post.md:responses}

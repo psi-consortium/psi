@@ -5,17 +5,15 @@
 
 # Price
 
-Provides all amounts (tax included, duty free, tax rate), used currency and percentage.
-
 | Field | Type | Format | Required |
 | ------- | ------- | ------- | --- |
-| percentage | number | float | No |
-| taxRate | number | float | No |
 | dutyFreeAmount | Money | N/A | No |
+| percentage | number | float | No |
 | taxIncludedAmount | Money | N/A | No |
+| taxRate | number | float | No |
 | @baseType | string | N/A | No |
-| @schemaLocation | string | uri | No |
-| @type | string | N/A | No |
+| @schemaLocation | string | N/A | No |
+| @type | string | "Price" | Yes |
 
 Table: Fields of Price. {#tbl:Price.md:Price}
 

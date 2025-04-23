@@ -5,7 +5,7 @@
 
 # PATCH /keyIndicator/{id}
 
-**Absolute Path:** /serviceQuality/v1/keyIndicator/{id}
+**Absolute Path:** /serviceQualityManagement/v2/keyIndicator/{id}
 
 **TOD Reference:** TOD-06-03-02-Update_Key_Indicator
 

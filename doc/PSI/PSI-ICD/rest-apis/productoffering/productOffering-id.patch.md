@@ -5,9 +5,7 @@
 
 # PATCH /productOffering/{id}
 
-**Absolute Path:** /productCatalog/v1/productOffering/{id}
-
-**TOD Reference:** TOD-02-04-02-Update_Product_Offering
+**Absolute Path:** /productCatalogManagement/v2/productOffering/{id}
 
 **Summary:** Updates partially a ProductOffering
 
@@ -15,7 +13,8 @@
 
 | Name | Type | Required | Description |
 | ------ | ------ | --- | ------------ |
-| id | string | Yes | Identifier of the ProductOffering |
+| id | string | Yes | Identifier of the Resource |
+| fields | string | No | Comma-separated properties to be provided in response |
 
 Table: Parameters of PATCH productOffering/{id}. {#tbl:productOffering-id.patch.md:parameters}
 
@@ -23,7 +22,10 @@ Table: Parameters of PATCH productOffering/{id}. {#tbl:productOffering-id.patch.
 
 | Content Type | Reference |
 |--------------|-----------|
-| application/json;charset=utf-8 | ProductOffering_Update |
+| application/json | ProductOffering_MVO |
+| application/merge-patch+json | ProductOffering_MVO |
+| application/json-patch+json | JsonPatchOperations |
+| application/json-patch-query+json | JsonPatchOperations |
 
 Table: Request Body of PATCH productOffering/{id}. {#tbl:productOffering-id.patch.md:request_body}
 
@@ -31,7 +33,8 @@ Table: Request Body of PATCH productOffering/{id}. {#tbl:productOffering-id.patc
 
 | Code | Description | Content |
 |------|-------------|---------|
-| 200 | Updated | ProductOffering |
+| 200 | Success | ProductOffering |
+| 202 | Accepted | N/A |
 | 400 | Bad Request | Error |
 | 401 | Unauthorized | Error |
 | 403 | Forbidden | Error |
@@ -39,6 +42,8 @@ Table: Request Body of PATCH productOffering/{id}. {#tbl:productOffering-id.patc
 | 405 | Method Not allowed | Error |
 | 409 | Conflict | Error |
 | 500 | Internal Server Error | Error |
+| 501 | Not Implemented | Error |
+| 503 | Service Unavailable | Error |
 
 Table: Responses of PATCH productOffering/{id}. {#tbl:productOffering-id.patch.md:responses}
 

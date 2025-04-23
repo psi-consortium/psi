@@ -5,9 +5,7 @@
 
 # GET /productOffering
 
-**Absolute Path:** /productCatalog/v1/productOffering
-
-**TOD Reference:** TOD-02-04-05-View_All_Product_Offerings
+**Absolute Path:** /productCatalogManagement/v2/productOffering
 
 **Summary:** List or find ProductOffering objects
 
@@ -25,14 +23,15 @@ Table: Parameters of GET productOffering. {#tbl:productOffering.get.md:parameter
 
 | Code | Description | Content |
 |------|-------------|---------|
-| 200 | Success | ProductOffering |
+| 200 | Success | N/A |
 | 400 | Bad Request | Error |
 | 401 | Unauthorized | Error |
 | 403 | Forbidden | Error |
 | 404 | Not Found | Error |
 | 405 | Method Not allowed | Error |
-| 409 | Conflict | Error |
 | 500 | Internal Server Error | Error |
+| 501 | Not Implemented | Error |
+| 503 | Service Unavailable | Error |
 
 Table: Responses of GET productOffering. {#tbl:productOffering.get.md:responses}
 

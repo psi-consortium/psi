@@ -5,9 +5,7 @@
 
 # PUT /document/{documentId}/attachment/{attachmentId}/content
 
-**Absolute Path:** /documentManagement/v1/document/{documentId}/attachment/{attachmentId}/content
-
-**TOD Reference:** TOD-01-03-12-Update_Attachment_Content
+**Absolute Path:** /document/v2/document/{documentId}/attachment/{attachmentId}/content
 
 **Summary:** Updates the content of an Attachment
 
@@ -38,8 +36,9 @@ Table: Request Body of PUT document/{documentId}/attachment/{attachmentId}/conte
 | 403 | Forbidden | Error |
 | 404 | Not Found | Error |
 | 405 | Method Not allowed | Error |
-| 409 | Conflict | Error |
 | 500 | Internal Server Error | Error |
+| 501 | Not Implemented | Error |
+| 503 | Service Unavailable | Error |
 
 Table: Responses of PUT document/{documentId}/attachment/{attachmentId}/content. {#tbl:document-documentId-attachment-attachmentId-content.put.md:responses}
 

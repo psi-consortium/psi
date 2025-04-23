@@ -70,6 +70,12 @@ dcr_overrides:
    version: 'MS10 [1.2.2]'
    author: 'Norbert Czeranka'
    message: 'Relative times in Mision-API, implicit subtypes, Open-API 3.0 type update.'
+ - dcr:
+   from: '2025-02-04'
+   to: '2025-12-31'
+   version: 'MS11pre [1.2.3]'
+   author: 'Christian Grubert'
+   message: 'TMF5 Updates (migrations) to all APIs.'  
 =end
 
 # Document Meta Information
@@ -82,7 +88,7 @@ dcr_overrides:
 | Author    | Norbert Czeranka  | Project Team                   | CGI             |
 | Author    | Dafinka Srezoska  | Project Team                   | CGI             |
 | Author    | Hendrik Oppenberg | Technical Officer              | CGI             |
-| Approval  | Rui Goncalves     | Project Manager                | SES             |
+| Approval  | Victoria McCarthy | Project Manager                | SES             |
 | Approval  | Wolfgang Robben   | Project Manager                | CGI             |
 | Checked   | Pepijn Witte      | Quality Assurance Manager      | CGI             |
 

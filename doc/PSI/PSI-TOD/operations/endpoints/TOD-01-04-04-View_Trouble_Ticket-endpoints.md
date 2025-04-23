@@ -3,4 +3,4 @@
                Do NOT manually edit this file! Any such changes will be overwritten!
 -->
 
-* GET /troubleTicket/v1/troubleTicket/{id}
+* GET /troubleTicket/v2/troubleTicket/{id}

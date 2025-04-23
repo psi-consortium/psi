@@ -6,7 +6,7 @@
 # RelatedParty
 
 Related Party reference.
-A related party defines a party or a party role linked to a specific entity.
+A related party defines party or party role linked to a specific entity.
 
 | Field | Type | Format | Required |
 | ------- | ------- | ------- | --- |

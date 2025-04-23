@@ -5,9 +5,7 @@
 
 # GET /document/{documentId}/attachment/{attachmentId}/content
 
-**Absolute Path:** /documentManagement/v1/document/{documentId}/attachment/{attachmentId}/content
-
-**TOD Reference:** TOD-01-03-11-Fetch_Attachment_Content
+**Absolute Path:** /document/v2/document/{documentId}/attachment/{attachmentId}/content
 
 **Summary:** Retrieves an Attachment content by ID
 
@@ -24,15 +22,16 @@ Table: Parameters of GET document/{documentId}/attachment/{attachmentId}/content
 
 | Code | Description | Content |
 |------|-------------|---------|
-| 200 | Success | binary |
+| 200 | Success | N/A |
 | 302 | Found | N/A |
 | 400 | Bad Request | Error |
 | 401 | Unauthorized | Error |
 | 403 | Forbidden | Error |
 | 404 | Not Found | Error |
 | 405 | Method Not allowed | Error |
-| 409 | Conflict | Error |
 | 500 | Internal Server Error | Error |
+| 501 | Not Implemented | Error |
+| 503 | Service Unavailable | Error |
 
 Table: Responses of GET document/{documentId}/attachment/{attachmentId}/content. {#tbl:document-documentId-attachment-attachmentId-content.get.md:responses}
 

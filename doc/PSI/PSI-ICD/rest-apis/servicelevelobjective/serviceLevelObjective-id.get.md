@@ -5,7 +5,7 @@
 
 # GET /serviceLevelObjective/{id}
 
-**Absolute Path:** /serviceQuality/v1/serviceLevelObjective/{id}
+**Absolute Path:** /serviceQualityManagement/v2/serviceLevelObjective/{id}
 
 **TOD Reference:** TOD-06-01-04-View_Service_Level_Objective
 

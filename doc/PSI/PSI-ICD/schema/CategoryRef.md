@@ -5,8 +5,6 @@
 
 # CategoryRef
 
-The category for grouping recommendations
-
 | Field | Type | Format | Required |
 | ------- | ------- | ------- | --- |
 | id | string | N/A | Yes |
@@ -14,9 +12,9 @@ The category for grouping recommendations
 | name | string | N/A | No |
 | version | string | N/A | No |
 | @baseType | string | N/A | No |
-| @schemaLocation | string | uri | No |
-| @type | string | N/A | No |
+| @schemaLocation | string | N/A | No |
 | @referredType | string | N/A | No |
+| @type | string | "CategoryRef" | Yes |
 
 Table: Fields of CategoryRef. {#tbl:CategoryRef.md:CategoryRef}
 

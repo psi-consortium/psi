@@ -1,0 +1,4131 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Document Management API",
+    "description": "TMF667 Document Management API describes the meta-data of a Document, such as the name, creationDate and lifecycle status. The (typically binary) body of this document (such as a Word.doc, PDF, Video clip, or Image) will be held in the associated Attachment(s) either by Ref or Value. If by value - the binary content is held in the Attachment.content. If by reference, the Attachment.url might point to a (file:) or remote (http:) pointer to the Document media.\\n\\n A Document may be associated with a DocumentSpecification, which will detail the characteristics of that type of Document (an Image may have a width, height and format; a Video may have a length and format).\\n A Document has a collection of RelatedParty's, for roles such as author, reviewer, publisher, and a lifecycle status to take the document through a simple set of production stages. Also the Attachment is made available as a resource to access the reference, or create or update the Attachment.",
+    "version": "5.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://serverRoot/psi-api/document/v2/"
+    }
+  ],
+  "tags": [
+    {
+      "name": "document",
+      "description": "Operations for Document Resource"
+    },
+    {
+      "name": "attachment",
+      "description": "Operations for Attachment Resource"
+    }
+  ],
+  "paths": {
+    "/document": {
+      "get": {
+        "tags": [
+          "document"
+        ],
+        "summary": "List or find Document objects",
+        "description": "List or find Document objects",
+        "operationId": "listDocument",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Fields"
+          },
+          {
+            "$ref": "#/components/parameters/Offset"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200DocumentArray"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "405": {
+            "$ref": "#/components/responses/405"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+          "501": {
+            "$ref": "#/components/responses/501"
+          },
+          "503": {
+            "$ref": "#/components/responses/503"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "document"
+        ],
+        "summary": "Creates a Document",
+        "description": "This operation creates a Document entity.",
+        "operationId": "createDocument",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Fields"
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/Document_FVO"
+        },
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/201Document"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "405": {
+            "$ref": "#/components/responses/405"
+          },
+          "409": {
+            "$ref": "#/components/responses/409"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+          "501": {
+            "$ref": "#/components/responses/501"
+          },
+          "503": {
+            "$ref": "#/components/responses/503"
+          }
+        }
+      }
+    },
+    "/document/{id}": {
+      "get": {
+        "tags": [
+          "document"
+        ],
+        "summary": "Retrieves a Document by ID",
+        "description": "This operation retrieves a Document entity. Attribute selection enabled for all first level attributes.",
+        "operationId": "retrieveDocument",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Id"
+          },
+          {
+            "$ref": "#/components/parameters/Fields"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200Document_Get"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "405": {
+            "$ref": "#/components/responses/405"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+          "501": {
+            "$ref": "#/components/responses/501"
+          },
+          "503": {
+            "$ref": "#/components/responses/503"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "document"
+        ],
+        "summary": "Deletes a Document",
+        "description": "This operation deletes a Document entity.",
+        "operationId": "deleteDocument",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Id"
+          }
+        ],
+        "responses": {
+          "202": {
+            "$ref": "#/components/responses/202"
+          },
+          "204": {
+            "$ref": "#/components/responses/204"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "405": {
+            "$ref": "#/components/responses/405"
+          },
+          "409": {
+            "$ref": "#/components/responses/409"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+          "501": {
+            "$ref": "#/components/responses/501"
+          },
+          "503": {
+            "$ref": "#/components/responses/503"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "document"
+        ],
+        "summary": "Updates partially a Document",
+        "description": "This operation updates partially a Document entity.",
+        "operationId": "patchDocument",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Id"
+          },
+          {
+            "$ref": "#/components/parameters/Fields"
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/Document_MVO"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200Document_Patch"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "405": {
+            "$ref": "#/components/responses/405"
+          },
+          "409": {
+            "$ref": "#/components/responses/409"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+          "501": {
+            "$ref": "#/components/responses/501"
+          },
+          "503": {
+            "$ref": "#/components/responses/503"
+          }
+        }
+      }
+    },
+    "/document/{documentId}/attachment": {
+      "get": {
+        "tags": [
+          "attachment"
+        ],
+        "summary": "List or find Attachment objects",
+        "description": "This operation list or find Attachment entities of a Document",
+        "operationId": "listAttachment",
+        "parameters": [
+          {
+            "name": "documentId",
+            "in": "path",
+            "description": "The identifier of the Document.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/Fields"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200AttachmentArray"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "405": {
+            "$ref": "#/components/responses/405"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+          "501": {
+            "$ref": "#/components/responses/501"
+          },
+          "503": {
+            "$ref": "#/components/responses/503"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "attachment"
+        ],
+        "summary": "Creates an Attachment",
+        "description": "This operation creates an Attachment entity.",
+        "operationId": "createAttachment",
+        "parameters": [
+          {
+            "name": "documentId",
+            "in": "path",
+            "description": "The identifier of the Document.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The Attachment to be created.",
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Attachment_FVO"
+              }
+            },
+            "application/json;charset=utf-8": {
+              "schema": {
+                "$ref": "#/components/schemas/Attachment_FVO"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/201Attachment"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "405": {
+            "$ref": "#/components/responses/405"
+          },
+          "409": {
+            "$ref": "#/components/responses/409"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+          "501": {
+            "$ref": "#/components/responses/501"
+          },
+          "503": {
+            "$ref": "#/components/responses/503"
+          }
+        }
+      }
+    },
+    "/document/{documentId}/attachment/{attachmentId}": {
+      "get": {
+        "tags": [
+          "attachment"
+        ],
+        "summary": "Retrieves an Attachment by ID",
+        "description": "This operation retrieves an Attachment entity. Attribute selection is enabled for all first level attributes.",
+        "operationId": "retrieveAttachment",
+        "parameters": [
+          {
+            "name": "documentId",
+            "in": "path",
+            "description": "The identifier of the Document.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "attachmentId",
+            "in": "path",
+            "description": "The identifier of the Attachment.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/Fields"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200Attachment_Get"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "405": {
+            "$ref": "#/components/responses/405"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+          "501": {
+            "$ref": "#/components/responses/501"
+          },
+          "503": {
+            "$ref": "#/components/responses/503"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "attachment"
+        ],
+        "summary": "Deletes an Attachment",
+        "description": "This operation deletes an attachment entity.",
+        "operationId": "deleteAttachment",
+        "parameters": [
+          {
+            "name": "documentId",
+            "in": "path",
+            "description": "Identifier of the document.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "attachmentId",
+            "in": "path",
+            "description": "Identifier of the attachment.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "$ref": "#/components/responses/202"
+          },
+          "204": {
+            "$ref": "#/components/responses/204"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "405": {
+            "$ref": "#/components/responses/405"
+          },
+          "409": {
+            "$ref": "#/components/responses/409"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+          "501": {
+            "$ref": "#/components/responses/501"
+          },
+          "503": {
+            "$ref": "#/components/responses/503"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "attachment"
+        ],
+        "summary": "Updates an Attachment",
+        "description": "This operation updates an attachment entity.",
+        "operationId": "patchAttachment",
+        "parameters": [
+          {
+            "name": "documentId",
+            "in": "path",
+            "description": "The identifier of the document.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "attachmentId",
+            "in": "path",
+            "description": "The identifier of the attachment.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The attachment to be updated.",
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Attachment_MVO"
+              }
+            },
+            "application/json;charset=utf-8": {
+              "schema": {
+                "$ref": "#/components/schemas/Attachment_MVO"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200Attachment_Patch"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "405": {
+            "$ref": "#/components/responses/405"
+          },
+          "409": {
+            "$ref": "#/components/responses/409"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+          "501": {
+            "$ref": "#/components/responses/501"
+          },
+          "503": {
+            "$ref": "#/components/responses/503"
+          }
+        }
+      }
+    },
+    "/document/{documentId}/attachment/{attachmentId}/content": {
+      "get": {
+        "tags": [
+          "attachment"
+        ],
+        "summary": "Retrieves an Attachment content by ID",
+        "description": "This operation retrieves the content of an attachment for direct download.",
+        "operationId": "retrieveAttachmentContent",
+        "parameters": [
+          {
+            "name": "documentId",
+            "in": "path",
+            "description": "The identifier of the Document.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "attachmentId",
+            "in": "path",
+            "description": "The identifier of the Attachment.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "headers": {
+              "Content-Disposition": {
+                "description": "The content disposition marking the response data as an Attachment, usually also denoting the actual filename.",
+                "style": "simple",
+                "explode": false,
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "302": {
+            "description": "Found",
+            "headers": {
+              "Location": {
+                "description": "The location where the content can be downloaded if it is an external URL or stored on a separate cloud storage.",
+                "style": "simple",
+                "explode": false,
+                "schema": {
+                  "type": "string",
+                  "format": "uri"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "405": {
+            "$ref": "#/components/responses/405"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+          "501": {
+            "$ref": "#/components/responses/501"
+          },
+          "503": {
+            "$ref": "#/components/responses/503"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "attachment"
+        ],
+        "summary": "Updates the content of an Attachment",
+        "description": "This operation updates the content of an Attachment.",
+        "operationId": "updateAttachmentContent",
+        "parameters": [
+          {
+            "name": "documentId",
+            "in": "path",
+            "description": "Identifier of the Document",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "attachmentId",
+            "in": "path",
+            "description": "Identifier of the Attachment",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The Attachment to be created",
+          "content": {
+            "*/*": {
+              "schema": {
+                "type": "string",
+                "format": "binary"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Updated",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Attachment"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "405": {
+            "$ref": "#/components/responses/405"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+          "501": {
+            "$ref": "#/components/responses/501"
+          },
+          "503": {
+            "$ref": "#/components/responses/503"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Addressable": {
+        "type": "object",
+        "properties": {
+          "href": {
+            "type": "string",
+            "description": "Hyperlink reference",
+            "format": "uri"
+          },
+          "id": {
+            "type": "string",
+            "description": "unique identifier"
+          }
+        },
+        "description": "Base schema for adressable entities"
+      },
+      "Attachment": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "Attachment": "#/components/schemas/Attachment"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Entity"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "The name of the attachment"
+              },
+              "description": {
+                "type": "string",
+                "description": "A narrative text describing the content of the attachment",
+                "example": "Photograph of the Product"
+              },
+              "url": {
+                "type": "string",
+                "description": "Uniform Resource Locator, is a web page address (a subset of URI)",
+                "format": "uri",
+                "example": "https://host/Content/4aafacbd-11ff-4dc8-b445-305f2215715f"
+              },
+              "size": {
+                "$ref": "#/components/schemas/Quantity"
+              },
+              "validFor": {
+                "$ref": "#/components/schemas/TimePeriod"
+              },
+              "attachmentType": {
+                "type": "string",
+                "description": "a business characterization of the purpose of the attachment, for example logo, instructionManual, contractCopy"
+              },
+              "mimeType": {
+                "type": "string",
+                "description": "a technical characterization of the attachment content format using IETF Mime Types"
+              }
+            },
+            "description": "Complements the description of an element (for instance a product) through video, pictures..."
+          }
+        ]
+      },
+      "Attachment_FVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "Attachment": "#/components/schemas/Attachment_FVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Entity_FVO"
+          },
+          {
+            "required": [
+              "attachmentType",
+              "mimeType"
+            ],
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "The name of the attachment"
+              },
+              "description": {
+                "type": "string",
+                "description": "A narrative text describing the content of the attachment",
+                "example": "Photograph of the Product"
+              },
+              "url": {
+                "type": "string",
+                "description": "Uniform Resource Locator, is a web page address (a subset of URI)",
+                "format": "uri",
+                "example": "https://host/Content/4aafacbd-11ff-4dc8-b445-305f2215715f"
+              },
+              "content": {
+                "type": "string",
+                "description": "The actual contents of the attachment object, if embedded, encoded as base64",
+                "format": "binary"
+              },
+              "size": {
+                "$ref": "#/components/schemas/Quantity"
+              },
+              "validFor": {
+                "$ref": "#/components/schemas/TimePeriod"
+              },
+              "attachmentType": {
+                "type": "string",
+                "description": "a business characterization of the purpose of the attachment, for example logo, instructionManual, contractCopy"
+              },
+              "mimeType": {
+                "type": "string",
+                "description": "a technical characterization of the attachment content format using IETF Mime Types"
+              }
+            },
+            "description": "Complements the description of an element (for instance a product) through video, pictures..."
+          }
+        ]
+      },
+      "Attachment_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "Attachment": "#/components/schemas/Attachment_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Entity_MVO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "The name of the attachment"
+              },
+              "description": {
+                "type": "string",
+                "description": "A narrative text describing the content of the attachment",
+                "example": "Photograph of the Product"
+              },
+              "url": {
+                "type": "string",
+                "description": "Uniform Resource Locator, is a web page address (a subset of URI)",
+                "format": "uri",
+                "example": "https://host/Content/4aafacbd-11ff-4dc8-b445-305f2215715f"
+              },
+              "content": {
+                "type": "string",
+                "description": "The actual contents of the attachment object, if embedded, encoded as base64",
+                "format": "binary"
+              },
+              "size": {
+                "$ref": "#/components/schemas/Quantity"
+              },
+              "validFor": {
+                "$ref": "#/components/schemas/TimePeriod"
+              },
+              "attachmentType": {
+                "type": "string",
+                "description": "a business characterization of the purpose of the attachment, for example logo, instructionManual, contractCopy"
+              },
+              "mimeType": {
+                "type": "string",
+                "description": "a technical characterization of the attachment content format using IETF Mime Types"
+              }
+            },
+            "description": "Complements the description of an element (for instance a product) through video, pictures..."
+          }
+        ]
+      },
+      "BooleanArrayCharacteristic": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "array",
+                "items": {
+                  "type": "boolean"
+                }
+              }
+            },
+            "description": "A characteristic which value is an array of Boolean(s)."
+          }
+        ]
+      },
+      "BooleanArrayCharacteristic_FVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic_FVO"
+          },
+          {
+            "required": [
+              "value"
+            ],
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "array",
+                "items": {
+                  "type": "boolean"
+                }
+              }
+            },
+            "description": "A characteristic which value is an array of Boolean(s)."
+          }
+        ]
+      },
+      "BooleanArrayCharacteristic_MVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic_MVO"
+          },
+          {
+            "required": [
+              "value"
+            ],
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "array",
+                "items": {
+                  "type": "boolean"
+                }
+              }
+            },
+            "description": "A characteristic which value is an array of Boolean(s)."
+          }
+        ]
+      },
+      "BooleanCharacteristic": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "boolean",
+                "description": "Value of the characteristic"
+              }
+            },
+            "description": "A characteristic which value is a Boolean."
+          }
+        ]
+      },
+      "BooleanCharacteristic_FVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic_FVO"
+          },
+          {
+            "required": [
+              "value"
+            ],
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "boolean",
+                "description": "Value of the characteristic"
+              }
+            },
+            "description": "A characteristic which value is a Boolean."
+          }
+        ]
+      },
+      "BooleanCharacteristic_MVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic_MVO"
+          },
+          {
+            "required": [
+              "value"
+            ],
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "boolean",
+                "description": "Value of the characteristic"
+              }
+            },
+            "description": "A characteristic which value is a Boolean."
+          }
+        ]
+      },
+      "CategoryRef": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "CategoryRef": "#/components/schemas/CategoryRef"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "version": {
+                "type": "string",
+                "description": "Version of the category"
+              }
+            },
+            "description": "Reference to a category in the catalog."
+          }
+        ]
+      },
+      "CategoryRef_FVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "CategoryRef": "#/components/schemas/CategoryRef_FVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "version": {
+                "type": "string",
+                "description": "Version of the category"
+              }
+            },
+            "description": "Reference to a category in the catalog."
+          }
+        ]
+      },
+      "CategoryRef_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "CategoryRef": "#/components/schemas/CategoryRef_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef_MVO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "version": {
+                "type": "string",
+                "description": "Version of the category"
+              }
+            },
+            "description": "Reference to a category in the catalog."
+          }
+        ]
+      },
+      "Characteristic": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "Characteristic": "#/components/schemas/Characteristic",
+            "StringCharacteristic": "#/components/schemas/StringCharacteristic",
+            "StringArrayCharacteristic": "#/components/schemas/StringArrayCharacteristic",
+            "ObjectCharacteristic": "#/components/schemas/ObjectCharacteristic",
+            "ObjectArrayCharacteristic": "#/components/schemas/ObjectArrayCharacteristic",
+            "NumberCharacteristic": "#/components/schemas/NumberCharacteristic",
+            "NumberArrayCharacteristic": "#/components/schemas/NumberArrayCharacteristic",
+            "IntegerCharacteristic": "#/components/schemas/IntegerCharacteristic",
+            "IntegerArrayCharacteristic": "#/components/schemas/IntegerArrayCharacteristic",
+            "FloatCharacteristic": "#/components/schemas/FloatCharacteristic",
+            "FloatArrayCharacteristic": "#/components/schemas/FloatArrayCharacteristic",
+            "BooleanCharacteristic": "#/components/schemas/BooleanCharacteristic",
+            "BooleanArrayCharacteristic": "#/components/schemas/BooleanArrayCharacteristic"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Unique identifier of the characteristic"
+              },
+              "name": {
+                "type": "string",
+                "description": "Name of the characteristic"
+              },
+              "valueType": {
+                "type": "string",
+                "description": "Data type of the value of the characteristic"
+              },
+              "characteristicRelationship": {
+                "type": "array",
+                "description": "Collection of characteristic relationships",
+                "items": {
+                  "$ref": "#/components/schemas/CharacteristicRelationship"
+                }
+              },
+              "unitOfMeasure": {
+                "type": "string",
+                "description": "A length, surface, volume, dry measure, liquid measure, money, weight, time, and the like. In general, a determinate quantity or magnitude of the kind designated, taken as a standard of comparison for others of the same kind, in assigning them to numerical values, as 1 foot, 1 yard, 1 mile, 1 square foot."
+              }
+            },
+            "description": "Describes a given characteristic of an object or entity through a name/value pair."
+          }
+        ]
+      },
+      "CharacteristicRelationship": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "CharacteristicRelationship": "#/components/schemas/CharacteristicRelationship"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Unique identifier of the characteristic"
+              },
+              "relationshipType": {
+                "type": "string",
+                "description": "The type of relationship"
+              }
+            },
+            "description": "Another Characteristic that is related to the current Characteristic;"
+          }
+        ]
+      },
+      "CharacteristicRelationship_FVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "CharacteristicRelationship": "#/components/schemas/CharacteristicRelationship_FVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible_FVO"
+          },
+          {
+            "required": [
+              "id",
+              "relationshipType"
+            ],
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Unique identifier of the characteristic"
+              },
+              "relationshipType": {
+                "type": "string",
+                "description": "The type of relationship"
+              }
+            },
+            "description": "Another Characteristic that is related to the current Characteristic;"
+          }
+        ]
+      },
+      "CharacteristicRelationship_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "CharacteristicRelationship": "#/components/schemas/CharacteristicRelationship_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Unique identifier of the characteristic"
+              },
+              "relationshipType": {
+                "type": "string",
+                "description": "The type of relationship"
+              }
+            },
+            "description": "Another Characteristic that is related to the current Characteristic;"
+          }
+        ]
+      },
+      "Characteristic_FVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "Characteristic": "#/components/schemas/Characteristic_FVO",
+            "StringCharacteristic": "#/components/schemas/StringCharacteristic_FVO",
+            "StringArrayCharacteristic": "#/components/schemas/StringArrayCharacteristic_FVO",
+            "ObjectCharacteristic": "#/components/schemas/ObjectCharacteristic_FVO",
+            "ObjectArrayCharacteristic": "#/components/schemas/ObjectArrayCharacteristic_FVO",
+            "NumberCharacteristic": "#/components/schemas/NumberCharacteristic_FVO",
+            "NumberArrayCharacteristic": "#/components/schemas/NumberArrayCharacteristic_FVO",
+            "IntegerCharacteristic": "#/components/schemas/IntegerCharacteristic_FVO",
+            "IntegerArrayCharacteristic": "#/components/schemas/IntegerArrayCharacteristic_FVO",
+            "FloatCharacteristic": "#/components/schemas/FloatCharacteristic_FVO",
+            "FloatArrayCharacteristic": "#/components/schemas/FloatArrayCharacteristic_FVO",
+            "BooleanCharacteristic": "#/components/schemas/BooleanCharacteristic_FVO",
+            "BooleanArrayCharacteristic": "#/components/schemas/BooleanArrayCharacteristic_FVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible_FVO"
+          },
+          {
+            "required": [
+              "name"
+            ],
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Unique identifier of the characteristic"
+              },
+              "name": {
+                "type": "string",
+                "description": "Name of the characteristic"
+              },
+              "valueType": {
+                "type": "string",
+                "description": "Data type of the value of the characteristic"
+              },
+              "characteristicRelationship": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CharacteristicRelationship_FVO"
+                }
+              },
+              "unitOfMeasure": {
+                "type": "string",
+                "description": "A length, surface, volume, dry measure, liquid measure, money, weight, time, and the like. In general, a determinate quantity or magnitude of the kind designated, taken as a standard of comparison for others of the same kind, in assigning them to numerical values, as 1 foot, 1 yard, 1 mile, 1 square foot."
+              }
+            },
+            "description": "Describes a given characteristic of an object or entity through a name/value pair."
+          }
+        ]
+      },
+      "Characteristic_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "Characteristic": "#/components/schemas/Characteristic_MVO",
+            "StringCharacteristic": "#/components/schemas/StringCharacteristic_MVO",
+            "StringArrayCharacteristic": "#/components/schemas/StringArrayCharacteristic_MVO",
+            "ObjectCharacteristic": "#/components/schemas/ObjectCharacteristic_MVO",
+            "ObjectArrayCharacteristic": "#/components/schemas/ObjectArrayCharacteristic_MVO",
+            "NumberCharacteristic": "#/components/schemas/NumberCharacteristic_MVO",
+            "NumberArrayCharacteristic": "#/components/schemas/NumberArrayCharacteristic_MVO",
+            "IntegerCharacteristic": "#/components/schemas/IntegerCharacteristic_MVO",
+            "IntegerArrayCharacteristic": "#/components/schemas/IntegerArrayCharacteristic_MVO",
+            "FloatCharacteristic": "#/components/schemas/FloatCharacteristic_MVO",
+            "FloatArrayCharacteristic": "#/components/schemas/FloatArrayCharacteristic_MVO",
+            "BooleanCharacteristic": "#/components/schemas/BooleanCharacteristic_MVO",
+            "BooleanArrayCharacteristic": "#/components/schemas/BooleanArrayCharacteristic_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Unique identifier of the characteristic"
+              },
+              "name": {
+                "type": "string",
+                "description": "Name of the characteristic"
+              },
+              "valueType": {
+                "type": "string",
+                "description": "Data type of the value of the characteristic"
+              },
+              "characteristicRelationship": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CharacteristicRelationship_MVO"
+                }
+              },
+              "unitOfMeasure": {
+                "type": "string",
+                "description": "A length, surface, volume, dry measure, liquid measure, money, weight, time, and the like. In general, a determinate quantity or magnitude of the kind designated, taken as a standard of comparison for others of the same kind, in assigning them to numerical values, as 1 foot, 1 yard, 1 mile, 1 square foot."
+              }
+            },
+            "description": "Describes a given characteristic of an object or entity through a name/value pair."
+          }
+        ]
+      },
+      "Document": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "Document": "#/components/schemas/Document"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Entity"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "A string used to give a name to the document"
+              },
+              "documentType": {
+                "type": "string",
+                "description": "Name of the document type"
+              },
+              "version": {
+                "type": "string",
+                "description": "A particular form or variety of an artefact that is different from others or from the original. The form represents differences in properties that characterize an artefact, that are not enough to warrant creating a new artefact"
+              },
+              "category": {
+                "type": "array",
+                "description": "Collection of categories applicable",
+                "items": {
+                  "$ref": "#/components/schemas/CategoryRef"
+                }
+              },
+              "creationDate": {
+                "type": "string",
+                "description": "The date and time the document was created. A date and time formatted in compliance with the ISO8601 standard must be used.",
+                "format": "date-time"
+              },
+              "expiryDate": {
+                "type": "string",
+                "description": "The date and time the document is to expire. A date and time formatted in compliance with the ISO8601 standard must be used.",
+                "format": "date-time"
+              },
+              "description": {
+                "type": "string",
+                "description": "free-text description of the document"
+              },
+              "documentRelationship": {
+                "type": "array",
+                "description": "A collection of document elements",
+                "items": {
+                  "$ref": "#/components/schemas/DocumentRefOrValue"
+                }
+              },
+              "lastUpdate": {
+                "type": "string",
+                "description": "The date and time the document was last modified. A date and time formatted in compliance with the ISO8601 standard must be used.",
+                "format": "date-time"
+              },
+              "lifecycleState": {
+                "type": "string",
+                "description": "Represents the lifecycleState of the document."
+              },
+              "attachment": {
+                "type": "array",
+                "description": "Collection of attachments",
+                "items": {
+                  "$ref": "#/components/schemas/Attachment"
+                }
+              },
+              "characteristic": {
+                "type": "array",
+                "description": "Collection of characteristics",
+                "items": {
+                  "$ref": "#/components/schemas/Characteristic"
+                }
+              },
+              "relatedEntity": {
+                "$ref": "#/components/schemas/RelatedEntity"
+              },
+              "relatedParty": {
+                "type": "array",
+                "description": "A collection of related parties",
+                "items": {
+                  "$ref": "#/components/schemas/RelatedPartyRefOrPartyRoleRef"
+                }
+              },
+              "externalIdentifier": {
+                "type": "array",
+                "description": "Collection of external identifiers",
+                "items": {
+                  "$ref": "#/components/schemas/ExternalIdentifier"
+                }
+              },
+              "validFor": {
+                "$ref": "#/components/schemas/TimePeriod"
+              }
+            },
+            "description": "Document is a tangible output from an activity"
+          }
+        ]
+      },
+      "DocumentRef": {
+        "type": "object",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "DocumentRef": "#/components/schemas/DocumentRef"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          }
+        ]
+      },
+      "DocumentRefOrValue": {
+        "type": "object",
+        "description": "",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "Document": "#/components/schemas/Document",
+            "DocumentRef": "#/components/schemas/DocumentRef"
+          }
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/Document"
+          },
+          {
+            "$ref": "#/components/schemas/DocumentRef"
+          }
+        ]
+      },
+      "DocumentRefOrValue_FVO": {
+        "type": "object",
+        "description": "",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "Document": "#/components/schemas/Document_FVO",
+            "DocumentRef": "#/components/schemas/DocumentRef_FVO"
+          }
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/Document_FVO"
+          },
+          {
+            "$ref": "#/components/schemas/DocumentRef_FVO"
+          }
+        ]
+      },
+      "DocumentRefOrValue_MVO": {
+        "type": "object",
+        "description": "",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "Document": "#/components/schemas/Document_MVO",
+            "DocumentRef": "#/components/schemas/DocumentRef_MVO"
+          }
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/Document_MVO"
+          },
+          {
+            "$ref": "#/components/schemas/DocumentRef_MVO"
+          }
+        ]
+      },
+      "DocumentRef_FVO": {
+        "type": "object",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "DocumentRef": "#/components/schemas/DocumentRef_FVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          }
+        ]
+      },
+      "DocumentRef_MVO": {
+        "type": "object",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "DocumentRef": "#/components/schemas/DocumentRef_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef_MVO"
+          }
+        ]
+      },
+      "Document_FVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "Document": "#/components/schemas/Document_FVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Entity_FVO"
+          },
+          {
+            "required": [
+              "name"
+            ],
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "A string used to give a name to the document"
+              },
+              "documentType": {
+                "type": "string",
+                "description": "Name of the document type"
+              },
+              "version": {
+                "type": "string",
+                "description": "A particular form or variety of an artefact that is different from others or from the original. The form represents differences in properties that characterize an artefact, that are not enough to warrant creating a new artefact"
+              },
+              "category": {
+                "type": "array",
+                "description": "Collection of categories applicable",
+                "items": {
+                  "$ref": "#/components/schemas/CategoryRef_FVO"
+                }
+              },
+              "creationDate": {
+                "type": "string",
+                "description": "The date and time the document was created. A date and time formatted in compliance with the ISO8601 standard must be used.",
+                "format": "date-time"
+              },
+              "expiryDate": {
+                "type": "string",
+                "description": "The date and time the document is to expire. A date and time formatted in compliance with the ISO8601 standard must be used.",
+                "format": "date-time"
+              },
+              "description": {
+                "type": "string",
+                "description": "free-text description of the document"
+              },
+              "documentRelationship": {
+                "type": "array",
+                "description": "A collection of document elements",
+                "items": {
+                  "$ref": "#/components/schemas/DocumentRefOrValue_FVO"
+                }
+              },
+              "lastUpdate": {
+                "type": "string",
+                "description": "The date and time the document was last modified. A date and time formatted in compliance with the ISO8601 standard must be used.",
+                "format": "date-time"
+              },
+              "lifecycleState": {
+                "type": "string",
+                "description": "Represents the lifecycleState of the document."
+              },
+              "characteristic": {
+                "type": "array",
+                "description": "Collection of characteristics",
+                "items": {
+                  "$ref": "#/components/schemas/Characteristic_FVO"
+                }
+              },
+              "relatedEntity": {
+                "$ref": "#/components/schemas/RelatedEntity_FVO"
+              },
+              "relatedParty": {
+                "type": "array",
+                "description": "A collection of related parties",
+                "items": {
+                  "$ref": "#/components/schemas/RelatedPartyRefOrPartyRoleRef_FVO"
+                }
+              },
+              "externalIdentifier": {
+                "type": "array",
+                "description": "Collection of external identifiers",
+                "items": {
+                  "$ref": "#/components/schemas/ExternalIdentifier_FVO"
+                }
+              },
+              "validFor": {
+                "$ref": "#/components/schemas/TimePeriod"
+              }
+            },
+            "description": "Document is a tangible output from an activity"
+          }
+        ]
+      },
+      "Document_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "Document": "#/components/schemas/Document_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Entity_MVO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "A string used to give a name to the document"
+              },
+              "documentType": {
+                "type": "string",
+                "description": "Name of the document type"
+              },
+              "version": {
+                "type": "string",
+                "description": "A particular form or variety of an artefact that is different from others or from the original. The form represents differences in properties that characterize an artefact, that are not enough to warrant creating a new artefact"
+              },
+              "category": {
+                "type": "array",
+                "description": "Collection of categories applicable",
+                "items": {
+                  "$ref": "#/components/schemas/CategoryRef_MVO"
+                }
+              },
+              "creationDate": {
+                "type": "string",
+                "description": "The date and time the document was created. A date and time formatted in compliance with the ISO8601 standard must be used.",
+                "format": "date-time"
+              },
+              "expiryDate": {
+                "type": "string",
+                "description": "The date and time the document is to expire. A date and time formatted in compliance with the ISO8601 standard must be used.",
+                "format": "date-time"
+              },
+              "description": {
+                "type": "string",
+                "description": "free-text description of the document"
+              },
+              "documentRelationship": {
+                "type": "array",
+                "description": "A collection of document elements",
+                "items": {
+                  "$ref": "#/components/schemas/DocumentRefOrValue_MVO"
+                }
+              },
+              "lastUpdate": {
+                "type": "string",
+                "description": "The date and time the document was last modified. A date and time formatted in compliance with the ISO8601 standard must be used.",
+                "format": "date-time"
+              },
+              "lifecycleState": {
+                "type": "string",
+                "description": "Represents the lifecycleState of the document."
+              },
+              "characteristic": {
+                "type": "array",
+                "description": "Collection of characteristics",
+                "items": {
+                  "$ref": "#/components/schemas/Characteristic_MVO"
+                }
+              },
+              "relatedEntity": {
+                "$ref": "#/components/schemas/RelatedEntity_MVO"
+              },
+              "relatedParty": {
+                "type": "array",
+                "description": "A collection of related parties",
+                "items": {
+                  "$ref": "#/components/schemas/RelatedPartyRefOrPartyRoleRef_MVO"
+                }
+              },
+              "externalIdentifier": {
+                "type": "array",
+                "description": "Collection of external identifiers",
+                "items": {
+                  "$ref": "#/components/schemas/ExternalIdentifier_MVO"
+                }
+              },
+              "validFor": {
+                "$ref": "#/components/schemas/TimePeriod"
+              }
+            },
+            "description": "Document is a tangible output from an activity"
+          }
+        ]
+      },
+      "Entity": {
+        "type": "object",
+        "description": "Base entity schema for use in TMForum Open-APIs. Property.",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "$ref": "#/components/schemas/Addressable"
+          }
+        ]
+      },
+      "EntityRef": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "$ref": "#/components/schemas/Addressable"
+          },
+          {
+            "required": [
+              "id"
+            ],
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "The identifier of the referred entity."
+              },
+              "href": {
+                "type": "string",
+                "description": "The URI of the referred entity.",
+                "format": "uri"
+              },
+              "name": {
+                "type": "string",
+                "description": "Name of the referred entity."
+              },
+              "@referredType": {
+                "type": "string",
+                "description": "The actual type of the target instance when needed for disambiguation."
+              }
+            },
+            "description": "Entity reference schema to be use for all entityRef class."
+          }
+        ]
+      },
+      "EntityRef_MVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "$ref": "#/components/schemas/Addressable"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "The identifier of the referred entity."
+              },
+              "href": {
+                "type": "string",
+                "description": "The URI of the referred entity.",
+                "format": "uri"
+              },
+              "name": {
+                "type": "string",
+                "description": "Name of the referred entity."
+              },
+              "@referredType": {
+                "type": "string",
+                "description": "The actual type of the target instance when needed for disambiguation."
+              }
+            },
+            "description": "Entity reference schema to be use for all entityRef class."
+          }
+        ]
+      },
+      "Entity_FVO": {
+        "type": "object",
+        "description": "Base entity schema for use in TMForum Open-APIs. Property.",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible_FVO"
+          },
+          {
+            "$ref": "#/components/schemas/Addressable_FVO"
+          }
+        ]
+      },
+      "Entity_MVO": {
+        "type": "object",
+        "description": "Base entity schema for use in TMForum Open-APIs. Property.",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          }
+        ]
+      },
+      "Extensible": {
+        "required": [
+          "@type"
+        ],
+        "type": "object",
+        "properties": {
+          "@type": {
+            "type": "string",
+            "description": "When sub-classing, this defines the sub-class Extensible name"
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class"
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships"
+          }
+        },
+        "description": "Base Extensible schema for use in TMForum Open-APIs - When used for in a schema it means that the Entity described by the schema  MUST be extended with the @type"
+      },
+      "ExternalIdentifier": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "ExternalIdentifier": "#/components/schemas/ExternalIdentifier"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "owner": {
+                "type": "string",
+                "description": "Name of the external system that owns the entity.",
+                "example": "MagentoCommerce"
+              },
+              "externalIdentifierType": {
+                "type": "string",
+                "description": "Type of the identification, typically would be the type of the entity within the external system",
+                "example": "ProductOrder"
+              },
+              "id": {
+                "type": "string",
+                "description": "identification of the entity within the external system."
+              }
+            },
+            "description": "An identification of an entity that is owned by or originates in a software system different from the current system, for example a ProductOrder handed off from a commerce platform into an order handling system. The structure identifies the system itself, the nature of the entity within the system (e.g. class name) and the unique ID of the entity within the system. It is anticipated that multiple external IDs can be held for a single entity, e.g. if the entity passed through multiple systems on the way to the current system. In this case the consumer is expected to sequence the IDs in the array in reverse order of provenance, i.e. most recent system first in the list."
+          }
+        ]
+      },
+      "ExternalIdentifier_FVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "ExternalIdentifier": "#/components/schemas/ExternalIdentifier_FVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "required": [
+              "id"
+            ],
+            "type": "object",
+            "properties": {
+              "owner": {
+                "type": "string",
+                "description": "Name of the external system that owns the entity.",
+                "example": "MagentoCommerce"
+              },
+              "externalIdentifierType": {
+                "type": "string",
+                "description": "Type of the identification, typically would be the type of the entity within the external system",
+                "example": "ProductOrder"
+              },
+              "id": {
+                "type": "string",
+                "description": "identification of the entity within the external system."
+              }
+            },
+            "description": "An identification of an entity that is owned by or originates in a software system different from the current system, for example a ProductOrder handed off from a commerce platform into an order handling system. The structure identifies the system itself, the nature of the entity within the system (e.g. class name) and the unique ID of the entity within the system. It is anticipated that multiple external IDs can be held for a single entity, e.g. if the entity passed through multiple systems on the way to the current system. In this case the consumer is expected to sequence the IDs in the array in reverse order of provenance, i.e. most recent system first in the list."
+          }
+        ]
+      },
+      "ExternalIdentifier_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "ExternalIdentifier": "#/components/schemas/ExternalIdentifier_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "owner": {
+                "type": "string",
+                "description": "Name of the external system that owns the entity.",
+                "example": "MagentoCommerce"
+              },
+              "externalIdentifierType": {
+                "type": "string",
+                "description": "Type of the identification, typically would be the type of the entity within the external system",
+                "example": "ProductOrder"
+              },
+              "id": {
+                "type": "string",
+                "description": "identification of the entity within the external system."
+              }
+            },
+            "description": "An identification of an entity that is owned by or originates in a software system different from the current system, for example a ProductOrder handed off from a commerce platform into an order handling system. The structure identifies the system itself, the nature of the entity within the system (e.g. class name) and the unique ID of the entity within the system. It is anticipated that multiple external IDs can be held for a single entity, e.g. if the entity passed through multiple systems on the way to the current system. In this case the consumer is expected to sequence the IDs in the array in reverse order of provenance, i.e. most recent system first in the list."
+          }
+        ]
+      },
+      "FloatArrayCharacteristic": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "array",
+                "items": {
+                  "type": "number",
+                  "format": "float"
+                }
+              }
+            },
+            "description": "A characteristic which value is an array of Float(s)."
+          }
+        ]
+      },
+      "FloatArrayCharacteristic_FVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic_FVO"
+          },
+          {
+            "required": [
+              "value"
+            ],
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "array",
+                "items": {
+                  "type": "number",
+                  "format": "float"
+                }
+              }
+            },
+            "description": "A characteristic which value is an array of Float(s)."
+          }
+        ]
+      },
+      "FloatArrayCharacteristic_MVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic_MVO"
+          },
+          {
+            "required": [
+              "value"
+            ],
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "array",
+                "items": {
+                  "type": "number",
+                  "format": "float"
+                }
+              }
+            },
+            "description": "A characteristic which value is an array of Float(s)."
+          }
+        ]
+      },
+      "FloatCharacteristic": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "number",
+                "description": "Value of the characteristic",
+                "format": "float"
+              }
+            },
+            "description": "A characteristic which value is a Float."
+          }
+        ]
+      },
+      "FloatCharacteristic_FVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic_FVO"
+          },
+          {
+            "required": [
+              "value"
+            ],
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "number",
+                "description": "Value of the characteristic",
+                "format": "float"
+              }
+            },
+            "description": "A characteristic which value is a Float."
+          }
+        ]
+      },
+      "FloatCharacteristic_MVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic_MVO"
+          },
+          {
+            "required": [
+              "value"
+            ],
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "number",
+                "description": "Value of the characteristic",
+                "format": "float"
+              }
+            },
+            "description": "A characteristic which value is a Float."
+          }
+        ]
+      },
+      "IntegerArrayCharacteristic": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                }
+              }
+            },
+            "description": "A characteristic which value is an array of Integer(s)."
+          }
+        ]
+      },
+      "IntegerArrayCharacteristic_FVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic_FVO"
+          },
+          {
+            "required": [
+              "value"
+            ],
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                }
+              }
+            },
+            "description": "A characteristic which value is an array of Integer(s)."
+          }
+        ]
+      },
+      "IntegerArrayCharacteristic_MVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic_MVO"
+          },
+          {
+            "required": [
+              "value"
+            ],
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                }
+              }
+            },
+            "description": "A characteristic which value is an array of Integer(s)."
+          }
+        ]
+      },
+      "IntegerCharacteristic": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "integer",
+                "description": "Value of the characteristic"
+              }
+            },
+            "description": "A characteristic which value is a Integer."
+          }
+        ]
+      },
+      "IntegerCharacteristic_FVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic_FVO"
+          },
+          {
+            "required": [
+              "value"
+            ],
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "integer",
+                "description": "Value of the characteristic"
+              }
+            },
+            "description": "A characteristic which value is a Integer."
+          }
+        ]
+      },
+      "IntegerCharacteristic_MVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic_MVO"
+          },
+          {
+            "required": [
+              "value"
+            ],
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "integer",
+                "description": "Value of the characteristic"
+              }
+            },
+            "description": "A characteristic which value is a Integer."
+          }
+        ]
+      },
+      "NumberArrayCharacteristic": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                }
+              }
+            },
+            "description": "A characteristic which value is an array of Number(s)."
+          }
+        ]
+      },
+      "NumberArrayCharacteristic_FVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic_FVO"
+          },
+          {
+            "required": [
+              "value"
+            ],
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                }
+              }
+            },
+            "description": "A characteristic which value is an array of Number(s)."
+          }
+        ]
+      },
+      "NumberArrayCharacteristic_MVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic_MVO"
+          },
+          {
+            "required": [
+              "value"
+            ],
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                }
+              }
+            },
+            "description": "A characteristic which value is an array of Number(s)."
+          }
+        ]
+      },
+      "NumberCharacteristic": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "number",
+                "description": "Value of the characteristic"
+              }
+            },
+            "description": "A characteristic which value is a Number."
+          }
+        ]
+      },
+      "NumberCharacteristic_FVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic_FVO"
+          },
+          {
+            "required": [
+              "value"
+            ],
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "number",
+                "description": "Value of the characteristic"
+              }
+            },
+            "description": "A characteristic which value is a Number."
+          }
+        ]
+      },
+      "NumberCharacteristic_MVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic_MVO"
+          },
+          {
+            "required": [
+              "value"
+            ],
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "number",
+                "description": "Value of the characteristic"
+              }
+            },
+            "description": "A characteristic which value is a Number."
+          }
+        ]
+      },
+      "ObjectArrayCharacteristic": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "array",
+                "items": {
+                  "type": "object"
+                }
+              }
+            },
+            "description": "A characteristic which value is an array of Object(s)."
+          }
+        ]
+      },
+      "ObjectArrayCharacteristic_FVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic_FVO"
+          },
+          {
+            "required": [
+              "value"
+            ],
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "array",
+                "items": {
+                  "type": "object"
+                }
+              }
+            },
+            "description": "A characteristic which value is an array of Object(s)."
+          }
+        ]
+      },
+      "ObjectArrayCharacteristic_MVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic_MVO"
+          },
+          {
+            "required": [
+              "value"
+            ],
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "array",
+                "items": {
+                  "type": "object"
+                }
+              }
+            },
+            "description": "A characteristic which value is an array of Object(s)."
+          }
+        ]
+      },
+      "ObjectCharacteristic": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "object",
+                "description": "Value of the characteristic"
+              }
+            },
+            "description": "A characteristic which value is a Object."
+          }
+        ]
+      },
+      "ObjectCharacteristic_FVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic_FVO"
+          },
+          {
+            "required": [
+              "value"
+            ],
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "object",
+                "description": "Value of the characteristic"
+              }
+            },
+            "description": "A characteristic which value is a Object."
+          }
+        ]
+      },
+      "ObjectCharacteristic_MVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic_MVO"
+          },
+          {
+            "required": [
+              "value"
+            ],
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "object",
+                "description": "Value of the characteristic"
+              }
+            },
+            "description": "A characteristic which value is a Object."
+          }
+        ]
+      },
+      "PartyRef": {
+        "type": "object",
+        "description": "A Party reference",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "PartyRef": "#/components/schemas/PartyRef"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          }
+        ]
+      },
+      "PartyRefOrPartyRoleRef": {
+        "type": "object",
+        "description": "",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "PartyRef": "#/components/schemas/PartyRef",
+            "PartyRoleRef": "#/components/schemas/PartyRoleRef"
+          }
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/PartyRef"
+          },
+          {
+            "$ref": "#/components/schemas/PartyRoleRef"
+          }
+        ]
+      },
+      "PartyRefOrPartyRoleRef_FVO": {
+        "type": "object",
+        "description": "",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "PartyRef": "#/components/schemas/PartyRef_FVO",
+            "PartyRoleRef": "#/components/schemas/PartyRoleRef_FVO"
+          }
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/PartyRef_FVO"
+          },
+          {
+            "$ref": "#/components/schemas/PartyRoleRef_FVO"
+          }
+        ]
+      },
+      "PartyRefOrPartyRoleRef_MVO": {
+        "type": "object",
+        "description": "",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "PartyRef": "#/components/schemas/PartyRef_MVO",
+            "PartyRoleRef": "#/components/schemas/PartyRoleRef_MVO"
+          }
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/PartyRef_MVO"
+          },
+          {
+            "$ref": "#/components/schemas/PartyRoleRef_MVO"
+          }
+        ]
+      },
+      "PartyRef_FVO": {
+        "type": "object",
+        "description": "A Party reference",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "PartyRef": "#/components/schemas/PartyRef_FVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          }
+        ]
+      },
+      "PartyRef_MVO": {
+        "type": "object",
+        "description": "A Party reference",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "PartyRef": "#/components/schemas/PartyRef_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef_MVO"
+          }
+        ]
+      },
+      "PartyRoleRef": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "PartyRoleRef": "#/components/schemas/PartyRoleRef"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "partyId": {
+                "type": "string",
+                "description": "The identifier of the engaged party that is linked to the PartyRole object."
+              },
+              "partyName": {
+                "type": "string",
+                "description": "The name of the engaged party that is linked to the PartyRole object."
+              }
+            },
+            "description": "Party role reference. A party role represents the part played by a party in a given context."
+          }
+        ]
+      },
+      "PartyRoleRef_FVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "PartyRoleRef": "#/components/schemas/PartyRoleRef_FVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "partyId": {
+                "type": "string",
+                "description": "The identifier of the engaged party that is linked to the PartyRole object."
+              },
+              "partyName": {
+                "type": "string",
+                "description": "The name of the engaged party that is linked to the PartyRole object."
+              }
+            },
+            "description": "Party role reference. A party role represents the part played by a party in a given context."
+          }
+        ]
+      },
+      "PartyRoleRef_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "PartyRoleRef": "#/components/schemas/PartyRoleRef_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef_MVO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "partyId": {
+                "type": "string",
+                "description": "The identifier of the engaged party that is linked to the PartyRole object."
+              },
+              "partyName": {
+                "type": "string",
+                "description": "The name of the engaged party that is linked to the PartyRole object."
+              }
+            },
+            "description": "Party role reference. A party role represents the part played by a party in a given context."
+          }
+        ]
+      },
+      "Quantity": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "number",
+            "description": "Numeric value in a given unit",
+            "format": "float",
+            "default": 1
+          },
+          "units": {
+            "type": "string",
+            "description": "Unit"
+          }
+        },
+        "description": "An amount in a given unit"
+      },
+      "RelatedEntity": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "RelatedEntity": "#/components/schemas/RelatedEntity"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "role": {
+                "type": "string"
+              },
+              "entity": {
+                "$ref": "#/components/schemas/EntityRef"
+              }
+            },
+            "description": "A reference to an entity, where the type of the entity is not known in advance."
+          }
+        ]
+      },
+      "RelatedEntity_FVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "RelatedEntity": "#/components/schemas/RelatedEntity_FVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "required": [
+              "entity",
+              "role"
+            ],
+            "type": "object",
+            "properties": {
+              "role": {
+                "type": "string"
+              },
+              "entity": {
+                "$ref": "#/components/schemas/EntityRef"
+              }
+            },
+            "description": "A reference to an entity, where the type of the entity is not known in advance."
+          }
+        ]
+      },
+      "RelatedEntity_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "RelatedEntity": "#/components/schemas/RelatedEntity_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "role": {
+                "type": "string"
+              },
+              "entity": {
+                "$ref": "#/components/schemas/EntityRef_MVO"
+              }
+            },
+            "description": "A reference to an entity, where the type of the entity is not known in advance."
+          }
+        ]
+      },
+      "RelatedPartyRefOrPartyRoleRef": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "RelatedPartyRefOrPartyRoleRef": "#/components/schemas/RelatedPartyRefOrPartyRoleRef"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "role": {
+                "type": "string",
+                "description": "Role played by the related party or party role in the context of the specific entity it is linked to. Such as 'initiator', 'customer',  'salesAgent', 'user'"
+              },
+              "partyOrPartyRole": {
+                "$ref": "#/components/schemas/PartyRefOrPartyRoleRef"
+              }
+            },
+            "description": "RelatedParty reference. A related party defines party or party role or its reference, linked to a specific entity"
+          }
+        ]
+      },
+      "RelatedPartyRefOrPartyRoleRef_FVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "RelatedPartyRefOrPartyRoleRef": "#/components/schemas/RelatedPartyRefOrPartyRoleRef_FVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "required": [
+              "role"
+            ],
+            "type": "object",
+            "properties": {
+              "role": {
+                "type": "string",
+                "description": "Role played by the related party or party role in the context of the specific entity it is linked to. Such as 'initiator', 'customer',  'salesAgent', 'user'"
+              },
+              "partyOrPartyRole": {
+                "$ref": "#/components/schemas/PartyRefOrPartyRoleRef_FVO"
+              }
+            },
+            "description": "RelatedParty reference. A related party defines party or party role or its reference, linked to a specific entity"
+          }
+        ]
+      },
+      "RelatedPartyRefOrPartyRoleRef_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "RelatedPartyRefOrPartyRoleRef": "#/components/schemas/RelatedPartyRefOrPartyRoleRef_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "role": {
+                "type": "string",
+                "description": "Role played by the related party or party role in the context of the specific entity it is linked to. Such as 'initiator', 'customer',  'salesAgent', 'user'"
+              },
+              "partyOrPartyRole": {
+                "$ref": "#/components/schemas/PartyRefOrPartyRoleRef_MVO"
+              }
+            },
+            "description": "RelatedParty reference. A related party defines party or party role or its reference, linked to a specific entity"
+          }
+        ]
+      },
+      "StringArrayCharacteristic": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "A characteristic which value is an array of String(s)."
+          }
+        ]
+      },
+      "StringArrayCharacteristic_FVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic_FVO"
+          },
+          {
+            "required": [
+              "value"
+            ],
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "A characteristic which value is an array of String(s)."
+          }
+        ]
+      },
+      "StringArrayCharacteristic_MVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic_MVO"
+          },
+          {
+            "required": [
+              "value"
+            ],
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "A characteristic which value is an array of String(s)."
+          }
+        ]
+      },
+      "StringCharacteristic": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "string",
+                "description": "Value of the characteristic"
+              }
+            },
+            "description": "A characteristic which value is a String."
+          }
+        ]
+      },
+      "StringCharacteristic_FVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic_FVO"
+          },
+          {
+            "required": [
+              "value"
+            ],
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "string",
+                "description": "Value of the characteristic"
+              }
+            },
+            "description": "A characteristic which value is a String."
+          }
+        ]
+      },
+      "StringCharacteristic_MVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic_MVO"
+          },
+          {
+            "required": [
+              "value"
+            ],
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "string",
+                "description": "Value of the characteristic"
+              }
+            },
+            "description": "A characteristic which value is a String."
+          }
+        ]
+      },
+      "TimePeriod": {
+        "type": "object",
+        "properties": {
+          "startDateTime": {
+            "type": "string",
+            "description": "Start of the time period, using IETC-RFC-3339 format",
+            "format": "date-time",
+            "example": "1985-04-12T23:20:50.52Z"
+          },
+          "endDateTime": {
+            "type": "string",
+            "description": "End of the time period, using IETC-RFC-3339 format",
+            "format": "date-time",
+            "example": "1985-04-12T23:20:50.52Z"
+          }
+        },
+        "description": "A period of time, either as a deadline (endDateTime only) a startDateTime only, or both"
+      },
+      "Error": {
+        "description": "Used when an API throws an Error, typically with a HTTP error response-code (3xx, 4xx, 5xx)",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "Error": "#/components/schemas/Error"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "required": [
+              "code",
+              "reason"
+            ],
+            "type": "object",
+            "properties": {
+              "code": {
+                "type": "string",
+                "description": "Application relevant detail, defined in the API or a common list."
+              },
+              "reason": {
+                "type": "string",
+                "description": "Explanation of the reason for the error which can be shown to a client user."
+              },
+              "message": {
+                "type": "string",
+                "description": "More details and corrective actions related to the error which can be shown to a client user."
+              },
+              "status": {
+                "type": "string",
+                "description": "HTTP Error code extension"
+              },
+              "referenceError": {
+                "type": "string",
+                "description": "URI of documentation describing the error."
+              }
+            }
+          }
+        ]
+      },
+      "JsonPatch": {
+        "required": [
+          "op",
+          "path"
+        ],
+        "type": "object",
+        "properties": {
+          "op": {
+            "type": "string",
+            "description": "The operation to be performed",
+            "enum": [
+              "add",
+              "remove",
+              "replace",
+              "move",
+              "copy",
+              "test"
+            ]
+          },
+          "path": {
+            "type": "string",
+            "description": "A JSON-Pointer"
+          },
+          "value": {
+            "description": "The value to be used within the operations."
+          },
+          "from": {
+            "type": "string",
+            "description": "A string containing a JSON Pointer value."
+          }
+        },
+        "description": "A JSONPatch document as defined by RFC 6902"
+      },
+      "JsonPatchOperations": {
+        "type": "array",
+        "description": "JSONPatch Operations document as defined by RFC 6902",
+        "items": {
+          "$ref": "#/components/schemas/JsonPatch"
+        }
+      },
+      "Addressable_FVO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "unique identifier"
+          }
+        },
+        "description": "Base schema for adressable entities"
+      },
+      "Extensible_FVO": {
+        "required": [
+          "@type"
+        ],
+        "type": "object",
+        "properties": {
+          "@type": {
+            "type": "string",
+            "description": "When sub-classing, this defines the sub-class Extensible name"
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class"
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships"
+          }
+        },
+        "description": "Base Extensible schema for use in TMForum Open-APIs - When used for in a schema it means that the Entity described by the schema  MUST be extended with the @type"
+      }
+    },
+    "responses": {
+      "202": {
+        "description": "Accepted"
+      },
+      "204": {
+        "description": "Deleted"
+      },
+      "400": {
+        "description": "Bad Request",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "examples": {
+              "basic": {
+                "summary": "Bad Request Error",
+                "value": {
+                  "@type": "Error",
+                  "code": "ERR400",
+                  "reason": "Bad Request",
+                  "message": "The server could not understand the request due to invalid syntax. Please correct the syntax and try again.",
+                  "referenceError": "https://host/errors"
+                }
+              }
+            }
+          }
+        }
+      },
+      "401": {
+        "description": "Unauthorized",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "examples": {
+              "basic": {
+                "summary": "Unauthorized Error",
+                "value": {
+                  "@type": "Error",
+                  "code": "ERR401",
+                  "reason": "Unauthorized",
+                  "message": "You are not authorized to access the requested resource. Please provide the correct credentials.",
+                  "referenceError": "https://host/errors"
+                }
+              }
+            }
+          }
+        }
+      },
+      "403": {
+        "description": "Forbidden",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "examples": {
+              "basic": {
+                "summary": "Forbidden Error",
+                "value": {
+                  "@type": "Error",
+                  "code": "ERR403",
+                  "reason": "Forbidden",
+                  "message": "You don't have the permission to access the requested resource. It is either read-protected or not readable by the server.",
+                  "referenceError": "https://host/errors"
+                }
+              }
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "Not Found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "examples": {
+              "basic": {
+                "summary": "Not Found Error",
+                "value": {
+                  "@type": "Error",
+                  "code": "ERR404",
+                  "reason": "Not Found",
+                  "message": "The requested URL was not found on the server.",
+                  "referenceError": "https://host/errors"
+                }
+              }
+            }
+          }
+        }
+      },
+      "405": {
+        "description": "Method Not allowed",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "examples": {
+              "basic": {
+                "summary": "Method Not allowed Error",
+                "value": {
+                  "@type": "Error",
+                  "code": "ERR405",
+                  "reason": "Method Not allowed",
+                  "message": "The method is not allowed for the requested URL.",
+                  "referenceError": "https://host/errors"
+                }
+              }
+            }
+          }
+        }
+      },
+      "409": {
+        "description": "Conflict",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "examples": {
+              "basic": {
+                "summary": "Conflict Error",
+                "value": {
+                  "@type": "Error",
+                  "code": "ERR409",
+                  "reason": "Conflict",
+                  "message": "The request could not be completed due to a conflict with the current state of the target resource.",
+                  "referenceError": "https://host/errors"
+                }
+              }
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "Internal Server Error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "examples": {
+              "basic": {
+                "summary": "Internal Server Error example",
+                "value": {
+                  "@type": "Error",
+                  "code": "ERR500",
+                  "reason": "Internal Server Error",
+                  "message": "The server encountered an internal error. Please contact the system administrator.",
+                  "referenceError": "https://host/errors"
+                }
+              }
+            }
+          }
+        }
+      },
+      "501": {
+        "description": "Not Implemented",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "examples": {
+              "basic": {
+                "summary": "Not Implemented Error",
+                "value": {
+                  "@type": "Error",
+                  "code": "ERR501",
+                  "reason": "The requested operation is not implemented",
+                  "message": "The requested operation is not implemented. Please contact the system administrator.",
+                  "referenceError": "https://host/errors"
+                }
+              }
+            }
+          }
+        }
+      },
+      "503": {
+        "description": "Service Unavailable",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "examples": {
+              "basic": {
+                "summary": "Service Unavailable Error",
+                "value": {
+                  "@type": "Error",
+                  "code": "ERR503",
+                  "reason": "Service Unavailable",
+                  "message": "The service is currently unavailable. Please try again later.",
+                  "referenceError": "https://host/errors"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200DocumentArray": {
+        "description": "Success",
+        "headers": {
+          "X-Total-Count": {
+            "$ref": "#/components/headers/X-Total-Count"
+          },
+          "X-Result-Count": {
+            "$ref": "#/components/headers/X-Result-Count"
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/Document"
+              }
+            },
+            "examples": {
+              "Document_list_example": {
+                "$ref": "#/components/examples/Document_list_example_response"
+              }
+            }
+          }
+        }
+      },
+      "200Document_Get": {
+        "description": "Success",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Document"
+            },
+            "examples": {
+              "Document_retrieve_example": {
+                "$ref": "#/components/examples/Document_retrieve_example_response"
+              }
+            }
+          }
+        }
+      },
+      "200Document_Patch": {
+        "description": "Success",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Document"
+            },
+            "examples": {
+              "Document_Update_example_application-json_": {
+                "$ref": "#/components/examples/Document_Update_example_application-json__response"
+              }
+            }
+          }
+        }
+      },
+      "201Document": {
+        "description": "OK/Created",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Document"
+            },
+            "examples": {
+              "Document_create_example": {
+                "$ref": "#/components/examples/Document_create_example_response"
+              }
+            }
+          }
+        }
+      },
+      "200AttachmentArray": {
+        "description": "Success",
+        "headers": {
+          "X-Total-Count": {
+            "$ref": "#/components/headers/X-Total-Count"
+          },
+          "X-Result-Count": {
+            "$ref": "#/components/headers/X-Result-Count"
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/Attachment"
+              }
+            },
+            "examples": {
+              "Attachment_list_example": {
+                "$ref": "#/components/examples/Attachment_list_example_response"
+              }
+            }
+          }
+        }
+      },
+      "200Attachment_Get": {
+        "description": "Success",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Attachment"
+            },
+            "examples": {
+              "Attachment_retrieve_example": {
+                "$ref": "#/components/examples/Attachment_retrieve_example_response"
+              }
+            }
+          }
+        }
+      },
+      "200Attachment_Patch": {
+        "description": "Success",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Attachment"
+            },
+            "examples": {
+              "Attachment_Update_example_application-json_": {
+                "$ref": "#/components/examples/Attachment_Update_example_application-json__response"
+              }
+            }
+          }
+        }
+      },
+      "201Attachment": {
+        "description": "OK/Created",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Attachment"
+            },
+            "examples": {
+              "Attachment_create_example": {
+                "$ref": "#/components/examples/Attachment_create_example_response"
+              }
+            }
+          }
+        }
+      }
+    },
+    "parameters": {
+      "Id": {
+        "name": "id",
+        "in": "path",
+        "description": "Identifier of the Resource",
+        "required": true,
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "Fields": {
+        "name": "fields",
+        "in": "query",
+        "description": "Comma-separated properties to be provided in response",
+        "required": false,
+        "style": "form",
+        "explode": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "Offset": {
+        "name": "offset",
+        "in": "query",
+        "description": "Requested index for start of resources to be provided in response",
+        "required": false,
+        "style": "form",
+        "explode": true,
+        "schema": {
+          "type": "integer"
+        }
+      },
+      "Limit": {
+        "name": "limit",
+        "in": "query",
+        "description": "Requested number of resources to be provided in response",
+        "required": false,
+        "style": "form",
+        "explode": true,
+        "schema": {
+          "type": "integer"
+        }
+      }
+    },
+    "examples": {
+      "Document_list_example_response": {
+        "description": "Retrieving previous Document details for the documentType of 'paperback'",
+        "value": [
+          {
+            "@type": "Document",
+            "href": "https://serverRoot/tmf-api/document/v5/document/9555-3c9c417feead",
+            "id": "9555-3c9c417feead",
+            "name": "Designing Web APIs: Building APIs That Developers Love",
+            "documentType": "paperback",
+            "version": "1",
+            "category": [
+              {
+                "@type": "CategoryRef",
+                "id": "269422",
+                "name": "Computing & Internet > Web Development > Web Design"
+              }
+            ],
+            "creationDate": "2008-09-14T10:00:00Z",
+            "description": "Designing an API is complicated to begin with, but evolving your API design over time makes the process even more difficult. There are several books on the topic, but ...",
+            "documentSpecification": {
+              "@type": "DocumentSpecification",
+              "href": "https://serverRoot/tmf-api/document/v5/documentSpecification/a65d-a08c744f2fe7",
+              "id": "a65d-a08c744f2fe7",
+              "name": "paperback"
+            },
+            "lastUpdate": "2021-11-05T10:15:26.007Z",
+            "lifecycleState": "published",
+            "attachment": [
+              {
+                "@type": "Attachment",
+                "href": "https://serverRoot/tmf-api/document/v5/attachment/1492026921",
+                "id": "1492026921",
+                "name": "Link to paperback",
+                "url": "https://www.amazon.co.uk/Designing-Web-APIs-Building-Developers/dp/1492026921",
+                "validFor": {
+                  "startDateTime": "2024-11-05T10:15:26.007Z",
+                  "endDateTime": "2008-09-14T10:00:00Z"
+                },
+                "attachmentType": "url",
+                "mimeType": "text/html"
+              }
+            ],
+            "characteristic": [
+              {
+                "@type": "IntegerCharacteristic",
+                "name": "pages",
+                "valueType": "integer",
+                "value": 200
+              },
+              {
+                "@type": "StringCharacteristic",
+                "name": "language",
+                "valueType": "string",
+                "value": "en"
+              },
+              {
+                "@type": "StringCharacteristic",
+                "name": "isbn-10",
+                "valueType": "string",
+                "value": "9781492026921"
+              }
+            ],
+            "relatedParty": [
+              {
+                "@type": "RelatedPartyRefOrPartyRoleRef",
+                "role": "Author",
+                "partyOrPartyRole": {
+                  "@type": "PartyRef",
+                  "href": "http://serverlocation:port/tmf-api/partyManagement/v5/individual/789",
+                  "id": "789",
+                  "name": "Brenda Jin",
+                  "@referredType": "Individual"
+                }
+              },
+              {
+                "@type": "RelatedPartyRefOrPartyRoleRef",
+                "role": "Publisher",
+                "partyOrPartyRole": {
+                  "@type": "PartyRef",
+                  "href": "http://serverlocation:port/tmf-api/partyManagement/v5/organization123",
+                  "id": "123",
+                  "name": "O'Reilly",
+                  "@referredType": "Organization"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "Document_retrieve_example_response": {
+        "description": "A request for a previous Document. The criteria is the Document id 9555-3c9c417feead",
+        "value": {
+          "@type": "Document",
+          "href": "https://serverRoot/tmf-api/document/v5/document/9555-3c9c417feead",
+          "id": "9555-3c9c417feead",
+          "name": "Designing Web APIs: Building APIs That Developers Love",
+          "documentType": "paperback",
+          "version": "1",
+          "category": [
+            {
+              "@type": "CategoryRef",
+              "id": "269422",
+              "name": "Computing & Internet > Web Development > Web Design"
+            }
+          ],
+          "creationDate": "2008-09-14T10:00:00Z",
+          "description": "Designing an API is complicated to begin with, but evolving your API design over time makes the process even more difficult. There are several books on the topic, but ...",
+          "documentSpecification": {
+            "@type": "DocumentSpecificationRef",
+            "href": "https://serverRoot/tmf-api/document/v5/documentSpecification/a65d-a08c744f2fe7",
+            "id": "a65d-a08c744f2fe7",
+            "name": "paperback"
+          },
+          "lastUpdate": "2021-11-05T10:15:26.007Z",
+          "lifecycleState": "published",
+          "attachment": [
+            {
+              "@type": "AttachmentRef",
+              "href": "https://serverRoot/tmf-api/document/v5/attachment/1492026921",
+              "id": "1492026921",
+              "name": "Link to paperback"
+            }
+          ],
+          "characteristic": [
+            {
+              "@type": "IntegerCharacteristic",
+              "name": "pages",
+              "valueType": "integer",
+              "value": 200
+            },
+            {
+              "@type": "StringCharacteristic",
+              "name": "language",
+              "valueType": "string",
+              "value": "en"
+            },
+            {
+              "@type": "StringCharacteristic",
+              "name": "isbn-10",
+              "valueType": "string",
+              "value": "9781492026921"
+            }
+          ],
+          "relatedParty": [
+            {
+              "@type": "RelatedPartyRefOrPartyRoleRef",
+              "role": "Author",
+              "partyOrPartyRole": {
+                "@type": "PartyRef",
+                "href": "http://serverlocation:port/tmf-api/partyManagement/v5/individual/789",
+                "id": "789",
+                "name": "Brenda Jin",
+                "@referredType": "Individual"
+              }
+            },
+            {
+              "@type": "RelatedPartyRefOrPartyRoleRef",
+              "role": "Publisher",
+              "partyOrPartyRole": {
+                "@type": "PartyRef",
+                "href": "http://serverlocation:port/tmf-api/partyManagement/v5/organization123",
+                "id": "123",
+                "name": "O'Reilly",
+                "@referredType": "Organization"
+              }
+            }
+          ]
+        }
+      },
+      "Attachment_list_example_response": {
+        "description": "Retrieving previous Document details for the documentType of 'paperback'",
+        "value": [
+          {
+            "@type": "Attachment",
+            "href": "https://serverRoot/tmf-api/document/v5/attachment/1492026921",
+            "id": "1492026921",
+            "name": "Link to paperback",
+            "url": "https://www.amazon.co.uk/Designing-Web-APIs-Building-Developers/dp/1492026921",
+            "validFor": {
+              "startDateTime": "2024-11-05T10:15:26.007Z",
+              "endDateTime": "2008-09-14T10:00:00Z"
+            },
+            "attachmentType": "url",
+            "mimeType": "text/html"
+          }
+        ]
+      },
+      "Attachment_retrieve_example_response": {
+        "description": "A request for a previous Attachment. The criteria is the Attachment id 1492026921",
+        "value": {
+          "@type": "Attachment",
+          "href": "https://serverRoot/tmf-api/document/v5/attachment/1492026921",
+          "id": "1492026921",
+          "name": "Link to paperback",
+          "url": "https://www.amazon.co.uk/Designing-Web-APIs-Building-Developers/dp/1492026921",
+          "validFor": {
+            "startDateTime": "2024-11-05T10:15:26.007Z",
+            "endDateTime": "2008-09-14T10:00:00Z"
+          },
+          "attachmentType": "url",
+          "mimeType": "text/html"
+        }
+      },
+      "Document_create_example_request": {
+        "description": "Here is an example of a request for creating a Document.",
+        "value": {
+          "@type": "Document",
+          "name": "Designing Web APIs: Building APIs That Developers Love",
+          "documentType": "paperback",
+          "version": "1",
+          "category": [
+            {
+              "@type": "CategoryRef",
+              "id": "269422",
+              "name": "Computing & Internet > Web Development > Web Design"
+            }
+          ],
+          "creationDate": "2008-09-14T10:00:00Z",
+          "description": "Designing an API is complicated to begin with, but evolving your API design over time makes the process even more difficult. There are several books on the topic, but ...",
+          "documentSpecification": {
+            "@type": "DocumentSpecificationRef",
+            "href": "https://serverRoot/tmf-api/document/v5/documentSpecification/a65d-a08c744f2fe7",
+            "id": "a65d-a08c744f2fe7",
+            "name": "paperback"
+          },
+          "lastUpdate": "2021-11-05T10:15:26.007Z",
+          "lifecycleState": "published",
+          "attachment": [
+            {
+              "@type": "AttachmentRef",
+              "href": "https://serverRoot/tmf-api/document/v5/attachment/1492026921",
+              "id": "1492026921",
+              "name": "Link to paperback"
+            }
+          ],
+          "characteristic": [
+            {
+              "@type": "IntegerCharacteristic",
+              "name": "pages",
+              "valueType": "integer",
+              "value": 200
+            },
+            {
+              "@type": "StringCharacteristic",
+              "name": "language",
+              "valueType": "string",
+              "value": "en"
+            },
+            {
+              "@type": "StringCharacteristic",
+              "name": "isbn-10",
+              "valueType": "string",
+              "value": "9781492026921"
+            }
+          ],
+          "relatedParty": [
+            {
+              "@type": "RelatedPartyRefOrPartyRoleRef",
+              "role": "Author",
+              "partyOrPartyRole": {
+                "@type": "PartyRef",
+                "href": "http://serverlocation:port/tmf-api/partyManagement/v5/individual/789",
+                "id": "789",
+                "name": "Brenda Jin",
+                "@referredType": "Individual"
+              }
+            },
+            {
+              "@type": "RelatedPartyRefOrPartyRoleRef",
+              "role": "Publisher",
+              "partyOrPartyRole": {
+                "@type": "PartyRef",
+                "href": "http://serverlocation:port/tmf-api/partyManagement/v5/organization123",
+                "id": "123",
+                "name": "O'Reilly",
+                "@referredType": "Organization"
+              }
+            }
+          ]
+        }
+      },
+      "Document_create_example_response": {
+        "description": "Here is an example of a response for creating a Document.",
+        "value": {
+          "@type": "Document",
+          "href": "https://serverRoot/tmf-api/document/v5/document/9555-3c9c417feead",
+          "id": "9555-3c9c417feead",
+          "name": "Designing Web APIs: Building APIs That Developers Love",
+          "documentType": "paperback",
+          "version": "1",
+          "category": [
+            {
+              "@type": "CategoryRef",
+              "id": "269422",
+              "name": "Computing & Internet > Web Development > Web Design"
+            }
+          ],
+          "creationDate": "2008-09-14T10:00:00Z",
+          "description": "Designing an API is complicated to begin with, but evolving your API design over time makes the process even more difficult. There are several books on the topic, but ...",
+          "documentSpecification": {
+            "@type": "DocumentSpecificationRef",
+            "href": "https://serverRoot/tmf-api/document/v5/documentSpecification/a65d-a08c744f2fe7",
+            "id": "a65d-a08c744f2fe7",
+            "name": "paperback"
+          },
+          "lastUpdate": "2021-11-05T10:15:26.007Z",
+          "lifecycleState": "published",
+          "attachment": [
+            {
+              "@type": "AttachmentRef",
+              "href": "https://serverRoot/tmf-api/document/v5/attachment/1492026921",
+              "id": "1492026921",
+              "name": "Link to paperback"
+            }
+          ],
+          "characteristic": [
+            {
+              "@type": "IntegerCharacteristic",
+              "name": "pages",
+              "valueType": "integer",
+              "value": 200
+            },
+            {
+              "@type": "StringCharacteristic",
+              "name": "language",
+              "valueType": "string",
+              "value": "en"
+            },
+            {
+              "@type": "StringCharacteristic",
+              "name": "isbn-10",
+              "valueType": "string",
+              "value": "9781492026921"
+            }
+          ],
+          "relatedParty": [
+            {
+              "@type": "RelatedPartyRefOrPartyRoleRef",
+              "role": "Author",
+              "partyOrPartyRole": {
+                "@type": "PartyRef",
+                "href": "http://serverlocation:port/tmf-api/partyManagement/v5/individual/789",
+                "id": "789",
+                "name": "Brenda Jin",
+                "@referredType": "Individual"
+              }
+            },
+            {
+              "@type": "RelatedPartyRefOrPartyRoleRef",
+              "role": "Publisher",
+              "partyOrPartyRole": {
+                "@type": "PartyRef",
+                "href": "http://serverlocation:port/tmf-api/partyManagement/v5/organization123",
+                "id": "123",
+                "name": "O'Reilly",
+                "@referredType": "Organization"
+              }
+            }
+          ]
+        }
+      },
+      "Attachment_create_example_response": {
+        "description": "Here is an example of a response for creating an attachment.",
+        "value": {
+          "@type": "Attachment",
+          "href": "https://serverRoot/tmf-api/document/v5/attachment/1492026921",
+          "id": "1492026921",
+          "name": "Link to paperback",
+          "url": "https://www.amazon.co.uk/Designing-Web-APIs-Building-Developers/dp/1492026921",
+          "validFor": {
+            "startDateTime": "2024-11-05T10:15:26.007Z",
+            "endDateTime": "2008-09-14T10:00:00Z"
+          },
+          "attachmentType": "url",
+          "mimeType": "text/html"
+        }
+      },
+      "Document_Update_example_application-json__request": {
+        "description": "Here is an example of a request for patching an document.",
+        "value": {
+          "@type": "Document",
+          "name": "Designing Web APIs: Building APIs That Developers really Love"
+        }
+      },
+      "Document_Update_example_application-json__response": {
+        "description": "Here is an example of a response for creating an document.",
+        "value": {
+          "@type": "Document",
+          "href": "https://serverRoot/tmf-api/document/v5/document/9555-3c9c417feead",
+          "id": "9555-3c9c417feead",
+          "name": "Designing Web APIs: Building APIs That Developers really Love",
+          "documentType": "paperback",
+          "version": "1",
+          "category": [
+            {
+              "@type": "CategoryRef",
+              "id": "269422",
+              "name": "Computing & Internet > Web Development > Web Design"
+            }
+          ],
+          "creationDate": "2008-09-14T10:00:00Z",
+          "description": "Designing an API is complicated to begin with, but evolving your API design over time makes the process even more difficult. There are several books on the topic, but ...",
+          "documentSpecification": {
+            "@type": "DocumentSpecification",
+            "href": "https://serverRoot/tmf-api/document/v5/documentSpecification/a65d-a08c744f2fe7",
+            "id": "a65d-a08c744f2fe7",
+            "name": "paperback"
+          },
+          "lastUpdate": "2021-11-05T10:15:26.007Z",
+          "lifecycleState": "published",
+          "attachment": [
+            {
+              "@type": "Attachment",
+              "href": "https://serverRoot/tmf-api/document/v5/attachment/1492026921",
+              "id": "1492026921",
+              "name": "Link to paperback",
+              "url": "https://www.amazon.co.uk/Designing-Web-APIs-Building-Developers/dp/1492026921",
+              "validFor": {
+                "startDateTime": "2024-11-05T10:15:26.007Z",
+                "endDateTime": "2008-09-14T10:00:00Z"
+              },
+              "attachmentType": "url",
+              "mimeType": "text/html"
+            }
+          ],
+          "characteristic": [
+            {
+              "@type": "IntegerCharacteristic",
+              "name": "pages",
+              "valueType": "integer",
+              "value": 200
+            },
+            {
+              "@type": "StringCharacteristic",
+              "name": "language",
+              "valueType": "string",
+              "value": "en"
+            },
+            {
+              "@type": "StringCharacteristic",
+              "name": "isbn-10",
+              "valueType": "string",
+              "value": "9781492026921"
+            }
+          ],
+          "relatedParty": [
+            {
+              "@type": "RelatedPartyRefOrPartyRoleRef",
+              "role": "Author",
+              "partyOrPartyRole": {
+                "@type": "PartyRef",
+                "href": "http://serverlocation:port/tmf-api/partyManagement/v5/individual/789",
+                "id": "789",
+                "name": "Brenda Jin",
+                "@referredType": "Individual"
+              }
+            },
+            {
+              "@type": "RelatedPartyRefOrPartyRoleRef",
+              "role": "Publisher",
+              "partyOrPartyRole": {
+                "@type": "PartyRef",
+                "href": "http://serverlocation:port/tmf-api/partyManagement/v5/organization123",
+                "id": "123",
+                "name": "O'Reilly",
+                "@referredType": "Organization"
+              }
+            }
+          ]
+        }
+      },
+      "Document_Update_example_Merge__request": {
+        "description": "Here is an example of a request for patching an document.",
+        "value": {
+          "@type": "Document",
+          "name": "Designing Web APIs: Building APIs That Developers really Love"
+        }
+      },
+      "Document_Update_example_JSON-PATCH__request": {
+        "description": "Here is an example of a request for patching an document.",
+        "value": [
+          {
+            "op": "replace",
+            "path": "/name",
+            "value": "Designing Web APIs: Building APIs That Developers really Love"
+          },
+          {
+            "op": "replace",
+            "path": "/version",
+            "value": "2"
+          }
+        ]
+      },
+      "Document_Update_example_JSON-PATCH-QUERY__request": {
+        "description": "Here is an example of a request for patching an document.",
+        "value": [
+          {
+            "op": "replace",
+            "path": "/name",
+            "value": "Designing Web APIs: Building APIs That Developers really Love"
+          },
+          {
+            "op": "replace",
+            "path": "/charachteristc?name=pages",
+            "value": {
+              "@type": "IntegerCharacteristicValueSpecification",
+              "name": "pages",
+              "valueType": "integer",
+              "value": 212
+            }
+          }
+        ]
+      },
+      "Attachment_Update_example_application-json__response": {
+        "description": "Here is an example of a response for creating an attachment.",
+        "value": {
+          "@type": "Attachment",
+          "href": "https://serverRoot/tmf-api/document/v5/attachment/1492026921",
+          "id": "1492026921",
+          "name": "Zelda as paperback",
+          "url": "https://www.amazon.co.uk/Designing-Web-APIs-Building-Developers/dp/1492026921",
+          "validFor": {
+            "startDateTime": "2024-11-05T10:15:26.007Z",
+            "endDateTime": "2008-09-14T10:00:00Z"
+          },
+          "attachmentType": "url",
+          "mimeType": "text/html"
+        }
+      }
+    },
+    "requestBodies": {
+      "Document_FVO": {
+        "description": "The Document to be created",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Document_FVO"
+            },
+            "examples": {
+              "Document_create_example": {
+                "$ref": "#/components/examples/Document_create_example_request"
+              }
+            }
+          }
+        },
+        "required": true
+      },
+      "Document_MVO": {
+        "description": "The Document to be patched",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Document_MVO"
+            },
+            "examples": {
+              "Document_Update_example_application-json_": {
+                "$ref": "#/components/examples/Document_Update_example_application-json__request"
+              }
+            }
+          },
+          "application/merge-patch+json": {
+            "schema": {
+              "$ref": "#/components/schemas/Document_MVO"
+            },
+            "examples": {
+              "Document_Update_example_Merge_": {
+                "$ref": "#/components/examples/Document_Update_example_Merge__request"
+              }
+            }
+          },
+          "application/json-patch+json": {
+            "schema": {
+              "$ref": "#/components/schemas/JsonPatchOperations"
+            },
+            "examples": {
+              "Document_Update_example_JSON-PATCH_": {
+                "$ref": "#/components/examples/Document_Update_example_JSON-PATCH__request"
+              }
+            }
+          },
+          "application/json-patch-query+json": {
+            "schema": {
+              "$ref": "#/components/schemas/JsonPatchOperations"
+            },
+            "examples": {
+              "Document_Update_example_JSON-PATCH-QUERY_": {
+                "$ref": "#/components/examples/Document_Update_example_JSON-PATCH-QUERY__request"
+              }
+            }
+          }
+        },
+        "required": true
+      }
+    },
+    "headers": {
+      "X-Total-Count": {
+        "description": "Total number of items matching criteria",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "integer"
+        }
+      },
+      "X-Result-Count": {
+        "description": "Actual number of items returned in the response body",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "integer"
+        }
+      }
+    },
+    "securitySchemes": { }
+  }
+}

@@ -5,11 +5,9 @@
 
 # Mission
 
-A mission of a customer.
-
 | Field | Type | Format | Required |
 | ------- | ------- | ------- | --- |
-| id | string | N/A | Yes |
+| id | string | N/A | No |
 | href | string | uri | No |
 | name | string | N/A | Yes |
 | description | string | N/A | No |
@@ -23,8 +21,8 @@ A mission of a customer.
 | missionRelationship | array | MissionRelationship | No |
 | relatedParty | array | RelatedParty | No |
 | @baseType | string | N/A | No |
-| @schemaLocation | string | uri | No |
-| @type | string | N/A | No |
+| @schemaLocation | string | N/A | No |
+| @type | string | "Mission" | Yes |
 
 Table: Fields of Mission. {#tbl:Mission.md:Mission}
 

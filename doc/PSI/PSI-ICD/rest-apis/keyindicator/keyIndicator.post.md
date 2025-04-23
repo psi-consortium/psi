@@ -5,7 +5,7 @@
 
 # POST /keyIndicator
 
-**Absolute Path:** /serviceQuality/v1/keyIndicator
+**Absolute Path:** /serviceQualityManagement/v2/keyIndicator
 
 **TOD Reference:** TOD-06-03-01-Create_Key_Indicator
 

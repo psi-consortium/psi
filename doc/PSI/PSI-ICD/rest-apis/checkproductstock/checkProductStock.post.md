@@ -5,7 +5,7 @@
 
 # POST /checkProductStock
 
-**Absolute Path:** /stock/v1/checkProductStock
+**Absolute Path:** /stock/v2/checkProductStock
 
 **TOD Reference:** TOD-05-04-01-Check_Product_Stock
 

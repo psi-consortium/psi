@@ -3,4 +3,4 @@
                Do NOT manually edit this file! Any such changes will be overwritten!
 -->
 
-* DELETE /productCatalog/v1/productOffering/{id}
+* DELETE /productCatalog/v2/productOffering/{id}

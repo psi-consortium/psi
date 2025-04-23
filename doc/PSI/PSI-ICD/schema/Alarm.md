@@ -5,46 +5,44 @@
 
 # Alarm
 
-This resource represents an alarm supporting the information model defined in ITU-T X.733.
-
 | Field | Type | Format | Required |
 | ------- | ------- | ------- | --- |
 | id | string | N/A | No |
 | href | string | uri | No |
-| ackState | string | N/A | No |
-| ackSystemId | string | N/A | No |
-| ackUserId | string | N/A | No |
+| externalAlarmId | string | N/A | No |
+| state | string | oneOf[raised, updated, cleared] | No |
+| alarmType | AlarmType | N/A | No |
+| perceivedSeverity | PerceivedSeverity | N/A | No |
+| probableCause | string | N/A | No |
+| specificProblem | string | N/A | No |
+| alarmedObjectType | string | N/A | No |
+| alarmedObject | AlarmedObjectRef | N/A | No |
+| reportingSystemId | string | N/A | No |
+| sourceSystemId | string | N/A | No |
+| alarmDetails | string | N/A | No |
+| alarmRaisedTime | string | date-time | No |
 | alarmChangedTime | string | date-time | No |
 | alarmClearedTime | string | date-time | No |
-| alarmDetails | string | N/A | No |
-| alarmEscalation | boolean | N/A | No |
-| alarmRaisedTime | string | date-time | No |
 | alarmReportingTime | string | date-time | No |
-| alarmedObjectType | string | N/A | No |
+| ackState | string | oneOf[unacknowledged, acknowledged] | No |
+| ackSystemId | string | N/A | No |
+| ackUserId | string | N/A | No |
+| affectedService | array | ServiceRef | No |
+| alarmEscalation | boolean | N/A | No |
 | clearSystemId | string | N/A | No |
 | clearUserId | string | N/A | No |
-| externalAlarmId | string | N/A | No |
-| isRootCause | boolean | N/A | No |
-| plannedOutageIndicator | string | N/A | No |
-| probableCause | string | N/A | No |
-| proposedRepairedActions | string | N/A | No |
-| reportingSystemId | string | N/A | No |
-| serviceAffecting | boolean | N/A | No |
-| sourceSystemId | string | N/A | No |
-| specificProblem | string | N/A | No |
-| state | string | oneOf[raised, updated, cleared] | No |
-| affectedService | array | AffectedService | No |
-| alarmType | AlarmType | N/A | No |
-| alarmedObject | AlarmedObject | N/A | No |
 | comment | array | Comment | No |
 | correlatedAlarm | array | AlarmRef | No |
 | crossedThresholdInformation | CrossedThresholdInformation | N/A | No |
+| isRootCause | boolean | N/A | No |
 | parentAlarm | array | AlarmRef | No |
-| perceivedSeverity | PerceivedSeverity | N/A | No |
-| place | array | RelatedPlaceRefOrValue | No |
+| plannedOutageIndicator | string | oneOf[InService, OutOfService] | No |
+| proposedRepairedActions | string | N/A | No |
+| serviceAffecting | boolean | N/A | No |
+| place | array | RelatedPlaceRef | No |
 | @baseType | string | N/A | No |
 | @schemaLocation | string | N/A | No |
-| @type | string | N/A | No |
+| @type | string | "Alarm" | Yes |
 
 Table: Fields of Alarm. {#tbl:Alarm.md:Alarm}
 

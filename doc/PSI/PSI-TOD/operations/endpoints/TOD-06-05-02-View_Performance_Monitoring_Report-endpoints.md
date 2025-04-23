@@ -3,4 +3,4 @@
                Do NOT manually edit this file! Any such changes will be overwritten!
 -->
 
-* GET /performanceMonitoring/v1/performanceReport/{id}
+* GET /performanceMonitoring/v2/performanceReport/{id}

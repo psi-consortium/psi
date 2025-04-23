@@ -6,7 +6,6 @@
 # PlaceRef
 
 Place reference.
-PlaceRef defines the placeRefs where the products are sold or delivered.
 
 | Field | Type | Format | Required |
 | ------- | ------- | ------- | --- |
@@ -14,7 +13,7 @@ PlaceRef defines the placeRefs where the products are sold or delivered.
 | href | string | uri | No |
 | name | string | N/A | No |
 | @baseType | string | N/A | No |
-| @schemaLocation | string | uri | No |
+| @schemaLocation | string | N/A | No |
 | @referredType | string | N/A | No |
 | @type | string | "PlaceRef" | Yes |
 

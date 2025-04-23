@@ -3,4 +3,4 @@
                Do NOT manually edit this file! Any such changes will be overwritten!
 -->
 
-* POST /troubleTicket/v1/troubleTicket
+* POST /troubleTicket/v2/troubleTicket

@@ -1,0 +1,480 @@
+{
+  "openapi": "3.0.1",
+  "components": {
+    "schemas": {
+      "Characteristic": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "Characteristic": "#/components/schemas/Characteristic",
+            "StringCharacteristic": "#/components/schemas/StringCharacteristic",
+            "StringArrayCharacteristic": "#/components/schemas/StringArrayCharacteristic",
+            "ObjectCharacteristic": "#/components/schemas/ObjectCharacteristic",
+            "ObjectArrayCharacteristic": "#/components/schemas/ObjectArrayCharacteristic",
+            "NumberCharacteristic": "#/components/schemas/NumberCharacteristic",
+            "NumberArrayCharacteristic": "#/components/schemas/NumberArrayCharacteristic",
+            "IntegerCharacteristic": "#/components/schemas/IntegerCharacteristic",
+            "IntegerArrayCharacteristic": "#/components/schemas/IntegerArrayCharacteristic",
+            "FloatCharacteristic": "#/components/schemas/FloatCharacteristic",
+            "FloatArrayCharacteristic": "#/components/schemas/FloatArrayCharacteristic",
+            "BooleanCharacteristic": "#/components/schemas/BooleanCharacteristic",
+            "BooleanArrayCharacteristic": "#/components/schemas/BooleanArrayCharacteristic"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Unique identifier of the characteristic"
+              },
+              "name": {
+                "type": "string",
+                "description": "Name of the characteristic"
+              },
+              "valueType": {
+                "type": "string",
+                "description": "Data type of the value of the characteristic"
+              },
+              "characteristicRelationship": {
+                "type": "array",
+                "description": "Collection of characteristic relationships",
+                "items": {
+                  "$ref": "#/components/schemas/CharacteristicRelationship"
+                }
+              },
+              "unitOfMeasure": {
+                "type": "string",
+                "description": "A length, surface, volume, dry measure, liquid measure, money, weight, time, and the like. In general, a determinate quantity or magnitude of the kind designated, taken as a standard of comparison for others of the same kind, in assigning them to numerical values, as 1 foot, 1 yard, 1 mile, 1 square foot."
+              }
+            },
+            "description": "Describes a given characteristic of an object or entity through a name/value pair."
+          }
+        ]
+      },
+      "CharacteristicRelationship": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "CharacteristicRelationship": "#/components/schemas/CharacteristicRelationship"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Unique identifier of the characteristic"
+              },
+              "relationshipType": {
+                "type": "string",
+                "description": "The type of relationship"
+              }
+            },
+            "description": "Another Characteristic that is related to the current Characteristic;"
+          }
+        ]
+      },
+      "CharacteristicRelationship_FVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "CharacteristicRelationship": "#/components/schemas/CharacteristicRelationship_FVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible_FVO"
+          },
+          {
+            "required": ["id", "relationshipType"],
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Unique identifier of the characteristic"
+              },
+              "relationshipType": {
+                "type": "string",
+                "description": "The type of relationship"
+              }
+            },
+            "description": "Another Characteristic that is related to the current Characteristic;"
+          }
+        ]
+      },
+      "CharacteristicRelationship_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "CharacteristicRelationship": "#/components/schemas/CharacteristicRelationship_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Unique identifier of the characteristic"
+              },
+              "relationshipType": {
+                "type": "string",
+                "description": "The type of relationship"
+              }
+            },
+            "description": "Another Characteristic that is related to the current Characteristic;"
+          }
+        ]
+      },
+      "Characteristic_FVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "Characteristic": "#/components/schemas/Characteristic_FVO",
+            "StringCharacteristic": "#/components/schemas/StringCharacteristic_FVO",
+            "StringArrayCharacteristic": "#/components/schemas/StringArrayCharacteristic_FVO",
+            "ObjectCharacteristic": "#/components/schemas/ObjectCharacteristic_FVO",
+            "ObjectArrayCharacteristic": "#/components/schemas/ObjectArrayCharacteristic_FVO",
+            "NumberCharacteristic": "#/components/schemas/NumberCharacteristic_FVO",
+            "NumberArrayCharacteristic": "#/components/schemas/NumberArrayCharacteristic_FVO",
+            "IntegerCharacteristic": "#/components/schemas/IntegerCharacteristic_FVO",
+            "IntegerArrayCharacteristic": "#/components/schemas/IntegerArrayCharacteristic_FVO",
+            "FloatCharacteristic": "#/components/schemas/FloatCharacteristic_FVO",
+            "FloatArrayCharacteristic": "#/components/schemas/FloatArrayCharacteristic_FVO",
+            "BooleanCharacteristic": "#/components/schemas/BooleanCharacteristic_FVO",
+            "BooleanArrayCharacteristic": "#/components/schemas/BooleanArrayCharacteristic_FVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible_FVO"
+          },
+          {
+            "required": ["name"],
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Unique identifier of the characteristic"
+              },
+              "name": {
+                "type": "string",
+                "description": "Name of the characteristic"
+              },
+              "valueType": {
+                "type": "string",
+                "description": "Data type of the value of the characteristic"
+              },
+              "characteristicRelationship": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CharacteristicRelationship_FVO"
+                }
+              },
+              "unitOfMeasure": {
+                "type": "string",
+                "description": "A length, surface, volume, dry measure, liquid measure, money, weight, time, and the like. In general, a determinate quantity or magnitude of the kind designated, taken as a standard of comparison for others of the same kind, in assigning them to numerical values, as 1 foot, 1 yard, 1 mile, 1 square foot."
+              }
+            },
+            "description": "Describes a given characteristic of an object or entity through a name/value pair."
+          }
+        ]
+      },
+      "Characteristic_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "Characteristic": "#/components/schemas/Characteristic_MVO",
+            "StringCharacteristic": "#/components/schemas/StringCharacteristic_MVO",
+            "StringArrayCharacteristic": "#/components/schemas/StringArrayCharacteristic_MVO",
+            "ObjectCharacteristic": "#/components/schemas/ObjectCharacteristic_MVO",
+            "ObjectArrayCharacteristic": "#/components/schemas/ObjectArrayCharacteristic_MVO",
+            "NumberCharacteristic": "#/components/schemas/NumberCharacteristic_MVO",
+            "NumberArrayCharacteristic": "#/components/schemas/NumberArrayCharacteristic_MVO",
+            "IntegerCharacteristic": "#/components/schemas/IntegerCharacteristic_MVO",
+            "IntegerArrayCharacteristic": "#/components/schemas/IntegerArrayCharacteristic_MVO",
+            "FloatCharacteristic": "#/components/schemas/FloatCharacteristic_MVO",
+            "FloatArrayCharacteristic": "#/components/schemas/FloatArrayCharacteristic_MVO",
+            "BooleanCharacteristic": "#/components/schemas/BooleanCharacteristic_MVO",
+            "BooleanArrayCharacteristic": "#/components/schemas/BooleanArrayCharacteristic_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Unique identifier of the characteristic"
+              },
+              "name": {
+                "type": "string",
+                "description": "Name of the characteristic"
+              },
+              "valueType": {
+                "type": "string",
+                "description": "Data type of the value of the characteristic"
+              },
+              "characteristicRelationship": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CharacteristicRelationship_MVO"
+                }
+              },
+              "unitOfMeasure": {
+                "type": "string",
+                "description": "A length, surface, volume, dry measure, liquid measure, money, weight, time, and the like. In general, a determinate quantity or magnitude of the kind designated, taken as a standard of comparison for others of the same kind, in assigning them to numerical values, as 1 foot, 1 yard, 1 mile, 1 square foot."
+              }
+            },
+            "description": "Describes a given characteristic of an object or entity through a name/value pair."
+          }
+        ]
+      },
+      "BooleanArrayCharacteristic": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "array",
+                "items": {
+                  "type": "boolean"
+                }
+              }
+            },
+            "description": "A characteristic which value is an array of Boolean(s)."
+          }
+        ]
+      },
+      "BooleanArrayCharacteristic_FVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic_FVO"
+          },
+          {
+            "required": ["value"],
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "array",
+                "items": {
+                  "type": "boolean"
+                }
+              }
+            },
+            "description": "A characteristic which value is an array of Boolean(s)."
+          }
+        ]
+      },
+      "BooleanArrayCharacteristic_MVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic_MVO"
+          },
+          {
+            "required": ["value"],
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "array",
+                "items": {
+                  "type": "boolean"
+                }
+              }
+            },
+            "description": "A characteristic which value is an array of Boolean(s)."
+          }
+        ]
+      },
+      "BooleanCharacteristic": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "boolean",
+                "description": "Value of the characteristic"
+              }
+            },
+            "description": "A characteristic which value is a Boolean."
+          }
+        ]
+      },
+      "BooleanCharacteristic_FVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic_FVO"
+          },
+          {
+            "required": ["value"],
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "boolean",
+                "description": "Value of the characteristic"
+              }
+            },
+            "description": "A characteristic which value is a Boolean."
+          }
+        ]
+      },
+      "BooleanCharacteristic_MVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic_MVO"
+          },
+          {
+            "required": ["value"],
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "boolean",
+                "description": "Value of the characteristic"
+              }
+            },
+            "description": "A characteristic which value is a Boolean."
+          }
+        ]
+      },
+      "FloatArrayCharacteristic": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "array",
+                "items": {
+                  "type": "number",
+                  "format": "float"
+                }
+              }
+            },
+            "description": "A characteristic which value is an array of Float(s)."
+          }
+        ]
+      },
+      "FloatArrayCharacteristic_FVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic_FVO"
+          },
+          {
+            "required": ["value"],
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "array",
+                "items": {
+                  "type": "number",
+                  "format": "float"
+                }
+              }
+            },
+            "description": "A characteristic which value is an array of Float(s)."
+          }
+        ]
+      },
+      "FloatArrayCharacteristic_MVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic_MVO"
+          },
+          {
+            "required": ["value"],
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "array",
+                "items": {
+                  "type": "number",
+                  "format": "float"
+                }
+              }
+            },
+            "description": "A characteristic which value is an array of Float(s)."
+          }
+        ]
+      },
+      "FloatCharacteristic": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "number",
+                "description": "Value of the characteristic",
+                "format": "float"
+              }
+            },
+            "description": "A characteristic which value is a Float."
+          }
+        ]
+      },
+      "FloatCharacteristic_FVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic_FVO"
+          },
+          {
+            "required": ["value"],
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "number",
+                "description": "Value of the characteristic",
+                "format": "float"
+              }
+            },
+            "description": "A characteristic which value is a Float."
+          }
+        ]
+      },
+      "FloatCharacteristic_MVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic_MVO"
+          },
+          {
+            "required": ["value"],
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "number",
+                "description": "Value of the characteristic",
+                "format": "float"
+              }
+            },
+            "description": "A characteristic which value is a Float."
+          }
+        ]
+      }
+    }
+  }
+}

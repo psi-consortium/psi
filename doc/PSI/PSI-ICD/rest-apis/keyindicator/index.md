@@ -3,7 +3,7 @@
                Do NOT manually edit this file! Any such changes will be overwritten!
 -->
 
-# keyIndicator (/serviceQuality)
+# keyIndicator (/serviceQualityManagement)
 
 Key Indicator API
 

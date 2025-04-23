@@ -5,7 +5,7 @@
 
 # GET /customerInquiry/{id}/results
 
-**Absolute Path:** /customerInquiry/v1/customerInquiry/{id}/results
+**Absolute Path:** /customerInquiry/v2/customerInquiry/{id}/results
 
 **TOD Reference:** TOD-03-01-03-View_Inquiry_Results
 
@@ -26,7 +26,7 @@ Table: Parameters of GET customerInquiry/{id}/results. {#tbl:customerInquiry-id-
 
 | Code | Description | Content |
 |------|-------------|---------|
-| 200 | Success | InquiryResult |
+| 200 | Success | N/A |
 | 204 | No content can be provided, because the inquiry is not yet processed. | N/A |
 | 400 | Bad Request | Error |
 | 401 | Unauthorized | Error |

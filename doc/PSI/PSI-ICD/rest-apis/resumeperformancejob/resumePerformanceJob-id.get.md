@@ -5,7 +5,7 @@
 
 # GET /resumePerformanceJob/{id}
 
-**Absolute Path:** /performanceMonitoring/v1/resumePerformanceJob/{id}
+**Absolute Path:** /performanceMonitoring/v2/resumePerformanceJob/{id}
 
 **Summary:** Retrieves a ResumePerformanceJob by ID.
 

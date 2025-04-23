@@ -70,6 +70,12 @@ dcr_overrides:
    version: 'MS10 [1.2.2]'
    author: 'Wolfgang Robben'
    message: 'No update, just version bump.'
+ - dcr:
+   from: '2025-02-04'
+   to: '2025-04-30'
+   version: 'MS11 [1.3.0]'
+   author: 'Christian Grubert'
+   message: 'PS28 Updated due to TMF5 update and advanced OAS patching.'
 =end
 
 # Document Meta Information

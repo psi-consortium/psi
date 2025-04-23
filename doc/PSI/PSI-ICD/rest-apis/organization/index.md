@@ -5,7 +5,7 @@
 
 # organization (/partyManagement)
 
-Organization API
+Operations for Organization Resource
 
 @include [organization.get.md](organization.get.md)
 @include [organization.post.md](organization.post.md)

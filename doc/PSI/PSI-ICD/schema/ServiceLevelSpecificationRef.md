@@ -17,9 +17,9 @@ Service Level Agreements are expressed in terms of Service Level Specifications.
 | href | string | uri | No |
 | name | string | N/A | No |
 | @baseType | string | N/A | No |
-| @schemaLocation | string | uri | No |
-| @type | string | N/A | No |
+| @schemaLocation | string | N/A | No |
 | @referredType | string | N/A | No |
+| @type | string | "ServiceLevelSpecificationRef" | Yes |
 
 Table: Fields of ServiceLevelSpecificationRef. {#tbl:ServiceLevelSpecificationRef.md:ServiceLevelSpecificationRef}
 

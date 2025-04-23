@@ -5,7 +5,7 @@
 
 # GET /performanceJob/{id}
 
-**Absolute Path:** /performanceMonitoring/v1/performanceJob/{id}
+**Absolute Path:** /performanceMonitoring/v2/performanceJob/{id}
 
 **TOD Reference:** TOD-06-04-04-View_Performance_Monitoring_Job
 

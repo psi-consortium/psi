@@ -5,16 +5,14 @@
 
 # TaxItem
 
-A tax item is created for each tax rate and tax type used in the bill.
-
 | Field | Type | Format | Required |
 | ------- | ------- | ------- | --- |
+| taxAmount | Money | N/A | No |
 | taxCategory | string | N/A | No |
 | taxRate | number | float | No |
-| taxAmount | Money | N/A | No |
 | @baseType | string | N/A | No |
-| @schemaLocation | string | uri | No |
-| @type | string | N/A | No |
+| @schemaLocation | string | N/A | No |
+| @type | string | "TaxItem" | Yes |
 
 Table: Fields of TaxItem. {#tbl:TaxItem.md:TaxItem}
 

@@ -5,9 +5,6 @@
 
 # ProductOfferingTerm
 
-A condition under which a ProductOffering is made available to Customers.
-For instance, a productOffering can be offered with multiple commitment periods.
-
 | Field | Type | Format | Required |
 | ------- | ------- | ------- | --- |
 | name | string | N/A | No |
@@ -15,8 +12,8 @@ For instance, a productOffering can be offered with multiple commitment periods.
 | duration | Duration | N/A | No |
 | validFor | TimePeriod | N/A | No |
 | @baseType | string | N/A | No |
-| @schemaLocation | string | uri | No |
-| @type | string | N/A | No |
+| @schemaLocation | string | N/A | No |
+| @type | string | "ProductOfferingTerm" | Yes |
 
 Table: Fields of ProductOfferingTerm. {#tbl:ProductOfferingTerm.md:ProductOfferingTerm}
 

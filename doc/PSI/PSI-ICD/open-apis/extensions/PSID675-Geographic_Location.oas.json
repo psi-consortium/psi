@@ -1,0 +1,303 @@
+{
+    "openapi": "3.0.1",
+    "components": {
+        "schemas": {
+            "Place": {
+                "type": "object",
+                "description": "Place reference.",
+                "discriminator": {
+                    "propertyName": "@type",
+                    "mapping": {
+                        "Place": "#/components/schemas/Place",
+                        "GeographicSite": "#/components/schemas/GeographicSite",
+                        "GeographicLocation": "#/components/schemas/GeographicLocation",
+                        "GeographicAddress": "#/components/schemas/GeographicAddress"
+                    }
+                },
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/Entity"
+                    },
+                    {
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "description": "Name of the Place"
+                            }
+                        }
+                    }
+                ]
+            },
+            "Place_FVO": {
+                "type": "object",
+                "description": "Place reference.",
+                "discriminator": {
+                    "propertyName": "@type",
+                    "mapping": {
+                        "Place": "#/components/schemas/Place_FVO",
+                        "GeographicSite": "#/components/schemas/GeographicSite_FVO",
+                        "GeographicLocation": "#/components/schemas/GeographicLocation_FVO",
+                        "GeographicAddress": "#/components/schemas/GeographicAddress_FVO"
+                    }
+                },
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/Entity_FVO"
+                    },
+                    {
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "description": "Name of the Place"
+                            }
+                        }
+                    }
+                ]
+            },
+            "Place_MVO": {
+                "type": "object",
+                "description": "Place reference.",
+                "discriminator": {
+                    "propertyName": "@type",
+                    "mapping": {
+                        "Place": "#/components/schemas/Place_MVO",
+                        "GeographicSite": "#/components/schemas/GeographicSite_MVO",
+                        "GeographicLocation": "#/components/schemas/GeographicLocation_MVO",
+                        "GeographicAddress": "#/components/schemas/GeographicAddress_MVO"
+                    }
+                },
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/Entity_MVO"
+                    },
+                    {
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "description": "Name of the Place"
+                            }
+                        }
+                    }
+                ]
+            },
+            "GeographicLocation": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/Place"
+                    },
+                    {
+                        "type": "object",
+                        "description": "A GeographicLocation is a pure-virtual super-class to the GeoJSON-aligned geometries of Point (addresses and locations), MultiPoint, LineString (streets, highways and boundaries), MultiLineString and Polygon (countries, provinces, tracts of land). Use the @type attribute to specify which of these is being specified by the geometry attribute.",
+                        "properties": {
+                            "geoJson": {
+                                "$ref": "#/components/schemas/Geometry"
+                            },
+                            "bbox": {
+                                "type": "array",
+                                "description": "A bounding box array that contains the geometry. The axes order follows the axes order of the geometry",
+                                "minItems": 4,
+                                "items": {
+                                    "type": "number"
+                                }
+                            }
+                        }
+                    }
+                ]
+            },
+            "GeographicLocation_FVO": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/Place_FVO"
+                    },
+                    {
+                        "type": "object",
+                        "description": "A GeographicLocation is a pure-virtual super-class to the GeoJSON-aligned geometries of Point (addresses and locations), MultiPoint, LineString (streets, highways and boundaries), MultiLineString and Polygon (countries, provinces, tracts of land). Use the @type attribute to specify which of these is being specified by the geometry attribute.",
+                        "properties": {
+                            "geoJson": {
+                                "$ref": "#/components/schemas/Geometry"
+                            },
+                            "bbox": {
+                                "type": "array",
+                                "description": "A bounding box array that contains the geometry. The axes order follows the axes order of the geometry",
+                                "minItems": 4,
+                                "items": {
+                                    "type": "number"
+                                }
+                            }
+                        }
+                    }
+                ]
+            },
+            "GeographicLocation_MVO": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/Place_MVO"
+                    },
+                    {
+                        "type": "object",
+                        "description": "A GeographicLocation is a pure-virtual super-class to the GeoJSON-aligned geometries of Point (addresses and locations), MultiPoint, LineString (streets, highways and boundaries), MultiLineString and Polygon (countries, provinces, tracts of land). Use the @type attribute to specify which of these is being specified by the geometry attribute.",
+                        "properties": {
+                            "geoJson": {
+                                "$ref": "#/components/schemas/Geometry"
+                            },
+                            "bbox": {
+                                "type": "array",
+                                "description": "A bounding box array that contains the geometry. The axes order follows the axes order of the geometry",
+                                "minItems": 4,
+                                "items": {
+                                    "type": "number"
+                                }
+                            }
+                        }
+                    }
+                ]
+            },
+            "Geometry": {
+                "type": "object",
+                "description": "A GeoJson geometry.",
+                "oneOf": [
+                    {
+                        "$ref": "#/components/schemas/LineString"
+                    },
+                    {
+                        "$ref": "#/components/schemas/MultiLineString"
+                    },
+                    {
+                        "$ref": "#/components/schemas/MultiPoint"
+                    },
+                    {
+                        "$ref": "#/components/schemas/MultiPolygon"
+                    },
+                    {
+                        "$ref": "#/components/schemas/Point"
+                    },
+                    {
+                        "$ref": "#/components/schemas/Polygon"
+                    }
+                ],
+                "discriminator": {
+                    "propertyName": "type",
+                    "mapping": {
+                        "LineString": "#/components/schemas/LineString",
+                        "MultiLineString": "#/components/schemas/MultiLineString",
+                        "MultiPoint": "#/components/schemas/MultiPoint",
+                        "MultiPolygon": "#/components/schemas/MultiPolygon",
+                        "Point": "#/components/schemas/Point",
+                        "Polygon": "#/components/schemas/Polygon"
+                    }
+                }
+            },
+            "Point2D": {
+                "type": "array",
+                "maxItems": 2,
+                "minItems": 2,
+                "items": {
+                    "type": "number"
+                }
+            },
+            "Point": {
+                "type": "object",
+                "description": "A GeoJSON Point.",
+                "properties": {
+                    "type": {
+                        "type": "string"
+                    },
+                    "coordinates": {
+                        "$ref": "#/components/schemas/Point2D"
+                    }
+                }
+            },
+            "MultiPoint": {
+                "type": "object",
+                "description": "A GeoJSON MultiPoint.",
+                "properties": {
+                    "type": {
+                        "type": "string"
+                    },
+                    "coordinates": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Point2D"
+                        }
+                    }
+                }
+            },
+            "LineString": {
+                "type": "object",
+                "description": "A GeoJSON LineString.",
+                "properties": {
+                    "type": {
+                        "type": "string"
+                    },
+                    "coordinates": {
+                        "type": "array",
+                        "minItems": 2,
+                        "items": {
+                            "$ref": "#/components/schemas/Point2D"
+                        }
+                    }
+                }
+            },
+            "MultiLineString": {
+                "type": "object",
+                "description": "A GeoJSON MultiLineString.",
+                "properties": {
+                    "type": {
+                        "type": "string"
+                    },
+                    "coordinates": {
+                        "type": "array",
+                        "items": {
+                            "type": "array",
+                            "minItems": 2,
+                            "items": {
+                                "$ref": "#/components/schemas/Point2D"
+                            }
+                        }
+                    }
+                }
+            },
+            "Polygon": {
+                "type": "object",
+                "description": "A GeoJSON Polygon.",
+                "properties": {
+                    "type": {
+                        "type": "string"
+                    },
+                    "coordinates": {
+                        "type": "array",
+                        "items": {
+                            "type": "array",
+                            "minItems": 4,
+                            "items": {
+                                "$ref": "#/components/schemas/Point2D"
+                            }
+                        }
+                    }
+                }
+            },
+            "MultiPolygon": {
+                "type": "object",
+                "description": "A GeoJSON MultiPolygon.",
+                "properties": {
+                    "type": {
+                        "type": "string"
+                    },
+                    "coordinates": {
+                        "type": "array",
+                        "items": {
+                            "type": "array",
+                            "items": {
+                                "type": "array",
+                                "minItems": 4,
+                                "items": {
+                                    "$ref": "#/components/schemas/Point2D"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

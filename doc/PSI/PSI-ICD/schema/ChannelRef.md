@@ -15,9 +15,9 @@ channel for selling product offerings, channel for opening a trouble ticket etc.
 | href | string | uri | No |
 | name | string | N/A | No |
 | @baseType | string | N/A | No |
-| @schemaLocation | string | uri | No |
-| @type | string | N/A | No |
+| @schemaLocation | string | N/A | No |
 | @referredType | string | N/A | No |
+| @type | string | "ChannelRef" | Yes |
 
 Table: Fields of ChannelRef. {#tbl:ChannelRef.md:ChannelRef}
 

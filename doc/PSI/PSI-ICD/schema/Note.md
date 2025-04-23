@@ -5,18 +5,15 @@
 
 # Note
 
-Extra information about a given entity
-
 | Field | Type | Format | Required |
 | ------- | ------- | ------- | --- |
 | id | string | N/A | No |
-| href | string | uri | No |
 | author | string | N/A | No |
 | date | string | date-time | No |
-| text | string | N/A | Yes |
+| text | string | N/A | No |
 | @baseType | string | N/A | No |
-| @schemaLocation | string | uri | No |
-| @type | string | N/A | No |
+| @schemaLocation | string | N/A | No |
+| @type | string | "Note" | Yes |
 
 Table: Fields of Note. {#tbl:Note.md:Note}
 

@@ -5,17 +5,14 @@
 
 # OrderTerm
 
-Description of a productTerm linked to this orderItem.
-This represent a commitment with a duration
-
 | Field | Type | Format | Required |
 | ------- | ------- | ------- | --- |
 | name | string | N/A | No |
 | description | string | N/A | No |
-| duration | Quantity | N/A | No |
+| duration | Duration | N/A | No |
 | @baseType | string | N/A | No |
-| @schemaLocation | string | uri | No |
-| @type | string | N/A | No |
+| @schemaLocation | string | N/A | No |
+| @type | string | "OrderTerm" | Yes |
 
 Table: Fields of OrderTerm. {#tbl:OrderTerm.md:OrderTerm}
 

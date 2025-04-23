@@ -5,9 +5,7 @@
 
 # DELETE /productOffering/{id}
 
-**Absolute Path:** /productCatalog/v1/productOffering/{id}
-
-**TOD Reference:** TOD-02-04-03-Remove_Product_Offering
+**Absolute Path:** /productCatalogManagement/v2/productOffering/{id}
 
 **Summary:** Deletes a ProductOffering
 
@@ -15,7 +13,7 @@
 
 | Name | Type | Required | Description |
 | ------ | ------ | --- | ------------ |
-| id | string | Yes | Identifier of the ProductOffering |
+| id | string | Yes | Identifier of the Resource |
 
 Table: Parameters of DELETE productOffering/{id}. {#tbl:productOffering-id.delete.md:parameters}
 
@@ -23,6 +21,7 @@ Table: Parameters of DELETE productOffering/{id}. {#tbl:productOffering-id.delet
 
 | Code | Description | Content |
 |------|-------------|---------|
+| 202 | Accepted | N/A |
 | 204 | Deleted | N/A |
 | 400 | Bad Request | Error |
 | 401 | Unauthorized | Error |
@@ -31,6 +30,8 @@ Table: Parameters of DELETE productOffering/{id}. {#tbl:productOffering-id.delet
 | 405 | Method Not allowed | Error |
 | 409 | Conflict | Error |
 | 500 | Internal Server Error | Error |
+| 501 | Not Implemented | Error |
+| 503 | Service Unavailable | Error |
 
 Table: Responses of DELETE productOffering/{id}. {#tbl:productOffering-id.delete.md:responses}
 

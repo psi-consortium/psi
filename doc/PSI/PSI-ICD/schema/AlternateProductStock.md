@@ -11,7 +11,7 @@ AlternateProductStock is used to log and execute Alternate about product  stock 
 | ------- | ------- | ------- | --- |
 | id | string | N/A | No |
 | alternateAvailabilityDate | string | date-time | No |
-| alternatePlace | PlaceRef | N/A | No |
+| alternatePlace | PlaceRefOrValue | N/A | No |
 | alternateProduct | ProductRefOrValue | N/A | No |
 | alternateQuantity | Quantity | N/A | No |
 | alternateStock | ProductStockRef | N/A | No |

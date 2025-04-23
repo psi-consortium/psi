@@ -20,7 +20,7 @@ Skipped properties: id,href
 | timeOccurred | string | date-time | No |
 | title | string | N/A | No |
 | analyticCharacteristic | array | Characteristic | No |
-| event | object | N/A | No |
+| event | any | N/A | No |
 | relatedParty | array | RelatedParty | No |
 | reportingSystem | EntityRef | N/A | No |
 | source | EntityRef | N/A | No |

@@ -5,7 +5,7 @@
 
 # PATCH /troubleTicket/{id}
 
-**Absolute Path:** /troubleTicket/v1/troubleTicket/{id}
+**Absolute Path:** /troubleTicket/v2/troubleTicket/{id}
 
 **TOD Reference:** TOD-01-04-02-Update_Trouble_Ticket
 
@@ -15,7 +15,8 @@
 
 | Name | Type | Required | Description |
 | ------ | ------ | --- | ------------ |
-| id | string | Yes | Identifier of the TroubleTicket |
+| id | string | Yes | Identifier of the Resource |
+| fields | string | No | Comma-separated properties to be provided in response |
 
 Table: Parameters of PATCH troubleTicket/{id}. {#tbl:troubleTicket-id.patch.md:parameters}
 
@@ -23,7 +24,10 @@ Table: Parameters of PATCH troubleTicket/{id}. {#tbl:troubleTicket-id.patch.md:p
 
 | Content Type | Reference |
 |--------------|-----------|
-| application/json;charset=utf-8 | TroubleTicket_Update |
+| application/json | TroubleTicket_MVO |
+| application/merge-patch+json | TroubleTicket_MVO |
+| application/json-patch+json | JsonPatchOperations |
+| application/json-patch-query+json | JsonPatchOperations |
 
 Table: Request Body of PATCH troubleTicket/{id}. {#tbl:troubleTicket-id.patch.md:request_body}
 
@@ -31,7 +35,8 @@ Table: Request Body of PATCH troubleTicket/{id}. {#tbl:troubleTicket-id.patch.md
 
 | Code | Description | Content |
 |------|-------------|---------|
-| 200 | Updated | TroubleTicket |
+| 200 | Success | TroubleTicket |
+| 202 | Accepted | N/A |
 | 400 | Bad Request | Error |
 | 401 | Unauthorized | Error |
 | 403 | Forbidden | Error |
@@ -39,6 +44,8 @@ Table: Request Body of PATCH troubleTicket/{id}. {#tbl:troubleTicket-id.patch.md
 | 405 | Method Not allowed | Error |
 | 409 | Conflict | Error |
 | 500 | Internal Server Error | Error |
+| 501 | Not Implemented | Error |
+| 503 | Service Unavailable | Error |
 
 Table: Responses of PATCH troubleTicket/{id}. {#tbl:troubleTicket-id.patch.md:responses}
 

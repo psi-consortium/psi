@@ -52,6 +52,12 @@ dcr_overrides:
    version: 'MS10 [1.2.2]'
    author: 'Wolfgang Robben'
    message: 'Updates for MS10 delivery'
+ - dcr:
+   from: '2025-02-04'
+   to: '2025-04-30'
+   version: 'MS11pre [1.2.3]'
+   author: 'Wolfgang Robben'
+   message: 'Updates for MS11 pre delivery'
 =end
 
 # Document Meta Information
@@ -65,31 +71,13 @@ dcr_overrides:
 | Author    | Norbert Czeranka   | Project Team                   | CGI             |
 | Author    | Christine Glaesser | Liaison Manager                | CGI             |
 | Author    | Hendrik Oppenberg  | Technical Officer              | CGI             |
-| Approval  | Rui Goncalves      | Project Manager                | SES             |
+| Approval  | Victoria McCarthy  | Project Manager                | SES             |
 | Approval  | Wolfgang Robben    | Project Manager                | CGI             |
 | Checked   | Pepijn Witte       | Quality Assurance Manager      | CGI             |
 
 Table: Signature Table. {#tbl:signature_table}
 
-## Document Change Record
-
-### Changes
-
-@dcr(dcr_table)
-
-Table: Document Change Record. {#tbl:dcr}
-
-### Source Control
-
-Changes to this document are tracked electronically.
-No signature is required by the authors.
-The following information can prove the integrity of the document and reveal any change.
-
-@dcr(git_table)
-
-Table: Git log. {#tbl:git_log}
-
-@dcr(git_qr_code){#fig:dcr_qr_code}
+@include [Document Change Record](../common/document-change-record.md)
 
 ## Documents
 
@@ -114,6 +102,8 @@ They have been moved here from the main document [PSI-ADR] to improve its readab
 @include [generated document warning](../common/generated_document.md)
 
 @include [development_state](../common/development_state.md)
+
+@include [Release Notes](../common/release_notes.md)
 
 # List of Deprecated Decisions
 

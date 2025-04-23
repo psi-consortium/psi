@@ -3,4 +3,4 @@
                Do NOT manually edit this file! Any such changes will be overwritten!
 -->
 
-* POST /resourceInventory/v1/resource
+* POST /resourceInventory/v2/resource

@@ -3,4 +3,4 @@
                Do NOT manually edit this file! Any such changes will be overwritten!
 -->
 
-* DELETE /troubleTicket/v1/troubleTicket/{id}
+* DELETE /troubleTicket/v2/troubleTicket/{id}

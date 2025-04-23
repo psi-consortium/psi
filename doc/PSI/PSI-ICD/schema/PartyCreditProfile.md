@@ -5,8 +5,6 @@
 
 # PartyCreditProfile
 
-An individual might be evaluated for its worthiness and this evaluation might be based on a credit rating given by a credit agency.
-
 | Field | Type | Format | Required |
 | ------- | ------- | ------- | --- |
 | id | string | N/A | No |
@@ -14,11 +12,11 @@ An individual might be evaluated for its worthiness and this evaluation might be
 | creditAgencyName | string | N/A | No |
 | creditAgencyType | string | N/A | No |
 | ratingReference | string | N/A | No |
-| ratingScore | integer | N/A | No |
+| ratingScore | integer | int32 | No |
 | validFor | TimePeriod | N/A | No |
 | @baseType | string | N/A | No |
-| @schemaLocation | string | uri | No |
-| @type | string | N/A | No |
+| @schemaLocation | string | N/A | No |
+| @type | string | "PartyCreditProfile" | Yes |
 
 Table: Fields of PartyCreditProfile. {#tbl:PartyCreditProfile.md:PartyCreditProfile}
 

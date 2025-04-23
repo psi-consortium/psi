@@ -3,4 +3,4 @@
                Do NOT manually edit this file! Any such changes will be overwritten!
 -->
 
-* GET /eventManagement/v1/topic
+* GET /eventManagement/v2/topic

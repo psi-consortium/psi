@@ -7,14 +7,12 @@
 
 | Field | Type | Format | Required |
 | ------- | ------- | ------- | --- |
-| id | string | N/A | No |
-| href | string | uri | No |
-| relationshipType | string | N/A | Yes |
-| service | ServiceRefOrValue | N/A | Yes |
 | serviceRelationshipCharacteristic | array | Characteristic | No |
+| service | ServiceRefOrValue | N/A | No |
+| relationshipType | string | N/A | No |
 | @baseType | string | N/A | No |
-| @schemaLocation | string | uri | No |
-| @type | string | N/A | No |
+| @schemaLocation | string | N/A | No |
+| @type | string | "ServiceRelationship" | Yes |
 
 Table: Fields of ServiceRelationship. {#tbl:ServiceRelationship.md:ServiceRelationship}
 

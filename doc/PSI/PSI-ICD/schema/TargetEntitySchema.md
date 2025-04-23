@@ -9,8 +9,8 @@ The reference object to the schema and type of target entity which is described 
 
 | Field | Type | Format | Required |
 | ------- | ------- | ------- | --- |
-| @schemaLocation | string | N/A | Yes |
-| @type | string | N/A | Yes |
+| @schemaLocation | string | N/A | No |
+| @type | string | N/A | No |
 
 Table: Fields of TargetEntitySchema. {#tbl:TargetEntitySchema.md:TargetEntitySchema}
 

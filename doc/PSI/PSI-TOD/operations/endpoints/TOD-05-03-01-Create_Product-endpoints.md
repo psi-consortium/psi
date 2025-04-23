@@ -3,4 +3,4 @@
                Do NOT manually edit this file! Any such changes will be overwritten!
 -->
 
-* POST /productInventory/v1/product
+* POST /productInventory/v2/product

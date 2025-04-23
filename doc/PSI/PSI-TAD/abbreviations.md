@@ -23,12 +23,14 @@ The table {@tbl:psi-abbreviations} below lists all abbreviations used in the con
 | BUC          | Block Up Converter                                     |
 | CD           | Continuous Delivery                                    |
 | CI           | Configuration Item                                     |
+| CI/CD        | Continuous Integration / Continuous Delivery             |
 | CIA          | Confidentiality, Integrity, Availability               |
 | CIR          | Committed Information Rate                             |
 | COTS         | Commercial Off-The-Shelf                               |
 | CRM          | Customer Relationship Management                       |
 | CRUD         | Create, Read, Update, and Delete                              |
 | CSP          | Communication Service Provider                         |
+| DaC          | Documentation-as-Code                                  |
 | DI           | Dependency Injection                                   |
 | DL           | Document List                                          |
 | EIRP         | Effective Isotropic Radiated Power                     |
@@ -40,12 +42,14 @@ The table {@tbl:psi-abbreviations} below lists all abbreviations used in the con
 | HMI          | Human-Machine-Interface                                |
 | ISMS         | Integrated Security Management System                  |
 | ITT          | Invitation To Tender                                   |
+| IVV          | Integration, Verification and Validation                |
 | JMS          | Java Messaging Service                                 |
 | JWE          | JSON Web Encryption                                    |
 | JWT          | JSON Web Token                                         |
 | KPI          | Key Performance Indicator                              |
 | KQI          | Key Quality Indicator                              |
 | LNB          | Low-Noise Block Downconverter                          |
+| MEF          | A nonprofit global consortium that defines standards for Carrier Ethernet and digital services |
 | MEO          | Medium Earth Orbit                                     |
 | MIR          | Maximum Information Rate                               |
 | N/A          | Not applicable                                         |

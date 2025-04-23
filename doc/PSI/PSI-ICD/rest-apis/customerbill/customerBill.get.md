@@ -5,7 +5,7 @@
 
 # GET /customerBill
 
-**Absolute Path:** /customerBillManagement/v1/customerBill
+**Absolute Path:** /customerBillManagement/v2/customerBill
 
 **TOD Reference:** TOD-03-03-04-View_All_Customer_Bills
 
@@ -25,14 +25,15 @@ Table: Parameters of GET customerBill. {#tbl:customerBill.get.md:parameters}
 
 | Code | Description | Content |
 |------|-------------|---------|
-| 200 | Success | CustomerBill |
+| 200 | Success | N/A |
 | 400 | Bad Request | Error |
 | 401 | Unauthorized | Error |
 | 403 | Forbidden | Error |
 | 404 | Not Found | Error |
 | 405 | Method Not allowed | Error |
-| 409 | Conflict | Error |
 | 500 | Internal Server Error | Error |
+| 501 | Not Implemented | Error |
+| 503 | Service Unavailable | Error |
 
 Table: Responses of GET customerBill. {#tbl:customerBill.get.md:responses}
 

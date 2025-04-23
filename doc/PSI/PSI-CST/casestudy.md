@@ -146,9 +146,9 @@ This section provides a description of the key business processes.
 ## Product Accreditation
 
 In a scenario in which the broker platform has been completed (so all software, including the broker PSS and any others, and infrastructure is ready, all people are trained, all processes defined etc.), the next steps would be to certify an initial set of Resource Providers.
-For example, SES and A-Sat might have expressed interest in participating in the broker program and have enhanced their software landscape to implement all relevant PSID APIs.
-In this case, once SES and A-Sat are ready, a certification campaign would be performed involving the governance and SES and A-Sat.
-The campaign will aim to certify one or more SES / A-Sat products as GOVSATCOM-compliant products (which would be somehow formally defined).
+For example, A-Sat and B-Sat might have expressed interest in participating in the broker program and have enhanced their software landscape to implement all relevant PSID APIs.
+In this case, once A-Sat and B-Sat are ready, a certification campaign would be performed involving the governance, A-Sat, and B-Sat.
+The campaign will aim to certify one or more A-Sat / B-Sat products as GOVSATCOM-compliant products (which would be somehow formally defined).
 As part of the campaign, the software components implementing PSID APIs of both Resource Providers would be certified via semi-automated testing campaigns.
 One of the outputs of the PSID initiative is a test suite for all PSID APIs.
 This test suite could be used and/or adapted for such certification purposes.
@@ -165,10 +165,10 @@ In the scope of this Case Study, the example will be for the Resource Provider s
 
 While the previous two business processes did not rely on the broker PSS nor on PSID APIs and were performed out of the scope of the broker software, once the products are procured, the broker and Resource Provider software can now leverage the PSID APIs to introduce automation into the process.
 
-For it to be available in the broker platform, the SES Product needs to be defined as per the PSID terms.
+For it to be available in the broker platform, the A-Sat Product needs to be defined as per the PSID terms.
 Please refer to section "Specifications, Catalogs and Offerings" of the PSID "TAD (Terms, Abbreviations and Definitions)" document for a description of what PSID terms are used to define a given product.
 
-An example definition of the SES product is as follows - Name: Trunk mPOWERED product (only a general description is provided for practical purposes, as precise specifications would be too lengthy and not required for the purpose of this document):
+An example definition of the A-Sat product is as follows - Name: Trunk mPOWERED product (only a general description is provided for practical purposes, as precise specifications would be too lengthy and not required for the purpose of this document):
 
 * Physical Resource Specifications: Intellian Terminal, 2 x 1.3m 20W, model mP130, Gateway infrastructure, etc.
 * Logical Resource Specifications: Bandwidth allowing for a minimum combination of FWD and RTN of 50 Mbps, where FWD and RTN have variable pre-defined ratios.
@@ -179,7 +179,7 @@ An example definition of the SES product is as follows - Name: Trunk mPOWERED pr
   The product offering will also contain details about SLAs (i.e., network uptime > 99.5 %, Satellite Latency < 150 ms, committed information rate (CIR) definitions, etc.).
 
 In practice, the exact characteristics of what Product Offerings would be procured by the governance would be detailed and defined in contractual documents as part of the business process described in the previous step.
-In the same manner as the governance procured products from SES, it would procure other products from other Resource Providers.
+In the same manner as the governance procured products from A-Sat, it would procure other products from other Resource Providers.
 
 One possibility is for the Resource Provider systems to leverage the PSID APIs to publish the procured products to the broker PSS via the APIs.
 This process could be implemented in a manner such as that governance operators receive notifications of new published Product Offerings in the broker.

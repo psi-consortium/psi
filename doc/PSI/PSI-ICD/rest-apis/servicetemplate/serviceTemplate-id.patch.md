@@ -5,9 +5,7 @@
 
 # PATCH /serviceTemplate/{id}
 
-**Absolute Path:** /serviceCatalog/v1/serviceTemplate/{id}
-
-**TOD Reference:** TOD-04-02-02-Update_Service_Template
+**Absolute Path:** /serviceManagement/v2/serviceTemplate/{id}
 
 **Summary:** Updates partially a ServiceTemplate
 
@@ -15,7 +13,8 @@
 
 | Name | Type | Required | Description |
 | ------ | ------ | --- | ------------ |
-| id | string | Yes | The identifier of the ServiceTemplate. |
+| id | string | Yes | Identifier of the Resource |
+| fields | string | No | Comma-separated properties to be provided in response |
 
 Table: Parameters of PATCH serviceTemplate/{id}. {#tbl:serviceTemplate-id.patch.md:parameters}
 
@@ -23,7 +22,10 @@ Table: Parameters of PATCH serviceTemplate/{id}. {#tbl:serviceTemplate-id.patch.
 
 | Content Type | Reference |
 |--------------|-----------|
-| application/json;charset=utf-8 | ServiceSpecification_Update |
+| application/json | ServiceSpecification_MVO |
+| application/merge-patch+json | ServiceSpecification_MVO |
+| application/json-patch+json | JsonPatchOperations |
+| application/json-patch-query+json | JsonPatchOperations |
 
 Table: Request Body of PATCH serviceTemplate/{id}. {#tbl:serviceTemplate-id.patch.md:request_body}
 
@@ -31,7 +33,8 @@ Table: Request Body of PATCH serviceTemplate/{id}. {#tbl:serviceTemplate-id.patc
 
 | Code | Description | Content |
 |------|-------------|---------|
-| 200 | Updated | ServiceSpecification |
+| 200 | Success | ServiceSpecification |
+| 202 | Accepted | N/A |
 | 400 | Bad Request | Error |
 | 401 | Unauthorized | Error |
 | 403 | Forbidden | Error |
@@ -39,6 +42,8 @@ Table: Request Body of PATCH serviceTemplate/{id}. {#tbl:serviceTemplate-id.patc
 | 405 | Method Not allowed | Error |
 | 409 | Conflict | Error |
 | 500 | Internal Server Error | Error |
+| 501 | Not Implemented | Error |
+| 503 | Service Unavailable | Error |
 
 Table: Responses of PATCH serviceTemplate/{id}. {#tbl:serviceTemplate-id.patch.md:responses}
 

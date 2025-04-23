@@ -76,6 +76,12 @@ dcr_overrides:
    version: 'MS10 [1.2.2]'
    author: 'Hendrik Oppenberg'
    message: 'Mission API: mission assets, products and mission management stubs.'
+ - dcr:
+   from: '2025-02-04'
+   to: '2025-04-30'
+   version: 'MS11 [1.3.0]'
+   author: 'Wolfgang Robben'
+   message: 'SatCom Ontology, Geospatial, EU CID 2023/1054.'
 =end
 
 # Document Meta Information
@@ -89,7 +95,7 @@ dcr_overrides:
 | Author    | Norbert Czeranka  | Project Team                   | CGI             |
 | Author    | Hendrik Oppenberg | Technical Officer              | CGI             |
 | Author    | Christine Gläßer  | Liasion Manager                | CGI             |
-| Approval  | Rui Goncalves     | Project Manager                | SES             |
+| Approval  | Victoria McCarthy | Project Manager                | SES             |
 | Approval  | Wolfgang Robben   | Project Manager                | CGI             |
 | Checked   | Pepijn Witte      | Quality Assurance Manager      | CGI             |
 

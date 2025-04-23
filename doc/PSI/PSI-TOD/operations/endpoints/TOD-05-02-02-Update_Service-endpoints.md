@@ -3,4 +3,4 @@
                Do NOT manually edit this file! Any such changes will be overwritten!
 -->
 
-* PATCH /serviceInventory/v1/service/{id}
+* PATCH /serviceInventory/v2/service/{id}

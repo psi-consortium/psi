@@ -3,5 +3,5 @@
                Do NOT manually edit this file! Any such changes will be overwritten!
 -->
 
-* GET /performanceMonitoring/v1/performanceReport
-* POST /performanceMonitoring/v1/performanceReportComplexQuery
+* GET /performanceMonitoring/v2/performanceReport
+* POST /performanceMonitoring/v2/performanceReportComplexQuery

@@ -5,7 +5,7 @@
 
 # service (/serviceInventory)
 
-Service Inventory API
+Operations for Service Resource
 
 @include [service.get.md](service.get.md)
 @include [service.post.md](service.post.md)

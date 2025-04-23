@@ -92,11 +92,11 @@ The REST endpoints implementing the operation are listed here.
 Commonly, an operation has one or more associated endpoints with a common HTTP method like `POST`, `PATCH`, `DELETE`, or `GET`.
 They may look like listed below and can be referenced in the [PSI-ICD].
 
-* POST /psi-api/foo/v1/bar
-* PATCH /psi-api/foo/v1/bar/{id}
-* PATCH /psi-api/foo/v1/baz/{id}
-* DELETE /psi-api/foo/v1/bar/{id}
-* GET /psi-api/foo/v1/bar/{id}
+* POST /psi-api/foo/v2/bar
+* PATCH /psi-api/foo/v2/bar/{id}
+* PATCH /psi-api/foo/v2/baz/{id}
+* DELETE /psi-api/foo/v2/bar/{id}
+* GET /psi-api/foo/v2/bar/{id}
 
 =begin
 

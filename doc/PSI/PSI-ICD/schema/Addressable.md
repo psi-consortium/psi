@@ -5,7 +5,7 @@
 
 # Addressable
 
-Base schema for addressable entities
+Base schema for adressable entities
 
 | Field | Type | Format | Required |
 | ------- | ------- | ------- | --- |

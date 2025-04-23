@@ -5,7 +5,7 @@
 
 # ProductOrderRef
 
-ProductOrder reference.
+A reference to an existing Product Order.
 
 | Field | Type | Format | Required |
 | ------- | ------- | ------- | --- |
@@ -13,9 +13,9 @@ ProductOrder reference.
 | href | string | uri | No |
 | name | string | N/A | No |
 | @baseType | string | N/A | No |
-| @schemaLocation | string | uri | No |
-| @type | string | N/A | No |
+| @schemaLocation | string | N/A | No |
 | @referredType | string | N/A | No |
+| @type | string | "ProductOrderRef" | Yes |
 
 Table: Fields of ProductOrderRef. {#tbl:ProductOrderRef.md:ProductOrderRef}
 

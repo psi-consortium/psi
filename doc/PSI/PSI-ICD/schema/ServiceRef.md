@@ -5,7 +5,7 @@
 
 # ServiceRef
 
-Service reference, for when Service is used by other entities
+Service reference, for when Service is used by other entities.
 
 | Field | Type | Format | Required |
 | ------- | ------- | ------- | --- |
@@ -13,9 +13,9 @@ Service reference, for when Service is used by other entities
 | href | string | uri | No |
 | name | string | N/A | No |
 | @baseType | string | N/A | No |
-| @schemaLocation | string | uri | No |
-| @type | string | N/A | No |
+| @schemaLocation | string | N/A | No |
 | @referredType | string | N/A | No |
+| @type | string | "ServiceRef" | Yes |
 
 Table: Fields of ServiceRef. {#tbl:ServiceRef.md:ServiceRef}
 

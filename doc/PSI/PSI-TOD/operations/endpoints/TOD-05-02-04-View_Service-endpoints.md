@@ -3,4 +3,4 @@
                Do NOT manually edit this file! Any such changes will be overwritten!
 -->
 
-* GET /serviceInventory/v1/service/{id}
+* GET /serviceInventory/v2/service/{id}

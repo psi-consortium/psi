@@ -5,7 +5,7 @@
 
 # GET /keyIndicator/{id}
 
-**Absolute Path:** /serviceQuality/v1/keyIndicator/{id}
+**Absolute Path:** /serviceQualityManagement/v2/keyIndicator/{id}
 
 **TOD Reference:** TOD-06-03-04-View_Key_Indicator
 

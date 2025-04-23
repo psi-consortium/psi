@@ -9,8 +9,8 @@ The reference object to the schema and type of target product which is described
 
 | Field | Type | Format | Required |
 | ------- | ------- | ------- | --- |
-| @schemaLocation | string | uri | Yes |
-| @type | string | N/A | Yes |
+| @schemaLocation | string | uri | No |
+| @type | string | N/A | No |
 
 Table: Fields of TargetProductSchema. {#tbl:TargetProductSchema.md:TargetProductSchema}
 

@@ -5,7 +5,7 @@
 
 # PATCH /mission/{id}
 
-**Absolute Path:** /missionManagement/v1/mission/{id}
+**Absolute Path:** /missionManagement/v2/mission/{id}
 
 **TOD Reference:** TOD-03-04-02-Update_Mission
 
@@ -23,7 +23,7 @@ Table: Parameters of PATCH mission/{id}. {#tbl:mission-id.patch.md:parameters}
 
 | Content Type | Reference |
 |--------------|-----------|
-| application/json | Mission_Update |
+| application/json | Mission_MVO |
 
 Table: Request Body of PATCH mission/{id}. {#tbl:mission-id.patch.md:request_body}
 

@@ -725,37 +725,19 @@ tasks.register('generateDocReferences', com.cgi.space.psi.tasks.GenerateDocRefer
   todOpsEndpoints = file("$projectDir/doc/PSI/PSI-TOD/operations/endpoints/")
 }
 
-tasks.register('generateMadrIndex') {
+tasks.register('generateAdrIndex') {
   group = 'Documentation'
-  description = 'Generate MADR index.'
+  description = 'Generate ADR index.'
 }
 
-['Accepted', 'Deprecated', 'Proposed', 'Rejected', 'Superseded'].each { madrStatus ->
-  tasks.register("generateMadrIndex$madrStatus", com.cgi.space.psi.tasks.GenerateMadrIndexTask.class) {
-    madrDir = file("$projectDir/doc/PSI/PSI-MADR/$madrStatus")
-    outputFile = file("$projectDir/doc/PSI/PSI-MADR/$madrStatus/list-of-decisions.md")
+['Accepted', 'Deprecated', 'Proposed', 'Rejected', 'Superseded'].each { adrStatus ->
+  tasks.register("generateAdrIndex$adrStatus", com.cgi.space.psi.tasks.GenerateAdrIndexTask.class) {
+    adrDir = file("$projectDir/doc/PSI/PSI-ADR/$adrStatus")
+    outputFile = file("$projectDir/doc/PSI/PSI-ADR/$adrStatus/list-of-decisions.md")
   }
-  tasks.generateMadrIndex.dependsOn "generateMadrIndex$madrStatus"
-}
-
-tasks.register('generateCandidateReqReferences', com.cgi.space.psi.tasks.GenerateCandidateReqReferences.class) {
-  group = 'Documentation'
-  description = 'Collect references to candidate requirments in MADR and REQ.'
-
-  candidateInput = file("$projectDir/doc/PSI/PSI-REQ/candidate_requirements/")
-  madrInput = fileTree("$projectDir/doc/PSI/PSI-MADR/").matching {
-    include "Accepted/????-??-??-*.md"
-    include "Proposed/????-??-??-*.md"
-    include "Rejected/????-??-??-*.md"
-  }
-  madrOutput = file("$projectDir/doc/PSI/PSI-REQ/candidate_requirements/MADRs/")
-  reqInput = fileTree("$projectDir/doc/PSI/PSI-REQ/requirements/").matching {
-    include "REQ-*.md"
-    exclude "*-index.md"
-  }
-  reqOutput = file("$projectDir/doc/PSI/PSI-REQ/candidate_requirements/requirements/")
+  tasks.generateAdrIndex.dependsOn "generateAdrIndex$adrStatus"
 }
 
 tasks.register('generate') {
-    dependsOn 'generateRestApiDocs', 'generateRestApiSchemaIndex', 'generateDocReferences', 'generateMadrIndex', 'generateCandidateReqReferences'
+    dependsOn 'generateRestApiDocs', 'generateRestApiSchemaIndex', 'generateDocReferences', 'generateAdrIndex'
 }

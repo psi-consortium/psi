@@ -11,14 +11,14 @@
 =end
 The outlined case study shows how the interplay between different PSSs and different entities - a customer aiming at booking specific services to meet their communication needs, a provider offering resources or services via a PSS to broaden their reach to different user communities - can work adapting the PSI APIs.
 The User Story accompanying the Case Study showcases how the interaction between different PSSs can be implemented.
-The different roles of providers and PSS can be set within the context of this consortium as follows: 
+The different roles of providers and PSS can be set as follows: 
 
-| Consortium Partner | Role | Description | 
+| Name | Role | Description | 
 | --------- | --------- | --------- |
 | A-Sat | Provider | Provisioning of services |
 | B-Sat | Provider | Provisioning of services |
-| SES | Provider, PSS | Provisioning of services and PSS |
-| CGI | Customer, PSS | Demonstration user, Broker platform PSS |
+| Provider PSS | Provider, PSS | Provisioning of services and PSS |
+| Broker PSS | Customer, PSS | Demonstration user, Broker platform PSS |
 
 Table: User Story players. {#tbl:us_players}
 
@@ -29,7 +29,7 @@ This can be done via JSON import if the services from A-Sat and B-Sat are being 
 If the optional demonstration step should be included, the services should include raw bandwidth services.
 After import, the required accreditation will be conducted for both providers.
 
-SES sends both *resource specifications* and *service specifications* via the API, showcasing the API connection between the broker PSS and the provider PSS.
+The provider PSS sends both *resource specifications* and *service specifications* via the API, showcasing the API connection between the broker PSS and the provider PSS.
 Subsequently, the broker PSS displays the received data and conducts the accreditation for this provider as well.
 Finally, the provider PSS sends *product offerings* to the broker PSS via the aforementioned APIs as well.
 One product offering includes *internet access*, to enable step 2.
@@ -52,10 +52,10 @@ Once the order is checked, a confirmation is send back to the broker PSS.
 ## Optional: Showing additional matchmaking
 
 Optionally another matchmaking action, using imported data in step 1 from A-Sat, can be shown on the example of raw bandwidth services.
-Potentially, the same services as those from SES can be shown with B-Sat derived services.
+Potentially, the same services as those from the provider PSS can be shown with B-Sat derived services.
 The user refines the mission to include raw bandwidth services.
 The matchmaking in the broker PSS is being conducted once more, showing the raw bandwidth services from A-Sat as options.
-Potentially, if present, the services from B-Sat can be shown here as well, but it is demonstrated that those from SES are chosen to show step 4.
+Potentially, if present, the services from B-Sat can be shown here as well, but it is demonstrated that those from A-Sat are chosen to show step 4.
 
 ## Step 4: Order confirmation and start of Service
 
@@ -67,5 +67,3 @@ The broker PSS shows the order's confirmation status and also the service status
 The user story has been completed.
 Within step 5, the capabilities for other endpoints are shown.
 This is done conducting the integration tests with a mock-up, i.e. mocking requests from customers or mocking further actions being conducted by potential providers or PSS <-> PSS interactions.
-
-

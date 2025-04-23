@@ -2,7 +2,7 @@
 
 # Provider Journey
 
-[[_TOC_]]
+[[*TOC*]]
 
 =end
 
@@ -10,12 +10,6 @@ To interact with the system, the provider needs a graphical interface.
 The GUI provides a dashboard to get an initial overview and to get a quick-start for some action.
 Further views are catalog, inventory and customer interactions.
 The character of these views are described below.
-
-| Actor | Consumed API(s) |
-|-------|-------------|
-| Provider | - |
-
-Table: Parameters of Dashboard View. {#tbl:parameters-dashboard-view}
 
 ![Provider Dashboard](img/Provider/Dashboard.png){#fig:provider-dashboard}
 

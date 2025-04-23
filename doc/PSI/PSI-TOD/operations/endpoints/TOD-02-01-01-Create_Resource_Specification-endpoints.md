@@ -3,4 +3,4 @@
                Do NOT manually edit this file! Any such changes will be overwritten!
 -->
 
-* POST /resourceCatalog/v1/resourceSpecification
+* POST /resourceCatalog/v2/resourceSpecification

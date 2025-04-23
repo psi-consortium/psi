@@ -52,6 +52,12 @@ dcr_overrides:
    version: 'MS10 [1.2.2]'
    author: 'Wolfgang Robben'
    message: 'No update, just version bump.'
+ - dcr:
+   from: '2025-02-04'
+   to: '2025-04-30'
+   version: 'MS11 [1.3.0]'
+   author: 'Wolfgang Robben'
+   message: 'Anonymized providers and PSS operators.'
 =end
 
 # Document Meta Information
@@ -62,7 +68,7 @@ dcr_overrides:
 |----------|--------------------|---------------------------|---------|
 | Author   | Norbert Czeranka   | PSI Project Team          | CGI     |
 | Author   | Divya Chauhan      | PSI Project Team          | SES     |
-| Approval | Rui Goncalves      | Project Manager           | SES     |
+| Approval | Victoria McCarthy  | Project Manager           | SES     |
 | Approval | Hendrik Oppenberg  | Technical Officer         | CGI     |
 | Checked  | Pepijn Witte       | Quality Assurance Manager | CGI     |
 

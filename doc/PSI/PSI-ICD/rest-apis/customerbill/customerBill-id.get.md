@@ -5,7 +5,7 @@
 
 # GET /customerBill/{id}
 
-**Absolute Path:** /customerBillManagement/v1/customerBill/{id}
+**Absolute Path:** /customerBillManagement/v2/customerBill/{id}
 
 **TOD Reference:** TOD-03-03-03-View_Customer_Bill
 
@@ -15,8 +15,8 @@
 
 | Name | Type | Required | Description |
 | ------ | ------ | --- | ------------ |
-| id | string | Yes | Identifier of the CustomerBill |
-| fields | string | No | Comma-separated properties to provide in response |
+| id | string | Yes | Identifier of the Resource |
+| fields | string | No | Comma-separated properties to be provided in response |
 
 Table: Parameters of GET customerBill/{id}. {#tbl:customerBill-id.get.md:parameters}
 
@@ -30,8 +30,9 @@ Table: Parameters of GET customerBill/{id}. {#tbl:customerBill-id.get.md:paramet
 | 403 | Forbidden | Error |
 | 404 | Not Found | Error |
 | 405 | Method Not allowed | Error |
-| 409 | Conflict | Error |
 | 500 | Internal Server Error | Error |
+| 501 | Not Implemented | Error |
+| 503 | Service Unavailable | Error |
 
 Table: Responses of GET customerBill/{id}. {#tbl:customerBill-id.get.md:responses}
 

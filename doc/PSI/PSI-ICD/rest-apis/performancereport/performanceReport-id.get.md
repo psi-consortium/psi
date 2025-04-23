@@ -5,7 +5,7 @@
 
 # GET /performanceReport/{id}
 
-**Absolute Path:** /performanceMonitoring/v1/performanceReport/{id}
+**Absolute Path:** /performanceMonitoring/v2/performanceReport/{id}
 
 **TOD Reference:** TOD-06-05-02-View_Performance_Monitoring_Report
 

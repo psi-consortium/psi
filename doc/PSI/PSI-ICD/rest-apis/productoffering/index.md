@@ -3,9 +3,9 @@
                Do NOT manually edit this file! Any such changes will be overwritten!
 -->
 
-# productOffering (/productCatalog)
+# productOffering (/productCatalogManagement)
 
-Product Offering API
+Operations for ProductOffering Resource
 
 @include [productOffering.get.md](productOffering.get.md)
 @include [productOffering.post.md](productOffering.post.md)

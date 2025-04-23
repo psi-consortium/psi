@@ -5,9 +5,7 @@
 
 # GET /productSpecification
 
-**Absolute Path:** /productCatalog/v1/productSpecification
-
-**TOD Reference:** TOD-02-03-05-View_All_Product_Specifications
+**Absolute Path:** /productCatalogManagement/v2/productSpecification
 
 **Summary:** List or find ProductSpecification objects
 
@@ -25,14 +23,15 @@ Table: Parameters of GET productSpecification. {#tbl:productSpecification.get.md
 
 | Code | Description | Content |
 |------|-------------|---------|
-| 200 | Success | ProductSpecification |
+| 200 | Success | N/A |
 | 400 | Bad Request | Error |
 | 401 | Unauthorized | Error |
 | 403 | Forbidden | Error |
 | 404 | Not Found | Error |
 | 405 | Method Not allowed | Error |
-| 409 | Conflict | Error |
 | 500 | Internal Server Error | Error |
+| 501 | Not Implemented | Error |
+| 503 | Service Unavailable | Error |
 
 Table: Responses of GET productSpecification. {#tbl:productSpecification.get.md:responses}
 

@@ -1,0 +1,12 @@
+{
+    "openapi": "3.0.1",
+    "components": {
+        "schemas": {
+            "AvailabilityResultType": {
+                "type": "string",
+                "description": "Possible values of the availability result check for CheckProductStockItem.",
+                "enum": ["available", "notAvailable", "alternate"]
+            }
+        }
+    }
+}

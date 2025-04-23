@@ -3,5 +3,5 @@
                Do NOT manually edit this file! Any such changes will be overwritten!
 -->
 
-* GET /partyManagement/v1/individual/{id}
-* GET /partyManagement/v1/organization/{id}
+* GET /partyManagement/v2/individual/{id}
+* GET /partyManagement/v2/organization/{id}

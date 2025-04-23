@@ -5,7 +5,7 @@
 
 # GET /cancelPerformanceJob/{id}
 
-**Absolute Path:** /performanceMonitoring/v1/cancelPerformanceJob/{id}
+**Absolute Path:** /performanceMonitoring/v2/cancelPerformanceJob/{id}
 
 **Summary:** Retrieves a CancelPerformanceJob by ID.
 

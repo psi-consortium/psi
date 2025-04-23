@@ -3,4 +3,4 @@
                Do NOT manually edit this file! Any such changes will be overwritten!
 -->
 
-* POST /missionManagement/v1/mission
+* POST /missionManagement/v2/mission

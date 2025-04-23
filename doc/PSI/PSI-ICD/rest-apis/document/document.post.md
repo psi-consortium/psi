@@ -5,17 +5,23 @@
 
 # POST /document
 
-**Absolute Path:** /documentManagement/v1/document
-
-**TOD Reference:** TOD-01-03-01-Create_Document
+**Absolute Path:** /document/v2/document
 
 **Summary:** Creates a Document
+
+## Parameters
+
+| Name | Type | Required | Description |
+| ------ | ------ | --- | ------------ |
+| fields | string | No | Comma-separated properties to be provided in response |
+
+Table: Parameters of POST document. {#tbl:document.post.md:parameters}
 
 ## Request Body
 
 | Content Type | Reference |
 |--------------|-----------|
-| application/json;charset=utf-8 | Document_Create |
+| application/json | Document_FVO |
 
 Table: Request Body of POST document. {#tbl:document.post.md:request_body}
 
@@ -23,13 +29,17 @@ Table: Request Body of POST document. {#tbl:document.post.md:request_body}
 
 | Code | Description | Content |
 |------|-------------|---------|
-| 201 | Created | Document |
+| 201 | OK/Created | Document |
+| 202 | Accepted | N/A |
 | 400 | Bad Request | Error |
 | 401 | Unauthorized | Error |
 | 403 | Forbidden | Error |
+| 404 | Not Found | Error |
 | 405 | Method Not allowed | Error |
 | 409 | Conflict | Error |
 | 500 | Internal Server Error | Error |
+| 501 | Not Implemented | Error |
+| 503 | Service Unavailable | Error |
 
 Table: Responses of POST document. {#tbl:document.post.md:responses}
 

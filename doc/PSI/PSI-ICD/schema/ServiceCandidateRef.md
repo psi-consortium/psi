@@ -5,9 +5,6 @@
 
 # ServiceCandidateRef
 
-ServiceCandidate reference.
-ServiceCandidate is an entity that makes a ServiceSpecification available to a catalog.
-
 | Field | Type | Format | Required |
 | ------- | ------- | ------- | --- |
 | id | string | N/A | Yes |
@@ -15,9 +12,9 @@ ServiceCandidate is an entity that makes a ServiceSpecification available to a c
 | name | string | N/A | No |
 | version | string | N/A | No |
 | @baseType | string | N/A | No |
-| @schemaLocation | string | uri | No |
-| @type | string | N/A | No |
+| @schemaLocation | string | N/A | No |
 | @referredType | string | N/A | No |
+| @type | string | "ServiceCandidateRef" | Yes |
 
 Table: Fields of ServiceCandidateRef. {#tbl:ServiceCandidateRef.md:ServiceCandidateRef}
 

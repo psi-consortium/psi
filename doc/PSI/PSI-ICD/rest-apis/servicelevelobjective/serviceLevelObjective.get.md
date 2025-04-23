@@ -5,7 +5,7 @@
 
 # GET /serviceLevelObjective
 
-**Absolute Path:** /serviceQuality/v1/serviceLevelObjective
+**Absolute Path:** /serviceQualityManagement/v2/serviceLevelObjective
 
 **TOD Reference:** TOD-06-01-05-View_All_Service_Level_Objective
 
@@ -25,7 +25,7 @@ Table: Parameters of GET serviceLevelObjective. {#tbl:serviceLevelObjective.get.
 
 | Code | Description | Content |
 |------|-------------|---------|
-| 200 | Success | ServiceLevelObjective |
+| 200 | Success | N/A |
 | 400 | Bad Request | Error |
 | 401 | Unauthorized | Error |
 | 403 | Forbidden | Error |

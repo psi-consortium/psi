@@ -3,9 +3,9 @@
                Do NOT manually edit this file! Any such changes will be overwritten!
 -->
 
-# alarm (/alarm)
+# alarm (/alarmManagement)
 
-Alarm API
+Operations for Alarm Resource
 
 @include [alarm.get.md](alarm.get.md)
 @include [alarm-id.get.md](alarm-id.get.md)

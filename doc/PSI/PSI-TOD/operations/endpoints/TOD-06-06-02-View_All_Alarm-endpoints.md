@@ -3,4 +3,4 @@
                Do NOT manually edit this file! Any such changes will be overwritten!
 -->
 
-* GET /alarmManagement/v1/alarm
+* GET /alarmManagement/v2/alarm

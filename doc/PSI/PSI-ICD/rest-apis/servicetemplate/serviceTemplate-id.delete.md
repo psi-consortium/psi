@@ -5,9 +5,7 @@
 
 # DELETE /serviceTemplate/{id}
 
-**Absolute Path:** /serviceCatalog/v1/serviceTemplate/{id}
-
-**TOD Reference:** TOD-04-02-03-Remove_Service_Template
+**Absolute Path:** /serviceManagement/v2/serviceTemplate/{id}
 
 **Summary:** Deletes a ServiceTemplate
 
@@ -15,7 +13,7 @@
 
 | Name | Type | Required | Description |
 | ------ | ------ | --- | ------------ |
-| id | string | Yes | The identifier of the ServiceTemplate. |
+| id | string | Yes | Identifier of the Resource |
 
 Table: Parameters of DELETE serviceTemplate/{id}. {#tbl:serviceTemplate-id.delete.md:parameters}
 
@@ -23,6 +21,7 @@ Table: Parameters of DELETE serviceTemplate/{id}. {#tbl:serviceTemplate-id.delet
 
 | Code | Description | Content |
 |------|-------------|---------|
+| 202 | Accepted | N/A |
 | 204 | Deleted | N/A |
 | 400 | Bad Request | Error |
 | 401 | Unauthorized | Error |
@@ -31,6 +30,8 @@ Table: Parameters of DELETE serviceTemplate/{id}. {#tbl:serviceTemplate-id.delet
 | 405 | Method Not allowed | Error |
 | 409 | Conflict | Error |
 | 500 | Internal Server Error | Error |
+| 501 | Not Implemented | Error |
+| 503 | Service Unavailable | Error |
 
 Table: Responses of DELETE serviceTemplate/{id}. {#tbl:serviceTemplate-id.delete.md:responses}
 

@@ -9,7 +9,7 @@ A GeoJSON MultiLineString.
 
 | Field | Type | Format | Required |
 | ------- | ------- | ------- | --- |
-| coordinates | array | Point2D | No |
+| coordinates | 2D-array | Point2D | No |
 | type | string | "MultiLineString" | Yes |
 
 Table: Fields of MultiLineString. {#tbl:MultiLineString.md:MultiLineString}

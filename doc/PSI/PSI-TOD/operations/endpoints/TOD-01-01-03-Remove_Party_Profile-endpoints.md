@@ -3,5 +3,5 @@
                Do NOT manually edit this file! Any such changes will be overwritten!
 -->
 
-* DELETE /partyManagement/v1/individual/{id}
-* DELETE /partyManagement/v1/organization/{id}
+* DELETE /partyManagement/v2/individual/{id}
+* DELETE /partyManagement/v2/organization/{id}

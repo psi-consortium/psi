@@ -17,8 +17,6 @@
 
 @include [ADR010 Party Management API](ADR010-party-management-api_V1.1.md)
 
-@include [ADR012 Swagger (JSON) File Patching for ICD Generation](ADR012-json-patching-for-icd-generation_V1.0.md)
-
 @include [ADR014 Asynchronous Workflow Approach](ADR014-asynchronous-workflow-approach_V1.0.md)
 
 @include [ADR015 Customer Inquiry Message Sequence](ADR015-customer-inquiry-message-sequence_V1.0.md)
@@ -31,9 +29,9 @@
 
 @include [ADR021 Inventory and Stock API](ADR021-inventory-stock-api_V1.0.md)
 
-@include [ADR022 Handling of Partial Matches](ADR022handling-partial-matches_V1.0.md)
+@include [ADR022 Handling of Partial Matches](ADR022-handling-partial-matches_V1.0.md)
 
-@include [ADR024 Overbooking (V2.0)](2023-09-26-overbooking_V2.0.md)
+@include [ADR024 Overbooking (V2.0)](ADR024-overbooking_V2.0.md)
 
 @include [ADR025 Use OpenAPI 3](ADR025-use-openapi-3_V1.0.md)
 
@@ -54,3 +52,7 @@
 @include [ADR039 ODA Implementation - Language and Framework for the Backend](ADR039-oda-programming-language.md)
 
 @include [ADR040 Implementation of Mission Management ODA Component](ADR040-mission-manangement-oda-component.md)
+
+@include [ADR041 MEF Convergence](ADR041-mef-convergence.md)
+
+@include [ADR042 Advanced OpenAPI Specification Patching](ADR042-advanced-oas-patching.md)

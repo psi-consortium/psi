@@ -5,7 +5,7 @@
 
 # DELETE /keyIndicator/{id}
 
-**Absolute Path:** /serviceQuality/v1/keyIndicator/{id}
+**Absolute Path:** /serviceQualityManagement/v2/keyIndicator/{id}
 
 **TOD Reference:** TOD-06-03-03-Remove_Key_Indicator
 

@@ -9,7 +9,7 @@ A GeoJSON MultiPolygon.
 
 | Field | Type | Format | Required |
 | ------- | ------- | ------- | --- |
-| coordinates | array | Point2D | No |
+| coordinates | 3D-array | Point2D | No |
 | type | string | "MultiPolygon" | Yes |
 
 Table: Fields of MultiPolygon. {#tbl:MultiPolygon.md:MultiPolygon}

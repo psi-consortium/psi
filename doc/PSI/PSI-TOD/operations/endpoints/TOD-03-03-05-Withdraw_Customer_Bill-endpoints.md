@@ -3,4 +3,4 @@
                Do NOT manually edit this file! Any such changes will be overwritten!
 -->
 
-* DELETE /customerBillManagement/v1/customerBill/{id}
+* DELETE /customerBillManagement/v2/customerBill/{id}

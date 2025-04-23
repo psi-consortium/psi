@@ -5,7 +5,7 @@
 
 # GET /mission/{id}
 
-**Absolute Path:** /missionManagement/v1/mission/{id}
+**Absolute Path:** /missionManagement/v2/mission/{id}
 
 **TOD Reference:** TOD-03-04-04-View_Mission
 

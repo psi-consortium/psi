@@ -5,7 +5,7 @@
 
 # DELETE /resource/{id}
 
-**Absolute Path:** /resourceInventory/v1/resource/{id}
+**Absolute Path:** /resourceInventory/v2/resource/{id}
 
 **TOD Reference:** TOD-05-01-03-Remove_Resource
 
@@ -23,6 +23,7 @@ Table: Parameters of DELETE resource/{id}. {#tbl:resource-id.delete.md:parameter
 
 | Code | Description | Content |
 |------|-------------|---------|
+| 202 | Accepted | N/A |
 | 204 | Deleted | N/A |
 | 400 | Bad Request | Error |
 | 401 | Unauthorized | Error |
@@ -31,6 +32,8 @@ Table: Parameters of DELETE resource/{id}. {#tbl:resource-id.delete.md:parameter
 | 405 | Method Not allowed | Error |
 | 409 | Conflict | Error |
 | 500 | Internal Server Error | Error |
+| 501 | Not Implemented | Error |
+| 503 | Service Unavailable | Error |
 
 Table: Responses of DELETE resource/{id}. {#tbl:resource-id.delete.md:responses}
 

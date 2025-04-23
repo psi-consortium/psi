@@ -3,5 +3,5 @@
                Do NOT manually edit this file! Any such changes will be overwritten!
 -->
 
-* POST /partyManagement/v1/individual
-* POST /partyManagement/v1/organization
+* POST /partyManagement/v2/individual
+* POST /partyManagement/v2/organization

@@ -5,7 +5,7 @@
 
 # GET /resourceTemplate
 
-**Absolute Path:** /resourceCatalog/v1/resourceTemplate
+**Absolute Path:** /resourceCatalog/v2/resourceTemplate
 
 **TOD Reference:** TOD-04-01-05-View_All_Resource_Templates
 
@@ -15,9 +15,9 @@
 
 | Name | Type | Required | Description |
 | ------ | ------ | --- | ------------ |
-| fields | string | No | Comma-separated properties to be provided in response. |
-| offset | integer | No | The requested index for start of resources to be provided in response. |
-| limit | integer | No | The requested number of resources to be provided in response. |
+| fields | string | No | Comma-separated properties to be provided in response |
+| offset | integer | No | Requested index for start of resources to be provided in response |
+| limit | integer | No | Requested number of resources to be provided in response |
 
 Table: Parameters of GET resourceTemplate. {#tbl:resourceTemplate.get.md:parameters}
 
@@ -25,14 +25,15 @@ Table: Parameters of GET resourceTemplate. {#tbl:resourceTemplate.get.md:paramet
 
 | Code | Description | Content |
 |------|-------------|---------|
-| 200 | Success | ResourceSpecification |
+| 200 | Success | N/A |
 | 400 | Bad Request | Error |
 | 401 | Unauthorized | Error |
 | 403 | Forbidden | Error |
 | 404 | Not Found | Error |
 | 405 | Method Not allowed | Error |
-| 409 | Conflict | Error |
 | 500 | Internal Server Error | Error |
+| 501 | Not Implemented | Error |
+| 503 | Service Unavailable | Error |
 
 Table: Responses of GET resourceTemplate. {#tbl:resourceTemplate.get.md:responses}
 

@@ -5,9 +5,7 @@
 
 # GET /document
 
-**Absolute Path:** /documentManagement/v1/document
-
-**TOD Reference:** TOD-01-03-05-View_All_Documents
+**Absolute Path:** /document/v2/document
 
 **Summary:** List or find Document objects
 
@@ -25,14 +23,15 @@ Table: Parameters of GET document. {#tbl:document.get.md:parameters}
 
 | Code | Description | Content |
 |------|-------------|---------|
-| 200 | Success | Document |
+| 200 | Success | N/A |
 | 400 | Bad Request | Error |
 | 401 | Unauthorized | Error |
 | 403 | Forbidden | Error |
 | 404 | Not Found | Error |
 | 405 | Method Not allowed | Error |
-| 409 | Conflict | Error |
 | 500 | Internal Server Error | Error |
+| 501 | Not Implemented | Error |
+| 503 | Service Unavailable | Error |
 
 Table: Responses of GET document. {#tbl:document.get.md:responses}
 

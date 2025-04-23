@@ -12,9 +12,6 @@ It enables to assign automatically or manually part of incoming payment amount t
 | ------- | ------- | ------- | --- |
 | appliedAmount | Money | N/A | No |
 | payment | PaymentRef | N/A | No |
-| @baseType | string | N/A | No |
-| @schemaLocation | string | uri | No |
-| @type | string | N/A | No |
 
 Table: Fields of AppliedPayment. {#tbl:AppliedPayment.md:AppliedPayment}
 

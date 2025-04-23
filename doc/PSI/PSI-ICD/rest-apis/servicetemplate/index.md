@@ -3,9 +3,9 @@
                Do NOT manually edit this file! Any such changes will be overwritten!
 -->
 
-# serviceTemplate (/serviceCatalog)
+# serviceTemplate (/serviceManagement)
 
-Service Template API
+Operations for ServiceTemplate Resource
 
 @include [serviceTemplate.get.md](serviceTemplate.get.md)
 @include [serviceTemplate.post.md](serviceTemplate.post.md)

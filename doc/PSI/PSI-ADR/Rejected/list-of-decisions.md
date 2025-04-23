@@ -12,3 +12,5 @@
 @include [ADR033 Implementation of (Gov)SatCom Hardware Logistics Process (V0.1)](ADR033-logistics-and-shipment_V0.1.md)
 
 @include [ADR034 Advanced Billing](ADR034-advanced-billing.md)
+
+@include [ADR037 Introduction of a common model](ADR037-introduction-of-a-common-model.md)

@@ -3,9 +3,9 @@
                Do NOT manually edit this file! Any such changes will be overwritten!
 -->
 
-# productSpecification (/productCatalog)
+# productSpecification (/productCatalogManagement)
 
-Product Specification API
+Operations for ProductSpecification Resource
 
 @include [productSpecification.get.md](productSpecification.get.md)
 @include [productSpecification.post.md](productSpecification.post.md)

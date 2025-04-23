@@ -3,4 +3,4 @@
                Do NOT manually edit this file! Any such changes will be overwritten!
 -->
 
-* PATCH /documentManagement/v1/document/{id}
+* PATCH /documentManagement/v2/document/{id}

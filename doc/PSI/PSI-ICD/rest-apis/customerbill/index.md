@@ -5,7 +5,7 @@
 
 # customerBill (/customerBillManagement)
 
-Customer Bill Management API
+Operations for CustomerBill Resource
 
 @include [customerBill.get.md](customerBill.get.md)
 @include [customerBill.post.md](customerBill.post.md)

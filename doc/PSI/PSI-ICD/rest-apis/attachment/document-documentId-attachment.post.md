@@ -5,9 +5,7 @@
 
 # POST /document/{documentId}/attachment
 
-**Absolute Path:** /documentManagement/v1/document/{documentId}/attachment
-
-**TOD Reference:** TOD-01-03-06-Create_Attachment
+**Absolute Path:** /document/v2/document/{documentId}/attachment
 
 **Summary:** Creates an Attachment
 
@@ -23,8 +21,8 @@ Table: Parameters of POST document/{documentId}/attachment. {#tbl:document-docum
 
 | Content Type | Reference |
 |--------------|-----------|
-| multipart/form-data | Attachment_Create |
-| application/json;charset=utf-8 | Attachment_Create |
+| multipart/form-data | Attachment_FVO |
+| application/json;charset=utf-8 | Attachment_FVO |
 
 Table: Request Body of POST document/{documentId}/attachment. {#tbl:document-documentId-attachment.post.md:request_body}
 
@@ -32,13 +30,17 @@ Table: Request Body of POST document/{documentId}/attachment. {#tbl:document-doc
 
 | Code | Description | Content |
 |------|-------------|---------|
-| 201 | Created | Attachment |
+| 201 | OK/Created | Attachment |
+| 202 | Accepted | N/A |
 | 400 | Bad Request | Error |
 | 401 | Unauthorized | Error |
 | 403 | Forbidden | Error |
+| 404 | Not Found | Error |
 | 405 | Method Not allowed | Error |
 | 409 | Conflict | Error |
 | 500 | Internal Server Error | Error |
+| 501 | Not Implemented | Error |
+| 503 | Service Unavailable | Error |
 
 Table: Responses of POST document/{documentId}/attachment. {#tbl:document-documentId-attachment.post.md:responses}
 

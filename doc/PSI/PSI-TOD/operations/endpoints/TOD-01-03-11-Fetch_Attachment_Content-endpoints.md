@@ -3,4 +3,4 @@
                Do NOT manually edit this file! Any such changes will be overwritten!
 -->
 
-* GET /documentManagement/v1/document/{documentId}/attachment/{attachmentId}/content
+* GET /documentManagement/v2/document/{documentId}/attachment/{attachmentId}/content

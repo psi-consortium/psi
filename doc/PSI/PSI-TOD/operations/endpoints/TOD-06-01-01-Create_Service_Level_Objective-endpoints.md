@@ -3,4 +3,4 @@
                Do NOT manually edit this file! Any such changes will be overwritten!
 -->
 
-* POST /serviceQuality/v1/serviceLevelObjective
+* POST /serviceQualityManagement/v2/serviceLevelObjective

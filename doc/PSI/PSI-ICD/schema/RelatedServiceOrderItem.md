@@ -5,21 +5,17 @@
 
 # RelatedServiceOrderItem
 
-RelatedServiceOrderItem (a ServiceOrder item) .The service order item which triggered service creation/change/termination.
-
 | Field | Type | Format | Required |
 | ------- | ------- | ------- | --- |
-| id | string | N/A | No |
-| href | string | uri | No |
-| itemId | string | N/A | Yes |
-| role | string | N/A | No |
 | serviceOrderHref | string | N/A | No |
-| serviceOrderId | string | N/A | Yes |
+| serviceOrderId | string | N/A | No |
 | itemAction | OrderItemActionType | N/A | No |
+| itemId | string | N/A | No |
+| role | string | N/A | No |
 | @baseType | string | N/A | No |
-| @schemaLocation | string | uri | No |
-| @type | string | N/A | No |
+| @schemaLocation | string | N/A | No |
 | @referredType | string | N/A | No |
+| @type | string | "RelatedServiceOrderItem" | Yes |
 
 Table: Fields of RelatedServiceOrderItem. {#tbl:RelatedServiceOrderItem.md:RelatedServiceOrderItem}
 

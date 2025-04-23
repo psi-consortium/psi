@@ -5,8 +5,6 @@
 
 # ProductOffering
 
-Represents entities that are orderable from the provider of the catalog, this resource includes pricing information.
-
 | Field | Type | Format | Required |
 | ------- | ------- | ------- | --- |
 | id | string | N/A | No |
@@ -15,32 +13,36 @@ Represents entities that are orderable from the provider of the catalog, this re
 | description | string | N/A | No |
 | isBundle | boolean | N/A | No |
 | isSellable | boolean | N/A | No |
+| statusReason | string | N/A | No |
+| validFor | TimePeriod | N/A | No |
+| version | string | N/A | No |
+| place | array | PlaceRef | No |
+| serviceLevelSpecification | ServiceLevelSpecificationRef | N/A | No |
+| channel | array | ChannelRef | No |
+| serviceCandidate | ServiceCandidateRef | N/A | No |
+| category | array | CategoryRef | No |
+| resourceCandidate | ResourceCandidateRef | N/A | No |
+| productOfferingTerm | array | ProductOfferingTerm | No |
+| productOfferingPrice | array | ProductOfferingPrice | No |
+| agreement | array | AgreementRef | No |
+| bundledProductOffering | array | BundledProductOffering | No |
+| bundledGroupProductOffering | array | BundledGroupProductOffering | No |
+| attachment | array | AttachmentOrDocumentRef | No |
+| marketSegment | array | MarketSegmentRef | No |
+| productOfferingRelationship | array | ProductOfferingRelationship | No |
+| productOfferingCharacteristic | array | CharacteristicSpecification | No |
+| prodSpecCharValueUse | array | ProductSpecificationCharacteristicValueUse | No |
+| policy | array | PolicyRef | No |
+| allowedAction | array | AllowedProductAction | No |
 | lastUpdate | string | date-time | No |
 | lifecycleStatus | string | N/A | No |
-| statusReason | string | N/A | No |
-| version | string | N/A | No |
-| agreement | array | AgreementRef | No |
-| attachment | array | AttachmentOrDocumentRef | No |
-| bundledProductOffering | array | BundledProductOffering | No |
-| category | array | CategoryRef | No |
-| channel | array | ChannelRef | No |
-| marketSegment | array | MarketSegmentRef | No |
-| place | array | PlaceRef | No |
-| prodSpecCharValueUse | array | ProductSpecificationCharacteristicValueUse | No |
-| productOfferingPrice | array | ProductOfferingPriceRefOrValue | No |
-| productOfferingRelationship | array | ProductOfferingRelationship | No |
-| productOfferingTerm | array | ProductOfferingTerm | No |
 | productSpecification | ProductSpecificationRef | N/A | No |
-| resourceCandidate | ResourceCandidateRef | N/A | No |
-| serviceCandidate | ServiceCandidateRef | N/A | No |
-| serviceLevelSpecification | ServiceLevelSpecificationRef | N/A | No |
-| validFor | TimePeriod | N/A | No |
+| externalIdentifier | array | ExternalIdentifier | No |
 | accessProbability | integer | N/A | No |
-| relatedParty | array | RelatedParty | No |
-| bundledGroupProductOffering | array | BundledGroupProductOffering | No |
+| relatedParty | array | RelatedPartyRefOrPartyRoleRef | No |
 | @baseType | string | N/A | No |
-| @schemaLocation | string | uri | No |
-| @type | string | N/A | No |
+| @schemaLocation | string | N/A | No |
+| @type | string | "ProductOffering" | Yes |
 
 Table: Fields of ProductOffering. {#tbl:ProductOffering.md:ProductOffering}
 

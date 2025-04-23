@@ -5,7 +5,7 @@
 
 # POST /performanceJob
 
-**Absolute Path:** /performanceMonitoring/v1/performanceJob
+**Absolute Path:** /performanceMonitoring/v2/performanceJob
 
 **TOD Reference:** TOD-06-04-01-Create_Performance_Monitoring_Job
 
@@ -27,7 +27,7 @@ Table: Request Body of POST performanceJob. {#tbl:performanceJob.post.md:request
 | 400 | Bad Request | Error400 |
 | 401 | Unauthorized | Error401 |
 | 403 | Forbidden | Error403 |
-| 422 | Unprocessable entity due to the business validation problems | Error422 |
+| 422 | Unprocessable entity due to the business validation problems | N/A |
 | 500 | Internal Server Error | Error500 |
 
 Table: Responses of POST performanceJob. {#tbl:performanceJob.post.md:responses}

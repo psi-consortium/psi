@@ -10,14 +10,14 @@ Used in case Seller is not supporting an optional operation (https://tools.ietf.
 
 | Field | Type | Format | Required |
 | ------- | ------- | ------- | --- |
-| code | string | oneOf[notImplemented] | Yes |
+| code | string | N/A | Yes |
 | reason | string | N/A | Yes |
 | message | string | N/A | No |
 | status | string | N/A | No |
-| referenceError | string | uri | No |
+| referenceError | string | N/A | No |
 | @baseType | string | N/A | No |
-| @schemaLocation | string | uri | No |
-| @type | string | N/A | No |
+| @schemaLocation | string | N/A | No |
+| @type | string | N/A | Yes |
 
 Table: Fields of Error501. {#tbl:Error501.md:Error501}
 

@@ -15,12 +15,12 @@ CheckProductStock is used to log and execute check about product stock availabil
 | creationDate | string | date-time | No |
 | instantSyncCheck | boolean | N/A | No |
 | provideAlternative | boolean | N/A | No |
+| requestedAvailability | TimePeriod | N/A | No |
 | requestedCheckProductStockDate | string | date-time | No |
 | checkProductStockItem | array | CheckProductStockItem | No |
-| place | PlaceRef | N/A | No |
+| place | PlaceRefOrValue | N/A | No |
 | relatedParty | array | RelatedParty | No |
 | state | TaskStateType | N/A | No |
-| requestedAvailability | TimePeriod | N/A | No |
 | @baseType | string | N/A | No |
 | @schemaLocation | string | uri | No |
 | @type | string | N/A | No |

@@ -5,9 +5,7 @@
 
 # PATCH /productSpecification/{id}
 
-**Absolute Path:** /productCatalog/v1/productSpecification/{id}
-
-**TOD Reference:** TOD-02-03-02-Update_Product_Specification
+**Absolute Path:** /productCatalogManagement/v2/productSpecification/{id}
 
 **Summary:** Updates partially a ProductSpecification
 
@@ -15,7 +13,8 @@
 
 | Name | Type | Required | Description |
 | ------ | ------ | --- | ------------ |
-| id | string | Yes | Identifier of the ProductSpecification |
+| id | string | Yes | Identifier of the Resource |
+| fields | string | No | Comma-separated properties to be provided in response |
 
 Table: Parameters of PATCH productSpecification/{id}. {#tbl:productSpecification-id.patch.md:parameters}
 
@@ -23,7 +22,10 @@ Table: Parameters of PATCH productSpecification/{id}. {#tbl:productSpecification
 
 | Content Type | Reference |
 |--------------|-----------|
-| application/json;charset=utf-8 | ProductSpecification_Update |
+| application/json | ProductSpecification_MVO |
+| application/merge-patch+json | ProductSpecification_MVO |
+| application/json-patch+json | JsonPatchOperations |
+| application/json-patch-query+json | JsonPatchOperations |
 
 Table: Request Body of PATCH productSpecification/{id}. {#tbl:productSpecification-id.patch.md:request_body}
 
@@ -31,7 +33,8 @@ Table: Request Body of PATCH productSpecification/{id}. {#tbl:productSpecificati
 
 | Code | Description | Content |
 |------|-------------|---------|
-| 200 | Updated | ProductSpecification |
+| 200 | Success | ProductSpecification |
+| 202 | Accepted | N/A |
 | 400 | Bad Request | Error |
 | 401 | Unauthorized | Error |
 | 403 | Forbidden | Error |
@@ -39,6 +42,8 @@ Table: Request Body of PATCH productSpecification/{id}. {#tbl:productSpecificati
 | 405 | Method Not allowed | Error |
 | 409 | Conflict | Error |
 | 500 | Internal Server Error | Error |
+| 501 | Not Implemented | Error |
+| 503 | Service Unavailable | Error |
 
 Table: Responses of PATCH productSpecification/{id}. {#tbl:productSpecification-id.patch.md:responses}
 

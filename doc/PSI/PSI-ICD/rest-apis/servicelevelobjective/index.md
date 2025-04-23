@@ -3,7 +3,7 @@
                Do NOT manually edit this file! Any such changes will be overwritten!
 -->
 
-# serviceLevelObjective (/serviceQuality)
+# serviceLevelObjective (/serviceQualityManagement)
 
 Service Level Objective API
 

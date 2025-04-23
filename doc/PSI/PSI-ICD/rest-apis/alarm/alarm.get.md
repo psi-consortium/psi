@@ -5,7 +5,9 @@
 
 # GET /alarm
 
-**Absolute Path:** /alarm/v1/alarm
+**Absolute Path:** /alarmManagement/v2/alarm
+
+**TOD Reference:** TOD-06-06-02-View_All_Alarm
 
 **Summary:** List or find Alarm objects
 
@@ -23,14 +25,15 @@ Table: Parameters of GET alarm. {#tbl:alarm.get.md:parameters}
 
 | Code | Description | Content |
 |------|-------------|---------|
-| 200 | Success | Alarm |
+| 200 | Success | N/A |
 | 400 | Bad Request | Error |
 | 401 | Unauthorized | Error |
 | 403 | Forbidden | Error |
 | 404 | Not Found | Error |
 | 405 | Method Not allowed | Error |
-| 409 | Conflict | Error |
 | 500 | Internal Server Error | Error |
+| 501 | Not Implemented | Error |
+| 503 | Service Unavailable | Error |
 
 Table: Responses of GET alarm. {#tbl:alarm.get.md:responses}
 

@@ -5,7 +5,7 @@
 
 # GET /keyIndicator
 
-**Absolute Path:** /serviceQuality/v1/keyIndicator
+**Absolute Path:** /serviceQualityManagement/v2/keyIndicator
 
 **TOD Reference:** TOD-06-03-05-View_All_Key_Indicator
 
@@ -25,7 +25,7 @@ Table: Parameters of GET keyIndicator. {#tbl:keyIndicator.get.md:parameters}
 
 | Code | Description | Content |
 |------|-------------|---------|
-| 200 | Success | KeyIndicator |
+| 200 | Success | N/A |
 | 400 | Bad Request | Error |
 | 401 | Unauthorized | Error |
 | 403 | Forbidden | Error |

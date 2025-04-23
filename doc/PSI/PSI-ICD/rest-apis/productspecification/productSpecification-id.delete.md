@@ -5,9 +5,7 @@
 
 # DELETE /productSpecification/{id}
 
-**Absolute Path:** /productCatalog/v1/productSpecification/{id}
-
-**TOD Reference:** TOD-02-03-03-Remove_Product_Specification
+**Absolute Path:** /productCatalogManagement/v2/productSpecification/{id}
 
 **Summary:** Deletes a ProductSpecification
 
@@ -15,7 +13,7 @@
 
 | Name | Type | Required | Description |
 | ------ | ------ | --- | ------------ |
-| id | string | Yes | Identifier of the ProductSpecification |
+| id | string | Yes | Identifier of the Resource |
 
 Table: Parameters of DELETE productSpecification/{id}. {#tbl:productSpecification-id.delete.md:parameters}
 
@@ -23,6 +21,7 @@ Table: Parameters of DELETE productSpecification/{id}. {#tbl:productSpecificatio
 
 | Code | Description | Content |
 |------|-------------|---------|
+| 202 | Accepted | N/A |
 | 204 | Deleted | N/A |
 | 400 | Bad Request | Error |
 | 401 | Unauthorized | Error |
@@ -31,6 +30,8 @@ Table: Parameters of DELETE productSpecification/{id}. {#tbl:productSpecificatio
 | 405 | Method Not allowed | Error |
 | 409 | Conflict | Error |
 | 500 | Internal Server Error | Error |
+| 501 | Not Implemented | Error |
+| 503 | Service Unavailable | Error |
 
 Table: Responses of DELETE productSpecification/{id}. {#tbl:productSpecification-id.delete.md:responses}
 

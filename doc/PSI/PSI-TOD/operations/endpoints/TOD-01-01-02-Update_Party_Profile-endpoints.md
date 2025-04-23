@@ -3,5 +3,5 @@
                Do NOT manually edit this file! Any such changes will be overwritten!
 -->
 
-* PATCH /partyManagement/v1/individual/{id}
-* PATCH /partyManagement/v1/organization/{id}
+* PATCH /partyManagement/v2/individual/{id}
+* PATCH /partyManagement/v2/organization/{id}

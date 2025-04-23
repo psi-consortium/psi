@@ -3,7 +3,7 @@
                Do NOT manually edit this file! Any such changes will be overwritten!
 -->
 
-# serviceLevelSpecification (/serviceQuality)
+# serviceLevelSpecification (/serviceQualityManagement)
 
 Service Level Specification API
 

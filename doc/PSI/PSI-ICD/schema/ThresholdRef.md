@@ -11,9 +11,9 @@
 | href | string | uri | No |
 | name | string | N/A | No |
 | @baseType | string | N/A | No |
-| @schemaLocation | string | uri | No |
-| @type | string | N/A | No |
+| @schemaLocation | string | N/A | No |
 | @referredType | string | N/A | No |
+| @type | string | "ThresholdRef" | Yes |
 
 Table: Fields of ThresholdRef. {#tbl:ThresholdRef.md:ThresholdRef}
 

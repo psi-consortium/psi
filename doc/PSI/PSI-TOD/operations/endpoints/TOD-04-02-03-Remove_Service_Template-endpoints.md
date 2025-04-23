@@ -3,4 +3,4 @@
                Do NOT manually edit this file! Any such changes will be overwritten!
 -->
 
-* DELETE /serviceCatalog/v1/serviceTemplate/{id}
+* DELETE /serviceCatalog/v2/serviceTemplate/{id}

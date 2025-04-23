@@ -13,9 +13,9 @@ If an immediate payment has been done at the product order submission, the payme
 | href | string | uri | No |
 | name | string | N/A | No |
 | @baseType | string | N/A | No |
-| @schemaLocation | string | uri | No |
-| @type | string | N/A | No |
+| @schemaLocation | string | N/A | No |
 | @referredType | string | N/A | No |
+| @type | string | "PaymentRef" | Yes |
 
 Table: Fields of PaymentRef. {#tbl:PaymentRef.md:PaymentRef}
 

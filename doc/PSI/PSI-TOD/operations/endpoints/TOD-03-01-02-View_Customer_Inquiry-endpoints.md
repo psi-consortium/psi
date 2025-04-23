@@ -3,4 +3,4 @@
                Do NOT manually edit this file! Any such changes will be overwritten!
 -->
 
-* GET /customerInquiry/v1/customerInquiry/{id}
+* GET /customerInquiry/v2/customerInquiry/{id}

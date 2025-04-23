@@ -5,7 +5,7 @@
 
 # DELETE /customerInquiry/{id}
 
-**Absolute Path:** /customerInquiry/v1/customerInquiry/{id}
+**Absolute Path:** /customerInquiry/v2/customerInquiry/{id}
 
 **TOD Reference:** TOD-03-01-05-Cancel_Customer_Inquiry
 

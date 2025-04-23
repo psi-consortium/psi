@@ -522,16 +522,15 @@ The `BandwidthProduct` result is likely to be independent, but could also be bun
 The following example demonstrates the structure of a JSON Schema.
 Apart from the identifier and description, the main content is the list of properties.
 Each one is defined by its name and type, and can be further qualified with value constraints and whether they are required.
-Lastly, they typically share all basic properties with the underlying entity, which is the `Service` in this case.
 
 ```plantuml
 @startuml
+' This diagram is still in JSON, because PlantUML can not render YAML
 json "JSON Schema: InternetAccessService" as prodSchema {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "$id": "InternetAccessService.schema.json",
     "title": "InternetAccessService",
     "description": "Describes a service that provides internet access via satellites.",
-    "allOf": [{ "$ref": "Service.schema.json#Service" }],
     "properties": {
         "frequencyBand": {
             "type": "string",
@@ -571,8 +570,20 @@ json "JSON Schema: InternetAccessService" as prodSchema {
 
 ![JSON Schema for InternetAccessService](../common/pixel.png){#fig:json-schema}
 
-More example schemas (including space assets and user terminals) can be found in [PSI-ICD-Annex-II] of this document.
-They are extracted from the prototype, which was designed based on input of different providers.
+Since version 2, PSI is using MEF LSO product schemas as the baseline to provide SatCom related definitions.
+In this way, it is assured to align them with terrestrial communication products as much as possible.
+It also enables providers that already adopted MEF using proprietary product definitions to seamlessly use PSI as well.
+
+Additionally, MEF promotes a nested data model with reusable types, which improves the readability when using more attributes than shown above.
+When used together with TMF characteristics, this results in denominators like `ipUni.egressBandwidthProfileEnvelope.maxIr`.
+
+[PSI-ICD-Annex-II] contains five product schemas:
+
+* `ip/internetAccess/basicInternetAccess.yaml` is derived from the MEF "Basic Internet Access" schema, adding SatCom specific descriptions for the physical link.
+* `ip/ipVpn/basicIpVpn.yaml` is a variant of the "Internet Access" schema with additional parameters for pure VPN connections.
+* `ip/ipUni/satelliteUniAccessLinkTrunk.yaml` is part of the schemas above, but can be used standalone as well allowing the ordering of a plain IP Trunk without access to the internet.
+* `satelliteCapacity/satelliteCapacity.yaml` can be used to order raw satellite capacity without any IP layer. This kind of service is not standardized by MEF yet.
+* `hardware/satelliteTerminal.yaml` describes a satellite terminal, which could be bundled with another product or used to check for compatibility. Standardizing hardware is currently out-of-scope for MEF, but required for PSI as a major driver for matchmaking.
 
 ## Integration of Service Monitoring Specification into Performance Monitoring API
 

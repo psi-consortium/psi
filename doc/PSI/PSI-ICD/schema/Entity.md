@@ -12,7 +12,7 @@ Base entity schema for use in TMForum Open-APIs
 | id | string | N/A | No |
 | href | string | uri | No |
 | @baseType | string | N/A | No |
-| @schemaLocation | string | uri | No |
+| @schemaLocation | string | N/A | No |
 | @type | string | N/A | Yes |
 
 Table: Fields of Entity. {#tbl:Entity.md:Entity}

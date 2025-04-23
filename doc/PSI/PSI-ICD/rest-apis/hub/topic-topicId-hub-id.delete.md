@@ -5,9 +5,7 @@
 
 # DELETE /topic/{topicId}/hub/{id}
 
-**Absolute Path:** /eventManagement/v1/topic/{topicId}/hub/{id}
-
-**TOD Reference:** TOD-01-02-04-Deregister_Event_Callback
+**Absolute Path:** /event/v2/topic/{topicId}/hub/{id}
 
 **Summary:** Unregister listener from a Hub
 

@@ -5,7 +5,7 @@
 
 # GET /serviceLevelSpecification
 
-**Absolute Path:** /serviceQuality/v1/serviceLevelSpecification
+**Absolute Path:** /serviceQualityManagement/v2/serviceLevelSpecification
 
 **TOD Reference:** TOD-06-02-05-View_All_Service_Level_Specification
 
@@ -25,7 +25,7 @@ Table: Parameters of GET serviceLevelSpecification. {#tbl:serviceLevelSpecificat
 
 | Code | Description | Content |
 |------|-------------|---------|
-| 200 | Success | ServiceLevelSpecification |
+| 200 | Success | N/A |
 | 400 | Bad Request | Error |
 | 401 | Unauthorized | Error |
 | 403 | Forbidden | Error |

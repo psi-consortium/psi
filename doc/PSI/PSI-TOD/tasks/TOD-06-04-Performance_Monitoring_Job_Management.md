@@ -21,7 +21,7 @@ participant Provider as PVD
 autonumber
 
 ...
-PSS -> PVD  : POST http://pss.com/psi-api/performanceMonitoring/v1/performanceJob\n{"jobType":"on-demand",<job_configuration>}
+PSS -> PVD  : POST http://pss.com/psi-api/performanceMonitoring/v2/performanceJob\n{"jobType":"on-demand",<job_configuration>}
 activate PVD
 PVD --> PSS: {"id": "730ac707-6d2b-47ac-a903-2ed7808e5bec"}
 
@@ -34,10 +34,10 @@ deactivate PVD
 
 note over PVD: reporting continues\nbased on job definition
 
-PSS -> PVD ++ : GET http://pss.com/psi-api/performanceMonitoring/v1/performanceReport
+PSS -> PVD ++ : GET http://pss.com/psi-api/performanceMonitoring/v2/performanceReport
 return: {["id":"b2a7ef8d-b218-4841-8584-bec2b6d1af4d",\n "id":"05cd940c-6524-483b-9043-f8a4589311c4"]}
 
-PSS -> PVD ++ : GET http://pss.com/psi-api/performanceMonitoring/v1/performanceReport/b2a...
+PSS -> PVD ++ : GET http://pss.com/psi-api/performanceMonitoring/v2/performanceReport/b2a...
 return {"id": "b2a7ef8d-b218-4841-8584-bec2b6d1af4d",\n"reportContent": "..."}
 
 @enduml

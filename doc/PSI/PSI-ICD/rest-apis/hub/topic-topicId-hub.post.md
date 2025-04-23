@@ -5,9 +5,7 @@
 
 # POST /topic/{topicId}/hub
 
-**Absolute Path:** /eventManagement/v1/topic/{topicId}/hub
-
-**TOD Reference:** TOD-01-02-02-Register_Event_Callback
+**Absolute Path:** /event/v2/topic/{topicId}/hub
 
 **Summary:** Register listener to a Hub
 

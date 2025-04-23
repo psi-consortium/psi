@@ -5,7 +5,7 @@
 
 # POST /serviceLevelSpecification
 
-**Absolute Path:** /serviceQuality/v1/serviceLevelSpecification
+**Absolute Path:** /serviceQualityManagement/v2/serviceLevelSpecification
 
 **TOD Reference:** TOD-06-02-01-Create_Service_Level_Specification
 

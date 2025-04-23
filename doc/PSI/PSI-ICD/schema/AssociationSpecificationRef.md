@@ -13,9 +13,9 @@ reference to an AssociationSpecification object
 | href | string | uri | No |
 | name | string | N/A | No |
 | @baseType | string | N/A | No |
-| @schemaLocation | string | uri | No |
-| @type | string | N/A | No |
+| @schemaLocation | string | N/A | No |
 | @referredType | string | N/A | No |
+| @type | string | "AssociationSpecificationRef" | Yes |
 
 Table: Fields of AssociationSpecificationRef. {#tbl:AssociationSpecificationRef.md:AssociationSpecificationRef}
 

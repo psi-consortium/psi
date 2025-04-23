@@ -3,4 +3,4 @@
                Do NOT manually edit this file! Any such changes will be overwritten!
 -->
 
-* PATCH /serviceCatalog/v1/serviceSpecification/{id}
+* PATCH /serviceCatalog/v2/serviceSpecification/{id}

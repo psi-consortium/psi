@@ -5,8 +5,6 @@
 
 # ProductSpecification
 
-Is a detailed description of a tangible or intangible object made available externally in the form of a ProductOffering to customers or other parties playing a party role.
-
 | Field | Type | Format | Required |
 | ------- | ------- | ------- | --- |
 | id | string | N/A | No |
@@ -15,22 +13,26 @@ Is a detailed description of a tangible or intangible object made available exte
 | description | string | N/A | No |
 | brand | string | N/A | No |
 | isBundle | boolean | N/A | No |
+| productNumber | string | N/A | No |
+| category | array | CategoryRef | No |
+| validFor | TimePeriod | N/A | No |
+| version | string | N/A | No |
+| relatedParty | array | RelatedPartyRefOrPartyRoleRef | No |
+| productSpecCharacteristic | array | CharacteristicSpecification | No |
+| serviceSpecification | array | ServiceSpecificationRef | No |
+| bundledProductSpecification | array | BundledProductSpecification | No |
+| productSpecificationRelationship | array | ProductSpecificationRelationship | No |
+| resourceSpecification | array | ResourceSpecificationRef | No |
+| attachment | array | AttachmentOrDocumentRef | No |
+| policy | array | PolicyRef | No |
+| targetProductSchema | TargetProductSchema | N/A | No |
+| intentSpecification | IntentSpecificationRef | N/A | No |
 | lastUpdate | string | date-time | No |
 | lifecycleStatus | string | N/A | No |
-| productNumber | string | N/A | No |
-| version | string | N/A | No |
-| attachment | array | AttachmentOrDocumentRef | No |
-| bundledProductSpecification | array | BundledProductSpecification | No |
-| productSpecCharacteristic | array | ProductSpecificationCharacteristic | No |
-| productSpecificationRelationship | array | ProductSpecificationRelationship | No |
-| relatedParty | array | RelatedParty | No |
-| resourceSpecification | array | ResourceSpecificationRef | No |
-| serviceSpecification | array | ServiceSpecificationRef | No |
-| targetProductSchema | TargetProductSchema | N/A | No |
-| validFor | TimePeriod | N/A | No |
+| externalIdentifier | array | ExternalIdentifier | No |
 | @baseType | string | N/A | No |
-| @schemaLocation | string | uri | No |
-| @type | string | N/A | No |
+| @schemaLocation | string | N/A | No |
+| @type | string | "ProductSpecification" | Yes |
 
 Table: Fields of ProductSpecification. {#tbl:ProductSpecification.md:ProductSpecification}
 

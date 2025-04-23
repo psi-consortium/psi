@@ -5,9 +5,7 @@
 
 # DELETE /serviceSpecification/{id}
 
-**Absolute Path:** /serviceCatalog/v1/serviceSpecification/{id}
-
-**TOD Reference:** TOD-02-02-03-Remove_Service_Specification
+**Absolute Path:** /serviceManagement/v2/serviceSpecification/{id}
 
 **Summary:** Deletes a ServiceSpecification
 
@@ -15,7 +13,7 @@
 
 | Name | Type | Required | Description |
 | ------ | ------ | --- | ------------ |
-| id | string | Yes | Identifier of the ServiceSpecification |
+| id | string | Yes | Identifier of the Resource |
 
 Table: Parameters of DELETE serviceSpecification/{id}. {#tbl:serviceSpecification-id.delete.md:parameters}
 
@@ -23,6 +21,7 @@ Table: Parameters of DELETE serviceSpecification/{id}. {#tbl:serviceSpecificatio
 
 | Code | Description | Content |
 |------|-------------|---------|
+| 202 | Accepted | N/A |
 | 204 | Deleted | N/A |
 | 400 | Bad Request | Error |
 | 401 | Unauthorized | Error |
@@ -31,6 +30,8 @@ Table: Parameters of DELETE serviceSpecification/{id}. {#tbl:serviceSpecificatio
 | 405 | Method Not allowed | Error |
 | 409 | Conflict | Error |
 | 500 | Internal Server Error | Error |
+| 501 | Not Implemented | Error |
+| 503 | Service Unavailable | Error |
 
 Table: Responses of DELETE serviceSpecification/{id}. {#tbl:serviceSpecification-id.delete.md:responses}
 

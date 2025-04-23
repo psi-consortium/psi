@@ -1,0 +1,985 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Alarm",
+    "description": "Alarm Management API",
+    "version": "5.0.1"
+  },
+  "servers": [
+    {
+      "url": "/psi-api/alarmManagement/v2/"
+    }
+  ],
+  "tags": [
+    {
+      "name": "alarm",
+      "description": "Operations for Alarm Resource"
+    }
+  ],
+  "paths": {
+    "/alarm": {
+      "get": {
+        "tags": [
+          "alarm"
+        ],
+        "summary": "List or find Alarm objects",
+        "description": "List or find Alarm objects",
+        "operationId": "listAlarm",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Fields"
+          },
+          {
+            "$ref": "#/components/parameters/Offset"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200AlarmArray"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "405": {
+            "$ref": "#/components/responses/405"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+          "501": {
+            "$ref": "#/components/responses/501"
+          },
+          "503": {
+            "$ref": "#/components/responses/503"
+          }
+        }
+      }
+    },
+    "/alarm/{id}": {
+      "get": {
+        "tags": [
+          "alarm"
+        ],
+        "summary": "Retrieves a Alarm by ID",
+        "description": "This operation retrieves a Alarm entity. Attribute selection enabled for all first level attributes.",
+        "operationId": "retrieveAlarm",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Id"
+          },
+          {
+            "$ref": "#/components/parameters/Fields"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200Alarm_Get"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "405": {
+            "$ref": "#/components/responses/405"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+          "501": {
+            "$ref": "#/components/responses/501"
+          },
+          "503": {
+            "$ref": "#/components/responses/503"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Addressable": {
+        "type": "object",
+        "properties": {
+          "href": {
+            "type": "string",
+            "description": "Hyperlink reference",
+            "format": "uri"
+          },
+          "id": {
+            "type": "string",
+            "description": "unique identifier"
+          }
+        },
+        "description": "Base schema for addressable entities"
+      },
+      "Alarm": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "Alarm": "#/components/schemas/Alarm"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Entity"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "externalAlarmId": {
+                "type": "string",
+                "description": "An identifier of the alarm in the source system."
+              },
+              "state": {
+                "type": "string",
+                "description": "Defines the alarm state during its life cycle (raised, updated, cleared).",
+                "enum": [
+                  "raised",
+                  "updated",
+                  "cleared"
+                ]
+              },
+              "alarmType": {
+                "$ref": "#/components/schemas/AlarmType"
+              },
+              "perceivedSeverity": {
+                "$ref": "#/components/schemas/PerceivedSeverity"
+              },
+              "probableCause": {
+                "type": "string",
+                "description": "Provides the probable cause of the alarm. The values are consistent with ITU-T Recommendation X.733 or 3GPP TS 32.111-2 Annex B."
+              },
+              "specificProblem": {
+                "type": "string",
+                "description": "Provides more specific information about the alarm."
+              },
+              "alarmedObjectType": {
+                "type": "string",
+                "description": "The type (class) of the managed object associated with the event."
+              },
+              "alarmedObject": {
+                "$ref": "#/components/schemas/AlarmedObjectRef"
+              },
+              "reportingSystemId": {
+                "type": "string",
+                "description": "Reporting system identity."
+              },
+              "sourceSystemId": {
+                "type": "string",
+                "description": "Source system identity."
+              },
+              "alarmDetails": {
+                "type": "string",
+                "description": "Contains further information on the alarm."
+              },
+              "alarmRaisedTime": {
+                "type": "string",
+                "description": "Indicates the time (as a date + time) at which the alarm occurred at its source.",
+                "format": "date-time"
+              },
+              "alarmChangedTime": {
+                "type": "string",
+                "description": "Indicates the last date and time when the alarm is changed on the alarm-owning system. Any change to the alarm whether coming from the alarmed resource, or triggered by a change from the client is changing this time.",
+                "format": "date-time"
+              },
+              "alarmClearedTime": {
+                "type": "string",
+                "description": "Indicates the time (as a date + time) at which the alarm is cleared at the source. ",
+                "format": "date-time"
+              },
+              "alarmReportingTime": {
+                "type": "string",
+                "description": "Indicates the time (as a date + time) at which the alarm was reported by the owning OSS. It might be different from the alarmRaisedTime. For instance, if the alarm list is maintained by an EMS, the alarmRaisedtime would be the time the alarm\n  was detected by the NE, while the alarmReportingTime would be the time this alarm was stored in the alarm list of the EMS.",
+                "format": "date-time"
+              },
+              "ackState": {
+                "type": "string",
+                "description": "Provides the Acknowledgement State of the alarm (unacknowledged, acknowledged).",
+                "enum": [
+                  "unacknowledged",
+                  "acknowledged"
+                ]
+              },
+              "ackSystemId": {
+                "type": "string",
+                "description": "Provides the name of the system that last changed the ackState of an alarm, i.e. acknowledged or unacknowledged the alarm."
+              },
+              "ackUserId": {
+                "type": "string",
+                "description": "Provides the id of the user who has last changed the ack state of the alarm, i.e. acknowledged or unacknowledged the alarm."
+              },
+              "affectedService": {
+                "type": "array",
+                "description": "Provides list of affected services.",
+                "items": {
+                  "$ref": "#/components/schemas/ServiceRef"
+                }
+              },
+              "alarmEscalation": {
+                "type": "boolean",
+                "description": "Indicates if this alarm has been escalated or not. "
+              },
+              "clearSystemId": {
+                "type": "string",
+                "description": "Provides the id of the system where the user who invoked the alarmCleared operation is located. "
+              },
+              "clearUserId": {
+                "type": "string",
+                "description": "Provides the id of the user who invoked the alarmCleared operation"
+              },
+              "comment": {
+                "type": "array",
+                "description": "Provides list of Comments regards Alarm.",
+                "items": {
+                  "$ref": "#/components/schemas/Comment"
+                }
+              },
+              "correlatedAlarm": {
+                "type": "array",
+                "description": "Provides list of correlated Alarms.",
+                "items": {
+                  "$ref": "#/components/schemas/AlarmRef"
+                }
+              },
+              "crossedThresholdInformation": {
+                "$ref": "#/components/schemas/CrossedThresholdInformation"
+              },
+              "isRootCause": {
+                "type": "boolean",
+                "description": "Indicates whether the alarm is a root cause alarm.. "
+              },
+              "parentAlarm": {
+                "type": "array",
+                "description": "Provides list of parrent Alarms.",
+                "items": {
+                  "$ref": "#/components/schemas/AlarmRef"
+                }
+              },
+              "plannedOutageIndicator": {
+                "type": "string",
+                "description": "Indicates that the Managed Object (related to this alarm) is in planned outage (in planned maintenance, or out-of-service). ",
+                "enum": [
+                  "InService",
+                  "OutOfService"
+                ]
+              },
+              "proposedRepairedActions": {
+                "type": "string",
+                "description": "Indicates proposed repair actions, if known to the system emitting the alarm."
+              },
+              "serviceAffecting": {
+                "type": "boolean",
+                "description": "Indicates whether the alarm affects service or not."
+              },
+              "place": {
+                "type": "array",
+                "description": "List of related places, which are affected by Alarm.",
+                "items": {
+                  "$ref": "#/components/schemas/RelatedPlaceRef"
+                }
+              }
+            },
+            "description": "This resource represents an alarm supporting the information model defined in ITU-T X.733."
+          }
+        ]
+      },
+      "AlarmRef": {
+        "type": "object",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "AlarmRef": "#/components/schemas/AlarmRef"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          }
+        ]
+      },
+      "AlarmType": {
+        "type": "string",
+        "description": "Categorizes the alarm (X.733 8.1.1, 3GPP TS 32.111-2 Annex A)",
+        "enum": [
+          "communicationsAlarm",
+          "processingErrorAlarm",
+          "environmentalAlarm",
+          "qualityOfServiceAlarm",
+          "equipmentAlarm",
+          "integrityViolation",
+          "operationalViolation",
+          "physicalViolation",
+          "securityService",
+          "mechanismViolation",
+          "timeDomainViolation"
+        ]
+      },
+      "AlarmedObjectRef": {
+        "type": "object",
+        "description": "Reference to object which affected by Alarm (AlarmedObject).",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "AlarmedObjectRef": "#/components/schemas/AlarmedObjectRef"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          }
+        ]
+      },
+      "Comment": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "Comment": "#/components/schemas/Comment"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "userId": {
+                "type": "string",
+                "description": "Indicates the user commenting the alarm."
+              },
+              "systemId": {
+                "type": "string",
+                "description": "Indicates the system identifier on which the client set the comment."
+              },
+              "time": {
+                "type": "string",
+                "description": "Indicates the time commenting the alarm",
+                "format": "date-time"
+              },
+              "comment": {
+                "type": "string",
+                "description": "Indicates the text of the comment."
+              }
+            },
+            "description": "Indicates the comments entered on the alarm."
+          }
+        ]
+      },
+      "CrossedThresholdInformation": {
+        "type": "object",
+        "properties": {
+          "threshold": {
+            "$ref": "#/components/schemas/ThresholdRef"
+          },
+          "direction": {
+            "type": "string",
+            "description": "Indicates the threshold crossing direction: up or down."
+          },
+          "granularity": {
+            "type": "string",
+            "description": "Indicates the granularity at which the indicator is evaluated for threshold crossing"
+          },
+          "indicatorName": {
+            "type": "string",
+            "description": "Indicates the name of indicator which crossed the threshold."
+          },
+          "indicatorUnit": {
+            "type": "string",
+            "description": "Indicates the unit of the measurement of the indicator corresponding to the threshold that has been crossed."
+          },
+          "observedValue": {
+            "type": "string",
+            "description": "Indicates the value of the indicator which crossed the threshold."
+          },
+          "thresholdCrossingDescription": {
+            "type": "string",
+            "description": "Indicates further information on the threshold crossing alarm."
+          }
+        },
+        "description": "Identifies the details of the threshold that has been crossed."
+      },
+      "Entity": {
+        "type": "object",
+        "description": "Base entity schema for use in TMForum Open-APIs. Property.",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "$ref": "#/components/schemas/Addressable"
+          }
+        ]
+      },
+      "EntityRef": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "$ref": "#/components/schemas/Addressable"
+          },
+          {
+            "required": [
+              "id"
+            ],
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "The identifier of the referred entity."
+              },
+              "href": {
+                "type": "string",
+                "description": "The URI of the referred entity.",
+                "format": "uri"
+              },
+              "name": {
+                "type": "string",
+                "description": "Name of the referred entity."
+              },
+              "@referredType": {
+                "type": "string",
+                "description": "The actual type of the target instance when needed for disambiguation."
+              }
+            },
+            "description": "Entity reference schema to be use for all entityRef class."
+          }
+        ]
+      },
+      "Extensible": {
+        "required": [
+          "@type"
+        ],
+        "type": "object",
+        "properties": {
+          "@type": {
+            "type": "string",
+            "description": "When sub-classing, this defines the sub-class Extensible name"
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class"
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships"
+          }
+        },
+        "description": "Base Extensible schema for use in TMForum Open-APIs - When used for in a schema it means that the Entity described by the schema  MUST be extended with the @type"
+      },
+      "PerceivedSeverity": {
+        "type": "string",
+        "description": "Lists the possible severities that can be allocated to an Alarm. The values are consistent with ITU-T Recommendation X.733.\nOnce an alarm has been cleared, its perceived severity is set to 'cleared' and can no longer be set.",
+        "enum": [
+          "critical",
+          "major",
+          "minor",
+          "warning",
+          "indeterminate",
+          "cleared"
+        ]
+      },
+      "ServiceRef": {
+        "type": "object",
+        "description": "Service reference, for when Service is used by other entities.",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "ServiceRef": "#/components/schemas/ServiceRef"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          }
+        ]
+      },
+      "ThresholdRef": {
+        "type": "object",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "ThresholdRef": "#/components/schemas/ThresholdRef"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          }
+        ]
+      },
+      "Error": {
+        "description": "Used when an API throws an Error, typically with a HTTP error response-code (3xx, 4xx, 5xx)",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "Error": "#/components/schemas/Error"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "required": [
+              "code",
+              "reason"
+            ],
+            "type": "object",
+            "properties": {
+              "code": {
+                "type": "string",
+                "description": "Application relevant detail, defined in the API or a common list."
+              },
+              "reason": {
+                "type": "string",
+                "description": "Explanation of the reason for the error which can be shown to a client user."
+              },
+              "message": {
+                "type": "string",
+                "description": "More details and corrective actions related to the error which can be shown to a client user."
+              },
+              "status": {
+                "type": "string",
+                "description": "HTTP Error code extension"
+              },
+              "referenceError": {
+                "type": "string",
+                "description": "URI of documentation describing the error."
+              }
+            }
+          }
+        ]
+      },
+      "PlaceRef": {
+        "type": "object",
+        "description": "Place reference.",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "PlaceRef": "#/components/schemas/PlaceRef"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          }
+        ]
+      },
+      "RelatedPlaceRef": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "RelatedPlaceRef": "#/components/schemas/RelatedPlaceRef"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "role": {
+                "type": "string"
+              },
+              "place": {
+                "$ref": "#/components/schemas/PlaceRef"
+              }
+            },
+            "description": "Entity reference. The polymorphic attributes @type, @schemaLocation & @referredType are related to the RelatedPlace entity and not the RelatedPlaceRef class itself"
+          }
+        ]
+      }
+    },
+    "responses": {
+      "400": {
+        "description": "Bad Request",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "examples": {
+              "basic": {
+                "summary": "Bad Request Error",
+                "value": {
+                  "@type": "Error",
+                  "code": "ERR400",
+                  "reason": "Bad Request",
+                  "message": "The server could not understand the request due to invalid syntax. Please correct the syntax and try again.",
+                  "referenceError": "https://host/errors"
+                }
+              }
+            }
+          }
+        }
+      },
+      "401": {
+        "description": "Unauthorized",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "examples": {
+              "basic": {
+                "summary": "Unauthorized Error",
+                "value": {
+                  "@type": "Error",
+                  "code": "ERR401",
+                  "reason": "Unauthorized",
+                  "message": "You are not authorized to access the requested resource. Please provide the correct credentials.",
+                  "referenceError": "https://host/errors"
+                }
+              }
+            }
+          }
+        }
+      },
+      "403": {
+        "description": "Forbidden",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "examples": {
+              "basic": {
+                "summary": "Forbidden Error",
+                "value": {
+                  "@type": "Error",
+                  "code": "ERR403",
+                  "reason": "Forbidden",
+                  "message": "You don't have the permission to access the requested resource. It is either read-protected or not readable by the server.",
+                  "referenceError": "https://host/errors"
+                }
+              }
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "Not Found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "examples": {
+              "basic": {
+                "summary": "Not Found Error",
+                "value": {
+                  "@type": "Error",
+                  "code": "ERR404",
+                  "reason": "Not Found",
+                  "message": "The requested URL was not found on the server.",
+                  "referenceError": "https://host/errors"
+                }
+              }
+            }
+          }
+        }
+      },
+      "405": {
+        "description": "Method Not allowed",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "examples": {
+              "basic": {
+                "summary": "Method Not allowed Error",
+                "value": {
+                  "@type": "Error",
+                  "code": "ERR405",
+                  "reason": "Method Not allowed",
+                  "message": "The method is not allowed for the requested URL.",
+                  "referenceError": "https://host/errors"
+                }
+              }
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "Internal Server Error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "examples": {
+              "basic": {
+                "summary": "Internal Server Error example",
+                "value": {
+                  "@type": "Error",
+                  "code": "ERR500",
+                  "reason": "Internal Server Error",
+                  "message": "The server encountered an internal error. Please contact the system administrator.",
+                  "referenceError": "https://host/errors"
+                }
+              }
+            }
+          }
+        }
+      },
+      "501": {
+        "description": "Not Implemented",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "examples": {
+              "basic": {
+                "summary": "Not Implemented Error",
+                "value": {
+                  "@type": "Error",
+                  "code": "ERR501",
+                  "reason": "The requested operation is not implemented",
+                  "message": "The requested operation is not implemented. Please contact the system administrator.",
+                  "referenceError": "https://host/errors"
+                }
+              }
+            }
+          }
+        }
+      },
+      "503": {
+        "description": "Service Unavailable",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "examples": {
+              "basic": {
+                "summary": "Service Unavailable Error",
+                "value": {
+                  "@type": "Error",
+                  "code": "ERR503",
+                  "reason": "Service Unavailable",
+                  "message": "The service is currently unavailable. Please try again later.",
+                  "referenceError": "https://host/errors"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200AlarmArray": {
+        "description": "Success",
+        "headers": {
+          "X-Total-Count": {
+            "$ref": "#/components/headers/X-Total-Count"
+          },
+          "X-Result-Count": {
+            "$ref": "#/components/headers/X-Result-Count"
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/Alarm"
+              }
+            },
+            "examples": {
+              "Alarm_list_example": {
+                "$ref": "#/components/examples/Alarm_list_example_response"
+              }
+            }
+          }
+        }
+      },
+      "200Alarm_Get": {
+        "description": "Success",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Alarm"
+            },
+            "examples": {
+              "Alarm_retrieve_example": {
+                "$ref": "#/components/examples/Alarm_retrieve_example_response"
+              }
+            }
+          }
+        }
+      }
+    },
+    "parameters": {
+      "Id": {
+        "name": "id",
+        "in": "path",
+        "description": "Identifier of the Resource",
+        "required": true,
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "Fields": {
+        "name": "fields",
+        "in": "query",
+        "description": "Comma-separated properties to be provided in response",
+        "required": false,
+        "style": "form",
+        "explode": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "Offset": {
+        "name": "offset",
+        "in": "query",
+        "description": "Requested index for start of resources to be provided in response",
+        "required": false,
+        "style": "form",
+        "explode": true,
+        "schema": {
+          "type": "integer"
+        }
+      },
+      "Limit": {
+        "name": "limit",
+        "in": "query",
+        "description": "Requested number of resources to be provided in response",
+        "required": false,
+        "style": "form",
+        "explode": true,
+        "schema": {
+          "type": "integer"
+        }
+      }
+    },
+    "examples": {
+      "Alarm_list_example_response": {
+        "description": "Example of a request for retrieving a list of alarms:",
+        "value": [
+          {
+            "id": "8675309",
+            "href": "/alarmManagement/v5/alarm/8675309",
+            "@type": "Alarm",
+            "externalAlarmId": "5551212",
+            "state": "updated",
+            "alarmType": "environmentalAlarm",
+            "perceivedSeverity": "major",
+            "probableCause": "rectifierLowVoltage",
+            "specificProblem": "ps=3,sl=1,in=8",
+            "alarmedObjectType": "Rectifier",
+            "alarmedObject": {
+              "@type": "AlarmedObjectRef",
+              "@referredType": "Resource",
+              "id": "93051825",
+              "href": "/resourceInventoryManagement/v5/resource/93051825"
+            },
+            "sourceSystemId": "ems-1",
+            "alarmDetails": "voltage=95",
+            "alarmRaisedTime": "2019-07-03T03:32:17.235Z",
+            "alarmReportingTime": "2019-07-03T03:32:17.552Z",
+            "alarmChangedTime": "2019-07-03T03:32:24.715Z"
+          },
+          {
+            "id": "8675399",
+            "href": "/alarmManagement/v5/alarm/8675399",
+            "@type": "Alarm",
+            "externalAlarmId": "5551234",
+            "state": "updated",
+            "alarmType": "equipmentAlarm",
+            "perceivedSeverity": "minor",
+            "probableCause": "powerSupplyFailure",
+            "specificProblem": "ch=1,ps=3",
+            "alarmedObjectType": "Chassis",
+            "alarmedObject": {
+              "@type": "AlarmedObjectRef",
+              "@referredType": "Resource",
+              "id": "93051831",
+              "href": "/resourceInventoryManagement/v5/resource/93051831"
+            },
+            "sourceSystemId": "ems-1",
+            "alarmRaisedTime": "2019-07-03T03:32:17.843Z",
+            "alarmReportingTime": "2019-07-03T03:32:18.102Z"
+          }
+        ]
+      },
+      "Alarm_retrieve_example_response": {
+        "description": "Example of a request for retrieving an alarm:",
+        "value": {
+          "id": "8675309",
+          "href": "/alarmManagement/v5/alarm/8675309",
+          "@type": "Alarm",
+          "externalAlarmId": "5551212",
+          "state": "updated",
+          "alarmType": "environmentalAlarm",
+          "perceivedSeverity": "major",
+          "probableCause": "rectifierLowVoltage",
+          "specificProblem": "ps=3,sl=1,in=8",
+          "alarmedObjectType": "Rectifier",
+          "alarmedObject": {
+            "@type": "AlarmedObjectRef",
+            "@referredType": "Resource",
+            "id": "93051825",
+            "href": "/resourceInventoryManagement/v5/resource/93051825"
+          },
+          "sourceSystemId": "ems-1",
+          "alarmDetails": "voltage=95",
+          "alarmRaisedTime": "2019-07-03T03:32:17.235Z",
+          "alarmReportingTime": "2019-07-03T03:32:17.552Z",
+          "alarmChangedTime": "2019-07-03T03:32:24.715Z",
+          "ackState": "unacknowledged"
+        }
+      }
+    },
+    "requestBodies": { },
+    "headers": {
+      "X-Total-Count": {
+        "description": "Total number of items matching criteria",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "integer"
+        }
+      },
+      "X-Result-Count": {
+        "description": "Actual number of items returned in the response body",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "integer"
+        }
+      }
+    },
+    "securitySchemes": { }
+  }
+}

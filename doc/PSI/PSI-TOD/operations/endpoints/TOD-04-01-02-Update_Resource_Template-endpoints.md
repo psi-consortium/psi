@@ -3,4 +3,4 @@
                Do NOT manually edit this file! Any such changes will be overwritten!
 -->
 
-* PATCH /resourceCatalog/v1/resourceTemplate/{id}
+* PATCH /resourceCatalog/v2/resourceTemplate/{id}

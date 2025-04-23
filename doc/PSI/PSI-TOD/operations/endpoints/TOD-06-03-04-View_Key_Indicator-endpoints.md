@@ -3,4 +3,4 @@
                Do NOT manually edit this file! Any such changes will be overwritten!
 -->
 
-* GET /serviceQuality/v1/keyIndicator/{id}
+* GET /serviceQualityManagement/v2/keyIndicator/{id}

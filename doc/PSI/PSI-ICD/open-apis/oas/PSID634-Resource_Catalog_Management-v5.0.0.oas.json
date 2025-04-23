@@ -1,0 +1,4964 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Resource Catalog Management",
+    "description": "### February 2023\nResource Catalog API is one of Catalog Management API Family. Resource Catalog API goal is to provide a catalog of resources. \n### Operations\nResource Catalog API performs the following operations on the resources :\n- Retrieve an entity or a collection of entities depending on filter criteria - Partial update of an entity (including updating rules) - Create an entity (including default values and creation rules) - Delete an entity - Manage notification of events",
+    "version": "5.0.0"
+  },
+  "servers": [
+    {
+      "url": "/psi-api/resourceCatalog/v2/"
+    }
+  ],
+  "tags": [
+    {
+      "name": "resourceSpecification",
+      "description": "Operations for ResourceSpecification Resource"
+    },
+    {
+      "name": "resourceTemplate",
+      "description": "Operations for ResourceTemplate Resource"
+    }
+  ],
+  "paths": {
+    "/resourceSpecification": {
+      "get": {
+        "tags": [
+          "resourceSpecification"
+        ],
+        "summary": "List or find ResourceSpecification objects",
+        "description": "List or find ResourceSpecification objects",
+        "operationId": "listResourceSpecification",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Fields"
+          },
+          {
+            "$ref": "#/components/parameters/Offset"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200ResourceSpecificationArray"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "405": {
+            "$ref": "#/components/responses/405"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+          "501": {
+            "$ref": "#/components/responses/501"
+          },
+          "503": {
+            "$ref": "#/components/responses/503"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "resourceSpecification"
+        ],
+        "summary": "Creates a ResourceSpecification",
+        "description": "This operation creates a ResourceSpecification entity.",
+        "operationId": "createResourceSpecification",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Fields"
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/ResourceSpecification_FVO"
+        },
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/201ResourceSpecification"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "405": {
+            "$ref": "#/components/responses/405"
+          },
+          "409": {
+            "$ref": "#/components/responses/409"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+          "501": {
+            "$ref": "#/components/responses/501"
+          },
+          "503": {
+            "$ref": "#/components/responses/503"
+          }
+        }
+      }
+    },
+    "/resourceSpecification/{id}": {
+      "get": {
+        "tags": [
+          "resourceSpecification"
+        ],
+        "summary": "Retrieves a ResourceSpecification by ID",
+        "description": "This operation retrieves a ResourceSpecification entity. Attribute selection enabled for all first level attributes.",
+        "operationId": "retrieveResourceSpecification",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Id"
+          },
+          {
+            "$ref": "#/components/parameters/Fields"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200ResourceSpecification_Get"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "405": {
+            "$ref": "#/components/responses/405"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+          "501": {
+            "$ref": "#/components/responses/501"
+          },
+          "503": {
+            "$ref": "#/components/responses/503"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "resourceSpecification"
+        ],
+        "summary": "Deletes a ResourceSpecification",
+        "description": "This operation deletes a ResourceSpecification entity.",
+        "operationId": "deleteResourceSpecification",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Id"
+          }
+        ],
+        "responses": {
+          "202": {
+            "$ref": "#/components/responses/202"
+          },
+          "204": {
+            "$ref": "#/components/responses/204"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "405": {
+            "$ref": "#/components/responses/405"
+          },
+          "409": {
+            "$ref": "#/components/responses/409"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+          "501": {
+            "$ref": "#/components/responses/501"
+          },
+          "503": {
+            "$ref": "#/components/responses/503"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "resourceSpecification"
+        ],
+        "summary": "Updates partially a ResourceSpecification",
+        "description": "This operation updates partially a ResourceSpecification entity.",
+        "operationId": "patchResourceSpecification",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Id"
+          },
+          {
+            "$ref": "#/components/parameters/Fields"
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/ResourceSpecification_MVO"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200ResourceSpecification_Patch"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "405": {
+            "$ref": "#/components/responses/405"
+          },
+          "409": {
+            "$ref": "#/components/responses/409"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+          "501": {
+            "$ref": "#/components/responses/501"
+          },
+          "503": {
+            "$ref": "#/components/responses/503"
+          }
+        }
+      }
+    },
+    "/resourceTemplate": {
+      "get": {
+        "tags": [
+          "resourceTemplate"
+        ],
+        "summary": "List or find ResourceTemplate objects",
+        "description": "List or find ResourceTemplate objects",
+        "operationId": "listResourceTemplate",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Fields"
+          },
+          {
+            "$ref": "#/components/parameters/Offset"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200ResourceSpecificationArray"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "405": {
+            "$ref": "#/components/responses/405"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+          "501": {
+            "$ref": "#/components/responses/501"
+          },
+          "503": {
+            "$ref": "#/components/responses/503"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "resourceTemplate"
+        ],
+        "summary": "Creates a ResourceTemplate",
+        "description": "This operation creates a ResourceTemplate entity.",
+        "operationId": "createResourceTemplate",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Fields"
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/ResourceSpecification_FVO"
+        },
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/201ResourceSpecification"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "405": {
+            "$ref": "#/components/responses/405"
+          },
+          "409": {
+            "$ref": "#/components/responses/409"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+          "501": {
+            "$ref": "#/components/responses/501"
+          },
+          "503": {
+            "$ref": "#/components/responses/503"
+          }
+        }
+      }
+    },
+    "/resourceTemplate/{id}": {
+      "get": {
+        "tags": [
+          "resourceTemplate"
+        ],
+        "summary": "Retrieves a ResourceTemplate by ID",
+        "description": "This operation retrieves a ResourceTemplate entity. Attribute selection enabled for all first level attributes.",
+        "operationId": "retrieveResourceTemplate",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Id"
+          },
+          {
+            "$ref": "#/components/parameters/Fields"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200ResourceSpecification_Get"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "405": {
+            "$ref": "#/components/responses/405"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+          "501": {
+            "$ref": "#/components/responses/501"
+          },
+          "503": {
+            "$ref": "#/components/responses/503"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "resourceTemplate"
+        ],
+        "summary": "Deletes a ResourceTemplate",
+        "description": "This operation deletes a ResourceTemplate entity.",
+        "operationId": "deleteResourceTemplate",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Id"
+          }
+        ],
+        "responses": {
+          "202": {
+            "$ref": "#/components/responses/202"
+          },
+          "204": {
+            "$ref": "#/components/responses/204"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "405": {
+            "$ref": "#/components/responses/405"
+          },
+          "409": {
+            "$ref": "#/components/responses/409"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+          "501": {
+            "$ref": "#/components/responses/501"
+          },
+          "503": {
+            "$ref": "#/components/responses/503"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "resourceTemplate"
+        ],
+        "summary": "Updates partially a ResourceTemplate",
+        "description": "This operation updates partially a ResourceTemplate entity.",
+        "operationId": "patchResourceTemplate",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Id"
+          },
+          {
+            "$ref": "#/components/parameters/Fields"
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/ResourceSpecification_MVO"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200ResourceSpecification_Patch"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "405": {
+            "$ref": "#/components/responses/405"
+          },
+          "409": {
+            "$ref": "#/components/responses/409"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+          "501": {
+            "$ref": "#/components/responses/501"
+          },
+          "503": {
+            "$ref": "#/components/responses/503"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Addressable": {
+        "type": "object",
+        "properties": {
+          "href": {
+            "type": "string",
+            "description": "Hyperlink reference",
+            "format": "uri"
+          },
+          "id": {
+            "type": "string",
+            "description": "unique identifier"
+          }
+        },
+        "description": "Base schema for adressable entities"
+      },
+      "Addressable_FVO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "unique identifier"
+          }
+        },
+        "description": "Base schema for adressable entities"
+      },
+      "AttachmentOrDocumentRef": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "AttachmentRef": "#/components/schemas/AttachmentOrDocumentRef"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "description": {
+                "type": "string",
+                "description": "A narrative text describing the content of the attachment"
+              },
+              "url": {
+                "type": "string",
+                "description": "Link to the attachment media/content"
+              }
+            },
+            "description": "Attachment reference. An attachment complements the description of an element (for instance a product) through video, pictures"
+          }
+        ]
+      },
+      "CharacteristicSpecification": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "CharacteristicSpecification": "#/components/schemas/CharacteristicSpecification"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Unique ID for the characteristic"
+              },
+              "name": {
+                "type": "string",
+                "description": "A word, term, or phrase by which this characteristic specification is known and distinguished from other characteristic specifications."
+              },
+              "valueType": {
+                "type": "string",
+                "description": "A kind of value that the characteristic can take on, such as numeric, text and so forth"
+              },
+              "description": {
+                "type": "string",
+                "description": "A narrative that explains the CharacteristicSpecification."
+              },
+              "configurable": {
+                "type": "boolean",
+                "description": "If true, the Boolean indicates that the target Characteristic is configurable"
+              },
+              "validFor": {
+                "$ref": "#/components/schemas/TimePeriod"
+              },
+              "minCardinality": {
+                "type": "integer",
+                "description": "The minimum number of instances a CharacteristicValue can take on. For example, zero to five phone numbers in a group calling plan, where zero is the value for the minCardinality."
+              },
+              "maxCardinality": {
+                "type": "integer",
+                "description": "The maximum number of instances a CharacteristicValue can take on. For example, zero to five phone numbers in a group calling plan, where five is the value for the maxCardinality."
+              },
+              "isUnique": {
+                "type": "boolean",
+                "description": "Specifies if the value of this characteristic is unique across all entities instantiated from the specification that uses this characteristc. For example, consider a ProductSpecification for a set-top box, with a CharacteristicSpecification cardID. Each set-top box must have a different value for cardID, so this isUnique attribute would be set to true for the characteristic."
+              },
+              "regex": {
+                "type": "string",
+                "description": "A rule or principle represented in regular expression used to derive the value of a characteristic value."
+              },
+              "extensible": {
+                "type": "boolean",
+                "description": "An indicator that specifies that the values for the characteristic can be extended by adding new values when instantiating a characteristic for a resource."
+              },
+              "@valueSchemaLocation": {
+                "type": "string",
+                "description": "This (optional) field provides a link to the schema describing the value type."
+              },
+              "charSpecRelationship": {
+                "type": "array",
+                "description": "An aggregation, migration, substitution, dependency or exclusivity relationship between/among Specification Characteristics.",
+                "items": {
+                  "$ref": "#/components/schemas/CharacteristicSpecificationRelationship"
+                }
+              },
+              "characteristicValueSpecification": {
+                "type": "array",
+                "description": "A CharacteristicValueSpecification object is used to define a set of attributes, each of which can be assigned to a corresponding set of attributes in a CharacteristicSpecification object. The values of the attributes in the CharacteristicValueSpecification object describe the values of the attributes that a corresponding Characteristic object can take on.",
+                "items": {
+                  "$ref": "#/components/schemas/CharacteristicValueSpecification"
+                }
+              }
+            },
+            "description": "This class defines a characteristic specification."
+          }
+        ]
+      },
+      "CharacteristicSpecificationRelationship": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "CharacteristicSpecificationRelationship": "#/components/schemas/CharacteristicSpecificationRelationship"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "relationshipType": {
+                "type": "string",
+                "description": "Type of relationship such as aggregation, migration, substitution, dependency, exclusivity"
+              },
+              "name": {
+                "type": "string",
+                "description": "Name of the target characteristic within the specification"
+              },
+              "characteristicSpecificationId": {
+                "type": "string",
+                "description": "Unique identifier of the characteristic within the specification"
+              },
+              "parentSpecificationHref": {
+                "type": "string",
+                "description": "Hyperlink reference to the parent specification containing the target characteristic",
+                "format": "uri"
+              },
+              "validFor": {
+                "$ref": "#/components/schemas/TimePeriod"
+              },
+              "parentSpecificationId": {
+                "type": "string",
+                "description": "Unique identifier of the parent specification containing the target characteristic"
+              }
+            },
+            "description": "An aggregation, migration, substitution, dependency or exclusivity relationship between/among Characteristic specifications. The specification characteristic is embedded within the specification whose ID and href are in this entity, and identified by its ID."
+          }
+        ]
+      },
+      "CharacteristicSpecificationRelationship_FVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "CharacteristicSpecificationRelationship": "#/components/schemas/CharacteristicSpecificationRelationship_FVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible_FVO"
+          },
+          {
+            "required": [
+              "name",
+              "parentSpecificationId",
+              "relationshipType"
+            ],
+            "type": "object",
+            "properties": {
+              "relationshipType": {
+                "type": "string",
+                "description": "Type of relationship such as aggregation, migration, substitution, dependency, exclusivity"
+              },
+              "name": {
+                "type": "string",
+                "description": "Name of the target characteristic within the specification"
+              },
+              "characteristicSpecificationId": {
+                "type": "string",
+                "description": "Unique identifier of the characteristic within the specification"
+              },
+              "parentSpecificationHref": {
+                "type": "string",
+                "description": "Hyperlink reference to the parent specification containing the target characteristic",
+                "format": "uri"
+              },
+              "validFor": {
+                "$ref": "#/components/schemas/TimePeriod"
+              },
+              "parentSpecificationId": {
+                "type": "string",
+                "description": "Unique identifier of the parent specification containing the target characteristic"
+              }
+            },
+            "description": "An aggregation, migration, substitution, dependency or exclusivity relationship between/among Characteristic specifications. The specification characteristic is embedded within the specification whose ID and href are in this entity, and identified by its ID."
+          }
+        ]
+      },
+      "CharacteristicSpecificationRelationship_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "CharacteristicSpecificationRelationship": "#/components/schemas/CharacteristicSpecificationRelationship_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "required": [
+              "name",
+              "parentSpecificationId",
+              "relationshipType"
+            ],
+            "type": "object",
+            "properties": {
+              "relationshipType": {
+                "type": "string",
+                "description": "Type of relationship such as aggregation, migration, substitution, dependency, exclusivity"
+              },
+              "name": {
+                "type": "string",
+                "description": "Name of the target characteristic within the specification"
+              },
+              "characteristicSpecificationId": {
+                "type": "string",
+                "description": "Unique identifier of the characteristic within the specification"
+              },
+              "parentSpecificationHref": {
+                "type": "string",
+                "description": "Hyperlink reference to the parent specification containing the target characteristic",
+                "format": "uri"
+              },
+              "validFor": {
+                "$ref": "#/components/schemas/TimePeriod"
+              },
+              "parentSpecificationId": {
+                "type": "string",
+                "description": "Unique identifier of the parent specification containing the target characteristic"
+              }
+            },
+            "description": "An aggregation, migration, substitution, dependency or exclusivity relationship between/among Characteristic specifications. The specification characteristic is embedded within the specification whose ID and href are in this entity, and identified by its ID."
+          }
+        ]
+      },
+      "CharacteristicSpecification_FVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "CharacteristicSpecification": "#/components/schemas/CharacteristicSpecification_FVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible_FVO"
+          },
+          {
+            "required": [
+              "name",
+              "valueType"
+            ],
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Unique ID for the characteristic"
+              },
+              "name": {
+                "type": "string",
+                "description": "A word, term, or phrase by which this characteristic specification is known and distinguished from other characteristic specifications."
+              },
+              "valueType": {
+                "type": "string",
+                "description": "A kind of value that the characteristic can take on, such as numeric, text and so forth"
+              },
+              "description": {
+                "type": "string",
+                "description": "A narrative that explains the CharacteristicSpecification."
+              },
+              "configurable": {
+                "type": "boolean",
+                "description": "If true, the Boolean indicates that the target Characteristic is configurable"
+              },
+              "validFor": {
+                "$ref": "#/components/schemas/TimePeriod"
+              },
+              "minCardinality": {
+                "type": "integer",
+                "description": "The minimum number of instances a CharacteristicValue can take on. For example, zero to five phone numbers in a group calling plan, where zero is the value for the minCardinality."
+              },
+              "maxCardinality": {
+                "type": "integer",
+                "description": "The maximum number of instances a CharacteristicValue can take on. For example, zero to five phone numbers in a group calling plan, where five is the value for the maxCardinality."
+              },
+              "isUnique": {
+                "type": "boolean",
+                "description": "Specifies if the value of this characteristic is unique across all entities instantiated from the specification that uses this characteristc. For example, consider a ProductSpecification for a set-top box, with a CharacteristicSpecification cardID. Each set-top box must have a different value for cardID, so this isUnique attribute would be set to true for the characteristic."
+              },
+              "regex": {
+                "type": "string",
+                "description": "A rule or principle represented in regular expression used to derive the value of a characteristic value."
+              },
+              "extensible": {
+                "type": "boolean",
+                "description": "An indicator that specifies that the values for the characteristic can be extended by adding new values when instantiating a characteristic for a resource."
+              },
+              "@valueSchemaLocation": {
+                "type": "string",
+                "description": "This (optional) field provides a link to the schema describing the value type."
+              },
+              "charSpecRelationship": {
+                "type": "array",
+                "description": "An aggregation, migration, substitution, dependency or exclusivity relationship between/among Specification Characteristics.",
+                "items": {
+                  "$ref": "#/components/schemas/CharacteristicSpecificationRelationship_FVO"
+                }
+              },
+              "characteristicValueSpecification": {
+                "type": "array",
+                "description": "A CharacteristicValueSpecification object is used to define a set of attributes, each of which can be assigned to a corresponding set of attributes in a CharacteristicSpecification object. The values of the attributes in the CharacteristicValueSpecification object describe the values of the attributes that a corresponding Characteristic object can take on.",
+                "items": {
+                  "$ref": "#/components/schemas/CharacteristicValueSpecification_FVO"
+                }
+              }
+            },
+            "description": "This class defines a characteristic specification."
+          }
+        ]
+      },
+      "CharacteristicSpecification_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "CharacteristicSpecification": "#/components/schemas/CharacteristicSpecification_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "required": [
+              "name",
+              "valueType"
+            ],
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Unique ID for the characteristic"
+              },
+              "name": {
+                "type": "string",
+                "description": "A word, term, or phrase by which this characteristic specification is known and distinguished from other characteristic specifications."
+              },
+              "valueType": {
+                "type": "string",
+                "description": "A kind of value that the characteristic can take on, such as numeric, text and so forth"
+              },
+              "description": {
+                "type": "string",
+                "description": "A narrative that explains the CharacteristicSpecification."
+              },
+              "configurable": {
+                "type": "boolean",
+                "description": "If true, the Boolean indicates that the target Characteristic is configurable"
+              },
+              "validFor": {
+                "$ref": "#/components/schemas/TimePeriod"
+              },
+              "minCardinality": {
+                "type": "integer",
+                "description": "The minimum number of instances a CharacteristicValue can take on. For example, zero to five phone numbers in a group calling plan, where zero is the value for the minCardinality."
+              },
+              "maxCardinality": {
+                "type": "integer",
+                "description": "The maximum number of instances a CharacteristicValue can take on. For example, zero to five phone numbers in a group calling plan, where five is the value for the maxCardinality."
+              },
+              "isUnique": {
+                "type": "boolean",
+                "description": "Specifies if the value of this characteristic is unique across all entities instantiated from the specification that uses this characteristc. For example, consider a ProductSpecification for a set-top box, with a CharacteristicSpecification cardID. Each set-top box must have a different value for cardID, so this isUnique attribute would be set to true for the characteristic."
+              },
+              "regex": {
+                "type": "string",
+                "description": "A rule or principle represented in regular expression used to derive the value of a characteristic value."
+              },
+              "extensible": {
+                "type": "boolean",
+                "description": "An indicator that specifies that the values for the characteristic can be extended by adding new values when instantiating a characteristic for a resource."
+              },
+              "@valueSchemaLocation": {
+                "type": "string",
+                "description": "This (optional) field provides a link to the schema describing the value type."
+              },
+              "charSpecRelationship": {
+                "type": "array",
+                "description": "An aggregation, migration, substitution, dependency or exclusivity relationship between/among Specification Characteristics.",
+                "items": {
+                  "$ref": "#/components/schemas/CharacteristicSpecificationRelationship_MVO"
+                }
+              },
+              "characteristicValueSpecification": {
+                "type": "array",
+                "description": "A CharacteristicValueSpecification object is used to define a set of attributes, each of which can be assigned to a corresponding set of attributes in a CharacteristicSpecification object. The values of the attributes in the CharacteristicValueSpecification object describe the values of the attributes that a corresponding Characteristic object can take on.",
+                "items": {
+                  "$ref": "#/components/schemas/CharacteristicValueSpecification_MVO"
+                }
+              }
+            },
+            "description": "This class defines a characteristic specification."
+          }
+        ]
+      },
+      "CharacteristicValueSpecification": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "CharacteristicValueSpecification": "#/components/schemas/CharacteristicValueSpecification",
+            "StringCharacteristicValueSpecification": "#/components/schemas/StringCharacteristicValueSpecification",
+            "StringArrayCharacteristicValueSpecification": "#/components/schemas/StringArrayCharacteristicValueSpecification",
+            "ObjectCharacteristicValueSpecification": "#/components/schemas/ObjectCharacteristicValueSpecification",
+            "ObjectArrayCharacteristicValueSpecification": "#/components/schemas/ObjectArrayCharacteristicValueSpecification",
+            "NumberCharacteristicValueSpecification": "#/components/schemas/NumberCharacteristicValueSpecification",
+            "NumberArrayCharacteristicValueSpecification": "#/components/schemas/NumberArrayCharacteristicValueSpecification",
+            "MapCharacteristicValueSpecification": "#/components/schemas/MapCharacteristicValueSpecification",
+            "MapArrayCharacteristicValueSpecification": "#/components/schemas/MapArrayCharacteristicValueSpecification",
+            "IntegerCharacteristicValueSpecification": "#/components/schemas/IntegerCharacteristicValueSpecification",
+            "IntegerArrayCharacteristicValueSpecification": "#/components/schemas/IntegerArrayCharacteristicValueSpecification"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "valueType": {
+                "type": "string",
+                "description": "A kind of value that the characteristic value can take on, such as numeric, text and so forth"
+              },
+              "isDefault": {
+                "type": "boolean",
+                "description": "If true, the Boolean Indicates if the value is the default value for a characteristic"
+              },
+              "unitOfMeasure": {
+                "type": "string",
+                "description": "A length, surface, volume, dry measure, liquid measure, money, weight, time, and the like. In general, a determinate quantity or magnitude of the kind designated, taken as a standard of comparison for others of the same kind, in assigning to them numerical values, as 1 foot, 1 yard, 1 mile, 1 square foot."
+              },
+              "validFor": {
+                "$ref": "#/components/schemas/TimePeriod"
+              },
+              "valueFrom": {
+                "type": "integer",
+                "description": "The low range value that a characteristic can take on"
+              },
+              "valueTo": {
+                "type": "integer",
+                "description": "The upper range value that a characteristic can take on"
+              },
+              "rangeInterval": {
+                "type": "string",
+                "description": "An indicator that specifies the inclusion or exclusion of the valueFrom and valueTo attributes. If applicable, possible values are \"open\", \"closed\", \"closedBottom\" and \"closedTop\"."
+              },
+              "regex": {
+                "type": "string",
+                "description": "A regular expression constraint for given value"
+              }
+            },
+            "description": "specification of a value (number or text or an object) that can be assigned to a Characteristic. This is an abstract base class, the actual value is in one of the strongly-typed subclasses"
+          }
+        ]
+      },
+      "CharacteristicValueSpecification_FVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "CharacteristicValueSpecification": "#/components/schemas/CharacteristicValueSpecification_FVO",
+            "StringCharacteristicValueSpecification": "#/components/schemas/StringCharacteristicValueSpecification_FVO",
+            "StringArrayCharacteristicValueSpecification": "#/components/schemas/StringArrayCharacteristicValueSpecification_FVO",
+            "ObjectCharacteristicValueSpecification": "#/components/schemas/ObjectCharacteristicValueSpecification_FVO",
+            "ObjectArrayCharacteristicValueSpecification": "#/components/schemas/ObjectArrayCharacteristicValueSpecification_FVO",
+            "NumberCharacteristicValueSpecification": "#/components/schemas/NumberCharacteristicValueSpecification_FVO",
+            "NumberArrayCharacteristicValueSpecification": "#/components/schemas/NumberArrayCharacteristicValueSpecification_FVO",
+            "MapCharacteristicValueSpecification": "#/components/schemas/MapCharacteristicValueSpecification_FVO",
+            "MapArrayCharacteristicValueSpecification": "#/components/schemas/MapArrayCharacteristicValueSpecification_FVO",
+            "IntegerCharacteristicValueSpecification": "#/components/schemas/IntegerCharacteristicValueSpecification_FVO",
+            "IntegerArrayCharacteristicValueSpecification": "#/components/schemas/IntegerArrayCharacteristicValueSpecification_FVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible_FVO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "valueType": {
+                "type": "string",
+                "description": "A kind of value that the characteristic value can take on, such as numeric, text and so forth"
+              },
+              "isDefault": {
+                "type": "boolean",
+                "description": "If true, the Boolean Indicates if the value is the default value for a characteristic"
+              },
+              "unitOfMeasure": {
+                "type": "string",
+                "description": "A length, surface, volume, dry measure, liquid measure, money, weight, time, and the like. In general, a determinate quantity or magnitude of the kind designated, taken as a standard of comparison for others of the same kind, in assigning to them numerical values, as 1 foot, 1 yard, 1 mile, 1 square foot."
+              },
+              "validFor": {
+                "$ref": "#/components/schemas/TimePeriod"
+              },
+              "valueFrom": {
+                "type": "integer",
+                "description": "The low range value that a characteristic can take on"
+              },
+              "valueTo": {
+                "type": "integer",
+                "description": "The upper range value that a characteristic can take on"
+              },
+              "rangeInterval": {
+                "type": "string",
+                "description": "An indicator that specifies the inclusion or exclusion of the valueFrom and valueTo attributes. If applicable, possible values are \"open\", \"closed\", \"closedBottom\" and \"closedTop\"."
+              },
+              "regex": {
+                "type": "string",
+                "description": "A regular expression constraint for given value"
+              }
+            },
+            "description": "specification of a value (number or text or an object) that can be assigned to a Characteristic. This is an abstract base class, the actual value is in one of the strongly-typed subclasses"
+          }
+        ]
+      },
+      "CharacteristicValueSpecification_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "CharacteristicValueSpecification": "#/components/schemas/CharacteristicValueSpecification_MVO",
+            "StringCharacteristicValueSpecification": "#/components/schemas/StringCharacteristicValueSpecification_MVO",
+            "StringArrayCharacteristicValueSpecification": "#/components/schemas/StringArrayCharacteristicValueSpecification_MVO",
+            "ObjectCharacteristicValueSpecification": "#/components/schemas/ObjectCharacteristicValueSpecification_MVO",
+            "ObjectArrayCharacteristicValueSpecification": "#/components/schemas/ObjectArrayCharacteristicValueSpecification_MVO",
+            "NumberCharacteristicValueSpecification": "#/components/schemas/NumberCharacteristicValueSpecification_MVO",
+            "NumberArrayCharacteristicValueSpecification": "#/components/schemas/NumberArrayCharacteristicValueSpecification_MVO",
+            "MapCharacteristicValueSpecification": "#/components/schemas/MapCharacteristicValueSpecification_MVO",
+            "MapArrayCharacteristicValueSpecification": "#/components/schemas/MapArrayCharacteristicValueSpecification_MVO",
+            "IntegerCharacteristicValueSpecification": "#/components/schemas/IntegerCharacteristicValueSpecification_MVO",
+            "IntegerArrayCharacteristicValueSpecification": "#/components/schemas/IntegerArrayCharacteristicValueSpecification_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "valueType": {
+                "type": "string",
+                "description": "A kind of value that the characteristic value can take on, such as numeric, text and so forth"
+              },
+              "isDefault": {
+                "type": "boolean",
+                "description": "If true, the Boolean Indicates if the value is the default value for a characteristic"
+              },
+              "unitOfMeasure": {
+                "type": "string",
+                "description": "A length, surface, volume, dry measure, liquid measure, money, weight, time, and the like. In general, a determinate quantity or magnitude of the kind designated, taken as a standard of comparison for others of the same kind, in assigning to them numerical values, as 1 foot, 1 yard, 1 mile, 1 square foot."
+              },
+              "validFor": {
+                "$ref": "#/components/schemas/TimePeriod"
+              },
+              "valueFrom": {
+                "type": "integer",
+                "description": "The low range value that a characteristic can take on"
+              },
+              "valueTo": {
+                "type": "integer",
+                "description": "The upper range value that a characteristic can take on"
+              },
+              "rangeInterval": {
+                "type": "string",
+                "description": "An indicator that specifies the inclusion or exclusion of the valueFrom and valueTo attributes. If applicable, possible values are \"open\", \"closed\", \"closedBottom\" and \"closedTop\"."
+              },
+              "regex": {
+                "type": "string",
+                "description": "A regular expression constraint for given value"
+              }
+            },
+            "description": "specification of a value (number or text or an object) that can be assigned to a Characteristic. This is an abstract base class, the actual value is in one of the strongly-typed subclasses"
+          }
+        ]
+      },
+      "ConnectionPointSpecificationRef": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "ConnectionPointSpecificationRef": "#/components/schemas/ConnectionPointSpecificationRef"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "version": {
+                "type": "string",
+                "description": "Connection point specification version"
+              }
+            },
+            "description": "Connection point specification reference. A connection point provides a service access point (SAP) for input and/or output of the resource function."
+          }
+        ]
+      },
+      "ConnectionSpecification": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "ConnectionSpecification": "#/components/schemas/ConnectionSpecification"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Entity"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Descriptive name for graph edge specification."
+              },
+              "associationType": {
+                "type": "string",
+                "description": "Association type.",
+                "enum": [
+                  "pointtoPoint",
+                  "pointtoMultipoint"
+                ]
+              },
+              "endpointSpecification": {
+                "type": "array",
+                "description": "Specifications for resource graph vertices connected by this edge.",
+                "items": {
+                  "$ref": "#/components/schemas/EndpointSpecificationRef"
+                }
+              }
+            },
+            "description": "A specification for an edge in a resource graph."
+          }
+        ]
+      },
+      "EndpointSpecificationRef": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "EndpointSpecificationRef": "#/components/schemas/EndpointSpecificationRef"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "role": {
+                "type": "string",
+                "description": "Role of the Resource Function."
+              },
+              "isRoot": {
+                "type": "boolean",
+                "description": "Directionality: true when endpoint is a source, false when a sink. If true for all endpoints connectivity is bidirectional. Default is true.",
+                "default": true
+              },
+              "connectionPointSpecification": {
+                "$ref": "#/components/schemas/ConnectionPointSpecificationRef"
+              }
+            },
+            "description": "A specification for a vertex in a resource graph."
+          }
+        ]
+      },
+      "Entity": {
+        "type": "object",
+        "description": "Base entity schema for use in TMForum Open-APIs. Property.",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "$ref": "#/components/schemas/Addressable"
+          }
+        ]
+      },
+      "EntityRef": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "$ref": "#/components/schemas/Addressable"
+          },
+          {
+            "required": [
+              "id"
+            ],
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "The identifier of the referred entity."
+              },
+              "href": {
+                "type": "string",
+                "description": "The URI of the referred entity.",
+                "format": "uri"
+              },
+              "name": {
+                "type": "string",
+                "description": "Name of the referred entity."
+              },
+              "@referredType": {
+                "type": "string",
+                "description": "The actual type of the target instance when needed for disambiguation."
+              }
+            },
+            "description": "Entity reference schema to be use for all entityRef class."
+          }
+        ]
+      },
+      "EntityRef_FVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible_FVO"
+          },
+          {
+            "$ref": "#/components/schemas/Addressable_FVO"
+          },
+          {
+            "required": [
+              "id"
+            ],
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "The identifier of the referred entity."
+              },
+              "href": {
+                "type": "string",
+                "description": "The URI of the referred entity.",
+                "format": "uri"
+              },
+              "name": {
+                "type": "string",
+                "description": "Name of the referred entity."
+              },
+              "@referredType": {
+                "type": "string",
+                "description": "The actual type of the target instance when needed for disambiguation."
+              }
+            },
+            "description": "Entity reference schema to be use for all entityRef class."
+          }
+        ]
+      },
+      "Entity_FVO": {
+        "type": "object",
+        "description": "Base entity schema for use in TMForum Open-APIs. Property.",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible_FVO"
+          },
+          {
+            "$ref": "#/components/schemas/Addressable_FVO"
+          }
+        ]
+      },
+      "Entity_MVO": {
+        "type": "object",
+        "description": "Base entity schema for use in TMForum Open-APIs. Property.",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          }
+        ]
+      },
+      "Extensible": {
+        "required": [
+          "@type"
+        ],
+        "type": "object",
+        "properties": {
+          "@type": {
+            "type": "string",
+            "description": "When sub-classing, this defines the sub-class Extensible name"
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class"
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships"
+          }
+        },
+        "description": "Base Extensible schema for use in TMForum Open-APIs - When used for in a schema it means that the Entity described by the schema  MUST be extended with the @type"
+      },
+      "Extensible_FVO": {
+        "required": [
+          "@type"
+        ],
+        "type": "object",
+        "properties": {
+          "@type": {
+            "type": "string",
+            "description": "When sub-classing, this defines the sub-class Extensible name"
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class"
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships"
+          }
+        },
+        "description": "Base Extensible schema for use in TMForum Open-APIs - When used for in a schema it means that the Entity described by the schema  MUST be extended with the @type"
+      },
+      "ExternalIdentifier": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "ExternalIdentifier": "#/components/schemas/ExternalIdentifier"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "owner": {
+                "type": "string",
+                "description": "Name of the external system that owns the entity.",
+                "example": "MagentoCommerce"
+              },
+              "externalIdentifierType": {
+                "type": "string",
+                "description": "Type of the identification, typically would be the type of the entity within the external system",
+                "example": "ProductOrder"
+              },
+              "id": {
+                "type": "string",
+                "description": "identification of the entity within the external system."
+              }
+            },
+            "description": "An identification of an entity that is owned by or originates in a software system different from the current system, for example a ProductOrder handed off from a commerce platform into an order handling system. The structure identifies the system itself, the nature of the entity within the system (e.g. class name) and the unique ID of the entity within the system. It is anticipated that multiple external IDs can be held for a single entity, e.g. if the entity passed through multiple systems on the way to the current system. In this case the consumer is expected to sequence the IDs in the array in reverse order of provenance, i.e. most recent system first in the list."
+          }
+        ]
+      },
+      "ExternalIdentifier_FVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "ExternalIdentifier": "#/components/schemas/ExternalIdentifier_FVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible_FVO"
+          },
+          {
+            "required": [
+              "id"
+            ],
+            "type": "object",
+            "properties": {
+              "owner": {
+                "type": "string",
+                "description": "Name of the external system that owns the entity.",
+                "example": "MagentoCommerce"
+              },
+              "externalIdentifierType": {
+                "type": "string",
+                "description": "Type of the identification, typically would be the type of the entity within the external system",
+                "example": "ProductOrder"
+              },
+              "id": {
+                "type": "string",
+                "description": "identification of the entity within the external system."
+              }
+            },
+            "description": "An identification of an entity that is owned by or originates in a software system different from the current system, for example a ProductOrder handed off from a commerce platform into an order handling system. The structure identifies the system itself, the nature of the entity within the system (e.g. class name) and the unique ID of the entity within the system. It is anticipated that multiple external IDs can be held for a single entity, e.g. if the entity passed through multiple systems on the way to the current system. In this case the consumer is expected to sequence the IDs in the array in reverse order of provenance, i.e. most recent system first in the list."
+          }
+        ]
+      },
+      "ExternalIdentifier_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "ExternalIdentifier": "#/components/schemas/ExternalIdentifier_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "owner": {
+                "type": "string",
+                "description": "Name of the external system that owns the entity.",
+                "example": "MagentoCommerce"
+              },
+              "externalIdentifierType": {
+                "type": "string",
+                "description": "Type of the identification, typically would be the type of the entity within the external system",
+                "example": "ProductOrder"
+              },
+              "id": {
+                "type": "string",
+                "description": "identification of the entity within the external system."
+              }
+            },
+            "description": "An identification of an entity that is owned by or originates in a software system different from the current system, for example a ProductOrder handed off from a commerce platform into an order handling system. The structure identifies the system itself, the nature of the entity within the system (e.g. class name) and the unique ID of the entity within the system. It is anticipated that multiple external IDs can be held for a single entity, e.g. if the entity passed through multiple systems on the way to the current system. In this case the consumer is expected to sequence the IDs in the array in reverse order of provenance, i.e. most recent system first in the list."
+          }
+        ]
+      },
+      "FeatureSpecification": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "FeatureSpecification": "#/components/schemas/FeatureSpecification"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "version": {
+                "type": "string",
+                "description": "Version of the feature specification"
+              },
+              "id": {
+                "type": "string",
+                "description": "feature identifier"
+              },
+              "isBundle": {
+                "type": "boolean",
+                "description": "A flag indicating if this is a feature group (true) or not (false)"
+              },
+              "validFor": {
+                "$ref": "#/components/schemas/TimePeriod"
+              },
+              "featureSpecRelationship": {
+                "type": "array",
+                "description": "A dependency, exclusivity or aggratation relationship between/among feature specifications.",
+                "items": {
+                  "$ref": "#/components/schemas/FeatureSpecificationRelationship"
+                }
+              },
+              "policyConstraint": {
+                "type": "array",
+                "description": "Reference to mangage a list of feature specification policy constraints",
+                "items": {
+                  "$ref": "#/components/schemas/PolicyRef"
+                }
+              },
+              "isEnabled": {
+                "type": "boolean",
+                "description": "A flag indicating if the feature is enabled (true) or not (false)"
+              },
+              "featureSpecCharacteristic": {
+                "type": "array",
+                "description": "This is a list of characteristics for a particular feature",
+                "items": {
+                  "$ref": "#/components/schemas/CharacteristicSpecification"
+                }
+              },
+              "name": {
+                "type": "string",
+                "description": "This is the name for the feature."
+              }
+            },
+            "description": "Specification for an entity features"
+          }
+        ]
+      },
+      "FeatureSpecificationRelationship": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "FeatureSpecificationRelationship": "#/components/schemas/FeatureSpecificationRelationship"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "relationshipType": {
+                "type": "string",
+                "description": "This is the type of the feature specification relationship.",
+                "enum": [
+                  "excluded",
+                  "includes",
+                  "may include",
+                  "requires"
+                ]
+              },
+              "featureId": {
+                "type": "string",
+                "description": "Unique identifier of the target feature specification."
+              },
+              "parentSpecificationId": {
+                "type": "string",
+                "description": "Unique identifier of the parent specification containing the target feature"
+              },
+              "parentSpecificationHref": {
+                "type": "string",
+                "description": "Hyperlink reference to the parent specification containing the target feature",
+                "format": "uri"
+              },
+              "name": {
+                "type": "string",
+                "description": "This is the name of the target feature specification."
+              },
+              "validFor": {
+                "$ref": "#/components/schemas/TimePeriod"
+              }
+            },
+            "description": "Relationship between feature specifications"
+          }
+        ]
+      },
+      "FeatureSpecificationRelationship_FVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "FeatureSpecificationRelationship": "#/components/schemas/FeatureSpecificationRelationship_FVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible_FVO"
+          },
+          {
+            "required": [
+              "name",
+              "relationshipType"
+            ],
+            "type": "object",
+            "properties": {
+              "relationshipType": {
+                "type": "string",
+                "description": "This is the type of the feature specification relationship.",
+                "enum": [
+                  "excluded",
+                  "includes",
+                  "may include",
+                  "requires"
+                ]
+              },
+              "featureId": {
+                "type": "string",
+                "description": "Unique identifier of the target feature specification."
+              },
+              "parentSpecificationId": {
+                "type": "string",
+                "description": "Unique identifier of the parent specification containing the target feature"
+              },
+              "parentSpecificationHref": {
+                "type": "string",
+                "description": "Hyperlink reference to the parent specification containing the target feature",
+                "format": "uri"
+              },
+              "name": {
+                "type": "string",
+                "description": "This is the name of the target feature specification."
+              },
+              "validFor": {
+                "$ref": "#/components/schemas/TimePeriod"
+              }
+            },
+            "description": "Relationship between feature specifications"
+          }
+        ]
+      },
+      "FeatureSpecificationRelationship_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "FeatureSpecificationRelationship": "#/components/schemas/FeatureSpecificationRelationship_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "required": [
+              "name",
+              "relationshipType"
+            ],
+            "type": "object",
+            "properties": {
+              "relationshipType": {
+                "type": "string",
+                "description": "This is the type of the feature specification relationship.",
+                "enum": [
+                  "excluded",
+                  "includes",
+                  "may include",
+                  "requires"
+                ]
+              },
+              "featureId": {
+                "type": "string",
+                "description": "Unique identifier of the target feature specification."
+              },
+              "parentSpecificationId": {
+                "type": "string",
+                "description": "Unique identifier of the parent specification containing the target feature"
+              },
+              "parentSpecificationHref": {
+                "type": "string",
+                "description": "Hyperlink reference to the parent specification containing the target feature",
+                "format": "uri"
+              },
+              "name": {
+                "type": "string",
+                "description": "This is the name of the target feature specification."
+              },
+              "validFor": {
+                "$ref": "#/components/schemas/TimePeriod"
+              }
+            },
+            "description": "Relationship between feature specifications"
+          }
+        ]
+      },
+      "FeatureSpecification_FVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "FeatureSpecification": "#/components/schemas/FeatureSpecification_FVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible_FVO"
+          },
+          {
+            "required": [
+              "@type",
+              "name"
+            ],
+            "type": "object",
+            "properties": {
+              "version": {
+                "type": "string",
+                "description": "Version of the feature specification"
+              },
+              "id": {
+                "type": "string",
+                "description": "feature identifier"
+              },
+              "isBundle": {
+                "type": "boolean",
+                "description": "A flag indicating if this is a feature group (true) or not (false)"
+              },
+              "validFor": {
+                "$ref": "#/components/schemas/TimePeriod"
+              },
+              "featureSpecRelationship": {
+                "type": "array",
+                "description": "A dependency, exclusivity or aggratation relationship between/among feature specifications.",
+                "items": {
+                  "$ref": "#/components/schemas/FeatureSpecificationRelationship_FVO"
+                }
+              },
+              "policyConstraint": {
+                "type": "array",
+                "description": "Reference to mangage a list of feature specification policy constraints",
+                "items": {
+                  "$ref": "#/components/schemas/PolicyRef_FVO"
+                }
+              },
+              "isEnabled": {
+                "type": "boolean",
+                "description": "A flag indicating if the feature is enabled (true) or not (false)"
+              },
+              "featureSpecCharacteristic": {
+                "type": "array",
+                "description": "This is a list of characteristics for a particular feature",
+                "items": {
+                  "$ref": "#/components/schemas/CharacteristicSpecification_FVO"
+                }
+              },
+              "name": {
+                "type": "string",
+                "description": "This is the name for the feature."
+              }
+            },
+            "description": "Specification for an entity features"
+          }
+        ]
+      },
+      "FeatureSpecification_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "FeatureSpecification": "#/components/schemas/FeatureSpecification_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "required": [
+              "@type",
+              "name"
+            ],
+            "type": "object",
+            "properties": {
+              "version": {
+                "type": "string",
+                "description": "Version of the feature specification"
+              },
+              "id": {
+                "type": "string",
+                "description": "feature identifier"
+              },
+              "isBundle": {
+                "type": "boolean",
+                "description": "A flag indicating if this is a feature group (true) or not (false)"
+              },
+              "validFor": {
+                "$ref": "#/components/schemas/TimePeriod"
+              },
+              "featureSpecRelationship": {
+                "type": "array",
+                "description": "A dependency, exclusivity or aggratation relationship between/among feature specifications.",
+                "items": {
+                  "$ref": "#/components/schemas/FeatureSpecificationRelationship_MVO"
+                }
+              },
+              "policyConstraint": {
+                "type": "array",
+                "description": "Reference to mangage a list of feature specification policy constraints",
+                "items": {
+                  "$ref": "#/components/schemas/PolicyRef_MVO"
+                }
+              },
+              "isEnabled": {
+                "type": "boolean",
+                "description": "A flag indicating if the feature is enabled (true) or not (false)"
+              },
+              "featureSpecCharacteristic": {
+                "type": "array",
+                "description": "This is a list of characteristics for a particular feature",
+                "items": {
+                  "$ref": "#/components/schemas/CharacteristicSpecification_MVO"
+                }
+              },
+              "name": {
+                "type": "string",
+                "description": "This is the name for the feature."
+              }
+            },
+            "description": "Specification for an entity features"
+          }
+        ]
+      },
+      "IntentSpecificationRef": {
+        "type": "object",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "IntentSpecificationRef": "#/components/schemas/IntentSpecificationRef"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          }
+        ]
+      },
+      "IntentSpecificationRef_FVO": {
+        "type": "object",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "IntentSpecificationRef": "#/components/schemas/IntentSpecificationRef_FVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef_FVO"
+          }
+        ]
+      },
+      "IntentSpecificationRef_MVO": {
+        "type": "object",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "IntentSpecificationRef": "#/components/schemas/IntentSpecificationRef_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          }
+        ]
+      },
+      "LogicalResourceSpecification": {
+        "type": "object",
+        "description": "This is a derived class of ResourceSpecification, and is used to define the invariant characteristics and behavior (attributes, methods, constraints, and relationships) of a LogicalResource.",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ResourceSpecification"
+          }
+        ]
+      },
+      "PartyRef": {
+        "type": "object",
+        "description": "A Party reference",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "PartyRef": "#/components/schemas/PartyRef"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          }
+        ]
+      },
+      "PartyRefOrPartyRoleRef": {
+        "type": "object",
+        "description": "",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "PartyRef": "#/components/schemas/PartyRef",
+            "PartyRoleRef": "#/components/schemas/PartyRoleRef"
+          }
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/PartyRef"
+          },
+          {
+            "$ref": "#/components/schemas/PartyRoleRef"
+          }
+        ]
+      },
+      "PartyRefOrPartyRoleRef_FVO": {
+        "type": "object",
+        "description": "",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "PartyRef": "#/components/schemas/PartyRef_FVO",
+            "PartyRoleRef": "#/components/schemas/PartyRoleRef_FVO"
+          }
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/PartyRef_FVO"
+          },
+          {
+            "$ref": "#/components/schemas/PartyRoleRef_FVO"
+          }
+        ]
+      },
+      "PartyRefOrPartyRoleRef_MVO": {
+        "type": "object",
+        "description": "",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "PartyRef": "#/components/schemas/PartyRef_MVO",
+            "PartyRoleRef": "#/components/schemas/PartyRoleRef_MVO"
+          }
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/PartyRef_MVO"
+          },
+          {
+            "$ref": "#/components/schemas/PartyRoleRef_MVO"
+          }
+        ]
+      },
+      "PartyRef_FVO": {
+        "type": "object",
+        "description": "A Party reference",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "PartyRef": "#/components/schemas/PartyRef_FVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef_FVO"
+          }
+        ]
+      },
+      "PartyRef_MVO": {
+        "type": "object",
+        "description": "A Party reference",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "PartyRef": "#/components/schemas/PartyRef_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          }
+        ]
+      },
+      "PartyRoleRef": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "PartyRoleRef": "#/components/schemas/PartyRoleRef"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "partyId": {
+                "type": "string",
+                "description": "The identifier of the engaged party that is linked to the PartyRole object."
+              },
+              "partyName": {
+                "type": "string",
+                "description": "The name of the engaged party that is linked to the PartyRole object."
+              }
+            },
+            "description": "Party role reference. A party role represents the part played by a party in a given context."
+          }
+        ]
+      },
+      "PartyRoleRef_FVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "PartyRoleRef": "#/components/schemas/PartyRoleRef_FVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef_FVO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "partyId": {
+                "type": "string",
+                "description": "The identifier of the engaged party that is linked to the PartyRole object."
+              },
+              "partyName": {
+                "type": "string",
+                "description": "The name of the engaged party that is linked to the PartyRole object."
+              }
+            },
+            "description": "Party role reference. A party role represents the part played by a party in a given context."
+          }
+        ]
+      },
+      "PartyRoleRef_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "PartyRoleRef": "#/components/schemas/PartyRoleRef_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "partyId": {
+                "type": "string",
+                "description": "The identifier of the engaged party that is linked to the PartyRole object."
+              },
+              "partyName": {
+                "type": "string",
+                "description": "The name of the engaged party that is linked to the PartyRole object."
+              }
+            },
+            "description": "Party role reference. A party role represents the part played by a party in a given context."
+          }
+        ]
+      },
+      "PhysicalResourceSpecification": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ResourceSpecification"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "model": {
+                "type": "string",
+                "description": "This is a string that represents a manufacturer-allocated number used to identify the general type and/or category of the hardware item. This, in combination with the Part and the Vendor, identify different types of hardware items. The SerialNumber can then be used to differentiate between different instances of the same type of hardware item. This is an optional attribute."
+              },
+              "part": {
+                "type": "string",
+                "description": "This is a string that defines a manufacturer-allocated part number assigned by the organization that manufactures the hardware item. This, in combination with the Model and the Vendor, identify different types of hardware items. The SerialNumber can then be used to differentiate between different instances of the same type of hardware item. This is a REQUIRED attribute."
+              },
+              "sku": {
+                "type": "string",
+                "description": "This is a string that defines the manufacturer-allocated Stock Keeping Unit (SKU) number of the hardware item. This is an optional attribute."
+              },
+              "vendor": {
+                "type": "string",
+                "description": "This is a string that defines the name of the manufacturer. This, in combination with the Model and the Part, identify different types of hardware items. The SerialNumber can then be used to differentiate between different instances of the same type of hardware item. This is a REQUIRED attribute for a physical resource."
+              }
+            },
+            "description": "This is a derived class of ResourceSpecification, and is used to define the invariant characteristics and behavior (attributes, methods, constraints, and relationships) of a PhysicalResource."
+          }
+        ]
+      },
+      "PolicyRef": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "PolicyRef": "#/components/schemas/PolicyRef"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "unique identifier"
+              },
+              "href": {
+                "type": "string",
+                "description": "Hyperlink reference",
+                "format": "uri"
+              },
+              "version": {
+                "type": "string"
+              },
+              "@type": {
+                "type": "string",
+                "description": "When sub-classing, this defines the sub-class Extensible name"
+              },
+              "@baseType": {
+                "type": "string",
+                "description": "When sub-classing, this defines the super-class"
+              },
+              "@schemaLocation": {
+                "type": "string",
+                "description": "A URI to a JSON-Schema file that defines additional attributes and relationships"
+              }
+            },
+            "description": "Reference to managed Policy object"
+          }
+        ]
+      },
+      "PolicyRef_FVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "PolicyRef": "#/components/schemas/PolicyRef_FVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef_FVO"
+          },
+          {
+            "required": [
+              "id"
+            ],
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "unique identifier"
+              },
+              "href": {
+                "type": "string",
+                "description": "Hyperlink reference",
+                "format": "uri"
+              },
+              "version": {
+                "type": "string"
+              },
+              "@type": {
+                "type": "string",
+                "description": "When sub-classing, this defines the sub-class Extensible name"
+              },
+              "@baseType": {
+                "type": "string",
+                "description": "When sub-classing, this defines the super-class"
+              },
+              "@schemaLocation": {
+                "type": "string",
+                "description": "A URI to a JSON-Schema file that defines additional attributes and relationships"
+              }
+            },
+            "description": "Reference to managed Policy object"
+          }
+        ]
+      },
+      "PolicyRef_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "PolicyRef": "#/components/schemas/PolicyRef_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "unique identifier"
+              },
+              "href": {
+                "type": "string",
+                "description": "Hyperlink reference",
+                "format": "uri"
+              },
+              "version": {
+                "type": "string"
+              },
+              "@type": {
+                "type": "string",
+                "description": "When sub-classing, this defines the sub-class Extensible name"
+              },
+              "@baseType": {
+                "type": "string",
+                "description": "When sub-classing, this defines the super-class"
+              },
+              "@schemaLocation": {
+                "type": "string",
+                "description": "A URI to a JSON-Schema file that defines additional attributes and relationships"
+              }
+            },
+            "description": "Reference to managed Policy object"
+          }
+        ]
+      },
+      "RelatedPartyRefOrPartyRoleRef": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "RelatedPartyRefOrPartyRoleRef": "#/components/schemas/RelatedPartyRefOrPartyRoleRef"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "role": {
+                "type": "string",
+                "description": "Role played by the related party or party role in the context of the specific entity it is linked to. Such as 'initiator', 'customer',  'salesAgent', 'user'"
+              },
+              "partyOrPartyRole": {
+                "$ref": "#/components/schemas/PartyRefOrPartyRoleRef"
+              }
+            },
+            "description": "RelatedParty reference. A related party defines party or party role or its reference, linked to a specific entity"
+          }
+        ]
+      },
+      "RelatedPartyRefOrPartyRoleRef_FVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "RelatedPartyRefOrPartyRoleRef": "#/components/schemas/RelatedPartyRefOrPartyRoleRef_FVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible_FVO"
+          },
+          {
+            "required": [
+              "role"
+            ],
+            "type": "object",
+            "properties": {
+              "role": {
+                "type": "string",
+                "description": "Role played by the related party or party role in the context of the specific entity it is linked to. Such as 'initiator', 'customer',  'salesAgent', 'user'"
+              },
+              "partyOrPartyRole": {
+                "$ref": "#/components/schemas/PartyRefOrPartyRoleRef_FVO"
+              }
+            },
+            "description": "RelatedParty reference. A related party defines party or party role or its reference, linked to a specific entity"
+          }
+        ]
+      },
+      "RelatedPartyRefOrPartyRoleRef_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "RelatedPartyRefOrPartyRoleRef": "#/components/schemas/RelatedPartyRefOrPartyRoleRef_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "role": {
+                "type": "string",
+                "description": "Role played by the related party or party role in the context of the specific entity it is linked to. Such as 'initiator', 'customer',  'salesAgent', 'user'"
+              },
+              "partyOrPartyRole": {
+                "$ref": "#/components/schemas/PartyRefOrPartyRoleRef_MVO"
+              }
+            },
+            "description": "RelatedParty reference. A related party defines party or party role or its reference, linked to a specific entity"
+          }
+        ]
+      },
+      "ResourceFunctionSpecification": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/LogicalResourceSpecification"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "connectionPointSpecification": {
+                "type": "array",
+                "description": "External connection point specifications. These are the service access points (SAP) where inputs and outputs of the function are available.",
+                "items": {
+                  "$ref": "#/components/schemas/ConnectionPointSpecificationRef"
+                }
+              },
+              "connectivitySpecification": {
+                "type": "array",
+                "description": "Internal connectivity potential specifications.",
+                "items": {
+                  "$ref": "#/components/schemas/ResourceGraphSpecification"
+                }
+              }
+            },
+            "description": "Specifies a function as a behavior to transform inputs of any nature into outputs of any nature independently from the way it is provided, for example a Medium to Large Enterprise Firewall."
+          }
+        ]
+      },
+      "ResourceGraphSpecification": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "ResourceGraphSpecification": "#/components/schemas/ResourceGraphSpecification"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Entity"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Descriptive name for the resource graph specification."
+              },
+              "description": {
+                "type": "string",
+                "description": "Description of the resource graph specification."
+              },
+              "graphSpecificationRelationship": {
+                "type": "array",
+                "description": "Relationships to other resource graph specifications.",
+                "items": {
+                  "$ref": "#/components/schemas/ResourceGraphSpecificationRelationship"
+                }
+              },
+              "connectionSpecification": {
+                "type": "array",
+                "description": "Resource graph edge specifications.",
+                "items": {
+                  "$ref": "#/components/schemas/ConnectionSpecification"
+                }
+              }
+            },
+            "description": "Resource graph specification."
+          }
+        ]
+      },
+      "ResourceGraphSpecificationRef": {
+        "type": "object",
+        "description": "Resource graph specification reference.",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "ResourceGraphSpecificationRef": "#/components/schemas/ResourceGraphSpecificationRef"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          }
+        ]
+      },
+      "ResourceGraphSpecificationRelationship": {
+        "type": "object",
+        "properties": {
+          "relationshipType": {
+            "type": "string",
+            "description": "Semantic of the relationship.",
+            "enum": [
+              "adjacency",
+              "connectivity"
+            ]
+          },
+          "resourceGraph": {
+            "$ref": "#/components/schemas/ResourceGraphSpecificationRef"
+          }
+        },
+        "description": "Describes link between resource graph specifications."
+      },
+      "ResourceSpecification": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "ResourceSpecification": "#/components/schemas/ResourceSpecification",
+            "PhysicalResourceSpecification": "#/components/schemas/PhysicalResourceSpecification",
+            "LogicalResourceSpecification": "#/components/schemas/LogicalResourceSpecification",
+            "ResourceFunctionSpecification": "#/components/schemas/ResourceFunctionSpecification"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Entity"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "description": {
+                "type": "string",
+                "description": "Description of this REST resource"
+              },
+              "version": {
+                "type": "string",
+                "description": "Resource Specification version"
+              },
+              "validFor": {
+                "$ref": "#/components/schemas/TimePeriod"
+              },
+              "isBundle": {
+                "type": "boolean",
+                "description": "A flag indicates that if this resource specification is a bundled specification (true) or single (false)."
+              },
+              "lastUpdate": {
+                "type": "string",
+                "description": "Date and time of the last update of this REST resource",
+                "format": "date-time"
+              },
+              "lifecycleStatus": {
+                "type": "string",
+                "description": "Used to indicate the current lifecycle status of the resource specification"
+              },
+              "name": {
+                "type": "string",
+                "description": "Name given to this REST resource"
+              },
+              "category": {
+                "type": "string",
+                "description": "Category of the target resource like NetworkConnectivity, PhysicalLinks, Generic, L2Network and so on."
+              },
+              "targetResourceSchema": {
+                "$ref": "#/components/schemas/TargetResourceSchema"
+              },
+              "featureSpecification": {
+                "type": "array",
+                "description": "A list of Features for this specification.",
+                "items": {
+                  "$ref": "#/components/schemas/FeatureSpecification"
+                }
+              },
+              "attachment": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/AttachmentOrDocumentRef"
+                }
+              },
+              "relatedParty": {
+                "type": "array",
+                "description": "A related party defines party or party role linked to a specific entity.",
+                "items": {
+                  "$ref": "#/components/schemas/RelatedPartyRefOrPartyRoleRef"
+                }
+              },
+              "resourceSpecCharacteristic": {
+                "type": "array",
+                "description": "A characteristic quality or distinctive feature of a ResourceSpecification.  The characteristic can be take on a discrete value, such as color, can take on a range of values, (for example, sensitivity of 100-240 mV), or can be derived from a formula (for example, usage time (hrs) = 30 - talk time *3). Certain characteristics, such as color, may be configured during the ordering or some other process.",
+                "items": {
+                  "$ref": "#/components/schemas/CharacteristicSpecification"
+                }
+              },
+              "resourceSpecRelationship": {
+                "type": "array",
+                "description": "A migration, substitution, dependency or exclusivity relationship between/among resource specifications.",
+                "items": {
+                  "$ref": "#/components/schemas/ResourceSpecificationRelationship"
+                }
+              },
+              "intentSpecification": {
+                "$ref": "#/components/schemas/IntentSpecificationRef"
+              },
+              "externalIdentifier": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ExternalIdentifier"
+                }
+              }
+            },
+            "description": "Resources are physical or non-physical components (or some combination of these) within an enterprise's infrastructure or inventory. They are typically consumed or used by services (for example a physical port assigned to a service) or contribute to the realization of a Product (for example, a SIM card). They can be drawn from the Application, Computing and Network domains, and include, for example, Network Elements, software, IT systems, content and information, and technology components.\nA ResourceSpecification is a base class that represents a generic means for implementing a particular type of Resource. In essence, a ResourceSpecification defines the common attributes and relationships of a set of related Resources, while Resource defines a specific instance that is based on a particular ResourceSpecification."
+          }
+        ]
+      },
+      "ResourceSpecificationRelationship": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "ResourceSpecificationRelationship": "#/components/schemas/ResourceSpecificationRelationship"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "relationshipType": {
+                "type": "string",
+                "description": "Type of relationship such as migration, substitution, dependency, exclusivity"
+              },
+              "role": {
+                "type": "string",
+                "description": "The association role for this resource specification"
+              },
+              "id": {
+                "type": "string",
+                "description": "Unique identifier of target ResourceSpecification"
+              },
+              "href": {
+                "type": "string",
+                "description": "Reference of the target ResourceSpecification",
+                "format": "uri"
+              },
+              "name": {
+                "type": "string",
+                "description": "The name given to the target resource specification instance"
+              },
+              "defaultQuantity": {
+                "type": "integer",
+                "description": "The default number of the related resource that should be instantiated, for example a rack would typically have 4 cards, although it could support more."
+              },
+              "maximumQuantity": {
+                "type": "integer",
+                "description": "The maximum number of the related resource that should be instantiated, for example a rack supports a maximum of 16 cards"
+              },
+              "minimumQuantity": {
+                "type": "integer",
+                "description": "The minimum number of the related resource that should be instantiated, for example a rack must have at least 1 card"
+              },
+              "characteristic": {
+                "type": "array",
+                "description": "A characteristic that refines the relationship. For example, consider the relationship between a slot and a card. For a half-height card it is important to know the position at which the card is inserted, so a characteristic Position might be defined on the relationship to allow capturing of this in the inventory",
+                "items": {
+                  "$ref": "#/components/schemas/CharacteristicSpecification"
+                }
+              },
+              "validFor": {
+                "$ref": "#/components/schemas/TimePeriod"
+              }
+            },
+            "description": "A migration, substitution, dependency or exclusivity relationship between/among resource specifications."
+          }
+        ]
+      },
+      "ResourceSpecificationRelationship_FVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "ResourceSpecificationRelationship": "#/components/schemas/ResourceSpecificationRelationship_FVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible_FVO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "relationshipType": {
+                "type": "string",
+                "description": "Type of relationship such as migration, substitution, dependency, exclusivity"
+              },
+              "role": {
+                "type": "string",
+                "description": "The association role for this resource specification"
+              },
+              "id": {
+                "type": "string",
+                "description": "Unique identifier of target ResourceSpecification"
+              },
+              "href": {
+                "type": "string",
+                "description": "Reference of the target ResourceSpecification",
+                "format": "uri"
+              },
+              "name": {
+                "type": "string",
+                "description": "The name given to the target resource specification instance"
+              },
+              "defaultQuantity": {
+                "type": "integer",
+                "description": "The default number of the related resource that should be instantiated, for example a rack would typically have 4 cards, although it could support more."
+              },
+              "maximumQuantity": {
+                "type": "integer",
+                "description": "The maximum number of the related resource that should be instantiated, for example a rack supports a maximum of 16 cards"
+              },
+              "minimumQuantity": {
+                "type": "integer",
+                "description": "The minimum number of the related resource that should be instantiated, for example a rack must have at least 1 card"
+              },
+              "characteristic": {
+                "type": "array",
+                "description": "A characteristic that refines the relationship. For example, consider the relationship between a slot and a card. For a half-height card it is important to know the position at which the card is inserted, so a characteristic Position might be defined on the relationship to allow capturing of this in the inventory",
+                "items": {
+                  "$ref": "#/components/schemas/CharacteristicSpecification_FVO"
+                }
+              },
+              "validFor": {
+                "$ref": "#/components/schemas/TimePeriod"
+              }
+            },
+            "description": "A migration, substitution, dependency or exclusivity relationship between/among resource specifications."
+          }
+        ]
+      },
+      "ResourceSpecificationRelationship_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "ResourceSpecificationRelationship": "#/components/schemas/ResourceSpecificationRelationship_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "relationshipType": {
+                "type": "string",
+                "description": "Type of relationship such as migration, substitution, dependency, exclusivity"
+              },
+              "role": {
+                "type": "string",
+                "description": "The association role for this resource specification"
+              },
+              "id": {
+                "type": "string",
+                "description": "Unique identifier of target ResourceSpecification"
+              },
+              "href": {
+                "type": "string",
+                "description": "Reference of the target ResourceSpecification",
+                "format": "uri"
+              },
+              "name": {
+                "type": "string",
+                "description": "The name given to the target resource specification instance"
+              },
+              "defaultQuantity": {
+                "type": "integer",
+                "description": "The default number of the related resource that should be instantiated, for example a rack would typically have 4 cards, although it could support more."
+              },
+              "maximumQuantity": {
+                "type": "integer",
+                "description": "The maximum number of the related resource that should be instantiated, for example a rack supports a maximum of 16 cards"
+              },
+              "minimumQuantity": {
+                "type": "integer",
+                "description": "The minimum number of the related resource that should be instantiated, for example a rack must have at least 1 card"
+              },
+              "characteristic": {
+                "type": "array",
+                "description": "A characteristic that refines the relationship. For example, consider the relationship between a slot and a card. For a half-height card it is important to know the position at which the card is inserted, so a characteristic Position might be defined on the relationship to allow capturing of this in the inventory",
+                "items": {
+                  "$ref": "#/components/schemas/CharacteristicSpecification_MVO"
+                }
+              },
+              "validFor": {
+                "$ref": "#/components/schemas/TimePeriod"
+              }
+            },
+            "description": "A migration, substitution, dependency or exclusivity relationship between/among resource specifications."
+          }
+        ]
+      },
+      "ResourceSpecification_FVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "ResourceSpecification": "#/components/schemas/ResourceSpecification_FVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Entity_FVO"
+          },
+          {
+            "required": [
+              "name"
+            ],
+            "type": "object",
+            "properties": {
+              "description": {
+                "type": "string",
+                "description": "Description of this REST resource"
+              },
+              "version": {
+                "type": "string",
+                "description": "Resource Specification version"
+              },
+              "validFor": {
+                "$ref": "#/components/schemas/TimePeriod"
+              },
+              "isBundle": {
+                "type": "boolean",
+                "description": "A flag indicates that if this resource specification is a bundled specification (true) or single (false)."
+              },
+              "lastUpdate": {
+                "type": "string",
+                "description": "Date and time of the last update of this REST resource",
+                "format": "date-time"
+              },
+              "lifecycleStatus": {
+                "type": "string",
+                "description": "Used to indicate the current lifecycle status of the resource specification"
+              },
+              "name": {
+                "type": "string",
+                "description": "Name given to this REST resource"
+              },
+              "category": {
+                "type": "string",
+                "description": "Category of the target resource like NetworkConnectivity, PhysicalLinks, Generic, L2Network and so on."
+              },
+              "targetResourceSchema": {
+                "$ref": "#/components/schemas/TargetResourceSchema_FVO"
+              },
+              "featureSpecification": {
+                "type": "array",
+                "description": "A list of Features for this specification.",
+                "items": {
+                  "$ref": "#/components/schemas/FeatureSpecification_FVO"
+                }
+              },
+              "attachment": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/AttachmentOrDocumentRef"
+                }
+              },
+              "relatedParty": {
+                "type": "array",
+                "description": "A related party defines party or party role linked to a specific entity.",
+                "items": {
+                  "$ref": "#/components/schemas/RelatedPartyRefOrPartyRoleRef_FVO"
+                }
+              },
+              "resourceSpecCharacteristic": {
+                "type": "array",
+                "description": "A characteristic quality or distinctive feature of a ResourceSpecification.  The characteristic can be take on a discrete value, such as color, can take on a range of values, (for example, sensitivity of 100-240 mV), or can be derived from a formula (for example, usage time (hrs) = 30 - talk time *3). Certain characteristics, such as color, may be configured during the ordering or some other process.",
+                "items": {
+                  "$ref": "#/components/schemas/CharacteristicSpecification_FVO"
+                }
+              },
+              "resourceSpecRelationship": {
+                "type": "array",
+                "description": "A migration, substitution, dependency or exclusivity relationship between/among resource specifications.",
+                "items": {
+                  "$ref": "#/components/schemas/ResourceSpecificationRelationship_FVO"
+                }
+              },
+              "intentSpecification": {
+                "$ref": "#/components/schemas/IntentSpecificationRef_FVO"
+              },
+              "externalIdentifier": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ExternalIdentifier_FVO"
+                }
+              }
+            },
+            "description": "Resources are physical or non-physical components (or some combination of these) within an enterprise's infrastructure or inventory. They are typically consumed or used by services (for example a physical port assigned to a service) or contribute to the realization of a Product (for example, a SIM card). They can be drawn from the Application, Computing and Network domains, and include, for example, Network Elements, software, IT systems, content and information, and technology components.\nA ResourceSpecification is a base class that represents a generic means for implementing a particular type of Resource. In essence, a ResourceSpecification defines the common attributes and relationships of a set of related Resources, while Resource defines a specific instance that is based on a particular ResourceSpecification."
+          }
+        ]
+      },
+      "ResourceSpecification_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "ResourceSpecification": "#/components/schemas/ResourceSpecification_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Entity_MVO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "description": {
+                "type": "string",
+                "description": "Description of this REST resource"
+              },
+              "version": {
+                "type": "string",
+                "description": "Resource Specification version"
+              },
+              "validFor": {
+                "$ref": "#/components/schemas/TimePeriod"
+              },
+              "isBundle": {
+                "type": "boolean",
+                "description": "A flag indicates that if this resource specification is a bundled specification (true) or single (false)."
+              },
+              "lastUpdate": {
+                "type": "string",
+                "description": "Date and time of the last update of this REST resource",
+                "format": "date-time"
+              },
+              "lifecycleStatus": {
+                "type": "string",
+                "description": "Used to indicate the current lifecycle status of the resource specification"
+              },
+              "name": {
+                "type": "string",
+                "description": "Name given to this REST resource"
+              },
+              "category": {
+                "type": "string",
+                "description": "Category of the target resource like NetworkConnectivity, PhysicalLinks, Generic, L2Network and so on."
+              },
+              "targetResourceSchema": {
+                "$ref": "#/components/schemas/TargetResourceSchema_MVO"
+              },
+              "featureSpecification": {
+                "type": "array",
+                "description": "A list of Features for this specification.",
+                "items": {
+                  "$ref": "#/components/schemas/FeatureSpecification_MVO"
+                }
+              },
+              "attachment": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/AttachmentOrDocumentRef"
+                }
+              },
+              "relatedParty": {
+                "type": "array",
+                "description": "A related party defines party or party role linked to a specific entity.",
+                "items": {
+                  "$ref": "#/components/schemas/RelatedPartyRefOrPartyRoleRef_MVO"
+                }
+              },
+              "resourceSpecCharacteristic": {
+                "type": "array",
+                "description": "A characteristic quality or distinctive feature of a ResourceSpecification.  The characteristic can be take on a discrete value, such as color, can take on a range of values, (for example, sensitivity of 100-240 mV), or can be derived from a formula (for example, usage time (hrs) = 30 - talk time *3). Certain characteristics, such as color, may be configured during the ordering or some other process.",
+                "items": {
+                  "$ref": "#/components/schemas/CharacteristicSpecification_MVO"
+                }
+              },
+              "resourceSpecRelationship": {
+                "type": "array",
+                "description": "A migration, substitution, dependency or exclusivity relationship between/among resource specifications.",
+                "items": {
+                  "$ref": "#/components/schemas/ResourceSpecificationRelationship_MVO"
+                }
+              },
+              "intentSpecification": {
+                "$ref": "#/components/schemas/IntentSpecificationRef_MVO"
+              },
+              "externalIdentifier": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ExternalIdentifier_MVO"
+                }
+              }
+            },
+            "description": "Resources are physical or non-physical components (or some combination of these) within an enterprise's infrastructure or inventory. They are typically consumed or used by services (for example a physical port assigned to a service) or contribute to the realization of a Product (for example, a SIM card). They can be drawn from the Application, Computing and Network domains, and include, for example, Network Elements, software, IT systems, content and information, and technology components.\nA ResourceSpecification is a base class that represents a generic means for implementing a particular type of Resource. In essence, a ResourceSpecification defines the common attributes and relationships of a set of related Resources, while Resource defines a specific instance that is based on a particular ResourceSpecification."
+          }
+        ]
+      },
+      "TargetResourceSchema": {
+        "type": "object",
+        "properties": {
+          "@type": {
+            "type": "string",
+            "description": "Class type of the target resource"
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "This field provides a link to the schema describing the target resource",
+            "format": "uri"
+          }
+        },
+        "description": "The reference object to the schema and type of target resource which is described by resource specification"
+      },
+      "TargetResourceSchema_FVO": {
+        "required": [
+          "@schemaLocation",
+          "@type"
+        ],
+        "type": "object",
+        "properties": {
+          "@type": {
+            "type": "string",
+            "description": "Class type of the target resource"
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "This field provides a link to the schema describing the target resource",
+            "format": "uri"
+          }
+        },
+        "description": "The reference object to the schema and type of target resource which is described by resource specification"
+      },
+      "TargetResourceSchema_MVO": {
+        "type": "object",
+        "properties": {
+          "@type": {
+            "type": "string",
+            "description": "Class type of the target resource"
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "This field provides a link to the schema describing the target resource",
+            "format": "uri"
+          }
+        },
+        "description": "The reference object to the schema and type of target resource which is described by resource specification"
+      },
+      "TimePeriod": {
+        "type": "object",
+        "properties": {
+          "startDateTime": {
+            "type": "string",
+            "description": "Start of the time period, using IETC-RFC-3339 format",
+            "format": "date-time",
+            "example": "1985-04-12T23:20:50.52Z"
+          },
+          "endDateTime": {
+            "type": "string",
+            "description": "End of the time period, using IETC-RFC-3339 format",
+            "format": "date-time",
+            "example": "1985-04-12T23:20:50.52Z"
+          }
+        },
+        "description": "A period of time, either as a deadline (endDateTime only) a startDateTime only, or both"
+      },
+      "Error": {
+        "description": "Used when an API throws an Error, typically with a HTTP error response-code (3xx, 4xx, 5xx)",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "Error": "#/components/schemas/Error"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "required": [
+              "code",
+              "reason"
+            ],
+            "type": "object",
+            "properties": {
+              "code": {
+                "type": "string",
+                "description": "Application relevant detail, defined in the API or a common list."
+              },
+              "reason": {
+                "type": "string",
+                "description": "Explanation of the reason for the error which can be shown to a client user."
+              },
+              "message": {
+                "type": "string",
+                "description": "More details and corrective actions related to the error which can be shown to a client user."
+              },
+              "status": {
+                "type": "string",
+                "description": "HTTP Error code extension"
+              },
+              "referenceError": {
+                "type": "string",
+                "description": "URI of documentation describing the error."
+              }
+            }
+          }
+        ]
+      },
+      "JsonPatch": {
+        "required": [
+          "op",
+          "path"
+        ],
+        "type": "object",
+        "properties": {
+          "op": {
+            "type": "string",
+            "description": "The operation to be performed",
+            "enum": [
+              "add",
+              "remove",
+              "replace",
+              "move",
+              "copy",
+              "test"
+            ]
+          },
+          "path": {
+            "type": "string",
+            "description": "A JSON-Pointer"
+          },
+          "value": {
+            "description": "The value to be used within the operations."
+          },
+          "from": {
+            "type": "string",
+            "description": "A string containing a JSON Pointer value."
+          }
+        },
+        "description": "A JSONPatch document as defined by RFC 6902"
+      },
+      "JsonPatchOperations": {
+        "type": "array",
+        "description": "JSONPatch Operations document as defined by RFC 6902",
+        "items": {
+          "$ref": "#/components/schemas/JsonPatch"
+        }
+      },
+      "IntegerArrayCharacteristicValueSpecification": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CharacteristicValueSpecification"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                }
+              }
+            },
+            "description": "A specification for a characteristic for which the value is a number array of format integer"
+          }
+        ]
+      },
+      "IntegerArrayCharacteristicValueSpecification_FVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CharacteristicValueSpecification_FVO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                }
+              }
+            },
+            "description": "A specification for a characteristic for which the value is a number array of format integer"
+          }
+        ]
+      },
+      "IntegerArrayCharacteristicValueSpecification_MVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CharacteristicValueSpecification_MVO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                }
+              }
+            },
+            "description": "A specification for a characteristic for which the value is a number array of format integer"
+          }
+        ]
+      },
+      "IntegerCharacteristicValueSpecification": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CharacteristicValueSpecification"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "integer",
+                "description": "Value of the characteristic"
+              }
+            },
+            "description": "A specification for a characteristic for which the value is an integer number"
+          }
+        ]
+      },
+      "IntegerCharacteristicValueSpecification_FVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CharacteristicValueSpecification_FVO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "integer",
+                "description": "Value of the characteristic"
+              }
+            },
+            "description": "A specification for a characteristic for which the value is an integer number"
+          }
+        ]
+      },
+      "IntegerCharacteristicValueSpecification_MVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CharacteristicValueSpecification_MVO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "integer",
+                "description": "Value of the characteristic"
+              }
+            },
+            "description": "A specification for a characteristic for which the value is an integer number"
+          }
+        ]
+      },
+      "MapArrayCharacteristicValueSpecification": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CharacteristicValueSpecification"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "value": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "object"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "A specification for a characteristic for which the value is an array of mapped objects"
+          }
+        ]
+      },
+      "MapArrayCharacteristicValueSpecification_FVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CharacteristicValueSpecification_FVO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "value": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "object"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "A specification for a characteristic for which the value is an array of mapped objects"
+          }
+        ]
+      },
+      "MapArrayCharacteristicValueSpecification_MVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CharacteristicValueSpecification_MVO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "value": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "object"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "A specification for a characteristic for which the value is an array of mapped objects"
+          }
+        ]
+      },
+      "MapCharacteristicValueSpecification": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CharacteristicValueSpecification"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "object"
+                },
+                "description": "Value of the characteristic"
+              }
+            },
+            "description": "A specification for a characteristic for which the value is a mapped object"
+          }
+        ]
+      },
+      "MapCharacteristicValueSpecification_FVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CharacteristicValueSpecification_FVO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "object"
+                },
+                "description": "Value of the characteristic"
+              }
+            },
+            "description": "A specification for a characteristic for which the value is a mapped object"
+          }
+        ]
+      },
+      "MapCharacteristicValueSpecification_MVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CharacteristicValueSpecification_MVO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "object"
+                },
+                "description": "Value of the characteristic"
+              }
+            },
+            "description": "A specification for a characteristic for which the value is a mapped object"
+          }
+        ]
+      },
+      "NumberArrayCharacteristicValueSpecification": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CharacteristicValueSpecification"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                }
+              }
+            },
+            "description": "A specification for a characteristic for which the value is a number array with no specific format "
+          }
+        ]
+      },
+      "NumberArrayCharacteristicValueSpecification_FVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CharacteristicValueSpecification_FVO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                }
+              }
+            },
+            "description": "A specification for a characteristic for which the value is a number array with no specific format "
+          }
+        ]
+      },
+      "NumberArrayCharacteristicValueSpecification_MVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CharacteristicValueSpecification_MVO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                }
+              }
+            },
+            "description": "A specification for a characteristic for which the value is a number array with no specific format "
+          }
+        ]
+      },
+      "NumberCharacteristicValueSpecification": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CharacteristicValueSpecification"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "number",
+                "description": "Value of the characteristic"
+              }
+            },
+            "description": "A specification for a characteristic for which the value is a number of no specific format"
+          }
+        ]
+      },
+      "NumberCharacteristicValueSpecification_FVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CharacteristicValueSpecification_FVO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "number",
+                "description": "Value of the characteristic"
+              }
+            },
+            "description": "A specification for a characteristic for which the value is a number of no specific format"
+          }
+        ]
+      },
+      "NumberCharacteristicValueSpecification_MVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CharacteristicValueSpecification_MVO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "number",
+                "description": "Value of the characteristic"
+              }
+            },
+            "description": "A specification for a characteristic for which the value is a number of no specific format"
+          }
+        ]
+      },
+      "ObjectArrayCharacteristicValueSpecification": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CharacteristicValueSpecification"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "array",
+                "items": {
+                  "type": "object"
+                }
+              }
+            },
+            "description": "A specification for a characteristic for which the value is an array of objects"
+          }
+        ]
+      },
+      "ObjectArrayCharacteristicValueSpecification_FVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CharacteristicValueSpecification_FVO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "array",
+                "items": {
+                  "type": "object"
+                }
+              }
+            },
+            "description": "A specification for a characteristic for which the value is an array of objects"
+          }
+        ]
+      },
+      "ObjectArrayCharacteristicValueSpecification_MVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CharacteristicValueSpecification_MVO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "array",
+                "items": {
+                  "type": "object"
+                }
+              }
+            },
+            "description": "A specification for a characteristic for which the value is an array of objects"
+          }
+        ]
+      },
+      "ObjectCharacteristicValueSpecification": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CharacteristicValueSpecification"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "object",
+                "description": "Value of the characteristic"
+              }
+            },
+            "description": "A specification for a characteristic for which the value is any object"
+          }
+        ]
+      },
+      "ObjectCharacteristicValueSpecification_FVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CharacteristicValueSpecification_FVO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "object",
+                "description": "Value of the characteristic"
+              }
+            },
+            "description": "A specification for a characteristic for which the value is any object"
+          }
+        ]
+      },
+      "ObjectCharacteristicValueSpecification_MVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CharacteristicValueSpecification_MVO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "object",
+                "description": "Value of the characteristic"
+              }
+            },
+            "description": "A specification for a characteristic for which the value is any object"
+          }
+        ]
+      },
+      "StringArrayCharacteristicValueSpecification": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CharacteristicValueSpecification"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "A specification for a characteristic for which the value is an array of strings"
+          }
+        ]
+      },
+      "StringArrayCharacteristicValueSpecification_FVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CharacteristicValueSpecification_FVO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "A specification for a characteristic for which the value is an array of strings"
+          }
+        ]
+      },
+      "StringArrayCharacteristicValueSpecification_MVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CharacteristicValueSpecification_MVO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "A specification for a characteristic for which the value is an array of strings"
+          }
+        ]
+      },
+      "StringCharacteristicValueSpecification": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CharacteristicValueSpecification"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "string",
+                "description": "Value of the characteristic"
+              }
+            },
+            "description": "A specification for a characteristic for which the value is a string"
+          }
+        ]
+      },
+      "StringCharacteristicValueSpecification_FVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CharacteristicValueSpecification_FVO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "string",
+                "description": "Value of the characteristic"
+              }
+            },
+            "description": "A specification for a characteristic for which the value is a string"
+          }
+        ]
+      },
+      "StringCharacteristicValueSpecification_MVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CharacteristicValueSpecification_MVO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "string",
+                "description": "Value of the characteristic"
+              }
+            },
+            "description": "A specification for a characteristic for which the value is a string"
+          }
+        ]
+      }
+    },
+    "responses": {
+      "202": {
+        "description": "Accepted"
+      },
+      "204": {
+        "description": "Deleted"
+      },
+      "400": {
+        "description": "Bad Request",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "401": {
+        "description": "Unauthorized",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "403": {
+        "description": "Forbidden",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "Not Found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "405": {
+        "description": "Method Not allowed",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "409": {
+        "description": "Conflict",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "Internal Server Error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "501": {
+        "description": "Not Implemented",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "503": {
+        "description": "Service Unavailable",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "200ResourceSpecificationArray": {
+        "description": "Success",
+        "headers": {
+          "X-Total-Count": {
+            "$ref": "#/components/headers/X-Total-Count"
+          },
+          "X-Result-Count": {
+            "$ref": "#/components/headers/X-Result-Count"
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/ResourceSpecification"
+              }
+            },
+            "examples": {
+              "ResourceSpecification_list_example": {
+                "$ref": "#/components/examples/ResourceSpecification_list_example_response"
+              }
+            }
+          }
+        }
+      },
+      "200ResourceSpecification_Get": {
+        "description": "Success",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ResourceSpecification"
+            },
+            "examples": {
+              "ResourceSpecification_retrieve_example": {
+                "$ref": "#/components/examples/ResourceSpecification_retrieve_example_response"
+              }
+            }
+          }
+        }
+      },
+      "200ResourceSpecification_Patch": {
+        "description": "Success",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ResourceSpecification"
+            },
+            "examples": {
+              "ResourceSpecification_Update_example_JSON_": {
+                "$ref": "#/components/examples/ResourceSpecification_Update_example_JSON__response"
+              }
+            }
+          },
+          "application/merge-patch+json": {
+            "schema": {
+              "$ref": "#/components/schemas/ResourceSpecification"
+            },
+            "examples": {
+              "ResourceSpecification_Update_example_Merge_": {
+                "$ref": "#/components/examples/ResourceSpecification_Update_example_Merge__response"
+              }
+            }
+          },
+          "application/json-patch+json": {
+            "schema": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/ResourceSpecification"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ResourceSpecification"
+                  }
+                },
+                {
+                  "type": "string",
+                  "nullable": true
+                }
+              ]
+            },
+            "examples": {
+              "ResourceSpecification_Update_example_JSON-PATCH_": {
+                "$ref": "#/components/examples/ResourceSpecification_Update_example_JSON-PATCH__response"
+              }
+            }
+          },
+          "application/json-patch-query+json": {
+            "schema": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/ResourceSpecification"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ResourceSpecification"
+                  }
+                },
+                {
+                  "type": "string",
+                  "nullable": true
+                }
+              ]
+            },
+            "examples": {
+              "ResourceSpecification_Update_example_JSON-PATCH-QUERY_": {
+                "$ref": "#/components/examples/ResourceSpecification_Update_example_JSON-PATCH-QUERY__response"
+              }
+            }
+          }
+        }
+      },
+      "201ResourceSpecification": {
+        "description": "OK/Created",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ResourceSpecification"
+            },
+            "examples": {
+              "ResourceSpecification_create_example_1_characteristic_bnased": {
+                "$ref": "#/components/examples/ResourceSpecification_create_example_1_characteristic_bnased_response"
+              },
+              "ResourceSpecification_create_example_2_schema_based": {
+                "$ref": "#/components/examples/ResourceSpecification_create_example_2_schema_based_response"
+              },
+              "ResourceSpecification_create_example_3_with_intent_specification": {
+                "$ref": "#/components/examples/ResourceSpecification_create_example_3_with_intent_specification_response"
+              }
+            }
+          }
+        }
+      }
+    },
+    "parameters": {
+      "Id": {
+        "name": "id",
+        "in": "path",
+        "description": "Identifier of the Resource",
+        "required": true,
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "Fields": {
+        "name": "fields",
+        "in": "query",
+        "description": "Comma-separated properties to be provided in response",
+        "required": false,
+        "style": "form",
+        "explode": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "Offset": {
+        "name": "offset",
+        "in": "query",
+        "description": "Requested index for start of resources to be provided in response",
+        "required": false,
+        "style": "form",
+        "explode": true,
+        "schema": {
+          "type": "integer"
+        }
+      },
+      "Limit": {
+        "name": "limit",
+        "in": "query",
+        "description": "Requested number of resources to be provided in response",
+        "required": false,
+        "style": "form",
+        "explode": true,
+        "schema": {
+          "type": "integer"
+        }
+      }
+    },
+    "examples": {
+      "ResourceSpecification_list_example_response": {
+        "description": "Here's an example of a request for retrieving multiple resource specifications.",
+        "value": [
+          {
+            "id": "42",
+            "href": "https://mycsp.com:8080/tmf-api/resourceCatalog/v5/resourceSpecification/42",
+            "name": "Virtual Storage Medium",
+            "description": "This resource specification defines the virtual storage medium",
+            "@type": "ResourceSpecification",
+            "@schemaLocation": "https://mycsp.com:8080/tmf-api/schema/Resource/ResourceSpecification.schema.json",
+            "version": "3.2",
+            "validFor": {
+              "startDateTime": "2017-08-12T00:00:00.000Z",
+              "endDateTime": "2018-03-07T00:00:00.000Z"
+            },
+            "lastUpdate": "2017-08-09T00:00:00.000Z",
+            "lifecycleStatus": "Active",
+            "isBundle": false,
+            "category": "Cloud resource",
+            "attachment": [
+              {
+                "id": "25552",
+                "href": "https://mycsp.com:8080/tmf-api/document/v5/attachment/25552",
+                "name": "Configuration Instructions",
+                "mimeType": "application/pdf",
+                "url": "https://mycsp.com:7070/docloader?docnum=9567457677",
+                "@type": "Attachment"
+              }
+            ],
+            "relatedParty": [
+              {
+                "role": "Supplier",
+                "@type": "RelatedPartyRefOrPartyRoleRef",
+                "partyOrPartyRole": {
+                  "id": "5858",
+                  "href": "https://mycsp.com:8080/tmf-api/partyRole/v5/supplier/5858",
+                  "name": "Gustave Flaubert",
+                  "@referredType": "Supplier",
+                  "@type": "PartyRoleRef"
+                }
+              }
+            ],
+            "resourceSpecCharacteristic": [
+              {
+                "name": "Maximum Allowed Storage",
+                "description": "The storage limit in the virtual storage medium, ",
+                "valueType": "integer",
+                "configurable": true,
+                "minCardinality": 1,
+                "maxCardinality": 1,
+                "isUnique": true,
+                "@type": "CharacteristicSpecification",
+                "characteristicValueSpecification": [
+                  {
+                    "value": 1024000,
+                    "@type": "IntegerCharacteristicValueSpecification"
+                  },
+                  {
+                    "value": 2048000,
+                    "@type": "IntegerCharacteristicValueSpecification"
+                  }
+                ]
+              }
+            ],
+            "resourceSpecRelationship": [
+              {
+                "id": "556788",
+                "href": "https://mycsp.com:8080/tmf-api/resourceCatalog/v5/resourceSpecification/556788",
+                "name": "Underlying Physical Disk",
+                "relationshipType": "dependency",
+                "@type": "ResourceSpecificationRelationship"
+              }
+            ],
+            "targetResourceSchema": {
+              "@type": "VirtualStorage",
+              "@schemaLocation": "https://mycsp.com:8080/tmf-api/schema/Resource/VirtualStorage.schema.json"
+            }
+          },
+          {
+            "id": "43",
+            "href": "https://mycsp.com:8080/tmf-api/resourceCatalog/v5/resourceSpecification/43",
+            "name": "Nokia 7750 SR-s Service Router",
+            "description": "This resource specification defines an IP router provided by Nokia",
+            "@type": "PhysicalResourceSpecification",
+            "@baseType": "ResourceSpecification",
+            "@schemaLocation": "https://mycsp.com:8080/tmf-api/schema/Resource/PhysicalResourceSpecification.schema.json",
+            "version": "3.2",
+            "validFor": {
+              "startDateTime": "2017-08-12T00:00:00.000Z",
+              "endDateTime": "2018-03-07T00:00:00.000Z"
+            },
+            "lastUpdate": "2017-08-09T00:00:00.000Z",
+            "lifecycleStatus": "Active",
+            "isBundle": false,
+            "category": "Router resource",
+            "attachment": [
+              {
+                "id": "25553",
+                "href": "https://mycsp.com:8080/tmf-api/document/v5/attachment/25553",
+                "name": "Data Sheet",
+                "mimeType": "application/pdf",
+                "url": "https://onestore.nokia.com/asset/205421",
+                "@type": "Attachment"
+              }
+            ],
+            "relatedParty": [
+              {
+                "role": "Supplier",
+                "@type": "RelatedPartyRefOrPartyRoleRef",
+                "partyOrPartyRole": {
+                  "id": "5855",
+                  "href": "https://mycsp.com:8080/tmf-api/partyRole/v5/supplier/5855",
+                  "name": "Nokia Networks",
+                  "@referredType": "Supplier",
+                  "@type": "PartyRoleRef"
+                }
+              }
+            ],
+            "resourceSpecCharacteristic": [
+              {
+                "name": "Power Supply Option",
+                "description": "The type of power supply that can be chosen",
+                "valueType": "string",
+                "configurable": true,
+                "minCardinality": 1,
+                "maxCardinality": 1,
+                "isUnique": true,
+                "@type": "CharacteristicSpecification",
+                "characteristicValueSpecification": [
+                  {
+                    "value": "AC/HVDC",
+                    "@type": "StringCharacteristicValueSpecification"
+                  },
+                  {
+                    "value": "LVDC",
+                    "@type": "StringCharacteristicValueSpecification"
+                  }
+                ]
+              }
+            ],
+            "resourceSpecRelationship": [
+              {
+                "id": "556234",
+                "href": "https://mycsp.com:8080/tmf-api/resourceCatalog/v5/resourceSpecification/556234",
+                "name": "SR OS Operating System",
+                "relationshipType": "dependency",
+                "@type": "ResourceSpecificationRelationship"
+              }
+            ],
+            "targetResourceSchema": {
+              "@type": "NokiaRouter",
+              "@schemaLocation": "https://mycsp.com:8080/tmf-api/schema/Resource/NokiaRouter.schema.json"
+            },
+            "model": "7750 SR",
+            "part": "2s",
+            "sku": "3HE09264AA",
+            "vendor": "Nokia Networks"
+          }
+        ]
+      },
+      "ResourceSpecification_retrieve_example_response": {
+        "description": "Here's an example of a request for retrieving a specific specification.",
+        "value": {
+          "id": "42",
+          "href": "https://mycsp.com:8080/tmf-api/resourceCatalog/v5/resourceSpecification/42",
+          "name": "Virtual Storage Medium",
+          "description": "This resource specification defines the virtual storage medium",
+          "@type": "ResourceSpecification",
+          "@schemaLocation": "https://mycsp.com:8080/tmf-api/schema/Resource/ResourceSpecification.schema.json",
+          "version": "3.2",
+          "validFor": {
+            "startDateTime": "2017-08-12T00:00:00.000Z",
+            "endDateTime": "2018-03-07T00:00:00.000Z"
+          },
+          "lastUpdate": "2017-08-09T00:00:00.000Z",
+          "lifecycleStatus": "Active",
+          "isBundle": false,
+          "category": "Cloud resource",
+          "attachment": [
+            {
+              "id": "25552",
+              "href": "https://mycsp.com:8080/tmf-api/document/v5/attachment/25552",
+              "name": "Configuration Instructions",
+              "mimeType": "application/pdf",
+              "url": "https://mycsp.com:7070/docloader?docnum=9567457677",
+              "@type": "Attachment"
+            }
+          ],
+          "relatedParty": [
+            {
+              "role": "Supplier",
+              "@type": "RelatedPartyRefOrPartyRoleRef",
+              "partyOrPartyRole": {
+                "id": "5858",
+                "href": "https://mycsp.com:8080/tmf-api/partyRole/v5/supplier/5858",
+                "name": "Gustave Flaubert",
+                "@referredType": "Supplier",
+                "@type": "PartyRoleRef"
+              }
+            }
+          ],
+          "resourceSpecCharacteristic": [
+            {
+              "name": "Maximum Allowed Storage",
+              "description": "The storage limit in the virtual storage medium, ",
+              "valueType": "integer",
+              "configurable": true,
+              "minCardinality": 1,
+              "maxCardinality": 1,
+              "isUnique": true,
+              "@type": "CharacteristicSpecification",
+              "characteristicValueSpecification": [
+                {
+                  "value": 1024000,
+                  "@type": "IntegerCharacteristicValueSpecification"
+                },
+                {
+                  "value": 2048000,
+                  "@type": "IntegerCharacteristicValueSpecification"
+                }
+              ]
+            }
+          ],
+          "resourceSpecRelationship": [
+            {
+              "id": "556788",
+              "href": "https://mycsp.com:8080/tmf-api/resourceCatalog/v5/resourceSpecification/556788",
+              "name": "Underlying Physical Disk",
+              "relationshipType": "dependency",
+              "@type": "ResourceSpecificationRelationship"
+            }
+          ],
+          "targetResourceSchema": {
+            "@type": "VirtualStorage",
+            "@schemaLocation": "https://mycsp.com:8080/tmf-api/schema/Resource/VirtualStorage.schema.json"
+          }
+        }
+      },
+      "ResourceSpecification_create_example_1_characteristic_bnased_request": {
+        "description": "Here's an example of a request for creating a specification. This example shows a characteristic-based implementation.",
+        "value": {
+          "name": "Virtual Storage Medium",
+          "description": "This resource specification defines the virtual storage medium",
+          "@type": "ResourceSpecification",
+          "@schemaLocation": "https://mycsp.com:8080/tmf-api/schema/Resource/ResourceSpecification.schema.json",
+          "version": "1.0",
+          "validFor": {
+            "startDateTime": "2017-08-12T00:00:00.000Z",
+            "endDateTime": "2018-03-07T00:00:00.000Z"
+          },
+          "isBundle": false,
+          "category": "Cloud resource",
+          "attachment": [
+            {
+              "id": "25552",
+              "href": "https://mycsp.com:8080/tmf-api/document/v5/attachment/25552",
+              "name": "Configuration Instructions",
+              "mimeType": "application/pdf",
+              "url": "https://mycsp.com:7070/docloader?docnum=9567457677",
+              "@type": "Attachment"
+            }
+          ],
+          "relatedParty": [
+            {
+              "role": "Supplier",
+              "@type": "RelatedPartyRefOrPartyRoleRef",
+              "partyOrPartyRole": {
+                "id": "5858",
+                "href": "https://mycsp.com:8080/tmf-api/partyRole/v5/supplier/5858",
+                "name": "Gustave Flaubert",
+                "@referredType": "Supplier",
+                "@type": "PartyRoleRef"
+              }
+            }
+          ],
+          "resourceSpecCharacteristic": [
+            {
+              "name": "Maximum Allowed Storage",
+              "description": "The storage limit in the virtual storage medium, ",
+              "valueType": "integer",
+              "configurable": true,
+              "minCardinality": 1,
+              "maxCardinality": 1,
+              "isUnique": true,
+              "@type": "CharacteristicSpecification",
+              "characteristicValueSpecification": [
+                {
+                  "value": 1024000,
+                  "@type": "IntegerCharacteristicValueSpecification"
+                },
+                {
+                  "value": 2048000,
+                  "@type": "IntegerCharacteristicValueSpecification"
+                }
+              ]
+            }
+          ],
+          "resourceSpecRelationship": [
+            {
+              "id": "556788",
+              "href": "https://mycsp.com:8080/tmf-api/resourceCatalog/v5/resourceSpecification/556788",
+              "name": "Underlying Physical Disk",
+              "relationshipType": "dependency",
+              "@type": "ResourceSpecificationRelationship"
+            }
+          ]
+        }
+      },
+      "ResourceSpecification_create_example_1_characteristic_bnased_response": {
+        "description": "Response message",
+        "value": {
+          "id": "42",
+          "href": "https://mycsp.com:8080/tmf-api/resourceCatalog/v5/resourceSpecification/42",
+          "name": "Virtual Storage Medium",
+          "description": "This resource specification defines the virtual storage medium",
+          "@type": "ResourceSpecification",
+          "@schemaLocation": "https://mycsp.com:8080/tmf-api/schema/Resource/ResourceSpecification.schema.json",
+          "version": "1.0",
+          "validFor": {
+            "startDateTime": "2017-08-12T00:00:00.000Z",
+            "endDateTime": "2018-03-07T00:00:00.000Z"
+          },
+          "lastUpdate": "2017-08-09T00:00:00.000Z",
+          "lifecycleStatus": "Tentative",
+          "isBundle": false,
+          "category": "Cloud resource",
+          "attachment": [
+            {
+              "id": "25552",
+              "href": "https://mycsp.com:8080/tmf-api/document/v5/attachment/25552",
+              "name": "Configuration Instructions",
+              "mimeType": "application/pdf",
+              "url": "https://mycsp.com:7070/docloader?docnum=9567457677",
+              "@type": "Attachment"
+            }
+          ],
+          "relatedParty": [
+            {
+              "role": "Supplier",
+              "@type": "RelatedPartyRefOrPartyRoleRef",
+              "partyOrPartyRole": {
+                "id": "5858",
+                "href": "https://mycsp.com:8080/tmf-api/partyRole/v5/supplier/5858",
+                "name": "Gustave Flaubert",
+                "@referredType": "Supplier",
+                "@type": "PartyRoleRef"
+              }
+            }
+          ],
+          "resourceSpecCharacteristic": [
+            {
+              "name": "Maximum Allowed Storage",
+              "description": "The storage limit in the virtual storage medium, ",
+              "valueType": "integer",
+              "configurable": true,
+              "minCardinality": 1,
+              "maxCardinality": 1,
+              "isUnique": true,
+              "@type": "CharacteristicSpecification",
+              "characteristicValueSpecification": [
+                {
+                  "value": 1024000,
+                  "@type": "IntegerCharacteristicValueSpecification"
+                },
+                {
+                  "value": 2048000,
+                  "@type": "IntegerCharacteristicValueSpecification"
+                }
+              ]
+            }
+          ],
+          "resourceSpecRelationship": [
+            {
+              "id": "556788",
+              "href": "https://mycsp.com:8080/tmf-api/resourceCatalog/v5/resourceSpecification/556788",
+              "name": "Underlying Physical Disk",
+              "relationshipType": "dependency",
+              "@type": "ResourceSpecificationRelationship"
+            }
+          ]
+        }
+      },
+      "ResourceSpecification_create_example_2_schema_based_request": {
+        "description": "Here's an example of a request for creating a specification. This example shows a schema-based implementation.",
+        "value": {
+          "name": "Virtual Storage Medium",
+          "description": "This resource specification defines the virtual storage medium",
+          "@type": "ResourceSpecification",
+          "@schemaLocation": "https://mycsp.com:8080/tmf-api/schema/Resource/ResourceSpecification.schema.json",
+          "version": "1.0",
+          "validFor": {
+            "startDateTime": "2017-08-12T00:00:00.000Z",
+            "endDateTime": "2018-03-07T00:00:00.000Z"
+          },
+          "isBundle": false,
+          "category": "Cloud resource",
+          "attachment": [
+            {
+              "id": "25552",
+              "href": "https://mycsp.com:8080/tmf-api/document/v5/attachment/25552",
+              "name": "Configuration Instructions",
+              "mimeType": "application/pdf",
+              "url": "https://mycsp.com:7070/docloader?docnum=9567457677",
+              "@type": "Attachment"
+            }
+          ],
+          "relatedParty": [
+            {
+              "role": "Supplier",
+              "@type": "RelatedPartyRefOrPartyRoleRef",
+              "partyOrPartyRole": {
+                "id": "5858",
+                "href": "https://mycsp.com:8080/tmf-api/partyRole/v5/supplier/5858",
+                "name": "Gustave Flaubert",
+                "@referredType": "Supplier",
+                "@type": "PartyRoleRef"
+              }
+            }
+          ],
+          "resourceSpecRelationship": [
+            {
+              "id": "556788",
+              "href": "https://mycsp.com:8080/tmf-api/resourceCatalog/v5/resourceSpecification/556788",
+              "name": "Underlying Physical Disk",
+              "relationshipType": "dependency",
+              "@type": "ResourceSpecificationRelationship"
+            }
+          ],
+          "targetResourceSchema": {
+            "@type": "VirtualStorage",
+            "@schemaLocation": "https://mycsp.com:8080/tmf-api/schema/Resource/VirtualStorage.schema.json"
+          }
+        }
+      },
+      "ResourceSpecification_create_example_2_schema_based_response": {
+        "description": "Response message",
+        "value": {
+          "id": "42",
+          "href": "https://mycsp.com:8080/tmf-api/resourceCatalog/v5/resourceSpecification/42",
+          "name": "Virtual Storage Medium",
+          "description": "This resource specification defines the virtual storage medium",
+          "@type": "ResourceSpecification",
+          "@schemaLocation": "https://mycsp.com:8080/tmf-api/schema/Resource/ResourceSpecification.schema.json",
+          "version": "1.0",
+          "validFor": {
+            "startDateTime": "2017-08-12T00:00:00.000Z",
+            "endDateTime": "2018-03-07T00:00:00.000Z"
+          },
+          "lastUpdate": "2017-08-09T00:00:00.000Z",
+          "lifecycleStatus": "Tentative",
+          "isBundle": false,
+          "category": "Cloud resource",
+          "attachment": [
+            {
+              "id": "25552",
+              "href": "https://mycsp.com:8080/tmf-api/document/v5/attachment/25552",
+              "name": "Configuration Instructions",
+              "mimeType": "application/pdf",
+              "url": "https://mycsp.com:7070/docloader?docnum=9567457677",
+              "@type": "Attachment"
+            }
+          ],
+          "relatedParty": [
+            {
+              "role": "Supplier",
+              "@type": "RelatedPartyRefOrPartyRoleRef",
+              "partyOrPartyRole": {
+                "id": "5858",
+                "href": "https://mycsp.com:8080/tmf-api/partyRole/v5/supplier/5858",
+                "name": "Gustave Flaubert",
+                "@referredType": "Supplier",
+                "@type": "PartyRoleRef"
+              }
+            }
+          ],
+          "resourceSpecRelationship": [
+            {
+              "id": "556788",
+              "href": "https://mycsp.com:8080/tmf-api/resourceCatalog/v5/resourceSpecification/556788",
+              "name": "Underlying Physical Disk",
+              "relationshipType": "dependency",
+              "@type": "ResourceSpecificationRelationship"
+            }
+          ],
+          "targetResourceSchema": {
+            "@type": "VirtualStorage",
+            "@schemaLocation": "https://mycsp.com:8080/tmf-api/schema/Resource/VirtualStorage.schema.json"
+          }
+        }
+      },
+      "ResourceSpecification_create_example_3_with_intent_specification_request": {
+        "description": "Here's an example of a request for creating a specification. This example shows a schema-based implementation.",
+        "value": {
+          "name": "Virtual Storage Medium",
+          "description": "This resource specification defines the virtual storage medium",
+          "@type": "ResourceSpecification",
+          "@schemaLocation": "https://mycsp.com:8080/tmf-api/schema/Resource/ResourceSpecification.schema.json",
+          "version": "1.0",
+          "validFor": {
+            "startDateTime": "2017-08-12T00:00:00.000Z",
+            "endDateTime": "2018-03-07T00:00:00.000Z"
+          },
+          "isBundle": false,
+          "category": "Cloud resource",
+          "attachment": [
+            {
+              "id": "25552",
+              "href": "https://mycsp.com:8080/tmf-api/document/v5/attachment/25552",
+              "name": "Configuration Instructions",
+              "mimeType": "application/pdf",
+              "url": "https://mycsp.com:7070/docloader?docnum=9567457677",
+              "@type": "Attachment"
+            }
+          ],
+          "relatedParty": [
+            {
+              "role": "Supplier",
+              "@type": "RelatedPartyRefOrPartyRoleRef",
+              "partyOrPartyRole": {
+                "id": "5858",
+                "href": "https://mycsp.com:8080/tmf-api/partyRole/v5/supplier/5858",
+                "name": "Gustave Flaubert",
+                "@referredType": "Supplier",
+                "@type": "PartyRoleRef"
+              }
+            }
+          ],
+          "resourceSpecRelationship": [
+            {
+              "id": "556788",
+              "href": "https://mycsp.com:8080/tmf-api/resourceCatalog/v5/resourceSpecification/556788",
+              "name": "Underlying Physical Disk",
+              "relationshipType": "dependency",
+              "@type": "ResourceSpecificationRelationship"
+            }
+          ],
+          "targetResourceSchema": {
+            "@type": "VirtualStorage",
+            "@schemaLocation": "https://mycsp.com:8080/tmf-api/schema/Resource/VirtualStorage.schema.json"
+          },
+          "intentSpecification": {
+            "@type": "IntentSpecificationRef",
+            "id": "EventLiveBroadcast_IntentSpec",
+            "href": "https://mycsp.com:8080/tmf-api/intent/v5/intentSpecification/EventLiveBroadcast_IntentSpec",
+            "name": "EventLiveBroadcastIntentSpec",
+            "@referredType": "IntentSpecification"
+          }
+        }
+      },
+      "ResourceSpecification_create_example_3_with_intent_specification_response": {
+        "description": "Response message",
+        "value": {
+          "id": "42",
+          "href": "https://mycsp.com:8080/tmf-api/resourceCatalog/v5/resourceSpecification/42",
+          "name": "Virtual Storage Medium",
+          "description": "This resource specification defines the virtual storage medium",
+          "@type": "ResourceSpecification",
+          "@schemaLocation": "https://mycsp.com:8080/tmf-api/schema/Resource/ResourceSpecification.schema.json",
+          "version": "1.0",
+          "validFor": {
+            "startDateTime": "2017-08-12T00:00:00.000Z",
+            "endDateTime": "2018-03-07T00:00:00.000Z"
+          },
+          "lastUpdate": "2017-08-09T00:00:00.000Z",
+          "lifecycleStatus": "Tentative",
+          "isBundle": false,
+          "category": "Cloud resource",
+          "attachment": [
+            {
+              "id": "25552",
+              "href": "https://mycsp.com:8080/tmf-api/document/v5/attachment/25552",
+              "name": "Configuration Instructions",
+              "mimeType": "application/pdf",
+              "url": "https://mycsp.com:7070/docloader?docnum=9567457677",
+              "@type": "Attachment"
+            }
+          ],
+          "relatedParty": [
+            {
+              "role": "Supplier",
+              "@type": "RelatedPartyRefOrPartyRoleRef",
+              "partyOrPartyRole": {
+                "id": "5858",
+                "href": "https://mycsp.com:8080/tmf-api/partyRole/v5/supplier/5858",
+                "name": "Gustave Flaubert",
+                "@referredType": "Supplier",
+                "@type": "PartyRoleRef"
+              }
+            }
+          ],
+          "resourceSpecRelationship": [
+            {
+              "id": "556788",
+              "href": "https://mycsp.com:8080/tmf-api/resourceCatalog/v5/resourceSpecification/556788",
+              "name": "Underlying Physical Disk",
+              "relationshipType": "dependency",
+              "@type": "ResourceSpecificationRelationship"
+            }
+          ],
+          "targetResourceSchema": {
+            "@type": "VirtualStorage",
+            "@schemaLocation": "https://mycsp.com:8080/tmf-api/schema/Resource/VirtualStorage.schema.json"
+          },
+          "intentSpecification": {
+            "@type": "IntentSpecificationRef",
+            "id": "EventLiveBroadcast_IntentSpec",
+            "href": "https://mycsp.com:8080/tmf-api/intent/v5/IntentSpecification/EventLiveBroadcast_IntentSpec",
+            "name": "EventLiveBroadcastIntentSpec",
+            "@referredType": "IntentSpecification"
+          }
+        }
+      },
+      "ResourceSpecification_Update_example_Merge__request": {
+        "description": "Here is an example of a request for patching a ResourceSpecification.",
+        "value": {
+          "@type": "ResourceSpecification",
+          "version": "4.0",
+          "validFor": {
+            "startDateTime": "2022-03-23T00:00:00.000Z",
+            "endDateTime": "2023-09-25T00:00:00.000Z"
+          }
+        }
+      },
+      "ResourceSpecification_Update_example_Merge__response": {
+        "description": "Here is an example of a response for patching a ResourceSpecification.",
+        "value": {
+          "id": "42",
+          "href": "https://mycsp.com:8080/tmf-api/resourceCatalog/v5/resourceSpecification/42",
+          "name": "Virtual Storage Medium",
+          "description": "This resource specification defines the virtual storage medium",
+          "@type": "ResourceSpecification",
+          "@schemaLocation": "https://mycsp.com:8080/tmf-api/schema/Resource/ResourceSpecification.schema.json",
+          "version": "4.0",
+          "validFor": {
+            "startDateTime": "2022-03-23T00:00:00.000Z",
+            "endDateTime": "2023-09-25T00:00:00.000Z"
+          },
+          "lastUpdate": "2019-03-20T00:00:00.000Z",
+          "lifecycleStatus": "Active",
+          "isBundle": false,
+          "category": "Cloud resource",
+          "attachment": [
+            {
+              "id": "25552",
+              "href": "https://mycsp.com:8080/tmf-api/document/v5/attachment/25552",
+              "name": "Configuration Instructions",
+              "mimeType": "application/pdf",
+              "url": "https://mycsp.com:7070/docloader?docnum=9567457677",
+              "@type": "Attachment"
+            }
+          ],
+          "relatedParty": [
+            {
+              "role": "Supplier",
+              "@type": "RelatedPartyRefOrPartyRoleRef",
+              "partyOrPartyRole": {
+                "id": "5858",
+                "href": "https://mycsp.com:8080/tmf-api/partyRole/v5/supplier/5858",
+                "name": "Gustave Flaubert",
+                "@referredType": "Supplier",
+                "@type": "PartyRoleRef"
+              }
+            }
+          ],
+          "resourceSpecCharacteristic": [
+            {
+              "name": "Maximum Allowed Storage",
+              "description": "The storage limit in the virtual storage medium, ",
+              "valueType": "integer",
+              "configurable": true,
+              "minCardinality": 1,
+              "maxCardinality": 1,
+              "isUnique": true,
+              "@type": "CharacteristicSpecification",
+              "resourceSpecCharacteristicValue": [
+                {
+                  "value": 1024000,
+                  "@type": "IntegerCharacteristicValueSpecification"
+                },
+                {
+                  "value": 2048000,
+                  "@type": "IntegerCharacteristicValueSpecification"
+                }
+              ]
+            }
+          ],
+          "resourceSpecRelationship": [
+            {
+              "id": "556788",
+              "href": "https://mycsp.com:8080/tmf-api/resourceCatalog/v5/resourceSpecification/556788",
+              "name": "Underlying Physical Disk",
+              "relationshipType": "dependency",
+              "@type": "ResourceSpecificationRelationship"
+            }
+          ],
+          "targetResourceSchema": {
+            "@type": "VirtualStorage",
+            "@schemaLocation": "https://mycsp.com:8080/tmf-api/schema/Resource/VirtualStorage.schema.json"
+          }
+        }
+      },
+      "ResourceSpecification_Update_example_JSON__request": {
+        "description": "Here is an example of a request for patching a ResourceSpecification.",
+        "value": {
+          "@type": "ResourceSpecification",
+          "version": "4.0",
+          "validFor": {
+            "startDateTime": "2022-03-23T00:00:00.000Z",
+            "endDateTime": "2023-09-25T00:00:00.000Z"
+          }
+        }
+      },
+      "ResourceSpecification_Update_example_JSON__response": {
+        "description": "Here is an example of a response for patching a ResourceSpecification.",
+        "value": {
+          "id": "42",
+          "href": "https://mycsp.com:8080/tmf-api/resourceCatalog/v5/resourceSpecification/42",
+          "name": "Virtual Storage Medium",
+          "description": "This resource specification defines the virtual storage medium",
+          "@type": "ResourceSpecification",
+          "@schemaLocation": "https://mycsp.com:8080/tmf-api/schema/Resource/ResourceSpecification.schema.json",
+          "version": "4.0",
+          "validFor": {
+            "startDateTime": "2022-03-23T00:00:00.000Z",
+            "endDateTime": "2023-09-25T00:00:00.000Z"
+          },
+          "lastUpdate": "2019-03-20T00:00:00.000Z",
+          "lifecycleStatus": "Active",
+          "isBundle": false,
+          "category": "Cloud resource",
+          "attachment": [
+            {
+              "id": "25552",
+              "href": "https://mycsp.com:8080/tmf-api/document/v5/attachment/25552",
+              "name": "Configuration Instructions",
+              "mimeType": "application/pdf",
+              "url": "https://mycsp.com:7070/docloader?docnum=9567457677",
+              "@type": "Attachment"
+            }
+          ],
+          "relatedParty": [
+            {
+              "role": "Supplier",
+              "@type": "RelatedPartyRefOrPartyRoleRef",
+              "partyOrPartyRole": {
+                "id": "5858",
+                "href": "https://mycsp.com:8080/tmf-api/partyRole/v5/supplier/5858",
+                "name": "Gustave Flaubert",
+                "@referredType": "Supplier",
+                "@type": "PartyRoleRef"
+              }
+            }
+          ],
+          "resourceSpecCharacteristic": [
+            {
+              "name": "Maximum Allowed Storage",
+              "description": "The storage limit in the virtual storage medium, ",
+              "valueType": "integer",
+              "configurable": true,
+              "minCardinality": 1,
+              "maxCardinality": 1,
+              "isUnique": true,
+              "@type": "CharacteristicSpecification",
+              "resourceSpecCharacteristicValue": [
+                {
+                  "value": 1024000,
+                  "@type": "IntegerCharacteristicValueSpecification"
+                },
+                {
+                  "value": 2048000,
+                  "@type": "IntegerCharacteristicValueSpecification"
+                }
+              ]
+            }
+          ],
+          "resourceSpecRelationship": [
+            {
+              "id": "556788",
+              "href": "https://mycsp.com:8080/tmf-api/resourceCatalog/v5/resourceSpecification/556788",
+              "name": "Underlying Physical Disk",
+              "relationshipType": "dependency",
+              "@type": "ResourceSpecificationRelationship"
+            }
+          ],
+          "targetResourceSchema": {
+            "@type": "VirtualStorage",
+            "@schemaLocation": "https://mycsp.com:8080/tmf-api/schema/Resource/VirtualStorage.schema.json"
+          }
+        }
+      },
+      "ResourceSpecification_Update_example_JSON-PATCH__request": {
+        "description": "Here is an example of a request for patching a ResourceSpecification.",
+        "value": [
+          {
+            "op": "replace",
+            "/path": "lifecycleStatus",
+            "value": "Retired"
+          },
+          {
+            "op": "replace",
+            "/path": "isBundle",
+            "value": "true"
+          }
+        ]
+      },
+      "ResourceSpecification_Update_example_JSON-PATCH__response": {
+        "description": "Here is an example of a response for patching a ResourceSpecification.",
+        "value": {
+          "id": "42",
+          "href": "https://mycsp.com:8080/tmf-api/resourceCatalog/v5/resourceSpecification/42",
+          "name": "Virtual Storage Medium",
+          "description": "This resource specification defines the virtual storage medium",
+          "@type": "ResourceSpecification",
+          "@schemaLocation": "https://mycsp.com:8080/tmf-api/schema/Resource/ResourceSpecification.schema.json",
+          "version": "4.0",
+          "validFor": {
+            "startDateTime": "2019-03-23T00:00:00.000Z",
+            "endDateTime": "2020-09-25T00:00:00.000Z"
+          },
+          "lastUpdate": "2020-03-20T00:00:00.000Z",
+          "lifecycleStatus": "Retired",
+          "isBundle": true,
+          "category": "Cloud resource",
+          "attachment": [
+            {
+              "id": "25552",
+              "href": "https://mycsp.com:8080/tmf-api/document/v5/attachment/25552",
+              "name": "Configuration Instructions",
+              "mimeType": "application/pdf",
+              "url": "https://mycsp.com:7070/docloader?docnum=9567457677",
+              "@type": "Attachment"
+            }
+          ],
+          "relatedParty": [
+            {
+              "role": "Supplier",
+              "@type": "RelatedPartyRefOrPartyRoleRef",
+              "partyOrPartyRole": {
+                "id": "5858",
+                "href": "https://mycsp.com:8080/tmf-api/partyRole/v5/supplier/5858",
+                "name": "Gustave Flaubert",
+                "@referredType": "Supplier",
+                "@type": "PartyRoleRef"
+              }
+            }
+          ],
+          "resourceSpecCharacteristic": [
+            {
+              "name": "Maximum Allowed Storage",
+              "description": "The storage limit in the virtual storage medium, ",
+              "valueType": "integer",
+              "configurable": true,
+              "minCardinality": 1,
+              "maxCardinality": 1,
+              "isUnique": true,
+              "@type": "CharacteristicSpecification",
+              "resourceSpecCharacteristicValue": [
+                {
+                  "value": 1024000,
+                  "@type": "IntegerCharacteristicValueSpecification"
+                },
+                {
+                  "value": 2048000,
+                  "@type": "IntegerCharacteristicValueSpecification"
+                }
+              ]
+            }
+          ],
+          "resourceSpecRelationship": [
+            {
+              "id": "556788",
+              "href": "https://mycsp.com:8080/tmf-api/resourceCatalog/v5/resourceSpecification/556788",
+              "name": "Underlying Physical Disk",
+              "relationshipType": "dependency",
+              "@type": "ResourceSpecificationRelationship"
+            }
+          ],
+          "targetResourceSchema": {
+            "@type": "VirtualStorage",
+            "@schemaLocation": "https://mycsp.com:8080/tmf-api/schema/Resource/VirtualStorage.schema.json"
+          }
+        }
+      },
+      "ResourceSpecification_Update_example_JSON-PATCH-QUERY__request": {
+        "description": "Here is an example of a request for patching a ResourceSpecification.",
+        "value": [
+          {
+            "op": "replace",
+            "path": "/lifecycleStatus?lifecycleStatus='Active'",
+            "value": "Retired"
+          }
+        ]
+      },
+      "ResourceSpecification_Update_example_JSON-PATCH-QUERY__response": {
+        "description": "Here is an example of a response for patching a ResourceSpecification.",
+        "value": {
+          "id": "42",
+          "href": "https://mycsp.com:8080/tmf-api/resourceCatalog/v5/resourceSpecification/42",
+          "name": "Virtual Storage Medium",
+          "description": "This resource specification defines the virtual storage medium",
+          "@type": "ResourceSpecification",
+          "@schemaLocation": "https://mycsp.com:8080/tmf-api/schema/Resource/ResourceSpecification.schema.json",
+          "version": "4.0",
+          "validFor": {
+            "startDateTime": "2019-03-23T00:00:00.000Z",
+            "endDateTime": "2020-09-25T00:00:00.000Z"
+          },
+          "lastUpdate": "2019-03-20T00:00:00.000Z",
+          "lifecycleStatus": "Retired",
+          "isBundle": false,
+          "category": "Cloud resource",
+          "attachment": [
+            {
+              "id": "25552",
+              "href": "https://mycsp.com:8080/tmf-api/document/v5/attachment/25552",
+              "name": "Configuration Instructions",
+              "mimeType": "application/pdf",
+              "url": "https://mycsp.com:7070/docloader?docnum=9567457677",
+              "@type": "Attachment"
+            }
+          ],
+          "relatedParty": [
+            {
+              "role": "Supplier",
+              "@type": "RelatedPartyRefOrPartyRoleRef",
+              "partyOrPartyRole": {
+                "id": "5858",
+                "href": "https://mycsp.com:8080/tmf-api/partyRole/v5/supplier/5858",
+                "name": "Gustave Flaubert",
+                "@referredType": "Supplier",
+                "@type": "PartyRoleRef"
+              }
+            }
+          ],
+          "resourceSpecCharacteristic": [
+            {
+              "name": "Maximum Allowed Storage",
+              "description": "The storage limit in the virtual storage medium, ",
+              "valueType": "integer",
+              "configurable": true,
+              "minCardinality": 1,
+              "maxCardinality": 1,
+              "isUnique": true,
+              "@type": "CharacteristicSpecification",
+              "resourceSpecCharacteristicValue": [
+                {
+                  "value": 1024000,
+                  "@type": "IntegerCharacteristicValueSpecification"
+                },
+                {
+                  "value": 2048000,
+                  "@type": "IntegerCharacteristicValueSpecification"
+                }
+              ]
+            }
+          ],
+          "resourceSpecRelationship": [
+            {
+              "id": "556788",
+              "href": "https://mycsp.com:8080/tmf-api/resourceCatalog/v5/resourceSpecification/556788",
+              "name": "Underlying Physical Disk",
+              "relationshipType": "dependency",
+              "@type": "ResourceSpecificationRelationship"
+            }
+          ],
+          "targetResourceSchema": {
+            "@type": "VirtualStorage",
+            "@schemaLocation": "https://mycsp.com:8080/tmf-api/schema/Resource/VirtualStorage.schema.json"
+          }
+        }
+      }
+    },
+    "requestBodies": {
+      "ResourceSpecification_FVO": {
+        "description": "The ResourceSpecification to be created",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ResourceSpecification_FVO"
+            },
+            "examples": {
+              "ResourceSpecification_create_example_1_characteristic_bnased": {
+                "$ref": "#/components/examples/ResourceSpecification_create_example_1_characteristic_bnased_request"
+              },
+              "ResourceSpecification_create_example_2_schema_based": {
+                "$ref": "#/components/examples/ResourceSpecification_create_example_2_schema_based_request"
+              },
+              "ResourceSpecification_create_example_3_with_intent_specification": {
+                "$ref": "#/components/examples/ResourceSpecification_create_example_3_with_intent_specification_request"
+              }
+            }
+          }
+        },
+        "required": true
+      },
+      "ResourceSpecification_MVO": {
+        "description": "The ResourceSpecification to be patched",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ResourceSpecification_MVO"
+            },
+            "examples": {
+              "ResourceSpecification_Update_example_JSON_": {
+                "$ref": "#/components/examples/ResourceSpecification_Update_example_JSON__request"
+              }
+            }
+          },
+          "application/merge-patch+json": {
+            "schema": {
+              "$ref": "#/components/schemas/ResourceSpecification_MVO"
+            },
+            "examples": {
+              "ResourceSpecification_Update_example_Merge_": {
+                "$ref": "#/components/examples/ResourceSpecification_Update_example_Merge__request"
+              }
+            }
+          },
+          "application/json-patch+json": {
+            "schema": {
+              "$ref": "#/components/schemas/JsonPatchOperations"
+            },
+            "examples": {
+              "ResourceSpecification_Update_example_JSON-PATCH_": {
+                "$ref": "#/components/examples/ResourceSpecification_Update_example_JSON-PATCH__request"
+              }
+            }
+          },
+          "application/json-patch-query+json": {
+            "schema": {
+              "$ref": "#/components/schemas/JsonPatchOperations"
+            },
+            "examples": {
+              "ResourceSpecification_Update_example_JSON-PATCH-QUERY_": {
+                "$ref": "#/components/examples/ResourceSpecification_Update_example_JSON-PATCH-QUERY__request"
+              }
+            }
+          }
+        },
+        "required": true
+      }
+    },
+    "headers": {
+      "X-Total-Count": {
+        "description": "Total number of items matching criteria",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "integer"
+        }
+      },
+      "X-Result-Count": {
+        "description": "Actual number of items returned in the response body",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "integer"
+        }
+      }
+    },
+    "securitySchemes": { }
+  }
+}

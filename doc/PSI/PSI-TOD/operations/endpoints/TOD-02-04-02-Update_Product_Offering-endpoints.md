@@ -3,4 +3,4 @@
                Do NOT manually edit this file! Any such changes will be overwritten!
 -->
 
-* PATCH /productCatalog/v1/productOffering/{id}
+* PATCH /productCatalog/v2/productOffering/{id}

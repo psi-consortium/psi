@@ -5,7 +5,7 @@
 
 # GET /performanceJob
 
-**Absolute Path:** /performanceMonitoring/v1/performanceJob
+**Absolute Path:** /performanceMonitoring/v2/performanceJob
 
 **TOD Reference:** TOD-06-04-05-View_All_Performance_Monitoring_Job
 
@@ -16,6 +16,7 @@
 | Name | Type | Required | Description |
 | ------ | ------ | --- | ------------ |
 | buyerJobId | string | No | Identifier assigned and understandable by Buyer/Client to  facilitate search requests. |
+| performanceProfileId | string | No | Identifier of Performance Profile used as a template for  Performance Job. |
 | state | string | No | State of the Performance Job. See `PerformanceJobStateType`  definition for details. |
 | creationDate.gt | string | No | Date when the job was created - greater than. |
 | creationDate.lt | string | No | Date when the job was created - lower than. |
@@ -34,11 +35,11 @@ Table: Parameters of GET performanceJob. {#tbl:performanceJob.get.md:parameters}
 
 | Code | Description | Content |
 |------|-------------|---------|
-| 200 | 'OK. (https://tools.ietf.org/html/rfc7231#section-6.3.1)' | PerformanceJob_Find |
+| 200 | 'OK. (https://tools.ietf.org/html/rfc7231#section-6.3.1)' | N/A |
 | 400 | Bad Request | Error400 |
 | 401 | Unauthorized | Error401 |
 | 403 | Forbidden | Error403 |
-| 422 | Unprocessable entity due to the business validation problems | Error422 |
+| 422 | Unprocessable entity due to the business validation problems | N/A |
 | 500 | Internal Server Error | Error500 |
 
 Table: Responses of GET performanceJob. {#tbl:performanceJob.get.md:responses}

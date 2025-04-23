@@ -5,7 +5,7 @@
 
 # resourceSpecification (/resourceCatalog)
 
-Resource Specification API
+Operations for ResourceSpecification Resource
 
 @include [resourceSpecification.get.md](resourceSpecification.get.md)
 @include [resourceSpecification.post.md](resourceSpecification.post.md)

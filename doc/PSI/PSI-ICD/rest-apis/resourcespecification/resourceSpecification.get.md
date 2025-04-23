@@ -5,7 +5,7 @@
 
 # GET /resourceSpecification
 
-**Absolute Path:** /resourceCatalog/v1/resourceSpecification
+**Absolute Path:** /resourceCatalog/v2/resourceSpecification
 
 **TOD Reference:** TOD-02-01-05-View_All_Resource_Specifications
 
@@ -25,14 +25,15 @@ Table: Parameters of GET resourceSpecification. {#tbl:resourceSpecification.get.
 
 | Code | Description | Content |
 |------|-------------|---------|
-| 200 | Success | ResourceSpecification |
+| 200 | Success | N/A |
 | 400 | Bad Request | Error |
 | 401 | Unauthorized | Error |
 | 403 | Forbidden | Error |
 | 404 | Not Found | Error |
 | 405 | Method Not allowed | Error |
-| 409 | Conflict | Error |
 | 500 | Internal Server Error | Error |
+| 501 | Not Implemented | Error |
+| 503 | Service Unavailable | Error |
 
 Table: Responses of GET resourceSpecification. {#tbl:resourceSpecification.get.md:responses}
 

@@ -1,0 +1,4356 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Stock Management",
+    "description": "**TMF API Reference : TMF 687 - Stock Management**\n\nRelease : 20.0 - January 2020\n\nThe Stock Management API provides standardized mechanism for product stock management such as creation, update and retrieval of the representation of a product stock, reserve product stock, check or query product stock or Adjust product Stock. It also allows the notification of events related to them\n\nCopyright © TM Forum 2020. All Rights Reserved\n\n\n",
+    "version": "4.1.0"
+  },
+  "servers": [
+    {
+      "url": "/psi-api/stock/v2/"
+    }
+  ],
+  "tags": [
+    {
+      "name": "checkProductStock",
+      "description": "Stock Check API"
+    }
+  ],
+  "paths": {
+    "/checkProductStock": {
+      "post": {
+        "tags": [
+          "checkProductStock"
+        ],
+        "summary": "Creates a CheckProductStock",
+        "description": "This operation creates a CheckProductStock entity.",
+        "operationId": "createCheckProductStock",
+        "requestBody": {
+          "description": "The CheckProductStock to be created",
+          "content": {
+            "application/json;charset=utf-8": {
+              "schema": {
+                "$ref": "#/components/schemas/CheckProductStock_Create"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Sucess",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/CheckProductStock"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/CheckProductStock"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method Not allowed",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "checkProductStock"
+      }
+    },
+    "/checkProductStock/{id}": {
+      "get": {
+        "tags": [
+          "checkProductStock"
+        ],
+        "summary": "Retrieves a CheckProductStock by ID",
+        "description": "This operation retrieves a CheckProductStock entity. Attribute selection is enabled for all first level attributes.",
+        "operationId": "retrieveCheckProductStock",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Identifier of the CheckProductStock",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "Comma-separated properties to provide in response",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/CheckProductStock"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method Not allowed",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Addressable": {
+        "type": "object",
+        "properties": {
+          "href": {
+            "type": "string",
+            "description": "Hyperlink reference",
+            "format": "uri"
+          },
+          "id": {
+            "type": "string",
+            "description": "unique identifier"
+          }
+        },
+        "description": "Base schema for adressable entities"
+      },
+      "AgreementItemRef": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "AgreementItemRef": "#/components/schemas/AgreementItemRef"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "agreementName": {
+                "type": "string",
+                "description": "Name of the related entity."
+              },
+              "agreementHref": {
+                "type": "string",
+                "description": "Reference of the related entity."
+              },
+              "@referredType": {
+                "type": "string",
+                "description": "The actual type of the target instance when needed for disambiguation."
+              },
+              "agreementId": {
+                "type": "string",
+                "description": "Unique identifier of a related entity."
+              },
+              "agreementItemId": {
+                "type": "string",
+                "description": "Id of an item of a Agreement"
+              }
+            },
+            "description": "It's a Agreement item that has been executed previously."
+          }
+        ]
+      },
+      "AlternateProductStock": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "identifier of the Alternate product stock "
+          },
+          "alternateAvailabilityDate": {
+            "type": "string",
+            "description": "Alternate date when the product stock is available.",
+            "format": "date-time"
+          },
+          "alternatePlace": {
+            "$ref": "#/components/schemas/PlaceRefOrValue"
+          },
+          "alternateProduct": {
+            "$ref": "#/components/schemas/ProductRefOrValue"
+          },
+          "alternateQuantity": {
+            "$ref": "#/components/schemas/Quantity"
+          },
+          "alternateStock": {
+            "$ref": "#/components/schemas/ProductStockRef"
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class"
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships",
+            "format": "uri"
+          },
+          "@type": {
+            "type": "string",
+            "description": "When sub-classing, this defines the sub-class Extensible name"
+          }
+        },
+        "description": "AlternateProductStock is used to log and execute Alternate about product  stock availability"
+      },
+      "BillingAccountRef": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "BillingAccountRef": "#/components/schemas/BillingAccountRef"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "ratingType": {
+                "type": "string",
+                "description": "Indicates whether the account follows a specific payment option such as prepaid or postpaid"
+              }
+            },
+            "description": "BillingAccount reference. A BillingAccount is a detailed description of a bill structure."
+          }
+        ]
+      },
+      "ChannelRef": {
+        "type": "object",
+        "description": "The channel to which the resource reference to. e.g. channel for selling product offerings, channel for opening a trouble ticket etc..",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "ChannelRef": "#/components/schemas/ChannelRef"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          }
+        ]
+      },
+      "Characteristic": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "Characteristic": "#/components/schemas/Characteristic",
+            "StringCharacteristic": "#/components/schemas/StringCharacteristic",
+            "StringArrayCharacteristic": "#/components/schemas/StringArrayCharacteristic",
+            "ObjectCharacteristic": "#/components/schemas/ObjectCharacteristic",
+            "ObjectArrayCharacteristic": "#/components/schemas/ObjectArrayCharacteristic",
+            "NumberCharacteristic": "#/components/schemas/NumberCharacteristic",
+            "NumberArrayCharacteristic": "#/components/schemas/NumberArrayCharacteristic",
+            "IntegerCharacteristic": "#/components/schemas/IntegerCharacteristic",
+            "IntegerArrayCharacteristic": "#/components/schemas/IntegerArrayCharacteristic",
+            "FloatCharacteristic": "#/components/schemas/FloatCharacteristic",
+            "FloatArrayCharacteristic": "#/components/schemas/FloatArrayCharacteristic",
+            "BooleanCharacteristic": "#/components/schemas/BooleanCharacteristic",
+            "BooleanArrayCharacteristic": "#/components/schemas/BooleanArrayCharacteristic"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Unique identifier of the characteristic"
+              },
+              "name": {
+                "type": "string",
+                "description": "Name of the characteristic"
+              },
+              "valueType": {
+                "type": "string",
+                "description": "Data type of the value of the characteristic"
+              },
+              "characteristicRelationship": {
+                "type": "array",
+                "description": "Collection of characteristic relationships",
+                "items": {
+                  "$ref": "#/components/schemas/CharacteristicRelationship"
+                }
+              },
+              "unitOfMeasure": {
+                "type": "string",
+                "description": "A length, surface, volume, dry measure, liquid measure, money, weight, time, and the like. In general, a determinate quantity or magnitude of the kind designated, taken as a standard of comparison for others of the same kind, in assigning them to numerical values, as 1 foot, 1 yard, 1 mile, 1 square foot."
+              }
+            },
+            "description": "Describes a given characteristic of an object or entity through a name/value pair."
+          }
+        ]
+      },
+      "CharacteristicRelationship": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "CharacteristicRelationship": "#/components/schemas/CharacteristicRelationship"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Unique identifier of the characteristic"
+              },
+              "relationshipType": {
+                "type": "string",
+                "description": "The type of relationship"
+              }
+            },
+            "description": "Another Characteristic that is related to the current Characteristic;"
+          }
+        ]
+      },
+      "CheckProductStock": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the CheckProductStock"
+          },
+          "href": {
+            "type": "string",
+            "description": "Reference of the CheckProductStock",
+            "format": "uri"
+          },
+          "completedCheckProductStockDate": {
+            "type": "string",
+            "description": "Date when the CheckProductStock was completed.",
+            "format": "date-time"
+          },
+          "creationDate": {
+            "type": "string",
+            "description": "Date when the CheckProductStock was created (whatever its status).",
+            "format": "date-time"
+          },
+          "instantSyncCheck": {
+            "type": "boolean",
+            "description": "An indicator which when the value is \"true\" means that requester expects to get result immediately in the response. If the indicator is true then the response code of 200 indicates the operation is successful otherwise a task is created with a response 201."
+          },
+          "provideAlternative": {
+            "type": "boolean",
+            "description": "When the value is TRUE means that alternative proposal should be provided (from other product stock, different date or quantity)",
+            "default": false
+          },
+          "requestedAvailability": {
+            "$ref": "#/components/schemas/TimePeriod"
+          },
+          "requestedCheckProductStockDate": {
+            "type": "string",
+            "description": "Date when the requester wished to have a response for this product stock check query.",
+            "format": "date-time"
+          },
+          "checkProductStockItem": {
+            "type": "array",
+            "description": "A list of check product stock  item",
+            "items": {
+              "$ref": "#/components/schemas/CheckProductStockItem"
+            }
+          },
+          "place": {
+            "$ref": "#/components/schemas/PlaceRefOrValue"
+          },
+          "relatedParty": {
+            "type": "array",
+            "description": "A list of related party references (RelatedParty [*]). A related party defines party or party role linked to this CheckProductStock",
+            "items": {
+              "$ref": "#/components/schemas/RelatedParty"
+            }
+          },
+          "state": {
+            "$ref": "#/components/schemas/TaskStateType"
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class"
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships",
+            "format": "uri"
+          },
+          "@type": {
+            "type": "string",
+            "description": "When sub-classing, this defines the sub-class Extensible name"
+          }
+        },
+        "description": "CheckProductStock is used to log and execute check about product stock availability"
+      },
+      "CheckProductStock_Create": {
+        "required": [
+          "checkProductStockItem"
+        ],
+        "type": "object",
+        "properties": {
+          "instantSyncCheck": {
+            "type": "boolean",
+            "description": "An indicator which when the value is \"true\" means that requester expects to get result immediately in the response. If the indicator is true then the response code of 200 indicates the operation is successful otherwise a task is created with a response 201."
+          },
+          "provideAlternative": {
+            "type": "boolean",
+            "description": "When the value is TRUE means that alternative proposal should be provided (from other product stock, different date or quantity)",
+            "default": false
+          },
+          "requestedAvailability": {
+            "$ref": "#/components/schemas/TimePeriod"
+          },
+          "requestedCheckProductStockDate": {
+            "type": "string",
+            "description": "Date when the requester wished to have a response for this product stock check query.",
+            "format": "date-time"
+          },
+          "checkProductStockItem": {
+            "minItems": 1,
+            "type": "array",
+            "description": "A list of check product stock  item",
+            "items": {
+              "$ref": "#/components/schemas/CheckProductStockItem"
+            }
+          },
+          "place": {
+            "$ref": "#/components/schemas/PlaceRefOrValue"
+          },
+          "relatedParty": {
+            "type": "array",
+            "description": "A list of related party references (RelatedParty [*]). A related party defines party or party role linked to this CheckProductStock",
+            "items": {
+              "$ref": "#/components/schemas/RelatedParty"
+            }
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class"
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships",
+            "format": "uri"
+          },
+          "@type": {
+            "type": "string",
+            "description": "When sub-classing, this defines the sub-class Extensible name"
+          }
+        },
+        "description": "CheckProductStock is used to log and execute check about product stock availability\nSkipped properties: id,href"
+      },
+      "CheckProductStockItem": {
+        "required": [
+          "checkedProductStock",
+          "id",
+          "requestedQuantity"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the Check Product Stock item"
+          },
+          "availabilityResult": {
+            "$ref": "#/components/schemas/AvailabilityResultType"
+          },
+          "provideAlternative": {
+            "type": "boolean",
+            "description": "When the value is TRUE means that alternative proposal should be provided (from other product stock, different date or quantity)",
+            "default": false
+          },
+          "alternate": {
+            "type": "array",
+            "description": "A list of alternate availability - from other product stock , different date or quantity",
+            "items": {
+              "$ref": "#/components/schemas/AlternateProductStock"
+            }
+          },
+          "checkedProductStock": {
+            "$ref": "#/components/schemas/ProductStock"
+          },
+          "requestedQuantity": {
+            "$ref": "#/components/schemas/Quantity"
+          },
+          "state": {
+            "$ref": "#/components/schemas/TaskStateType"
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class"
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships",
+            "format": "uri"
+          },
+          "@type": {
+            "type": "string",
+            "description": "When sub-classing, this defines the sub-class Extensible name"
+          }
+        },
+        "description": "CheckProductStockItem is used to log and execute query about one product (or configured product) stock availability"
+      },
+      "Entity": {
+        "type": "object",
+        "description": "Base entity schema for use in TMForum Open-APIs. Property.",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "$ref": "#/components/schemas/Addressable"
+          }
+        ]
+      },
+      "EntityRef": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "$ref": "#/components/schemas/Addressable"
+          },
+          {
+            "required": [
+              "id"
+            ],
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "The identifier of the referred entity."
+              },
+              "href": {
+                "type": "string",
+                "description": "The URI of the referred entity.",
+                "format": "uri"
+              },
+              "name": {
+                "type": "string",
+                "description": "Name of the referred entity."
+              },
+              "@referredType": {
+                "type": "string",
+                "description": "The actual type of the target instance when needed for disambiguation."
+              }
+            },
+            "description": "Entity reference schema to be use for all entityRef class."
+          }
+        ]
+      },
+      "Extensible": {
+        "required": [
+          "@type"
+        ],
+        "type": "object",
+        "properties": {
+          "@type": {
+            "type": "string",
+            "description": "When sub-classing, this defines the sub-class Extensible name"
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class"
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships"
+          }
+        },
+        "description": "Base Extensible schema for use in TMForum Open-APIs - When used for in a schema it means that the Entity described by the schema  MUST be extended with the @type"
+      },
+      "MarketSegmentRef": {
+        "type": "object",
+        "description": "provides references to the corresponding market segment as target of product offerings. A market segment is grouping of Parties, GeographicAreas, SalesChannels, and so forth.",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "MarketSegmentRef": "#/components/schemas/MarketSegmentRef"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          },
+          {
+            "$ref": "#/components/schemas/Entity"
+          }
+        ]
+      },
+      "Money": {
+        "type": "object",
+        "properties": {
+          "unit": {
+            "type": "string",
+            "description": "Currency (ISO4217 norm uses 3 letters to define the currency)"
+          },
+          "value": {
+            "type": "number",
+            "description": "A positive floating point number",
+            "format": "float"
+          }
+        },
+        "description": "A base / value business entity used to represent money"
+      },
+      "Place": {
+        "type": "object",
+        "description": "Place reference.",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "Place": "#/components/schemas/Place",
+            "GeographicSite": "#/components/schemas/GeographicSite",
+            "GeographicLocation": "#/components/schemas/GeographicLocation",
+            "GeographicAddress": "#/components/schemas/GeographicAddress"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Entity"
+          },
+          {
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Name of the Place"
+              }
+            }
+          }
+        ]
+      },
+      "PlaceRef": {
+        "type": "object",
+        "description": "Place reference.",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "PlaceRef": "#/components/schemas/PlaceRef"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          }
+        ]
+      },
+      "PlaceRefOrValue": {
+        "type": "object",
+        "description": "The polymorphic attributes @type, @schemaLocation & @referredType are related to the Place entity and not the PlaceRefOrValue class itself",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "GeographicLocation": "#/components/schemas/GeographicLocation",
+            "GeographicSite": "#/components/schemas/GeographicSite",
+            "GeographicAddress": "#/components/schemas/GeographicAddress",
+            "PlaceRef": "#/components/schemas/PlaceRef"
+          }
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/GeographicLocation"
+          },
+          {
+            "$ref": "#/components/schemas/GeographicSite"
+          },
+          {
+            "$ref": "#/components/schemas/GeographicAddress"
+          },
+          {
+            "$ref": "#/components/schemas/PlaceRef"
+          }
+        ]
+      },
+      "Price": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "Price": "#/components/schemas/Price"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "dutyFreeAmount": {
+                "$ref": "#/components/schemas/Money"
+              },
+              "percentage": {
+                "type": "number",
+                "description": "Percentage to apply for ProdOfferPriceAlteration",
+                "format": "float"
+              },
+              "taxIncludedAmount": {
+                "$ref": "#/components/schemas/Money"
+              },
+              "taxRate": {
+                "type": "number",
+                "description": "Tax rate",
+                "format": "float"
+              }
+            },
+            "description": "Provides all amounts (tax included, duty free, tax rate), used currency and percentage to apply for Price and Price Alteration."
+          }
+        ]
+      },
+      "PriceAlteration": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "PriceAlteration": "#/components/schemas/PriceAlteration"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "applicationDuration": {
+                "type": "integer",
+                "description": "Duration during which the alteration applies on the order item price (for instance 2 months free of charge for the recurring charge)"
+              },
+              "description": {
+                "type": "string",
+                "description": "A narrative that explains in detail the semantics of this order item price alteration"
+              },
+              "name": {
+                "type": "string",
+                "description": "Name of the order item price alteration"
+              },
+              "productOfferingPrice": {
+                "$ref": "#/components/schemas/ProductOfferingPriceRef"
+              },
+              "priceType": {
+                "type": "string",
+                "description": "A category that describes the price such as recurring, one time and usage."
+              },
+              "priority": {
+                "type": "integer",
+                "description": "Priority level for applying this alteration among all the defined alterations on the order item price"
+              },
+              "recurringChargePeriod": {
+                "type": "string",
+                "description": "Could be month, week..."
+              },
+              "unitOfMeasure": {
+                "type": "string",
+                "description": "Could be minutes, GB..."
+              },
+              "price": {
+                "$ref": "#/components/schemas/Price"
+              }
+            },
+            "description": "Is an amount, usually of money, that modifies the price charged for an order item."
+          }
+        ]
+      },
+      "Product": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "Product": "#/components/schemas/Product"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Entity"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "agreementItem": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/AgreementItemRef"
+                }
+              },
+              "billingAccount": {
+                "$ref": "#/components/schemas/BillingAccountRef"
+              },
+              "creationDate": {
+                "type": "string",
+                "description": "Date and time when the product was created",
+                "format": "date-time"
+              },
+              "description": {
+                "type": "string",
+                "description": "Is the description of the product. It could be copied from the description of the Product Offering."
+              },
+              "isBundle": {
+                "type": "boolean",
+                "description": "If true, the product is a ProductBundle which is an instantiation of a BundledProductOffering. If false, the product is a ProductComponent which is an instantiation of a SimpleProductOffering."
+              },
+              "isCustomerVisible": {
+                "type": "boolean",
+                "description": "If true, the product is visible by the customer."
+              },
+              "name": {
+                "type": "string",
+                "description": "Name of the product. It could be the same as the name of the product offering"
+              },
+              "orderDate": {
+                "type": "string",
+                "description": "Is the date when the product was ordered",
+                "format": "date-time"
+              },
+              "productCharacteristic": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Characteristic"
+                }
+              },
+              "productOffering": {
+                "$ref": "#/components/schemas/ProductOfferingRef"
+              },
+              "productOrderItem": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/RelatedOrderItem"
+                }
+              },
+              "product": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ProductRefOrValue"
+                }
+              },
+              "productPrice": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ProductPrice"
+                }
+              },
+              "productRelationship": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ProductRelationship"
+                }
+              },
+              "productSerialNumber": {
+                "type": "string",
+                "description": "Is the serial number for the product. This is typically applicable to tangible products e.g. Broadband Router."
+              },
+              "productSpecification": {
+                "$ref": "#/components/schemas/ProductSpecificationRef"
+              },
+              "productTerm": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ProductTerm"
+                }
+              },
+              "realizingResource": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ResourceRef"
+                }
+              },
+              "realizingService": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ServiceRef"
+                }
+              },
+              "relatedParty": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/RelatedPartyOrPartyRole"
+                }
+              },
+              "place": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/RelatedPlaceRefOrValue"
+                }
+              },
+              "startDate": {
+                "type": "string",
+                "description": "Is the date from which the product starts",
+                "format": "date-time"
+              },
+              "status": {
+                "$ref": "#/components/schemas/ProductStatusType"
+              },
+              "terminationDate": {
+                "type": "string",
+                "description": "Is the date when the product was terminated",
+                "format": "date-time"
+              },
+              "intent": {
+                "$ref": "#/components/schemas/IntentRefOrValue"
+              }
+            },
+            "description": "A product offering procured by a customer or other interested party playing a party role. A product is realized as one or more service(s) and / or resource(s)."
+          }
+        ]
+      },
+      "ProductOfferingPriceRef": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "ProductOfferingPriceRef": "#/components/schemas/ProductOfferingPriceRef"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "version": {
+                "type": "string",
+                "description": "Version of the product offering price"
+              }
+            },
+            "description": "ProductPriceOffering reference. An amount, usually of money, that is asked for or allowed when a ProductOffering is bought, rented, or leased"
+          }
+        ]
+      },
+      "ProductOfferingRef": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "ProductOfferingRef": "#/components/schemas/ProductOfferingRef"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "version": {
+                "type": "string",
+                "description": "Version of the product offering"
+              }
+            },
+            "description": "ProductOffering reference. A product offering represents entities that are orderable from the provider of the catalog, this resource includes pricing information."
+          }
+        ]
+      },
+      "ProductPrice": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "ProductPrice": "#/components/schemas/ProductPrice"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "description": {
+                "type": "string",
+                "description": "Description of the Product price"
+              },
+              "name": {
+                "type": "string",
+                "description": "Name of the Product price"
+              },
+              "productOfferingPrice": {
+                "$ref": "#/components/schemas/ProductOfferingPriceRef"
+              },
+              "recurringChargePeriod": {
+                "type": "string",
+                "description": "Used for recurring charge to indicate period (month, week, etc..)."
+              },
+              "unitOfMeasure": {
+                "type": "string",
+                "description": "Unit of Measure if price depending on it (Gb, SMS volume, etc..)"
+              },
+              "price": {
+                "$ref": "#/components/schemas/Price"
+              },
+              "priceAlteration": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/PriceAlteration"
+                }
+              },
+              "priceType": {
+                "type": "string",
+                "description": "indicate if the price is for recurrent or no-recurrent charge"
+              }
+            },
+            "description": "Description of price and discount awarded"
+          }
+        ]
+      },
+      "ProductRef": {
+        "type": "object",
+        "description": "A Product reference",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "ProductRef": "#/components/schemas/ProductRef"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          }
+        ]
+      },
+      "ProductRefOrValue": {
+        "type": "object",
+        "description": "The polymorphic attributes @type, @schemaLocation & @referredType are related to the Product entity and not the ProductRefOrValue class itself",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "Product": "#/components/schemas/Product",
+            "ProductRef": "#/components/schemas/ProductRef"
+          }
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/Product"
+          },
+          {
+            "$ref": "#/components/schemas/ProductRef"
+          }
+        ]
+      },
+      "ProductRelationship": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "ProductRelationship": "#/components/schemas/ProductRelationship"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Id of the related product"
+              },
+              "relationshipType": {
+                "type": "string",
+                "description": "Relationship type as relies on, bundles, etc..."
+              }
+            },
+            "description": "Used to describe relationship between product."
+          }
+        ]
+      },
+      "ProductSpecificationRef": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "ProductSpecificationRef": "#/components/schemas/ProductSpecificationRef"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "version": {
+                "type": "string",
+                "description": "Version of the product specification"
+              },
+              "targetProductSchema": {
+                "$ref": "#/components/schemas/TargetProductSchema"
+              }
+            },
+            "description": "ProductSpecification reference. A product Specification represents entities that are orderable from the provider of the catalog."
+          }
+        ]
+      },
+      "ProductStatusType": {
+        "type": "string",
+        "description": "Possible values for the status of the product",
+        "enum": [
+          "created",
+          "pendingActive",
+          "cancelled",
+          "active",
+          "pendingTerminate",
+          "terminated",
+          "suspended",
+          "aborted "
+        ]
+      },
+      "ProductStock": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the ProductStock"
+          },
+          "href": {
+            "type": "string",
+            "description": "Reference of the ProductStock",
+            "format": "uri"
+          },
+          "creationDate": {
+            "type": "string",
+            "description": "Date when the ProductStock was created (whatever its status).",
+            "format": "date-time"
+          },
+          "description": {
+            "type": "string",
+            "description": "Free-text description of the ProductStock"
+          },
+          "lastInventoryDate": {
+            "type": "string",
+            "description": "Last inventory count date for this ProductStock.",
+            "format": "date-time"
+          },
+          "lastUpdate": {
+            "type": "string",
+            "description": "Last date when the ProductStock record was updated.",
+            "format": "date-time"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the ProductStock"
+          },
+          "replenishmentDate": {
+            "type": "string",
+            "description": "Planned date for future replenishment for this ProductStock.",
+            "format": "date-time"
+          },
+          "stockLevelCategory": {
+            "type": "string",
+            "description": "Category of the ProductStock"
+          },
+          "channel": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ChannelRef"
+            }
+          },
+          "marketSegment": {
+            "type": "array",
+            "description": "provides references to the corresponding market segment as target of a product stock. A market segment is grouping of Parties, GeographicAreas, SalesChannels, and so forth.",
+            "items": {
+              "$ref": "#/components/schemas/MarketSegmentRef"
+            }
+          },
+          "maxStockLevel": {
+            "$ref": "#/components/schemas/Quantity"
+          },
+          "minStockLevel": {
+            "$ref": "#/components/schemas/Quantity"
+          },
+          "place": {
+            "$ref": "#/components/schemas/RelatedPlaceRefOrValue"
+          },
+          "productStockLevel": {
+            "$ref": "#/components/schemas/Quantity"
+          },
+          "productStockRelationship": {
+            "type": "array",
+            "description": "relationship to other product stock",
+            "items": {
+              "$ref": "#/components/schemas/ProductStockRelationship"
+            }
+          },
+          "productStockStatusType": {
+            "$ref": "#/components/schemas/ProductStockStatusType"
+          },
+          "productStockUsageType": {
+            "$ref": "#/components/schemas/ProductStockUsageType"
+          },
+          "relatedParty": {
+            "type": "array",
+            "description": "A list of related party references (RelatedParty [*]). A related party defines party or party role linked to a specific entity",
+            "items": {
+              "$ref": "#/components/schemas/RelatedParty"
+            }
+          },
+          "reorderQuantity": {
+            "$ref": "#/components/schemas/Quantity"
+          },
+          "resource": {
+            "type": "array",
+            "description": "The Resource managed through this ProductStock is used",
+            "items": {
+              "$ref": "#/components/schemas/ResourceRef"
+            }
+          },
+          "stockLevelAlert": {
+            "$ref": "#/components/schemas/Quantity"
+          },
+          "stockedProduct": {
+            "$ref": "#/components/schemas/ProductRefOrValue"
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class"
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships",
+            "format": "uri"
+          },
+          "@type": {
+            "type": "string",
+            "description": "When sub-classing, this defines the sub-class Extensible name"
+          }
+        },
+        "description": "ProductStock is a base class for defining a product (or configured product with values characteristic) stock level."
+      },
+      "ProductStockRef": {
+        "required": [
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "unique identifier"
+          },
+          "href": {
+            "type": "string",
+            "description": "Hyperlink reference",
+            "format": "uri"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the ProductStockRef"
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class"
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships",
+            "format": "uri"
+          },
+          "@type": {
+            "type": "string",
+            "description": "When sub-classing, this defines the sub-class Extensible name"
+          },
+          "@referredType": {
+            "type": "string",
+            "description": "The actual type of the target instance when needed for disambiguation."
+          }
+        },
+        "description": "ProductStockRef is a reference to a product stock"
+      },
+      "ProductStockRelationship": {
+        "required": [
+          "relationshipType",
+          "stockLevel"
+        ],
+        "type": "object",
+        "properties": {
+          "relationshipType": {
+            "type": "string",
+            "description": "The type of relationship between product stock"
+          },
+          "stockLevel": {
+            "$ref": "#/components/schemas/ProductStockRef"
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class"
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships",
+            "format": "uri"
+          },
+          "@type": {
+            "type": "string",
+            "description": "When sub-classing, this defines the sub-class Extensible name"
+          }
+        },
+        "description": "Linked product stock  with a type relationship."
+      },
+      "ProductStockStatusType": {
+        "type": "string",
+        "description": "Possible values for the status of the stock  level",
+        "enum": [
+          "reserved",
+          "available",
+          "unavailable",
+          "unknown"
+        ]
+      },
+      "ProductStockUsageType": {
+        "type": "string",
+        "description": "Possible values for the usage of the stock level - This is illustrative",
+        "enum": [
+          "inTransit",
+          "onDisplay",
+          "damaged",
+          "returned",
+          "replenishmentInProgress",
+          "inShop"
+        ]
+      },
+      "ProductTerm": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "ProductTerm": "#/components/schemas/ProductTerm"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "description": {
+                "type": "string",
+                "description": "Description of the productTerm"
+              },
+              "duration": {
+                "$ref": "#/components/schemas/Duration"
+              },
+              "validFor": {
+                "$ref": "#/components/schemas/TimePeriod"
+              },
+              "name": {
+                "type": "string",
+                "description": "Name of the productTerm",
+                "example": "12months commitment"
+              }
+            },
+            "description": "Description of a productTerm linked to this product. This represent a commitment with a duration"
+          }
+        ]
+      },
+      "Quantity": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "number",
+            "description": "Numeric value in a given unit",
+            "format": "float",
+            "default": 1
+          },
+          "units": {
+            "type": "string",
+            "description": "Unit"
+          }
+        },
+        "description": "An amount in a given unit"
+      },
+      "RelatedParty": {
+        "required": [
+          "@referredType",
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "unique identifier"
+          },
+          "href": {
+            "type": "string",
+            "description": "Hyperlink reference",
+            "format": "uri"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the related entity."
+          },
+          "role": {
+            "type": "string",
+            "description": "Role played by the related party"
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class"
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships",
+            "format": "uri"
+          },
+          "@type": {
+            "type": "string",
+            "description": "When sub-classing, this defines the sub-class Extensible name"
+          },
+          "@referredType": {
+            "type": "string",
+            "description": "The actual type of the target instance when needed for disambiguation."
+          }
+        },
+        "description": "Related Entity reference. A related party defines party or party role linked to a specific entity."
+      },
+      "RelatedPlaceRefOrValue": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "RelatedPlaceRefOrValue": "#/components/schemas/RelatedPlaceRefOrValue"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "role": {
+                "type": "string"
+              },
+              "place": {
+                "$ref": "#/components/schemas/PlaceRefOrValue"
+              }
+            },
+            "description": "Entity reference. The polymorphic attributes @type, @schemaLocation & @referredType are related to the RelatedPlace entity and not the RelatedPlaceRefOrValue class itself"
+          }
+        ]
+      },
+      "ResourceRef": {
+        "type": "object",
+        "description": "Resource reference, for when Resource is used by other entities.",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "ResourceRef": "#/components/schemas/ResourceRef"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          }
+        ]
+      },
+      "ServiceRef": {
+        "type": "object",
+        "description": "Service reference, for when Service is used by other entities.",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "ServiceRef": "#/components/schemas/ServiceRef"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          }
+        ]
+      },
+      "TargetProductSchema": {
+        "type": "object",
+        "properties": {
+          "@type": {
+            "type": "string",
+            "description": "Class type of the target product"
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "This field provides a link to the schema describing the target product",
+            "format": "uri"
+          }
+        },
+        "description": "The reference object to the schema and type of target product which is described by product specification"
+      },
+      "TaskStateType": {
+        "type": "string",
+        "description": "Possible values for the state of a task",
+        "enum": [
+          "accepted",
+          "terminatedWithError",
+          "inProgress",
+          "done"
+        ]
+      },
+      "TimePeriod": {
+        "type": "object",
+        "properties": {
+          "endDateTime": {
+            "type": "string",
+            "description": "End of the time period, using IETC-RFC-3339 format",
+            "format": "date-time",
+            "example": "1985-04-12T23:20:50.52Z"
+          },
+          "startDateTime": {
+            "type": "string",
+            "description": "Start of the time period, using IETC-RFC-3339 format",
+            "format": "date-time",
+            "example": "1985-04-12T23:20:50.52Z"
+          }
+        },
+        "description": "A period of time, either as a deadline (endDateTime only) a startDateTime only, or both"
+      },
+      "Error": {
+        "description": "Used when an API throws an Error, typically with a HTTP error response-code (3xx, 4xx, 5xx)",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "Error": "#/components/schemas/Error"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "required": [
+              "code",
+              "reason"
+            ],
+            "type": "object",
+            "properties": {
+              "code": {
+                "type": "string",
+                "description": "Application relevant detail, defined in the API or a common list."
+              },
+              "reason": {
+                "type": "string",
+                "description": "Explanation of the reason for the error which can be shown to a client user."
+              },
+              "message": {
+                "type": "string",
+                "description": "More details and corrective actions related to the error which can be shown to a client user."
+              },
+              "status": {
+                "type": "string",
+                "description": "HTTP Error code extension"
+              },
+              "referenceError": {
+                "type": "string",
+                "description": "URI of documentation describing the error."
+              }
+            }
+          }
+        ]
+      },
+      "Addressable_FVO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "unique identifier"
+          }
+        },
+        "description": "Base schema for adressable entities"
+      },
+      "EntityRef_FVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible_FVO"
+          },
+          {
+            "$ref": "#/components/schemas/Addressable_FVO"
+          },
+          {
+            "required": [
+              "id"
+            ],
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "The identifier of the referred entity."
+              },
+              "href": {
+                "type": "string",
+                "description": "The URI of the referred entity.",
+                "format": "uri"
+              },
+              "name": {
+                "type": "string",
+                "description": "Name of the referred entity."
+              },
+              "@referredType": {
+                "type": "string",
+                "description": "The actual type of the target instance when needed for disambiguation."
+              }
+            },
+            "description": "Entity reference schema to be use for all entityRef class."
+          }
+        ]
+      },
+      "EntityRelationship": {
+        "type": "object",
+        "properties": {
+          "href": {
+            "type": "string",
+            "format": "uri"
+          },
+          "name": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string",
+            "description": "The association role for this entity"
+          },
+          "validFor": {
+            "$ref": "#/components/schemas/TimePeriod"
+          },
+          "associationSpec": {
+            "$ref": "#/components/schemas/EntityRef"
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class"
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships"
+          },
+          "relationshipType": {
+            "type": "string",
+            "description": "Type of relationship such as migration, substitution, dependency, exclusivity"
+          },
+          "id": {
+            "type": "string"
+          },
+          "@referredType": {
+            "type": "string"
+          },
+          "@type": {
+            "type": "string"
+          }
+        },
+        "description": "A uni-directionmal relationship from this entity to a target entity instance"
+      },
+      "Extensible_FVO": {
+        "required": [
+          "@type"
+        ],
+        "type": "object",
+        "properties": {
+          "@type": {
+            "type": "string",
+            "description": "When sub-classing, this defines the sub-class Extensible name"
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class"
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships"
+          }
+        },
+        "description": "Base Extensible schema for use in TMForum Open-APIs - When used for in a schema it means that the Entity described by the schema  MUST be extended with the @type"
+      },
+      "Duration": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "integer",
+            "description": "Time interval (number of seconds, minutes, hours, etc.)"
+          },
+          "units": {
+            "type": "string",
+            "description": "Unit of time (seconds, minutes, hours, etc.)"
+          }
+        },
+        "description": "A time interval in a given unit of time"
+      },
+      "Expression": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "Expression": "#/components/schemas/Expression"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "expressionLanguage": {
+                "$ref": "#/components/schemas/ExpressionLanguageEnum"
+              },
+              "iri": {
+                "type": "string",
+                "description": "Internationalized Resource Identifier of the intent Expression"
+              },
+              "expressionValue": {
+                "type": "string",
+                "description": "expression value is the ontology-encoded form of the Intent such as RDF-XML, Turtle, Json-LD,..."
+              }
+            },
+            "description": "Expression is the ontology-encoded form of the Intent"
+          }
+        ]
+      },
+      "ExpressionLanguageEnum": {
+        "type": "string",
+        "description": "Possible values for the serialized Expression language of an intent or Intent report",
+        "enum": [
+          "Turtle",
+          "JSON-LD",
+          "RDF-XML",
+          "Other"
+        ]
+      },
+      "Intent": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "Intent": "#/components/schemas/Intent"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Entity"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "description": {
+                "type": "string",
+                "description": "The description of the intent."
+              },
+              "validFor": {
+                "$ref": "#/components/schemas/TimePeriod"
+              },
+              "isBundle": {
+                "type": "boolean",
+                "description": "isBundle determines whether an intent represents a single intent (false), or a bundle of intents(true)."
+              },
+              "priority": {
+                "type": "string",
+                "description": "Can be used by intent owner to prioritize intents in an intent management system"
+              },
+              "statusChangeDate": {
+                "type": "string",
+                "description": "A date time( DateTime). The date that the entity status changed to the current one",
+                "format": "date-time"
+              },
+              "context": {
+                "type": "string",
+                "description": "A string used to give a context to the intent"
+              },
+              "version": {
+                "type": "string",
+                "description": "A field that identifies the specific version of an instance of an intent."
+              },
+              "intentSpecification": {
+                "$ref": "#/components/schemas/EntityRef"
+              },
+              "intentRelationship": {
+                "type": "array",
+                "description": "A list of intents related to this intent",
+                "items": {
+                  "$ref": "#/components/schemas/EntityRelationship"
+                }
+              },
+              "characteristic": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Characteristic"
+                }
+              },
+              "relatedParty": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/RelatedPartyRefOrPartyRoleRef"
+                }
+              },
+              "attachment": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/AttachmentOrDocumentRef"
+                }
+              },
+              "name": {
+                "type": "string",
+                "description": "The name of the intent."
+              },
+              "expression": {
+                "$ref": "#/components/schemas/Expression"
+              },
+              "creationDate": {
+                "type": "string",
+                "description": "Date and time of the creation of this REST resource",
+                "format": "date-time"
+              },
+              "lastUpdate": {
+                "type": "string",
+                "description": "Date and time of the last update of this REST resource",
+                "format": "date-time"
+              },
+              "lifecycleStatus": {
+                "type": "string",
+                "description": "Used to indicate the current lifecycle status of this intent"
+              }
+            },
+            "description": "An Intent instance is the formal description of all expectations including requirements, goals, and constraints given to a technical system"
+          }
+        ]
+      },
+      "IntentRef": {
+        "type": "object",
+        "description": "Intent reference, for when Intent is used by other entities",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "IntentRef": "#/components/schemas/IntentRef"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          }
+        ]
+      },
+      "IntentRefOrValue": {
+        "type": "object",
+        "description": "Intent Ref (if Intent already exists) or Value (if Intent be created or its details be presented)",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "IntentRef": "#/components/schemas/IntentRef",
+            "Intent": "#/components/schemas/Intent"
+          }
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/IntentRef"
+          },
+          {
+            "$ref": "#/components/schemas/Intent"
+          }
+        ]
+      },
+      "PartyOrPartyRole": {
+        "type": "object",
+        "description": "",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "PartyRef": "#/components/schemas/PartyRef",
+            "PartyRoleRef": "#/components/schemas/PartyRoleRef",
+            "Individual": "#/components/schemas/Individual",
+            "Organization": "#/components/schemas/Organization",
+            "PartyRole": "#/components/schemas/PartyRole",
+            "Supplier": "#/components/schemas/Supplier",
+            "BusinessPartner": "#/components/schemas/BusinessPartner",
+            "Consumer": "#/components/schemas/Consumer",
+            "Producer": "#/components/schemas/Producer"
+          }
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/PartyRef"
+          },
+          {
+            "$ref": "#/components/schemas/PartyRoleRef"
+          },
+          {
+            "$ref": "#/components/schemas/Individual"
+          },
+          {
+            "$ref": "#/components/schemas/Organization"
+          },
+          {
+            "$ref": "#/components/schemas/PartyRole"
+          },
+          {
+            "$ref": "#/components/schemas/Supplier"
+          },
+          {
+            "$ref": "#/components/schemas/BusinessPartner"
+          },
+          {
+            "$ref": "#/components/schemas/Consumer"
+          },
+          {
+            "$ref": "#/components/schemas/Producer"
+          }
+        ]
+      },
+      "RelatedOrderItem": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "RelatedOrderItem": "#/components/schemas/RelatedOrderItem"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "orderItemAction": {
+                "$ref": "#/components/schemas/ItemActionType"
+              },
+              "orderHref": {
+                "type": "string",
+                "description": "Reference of the related entity."
+              },
+              "@referredType": {
+                "type": "string",
+                "description": "The actual type of the target instance when needed for disambiguation."
+              },
+              "role": {
+                "type": "string",
+                "description": "Role played by the  Order"
+              },
+              "orderId": {
+                "type": "string",
+                "description": "Unique identifier of a related  Order."
+              },
+              "orderItemId": {
+                "type": "string",
+                "description": "Id of an item of a prduct order"
+              }
+            },
+            "description": "It's a Order item that has been executed previously."
+          }
+        ]
+      },
+      "RelatedPartyOrPartyRole": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "RelatedPartyOrPartyRole": "#/components/schemas/RelatedPartyOrPartyRole"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "role": {
+                "type": "string",
+                "description": "Role played by the related party or party role in the context of the specific entity it is linked to. Such as 'initiator', 'customer',  'salesAgent', 'user'"
+              },
+              "partyOrPartyRole": {
+                "$ref": "#/components/schemas/PartyOrPartyRole"
+              }
+            },
+            "description": "RelatedParty reference. A related party defines party or party role or its reference, linked to a specific entity"
+          }
+        ]
+      },
+      "RelatedPartyRefOrPartyRoleRef": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "RelatedPartyRefOrPartyRoleRef": "#/components/schemas/RelatedPartyRefOrPartyRoleRef"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "role": {
+                "type": "string",
+                "description": "Role played by the related party or party role in the context of the specific entity it is linked to. Such as 'initiator', 'customer',  'salesAgent', 'user'"
+              },
+              "partyOrPartyRole": {
+                "$ref": "#/components/schemas/PartyRefOrPartyRoleRef"
+              }
+            },
+            "description": "RelatedParty reference. A related party defines party or party role or its reference, linked to a specific entity"
+          }
+        ]
+      },
+      "CalendarPeriod": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "CalendarPeriod": "#/components/schemas/CalendarPeriod"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "day": {
+                "type": "string",
+                "description": "Day where the calendar status applies (e.g.: monday, mon-to-fri, weekdays, weekend, all week, ...)"
+              },
+              "timeZone": {
+                "type": "string",
+                "description": "Indication of the timezone applicable to the calendar information (e.g.: Paris, GMT+1)"
+              },
+              "hourPeriod": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/HourPeriod"
+                }
+              },
+              "status": {
+                "type": "string",
+                "description": "Indication of the availability of the caledar period (e.g.: available, booked, etc.)"
+              }
+            }
+          }
+        ]
+      },
+      "ExternalIdentifier": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "ExternalIdentifier": "#/components/schemas/ExternalIdentifier"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "owner": {
+                "type": "string",
+                "description": "Name of the external system that owns the entity.",
+                "example": "MagentoCommerce"
+              },
+              "externalIdentifierType": {
+                "type": "string",
+                "description": "Type of the identification, typically would be the type of the entity within the external system",
+                "example": "ProductOrder"
+              },
+              "id": {
+                "type": "string",
+                "description": "identification of the entity within the external system."
+              }
+            },
+            "description": "An identification of an entity that is owned by or originates in a software system different from the current system, for example a ProductOrder handed off from a commerce platform into an order handling system. The structure identifies the system itself, the nature of the entity within the system (e.g. class name) and the unique ID of the entity within the system. It is anticipated that multiple external IDs can be held for a single entity, e.g. if the entity passed through multiple systems on the way to the current system. In this case the consumer is expected to sequence the IDs in the array in reverse order of provenance, i.e. most recent system first in the list."
+          }
+        ]
+      },
+      "GeographicAddress": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Place"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "city": {
+                "type": "string",
+                "description": "City that the address is in"
+              },
+              "country": {
+                "type": "string",
+                "description": "Country that the address is in"
+              },
+              "locality": {
+                "type": "string",
+                "description": "An area of defined or undefined boundaries within a local authority or other legislatively defined area, usually rural or semi rural in nature. [ANZLIC-STREET], or a suburb, a bounded locality within a city, town or shire principally of urban character [ANZLICSTREET]"
+              },
+              "postcode": {
+                "type": "string",
+                "description": "descriptor for a postal delivery area, used to speed and simplify the delivery of mail (also know as zipcode)"
+              },
+              "stateOrProvince": {
+                "type": "string",
+                "description": "the State or Province that the address is in"
+              },
+              "streetName": {
+                "type": "string",
+                "description": "Name of the street or other street type"
+              },
+              "streetNr": {
+                "type": "string",
+                "description": "Number identifying a specific property on a public street. It may be combined with streetNrLast for ranged addresses"
+              },
+              "streetNrLast": {
+                "type": "string",
+                "description": "Last number in a range of street numbers allocated to a property"
+              },
+              "streetNrLastSuffix": {
+                "type": "string",
+                "description": "Last street number suffix for a ranged address"
+              },
+              "streetNrSuffix": {
+                "type": "string",
+                "description": "the first street number suffix"
+              },
+              "streetSuffix": {
+                "type": "string",
+                "description": "A modifier denoting a relative direction"
+              },
+              "streetType": {
+                "type": "string",
+                "description": "alley, avenue, boulevard, brae, crescent, drive, highway, lane, terrace, parade, place, tarn, way, wharf "
+              },
+              "countryCode": {
+                "type": "array",
+                "description": "Country codes are short alphabetic or numeric geographical codes (geocodes) developed to represent countries and dependent areas, for use in data processing and communications. Several different systems have been developed to do this. The term country code frequently refers to ISO 3166-1 alpha-2 or international dialing codes, the E.164 country calling codes.",
+                "items": {
+                  "$ref": "#/components/schemas/StandardIdentifier"
+                }
+              },
+              "externalIdentifier": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ExternalIdentifier"
+                }
+              },
+              "geographicLocation": {
+                "$ref": "#/components/schemas/GeographicLocationRefOrValue"
+              },
+              "geographicSubAddress": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/GeographicSubAddress"
+                }
+              },
+              "geographicAddressType": {
+                "type": "string",
+                "description": "Classification of the address, e.g., residential, industrial "
+              }
+            },
+            "description": "Structured textual way of describing how to find a Property in an urban area (country properties are often defined differently).\nNote : Address corresponds to SID UrbanPropertyAddress"
+          }
+        ]
+      },
+      "GeographicLocation": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Place"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "geoJson": {
+                "$ref": "#/components/schemas/Geometry"
+              },
+              "bbox": {
+                "minItems": 4,
+                "type": "array",
+                "description": "A bounding box array that contains the geometry. The axes order follows the axes order of the geometry",
+                "items": {
+                  "type": "number"
+                }
+              }
+            },
+            "description": "A GeographicLocation is a pure-virtual super-class to the GeoJSON-aligned geometries of Point (addresses and locations), MultiPoint, LineString (streets, highways and boundaries), MultiLineString and Polygon (countries, provinces, tracts of land). Use the @type attribute to specify which of these is being specified by the geometry attribute."
+          }
+        ]
+      },
+      "GeographicLocationRef": {
+        "type": "object",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "GeographicLocationRef": "#/components/schemas/GeographicLocationRef"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          }
+        ]
+      },
+      "GeographicLocationRefOrValue": {
+        "type": "object",
+        "description": "The polymorphic attributes @type, @schemaLocation & @referredType are related to the GeographicLocation entity and not the GeographicLocationRefOrValue class itself",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "GeographicLocation": "#/components/schemas/GeographicLocation",
+            "GeographicLocationRef": "#/components/schemas/GeographicLocationRef"
+          }
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/GeographicLocation"
+          },
+          {
+            "$ref": "#/components/schemas/GeographicLocationRef"
+          }
+        ]
+      },
+      "GeographicSite": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Place"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "code": {
+                "type": "string",
+                "description": "A code that may be used for some addressing schemes eg: [ANSI T1.253-1999]"
+              },
+              "creationDate": {
+                "type": "string",
+                "description": "Date and time when the GeographicSite was created",
+                "format": "date-time"
+              },
+              "description": {
+                "type": "string",
+                "description": "Text describing additional information regarding the site"
+              },
+              "status": {
+                "type": "string",
+                "description": "The condition of the GeographicSite, such as planned, underConstruction, cancelled, active, inactive, former"
+              },
+              "relatedParty": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/RelatedPartyOrPartyRole"
+                }
+              },
+              "externalIdentifier": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ExternalIdentifier"
+                }
+              },
+              "calendar": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CalendarPeriod"
+                }
+              },
+              "place": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/PlaceRefOrValue"
+                }
+              },
+              "siteRelationship": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/GeographicSiteRelationship"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "GeographicSiteRelationship": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "GeographicSiteRelationship": "#/components/schemas/GeographicSiteRelationship"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "href": {
+                "type": "string",
+                "description": "Reference of the related geographic site",
+                "format": "uri"
+              },
+              "role": {
+                "type": "string",
+                "description": "Role of the related site in the relationship"
+              },
+              "validFor": {
+                "$ref": "#/components/schemas/TimePeriod"
+              },
+              "id": {
+                "type": "string",
+                "description": "Unique identifier of the related site entity within the server"
+              },
+              "relationshipType": {
+                "type": "string",
+                "description": "Type of relationship"
+              }
+            }
+          }
+        ]
+      },
+      "GeographicSubAddress": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "GeographicSubAddress": "#/components/schemas/GeographicSubAddress"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Entity"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "buildingName": {
+                "type": "string",
+                "description": "allows for buildings that have well-known names"
+              },
+              "href": {
+                "type": "string",
+                "description": "Link to the subAddress",
+                "format": "uri"
+              },
+              "id": {
+                "type": "string",
+                "description": "Unique Identifier of the subAddress"
+              },
+              "levelNumber": {
+                "type": "string",
+                "description": "used where a level type may be repeated e.g. BASEMENT 1, BASEMENT 2"
+              },
+              "levelType": {
+                "type": "string",
+                "description": "describes level types within a building"
+              },
+              "name": {
+                "type": "string",
+                "description": "Name of the subAddress to identify it with a meaningful identification"
+              },
+              "privateStreetName": {
+                "type": "string",
+                "description": "private streets internal to a property (e.g. a university) may have internal names that are not recorded by the land title office."
+              },
+              "privateStreetNumber": {
+                "type": "string",
+                "description": "private streets numbers internal to a private street"
+              },
+              "subUnit": {
+                "type": "array",
+                "description": "Representation of a SubUnit. It is used for describing subunit within a subAddress e.g. BERTH, FLAT, PIER, SUITE, SHOP, TOWER, UNIT, WHARF.",
+                "items": {
+                  "$ref": "#/components/schemas/GeographicSubAddressUnit"
+                }
+              },
+              "subAddressType": {
+                "type": "string",
+                "description": "Type of subAddress : it can be a subunit or a private street"
+              }
+            },
+            "description": "Representation of a GeographicSubAddress \nIt is used for addressing within a property in an urban area (country properties are often defined differently). It may refer to a building, a building cluster, or a floor of a multistory building."
+          }
+        ]
+      },
+      "GeographicSubAddressUnit": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "GeographicSubAddressUnit": "#/components/schemas/GeographicSubAddressUnit"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "subUnitNumber": {
+                "type": "string",
+                "description": "The discriminator used for the subunit, often just a simple number but may also be a range."
+              },
+              "subUnitType": {
+                "type": "string",
+                "description": "The type of subunit e.g.BERTH, FLAT, PIER, SUITE, SHOP, TOWER, UNIT, WHARF, RACK"
+              }
+            },
+            "description": "Representation of a SubUnit. It is used for describing subunit within a subAddress e.g. BERTH, FLAT, PIER, SUITE, SHOP, TOWER, UNIT, WHARF."
+          }
+        ]
+      },
+      "HourPeriod": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "HourPeriod": "#/components/schemas/HourPeriod"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "endHour": {
+                "type": "string",
+                "description": "The time when the status ends applying"
+              },
+              "startHour": {
+                "type": "string",
+                "description": "The time when the status starts applying"
+              }
+            }
+          }
+        ]
+      },
+      "ItemActionType": {
+        "type": "string",
+        "description": "action to be performed on the entity managed by the item",
+        "enum": [
+          "add",
+          "modify",
+          "delete",
+          "noChange"
+        ]
+      },
+      "StandardIdentifier": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "StandardIdentifier": "#/components/schemas/StandardIdentifier"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Entity"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "format": {
+                "type": "string",
+                "description": "Standard/Regulatory definition identifier. e.g., ISO 3166-1",
+                "example": "ISO 3166-1"
+              },
+              "value": {
+                "type": "string",
+                "description": "The value of the resource in the corresponding standard.e.g., a country code value",
+                "example": "GB"
+              }
+            },
+            "description": "The corresponding identification of the resource in different standard, regulatory definitions. The standard specification identifier (e.g., ISO 3166-1 Alpha-2) and the corresponding value (e.g., BE) relevant to a particular resource. It is anticipated that multiple standards can provide definitions for a single entity, e.g., a country identifier can be specified in various standards (e.g., \"ISO 3166-1 Alpha 2\",  \"ISO 3166-1 Alpha 3\", \"ISO 3166-1 Numeric\")"
+          }
+        ]
+      },
+      "Geometry": {
+        "type": "object",
+        "description": "A GeoJson geometry.",
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "LineString": "#/components/schemas/LineString",
+            "MultiLineString": "#/components/schemas/MultiLineString",
+            "MultiPoint": "#/components/schemas/MultiPoint",
+            "MultiPolygon": "#/components/schemas/MultiPolygon",
+            "Point": "#/components/schemas/Point",
+            "Polygon": "#/components/schemas/Polygon"
+          }
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/LineString"
+          },
+          {
+            "$ref": "#/components/schemas/MultiLineString"
+          },
+          {
+            "$ref": "#/components/schemas/MultiPoint"
+          },
+          {
+            "$ref": "#/components/schemas/MultiPolygon"
+          },
+          {
+            "$ref": "#/components/schemas/Point"
+          },
+          {
+            "$ref": "#/components/schemas/Polygon"
+          }
+        ]
+      },
+      "Point2D": {
+        "maxItems": 2,
+        "minItems": 2,
+        "type": "array",
+        "items": {
+          "type": "number"
+        }
+      },
+      "Point": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "coordinates": {
+            "$ref": "#/components/schemas/Point2D"
+          }
+        },
+        "description": "A GeoJSON Point."
+      },
+      "MultiPoint": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "coordinates": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Point2D"
+            }
+          }
+        },
+        "description": "A GeoJSON MultiPoint."
+      },
+      "LineString": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "coordinates": {
+            "minItems": 2,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Point2D"
+            }
+          }
+        },
+        "description": "A GeoJSON LineString."
+      },
+      "MultiLineString": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "coordinates": {
+            "type": "array",
+            "items": {
+              "minItems": 2,
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/Point2D"
+              }
+            }
+          }
+        },
+        "description": "A GeoJSON MultiLineString."
+      },
+      "Polygon": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "coordinates": {
+            "type": "array",
+            "items": {
+              "minItems": 4,
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/Point2D"
+              }
+            }
+          }
+        },
+        "description": "A GeoJSON Polygon."
+      },
+      "MultiPolygon": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "coordinates": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "minItems": 4,
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Point2D"
+                }
+              }
+            }
+          }
+        },
+        "description": "A GeoJSON MultiPolygon."
+      },
+      "AccountRef": {
+        "type": "object",
+        "description": "Account reference. A account may be a party account or a financial account.",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "AccountRef": "#/components/schemas/AccountRef"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          }
+        ]
+      },
+      "AgreementRef": {
+        "type": "object",
+        "description": "Agreement reference. An agreement represents a contract or arrangement, either written or verbal and sometimes enforceable by law, such as a service level agreement or a customer price agreement. An agreement involves a number of other business entities, such as products, services, and resources and/or their specifications.",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "AgreementRef": "#/components/schemas/AgreementRef"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          }
+        ]
+      },
+      "AttachmentOrDocumentRef": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "AttachmentRef": "#/components/schemas/AttachmentOrDocumentRef"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "description": {
+                "type": "string",
+                "description": "A narrative text describing the content of the attachment"
+              },
+              "url": {
+                "type": "string",
+                "description": "Link to the attachment media/content"
+              }
+            },
+            "description": "Attachment reference. An attachment complements the description of an element (for instance a product) through video, pictures"
+          }
+        ]
+      },
+      "OrganizationRef": {
+        "type": "object",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "OrganizationRef": "#/components/schemas/OrganizationRef"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          }
+        ]
+      },
+      "PartyRef": {
+        "type": "object",
+        "description": "A Party reference",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "PartyRef": "#/components/schemas/PartyRef"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          }
+        ]
+      },
+      "PartyRefOrPartyRoleRef": {
+        "type": "object",
+        "description": "",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "PartyRef": "#/components/schemas/PartyRef",
+            "PartyRoleRef": "#/components/schemas/PartyRoleRef"
+          }
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/PartyRef"
+          },
+          {
+            "$ref": "#/components/schemas/PartyRoleRef"
+          }
+        ]
+      },
+      "PartyRoleRef": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "PartyRoleRef": "#/components/schemas/PartyRoleRef"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "partyId": {
+                "type": "string",
+                "description": "The identifier of the engaged party that is linked to the PartyRole object."
+              },
+              "partyName": {
+                "type": "string",
+                "description": "The name of the engaged party that is linked to the PartyRole object."
+              }
+            },
+            "description": "Party role reference. A party role represents the part played by a party in a given context."
+          }
+        ]
+      },
+      "PartyRoleSpecificationRef": {
+        "type": "object",
+        "description": "Party role specification reference. A party role specification gives additional details on the part played by a party in a given context.",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "PartyRoleSpecificationRef": "#/components/schemas/PartyRoleSpecificationRef"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          }
+        ]
+      },
+      "PaymentMethodRef": {
+        "type": "object",
+        "description": "PaymentMethod reference. A payment method defines a specific mean of payment (e.g direct debit).",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "PaymentMethodRef": "#/components/schemas/PaymentMethodRef"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          }
+        ]
+      },
+      "BusinessPartner": {
+        "type": "object",
+        "description": "When business partner is the BusinessPartner ",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/PartyRole"
+          }
+        ]
+      },
+      "Consumer": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/PartyRole"
+          }
+        ]
+      },
+      "ContactMedium": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "ContactMedium": "#/components/schemas/ContactMedium",
+            "SocialContactMedium": "#/components/schemas/SocialContactMedium",
+            "PhoneContactMedium": "#/components/schemas/PhoneContactMedium",
+            "GeographicAddressContactMedium": "#/components/schemas/GeographicAddressContactMedium",
+            "FaxContactMedium": "#/components/schemas/FaxContactMedium",
+            "EmailContactMedium": "#/components/schemas/EmailContactMedium"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Identifier for this contact medium."
+              },
+              "preferred": {
+                "type": "boolean",
+                "description": "If true, indicates that is the preferred contact medium"
+              },
+              "contactType": {
+                "type": "string",
+                "description": "Type of the contact medium to qualifiy it like pro email / personal email. This is not used to define the contact medium used."
+              },
+              "validFor": {
+                "$ref": "#/components/schemas/TimePeriod"
+              }
+            },
+            "description": "Indicates the contact medium that could be used to contact the party."
+          }
+        ]
+      },
+      "ContactMedium_FVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "ContactMedium": "#/components/schemas/ContactMedium_FVO",
+            "SocialContactMedium": "#/components/schemas/SocialContactMedium_FVO",
+            "PhoneContactMedium": "#/components/schemas/PhoneContactMedium_FVO",
+            "GeographicAddressContactMedium": "#/components/schemas/GeographicAddressContactMedium_FVO",
+            "FaxContactMedium": "#/components/schemas/FaxContactMedium_FVO",
+            "EmailContactMedium": "#/components/schemas/EmailContactMedium_FVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible_FVO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Identifier for this contact medium."
+              },
+              "preferred": {
+                "type": "boolean",
+                "description": "If true, indicates that is the preferred contact medium"
+              },
+              "contactType": {
+                "type": "string",
+                "description": "Type of the contact medium to qualifiy it like pro email / personal email. This is not used to define the contact medium used."
+              },
+              "validFor": {
+                "$ref": "#/components/schemas/TimePeriod"
+              }
+            },
+            "description": "Indicates the contact medium that could be used to contact the party."
+          }
+        ]
+      },
+      "ContactMedium_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "ContactMedium": "#/components/schemas/ContactMedium_MVO",
+            "SocialContactMedium": "#/components/schemas/SocialContactMedium_MVO",
+            "PhoneContactMedium": "#/components/schemas/PhoneContactMedium_MVO",
+            "GeographicAddressContactMedium": "#/components/schemas/GeographicAddressContactMedium_MVO",
+            "FaxContactMedium": "#/components/schemas/FaxContactMedium_MVO",
+            "EmailContactMedium": "#/components/schemas/EmailContactMedium_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Identifier for this contact medium."
+              },
+              "preferred": {
+                "type": "boolean",
+                "description": "If true, indicates that is the preferred contact medium"
+              },
+              "contactType": {
+                "type": "string",
+                "description": "Type of the contact medium to qualifiy it like pro email / personal email. This is not used to define the contact medium used."
+              },
+              "validFor": {
+                "$ref": "#/components/schemas/TimePeriod"
+              }
+            },
+            "description": "Indicates the contact medium that could be used to contact the party."
+          }
+        ]
+      },
+      "CreditProfile": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "CreditProfile": "#/components/schemas/CreditProfile"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Entity"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "creditProfileDate": {
+                "type": "string",
+                "description": "The date the profile was established",
+                "format": "date-time"
+              },
+              "creditRiskRating": {
+                "type": "integer",
+                "description": "This is an integer whose value is used to rate the risk"
+              },
+              "creditScore": {
+                "type": "integer",
+                "description": "A measure of a person or organizations creditworthiness calculated on the basis of a combination of factors such as their income and credit history"
+              },
+              "validFor": {
+                "$ref": "#/components/schemas/TimePeriod"
+              }
+            },
+            "description": "Credit profile for the party (containing credit scoring, ...). By default only the current credit profile  is retrieved. It can be used as a list to give the party credit profiles history, the first one in the list will be the current one."
+          }
+        ]
+      },
+      "Disability": {
+        "type": "object",
+        "properties": {
+          "disabilityCode": {
+            "type": "string",
+            "description": "Code of the disability"
+          },
+          "disabilityName": {
+            "type": "string",
+            "description": "Name of the disability"
+          },
+          "validFor": {
+            "$ref": "#/components/schemas/TimePeriod"
+          }
+        },
+        "description": "Lack or inadequate strength or ability."
+      },
+      "EmailContactMedium": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ContactMedium"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "emailAddress": {
+                "type": "string",
+                "description": "Full email address in standard format"
+              }
+            },
+            "description": "Describes an email that could be used to contact a party (an individual or an organization)"
+          }
+        ]
+      },
+      "EmailContactMedium_FVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ContactMedium_FVO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "emailAddress": {
+                "type": "string",
+                "description": "Full email address in standard format"
+              }
+            },
+            "description": "Describes an email that could be used to contact a party (an individual or an organization)"
+          }
+        ]
+      },
+      "EmailContactMedium_MVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ContactMedium_MVO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "emailAddress": {
+                "type": "string",
+                "description": "Full email address in standard format"
+              }
+            },
+            "description": "Describes an email that could be used to contact a party (an individual or an organization)"
+          }
+        ]
+      },
+      "FaxContactMedium": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ContactMedium"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "faxNumber": {
+                "type": "string",
+                "description": "The fax number of the contact"
+              }
+            },
+            "description": "Describes a fax that could be used to contact a party (an individual or an organization)"
+          }
+        ]
+      },
+      "FaxContactMedium_FVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ContactMedium_FVO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "faxNumber": {
+                "type": "string",
+                "description": "The fax number of the contact"
+              }
+            },
+            "description": "Describes a fax that could be used to contact a party (an individual or an organization)"
+          }
+        ]
+      },
+      "FaxContactMedium_MVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ContactMedium_MVO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "faxNumber": {
+                "type": "string",
+                "description": "The fax number of the contact"
+              }
+            },
+            "description": "Describes a fax that could be used to contact a party (an individual or an organization)"
+          }
+        ]
+      },
+      "GeographicAddressContactMedium": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ContactMedium"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "city": {
+                "type": "string",
+                "description": "The city"
+              },
+              "country": {
+                "type": "string",
+                "description": "The country"
+              },
+              "postCode": {
+                "type": "string",
+                "description": "Postcode"
+              },
+              "stateOrProvince": {
+                "type": "string",
+                "description": "State or province"
+              },
+              "street1": {
+                "type": "string",
+                "description": "Describes the street"
+              },
+              "street2": {
+                "type": "string",
+                "description": "Complementary street description"
+              },
+              "geographicAddress": {
+                "$ref": "#/components/schemas/GeographicAddressRef"
+              }
+            },
+            "description": "Describes a geographical address that could be used to contact a party (an individual or an organization)"
+          }
+        ]
+      },
+      "GeographicAddressContactMedium_FVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ContactMedium_FVO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "city": {
+                "type": "string",
+                "description": "The city"
+              },
+              "country": {
+                "type": "string",
+                "description": "The country"
+              },
+              "postCode": {
+                "type": "string",
+                "description": "Postcode"
+              },
+              "stateOrProvince": {
+                "type": "string",
+                "description": "State or province"
+              },
+              "street1": {
+                "type": "string",
+                "description": "Describes the street"
+              },
+              "street2": {
+                "type": "string",
+                "description": "Complementary street description"
+              },
+              "geographicAddress": {
+                "$ref": "#/components/schemas/GeographicAddressRef_FVO"
+              }
+            },
+            "description": "Describes a geographical address that could be used to contact a party (an individual or an organization)"
+          }
+        ]
+      },
+      "GeographicAddressContactMedium_MVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ContactMedium_MVO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "city": {
+                "type": "string",
+                "description": "The city"
+              },
+              "country": {
+                "type": "string",
+                "description": "The country"
+              },
+              "postCode": {
+                "type": "string",
+                "description": "Postcode"
+              },
+              "stateOrProvince": {
+                "type": "string",
+                "description": "State or province"
+              },
+              "street1": {
+                "type": "string",
+                "description": "Describes the street"
+              },
+              "street2": {
+                "type": "string",
+                "description": "Complementary street description"
+              },
+              "geographicAddress": {
+                "$ref": "#/components/schemas/GeographicAddressRef_MVO"
+              }
+            },
+            "description": "Describes a geographical address that could be used to contact a party (an individual or an organization)"
+          }
+        ]
+      },
+      "GeographicAddressRef": {
+        "type": "object",
+        "description": "Reference to a Geographic Address.",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "GeographicAddressRef": "#/components/schemas/GeographicAddressRef"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          }
+        ]
+      },
+      "GeographicAddressRef_FVO": {
+        "type": "object",
+        "description": "Reference to a Geographic Address.",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "GeographicAddressRef": "#/components/schemas/GeographicAddressRef_FVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef_FVO"
+          }
+        ]
+      },
+      "GeographicAddressRef_MVO": {
+        "type": "object",
+        "description": "Reference to a Geographic Address.",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "GeographicAddressRef": "#/components/schemas/GeographicAddressRef_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          }
+        ]
+      },
+      "Individual": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Party"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "gender": {
+                "type": "string",
+                "description": "Gender"
+              },
+              "placeOfBirth": {
+                "type": "string",
+                "description": "Reference to the place where the individual was born"
+              },
+              "countryOfBirth": {
+                "type": "string",
+                "description": "Country where the individual was born"
+              },
+              "nationality": {
+                "type": "string",
+                "description": "Nationality"
+              },
+              "maritalStatus": {
+                "type": "string",
+                "description": "Marital status (married, divorced, widow ...)"
+              },
+              "birthDate": {
+                "type": "string",
+                "description": "Birth date",
+                "format": "date-time"
+              },
+              "deathDate": {
+                "type": "string",
+                "description": "Date of death",
+                "format": "date-time"
+              },
+              "title": {
+                "type": "string",
+                "description": "Useful for titles (aristocratic, social,...) Pr, Dr, Sir, ..."
+              },
+              "aristocraticTitle": {
+                "type": "string",
+                "description": "e.g. Baron, Graf, Earl"
+              },
+              "generation": {
+                "type": "string",
+                "description": "e.g.. Sr, Jr, III (the third)"
+              },
+              "preferredGivenName": {
+                "type": "string",
+                "description": "Contains the chosen name by which the individual prefers to be addressed. Note: This name may be a name other than a given name, such as a nickname"
+              },
+              "familyNamePrefix": {
+                "type": "string",
+                "description": "Family name prefix"
+              },
+              "legalName": {
+                "type": "string",
+                "description": "Legal name or birth name (name one has for official purposes)"
+              },
+              "middleName": {
+                "type": "string",
+                "description": "Middles name or initial"
+              },
+              "name": {
+                "type": "string",
+                "description": "Full name flatten (first, middle, and last names) - this is the name that is expected to be presented in reference data types such as PartyRef, RelatedParty, etc. that refer to Individual"
+              },
+              "formattedName": {
+                "type": "string",
+                "description": "A fully formatted name in one string with all of its pieces in their proper place and all of the necessary punctuation. Useful for specific contexts (Chinese, Japanese, Korean)"
+              },
+              "location": {
+                "type": "string",
+                "description": "Temporary current location of the individual (may be used if the individual has approved its sharing)"
+              },
+              "status": {
+                "$ref": "#/components/schemas/IndividualStateType"
+              },
+              "otherName": {
+                "type": "array",
+                "description": "List of other names by which this individual is known",
+                "items": {
+                  "$ref": "#/components/schemas/OtherNameIndividual"
+                }
+              },
+              "individualIdentification": {
+                "type": "array",
+                "description": "List of official identifications issued to the individual, such as passport, driving licence, social security number",
+                "items": {
+                  "$ref": "#/components/schemas/IndividualIdentification"
+                }
+              },
+              "disability": {
+                "type": "array",
+                "description": "List of disabilities suffered by the individual",
+                "items": {
+                  "$ref": "#/components/schemas/Disability"
+                }
+              },
+              "languageAbility": {
+                "type": "array",
+                "description": "List of national languages known by the individual",
+                "items": {
+                  "$ref": "#/components/schemas/LanguageAbility"
+                }
+              },
+              "skill": {
+                "type": "array",
+                "description": "List of skills exhibited by the individual",
+                "items": {
+                  "$ref": "#/components/schemas/Skill"
+                }
+              },
+              "familyName": {
+                "type": "string",
+                "description": "Contains the non-chosen or inherited name. Also known as last name in the Western context"
+              },
+              "givenName": {
+                "type": "string",
+                "description": "First name of the individual"
+              }
+            },
+            "description": "Individual represents a single human being (a man, woman or child). The individual can be a customer, an employee or any other person that the organization needs to store information about."
+          }
+        ]
+      },
+      "IndividualIdentification": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "IndividualIdentification": "#/components/schemas/IndividualIdentification"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "identificationId": {
+                "type": "string",
+                "description": "Identifier"
+              },
+              "issuingAuthority": {
+                "type": "string",
+                "description": "Authority which has issued the identifier, such as: social security, town hall"
+              },
+              "issuingDate": {
+                "type": "string",
+                "description": "Date at which the identifier was issued",
+                "format": "date-time"
+              },
+              "identificationType": {
+                "type": "string",
+                "description": "Identification type (passport, national identity card, drivers license, social security number, birth certificate)"
+              },
+              "validFor": {
+                "$ref": "#/components/schemas/TimePeriod"
+              },
+              "attachment": {
+                "$ref": "#/components/schemas/AttachmentOrDocumentRef"
+              }
+            },
+            "description": "Represents our registration of information used as proof of identity by an individual (passport, national identity card, drivers license, social security number, birth certificate)"
+          }
+        ]
+      },
+      "IndividualStateType": {
+        "type": "string",
+        "description": "Valid values for the lifecycle state of the individual",
+        "enum": [
+          "initialized",
+          "validated",
+          "deceased"
+        ]
+      },
+      "LanguageAbility": {
+        "type": "object",
+        "properties": {
+          "languageCode": {
+            "type": "string",
+            "description": "Language code (RFC 5646)"
+          },
+          "languageName": {
+            "type": "string",
+            "description": "Language name"
+          },
+          "isFavouriteLanguage": {
+            "type": "boolean",
+            "description": "A “true” value specifies whether the language is considered by the individual as his favourite one"
+          },
+          "writingProficiency": {
+            "type": "string",
+            "description": "Writing proficiency evaluated for this language"
+          },
+          "readingProficiency": {
+            "type": "string",
+            "description": "Reading proficiency evaluated for this language"
+          },
+          "speakingProficiency": {
+            "type": "string",
+            "description": "Speaking proficiency evaluated for this language"
+          },
+          "listeningProficiency": {
+            "type": "string",
+            "description": "Listening proficiency evaluated for this language"
+          },
+          "validFor": {
+            "$ref": "#/components/schemas/TimePeriod"
+          }
+        },
+        "description": "Ability of an individual to understand or converse in a language."
+      },
+      "Organization": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Party"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "isLegalEntity": {
+                "type": "boolean",
+                "description": "If value is true, the organization is a legal entity known by a national referential."
+              },
+              "isHeadOffice": {
+                "type": "boolean",
+                "description": "If value is true, the organization is the head office"
+              },
+              "organizationType": {
+                "type": "string",
+                "description": "Type of Organization (company, department...)"
+              },
+              "existsDuring": {
+                "$ref": "#/components/schemas/TimePeriod"
+              },
+              "name": {
+                "type": "string",
+                "description": "Organization name (department name for example)"
+              },
+              "nameType": {
+                "type": "string",
+                "description": "Type of the name : Co, Inc, Ltd, etc."
+              },
+              "status": {
+                "$ref": "#/components/schemas/OrganizationStateType"
+              },
+              "otherName": {
+                "type": "array",
+                "description": "List of additional names by which the organization is known",
+                "items": {
+                  "$ref": "#/components/schemas/OtherNameOrganization"
+                }
+              },
+              "organizationIdentification": {
+                "type": "array",
+                "description": "List of official identifiers given to the organization, for example company number in the registry of companies",
+                "items": {
+                  "$ref": "#/components/schemas/OrganizationIdentification"
+                }
+              },
+              "organizationChildRelationship": {
+                "type": "array",
+                "description": "List of organizations that are contained within this organization. For example if this organization is the Legal Department, the child organizations might include Claims, Courts, Contracts",
+                "items": {
+                  "$ref": "#/components/schemas/OrganizationChildRelationship"
+                }
+              },
+              "organizationParentRelationship": {
+                "$ref": "#/components/schemas/OrganizationParentRelationship"
+              },
+              "tradingName": {
+                "type": "string",
+                "description": "Name that the organization (unit) trades under"
+              }
+            },
+            "description": "Organization represents a group of people identified by shared interests or purpose. Examples include business, department and enterprise. Because of the complex nature of many businesses, both organizations and organization units are represented by the same data."
+          }
+        ]
+      },
+      "OrganizationChildRelationship": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "OrganizationChildRelationship": "#/components/schemas/OrganizationChildRelationship"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "relationshipType": {
+                "type": "string",
+                "description": "Type of the relationship. Could be juridical, hierarchical, geographical, functional for example."
+              },
+              "organization": {
+                "$ref": "#/components/schemas/OrganizationRef"
+              }
+            },
+            "description": "Child references of an organization in a structure of organizations."
+          }
+        ]
+      },
+      "OrganizationIdentification": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "OrganizationIdentification": "#/components/schemas/OrganizationIdentification"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "identificationId": {
+                "type": "string",
+                "description": "Identifier"
+              },
+              "issuingAuthority": {
+                "type": "string",
+                "description": "Authority which has issued the identifier (chamber of commerce...)"
+              },
+              "issuingDate": {
+                "type": "string",
+                "description": "Date at which the identifier was issued",
+                "format": "date-time"
+              },
+              "identificationType": {
+                "type": "string",
+                "description": "Type of identification information used to identify the company in a country or internationally"
+              },
+              "validFor": {
+                "$ref": "#/components/schemas/TimePeriod"
+              },
+              "attachment": {
+                "$ref": "#/components/schemas/AttachmentOrDocumentRef"
+              }
+            },
+            "description": "Represents our registration of information used as proof of identity by an organization"
+          }
+        ]
+      },
+      "OrganizationParentRelationship": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "OrganizationParentRelationship": "#/components/schemas/OrganizationParentRelationship"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "relationshipType": {
+                "type": "string",
+                "description": "Type of the relationship. Could be juridical, hierarchical, geographical, functional for example."
+              },
+              "organization": {
+                "$ref": "#/components/schemas/OrganizationRef"
+              }
+            },
+            "description": "Parent references of an organization in a structure of organizations."
+          }
+        ]
+      },
+      "OrganizationStateType": {
+        "type": "string",
+        "description": "Valid values for the lifecycle state of the organization",
+        "enum": [
+          "initialized",
+          "validated",
+          "closed"
+        ]
+      },
+      "OtherNameIndividual": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "Use for titles (aristrocatic, social, ...): Pr, Dr, Sir,...."
+          },
+          "aristocraticTitle": {
+            "type": "string",
+            "description": "e.g. Baron, Graf, Earl, etc."
+          },
+          "generation": {
+            "type": "string",
+            "description": "e.g. Sr, Jr, etc."
+          },
+          "givenName": {
+            "type": "string",
+            "description": "First name"
+          },
+          "preferredGivenName": {
+            "type": "string",
+            "description": "Contains the chosen name by which the person prefers to be addressed. Note: This name may be a name other than a given name, such as a nickname"
+          },
+          "familyNamePrefix": {
+            "type": "string",
+            "description": "Family name prefix"
+          },
+          "familyName": {
+            "type": "string",
+            "description": "Contains the non-chosen or inherited name. Also known as last name in the Western context"
+          },
+          "legalName": {
+            "type": "string",
+            "description": "Legal name or birth name (name one has for official purposes)"
+          },
+          "middleName": {
+            "type": "string",
+            "description": "Middle name or initial"
+          },
+          "fullName": {
+            "type": "string",
+            "description": "Full name flatten (first, middle, and last names)"
+          },
+          "formattedName": {
+            "type": "string",
+            "description": ". A fully formatted name in one string with all of its pieces in their proper place and all of the necessary punctuation. Useful for specific contexts (Chinese, Japanese, Korean, etc.)"
+          },
+          "validFor": {
+            "$ref": "#/components/schemas/TimePeriod"
+          }
+        },
+        "description": "Keeps track of other names, for example the old name of a woman before marriage or an artist name."
+      },
+      "OtherNameOrganization": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "OtherNameOrganization": "#/components/schemas/OtherNameOrganization"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "tradingName": {
+                "type": "string",
+                "description": "The name that the organization trades under"
+              },
+              "nameType": {
+                "type": "string",
+                "description": "Co. , Inc. , Ltd. , Pty Ltd. , Plc; , Gmbh"
+              },
+              "name": {
+                "type": "string",
+                "description": "Organization name (department name for example)"
+              },
+              "validFor": {
+                "$ref": "#/components/schemas/TimePeriod"
+              }
+            },
+            "description": "Keeps track of other names, for example the old name of an organization."
+          }
+        ]
+      },
+      "Party": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "Party": "#/components/schemas/Party",
+            "Organization": "#/components/schemas/Organization",
+            "Individual": "#/components/schemas/Individual"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Entity"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "externalReference": {
+                "type": "array",
+                "description": "List of identifiers of the Party in an external system, for example when party information is imported from a commerce system",
+                "items": {
+                  "$ref": "#/components/schemas/ExternalIdentifier"
+                }
+              },
+              "partyCharacteristic": {
+                "type": "array",
+                "description": "List of additional characteristics that a Party can take on.",
+                "items": {
+                  "$ref": "#/components/schemas/Characteristic"
+                }
+              },
+              "taxExemptionCertificate": {
+                "type": "array",
+                "description": "List of tax exemptions granted to the party. For example, a war veteran might have partial exemption from state tax and a full exemption from federal tax",
+                "items": {
+                  "$ref": "#/components/schemas/TaxExemptionCertificate"
+                }
+              },
+              "creditRating": {
+                "type": "array",
+                "description": "List of credit profiles and scores for the party, typically received from an external credit broker",
+                "items": {
+                  "$ref": "#/components/schemas/PartyCreditProfile"
+                }
+              },
+              "relatedParty": {
+                "type": "array",
+                "description": "List of parties and/or party roles related to this party",
+                "items": {
+                  "$ref": "#/components/schemas/RelatedPartyOrPartyRole"
+                }
+              },
+              "contactMedium": {
+                "type": "array",
+                "description": "List of means for contacting the party, e.g. mobile phone, email address",
+                "items": {
+                  "$ref": "#/components/schemas/ContactMedium"
+                }
+              }
+            },
+            "description": "Generic and Abstract Party structure used to define commonalities between sub concepts of Individual and Organization."
+          }
+        ]
+      },
+      "PartyCreditProfile": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "PartyCreditProfile": "#/components/schemas/PartyCreditProfile"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Entity"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "creditAgencyName": {
+                "type": "string",
+                "description": "Name of the credit agency giving the score"
+              },
+              "creditAgencyType": {
+                "type": "string",
+                "description": "Type of the credit agency giving the score"
+              },
+              "ratingReference": {
+                "type": "string",
+                "description": "Reference corresponding to the credit rating"
+              },
+              "ratingScore": {
+                "type": "integer",
+                "description": "A measure of a party's creditworthiness calculated on the basis of a combination of factors such as their income and credit history",
+                "format": "int32"
+              },
+              "validFor": {
+                "$ref": "#/components/schemas/TimePeriod"
+              }
+            },
+            "description": "An individual might be evaluated for its worthiness and this evaluation might be based on a credit rating given by a credit agency."
+          }
+        ]
+      },
+      "PartyRole": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "PartyRole": "#/components/schemas/PartyRole",
+            "Supplier": "#/components/schemas/Supplier",
+            "Producer": "#/components/schemas/Producer",
+            "Consumer": "#/components/schemas/Consumer",
+            "BusinessPartner": "#/components/schemas/BusinessPartner"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Entity"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "A word, term, or phrase by which the PartyRole is known and distinguished from other PartyRoles. It's the name of the PartyRole unique entity."
+              },
+              "description": {
+                "type": "string",
+                "description": "A description of the PartyRole."
+              },
+              "role": {
+                "type": "string",
+                "description": "Role played by the engagedParty in this context. As role is defined by partyRoleSpecification, this role attribute can be used to precise the role defined by partyRoleSpecification, or it can be used to define the role in case there is no partyRoleSpecification."
+              },
+              "engagedParty": {
+                "$ref": "#/components/schemas/PartyRef"
+              },
+              "partyRoleSpecification": {
+                "$ref": "#/components/schemas/PartyRoleSpecificationRef"
+              },
+              "characteristic": {
+                "type": "array",
+                "description": "Describes the characteristic of a party role.",
+                "items": {
+                  "$ref": "#/components/schemas/Characteristic"
+                }
+              },
+              "account": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/AccountRef"
+                }
+              },
+              "agreement": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/AgreementRef"
+                }
+              },
+              "contactMedium": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ContactMedium"
+                }
+              },
+              "paymentMethod": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/PaymentMethodRef"
+                }
+              },
+              "creditProfile": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CreditProfile"
+                }
+              },
+              "relatedParty": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/RelatedPartyOrPartyRole"
+                }
+              },
+              "status": {
+                "type": "string",
+                "description": "Used to track the lifecycle status of the party role."
+              },
+              "statusReason": {
+                "type": "string",
+                "description": "A string providing an explanation on the value of the status lifecycle. For instance if the status is Rejected, statusReason will provide the reason for rejection."
+              },
+              "validFor": {
+                "$ref": "#/components/schemas/TimePeriod"
+              }
+            },
+            "description": "The part played by a party in a given context."
+          }
+        ]
+      },
+      "PhoneContactMedium": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ContactMedium"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "phoneNumber": {
+                "type": "string",
+                "description": "The phone number of the contact"
+              }
+            },
+            "description": "Describes a phone number that could be used to contact a party (an individual or an organization)"
+          }
+        ]
+      },
+      "PhoneContactMedium_FVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ContactMedium_FVO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "phoneNumber": {
+                "type": "string",
+                "description": "The phone number of the contact"
+              }
+            },
+            "description": "Describes a phone number that could be used to contact a party (an individual or an organization)"
+          }
+        ]
+      },
+      "PhoneContactMedium_MVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ContactMedium_MVO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "phoneNumber": {
+                "type": "string",
+                "description": "The phone number of the contact"
+              }
+            },
+            "description": "Describes a phone number that could be used to contact a party (an individual or an organization)"
+          }
+        ]
+      },
+      "Producer": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/PartyRole"
+          }
+        ]
+      },
+      "Skill": {
+        "type": "object",
+        "properties": {
+          "skillCode": {
+            "type": "string",
+            "description": "Code of the skill"
+          },
+          "skillName": {
+            "type": "string",
+            "description": "Name of the skill, such as Java language"
+          },
+          "evaluatedLevel": {
+            "type": "string",
+            "description": "Level of expertise in a skill evaluated for an individual"
+          },
+          "comment": {
+            "type": "string",
+            "description": "A free text comment linked to the evaluation done"
+          },
+          "validFor": {
+            "$ref": "#/components/schemas/TimePeriod"
+          }
+        },
+        "description": "Skills evaluated for an individual with a level and possibly with a limited validity when an obsolescence is defined (Ex: the first-aid certificate first level is limited to one year and an update training is required each year to keep the level)."
+      },
+      "SocialContactMedium": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ContactMedium"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "socialNetworkId": {
+                "type": "string",
+                "description": "Identifier as a member of a social network"
+              }
+            },
+            "description": "Describes a social media identifier that could be used to contact a party (an individual or an organization)"
+          }
+        ]
+      },
+      "SocialContactMedium_FVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ContactMedium_FVO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "socialNetworkId": {
+                "type": "string",
+                "description": "Identifier as a member of a social network"
+              }
+            },
+            "description": "Describes a social media identifier that could be used to contact a party (an individual or an organization)"
+          }
+        ]
+      },
+      "SocialContactMedium_MVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ContactMedium_MVO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "socialNetworkId": {
+                "type": "string",
+                "description": "Identifier as a member of a social network"
+              }
+            },
+            "description": "Describes a social media identifier that could be used to contact a party (an individual or an organization)"
+          }
+        ]
+      },
+      "Supplier": {
+        "type": "object",
+        "description": "When business partner is the Supplier ",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/PartyRole"
+          }
+        ]
+      },
+      "TaxDefinition": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "TaxDefinition": "#/components/schemas/TaxDefinition"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Unique identifier of the tax."
+              },
+              "name": {
+                "type": "string",
+                "description": "Tax name."
+              },
+              "validFor": {
+                "$ref": "#/components/schemas/TimePeriod"
+              },
+              "jurisdictionName": {
+                "type": "string",
+                "description": "Name of the jurisdiction that levies the tax",
+                "example": "USA"
+              },
+              "jurisdictionLevel": {
+                "type": "string",
+                "description": "Level of the jurisdiction that levies the tax",
+                "example": "Country"
+              },
+              "taxType": {
+                "type": "string",
+                "description": "Type of the tax.",
+                "example": "VAT"
+              }
+            },
+            "description": "Reference of a tax definition. A tax is levied by an authorized tax jurisdiction. For example, there are many different types of tax (Federal Tax levied by the US Government, State Tax levied by the State of California, City Tax levied by the City of Los Angeles, etc.)."
+          }
+        ]
+      },
+      "TaxExemptionCertificate": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "TaxExemptionCertificate": "#/components/schemas/TaxExemptionCertificate"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Identifier of the tax exemption within list of the exemptions"
+              },
+              "taxDefinition": {
+                "type": "array",
+                "description": "A list of taxes that are covered by the exemption, e.g. City Tax, State Tax. The definition would include the exemption (e.g. for a rate exemption 0% would be a full exemption, 5% could be a partial exemption if the actual rate was 10%).",
+                "items": {
+                  "$ref": "#/components/schemas/TaxDefinition"
+                }
+              },
+              "validFor": {
+                "$ref": "#/components/schemas/TimePeriod"
+              },
+              "certificateNumber": {
+                "type": "string",
+                "description": "Identifier of a document that shows proof of exemption from taxes for the taxing jurisdiction"
+              },
+              "issuingJurisdiction": {
+                "type": "string",
+                "description": "Name of the jurisdiction that issued the exemption",
+                "example": "USA"
+              },
+              "reason": {
+                "type": "string",
+                "description": "Reason for the tax exemption"
+              },
+              "attachment": {
+                "$ref": "#/components/schemas/AttachmentOrDocumentRef"
+              }
+            },
+            "description": "A tax exemption certificate represents a tax exemption granted to a party (individual or organization) by a tax jurisdiction which may be a city, state, country,... An exemption has a certificate identifier (received from the jurisdiction that levied the tax) and a validity period. An exemption is per tax types and determines for each type of tax what portion of the tax is exempted (partial by percentage or complete) via the tax definition."
+          }
+        ]
+      },
+      "BooleanArrayCharacteristic": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "array",
+                "items": {
+                  "type": "boolean"
+                }
+              }
+            },
+            "description": "A characteristic which value is an array of Boolean(s)."
+          }
+        ]
+      },
+      "BooleanCharacteristic": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "boolean",
+                "description": "Value of the characteristic"
+              }
+            },
+            "description": "A characteristic which value is a Boolean."
+          }
+        ]
+      },
+      "FloatArrayCharacteristic": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "array",
+                "items": {
+                  "type": "number",
+                  "format": "float"
+                }
+              }
+            },
+            "description": "A characteristic which value is an array of Float(s)."
+          }
+        ]
+      },
+      "FloatCharacteristic": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "number",
+                "description": "Value of the characteristic",
+                "format": "float"
+              }
+            },
+            "description": "A characteristic which value is a Float."
+          }
+        ]
+      },
+      "AvailabilityResultType": {
+        "type": "string",
+        "description": "Possible values of the availability result check for CheckProductStockItem.",
+        "enum": [
+          "available",
+          "notAvailable",
+          "alternate"
+        ]
+      }
+    }
+  },
+  "x-original-swagger-version": "2.0"
+}

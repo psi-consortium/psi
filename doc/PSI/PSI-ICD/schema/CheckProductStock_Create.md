@@ -12,11 +12,11 @@ Skipped properties: id,href
 | ------- | ------- | ------- | --- |
 | instantSyncCheck | boolean | N/A | No |
 | provideAlternative | boolean | N/A | No |
+| requestedAvailability | TimePeriod | N/A | No |
 | requestedCheckProductStockDate | string | date-time | No |
 | checkProductStockItem | array | CheckProductStockItem | Yes |
-| place | PlaceRef | N/A | No |
+| place | PlaceRefOrValue | N/A | No |
 | relatedParty | array | RelatedParty | No |
-| requestedAvailability | TimePeriod | N/A | No |
 | @baseType | string | N/A | No |
 | @schemaLocation | string | uri | No |
 | @type | string | N/A | No |

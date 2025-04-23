@@ -3,4 +3,4 @@
                Do NOT manually edit this file! Any such changes will be overwritten!
 -->
 
-* PATCH /resourceInventory/v1/resource/{id}
+* PATCH /resourceInventory/v2/resource/{id}

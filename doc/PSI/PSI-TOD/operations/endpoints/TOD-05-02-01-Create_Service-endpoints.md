@@ -3,4 +3,4 @@
                Do NOT manually edit this file! Any such changes will be overwritten!
 -->
 
-* POST /serviceInventory/v1/service
+* POST /serviceInventory/v2/service
