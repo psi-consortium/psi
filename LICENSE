@@ -1,5 +1,8 @@
-Copyright 2024 THE PSI CONSORTIUM
+Copyright 2024,2025 THE PSI CONSORTIUM
+
 Portions of this creation are adapted from the TM Forum project (https://www.tmforum.org)
+Portions of this creation are adapted from the MEF project (https://github.com/MEF-GIT)
+
 See PSI-SLF for details.
 
                                  Apache License
@@ -190,7 +193,7 @@ See PSI-SLF for details.
       same "printed page" as the copyright notice for easier
       identification within third-party archives.
 
-   Copyright [yyyy] [name of copyright owner]
+   Copyright 2024,20205 THE PSI CONSORTIUM
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
