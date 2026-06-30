@@ -1,0 +1,519 @@
+\documentclass[10pt,a4paper]{article}
+
+$if(titleblock)$
+$titleblock$
+$endif$
+
+% fix missing tightlist command
+\providecommand{\tightlist}{%
+    \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+%counts titlepage as page 1
+\renewenvironment{titlepage}
+{%
+    \if@twocolumn
+    \@restonecoltrue\onecolumn
+    \else
+    \fi
+%    \thispagestyle{empty}%
+}
+{%
+    \if@restonecol
+    \twocolumn
+    \else
+
+    \fi
+}
+\makeatother
+
+\usepackage{longtable,booktabs,array}
+\usepackage{multirow}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+
+\usepackage{minted1}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{tgcursor}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{eurosym}
+\usepackage{geometry}
+\geometry{a4paper,
+    inner=19mm,
+    outer=12.7mm,
+    bottom=25mm,
+    top=0mm,
+    headheight=30mm,
+    includehead,
+%   headsep=5mm,
+%   footskip=12mm
+}
+
+\usepackage{url}
+\usepackage{listings}
+\usepackage{graphicx,xcolor}
+\usepackage{tocloft,xcolor}
+\usepackage[pdfborder={0 0 0}]{hyperref}
+\hypersetup{
+    colorlinks,
+    breaklinks,
+    urlcolor=[rgb]{0.3,0.1,0.1},
+    linkcolor=[rgb]{0.3,0.1,0.1},
+    bookmarksnumbered=true,
+    bookmarksopen=true
+}
+\usepackage{pdflscape}
+\usepackage[binary-units=true, detect-family=true]{siunitx}
+\usepackage{caption}
+\usepackage{graphicx,xcolor}
+\usepackage{tocloft,xcolor}
+\usepackage{ltablex}
+\usepackage{booktabs}
+
+\newcolumntype{Z}{>{\raggedright\let\newline\\\arraybackslash}X}
+\newcolumntype{P}{>{\raggedleft\let\newline\\\arraybackslash}r}
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+\usepackage{colortbl}
+\usepackage[pages=all]{background}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{tikz}
+\usepackage{titlesec}
+\usepackage{xstring}
+\usepackage{soul}
+\usepackage{textpos}
+\usepackage{xcolor}
+\usepackage{wasysym}
+\usepackage{textcomp}
+\usepackage{mathcomp}
+\usepackage{xspace}
+\usepackage{pxfonts}
+\usepackage{tipa}
+
+\let\leftmoon\relax
+\let\rightmoon\relax
+\let\fullmoon\relax
+\let\newmoon\relax
+\let\diameter\relax
+
+\usetikzlibrary{patterns,fadings, shapes,arrows,arrows.meta}
+
+\usepackage[normalem]{ulem}
+
+%tie text and graphics together
+\usepackage{etoolbox}
+
+\renewcommand{\ttdefault}{pcr} % selects Courier font
+
+\BeforeBeginEnvironment{figure}{\vskip-1em}
+\AfterEndEnvironment{figure}{\vskip-1.8em}
+
+%set font
+\usepackage{helvet}
+
+\renewcommand{\familydefault}{\sfdefault}
+\fontsize{10}{6}
+
+%trademark symbol
+\usepackage{textcomp}
+
+%plots
+\usepackage{pgfplotstable}
+\usepackage{pgfplots}
+
+%line spacing
+\usepackage{setspace}
+\setstretch{1.13}
+
+%
+% remove paragraph indention
+%
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+
+\def\twodigits#1{\ifnum#1<10 0\fi\the#1}
+
+% https://github.com/jgm/pandoc/issues/4716
+% \newcommand{\passthrough}[1]{#1}
+\newcommand{\passthrough}[1]{\lstset{mathescape=false}#1\lstset{mathescape=true}}
+
+\newcommand{\rhodadded}[1]{\textcolor{teal}{#1}}
+\newcommand{\rhodremoved}[1]{\small\textbf{\textcolor{purple}{\sout{#1}}}\normalsize}
+\newcommand{\rhodchanged}[2]{\small\textcolor{purple}{\sout{#1}}\normalsize\hfill\break\textcolor{blue}{#2}}
+
+% https://stackoverflow.com/questions/25849814/rstudio-rmarkdown-both-portrait-and-landscape-layout-in-a-single-pdf
+\usepackage{lscape}
+\newcommand{\blandscape}{\begin{landscape}}
+\newcommand{\elandscape}{\end{landscape}}
+
+%definitions##########################################################################################################
+
+\definecolor{cgired}{RGB}{227, 25, 55}
+\definecolor{cgibeet}{RGB}{153, 31, 61}
+\definecolor{cgipumpkin}{RGB}{255, 106, 0}
+\definecolor{cgihoney}{RGB}{242, 162, 0}
+\definecolor{cgicloud}{RGB}{170, 175, 179}
+\definecolor{cgiclouddark}{RGB}{120, 125, 128}
+\definecolor{cgiice}{RGB}{161, 196, 208}
+\definecolor{cgipurple}{RGB}{82, 54, 171}
+\definecolor{cgifoot}{RGB}{128, 128, 128}
+
+\usepackage[
+    singlelinecheck=false % <-- important for left-aligned tables.
+]{caption}
+
+\usepackage{xcolor}
+\usepackage{sectsty}
+
+% defining sections, subsections etc.
+
+% 6th header lever
+\makeatletter
+\newcounter{subsubparagraph}[subparagraph]
+\renewcommand\thesubsubparagraph{%
+  \thesubparagraph.\@arabic\c@subsubparagraph}
+\newcommand\subsubparagraph{%
+  \@startsection{subsubparagraph}    % counter
+    {6}                              % level
+    {\parindent}                     % indent
+    {3.25ex \@plus 1ex \@minus .2ex} % beforeskip
+    {0.75ex plus 0.1ex}              % space after heading
+    {\normalfont\normalsize\bfseries}}
+\newcommand\l@subsubparagraph{\@dottedtocline{6}{10em}{5em}}
+\newcommand{\subsubparagraphmark}[1]{}
+\makeatother
+
+% 7th header lever
+\makeatletter
+\newcounter{subsubsubparagraph}[subsubparagraph]
+\renewcommand\thesubsubsubparagraph{%
+  \thesubsubparagraph.\@arabic\c@subsubsubparagraph}
+\newcommand\subsubsubparagraph{%
+  \@startsection{subsubsubparagraph} % counter
+    {7}                              % level
+    {\parindent}                     % indent
+    {3.25ex \@plus 1ex \@minus .2ex} % beforeskip
+    {0.75ex plus 0.1ex}              % space after heading
+    {\normalfont\normalsize\bfseries}}
+\newcommand\l@subsubsubparagraph{\@dottedtocline{7}{10em}{5em}}
+\newcommand{\subsubsubparagraphmark}[1]{}
+\makeatother
+
+\makeatletter
+\def\toclevel@subsubparagraph{6}
+\def\toclevel@subsubsubparagraph{7}
+\makeatother
+
+\setcounter{secnumdepth}{7}
+
+\sectionfont{\color{black}\fontsize{24}{30}\selectfont}
+\subsectionfont{\color{cgipurple}\fontsize{16}{16}\selectfont}
+\subsubsectionfont{\color{black}\fontsize{14}{12}\selectfont}
+
+% limit image size
+\usepackage[export]{adjustbox}%
+\let\oldincludegraphics\includegraphics
+\renewcommand{\includegraphics}[2][]{%
+    \oldincludegraphics[#1,max height=0.49\textheight]{#2}}
+
+%Move footnotes to page bottom, allow multiple footnote links
+\usepackage[bottom,multiple,flushmargin]{footmisc}
+
+
+% pagestyles ################################################################################
+\fancypagestyle{titlePageStyle}{
+    \fancyhf{}
+
+    \renewcommand{\headrulewidth}{0pt}
+}
+
+\fancypagestyle{documentPageStyle}{
+    \fancyhf{}
+    \fancyhead[L]{ \footnotesize Ref: \documentReference\\~\\Date: \documentDate\\Version: \documentVersion \\~\\ }
+    \fancyhead[C]{ \textbf{\documentTitle} \\~\\ \footnotesize \documentSubTitle \\~\\ }
+    \fancyhead[R]{
+        \resizebox {\hsize} {!} {
+            \begin{tikzpicture}
+                \shade [left color = cgired, right color = cgipurple] (-112,0) rectangle (12,0.1);
+            \end{tikzpicture}
+        }
+    }
+
+    \fancyfoot[L]{{\scriptsize\textcolor{cgifoot}{~\\~\\\cgiCopyright}}}
+    \fancyfoot[C]{{\scriptsize\textcolor{cgifoot}{~\\ Page \thepage ~of~\pageref{LastPage}}}}
+    \renewcommand{\headrulewidth}{0.0pt}
+}
+
+\makeatletter
+
+% Ensure all plain pages use our fancy settings by default.
+% Otherwise, header and footers may not appear in places, e.g. the TOC.
+% For more information see: https://texblog.net/latex-archive/uncategorized/page-style-plain-fancy/
+\let\ps@plain\ps@fancy
+\makeatother
+
+\usepackage{transparent}
+
+% Background and Watermark #####################################################################
+\newcommand{\backgroundSetupTitlePage}{
+    \backgroundsetup{
+        scale=1,
+        color=black,
+        opacity=1,
+        angle=0,
+        contents={
+            \begin{tikzpicture}%x:[-10.5:10.5]   y:[-14.85:14.85]
+                \fill [white](-10.5,-14.85) rectangle (10.5,14.85); %A4 page
+                \node[inner sep=0pt, anchor=west] (whitehead) at (4,8.7) {\includegraphics[width=5cm]{pictures/psid-logo.png}};
+                $if(is_draft)$
+                \node[inner sep=0pt, anchor=west] (whitehead) at (-10,10) { {\transparent{0.4}\includegraphics[width=10cm]{pictures/draft.png}}};
+                $endif$
+            \end{tikzpicture}
+        }
+    }
+}
+
+\newcommand{\backgroundSetupNormalPage}{
+    \backgroundsetup{
+        scale=1,
+        color=black,
+        opacity=1,
+        angle=0,
+        contents={
+            \begin{tikzpicture}%x:[-10.5:10.5]   y:[-14.85:14.85]
+                \fill [white](-10.5,-14.85) rectangle (10.5,14.85);
+                \node[inner sep=0pt, anchor=west] (whitehead) at (7.2,13.4) {\includegraphics[width=2cm]{pictures/psid-logo.png}};
+                $if(is_draft)$
+                \node[inner sep=0pt, anchor=west] (whitehead) at (-10,10) { {\transparent{0.4}\includegraphics[width=10cm]{pictures/draft.png}}};
+                $endif$
+            \end{tikzpicture}
+        }
+    }
+}
+\newcommand{\documentTitle}{$title$}
+\newcommand{\documentSubTitle}{$subtitle$}
+\newcommand{\documentReference}{$reference$}
+\newcommand{\documentDate}{$docdate$}
+\newcommand{\documentVersion}{$version$}
+\newcommand{\documentAuthor}{$author$}
+\newcommand{\cgiClassification}{$classification$}
+\newcommand{\cgiCopyright}{\textcopyright~\the\year~The PSI Consortium}
+
+%%%% pandoc-fignos: required package
+\usepackage{caption}
+
+%% pandoc-fignos: number figures by section
+\numberwithin{figure}{section}
+
+%% pandoc-fignos: environment to disable figure caption prefixes
+\makeatletter
+\newcounter{figno}
+\newenvironment{fignos:no-prefix-figure-caption}{
+    \caption@ifcompatibility{}{
+        \captionsetup{labelformat=empty,list=no}
+    }
+}{
+    \caption@ifcompatibility{}{
+        \captionsetup{labelformat=empty}
+        \let\thefigure\oldthefigure
+        \let\theHfigure\oldtheHfigure
+    }
+}
+\makeatother
+
+%% pandoc-fignos: environment for tagged figures
+\newenvironment{fignos:tagged-figure}[1][]{
+    \renewcommand{\thefigure}{#1}
+}{
+    \let\thefigure\oldthefigure
+}
+
+
+%% pandoc-tablenos: environment to disable table caption prefixes
+\makeatletter
+\newcounter{tableno}
+\newenvironment{tablenos:no-prefix-table-caption}{
+    \caption@ifcompatibility{}{
+        \renewcommand{\thetable}{tableno:\thetableno}
+        \stepcounter{tableno}
+        \captionsetup{labelformat=empty}
+    }
+}{
+    \caption@ifcompatibility{}{
+        \captionsetup{labelformat=default}
+        \addtocounter{table}{-1}
+    }
+}
+\makeatother
+
+%% pandoc-tablenos: environment for tagged tables
+\newenvironment{tablenos:tagged-table}[1][]{
+    \renewcommand{\thetable}{#1}
+}{
+    \addtocounter{table}{-1}
+}
+
+%% pandoc-tablenos: number tables by section
+\numberwithin{table}{section}
+
+%bold table and figure captions
+\captionsetup{labelfont=bf,font=bf}
+\captionsetup[table]{position=below,singlelinecheck=off,justification=centering,labelfont={color=cgipurple},font={color=cgipurple}}
+\captionsetup[figure]{position=below,singlelinecheck=off,justification=centering,labelfont={color=cgipurple},font={color=cgipurple}}
+\usepackage[tableposition=below]{caption}
+
+$for(header-includes)$
+$header-includes$
+$endfor$
+\let\stdsection\section
+\renewcommand\section{\clearpage\stdsection}
+\renewcommand{\_}{\textunderscore\nobreak\hspace{0pt}}
+
+\makeatletter
+\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
+    {-3.25ex\@plus -1ex \@minus -.2ex}%
+    {1.5ex \@plus .2ex}%
+    {\normalfont\fontsize{12}{12}\selectfont\color{cgired}}%
+}
+
+\renewcommand\subparagraph{\@startsection{subparagraph}{5}{\z@}%
+    {-3.25ex\@plus -1ex \@minus -.2ex}%
+    {1.5ex \@plus .2ex}%
+    {\normalfont\fontsize{12}{10}\selectfont\color{black}}%
+}
+\makeatother
+
+% tie figures close to the paragraph they are defined in
+\def\topfraction{0.75} % percent of the page may be used by floats on top
+\def\bottomfraction{0.75} % the same at the bottom
+\def\textfraction{0.25} % at least this percent must be reserved for text
+\usepackage{float}
+\floatplacement{figure}{H}
+
+
+\begin{document}
+\pagestyle{fancy}
+
+\backgroundSetupTitlePage
+
+\begin{titlepage}
+
+    \thispagestyle{titlePageStyle}
+    \BgThispage
+
+    \parbox{10cm}{
+        \begin{doublespace}
+            \begin{textblock}{0.5}(1,0.7){\parbox{10cm}{
+                {\Huge\textcolor{cgired}{\documentTitle}}\\~\\
+                {\huge\textcolor{black}{\documentSubTitle}}\\~\\}}
+            \end{textblock}
+        \end{doublespace}
+    }
+
+        ~\\~\\~\\~\\~\\~\\
+        ~\\~\\~\\~\\~\\~\\
+        ~\\~\\~\\~\\~\\~\\~\\~\\
+    \begin{center}
+
+        \begin{tabular}{ll}
+            \Large\textcolor{gray}{Version:} & \Large\textcolor{gray}{\documentVersion} \\
+            \\[-0.5em]
+            \Large\textcolor{gray}{Date:} & \Large\textcolor{gray}{\documentDate} \\
+            \\[-0.5em]
+            \Large\textcolor{gray}{Reference:} & \Large\textcolor{gray}{\documentReference} \\
+            \\[-0.5em]
+            \Large\textcolor{gray}{Total Pages:} & \Large\textcolor{gray}{\pageref{LastPage}}
+        \end{tabular}
+
+        ~\\~\\~\\~\\~\\~\\~\\~\\
+        ~\\~\\~\\~\\~\\~\\~\\~\\
+        \footnotesize\textcolor{black}{\textcopyright~\the\year~The PSI Consortium, co-funded by ESA, released to public domain.}\\~\\
+        \tiny\textcolor{black}{This document may only be reproduced in whole or in part, or stored in a retrieval system, or transmitted in any form, or by any \\
+        means electronic, mechanical, photocopying or otherwise, in accordance with the terms of the Apache 2.0 license. \\~\\You have received a copy of this license together with this document.}
+
+    \end{center}
+
+\end{titlepage}
+
+
+\newpage
+\pagestyle{documentPageStyle}
+\backgroundSetupNormalPage
+
+\renewcommand{\contentsname}{\textcolor{black}{Table of Contents}}
+\renewcommand{\cftsecfont}{\color{cgired}}
+\renewcommand*{\arraystretch}{1.4}
+
+\cftsetindents{section}{4.5em}{4.5em}
+\cftsetindents{sec}{4.5em}{4.5em}
+\cftsetindents{subsec}{4.5em}{4.5em}
+\cftsetindents{subsubsec}{4.5em}{4.5em}
+\cftsetindents{para}{4.5em}{4.5em}
+\cftsetindents{subpara}{4.5em}{4.5em}
+\cftsetindents{fig}{4.5em}{4.5em}
+\cftsetindents{figure}{4.5em}{4.5em}
+\cftsetindents{tab}{4.5em}{4.5em}
+\cftsetindents{table}{4.5em}{4.5em}
+
+\tableofcontents
+
+\thispagestyle{fancy}
+
+\begingroup
+    \listoffigures \thispagestyle{fancy}
+    \listoftables \thispagestyle{fancy}
+\endgroup
+
+\raggedbottom % avoid strechted white spaces between paragraphs
+
+\newpage
+
+$for(include-before)$
+$include-before$
+$endfor$
+
+$body$
+
+$for(include-after)$
+$include-after$
+$endfor$
+
+%########### last page
+
+\newpage
+\pagestyle{documentPageStyle}
+\backgroundSetupNormalPage
+\begin{center}
+    \vspace*{250px}
+    {\fontsize{16}{12}\textcolor{cgipurple}{\textbf{Last Page of Document}}}
+\end{center}
+
+\end{document}
