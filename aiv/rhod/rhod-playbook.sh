@@ -156,7 +156,7 @@ TOCDEPTH=6
 # Set this to and empty string to not have review links in the resulting document.
 REVIEW_LINK=${REVIEW_LINK:="https://github.com/psi-consortium/psi"}
 # set to 1 to render a draft document
-DRAFT=${DRAFT:=1}
+DRAFT=${DRAFT:=0}
 # The checkout to be rendered - in case the checkout verb is used
 CHECKOUT=${CHECKOUT:="refs/heads/main"}
 # the checkout to compare to - in case the compare verb is given

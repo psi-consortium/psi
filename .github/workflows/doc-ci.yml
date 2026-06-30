@@ -12,6 +12,8 @@ jobs:
         container:
             image: spcbo-registry-ext.vcs.de/govsatcom/psi/psi-dev-images/psi-dev:latest
             options: --user 1001:1001
+        env:
+            DRAFT: ${{ github.event_name == 'pull_request' && '1' || '0' }}
         steps:
             - name: Checkout repository
               uses: actions/checkout@v4
