@@ -1,0 +1,28 @@
+name: Pull Request CI
+
+on: pull_request
+
+jobs:
+    changes:
+        name: Detect Changes
+        runs-on: ubuntu-latest
+        permissions:
+            pull-requests: read
+        outputs:
+            documents: ${{ steps.filter.outputs.documents }}
+        steps:
+            - uses: dorny/paths-filter@7b450fff21473bca461d4b92ce414b9d0420d706
+              id: filter
+              with:
+                  filters: |
+                      documents:
+                        - 'doc/**'
+                        - 'aiv/rhod/**'
+
+    test_document_build:
+        name: Document Test Build
+        uses: ./.github/workflows/document-build.yml
+        needs: changes
+        if: ${{ needs.changes.outputs.documents == 'true' }}
+        with:
+            draft: true

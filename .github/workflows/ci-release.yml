@@ -1,0 +1,13 @@
+name: Release CI
+
+on:
+    push:
+        tags:
+            - '*'
+
+jobs:
+    document_build:
+        name: Document Release Build
+        uses: ./.github/workflows/document-build.yml
+        with:
+            draft: false
