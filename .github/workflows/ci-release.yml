@@ -3,7 +3,7 @@ name: Release CI
 on:
     push:
         tags:
-            - '*'
+            - "*"
 
 jobs:
     document_build:
@@ -11,3 +11,20 @@ jobs:
         uses: ./.github/workflows/document-build.yml
         with:
             draft: false
+
+    release:
+        name: Release
+        runs-on: ubuntu-latest
+        needs:
+            - document_build
+        permissions:
+            contents: write
+        steps:
+            - name: Download Artifacts
+              uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
+            - name: Release
+              uses: softprops/action-gh-release@3d0d9888cb7fd7b750713d6e236d1fcb99157228
+              with:
+                  fail_on_unmatched_files: true
+                  files: |
+                      *.pdf
