@@ -99,7 +99,13 @@ dcr_overrides:
    to: '2025-04-23'
    version: 'MS11pre [1.2.3]'
    author: 'Wolfgang Robben'
-   message: 'Advanced OAS patching, MEF convergence.'     
+   message: 'Advanced OAS patching, MEF convergence.'
+ - dcr:
+   from: '2026-07-27'
+   to: '2026-07-31'
+   version: 'MS12 [2.0.0-alpha]'
+   author: 'Wolfgang Robben'
+   message: 'No update, PSI Phase 2 version bump.'
  =end
 
 # Document Meta Information

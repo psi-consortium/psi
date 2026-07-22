@@ -39,7 +39,13 @@ dcr_overrides:
    to: '2025-04-23'
    version: 'MS11 [1.3.0]'
    author: 'Bela Mueller'
-   message: 'ODA mission planning component added.'     
+   message: 'ODA mission planning component added.'
+ - dcr:
+   from: '2026-07-27'
+   to: '2026-07-31'
+   version: 'MS12 [2.0.0-alpha]'
+   author: 'Bela Mueller'
+   message: 'No update, PSI Phase 2 version bump.'
 =end
 
 # Document Meta Information

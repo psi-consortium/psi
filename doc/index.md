@@ -34,6 +34,12 @@ dcr_overrides:
   version: '1.3.0'
   author: 'Christian Grubert'
   message: 'Release of Version 1.3.0'
+- dcr:
+  from: '2026-07-27'
+  to: '2026-07-31'
+  version: 'MS12 [2.0.0-alpha]'
+  author: 'Christian Grubert'
+  message: 'No update, PSI Phase 2 version bump.'
 =end
 
 # Document Meta Information
