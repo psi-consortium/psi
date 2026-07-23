@@ -39,7 +39,7 @@ Find the release notes [here](doc/PSI/common/release_notes.md).
 
 # Standard documentation
 
-Find the current standard documentation [here](psi-standard)
+You can find the current standard documentation in the assets of the [latest release](https://github.com/psi-consortium/psi/releases).
 
 # Contributing
 

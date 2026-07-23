@@ -1,0 +1,13 @@
+name: Main CI
+
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    document_build:
+        name: Document Build
+        uses: ./.github/workflows/document-build.yml
+        with:
+            draft: true
