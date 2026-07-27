@@ -75,7 +75,13 @@ dcr_overrides:
    to: '2025-04-23'
    version: 'MS11 [1.2.3]'
    author: 'Christian Grubert'
-   message: 'TMF5 Updates (migrations) to all APIs.'  
+   message: 'TMF5 Updates (migrations) to all APIs.'
+ - dcr:
+   from: '2026-07-27'
+   to: '2026-07-31'
+   version: 'MS12 [2.0.0-alpha]'
+   author: 'Christian Grubert'
+   message: 'No update, PSI Phase 2 version bump.'
 =end
 
 # Document Meta Information
