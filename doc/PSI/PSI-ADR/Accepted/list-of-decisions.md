@@ -56,3 +56,5 @@
 @include [ADR041 MEF Convergence](ADR041-mef-convergence.md)
 
 @include [ADR042 Advanced OpenAPI Specification Patching](ADR042-advanced-oas-patching.md)
+
+@include [ADR043 Use Docker as Container Runner](ADR043-use-docker-as-container-runner.md)
