@@ -2,8 +2,6 @@
 
 ### Auto-generating Conformance documentation
 
-[[_TOC_]]
-
 =end
 
 Mistral was asked first to analyze the provided PDF Conformance documents for their structure and similarities:

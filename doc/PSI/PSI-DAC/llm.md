@@ -2,8 +2,6 @@
 
 # Large Language Models and Document Generation
 
-[[_TOC_]]
-
 =end
 
 ## Introduction

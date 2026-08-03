@@ -2,8 +2,6 @@
 
 # Mission Management ODA Component GUI
 
-[[*TOC*]]
-
 =end
 
 The development of a mission management ODA component, which we are aiming to publish on GitHub, is an important target for PSI.

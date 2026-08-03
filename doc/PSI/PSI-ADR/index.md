@@ -2,8 +2,6 @@
 
 # :book: ​Information for contributors - not included into final document
 
-[[_TOC_]]
-
 Documents referenced in this page:
 
 * PSI-MADR

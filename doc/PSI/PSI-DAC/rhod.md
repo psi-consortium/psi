@@ -2,8 +2,6 @@
 
 # DaC application in PSID
 
-[[_TOC_]]
-
 =end
 
 In the context of the PSID project, we have adapted DaC to take advantage of the benefits described above.

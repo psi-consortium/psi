@@ -2,8 +2,6 @@
 
 # Automation of requirements traceability
 
-[[_TOC_]]
-
 =end
 
 Requirements serve as foundation to define functionalities an envisioned software shall have and also the constraints the software shall express.

@@ -1,7 +1,3 @@
-=begin
-[[_TOC_]]
-=end
-
 @include [common meta information like version docdate etc..](../common/common_metadata.md)
 
 =begin metadata

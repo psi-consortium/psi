@@ -2,8 +2,6 @@
 
 # :book: wiki-Internal section, not compiled to documents
 
-[[_TOC_]]
-
 # Terminology
 
 =end

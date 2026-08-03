@@ -2,8 +2,6 @@
 
 # Requirement Categories
 
-[[_TOC_]]
-
 =end
 
 For clarity and ease of use, all PSI requirements are grouped by the corresponding endpoint of the interface and then enumerated corresponding to the [PSI-TOD].
