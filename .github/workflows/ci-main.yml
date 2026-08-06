@@ -6,6 +6,15 @@ on:
             - main
 
 jobs:
+    build:
+        name: Build
+        uses: ./.github/workflows/build.yml
+
+    code_docs:
+        name: Code Documentation
+        needs: build
+        uses: ./.github/workflows/code-docs.yml
+
     document_build:
         name: Document Build
         uses: ./.github/workflows/document-build.yml

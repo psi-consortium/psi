@@ -1,0 +1,16 @@
+name: Gradle Cache
+description: Configure and cache the workspace-local Gradle user home
+runs:
+    using: composite
+    steps:
+        - name: Set Gradle user home
+          shell: bash
+          run: echo "GRADLE_USER_HOME=$GITHUB_WORKSPACE/.gradle" >> "$GITHUB_ENV"
+
+        - name: Cache Gradle
+          uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+          with:
+              path: .gradle/caches
+              key: gradle-${{ runner.os }}-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties', 'gradle.properties') }}
+              restore-keys: |
+                  gradle-${{ runner.os }}-

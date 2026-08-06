@@ -1,34 +1,35 @@
-name: Document Build
+name: Build
 
 on:
     workflow_call:
-        inputs:
-            draft:
-                required: true
-                type: boolean
+
+permissions:
+    contents: read
 
 jobs:
-    build_docs:
+    build:
+        name: Build PSI
         runs-on: [self-hosted, cgi]
         container:
             image: spcbo-registry-ext.vcs.de/govsatcom/psi/psi-dev-images/psi-dev:latest
             options: --user 1001:1001
-        env:
-            DRAFT: ${{ inputs.draft && '1' || '0' }}
         steps:
             - name: Checkout repository
               uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-            - name: Run RHOD
-              run: task docs:document-build
+            - name: Cache Gradle
+              uses: ./.github/actions/gradle-cache
 
-            - name: Upload generated documents
+            - name: Build PSI
+              run: task build:gradle-build
+
+            - name: Upload build output
               uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
               with:
-                  name: documents
+                  name: build
                   path: |
-                      .pdfout/*.pdf
-                      .pdfout/*.zip
-                  include-hidden-files: true
+                      build
+                      buildSrc/build
+                      source/**/build
                   if-no-files-found: error
                   retention-days: 2

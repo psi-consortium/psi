@@ -9,13 +9,25 @@ jobs:
         permissions:
             pull-requests: read
         outputs:
+            code: ${{ steps.filter.outputs.code }}
             documents: ${{ steps.filter.outputs.documents }}
         steps:
             - uses: dorny/paths-filter@7b450fff21473bca461d4b92ce414b9d0420d706 # v4.0.2
               id: filter
               with:
                   filters: |
+                      code:
+                        - 'Taskfile.yml'
+                        - 'Taskfile.build.yml'
+                        - 'Taskfile.test.yml'
+                        - 'Taskfile.check.yml'
+                        - 'build.gradle'
+                        - 'settings.gradle'
+                        - 'buildSrc/**/*.{java,gradle,groovy}'
+                        - 'source/**/*.{java,gradle,yml,config,json,toml,sql,py}'
                       documents:
+                        - 'Taskfile.yml'
+                        - 'aiv/rhod/Taskfile.yml'
                         - 'doc/**'
                         - 'aiv/rhod/**'
 
@@ -26,3 +38,27 @@ jobs:
         if: ${{ needs.changes.outputs.documents == 'true' }}
         with:
             draft: true
+
+    build:
+        name: Test Build
+        needs: changes
+        if: ${{ needs.changes.outputs.code == 'true' }}
+        uses: ./.github/workflows/build.yml
+
+    code_docs:
+        name: Code Documentation Test Build
+        needs:
+            - changes
+            - build
+        if: ${{ needs.changes.outputs.code == 'true' }}
+        uses: ./.github/workflows/code-docs.yml
+
+    check_doc_generation:
+        name: Check Document Generation
+        needs: changes
+        uses: ./.github/workflows/check-doc-generation.yml
+
+    check_model_generation:
+        name: Check Model Generation
+        needs: changes
+        uses: ./.github/workflows/check-model-generation.yml
