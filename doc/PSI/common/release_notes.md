@@ -1,9 +1,3 @@
-# Release Notes
-
-[[_TOC_]]
-
----
-
 # PSI Release Notes
 
 ## Introduction

@@ -2,8 +2,6 @@
 
 # Automated Generation of OpenAPI Specification files
 
-[[_TOC_]]
-
 =end
 
 ## OpenAPI Specification files

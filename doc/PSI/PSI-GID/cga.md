@@ -2,8 +2,6 @@
 
 # CGA
 
-[[_TOC_]]
-
 =end
 
 ## Distributed Matchmaking

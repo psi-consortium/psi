@@ -2,8 +2,6 @@
 
 # PSID Requirements
 
-[[_TOC_]]
-
 =end
 
 # REQ-01-Miscellaneous

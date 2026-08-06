@@ -1,5 +1,4 @@
 =begin
-[[_TOC_]]
 
 # Abbreviations
 

@@ -2,8 +2,6 @@
 
 # :book: wiki-Internal section, not compiled to documents
 
-[[_TOC_]]
-
 # A User Story: Demonstration of capabilities
 
 > The heading has to be included in the document that includes this document.

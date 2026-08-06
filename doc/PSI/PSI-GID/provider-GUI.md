@@ -2,8 +2,6 @@
 
 # Provider Journey
 
-[[*TOC*]]
-
 =end
 
 To interact with the system, the provider needs a graphical interface.

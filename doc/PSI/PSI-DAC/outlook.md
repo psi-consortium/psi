@@ -2,8 +2,6 @@
 
 # Automation of document generation - Conclusion
 
-[[_TOC_]]
-
 =end
 
 We have shown how PSI uses Documentation as Code within its repository.

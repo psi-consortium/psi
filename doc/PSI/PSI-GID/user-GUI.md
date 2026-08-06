@@ -2,8 +2,6 @@
 
 # User Journey
 
-[[*TOC*]]
-
 =end
 
 ## Mission Creation

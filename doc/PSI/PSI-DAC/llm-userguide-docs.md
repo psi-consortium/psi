@@ -2,8 +2,6 @@
 
 ### Auto-generating Userguide documentation
 
-[[_TOC_]]
-
 =end
 
 Again, Mistral was asked first to analyze the provided pdf documents for their structure and similarities:

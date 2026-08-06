@@ -2,8 +2,6 @@
 
 # Types and Characteristics
 
-[[_TOC_]]
-
 =end
 
 The PSS defines a set of supported types for resources, services and products in consultation with the providers.

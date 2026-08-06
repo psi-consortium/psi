@@ -1,7 +1,5 @@
 =begin
 
-[[_TOC_]]
-
 # Security Considerations
 
 =end
