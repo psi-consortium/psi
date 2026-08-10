@@ -1,0 +1,34 @@
+version: "3"
+
+vars:
+    DRAFT: '{{.DRAFT | default "1"}}'
+
+tasks:
+    document-build:
+        desc: Build all PSI documents
+        summary: |
+            Build all PSI documents from the ./doc directory
+
+            Variables:
+                - DRAFT: Controls whether documents are built in draft mode. Set to "1" to enable draft mode or "0" for the final build. Defaults to "1".
+        requires:
+            vars:
+                - name: DRAFT
+                  enum: ["0", "1"]
+        cmds:
+            - bash ./aiv/rhod/rhod-playbook.sh
+            - zip --junk-paths {{.ROOT_DIR}}/.pdfout/PSI-ICD-Annex-I.zip {{.ROOT_DIR}}/doc/PSI/PSI-ICD/open-apis/oas/*
+            - |
+                cp -r {{.ROOT_DIR}}/doc/PSI/PSI-ICD/examples/ {{.ROOT_DIR}}/.pdfout/icd-examples/
+                cp -r {{.ROOT_DIR}}/source/psid-mockup/src/main/resources/static/productSchema {{.ROOT_DIR}}/.pdfout/icd-examples/productSchema
+                cd {{.ROOT_DIR}}/.pdfout/icd-examples/
+                zip -r {{.ROOT_DIR}}/.pdfout/PSI-ICD-Annex-II.zip *
+        sources:
+            - "{{.ROOT_DIR}}/doc/**/*"
+            - "{{.ROOT_DIR}}/aiv/rhod/**/*"
+            - "{{.ROOT_DIR}}/doc/PSI/PSI-ICD/open-apis/oas/*"
+            - "{{.ROOT_DIR}}/doc/PSI/PSI-ICD/examples/**/*"
+            - "{{.ROOT_DIR}}/source/psid-mockup/src/main/resources/static/productSchema/**/*"
+        generates:
+            - "{{.ROOT_DIR}}/.pdfout/**/*"
+            - "{{.ROOT_DIR}}/.pdfout/*.zip"

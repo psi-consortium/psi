@@ -1,0 +1,36 @@
+version: "3"
+
+tasks:
+    confirm-doc-generation:
+        desc: Generate documentation and verify no changes were created
+        cmds:
+            - gradle generate -x transformSwaggerJson
+            - |
+                changed_files="$(git status --porcelain)"
+
+                if [ -n "$changed_files" ]; then
+                  echo "Changed documents:"
+                  echo "$changed_files"
+                  exit 1
+                fi
+
+                echo "No document changes detected - success"
+        generates:
+            - "{{.ROOT_DIR}}/doc/**/*"
+
+    confirm-model-generation:
+        desc: Generate OpenAPI model classes and verify no changes were created
+        cmds:
+            - gradle psid-genModel
+            - |
+                changed_files="$(git status --porcelain)"
+
+                if [ -n "$changed_files" ]; then
+                  echo "Changed model classes:"
+                  echo "$changed_files"
+                  exit 1
+                fi
+
+                echo "No java model class changes detected - success"
+        generates:
+            - "{{.ROOT_DIR}}/source/common/src/main/java/com/cgi/space/psi/common/model/**/*"

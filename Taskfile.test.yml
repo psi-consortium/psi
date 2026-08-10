@@ -1,0 +1,13 @@
+version: "3"
+
+tasks:
+    unit-test:
+        desc: Invokes the unit tests
+        summary: |
+            This invokes the unit tests and builds a test report.
+        cmds:
+            - gradle test
+        generates:
+            - "{{.ROOT_DIR}}/**/build/jacoco"
+            - "{{.ROOT_DIR}}/**/build/reports"
+            - "{{.ROOT_DIR}}/**/build/test-results"

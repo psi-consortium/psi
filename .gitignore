@@ -24,6 +24,9 @@ target/
 build/
 /public/
 
+# Taskfile
+.task
+
 # Testing / AITF
 
 Gemfile.lock.bak
