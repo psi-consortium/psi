@@ -1,0 +1,11 @@
+version: "3"
+
+includes:
+    docs:
+        taskfile: ./aiv/rhod/Taskfile.yml
+    build:
+        taskfile: ./Taskfile.build.yml
+    test:
+      taskfile: ./Taskfile.test.yml
+    check:
+        taskfile: ./Taskfile.check.yml

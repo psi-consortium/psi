@@ -1,0 +1,33 @@
+version: "3"
+
+tasks:
+    gradle-build:
+        desc: Build the PSI via gradle
+        summary: |
+            This only builds PSI via gradle (and creates the application configuration).
+        cmds:
+            - gradle clean assemble
+        sources:
+            - "{{.ROOT_DIR}}/build.gradle"
+            - "{{.ROOT_DIR}}/settings.gradle"
+            - "{{.ROOT_DIR}}/buildSrc/**/*.{java,gradle,groovy}"
+            - "{{.ROOT_DIR}}/source/**/*.{java,gradle,yml,config,json,toml,sql,py}"
+        generates:
+            - "{{.ROOT_DIR}}/build/**/*"
+            - "{{.ROOT_DIR}}/buildSrc/build/**/*"
+            - "{{.ROOT_DIR}}/source/**/build/**/*"
+
+    compile-code-docs:
+        desc: Builds code documentation and license report via gradle
+        summary: |
+            This only builds the code documentation and license report via gradle.
+        cmds:
+            - gradle aggregateJavadoc generateLicenseReport
+        generates:
+            - "{{.ROOT_DIR}}/build/javadoc/**/*"
+            - "{{.ROOT_DIR}}/build/licensereport/**/*"
+        sources:
+            - "{{.ROOT_DIR}}/build.gradle"
+            - "{{.ROOT_DIR}}/settings.gradle"
+            - "{{.ROOT_DIR}}/buildSrc/**/*.{java,gradle,groovy}"
+            - "{{.ROOT_DIR}}/source/**/*.{java,gradle,yml,config,json,toml,sql,py}"
