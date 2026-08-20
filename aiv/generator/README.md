@@ -23,6 +23,10 @@ Write the JSON files
 The schemas define the expected structure and field types. The generator rules
 provide the fictional names, descriptions, values, and relationships.
 
+The generator also uses the value-free `profile.json` to match the original
+dataset's scale by default. It can be regenerated locally with `profile.py`,
+but the original data is not needed when running the generator.
+
 ## Run
 
 Run from the PSI repository root:
@@ -48,6 +52,9 @@ python3 aiv/generator/generate.py \
   --orders 6
 ```
 
+The `--organizations`, `--products-per-organization`, and `--individuals`
+options override the profile-derived sizes.
+
 The OpenAPI directory can be overridden when testing a schema revision:
 
 ```bash
@@ -71,3 +78,11 @@ python3 aiv/generator/validate.py \
 
 The original data is only needed for this optional local check, not for normal
 generation.
+
+To update the value-free profile from local source fixtures:
+
+```bash
+python3 aiv/generator/profile.py \
+  ../testdata \
+  aiv/generator/profile.json
+```

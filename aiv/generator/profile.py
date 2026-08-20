@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Create a source-data profile without copying source values.
 
-The profile records JSON structure only: file counts, object keys, value types,
-and array-size ranges. It intentionally does not record names, descriptions,
-IDs, URLs, or any other source values.
+The profile records structure and distributions only: file counts, field
+presence, value types, array-size ranges, and numeric ranges. It intentionally
+does not record names, descriptions, IDs, URLs, or any other source values.
 """
 
 from __future__ import annotations
@@ -36,9 +36,11 @@ def inspect(value: Any, path: str, fields: dict[str, dict[str, Any]], arrays: di
     if isinstance(value, dict):
         for key, child in value.items():
             child_path = f"{path}.{key}" if path else key
-            entry = fields.setdefault(child_path, {"types": set(), "occurrences": 0})
+            entry = fields.setdefault(child_path, {"types": set(), "occurrences": 0, "numbers": []})
             update_type(entry["types"], child)
             entry["occurrences"] += 1
+            if isinstance(child, (int, float)) and not isinstance(child, bool):
+                entry["numbers"].append(child)
             inspect(child, child_path, fields, arrays)
     elif isinstance(value, list):
         arrays.setdefault(path, []).append(len(value))
@@ -48,12 +50,16 @@ def inspect(value: Any, path: str, fields: dict[str, dict[str, Any]], arrays: di
 
 def build_profile(input_dir: Path) -> dict[str, Any]:
     files: dict[str, Any] = {}
+    summary: dict[str, dict[str, int]] = defaultdict(lambda: {"files": 0, "records": 0})
     for source in sorted(input_dir.rglob("*.json")):
         relative = source.relative_to(input_dir).as_posix()
         with source.open(encoding="utf-8") as handle:
             data = json.load(handle)
 
         records = data if isinstance(data, list) else [data]
+        category = relative.split("/", 1)[0]
+        summary[category]["files"] += 1
+        summary[category]["records"] += len(records)
         fields: dict[str, dict[str, Any]] = {}
         arrays: dict[str, list[int]] = {}
         inspect(data, "", fields, arrays)
@@ -64,6 +70,8 @@ def build_profile(input_dir: Path) -> dict[str, Any]:
                 path: {
                     "types": sorted(info["types"]),
                     "occurrences": info["occurrences"],
+                    "presenceRate": round(min(1.0, info["occurrences"] / max(1, len(records))), 4),
+                    **({"numericRange": {"min": min(info["numbers"]), "max": max(info["numbers"])} } if info["numbers"] else {}),
                 }
                 for path, info in sorted(fields.items())
             },
@@ -73,7 +81,11 @@ def build_profile(input_dir: Path) -> dict[str, Any]:
             },
         }
 
-    return {"source": "structural profile only", "files": files}
+    return {
+        "source": "structural profile and distributions only",
+        "summary": {category: values for category, values in sorted(summary.items())},
+        "files": files,
+    }
 
 
 def main() -> None:

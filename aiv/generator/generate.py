@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Generate deterministic, fictional PSI test data.
 
-This generator has no dependency on the original sensitive fixtures.  The
-OpenAPI specifications are repository documentation and are intentionally not
-used as a source of example values.
+This generator has no dependency on the original sensitive fixtures. It uses
+the public OpenAPI specifications for structural checks and an optional,
+value-free profile for dataset scale.
 """
 
 from __future__ import annotations
@@ -59,6 +59,11 @@ class Scenario:
         "Northstar Signal",
         "Cedar Orbit",
         "Vela Connect",
+        "Solstice Array",
+        "Harbor Vector",
+        "Ember Link",
+        "Polar Meridian",
+        "Quasar Field",
     ]
     people = [
         ("Mira", "Keller"),
@@ -75,11 +80,11 @@ class Scenario:
         ("Pioneer", "Beam"),
     ]
 
-    def __init__(self, seed: int, organizations: int, products_per_org: int, individuals: int):
+    def __init__(self, seed: int, organizations: int, products_per_org: int | None, individuals: int, product_counts: list[int] | None = None):
         self.random = random.Random(seed)
         self.orgs = self.organizations[:organizations]
         self.people = self.people[:individuals]
-        self.products_per_org = products_per_org
+        self.product_counts = product_counts or [products_per_org or 3] * organizations
         self.products: list[dict[str, Any]] = []
         self.services: list[dict[str, Any]] = []
         self.resources: list[dict[str, Any]] = []
@@ -119,7 +124,7 @@ class Scenario:
 
     def build_catalog(self) -> None:
         for org_index, organization in enumerate(self.orgs):
-            for product_index in range(self.products_per_org):
+            for product_index in range(self.product_counts[org_index]):
                 family, kind = self.product_families[(org_index + product_index) % len(self.product_families)]
                 tier = ["Core", "Plus", "Max"][product_index % 3]
                 name = f"{family} {organization.split()[0]} {kind} {tier}"
@@ -249,16 +254,30 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     default_output = Path(__file__).resolve().parents[2] / "aiv" / "testing" / "testdata"
     default_openapi = Path(__file__).resolve().parents[2] / "doc" / "PSI" / "PSI-ICD" / "open-apis" / "oas"
+    default_profile = Path(__file__).resolve().parent / "profile.json"
     parser.add_argument("--output", type=Path, default=default_output)
     parser.add_argument("--openapi", type=Path, default=default_openapi)
+    parser.add_argument("--profile", type=Path, default=default_profile)
     parser.add_argument("--seed", type=int, default=42)
-    parser.add_argument("--organizations", type=int, default=5)
-    parser.add_argument("--products-per-organization", type=int, default=3)
-    parser.add_argument("--individuals", type=int, default=6)
+    parser.add_argument("--organizations", type=int)
+    parser.add_argument("--products-per-organization", type=int)
+    parser.add_argument("--individuals", type=int)
     parser.add_argument("--orders", type=int, default=4)
     args = parser.parse_args()
+
+    profile = json.loads(args.profile.read_text(encoding="utf-8")) if args.profile.exists() else {}
+    summary = profile.get("summary", {})
+    organization_count = args.organizations or summary.get("partyOrganizations", {}).get("records", 5)
+    individual_count = args.individuals or summary.get("partyIndividuals", {}).get("records", 6)
+    product_total = summary.get("productSpecifications", {}).get("records", organization_count * 3)
+    if args.products_per_organization:
+        product_counts = [args.products_per_organization] * organization_count
+    else:
+        base, remainder = divmod(product_total, organization_count)
+        product_counts = [base + (index < remainder) for index in range(organization_count)]
+
     registry = SchemaRegistry(args.openapi)
-    Scenario(args.seed, args.organizations, args.products_per_organization, args.individuals).write(args.output, args.orders, registry)
+    Scenario(args.seed, organization_count, args.products_per_organization, individual_count, product_counts).write(args.output, args.orders, registry)
 
 
 if __name__ == "__main__":
