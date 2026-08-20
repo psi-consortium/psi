@@ -16,6 +16,8 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 
+from schema_registry import SchemaRegistry
+
 
 UTC = timezone.utc
 START = datetime(2026, 1, 1, tzinfo=UTC)
@@ -212,7 +214,7 @@ class Scenario:
             })
         return orders
 
-    def write(self, output: Path, orders: int) -> None:
+    def write(self, output: Path, orders: int, registry: SchemaRegistry) -> None:
         individuals, organizations = self.build_parties()
         self.build_catalog()
         groups = {
@@ -223,6 +225,20 @@ class Scenario:
         for directory, records in [("productSpecifications", self.products), ("serviceSpecifications", self.services), ("resourceSpecifications", self.resources), ("productOfferings", self.offerings)]:
             for organization in self.orgs:
                 groups[f"{directory}/{slug(organization)}_{directory[:-1]}.json"] = [record for owner, record in records if owner == organization]
+
+        records_by_category = {
+            "partyIndividuals": individuals,
+            "partyOrganizations": organizations,
+            "productOrders": groups["productOrders/synthetic_product_orders.json"],
+            "productSpecifications": [record for _, record in self.products],
+            "serviceSpecifications": [record for _, record in self.services],
+            "resourceSpecifications": [record for _, record in self.resources],
+            "productOfferings": [record for _, record in self.offerings],
+        }
+        errors = [error for category, records in records_by_category.items() for error in registry.validate_category(category, records)]
+        if errors:
+            raise ValueError("Generated data does not match the PSI OpenAPI structure:\n" + "\n".join(errors))
+
         for relative, data in groups.items():
             target = output / relative
             target.parent.mkdir(parents=True, exist_ok=True)
@@ -232,14 +248,17 @@ class Scenario:
 def main() -> None:
     parser = argparse.ArgumentParser()
     default_output = Path(__file__).resolve().parents[2] / "aiv" / "testing" / "testdata"
+    default_openapi = Path(__file__).resolve().parents[2] / "doc" / "PSI" / "PSI-ICD" / "open-apis" / "oas"
     parser.add_argument("--output", type=Path, default=default_output)
+    parser.add_argument("--openapi", type=Path, default=default_openapi)
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--organizations", type=int, default=5)
     parser.add_argument("--products-per-organization", type=int, default=3)
     parser.add_argument("--individuals", type=int, default=6)
     parser.add_argument("--orders", type=int, default=4)
     args = parser.parse_args()
-    Scenario(args.seed, args.organizations, args.products_per_organization, args.individuals).write(args.output, args.orders)
+    registry = SchemaRegistry(args.openapi)
+    Scenario(args.seed, args.organizations, args.products_per_organization, args.individuals).write(args.output, args.orders, registry)
 
 
 if __name__ == "__main__":
