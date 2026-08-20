@@ -10,6 +10,7 @@ jobs:
             pull-requests: read
         outputs:
             code: ${{ steps.filter.outputs.code }}
+            testdata: ${{ steps.filter.outputs.testdata }}
             documents: ${{ steps.filter.outputs.documents }}
         steps:
             - uses: dorny/paths-filter@7b450fff21473bca461d4b92ce414b9d0420d706 # v4.0.2
@@ -23,8 +24,11 @@ jobs:
                         - 'Taskfile.check.yml'
                         - 'build.gradle'
                         - 'settings.gradle'
+                        - 'gradle.properties'
                         - 'buildSrc/**/*.{java,gradle,groovy}'
                         - 'source/**/*.{java,gradle,yml,config,json,toml,sql,py}'
+                      testdata:
+                        - 'aiv/testing/testdata/**'
                       documents:
                         - 'Taskfile.yml'
                         - 'aiv/rhod/Taskfile.yml'
@@ -44,6 +48,14 @@ jobs:
         needs: changes
         if: ${{ needs.changes.outputs.code == 'true' }}
         uses: ./.github/workflows/build.yml
+
+    unit_tests:
+        name: Unit Tests
+        needs:
+            - changes
+            - build
+        if: ${{ needs.changes.outputs.code == 'true' || needs.changes.outputs.testdata == 'true' }}
+        uses: ./.github/workflows/unit-tests.yml
 
     code_docs:
         name: Code Documentation Test Build

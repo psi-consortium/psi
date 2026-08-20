@@ -10,6 +10,11 @@ jobs:
         name: Build
         uses: ./.github/workflows/build.yml
 
+    unit_tests:
+        name: Unit Tests
+        needs: build
+        uses: ./.github/workflows/unit-tests.yml
+
     code_docs:
         name: Code Documentation
         needs: build
