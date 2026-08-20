@@ -1,0 +1,149 @@
+[
+  {
+    "name": "Pioneer Cedar Beam Core Managed Service",
+    "description": "Managed delivery for the fictional Pioneer Cedar Beam Core product.",
+    "id": "pioneer_cedar_beam_core_managed_service",
+    "entity": "ServiceSpecification",
+    "value": "Pioneer Cedar Beam Core Managed Service",
+    "valueType": "string",
+    "relationshipType": "uses",
+    "parentSpecificationId": "pioneer_cedar_beam_core",
+    "parentSpecificationHref": "https://example.invalid/specifications/pioneer_cedar_beam_core",
+    "@referredType": "ServiceSpecification",
+    "@schemaLocation": "https://example.invalid/schemas/service-specification.json",
+    "isBundle": false,
+    "lifecycleStatus": "Active",
+    "validFor": {
+      "startDateTime": "2026-01-01T00:00:00.000Z",
+      "endDateTime": "2028-12-31T00:00:00.000Z"
+    },
+    "version": "1.0",
+    "relatedParty": [
+      {
+        "@type": "RelatedPartyRefOrPartyRoleRef",
+        "role": "ServiceProvider",
+        "partyOrPartyRole": {
+          "id": "cedar_orbit",
+          "name": "Cedar Orbit",
+          "@type": "PartyRef",
+          "@referredType": "Organization"
+        }
+      }
+    ],
+    "resourceSpecification": [
+      {
+        "id": "pioneer_cedar_beam_core_edge_terminal",
+        "name": "Pioneer Cedar Beam Core Edge Terminal",
+        "version": "1.0",
+        "@type": "ResourceSpecificationRef",
+        "@referredType": "PhysicalResourceSpecification"
+      }
+    ],
+    "specCharacteristic": [
+      {
+        "name": "serviceLevel",
+        "valueType": "string",
+        "@type": "CharacteristicSpecification"
+      }
+    ],
+    "@type": "ServiceSpecification"
+  },
+  {
+    "name": "Horizon Cedar Access Plus Managed Service",
+    "description": "Managed delivery for the fictional Horizon Cedar Access Plus product.",
+    "id": "horizon_cedar_access_plus_managed_service",
+    "entity": "ServiceSpecification",
+    "value": "Horizon Cedar Access Plus Managed Service",
+    "valueType": "string",
+    "relationshipType": "uses",
+    "parentSpecificationId": "horizon_cedar_access_plus",
+    "parentSpecificationHref": "https://example.invalid/specifications/horizon_cedar_access_plus",
+    "@referredType": "ServiceSpecification",
+    "@schemaLocation": "https://example.invalid/schemas/service-specification.json",
+    "isBundle": false,
+    "lifecycleStatus": "Active",
+    "validFor": {
+      "startDateTime": "2026-01-01T00:00:00.000Z",
+      "endDateTime": "2028-12-31T00:00:00.000Z"
+    },
+    "version": "1.0",
+    "relatedParty": [
+      {
+        "@type": "RelatedPartyRefOrPartyRoleRef",
+        "role": "ServiceProvider",
+        "partyOrPartyRole": {
+          "id": "cedar_orbit",
+          "name": "Cedar Orbit",
+          "@type": "PartyRef",
+          "@referredType": "Organization"
+        }
+      }
+    ],
+    "resourceSpecification": [
+      {
+        "id": "horizon_cedar_access_plus_edge_terminal",
+        "name": "Horizon Cedar Access Plus Edge Terminal",
+        "version": "1.0",
+        "@type": "ResourceSpecificationRef",
+        "@referredType": "PhysicalResourceSpecification"
+      }
+    ],
+    "specCharacteristic": [
+      {
+        "name": "serviceLevel",
+        "valueType": "string",
+        "@type": "CharacteristicSpecification"
+      }
+    ],
+    "@type": "ServiceSpecification"
+  },
+  {
+    "name": "Vector Cedar Trunk Max Managed Service",
+    "description": "Managed delivery for the fictional Vector Cedar Trunk Max product.",
+    "id": "vector_cedar_trunk_max_managed_service",
+    "entity": "ServiceSpecification",
+    "value": "Vector Cedar Trunk Max Managed Service",
+    "valueType": "string",
+    "relationshipType": "uses",
+    "parentSpecificationId": "vector_cedar_trunk_max",
+    "parentSpecificationHref": "https://example.invalid/specifications/vector_cedar_trunk_max",
+    "@referredType": "ServiceSpecification",
+    "@schemaLocation": "https://example.invalid/schemas/service-specification.json",
+    "isBundle": false,
+    "lifecycleStatus": "Active",
+    "validFor": {
+      "startDateTime": "2026-01-01T00:00:00.000Z",
+      "endDateTime": "2028-12-31T00:00:00.000Z"
+    },
+    "version": "1.0",
+    "relatedParty": [
+      {
+        "@type": "RelatedPartyRefOrPartyRoleRef",
+        "role": "ServiceProvider",
+        "partyOrPartyRole": {
+          "id": "cedar_orbit",
+          "name": "Cedar Orbit",
+          "@type": "PartyRef",
+          "@referredType": "Organization"
+        }
+      }
+    ],
+    "resourceSpecification": [
+      {
+        "id": "vector_cedar_trunk_max_edge_terminal",
+        "name": "Vector Cedar Trunk Max Edge Terminal",
+        "version": "1.0",
+        "@type": "ResourceSpecificationRef",
+        "@referredType": "PhysicalResourceSpecification"
+      }
+    ],
+    "specCharacteristic": [
+      {
+        "name": "serviceLevel",
+        "valueType": "string",
+        "@type": "CharacteristicSpecification"
+      }
+    ],
+    "@type": "ServiceSpecification"
+  }
+]

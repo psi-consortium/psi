@@ -1,0 +1,90 @@
+[
+  {
+    "name": "Vector Blue Trunk Core Edge Terminal",
+    "category": "Customer edge equipment",
+    "description": "Fictional terminal resource used by Vector Blue Trunk Core.",
+    "isBundle": false,
+    "model": "Vector-01",
+    "vendor": "Aster Devices",
+    "validFor": {
+      "startDateTime": "2026-01-01T00:00:00.000Z",
+      "endDateTime": "2029-12-31T00:00:00.000Z"
+    },
+    "version": "1.0",
+    "resourceSpecCharacteristic": [
+      {
+        "name": "weight",
+        "valueType": "double",
+        "unitOfMeasure": "kg",
+        "@type": "CharacteristicSpecification"
+      }
+    ],
+    "@type": "ResourceSpecification"
+  },
+  {
+    "name": "Lumen Blue Relay Plus Edge Terminal",
+    "category": "Customer edge equipment",
+    "description": "Fictional terminal resource used by Lumen Blue Relay Plus.",
+    "isBundle": false,
+    "model": "Lumen-02",
+    "vendor": "Aster Devices",
+    "validFor": {
+      "startDateTime": "2026-01-01T00:00:00.000Z",
+      "endDateTime": "2029-12-31T00:00:00.000Z"
+    },
+    "version": "1.0",
+    "resourceSpecCharacteristic": [
+      {
+        "name": "weight",
+        "valueType": "double",
+        "unitOfMeasure": "kg",
+        "@type": "CharacteristicSpecification"
+      }
+    ],
+    "@type": "ResourceSpecification"
+  },
+  {
+    "name": "Pioneer Blue Beam Max Edge Terminal",
+    "category": "Customer edge equipment",
+    "description": "Fictional terminal resource used by Pioneer Blue Beam Max.",
+    "isBundle": false,
+    "model": "Pioneer-03",
+    "vendor": "Aster Devices",
+    "validFor": {
+      "startDateTime": "2026-01-01T00:00:00.000Z",
+      "endDateTime": "2029-12-31T00:00:00.000Z"
+    },
+    "version": "1.0",
+    "resourceSpecCharacteristic": [
+      {
+        "name": "weight",
+        "valueType": "double",
+        "unitOfMeasure": "kg",
+        "@type": "CharacteristicSpecification"
+      }
+    ],
+    "@type": "ResourceSpecification"
+  },
+  {
+    "name": "Horizon Blue Access Core Edge Terminal",
+    "category": "Customer edge equipment",
+    "description": "Fictional terminal resource used by Horizon Blue Access Core.",
+    "isBundle": false,
+    "model": "Horizon-04",
+    "vendor": "Aster Devices",
+    "validFor": {
+      "startDateTime": "2026-01-01T00:00:00.000Z",
+      "endDateTime": "2029-12-31T00:00:00.000Z"
+    },
+    "version": "1.0",
+    "resourceSpecCharacteristic": [
+      {
+        "name": "weight",
+        "valueType": "double",
+        "unitOfMeasure": "kg",
+        "@type": "CharacteristicSpecification"
+      }
+    ],
+    "@type": "ResourceSpecification"
+  }
+]

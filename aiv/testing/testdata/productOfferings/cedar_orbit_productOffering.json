@@ -1,0 +1,182 @@
+[
+  {
+    "name": "Pioneer Cedar Beam Core Offering",
+    "description": "Commercial offering for Pioneer Cedar Beam Core with a 12-month term.",
+    "isBundle": false,
+    "isSellable": true,
+    "lifecycleStatus": "Active",
+    "statusReason": "Available for synthetic test scenarios",
+    "version": "1.0",
+    "validFor": {
+      "startDateTime": "2026-01-01T00:00:00.000Z",
+      "endDateTime": "2028-01-01T00:00:00.000Z"
+    },
+    "productSpecification": {
+      "id": "pioneer_cedar_beam_core",
+      "name": "Pioneer Cedar Beam Core",
+      "version": "1.0",
+      "@type": "ProductSpecificationRef",
+      "@referredType": "ProductSpecification"
+    },
+    "serviceCandidate": {
+      "id": "pioneer_cedar_beam_core_managed_service",
+      "name": "Pioneer Cedar Beam Core Managed Service",
+      "version": "1.0",
+      "@type": "ServiceCandidateRef",
+      "@referredType": "ServiceSpecification"
+    },
+    "resourceCandidate": {
+      "id": "pioneer_cedar_beam_core_edge_terminal",
+      "name": "Pioneer Cedar Beam Core Edge Terminal",
+      "version": "1.0",
+      "@type": "ResourceCandidateRef",
+      "@referredType": "ResourceCandidate"
+    },
+    "relatedParty": [
+      {
+        "@type": "RelatedPartyRefOrPartyRoleRef",
+        "role": "Seller",
+        "partyOrPartyRole": {
+          "id": "cedar_orbit",
+          "name": "Cedar Orbit",
+          "@type": "PartyRef",
+          "@referredType": "Organization"
+        }
+      }
+    ],
+    "productOfferingPrice": [
+      {
+        "name": "Pioneer Cedar Beam Core Offering Monthly Price",
+        "priceType": "recurring",
+        "price": {
+          "taxIncludedAmount": {
+            "unit": "EUR",
+            "value": 120
+          }
+        },
+        "@type": "ProductOfferingPrice"
+      }
+    ],
+    "@type": "ProductOffering"
+  },
+  {
+    "name": "Horizon Cedar Access Plus Offering",
+    "description": "Commercial offering for Horizon Cedar Access Plus with a 18-month term.",
+    "isBundle": false,
+    "isSellable": true,
+    "lifecycleStatus": "Active",
+    "statusReason": "Available for synthetic test scenarios",
+    "version": "1.0",
+    "validFor": {
+      "startDateTime": "2026-01-01T00:00:00.000Z",
+      "endDateTime": "2028-01-01T00:00:00.000Z"
+    },
+    "productSpecification": {
+      "id": "horizon_cedar_access_plus",
+      "name": "Horizon Cedar Access Plus",
+      "version": "1.0",
+      "@type": "ProductSpecificationRef",
+      "@referredType": "ProductSpecification"
+    },
+    "serviceCandidate": {
+      "id": "horizon_cedar_access_plus_managed_service",
+      "name": "Horizon Cedar Access Plus Managed Service",
+      "version": "1.0",
+      "@type": "ServiceCandidateRef",
+      "@referredType": "ServiceSpecification"
+    },
+    "resourceCandidate": {
+      "id": "horizon_cedar_access_plus_edge_terminal",
+      "name": "Horizon Cedar Access Plus Edge Terminal",
+      "version": "1.0",
+      "@type": "ResourceCandidateRef",
+      "@referredType": "ResourceCandidate"
+    },
+    "relatedParty": [
+      {
+        "@type": "RelatedPartyRefOrPartyRoleRef",
+        "role": "Seller",
+        "partyOrPartyRole": {
+          "id": "cedar_orbit",
+          "name": "Cedar Orbit",
+          "@type": "PartyRef",
+          "@referredType": "Organization"
+        }
+      }
+    ],
+    "productOfferingPrice": [
+      {
+        "name": "Horizon Cedar Access Plus Offering Monthly Price",
+        "priceType": "recurring",
+        "price": {
+          "taxIncludedAmount": {
+            "unit": "EUR",
+            "value": 165
+          }
+        },
+        "@type": "ProductOfferingPrice"
+      }
+    ],
+    "@type": "ProductOffering"
+  },
+  {
+    "name": "Vector Cedar Trunk Max Offering",
+    "description": "Commercial offering for Vector Cedar Trunk Max with a 24-month term.",
+    "isBundle": false,
+    "isSellable": true,
+    "lifecycleStatus": "Active",
+    "statusReason": "Available for synthetic test scenarios",
+    "version": "1.0",
+    "validFor": {
+      "startDateTime": "2026-01-01T00:00:00.000Z",
+      "endDateTime": "2028-01-01T00:00:00.000Z"
+    },
+    "productSpecification": {
+      "id": "vector_cedar_trunk_max",
+      "name": "Vector Cedar Trunk Max",
+      "version": "1.0",
+      "@type": "ProductSpecificationRef",
+      "@referredType": "ProductSpecification"
+    },
+    "serviceCandidate": {
+      "id": "vector_cedar_trunk_max_managed_service",
+      "name": "Vector Cedar Trunk Max Managed Service",
+      "version": "1.0",
+      "@type": "ServiceCandidateRef",
+      "@referredType": "ServiceSpecification"
+    },
+    "resourceCandidate": {
+      "id": "vector_cedar_trunk_max_edge_terminal",
+      "name": "Vector Cedar Trunk Max Edge Terminal",
+      "version": "1.0",
+      "@type": "ResourceCandidateRef",
+      "@referredType": "ResourceCandidate"
+    },
+    "relatedParty": [
+      {
+        "@type": "RelatedPartyRefOrPartyRoleRef",
+        "role": "Seller",
+        "partyOrPartyRole": {
+          "id": "cedar_orbit",
+          "name": "Cedar Orbit",
+          "@type": "PartyRef",
+          "@referredType": "Organization"
+        }
+      }
+    ],
+    "productOfferingPrice": [
+      {
+        "name": "Vector Cedar Trunk Max Offering Monthly Price",
+        "priceType": "recurring",
+        "price": {
+          "taxIncludedAmount": {
+            "unit": "EUR",
+            "value": 210
+          }
+        },
+        "@type": "ProductOfferingPrice"
+      }
+    ],
+    "@type": "ProductOffering"
+  }
+]

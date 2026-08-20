@@ -1,0 +1,68 @@
+[
+  {
+    "name": "Vector Solstice Trunk Core Edge Terminal",
+    "category": "Customer edge equipment",
+    "description": "Fictional terminal resource used by Vector Solstice Trunk Core.",
+    "isBundle": false,
+    "model": "Vector-01",
+    "vendor": "Aster Devices",
+    "validFor": {
+      "startDateTime": "2026-01-01T00:00:00.000Z",
+      "endDateTime": "2029-12-31T00:00:00.000Z"
+    },
+    "version": "1.0",
+    "resourceSpecCharacteristic": [
+      {
+        "name": "weight",
+        "valueType": "double",
+        "unitOfMeasure": "kg",
+        "@type": "CharacteristicSpecification"
+      }
+    ],
+    "@type": "ResourceSpecification"
+  },
+  {
+    "name": "Lumen Solstice Relay Plus Edge Terminal",
+    "category": "Customer edge equipment",
+    "description": "Fictional terminal resource used by Lumen Solstice Relay Plus.",
+    "isBundle": false,
+    "model": "Lumen-02",
+    "vendor": "Aster Devices",
+    "validFor": {
+      "startDateTime": "2026-01-01T00:00:00.000Z",
+      "endDateTime": "2029-12-31T00:00:00.000Z"
+    },
+    "version": "1.0",
+    "resourceSpecCharacteristic": [
+      {
+        "name": "weight",
+        "valueType": "double",
+        "unitOfMeasure": "kg",
+        "@type": "CharacteristicSpecification"
+      }
+    ],
+    "@type": "ResourceSpecification"
+  },
+  {
+    "name": "Pioneer Solstice Beam Max Edge Terminal",
+    "category": "Customer edge equipment",
+    "description": "Fictional terminal resource used by Pioneer Solstice Beam Max.",
+    "isBundle": false,
+    "model": "Pioneer-03",
+    "vendor": "Aster Devices",
+    "validFor": {
+      "startDateTime": "2026-01-01T00:00:00.000Z",
+      "endDateTime": "2029-12-31T00:00:00.000Z"
+    },
+    "version": "1.0",
+    "resourceSpecCharacteristic": [
+      {
+        "name": "weight",
+        "valueType": "double",
+        "unitOfMeasure": "kg",
+        "@type": "CharacteristicSpecification"
+      }
+    ],
+    "@type": "ResourceSpecification"
+  }
+]

@@ -1,0 +1,257 @@
+[
+  {
+    "name": "Pioneer Cedar Beam Core",
+    "brand": "Cedar Orbit",
+    "productNumber": "CEDA-PIONEER-01",
+    "description": "Pioneer Cedar Beam Core provides fictional beam connectivity with configurable capacity and service monitoring.",
+    "isBundle": false,
+    "lifecycleStatus": "Active",
+    "validFor": {
+      "startDateTime": "2026-01-01T00:00:00.000Z",
+      "endDateTime": "2028-12-31T00:00:00.000Z"
+    },
+    "version": "1.0",
+    "relatedParty": [
+      {
+        "@type": "RelatedPartyRefOrPartyRoleRef",
+        "role": "ServiceProvider",
+        "partyOrPartyRole": {
+          "id": "cedar_orbit",
+          "name": "Cedar Orbit",
+          "@type": "PartyRef",
+          "@referredType": "Organization"
+        }
+      }
+    ],
+    "attachment": [],
+    "bundledProductSpecification": [],
+    "productSpecificationRelationship": [],
+    "serviceSpecification": [
+      {
+        "id": "pioneer_cedar_beam_core_managed_service",
+        "name": "Pioneer Cedar Beam Core Managed Service",
+        "version": "1.0",
+        "@type": "ServiceSpecificationRef",
+        "@referredType": "ServiceSpecification"
+      }
+    ],
+    "resourceSpecification": [
+      {
+        "id": "pioneer_cedar_beam_core_edge_terminal",
+        "name": "Pioneer Cedar Beam Core Edge Terminal",
+        "version": "1.0",
+        "@type": "ResourceSpecificationRef",
+        "@referredType": "PhysicalResourceSpecification"
+      }
+    ],
+    "productSpecCharacteristic": [
+      {
+        "name": "bandwidth",
+        "description": "Configured service bandwidth",
+        "valueType": "integer",
+        "configurable": true,
+        "minCardinality": 1,
+        "maxCardinality": 1,
+        "characteristicValueSpecification": [
+          {
+            "isDefault": true,
+            "valueType": "integer",
+            "value": 50,
+            "unitOfMeasure": "Mbps",
+            "@type": "IntegerCharacteristicValueSpecification"
+          }
+        ],
+        "@type": "CharacteristicSpecification"
+      },
+      {
+        "name": "networkUptime",
+        "description": "Target network availability",
+        "valueType": "double",
+        "configurable": false,
+        "minCardinality": 1,
+        "maxCardinality": 1,
+        "characteristicValueSpecification": [
+          {
+            "isDefault": true,
+            "valueType": "double",
+            "value": 99.5,
+            "unitOfMeasure": "percent (%)",
+            "@type": "NumberCharacteristicValueSpecification"
+          }
+        ],
+        "@type": "CharacteristicSpecification"
+      }
+    ],
+    "@type": "ProductSpecification"
+  },
+  {
+    "name": "Horizon Cedar Access Plus",
+    "brand": "Cedar Orbit",
+    "productNumber": "CEDA-HORIZON-02",
+    "description": "Horizon Cedar Access Plus provides fictional access connectivity with configurable capacity and service monitoring.",
+    "isBundle": false,
+    "lifecycleStatus": "Active",
+    "validFor": {
+      "startDateTime": "2026-01-01T00:00:00.000Z",
+      "endDateTime": "2028-12-31T00:00:00.000Z"
+    },
+    "version": "1.0",
+    "relatedParty": [
+      {
+        "@type": "RelatedPartyRefOrPartyRoleRef",
+        "role": "ServiceProvider",
+        "partyOrPartyRole": {
+          "id": "cedar_orbit",
+          "name": "Cedar Orbit",
+          "@type": "PartyRef",
+          "@referredType": "Organization"
+        }
+      }
+    ],
+    "attachment": [],
+    "bundledProductSpecification": [],
+    "productSpecificationRelationship": [],
+    "serviceSpecification": [
+      {
+        "id": "horizon_cedar_access_plus_managed_service",
+        "name": "Horizon Cedar Access Plus Managed Service",
+        "version": "1.0",
+        "@type": "ServiceSpecificationRef",
+        "@referredType": "ServiceSpecification"
+      }
+    ],
+    "resourceSpecification": [
+      {
+        "id": "horizon_cedar_access_plus_edge_terminal",
+        "name": "Horizon Cedar Access Plus Edge Terminal",
+        "version": "1.0",
+        "@type": "ResourceSpecificationRef",
+        "@referredType": "PhysicalResourceSpecification"
+      }
+    ],
+    "productSpecCharacteristic": [
+      {
+        "name": "bandwidth",
+        "description": "Configured service bandwidth",
+        "valueType": "integer",
+        "configurable": true,
+        "minCardinality": 1,
+        "maxCardinality": 1,
+        "characteristicValueSpecification": [
+          {
+            "isDefault": true,
+            "valueType": "integer",
+            "value": 75,
+            "unitOfMeasure": "Mbps",
+            "@type": "IntegerCharacteristicValueSpecification"
+          }
+        ],
+        "@type": "CharacteristicSpecification"
+      },
+      {
+        "name": "networkUptime",
+        "description": "Target network availability",
+        "valueType": "double",
+        "configurable": false,
+        "minCardinality": 1,
+        "maxCardinality": 1,
+        "characteristicValueSpecification": [
+          {
+            "isDefault": true,
+            "valueType": "double",
+            "value": 99.5,
+            "unitOfMeasure": "percent (%)",
+            "@type": "NumberCharacteristicValueSpecification"
+          }
+        ],
+        "@type": "CharacteristicSpecification"
+      }
+    ],
+    "@type": "ProductSpecification"
+  },
+  {
+    "name": "Vector Cedar Trunk Max",
+    "brand": "Cedar Orbit",
+    "productNumber": "CEDA-VECTOR-03",
+    "description": "Vector Cedar Trunk Max provides fictional trunk connectivity with configurable capacity and service monitoring.",
+    "isBundle": false,
+    "lifecycleStatus": "Active",
+    "validFor": {
+      "startDateTime": "2026-01-01T00:00:00.000Z",
+      "endDateTime": "2028-12-31T00:00:00.000Z"
+    },
+    "version": "1.0",
+    "relatedParty": [
+      {
+        "@type": "RelatedPartyRefOrPartyRoleRef",
+        "role": "ServiceProvider",
+        "partyOrPartyRole": {
+          "id": "cedar_orbit",
+          "name": "Cedar Orbit",
+          "@type": "PartyRef",
+          "@referredType": "Organization"
+        }
+      }
+    ],
+    "attachment": [],
+    "bundledProductSpecification": [],
+    "productSpecificationRelationship": [],
+    "serviceSpecification": [
+      {
+        "id": "vector_cedar_trunk_max_managed_service",
+        "name": "Vector Cedar Trunk Max Managed Service",
+        "version": "1.0",
+        "@type": "ServiceSpecificationRef",
+        "@referredType": "ServiceSpecification"
+      }
+    ],
+    "resourceSpecification": [
+      {
+        "id": "vector_cedar_trunk_max_edge_terminal",
+        "name": "Vector Cedar Trunk Max Edge Terminal",
+        "version": "1.0",
+        "@type": "ResourceSpecificationRef",
+        "@referredType": "PhysicalResourceSpecification"
+      }
+    ],
+    "productSpecCharacteristic": [
+      {
+        "name": "bandwidth",
+        "description": "Configured service bandwidth",
+        "valueType": "integer",
+        "configurable": true,
+        "minCardinality": 1,
+        "maxCardinality": 1,
+        "characteristicValueSpecification": [
+          {
+            "isDefault": true,
+            "valueType": "integer",
+            "value": 100,
+            "unitOfMeasure": "Mbps",
+            "@type": "IntegerCharacteristicValueSpecification"
+          }
+        ],
+        "@type": "CharacteristicSpecification"
+      },
+      {
+        "name": "networkUptime",
+        "description": "Target network availability",
+        "valueType": "double",
+        "configurable": false,
+        "minCardinality": 1,
+        "maxCardinality": 1,
+        "characteristicValueSpecification": [
+          {
+            "isDefault": true,
+            "valueType": "double",
+            "value": 99.5,
+            "unitOfMeasure": "percent (%)",
+            "@type": "NumberCharacteristicValueSpecification"
+          }
+        ],
+        "@type": "CharacteristicSpecification"
+      }
+    ],
+    "@type": "ProductSpecification"
+  }
+]

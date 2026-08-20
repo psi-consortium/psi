@@ -1,0 +1,149 @@
+[
+  {
+    "name": "Vector Solstice Trunk Core Managed Service",
+    "description": "Managed delivery for the fictional Vector Solstice Trunk Core product.",
+    "id": "vector_solstice_trunk_core_managed_service",
+    "entity": "ServiceSpecification",
+    "value": "Vector Solstice Trunk Core Managed Service",
+    "valueType": "string",
+    "relationshipType": "uses",
+    "parentSpecificationId": "vector_solstice_trunk_core",
+    "parentSpecificationHref": "https://example.invalid/specifications/vector_solstice_trunk_core",
+    "@referredType": "ServiceSpecification",
+    "@schemaLocation": "https://example.invalid/schemas/service-specification.json",
+    "isBundle": false,
+    "lifecycleStatus": "Active",
+    "validFor": {
+      "startDateTime": "2026-01-01T00:00:00.000Z",
+      "endDateTime": "2028-12-31T00:00:00.000Z"
+    },
+    "version": "1.0",
+    "relatedParty": [
+      {
+        "@type": "RelatedPartyRefOrPartyRoleRef",
+        "role": "ServiceProvider",
+        "partyOrPartyRole": {
+          "id": "solstice_array",
+          "name": "Solstice Array",
+          "@type": "PartyRef",
+          "@referredType": "Organization"
+        }
+      }
+    ],
+    "resourceSpecification": [
+      {
+        "id": "vector_solstice_trunk_core_edge_terminal",
+        "name": "Vector Solstice Trunk Core Edge Terminal",
+        "version": "1.0",
+        "@type": "ResourceSpecificationRef",
+        "@referredType": "PhysicalResourceSpecification"
+      }
+    ],
+    "specCharacteristic": [
+      {
+        "name": "serviceLevel",
+        "valueType": "string",
+        "@type": "CharacteristicSpecification"
+      }
+    ],
+    "@type": "ServiceSpecification"
+  },
+  {
+    "name": "Lumen Solstice Relay Plus Managed Service",
+    "description": "Managed delivery for the fictional Lumen Solstice Relay Plus product.",
+    "id": "lumen_solstice_relay_plus_managed_service",
+    "entity": "ServiceSpecification",
+    "value": "Lumen Solstice Relay Plus Managed Service",
+    "valueType": "string",
+    "relationshipType": "uses",
+    "parentSpecificationId": "lumen_solstice_relay_plus",
+    "parentSpecificationHref": "https://example.invalid/specifications/lumen_solstice_relay_plus",
+    "@referredType": "ServiceSpecification",
+    "@schemaLocation": "https://example.invalid/schemas/service-specification.json",
+    "isBundle": false,
+    "lifecycleStatus": "Active",
+    "validFor": {
+      "startDateTime": "2026-01-01T00:00:00.000Z",
+      "endDateTime": "2028-12-31T00:00:00.000Z"
+    },
+    "version": "1.0",
+    "relatedParty": [
+      {
+        "@type": "RelatedPartyRefOrPartyRoleRef",
+        "role": "ServiceProvider",
+        "partyOrPartyRole": {
+          "id": "solstice_array",
+          "name": "Solstice Array",
+          "@type": "PartyRef",
+          "@referredType": "Organization"
+        }
+      }
+    ],
+    "resourceSpecification": [
+      {
+        "id": "lumen_solstice_relay_plus_edge_terminal",
+        "name": "Lumen Solstice Relay Plus Edge Terminal",
+        "version": "1.0",
+        "@type": "ResourceSpecificationRef",
+        "@referredType": "PhysicalResourceSpecification"
+      }
+    ],
+    "specCharacteristic": [
+      {
+        "name": "serviceLevel",
+        "valueType": "string",
+        "@type": "CharacteristicSpecification"
+      }
+    ],
+    "@type": "ServiceSpecification"
+  },
+  {
+    "name": "Pioneer Solstice Beam Max Managed Service",
+    "description": "Managed delivery for the fictional Pioneer Solstice Beam Max product.",
+    "id": "pioneer_solstice_beam_max_managed_service",
+    "entity": "ServiceSpecification",
+    "value": "Pioneer Solstice Beam Max Managed Service",
+    "valueType": "string",
+    "relationshipType": "uses",
+    "parentSpecificationId": "pioneer_solstice_beam_max",
+    "parentSpecificationHref": "https://example.invalid/specifications/pioneer_solstice_beam_max",
+    "@referredType": "ServiceSpecification",
+    "@schemaLocation": "https://example.invalid/schemas/service-specification.json",
+    "isBundle": false,
+    "lifecycleStatus": "Active",
+    "validFor": {
+      "startDateTime": "2026-01-01T00:00:00.000Z",
+      "endDateTime": "2028-12-31T00:00:00.000Z"
+    },
+    "version": "1.0",
+    "relatedParty": [
+      {
+        "@type": "RelatedPartyRefOrPartyRoleRef",
+        "role": "ServiceProvider",
+        "partyOrPartyRole": {
+          "id": "solstice_array",
+          "name": "Solstice Array",
+          "@type": "PartyRef",
+          "@referredType": "Organization"
+        }
+      }
+    ],
+    "resourceSpecification": [
+      {
+        "id": "pioneer_solstice_beam_max_edge_terminal",
+        "name": "Pioneer Solstice Beam Max Edge Terminal",
+        "version": "1.0",
+        "@type": "ResourceSpecificationRef",
+        "@referredType": "PhysicalResourceSpecification"
+      }
+    ],
+    "specCharacteristic": [
+      {
+        "name": "serviceLevel",
+        "valueType": "string",
+        "@type": "CharacteristicSpecification"
+      }
+    ],
+    "@type": "ServiceSpecification"
+  }
+]

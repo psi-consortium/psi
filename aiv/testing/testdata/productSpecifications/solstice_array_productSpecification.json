@@ -1,0 +1,257 @@
+[
+  {
+    "name": "Vector Solstice Trunk Core",
+    "brand": "Solstice Array",
+    "productNumber": "SOLS-VECTOR-01",
+    "description": "Vector Solstice Trunk Core provides fictional trunk connectivity with configurable capacity and service monitoring.",
+    "isBundle": false,
+    "lifecycleStatus": "Active",
+    "validFor": {
+      "startDateTime": "2026-01-01T00:00:00.000Z",
+      "endDateTime": "2028-12-31T00:00:00.000Z"
+    },
+    "version": "1.0",
+    "relatedParty": [
+      {
+        "@type": "RelatedPartyRefOrPartyRoleRef",
+        "role": "ServiceProvider",
+        "partyOrPartyRole": {
+          "id": "solstice_array",
+          "name": "Solstice Array",
+          "@type": "PartyRef",
+          "@referredType": "Organization"
+        }
+      }
+    ],
+    "attachment": [],
+    "bundledProductSpecification": [],
+    "productSpecificationRelationship": [],
+    "serviceSpecification": [
+      {
+        "id": "vector_solstice_trunk_core_managed_service",
+        "name": "Vector Solstice Trunk Core Managed Service",
+        "version": "1.0",
+        "@type": "ServiceSpecificationRef",
+        "@referredType": "ServiceSpecification"
+      }
+    ],
+    "resourceSpecification": [
+      {
+        "id": "vector_solstice_trunk_core_edge_terminal",
+        "name": "Vector Solstice Trunk Core Edge Terminal",
+        "version": "1.0",
+        "@type": "ResourceSpecificationRef",
+        "@referredType": "PhysicalResourceSpecification"
+      }
+    ],
+    "productSpecCharacteristic": [
+      {
+        "name": "bandwidth",
+        "description": "Configured service bandwidth",
+        "valueType": "integer",
+        "configurable": true,
+        "minCardinality": 1,
+        "maxCardinality": 1,
+        "characteristicValueSpecification": [
+          {
+            "isDefault": true,
+            "valueType": "integer",
+            "value": 50,
+            "unitOfMeasure": "Mbps",
+            "@type": "IntegerCharacteristicValueSpecification"
+          }
+        ],
+        "@type": "CharacteristicSpecification"
+      },
+      {
+        "name": "networkUptime",
+        "description": "Target network availability",
+        "valueType": "double",
+        "configurable": false,
+        "minCardinality": 1,
+        "maxCardinality": 1,
+        "characteristicValueSpecification": [
+          {
+            "isDefault": true,
+            "valueType": "double",
+            "value": 99.5,
+            "unitOfMeasure": "percent (%)",
+            "@type": "NumberCharacteristicValueSpecification"
+          }
+        ],
+        "@type": "CharacteristicSpecification"
+      }
+    ],
+    "@type": "ProductSpecification"
+  },
+  {
+    "name": "Lumen Solstice Relay Plus",
+    "brand": "Solstice Array",
+    "productNumber": "SOLS-LUMEN-02",
+    "description": "Lumen Solstice Relay Plus provides fictional relay connectivity with configurable capacity and service monitoring.",
+    "isBundle": false,
+    "lifecycleStatus": "Active",
+    "validFor": {
+      "startDateTime": "2026-01-01T00:00:00.000Z",
+      "endDateTime": "2028-12-31T00:00:00.000Z"
+    },
+    "version": "1.0",
+    "relatedParty": [
+      {
+        "@type": "RelatedPartyRefOrPartyRoleRef",
+        "role": "ServiceProvider",
+        "partyOrPartyRole": {
+          "id": "solstice_array",
+          "name": "Solstice Array",
+          "@type": "PartyRef",
+          "@referredType": "Organization"
+        }
+      }
+    ],
+    "attachment": [],
+    "bundledProductSpecification": [],
+    "productSpecificationRelationship": [],
+    "serviceSpecification": [
+      {
+        "id": "lumen_solstice_relay_plus_managed_service",
+        "name": "Lumen Solstice Relay Plus Managed Service",
+        "version": "1.0",
+        "@type": "ServiceSpecificationRef",
+        "@referredType": "ServiceSpecification"
+      }
+    ],
+    "resourceSpecification": [
+      {
+        "id": "lumen_solstice_relay_plus_edge_terminal",
+        "name": "Lumen Solstice Relay Plus Edge Terminal",
+        "version": "1.0",
+        "@type": "ResourceSpecificationRef",
+        "@referredType": "PhysicalResourceSpecification"
+      }
+    ],
+    "productSpecCharacteristic": [
+      {
+        "name": "bandwidth",
+        "description": "Configured service bandwidth",
+        "valueType": "integer",
+        "configurable": true,
+        "minCardinality": 1,
+        "maxCardinality": 1,
+        "characteristicValueSpecification": [
+          {
+            "isDefault": true,
+            "valueType": "integer",
+            "value": 75,
+            "unitOfMeasure": "Mbps",
+            "@type": "IntegerCharacteristicValueSpecification"
+          }
+        ],
+        "@type": "CharacteristicSpecification"
+      },
+      {
+        "name": "networkUptime",
+        "description": "Target network availability",
+        "valueType": "double",
+        "configurable": false,
+        "minCardinality": 1,
+        "maxCardinality": 1,
+        "characteristicValueSpecification": [
+          {
+            "isDefault": true,
+            "valueType": "double",
+            "value": 99.5,
+            "unitOfMeasure": "percent (%)",
+            "@type": "NumberCharacteristicValueSpecification"
+          }
+        ],
+        "@type": "CharacteristicSpecification"
+      }
+    ],
+    "@type": "ProductSpecification"
+  },
+  {
+    "name": "Pioneer Solstice Beam Max",
+    "brand": "Solstice Array",
+    "productNumber": "SOLS-PIONEER-03",
+    "description": "Pioneer Solstice Beam Max provides fictional beam connectivity with configurable capacity and service monitoring.",
+    "isBundle": false,
+    "lifecycleStatus": "Active",
+    "validFor": {
+      "startDateTime": "2026-01-01T00:00:00.000Z",
+      "endDateTime": "2028-12-31T00:00:00.000Z"
+    },
+    "version": "1.0",
+    "relatedParty": [
+      {
+        "@type": "RelatedPartyRefOrPartyRoleRef",
+        "role": "ServiceProvider",
+        "partyOrPartyRole": {
+          "id": "solstice_array",
+          "name": "Solstice Array",
+          "@type": "PartyRef",
+          "@referredType": "Organization"
+        }
+      }
+    ],
+    "attachment": [],
+    "bundledProductSpecification": [],
+    "productSpecificationRelationship": [],
+    "serviceSpecification": [
+      {
+        "id": "pioneer_solstice_beam_max_managed_service",
+        "name": "Pioneer Solstice Beam Max Managed Service",
+        "version": "1.0",
+        "@type": "ServiceSpecificationRef",
+        "@referredType": "ServiceSpecification"
+      }
+    ],
+    "resourceSpecification": [
+      {
+        "id": "pioneer_solstice_beam_max_edge_terminal",
+        "name": "Pioneer Solstice Beam Max Edge Terminal",
+        "version": "1.0",
+        "@type": "ResourceSpecificationRef",
+        "@referredType": "PhysicalResourceSpecification"
+      }
+    ],
+    "productSpecCharacteristic": [
+      {
+        "name": "bandwidth",
+        "description": "Configured service bandwidth",
+        "valueType": "integer",
+        "configurable": true,
+        "minCardinality": 1,
+        "maxCardinality": 1,
+        "characteristicValueSpecification": [
+          {
+            "isDefault": true,
+            "valueType": "integer",
+            "value": 100,
+            "unitOfMeasure": "Mbps",
+            "@type": "IntegerCharacteristicValueSpecification"
+          }
+        ],
+        "@type": "CharacteristicSpecification"
+      },
+      {
+        "name": "networkUptime",
+        "description": "Target network availability",
+        "valueType": "double",
+        "configurable": false,
+        "minCardinality": 1,
+        "maxCardinality": 1,
+        "characteristicValueSpecification": [
+          {
+            "isDefault": true,
+            "valueType": "double",
+            "value": 99.5,
+            "unitOfMeasure": "percent (%)",
+            "@type": "NumberCharacteristicValueSpecification"
+          }
+        ],
+        "@type": "CharacteristicSpecification"
+      }
+    ],
+    "@type": "ProductSpecification"
+  }
+]

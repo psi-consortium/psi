@@ -1,0 +1,257 @@
+[
+  {
+    "name": "Lumen Harbor Relay Core",
+    "brand": "Harbor Vector",
+    "productNumber": "HARB-LUMEN-01",
+    "description": "Lumen Harbor Relay Core provides fictional relay connectivity with configurable capacity and service monitoring.",
+    "isBundle": false,
+    "lifecycleStatus": "Active",
+    "validFor": {
+      "startDateTime": "2026-01-01T00:00:00.000Z",
+      "endDateTime": "2028-12-31T00:00:00.000Z"
+    },
+    "version": "1.0",
+    "relatedParty": [
+      {
+        "@type": "RelatedPartyRefOrPartyRoleRef",
+        "role": "ServiceProvider",
+        "partyOrPartyRole": {
+          "id": "harbor_vector",
+          "name": "Harbor Vector",
+          "@type": "PartyRef",
+          "@referredType": "Organization"
+        }
+      }
+    ],
+    "attachment": [],
+    "bundledProductSpecification": [],
+    "productSpecificationRelationship": [],
+    "serviceSpecification": [
+      {
+        "id": "lumen_harbor_relay_core_managed_service",
+        "name": "Lumen Harbor Relay Core Managed Service",
+        "version": "1.0",
+        "@type": "ServiceSpecificationRef",
+        "@referredType": "ServiceSpecification"
+      }
+    ],
+    "resourceSpecification": [
+      {
+        "id": "lumen_harbor_relay_core_edge_terminal",
+        "name": "Lumen Harbor Relay Core Edge Terminal",
+        "version": "1.0",
+        "@type": "ResourceSpecificationRef",
+        "@referredType": "PhysicalResourceSpecification"
+      }
+    ],
+    "productSpecCharacteristic": [
+      {
+        "name": "bandwidth",
+        "description": "Configured service bandwidth",
+        "valueType": "integer",
+        "configurable": true,
+        "minCardinality": 1,
+        "maxCardinality": 1,
+        "characteristicValueSpecification": [
+          {
+            "isDefault": true,
+            "valueType": "integer",
+            "value": 50,
+            "unitOfMeasure": "Mbps",
+            "@type": "IntegerCharacteristicValueSpecification"
+          }
+        ],
+        "@type": "CharacteristicSpecification"
+      },
+      {
+        "name": "networkUptime",
+        "description": "Target network availability",
+        "valueType": "double",
+        "configurable": false,
+        "minCardinality": 1,
+        "maxCardinality": 1,
+        "characteristicValueSpecification": [
+          {
+            "isDefault": true,
+            "valueType": "double",
+            "value": 99.5,
+            "unitOfMeasure": "percent (%)",
+            "@type": "NumberCharacteristicValueSpecification"
+          }
+        ],
+        "@type": "CharacteristicSpecification"
+      }
+    ],
+    "@type": "ProductSpecification"
+  },
+  {
+    "name": "Pioneer Harbor Beam Plus",
+    "brand": "Harbor Vector",
+    "productNumber": "HARB-PIONEER-02",
+    "description": "Pioneer Harbor Beam Plus provides fictional beam connectivity with configurable capacity and service monitoring.",
+    "isBundle": false,
+    "lifecycleStatus": "Active",
+    "validFor": {
+      "startDateTime": "2026-01-01T00:00:00.000Z",
+      "endDateTime": "2028-12-31T00:00:00.000Z"
+    },
+    "version": "1.0",
+    "relatedParty": [
+      {
+        "@type": "RelatedPartyRefOrPartyRoleRef",
+        "role": "ServiceProvider",
+        "partyOrPartyRole": {
+          "id": "harbor_vector",
+          "name": "Harbor Vector",
+          "@type": "PartyRef",
+          "@referredType": "Organization"
+        }
+      }
+    ],
+    "attachment": [],
+    "bundledProductSpecification": [],
+    "productSpecificationRelationship": [],
+    "serviceSpecification": [
+      {
+        "id": "pioneer_harbor_beam_plus_managed_service",
+        "name": "Pioneer Harbor Beam Plus Managed Service",
+        "version": "1.0",
+        "@type": "ServiceSpecificationRef",
+        "@referredType": "ServiceSpecification"
+      }
+    ],
+    "resourceSpecification": [
+      {
+        "id": "pioneer_harbor_beam_plus_edge_terminal",
+        "name": "Pioneer Harbor Beam Plus Edge Terminal",
+        "version": "1.0",
+        "@type": "ResourceSpecificationRef",
+        "@referredType": "PhysicalResourceSpecification"
+      }
+    ],
+    "productSpecCharacteristic": [
+      {
+        "name": "bandwidth",
+        "description": "Configured service bandwidth",
+        "valueType": "integer",
+        "configurable": true,
+        "minCardinality": 1,
+        "maxCardinality": 1,
+        "characteristicValueSpecification": [
+          {
+            "isDefault": true,
+            "valueType": "integer",
+            "value": 75,
+            "unitOfMeasure": "Mbps",
+            "@type": "IntegerCharacteristicValueSpecification"
+          }
+        ],
+        "@type": "CharacteristicSpecification"
+      },
+      {
+        "name": "networkUptime",
+        "description": "Target network availability",
+        "valueType": "double",
+        "configurable": false,
+        "minCardinality": 1,
+        "maxCardinality": 1,
+        "characteristicValueSpecification": [
+          {
+            "isDefault": true,
+            "valueType": "double",
+            "value": 99.5,
+            "unitOfMeasure": "percent (%)",
+            "@type": "NumberCharacteristicValueSpecification"
+          }
+        ],
+        "@type": "CharacteristicSpecification"
+      }
+    ],
+    "@type": "ProductSpecification"
+  },
+  {
+    "name": "Horizon Harbor Access Max",
+    "brand": "Harbor Vector",
+    "productNumber": "HARB-HORIZON-03",
+    "description": "Horizon Harbor Access Max provides fictional access connectivity with configurable capacity and service monitoring.",
+    "isBundle": false,
+    "lifecycleStatus": "Active",
+    "validFor": {
+      "startDateTime": "2026-01-01T00:00:00.000Z",
+      "endDateTime": "2028-12-31T00:00:00.000Z"
+    },
+    "version": "1.0",
+    "relatedParty": [
+      {
+        "@type": "RelatedPartyRefOrPartyRoleRef",
+        "role": "ServiceProvider",
+        "partyOrPartyRole": {
+          "id": "harbor_vector",
+          "name": "Harbor Vector",
+          "@type": "PartyRef",
+          "@referredType": "Organization"
+        }
+      }
+    ],
+    "attachment": [],
+    "bundledProductSpecification": [],
+    "productSpecificationRelationship": [],
+    "serviceSpecification": [
+      {
+        "id": "horizon_harbor_access_max_managed_service",
+        "name": "Horizon Harbor Access Max Managed Service",
+        "version": "1.0",
+        "@type": "ServiceSpecificationRef",
+        "@referredType": "ServiceSpecification"
+      }
+    ],
+    "resourceSpecification": [
+      {
+        "id": "horizon_harbor_access_max_edge_terminal",
+        "name": "Horizon Harbor Access Max Edge Terminal",
+        "version": "1.0",
+        "@type": "ResourceSpecificationRef",
+        "@referredType": "PhysicalResourceSpecification"
+      }
+    ],
+    "productSpecCharacteristic": [
+      {
+        "name": "bandwidth",
+        "description": "Configured service bandwidth",
+        "valueType": "integer",
+        "configurable": true,
+        "minCardinality": 1,
+        "maxCardinality": 1,
+        "characteristicValueSpecification": [
+          {
+            "isDefault": true,
+            "valueType": "integer",
+            "value": 100,
+            "unitOfMeasure": "Mbps",
+            "@type": "IntegerCharacteristicValueSpecification"
+          }
+        ],
+        "@type": "CharacteristicSpecification"
+      },
+      {
+        "name": "networkUptime",
+        "description": "Target network availability",
+        "valueType": "double",
+        "configurable": false,
+        "minCardinality": 1,
+        "maxCardinality": 1,
+        "characteristicValueSpecification": [
+          {
+            "isDefault": true,
+            "valueType": "double",
+            "value": 99.5,
+            "unitOfMeasure": "percent (%)",
+            "@type": "NumberCharacteristicValueSpecification"
+          }
+        ],
+        "@type": "CharacteristicSpecification"
+      }
+    ],
+    "@type": "ProductSpecification"
+  }
+]

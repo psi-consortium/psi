@@ -1,0 +1,212 @@
+[
+  {
+    "name": "Aurora Relay",
+    "@type": "Organization",
+    "partyCharacteristic": [
+      {
+        "name": "orderResponseTime",
+        "valueType": "string",
+        "value": "PT12H",
+        "@type": "StringCharacteristic"
+      },
+      {
+        "name": "inquiryResponseTime",
+        "valueType": "string",
+        "value": "PT24H",
+        "@type": "StringCharacteristic"
+      }
+    ],
+    "relatedParty": [
+      {
+        "@type": "RelatedPartyOrPartyRole",
+        "role": "Operator",
+        "partyOrPartyRole": {
+          "id": "mira_keller",
+          "name": "Mira Keller",
+          "@type": "PartyRef",
+          "@referredType": "Individual"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Blue Meridian",
+    "@type": "Organization",
+    "partyCharacteristic": [
+      {
+        "name": "orderResponseTime",
+        "valueType": "string",
+        "value": "PT12H",
+        "@type": "StringCharacteristic"
+      },
+      {
+        "name": "inquiryResponseTime",
+        "valueType": "string",
+        "value": "PT24H",
+        "@type": "StringCharacteristic"
+      }
+    ],
+    "relatedParty": [
+      {
+        "@type": "RelatedPartyOrPartyRole",
+        "role": "Operator",
+        "partyOrPartyRole": {
+          "id": "daniel_novak",
+          "name": "Daniel Novak",
+          "@type": "PartyRef",
+          "@referredType": "Individual"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Northstar Signal",
+    "@type": "Organization",
+    "partyCharacteristic": [
+      {
+        "name": "orderResponseTime",
+        "valueType": "string",
+        "value": "PT12H",
+        "@type": "StringCharacteristic"
+      },
+      {
+        "name": "inquiryResponseTime",
+        "valueType": "string",
+        "value": "PT24H",
+        "@type": "StringCharacteristic"
+      }
+    ],
+    "relatedParty": [
+      {
+        "@type": "RelatedPartyOrPartyRole",
+        "role": "Operator",
+        "partyOrPartyRole": {
+          "id": "mira_keller",
+          "name": "Mira Keller",
+          "@type": "PartyRef",
+          "@referredType": "Individual"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Cedar Orbit",
+    "@type": "Organization",
+    "partyCharacteristic": [
+      {
+        "name": "orderResponseTime",
+        "valueType": "string",
+        "value": "PT12H",
+        "@type": "StringCharacteristic"
+      },
+      {
+        "name": "inquiryResponseTime",
+        "valueType": "string",
+        "value": "PT24H",
+        "@type": "StringCharacteristic"
+      }
+    ],
+    "relatedParty": [
+      {
+        "@type": "RelatedPartyOrPartyRole",
+        "role": "Operator",
+        "partyOrPartyRole": {
+          "id": "daniel_novak",
+          "name": "Daniel Novak",
+          "@type": "PartyRef",
+          "@referredType": "Individual"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Vela Connect",
+    "@type": "Organization",
+    "partyCharacteristic": [
+      {
+        "name": "orderResponseTime",
+        "valueType": "string",
+        "value": "PT12H",
+        "@type": "StringCharacteristic"
+      },
+      {
+        "name": "inquiryResponseTime",
+        "valueType": "string",
+        "value": "PT24H",
+        "@type": "StringCharacteristic"
+      }
+    ],
+    "relatedParty": [
+      {
+        "@type": "RelatedPartyOrPartyRole",
+        "role": "Operator",
+        "partyOrPartyRole": {
+          "id": "mira_keller",
+          "name": "Mira Keller",
+          "@type": "PartyRef",
+          "@referredType": "Individual"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Solstice Array",
+    "@type": "Organization",
+    "partyCharacteristic": [
+      {
+        "name": "orderResponseTime",
+        "valueType": "string",
+        "value": "PT12H",
+        "@type": "StringCharacteristic"
+      },
+      {
+        "name": "inquiryResponseTime",
+        "valueType": "string",
+        "value": "PT24H",
+        "@type": "StringCharacteristic"
+      }
+    ],
+    "relatedParty": [
+      {
+        "@type": "RelatedPartyOrPartyRole",
+        "role": "Operator",
+        "partyOrPartyRole": {
+          "id": "daniel_novak",
+          "name": "Daniel Novak",
+          "@type": "PartyRef",
+          "@referredType": "Individual"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Harbor Vector",
+    "@type": "Organization",
+    "partyCharacteristic": [
+      {
+        "name": "orderResponseTime",
+        "valueType": "string",
+        "value": "PT12H",
+        "@type": "StringCharacteristic"
+      },
+      {
+        "name": "inquiryResponseTime",
+        "valueType": "string",
+        "value": "PT24H",
+        "@type": "StringCharacteristic"
+      }
+    ],
+    "relatedParty": [
+      {
+        "@type": "RelatedPartyOrPartyRole",
+        "role": "Operator",
+        "partyOrPartyRole": {
+          "id": "mira_keller",
+          "name": "Mira Keller",
+          "@type": "PartyRef",
+          "@referredType": "Individual"
+        }
+      }
+    ]
+  }
+]

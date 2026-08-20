@@ -1,0 +1,90 @@
+[
+  {
+    "name": "Horizon Aurora Access Core Edge Terminal",
+    "category": "Customer edge equipment",
+    "description": "Fictional terminal resource used by Horizon Aurora Access Core.",
+    "isBundle": false,
+    "model": "Horizon-01",
+    "vendor": "Aster Devices",
+    "validFor": {
+      "startDateTime": "2026-01-01T00:00:00.000Z",
+      "endDateTime": "2029-12-31T00:00:00.000Z"
+    },
+    "version": "1.0",
+    "resourceSpecCharacteristic": [
+      {
+        "name": "weight",
+        "valueType": "double",
+        "unitOfMeasure": "kg",
+        "@type": "CharacteristicSpecification"
+      }
+    ],
+    "@type": "ResourceSpecification"
+  },
+  {
+    "name": "Vector Aurora Trunk Plus Edge Terminal",
+    "category": "Customer edge equipment",
+    "description": "Fictional terminal resource used by Vector Aurora Trunk Plus.",
+    "isBundle": false,
+    "model": "Vector-02",
+    "vendor": "Aster Devices",
+    "validFor": {
+      "startDateTime": "2026-01-01T00:00:00.000Z",
+      "endDateTime": "2029-12-31T00:00:00.000Z"
+    },
+    "version": "1.0",
+    "resourceSpecCharacteristic": [
+      {
+        "name": "weight",
+        "valueType": "double",
+        "unitOfMeasure": "kg",
+        "@type": "CharacteristicSpecification"
+      }
+    ],
+    "@type": "ResourceSpecification"
+  },
+  {
+    "name": "Lumen Aurora Relay Max Edge Terminal",
+    "category": "Customer edge equipment",
+    "description": "Fictional terminal resource used by Lumen Aurora Relay Max.",
+    "isBundle": false,
+    "model": "Lumen-03",
+    "vendor": "Aster Devices",
+    "validFor": {
+      "startDateTime": "2026-01-01T00:00:00.000Z",
+      "endDateTime": "2029-12-31T00:00:00.000Z"
+    },
+    "version": "1.0",
+    "resourceSpecCharacteristic": [
+      {
+        "name": "weight",
+        "valueType": "double",
+        "unitOfMeasure": "kg",
+        "@type": "CharacteristicSpecification"
+      }
+    ],
+    "@type": "ResourceSpecification"
+  },
+  {
+    "name": "Pioneer Aurora Beam Core Edge Terminal",
+    "category": "Customer edge equipment",
+    "description": "Fictional terminal resource used by Pioneer Aurora Beam Core.",
+    "isBundle": false,
+    "model": "Pioneer-04",
+    "vendor": "Aster Devices",
+    "validFor": {
+      "startDateTime": "2026-01-01T00:00:00.000Z",
+      "endDateTime": "2029-12-31T00:00:00.000Z"
+    },
+    "version": "1.0",
+    "resourceSpecCharacteristic": [
+      {
+        "name": "weight",
+        "valueType": "double",
+        "unitOfMeasure": "kg",
+        "@type": "CharacteristicSpecification"
+      }
+    ],
+    "@type": "ResourceSpecification"
+  }
+]

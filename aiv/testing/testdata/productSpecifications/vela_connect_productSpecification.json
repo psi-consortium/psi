@@ -1,0 +1,257 @@
+[
+  {
+    "name": "Horizon Vela Access Core",
+    "brand": "Vela Connect",
+    "productNumber": "VELA-HORIZON-01",
+    "description": "Horizon Vela Access Core provides fictional access connectivity with configurable capacity and service monitoring.",
+    "isBundle": false,
+    "lifecycleStatus": "Active",
+    "validFor": {
+      "startDateTime": "2026-01-01T00:00:00.000Z",
+      "endDateTime": "2028-12-31T00:00:00.000Z"
+    },
+    "version": "1.0",
+    "relatedParty": [
+      {
+        "@type": "RelatedPartyRefOrPartyRoleRef",
+        "role": "ServiceProvider",
+        "partyOrPartyRole": {
+          "id": "vela_connect",
+          "name": "Vela Connect",
+          "@type": "PartyRef",
+          "@referredType": "Organization"
+        }
+      }
+    ],
+    "attachment": [],
+    "bundledProductSpecification": [],
+    "productSpecificationRelationship": [],
+    "serviceSpecification": [
+      {
+        "id": "horizon_vela_access_core_managed_service",
+        "name": "Horizon Vela Access Core Managed Service",
+        "version": "1.0",
+        "@type": "ServiceSpecificationRef",
+        "@referredType": "ServiceSpecification"
+      }
+    ],
+    "resourceSpecification": [
+      {
+        "id": "horizon_vela_access_core_edge_terminal",
+        "name": "Horizon Vela Access Core Edge Terminal",
+        "version": "1.0",
+        "@type": "ResourceSpecificationRef",
+        "@referredType": "PhysicalResourceSpecification"
+      }
+    ],
+    "productSpecCharacteristic": [
+      {
+        "name": "bandwidth",
+        "description": "Configured service bandwidth",
+        "valueType": "integer",
+        "configurable": true,
+        "minCardinality": 1,
+        "maxCardinality": 1,
+        "characteristicValueSpecification": [
+          {
+            "isDefault": true,
+            "valueType": "integer",
+            "value": 50,
+            "unitOfMeasure": "Mbps",
+            "@type": "IntegerCharacteristicValueSpecification"
+          }
+        ],
+        "@type": "CharacteristicSpecification"
+      },
+      {
+        "name": "networkUptime",
+        "description": "Target network availability",
+        "valueType": "double",
+        "configurable": false,
+        "minCardinality": 1,
+        "maxCardinality": 1,
+        "characteristicValueSpecification": [
+          {
+            "isDefault": true,
+            "valueType": "double",
+            "value": 99.5,
+            "unitOfMeasure": "percent (%)",
+            "@type": "NumberCharacteristicValueSpecification"
+          }
+        ],
+        "@type": "CharacteristicSpecification"
+      }
+    ],
+    "@type": "ProductSpecification"
+  },
+  {
+    "name": "Vector Vela Trunk Plus",
+    "brand": "Vela Connect",
+    "productNumber": "VELA-VECTOR-02",
+    "description": "Vector Vela Trunk Plus provides fictional trunk connectivity with configurable capacity and service monitoring.",
+    "isBundle": false,
+    "lifecycleStatus": "Active",
+    "validFor": {
+      "startDateTime": "2026-01-01T00:00:00.000Z",
+      "endDateTime": "2028-12-31T00:00:00.000Z"
+    },
+    "version": "1.0",
+    "relatedParty": [
+      {
+        "@type": "RelatedPartyRefOrPartyRoleRef",
+        "role": "ServiceProvider",
+        "partyOrPartyRole": {
+          "id": "vela_connect",
+          "name": "Vela Connect",
+          "@type": "PartyRef",
+          "@referredType": "Organization"
+        }
+      }
+    ],
+    "attachment": [],
+    "bundledProductSpecification": [],
+    "productSpecificationRelationship": [],
+    "serviceSpecification": [
+      {
+        "id": "vector_vela_trunk_plus_managed_service",
+        "name": "Vector Vela Trunk Plus Managed Service",
+        "version": "1.0",
+        "@type": "ServiceSpecificationRef",
+        "@referredType": "ServiceSpecification"
+      }
+    ],
+    "resourceSpecification": [
+      {
+        "id": "vector_vela_trunk_plus_edge_terminal",
+        "name": "Vector Vela Trunk Plus Edge Terminal",
+        "version": "1.0",
+        "@type": "ResourceSpecificationRef",
+        "@referredType": "PhysicalResourceSpecification"
+      }
+    ],
+    "productSpecCharacteristic": [
+      {
+        "name": "bandwidth",
+        "description": "Configured service bandwidth",
+        "valueType": "integer",
+        "configurable": true,
+        "minCardinality": 1,
+        "maxCardinality": 1,
+        "characteristicValueSpecification": [
+          {
+            "isDefault": true,
+            "valueType": "integer",
+            "value": 75,
+            "unitOfMeasure": "Mbps",
+            "@type": "IntegerCharacteristicValueSpecification"
+          }
+        ],
+        "@type": "CharacteristicSpecification"
+      },
+      {
+        "name": "networkUptime",
+        "description": "Target network availability",
+        "valueType": "double",
+        "configurable": false,
+        "minCardinality": 1,
+        "maxCardinality": 1,
+        "characteristicValueSpecification": [
+          {
+            "isDefault": true,
+            "valueType": "double",
+            "value": 99.5,
+            "unitOfMeasure": "percent (%)",
+            "@type": "NumberCharacteristicValueSpecification"
+          }
+        ],
+        "@type": "CharacteristicSpecification"
+      }
+    ],
+    "@type": "ProductSpecification"
+  },
+  {
+    "name": "Lumen Vela Relay Max",
+    "brand": "Vela Connect",
+    "productNumber": "VELA-LUMEN-03",
+    "description": "Lumen Vela Relay Max provides fictional relay connectivity with configurable capacity and service monitoring.",
+    "isBundle": false,
+    "lifecycleStatus": "Active",
+    "validFor": {
+      "startDateTime": "2026-01-01T00:00:00.000Z",
+      "endDateTime": "2028-12-31T00:00:00.000Z"
+    },
+    "version": "1.0",
+    "relatedParty": [
+      {
+        "@type": "RelatedPartyRefOrPartyRoleRef",
+        "role": "ServiceProvider",
+        "partyOrPartyRole": {
+          "id": "vela_connect",
+          "name": "Vela Connect",
+          "@type": "PartyRef",
+          "@referredType": "Organization"
+        }
+      }
+    ],
+    "attachment": [],
+    "bundledProductSpecification": [],
+    "productSpecificationRelationship": [],
+    "serviceSpecification": [
+      {
+        "id": "lumen_vela_relay_max_managed_service",
+        "name": "Lumen Vela Relay Max Managed Service",
+        "version": "1.0",
+        "@type": "ServiceSpecificationRef",
+        "@referredType": "ServiceSpecification"
+      }
+    ],
+    "resourceSpecification": [
+      {
+        "id": "lumen_vela_relay_max_edge_terminal",
+        "name": "Lumen Vela Relay Max Edge Terminal",
+        "version": "1.0",
+        "@type": "ResourceSpecificationRef",
+        "@referredType": "PhysicalResourceSpecification"
+      }
+    ],
+    "productSpecCharacteristic": [
+      {
+        "name": "bandwidth",
+        "description": "Configured service bandwidth",
+        "valueType": "integer",
+        "configurable": true,
+        "minCardinality": 1,
+        "maxCardinality": 1,
+        "characteristicValueSpecification": [
+          {
+            "isDefault": true,
+            "valueType": "integer",
+            "value": 100,
+            "unitOfMeasure": "Mbps",
+            "@type": "IntegerCharacteristicValueSpecification"
+          }
+        ],
+        "@type": "CharacteristicSpecification"
+      },
+      {
+        "name": "networkUptime",
+        "description": "Target network availability",
+        "valueType": "double",
+        "configurable": false,
+        "minCardinality": 1,
+        "maxCardinality": 1,
+        "characteristicValueSpecification": [
+          {
+            "isDefault": true,
+            "valueType": "double",
+            "value": 99.5,
+            "unitOfMeasure": "percent (%)",
+            "@type": "NumberCharacteristicValueSpecification"
+          }
+        ],
+        "@type": "CharacteristicSpecification"
+      }
+    ],
+    "@type": "ProductSpecification"
+  }
+]

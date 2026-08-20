@@ -1,0 +1,68 @@
+[
+  {
+    "name": "Horizon Vela Access Core Edge Terminal",
+    "category": "Customer edge equipment",
+    "description": "Fictional terminal resource used by Horizon Vela Access Core.",
+    "isBundle": false,
+    "model": "Horizon-01",
+    "vendor": "Aster Devices",
+    "validFor": {
+      "startDateTime": "2026-01-01T00:00:00.000Z",
+      "endDateTime": "2029-12-31T00:00:00.000Z"
+    },
+    "version": "1.0",
+    "resourceSpecCharacteristic": [
+      {
+        "name": "weight",
+        "valueType": "double",
+        "unitOfMeasure": "kg",
+        "@type": "CharacteristicSpecification"
+      }
+    ],
+    "@type": "ResourceSpecification"
+  },
+  {
+    "name": "Vector Vela Trunk Plus Edge Terminal",
+    "category": "Customer edge equipment",
+    "description": "Fictional terminal resource used by Vector Vela Trunk Plus.",
+    "isBundle": false,
+    "model": "Vector-02",
+    "vendor": "Aster Devices",
+    "validFor": {
+      "startDateTime": "2026-01-01T00:00:00.000Z",
+      "endDateTime": "2029-12-31T00:00:00.000Z"
+    },
+    "version": "1.0",
+    "resourceSpecCharacteristic": [
+      {
+        "name": "weight",
+        "valueType": "double",
+        "unitOfMeasure": "kg",
+        "@type": "CharacteristicSpecification"
+      }
+    ],
+    "@type": "ResourceSpecification"
+  },
+  {
+    "name": "Lumen Vela Relay Max Edge Terminal",
+    "category": "Customer edge equipment",
+    "description": "Fictional terminal resource used by Lumen Vela Relay Max.",
+    "isBundle": false,
+    "model": "Lumen-03",
+    "vendor": "Aster Devices",
+    "validFor": {
+      "startDateTime": "2026-01-01T00:00:00.000Z",
+      "endDateTime": "2029-12-31T00:00:00.000Z"
+    },
+    "version": "1.0",
+    "resourceSpecCharacteristic": [
+      {
+        "name": "weight",
+        "valueType": "double",
+        "unitOfMeasure": "kg",
+        "@type": "CharacteristicSpecification"
+      }
+    ],
+    "@type": "ResourceSpecification"
+  }
+]

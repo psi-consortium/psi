@@ -1,0 +1,182 @@
+[
+  {
+    "name": "Lumen Harbor Relay Core Offering",
+    "description": "Commercial offering for Lumen Harbor Relay Core with a 12-month term.",
+    "isBundle": false,
+    "isSellable": true,
+    "lifecycleStatus": "Active",
+    "statusReason": "Available for synthetic test scenarios",
+    "version": "1.0",
+    "validFor": {
+      "startDateTime": "2026-01-01T00:00:00.000Z",
+      "endDateTime": "2028-01-01T00:00:00.000Z"
+    },
+    "productSpecification": {
+      "id": "lumen_harbor_relay_core",
+      "name": "Lumen Harbor Relay Core",
+      "version": "1.0",
+      "@type": "ProductSpecificationRef",
+      "@referredType": "ProductSpecification"
+    },
+    "serviceCandidate": {
+      "id": "lumen_harbor_relay_core_managed_service",
+      "name": "Lumen Harbor Relay Core Managed Service",
+      "version": "1.0",
+      "@type": "ServiceCandidateRef",
+      "@referredType": "ServiceSpecification"
+    },
+    "resourceCandidate": {
+      "id": "lumen_harbor_relay_core_edge_terminal",
+      "name": "Lumen Harbor Relay Core Edge Terminal",
+      "version": "1.0",
+      "@type": "ResourceCandidateRef",
+      "@referredType": "ResourceCandidate"
+    },
+    "relatedParty": [
+      {
+        "@type": "RelatedPartyRefOrPartyRoleRef",
+        "role": "Seller",
+        "partyOrPartyRole": {
+          "id": "harbor_vector",
+          "name": "Harbor Vector",
+          "@type": "PartyRef",
+          "@referredType": "Organization"
+        }
+      }
+    ],
+    "productOfferingPrice": [
+      {
+        "name": "Lumen Harbor Relay Core Offering Monthly Price",
+        "priceType": "recurring",
+        "price": {
+          "taxIncludedAmount": {
+            "unit": "EUR",
+            "value": 120
+          }
+        },
+        "@type": "ProductOfferingPrice"
+      }
+    ],
+    "@type": "ProductOffering"
+  },
+  {
+    "name": "Pioneer Harbor Beam Plus Offering",
+    "description": "Commercial offering for Pioneer Harbor Beam Plus with a 18-month term.",
+    "isBundle": false,
+    "isSellable": true,
+    "lifecycleStatus": "Active",
+    "statusReason": "Available for synthetic test scenarios",
+    "version": "1.0",
+    "validFor": {
+      "startDateTime": "2026-01-01T00:00:00.000Z",
+      "endDateTime": "2028-01-01T00:00:00.000Z"
+    },
+    "productSpecification": {
+      "id": "pioneer_harbor_beam_plus",
+      "name": "Pioneer Harbor Beam Plus",
+      "version": "1.0",
+      "@type": "ProductSpecificationRef",
+      "@referredType": "ProductSpecification"
+    },
+    "serviceCandidate": {
+      "id": "pioneer_harbor_beam_plus_managed_service",
+      "name": "Pioneer Harbor Beam Plus Managed Service",
+      "version": "1.0",
+      "@type": "ServiceCandidateRef",
+      "@referredType": "ServiceSpecification"
+    },
+    "resourceCandidate": {
+      "id": "pioneer_harbor_beam_plus_edge_terminal",
+      "name": "Pioneer Harbor Beam Plus Edge Terminal",
+      "version": "1.0",
+      "@type": "ResourceCandidateRef",
+      "@referredType": "ResourceCandidate"
+    },
+    "relatedParty": [
+      {
+        "@type": "RelatedPartyRefOrPartyRoleRef",
+        "role": "Seller",
+        "partyOrPartyRole": {
+          "id": "harbor_vector",
+          "name": "Harbor Vector",
+          "@type": "PartyRef",
+          "@referredType": "Organization"
+        }
+      }
+    ],
+    "productOfferingPrice": [
+      {
+        "name": "Pioneer Harbor Beam Plus Offering Monthly Price",
+        "priceType": "recurring",
+        "price": {
+          "taxIncludedAmount": {
+            "unit": "EUR",
+            "value": 165
+          }
+        },
+        "@type": "ProductOfferingPrice"
+      }
+    ],
+    "@type": "ProductOffering"
+  },
+  {
+    "name": "Horizon Harbor Access Max Offering",
+    "description": "Commercial offering for Horizon Harbor Access Max with a 24-month term.",
+    "isBundle": false,
+    "isSellable": true,
+    "lifecycleStatus": "Active",
+    "statusReason": "Available for synthetic test scenarios",
+    "version": "1.0",
+    "validFor": {
+      "startDateTime": "2026-01-01T00:00:00.000Z",
+      "endDateTime": "2028-01-01T00:00:00.000Z"
+    },
+    "productSpecification": {
+      "id": "horizon_harbor_access_max",
+      "name": "Horizon Harbor Access Max",
+      "version": "1.0",
+      "@type": "ProductSpecificationRef",
+      "@referredType": "ProductSpecification"
+    },
+    "serviceCandidate": {
+      "id": "horizon_harbor_access_max_managed_service",
+      "name": "Horizon Harbor Access Max Managed Service",
+      "version": "1.0",
+      "@type": "ServiceCandidateRef",
+      "@referredType": "ServiceSpecification"
+    },
+    "resourceCandidate": {
+      "id": "horizon_harbor_access_max_edge_terminal",
+      "name": "Horizon Harbor Access Max Edge Terminal",
+      "version": "1.0",
+      "@type": "ResourceCandidateRef",
+      "@referredType": "ResourceCandidate"
+    },
+    "relatedParty": [
+      {
+        "@type": "RelatedPartyRefOrPartyRoleRef",
+        "role": "Seller",
+        "partyOrPartyRole": {
+          "id": "harbor_vector",
+          "name": "Harbor Vector",
+          "@type": "PartyRef",
+          "@referredType": "Organization"
+        }
+      }
+    ],
+    "productOfferingPrice": [
+      {
+        "name": "Horizon Harbor Access Max Offering Monthly Price",
+        "priceType": "recurring",
+        "price": {
+          "taxIncludedAmount": {
+            "unit": "EUR",
+            "value": 210
+          }
+        },
+        "@type": "ProductOfferingPrice"
+      }
+    ],
+    "@type": "ProductOffering"
+  }
+]
