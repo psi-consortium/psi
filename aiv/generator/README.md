@@ -86,3 +86,15 @@ python3 aiv/generator/profile.py \
   ../testdata \
   aiv/generator/profile.json
 ```
+
+## Schema integration test
+
+Run the minimal integration test from the PSI repository root:
+
+```bash
+python3 -m unittest aiv/generator/test_integration.py
+```
+
+It generates temporary fixtures, checks every configured category against the
+public OpenAPI structure, and verifies that an invalid field type is rejected.
+The temporary fixtures are removed after the test.

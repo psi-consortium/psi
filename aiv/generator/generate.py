@@ -252,8 +252,9 @@ class Scenario:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    default_output = Path(__file__).resolve().parents[2] / "aiv" / "testing" / "testdata"
-    default_openapi = Path(__file__).resolve().parents[2] / "doc" / "PSI" / "PSI-ICD" / "open-apis" / "oas"
+    psi_root = Path(__file__).resolve().parents[1]
+    default_output = psi_root / "aiv" / "testing" / "testdata"
+    default_openapi = psi_root / "doc" / "PSI" / "PSI-ICD" / "open-apis" / "oas"
     default_profile = Path(__file__).resolve().parent / "profile.json"
     parser.add_argument("--output", type=Path, default=default_output)
     parser.add_argument("--openapi", type=Path, default=default_openapi)
