@@ -252,7 +252,7 @@ class Scenario:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    psi_root = Path(__file__).resolve().parents[1]
+    psi_root = Path(__file__).resolve().parents[2]
     default_output = psi_root / "aiv" / "testing" / "testdata"
     default_openapi = psi_root / "doc" / "PSI" / "PSI-ICD" / "open-apis" / "oas"
     default_profile = Path(__file__).resolve().parent / "profile.json"

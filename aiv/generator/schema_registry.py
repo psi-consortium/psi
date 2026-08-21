@@ -80,6 +80,24 @@ class SchemaRegistry:
         if allowed is not None and value not in allowed:
             errors.append(f"{path}: value {value!r} is not one of {allowed!r}")
 
+        if isinstance(value, (int, float)) and not isinstance(value, bool):
+            if "minimum" in schema and value < schema["minimum"]:
+                errors.append(f"{path}: value {value!r} is below minimum {schema['minimum']!r}")
+            if "maximum" in schema and value > schema["maximum"]:
+                errors.append(f"{path}: value {value!r} is above maximum {schema['maximum']!r}")
+
+        if isinstance(value, str):
+            if "minLength" in schema and len(value) < schema["minLength"]:
+                errors.append(f"{path}: length is below minLength {schema['minLength']}")
+            if "maxLength" in schema and len(value) > schema["maxLength"]:
+                errors.append(f"{path}: length exceeds maxLength {schema['maxLength']}")
+
+        if isinstance(value, list):
+            if "minItems" in schema and len(value) < schema["minItems"]:
+                errors.append(f"{path}: item count is below minItems {schema['minItems']}")
+            if "maxItems" in schema and len(value) > schema["maxItems"]:
+                errors.append(f"{path}: item count exceeds maxItems {schema['maxItems']}")
+
         if isinstance(value, dict):
             properties = schema.get("properties", {})
             for key, child in value.items():

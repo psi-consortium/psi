@@ -85,6 +85,40 @@ class GeneratedDataSchemaTest(unittest.TestCase):
 
             self.assertTrue(any("action" in error for error in errors), errors)
 
+    def test_schema_check_rejects_numeric_range_violation(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            output = Path(directory)
+            self.generate_fixture_directory(output)
+            records = self.records_by_category(output, "productOfferings")
+            records[0]["accessProbability"] = 2.0
+
+            errors = SchemaRegistry(OPENAPI_DIR).validate_category(
+                "productOfferings", records
+            )
+
+            self.assertTrue(any("accessProbability" in error for error in errors), errors)
+
+    def test_schema_check_rejects_array_size_violation(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            output = Path(directory)
+            self.generate_fixture_directory(output)
+            records = self.records_by_category(output, "productOrders")
+            records[0]["productOrderItem"] = []
+
+            errors = SchemaRegistry(OPENAPI_DIR).validate_category(
+                "productOrders", records
+            )
+
+            self.assertTrue(any("productOrderItem" in error for error in errors), errors)
+
+    def test_schema_check_enforces_string_length(self) -> None:
+        errors: list[str] = []
+        SchemaRegistry(OPENAPI_DIR)._validate(
+            "x", {"type": "string", "minLength": 2}, "", "field", errors, set()
+        )
+
+        self.assertTrue(errors)
+
 
 if __name__ == "__main__":
     unittest.main()
