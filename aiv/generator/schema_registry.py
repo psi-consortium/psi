@@ -76,6 +76,10 @@ class SchemaRegistry:
             errors.append(f"{path}: expected {expected}, got {type(value).__name__}")
             return
 
+        allowed = schema.get("enum")
+        if allowed is not None and value not in allowed:
+            errors.append(f"{path}: value {value!r} is not one of {allowed!r}")
+
         if isinstance(value, dict):
             properties = schema.get("properties", {})
             for key, child in value.items():

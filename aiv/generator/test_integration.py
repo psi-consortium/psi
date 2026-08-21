@@ -72,6 +72,19 @@ class GeneratedDataSchemaTest(unittest.TestCase):
 
             self.assertTrue(any("isBundle" in error for error in errors), errors)
 
+    def test_schema_check_rejects_invalid_enum_value(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            output = Path(directory)
+            self.generate_fixture_directory(output)
+            records = self.records_by_category(output, "productOrders")
+            records[0]["productOrderItem"][0]["action"] = "unsupported-action"
+
+            errors = SchemaRegistry(OPENAPI_DIR).validate_category(
+                "productOrders", records
+            )
+
+            self.assertTrue(any("action" in error for error in errors), errors)
+
 
 if __name__ == "__main__":
     unittest.main()
