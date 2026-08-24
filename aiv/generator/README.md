@@ -37,7 +37,11 @@ python3 aiv/generator/generate.py --seed 42
 ```
 
 The generator requires the Python `jsonschema` package for its final OpenAPI
-validation step.
+validation step. Install the generator dependency once with:
+
+```bash
+python3 -m pip install -r aiv/generator/requirements.txt
+```
 
 The generated files are written to:
 
