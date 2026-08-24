@@ -31,17 +31,6 @@ build/
 
 Gemfile.lock.bak
 Jarfile.lock.bak
-aiv/testing/log/
-aiv/testing/tmp/
-aiv/testing/results/
-aiv/testing/reports/
-aiv/testing/aitf/results/
-aiv/testing/aitf/reports/
-aiv/testing/repos/.gradle/
-aiv/testing/repos/aitf
-
-
-
 
 # Created by https://www.toptal.com/developers/gitignore/api/visualstudiocode,java,rubymine,intellij+all
 # Edit at https://www.toptal.com/developers/gitignore?templates=visualstudiocode,java,rubymine,intellij+all

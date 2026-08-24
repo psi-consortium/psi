@@ -6,7 +6,8 @@ sensitive fixtures.
 It creates individuals, organizations, products, services, resources,
 offerings, and orders. All records are generated from one shared scenario, so
 names and references stay consistent. The generator also checks the output
-against the PSI OpenAPI structure and field types.
+against the PSI OpenAPI structure and field types. Generation fails if the
+resolved schemas reject any record.
 
 The generation workflow is:
 
@@ -34,6 +35,9 @@ Run from the PSI repository root:
 ```bash
 python3 aiv/generator/generate.py --seed 42
 ```
+
+The generator requires the Python `jsonschema` package for its final OpenAPI
+validation step.
 
 The generated files are written to:
 

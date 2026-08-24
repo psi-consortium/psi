@@ -20,9 +20,10 @@ SCHEMAS = {
     "productSpecifications": ("PSID620-Product_Catalog_Management-v5.0.0.oas.json", "ProductSpecification_FVO"),
     "productOfferings": ("PSID620-Product_Catalog_Management-v5.0.0.oas.json", "ProductOffering_FVO"),
     "serviceSpecifications": ("PSID633-Service_Catalog_Management-v5.0.0.oas.json", "ServiceSpecification_FVO"),
-    # This specification currently exposes the physical resource schema as a
-    # persisted schema only, so use it for structural checks and ignore IDs.
-    "resourceSpecifications": ("PSID634-Resource_Catalog_Management-v5.0.0.oas.json", "PhysicalResourceSpecification"),
+    # DemoDataLoader reads resource fixtures as ResourceSpecificationFVO, so
+    # validate the request/input schema rather than the persisted concrete
+    # PhysicalResourceSpecification schema.
+    "resourceSpecifications": ("PSID634-Resource_Catalog_Management-v5.0.0.oas.json", "ResourceSpecification_FVO"),
     "productOrders": ("PSID622-ProductOrdering-v5.0.0.oas.json", "ProductOrder_FVO"),
 }
 

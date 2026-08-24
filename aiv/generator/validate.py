@@ -16,7 +16,7 @@ OPENAPI_FILES = {
     "productSpecifications": ("PSID620-Product_Catalog_Management-v5.0.0.oas.json", "ProductSpecification_FVO"),
     "productOfferings": ("PSID620-Product_Catalog_Management-v5.0.0.oas.json", "ProductOffering_FVO"),
     "serviceSpecifications": ("PSID633-Service_Catalog_Management-v5.0.0.oas.json", "ServiceSpecification_FVO"),
-    "resourceSpecifications": ("PSID634-Resource_Catalog_Management-v5.0.0.oas.json", "PhysicalResourceSpecification_FVO"),
+    "resourceSpecifications": ("PSID634-Resource_Catalog_Management-v5.0.0.oas.json", "ResourceSpecification_FVO"),
     "productOrders": ("PSID622-ProductOrdering-v5.0.0.oas.json", "ProductOrder_FVO"),
 }
 

@@ -17,6 +17,7 @@ from pathlib import Path
 from typing import Any
 
 from schema_registry import SchemaRegistry
+from validate import validate_openapi
 
 
 UTC = timezone.utc
@@ -35,22 +36,30 @@ def ref(
     name: str,
     referred_type: str,
     version: str = "1.0",
-    reference_type: str | None = None,
+    discriminator: str | None = None,
+    identifier: str | None = None,
 ) -> dict[str, Any]:
-    reference_type = reference_type or referred_type
+    discriminator = discriminator or f"{referred_type}Ref"
     return {
+        "id": identifier or slug(name),
         "name": name,
         "version": version,
-        "@type": f"{reference_type}Ref",
+        "@type": discriminator,
         "@referredType": referred_type,
     }
 
 
-def related_party(name: str, role: str, referred_type: str) -> dict[str, Any]:
+def related_party(
+    name: str,
+    role: str,
+    referred_type: str,
+    discriminator: str = "RelatedPartyRefOrPartyRoleRef",
+) -> dict[str, Any]:
     return {
-        "@type": "RelatedPartyRefOrPartyRoleRef",
+        "@type": discriminator,
         "role": role,
         "partyOrPartyRole": {
+            "id": slug(name),
             "name": name,
             "@type": "PartyRef",
             "@referredType": referred_type,
@@ -124,7 +133,12 @@ class Scenario:
             }
             if self.people:
                 person = self.people[(index - 1) % len(self.people)]
-                record["relatedParty"] = [related_party(f"{person[0]} {person[1]}", "Operator", "Individual")]
+                record["relatedParty"] = [related_party(
+                    f"{person[0]} {person[1]}",
+                    "Operator",
+                    "Individual",
+                    discriminator="RelatedPartyOrPartyRole",
+                )]
             organizations.append(record)
         return individuals, organizations
 
@@ -151,8 +165,8 @@ class Scenario:
                     "attachment": [],
                     "bundledProductSpecification": [],
                     "productSpecificationRelationship": [],
-                    "serviceSpecification": [ref(service_name, "ServiceSpecification")],
-                    "resourceSpecification": [ref(resource_name, "PhysicalResourceSpecification", reference_type="ResourceSpecification")],
+                    "serviceSpecification": [ref(service_name, "ServiceSpecification", discriminator="ServiceSpecificationRef")],
+                    "resourceSpecification": [ref(resource_name, "PhysicalResourceSpecification", discriminator="ResourceSpecificationRef")],
                     "productSpecCharacteristic": [
                         {"name": "bandwidth", "description": "Configured service bandwidth", "valueType": "integer", "configurable": True, "minCardinality": 1, "maxCardinality": 1, "characteristicValueSpecification": [{"isDefault": True, "valueType": "integer", "value": 50 + product_index * 25, "unitOfMeasure": "Mbps", "@type": "IntegerCharacteristicValueSpecification"}], "@type": "CharacteristicSpecification"},
                         {"name": "networkUptime", "description": "Target network availability", "valueType": "double", "configurable": False, "minCardinality": 1, "maxCardinality": 1, "characteristicValueSpecification": [{"isDefault": True, "valueType": "double", "value": 99.5, "unitOfMeasure": "percent (%)", "@type": "NumberCharacteristicValueSpecification"}], "@type": "CharacteristicSpecification"},
@@ -162,13 +176,25 @@ class Scenario:
                 service = {
                     "name": service_name,
                     "description": f"Managed delivery for the fictional {name} product.",
+                    # These fields are required by the published Service
+                    # Catalog FVO schema, even though they are normally
+                    # enriched by the service API.
+                    "id": slug(service_name),
+                    "entity": "ServiceSpecification",
+                    "value": service_name,
+                    "valueType": "string",
+                    "relationshipType": "uses",
+                    "parentSpecificationId": slug(name),
+                    "parentSpecificationHref": f"https://example.invalid/specifications/{slug(name)}",
+                    "@referredType": "ServiceSpecification",
+                    "@schemaLocation": "https://example.invalid/schemas/service-specification.json",
                     "isBundle": False,
                     "lifecycleStatus": "Active",
                     "validFor": {"startDateTime": iso(START), "endDateTime": iso(START + timedelta(days=1095))},
                     "version": "1.0",
                     "relatedParty": [related_party(organization, "ServiceProvider", "Organization")],
-                    "resourceSpecification": [ref(resource_name, "PhysicalResourceSpecification", reference_type="ResourceSpecification")],
-                    "specCharacteristic": [{"name": "serviceLevel", "valueType": "string", "@type": "StringCharacteristicSpecification"}],
+                    "resourceSpecification": [ref(resource_name, "PhysicalResourceSpecification", discriminator="ResourceSpecificationRef")],
+                    "specCharacteristic": [{"name": "serviceLevel", "valueType": "string", "@type": "CharacteristicSpecification"}],
                     "@type": "ServiceSpecification",
                 }
                 resource = {
@@ -181,7 +207,7 @@ class Scenario:
                     "validFor": {"startDateTime": iso(START), "endDateTime": iso(START + timedelta(days=1460))},
                     "version": "1.0",
                     "resourceSpecCharacteristic": [{"name": "weight", "valueType": "double", "unitOfMeasure": "kg", "@type": "CharacteristicSpecification"}],
-                    "@type": "PhysicalResourceSpecification",
+                    "@type": "ResourceSpecification",
                 }
                 offering = {
                     "name": offering_name,
@@ -192,9 +218,9 @@ class Scenario:
                     "statusReason": "Available for synthetic test scenarios",
                     "version": "1.0",
                     "validFor": {"startDateTime": iso(START), "endDateTime": iso(START + timedelta(days=730))},
-                    "productSpecification": ref(name, "ProductSpecification"),
-                    "serviceCandidate": ref(service_name, "ServiceSpecification"),
-                    "resourceCandidate": ref(resource_name, "ResourceCandidate"),
+                    "productSpecification": ref(name, "ProductSpecification", discriminator="ProductSpecificationRef"),
+                    "serviceCandidate": ref(service_name, "ServiceSpecification", discriminator="ServiceCandidateRef"),
+                    "resourceCandidate": ref(resource_name, "ResourceCandidate", discriminator="ResourceCandidateRef"),
                     "relatedParty": [related_party(organization, "Seller", "Organization")],
                     "productOfferingPrice": [{"name": f"{offering_name} Monthly Price", "priceType": "recurring", "price": {"taxIncludedAmount": {"unit": "EUR", "value": 120 + product_index * 45}}, "@type": "ProductOfferingPrice"}],
                     "@type": "ProductOffering",
@@ -219,7 +245,7 @@ class Scenario:
                 "requestedCompletionDate": iso(created + timedelta(days=5)),
                 "requestedStartDate": iso(created + timedelta(days=2)),
                 "note": [{"id": f"note-{order_index + 1:04d}", "author": f"{person[0]} {person[1]}", "date": iso(created), "text": "Generated test order note", "@type": "Note"}],
-                "productOrderItem": [{"id": f"item-{order_index + 1:04d}", "quantity": 1, "action": "add", "productOffering": ref(offering["name"], "ProductOffering"), "product": {"startDate": iso(created + timedelta(days=2)), "@type": "Product"}, "@type": "ProductOrderItem"}],
+                "productOrderItem": [{"id": f"item-{order_index + 1:04d}", "quantity": 1, "action": "add", "productOffering": ref(offering["name"], "ProductOffering", discriminator="ProductOfferingRef"), "product": {"startDate": iso(created + timedelta(days=2)), "@type": "Product"}, "@type": "ProductOrderItem"}],
                 "relatedParty": [related_party(organization, "Broker", "Organization"), related_party(f"{person[0]} {person[1]}", "Customer", "Individual")],
                 "@type": "ProductOrder",
             })
@@ -254,6 +280,14 @@ class Scenario:
             target = output / relative
             target.parent.mkdir(parents=True, exist_ok=True)
             target.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
+
+        # The registry check gives immediate feedback while building records.
+        # This resolved OpenAPI validation is the final generation gate and
+        # includes required fields, formats, enums, nested references, and
+        # discriminator branches.
+        strict_errors = validate_openapi(output, registry.openapi_dir)
+        if strict_errors:
+            raise ValueError("Generated data failed strict OpenAPI validation:\n" + "\n".join(strict_errors))
 
 
 def main() -> None:

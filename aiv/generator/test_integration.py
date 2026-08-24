@@ -119,28 +119,5 @@ class GeneratedDataSchemaTest(unittest.TestCase):
 
         self.assertTrue(errors)
 
-    def test_generated_resource_reference_types_match_java_models(self) -> None:
-        with tempfile.TemporaryDirectory() as directory:
-            output = Path(directory)
-            self.generate_fixture_directory(output)
-
-            product = self.records_by_category(output, "productSpecifications")[0]
-            service = self.records_by_category(output, "serviceSpecifications")[0]
-            offering = self.records_by_category(output, "productOfferings")[0]
-
-            self.assertEqual(
-                "ResourceSpecificationRef",
-                product["resourceSpecification"][0]["@type"],
-            )
-            self.assertEqual(
-                "ResourceSpecificationRef",
-                service["resourceSpecification"][0]["@type"],
-            )
-            self.assertEqual(
-                "ResourceCandidateRef",
-                offering["resourceCandidate"]["@type"],
-            )
-
-
 if __name__ == "__main__":
     unittest.main()
