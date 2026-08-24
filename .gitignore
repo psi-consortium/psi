@@ -33,7 +33,6 @@ Gemfile.lock.bak
 Jarfile.lock.bak
 aiv/testing/log/
 aiv/testing/tmp/
-aiv/testing/testdata/
 aiv/testing/results/
 aiv/testing/reports/
 aiv/testing/aitf/results/
