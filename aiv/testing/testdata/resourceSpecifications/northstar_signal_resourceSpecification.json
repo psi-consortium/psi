@@ -1,0 +1,68 @@
+[
+  {
+    "name": "Lumen Northstar Relay Core Edge Terminal",
+    "category": "Customer edge equipment",
+    "description": "Fictional terminal resource used by Lumen Northstar Relay Core.",
+    "isBundle": false,
+    "model": "Lumen-01",
+    "vendor": "Aster Devices",
+    "validFor": {
+      "startDateTime": "2026-01-01T00:00:00.000Z",
+      "endDateTime": "2029-12-31T00:00:00.000Z"
+    },
+    "version": "1.0",
+    "resourceSpecCharacteristic": [
+      {
+        "name": "weight",
+        "valueType": "double",
+        "unitOfMeasure": "kg",
+        "@type": "CharacteristicSpecification"
+      }
+    ],
+    "@type": "ResourceSpecification"
+  },
+  {
+    "name": "Pioneer Northstar Beam Plus Edge Terminal",
+    "category": "Customer edge equipment",
+    "description": "Fictional terminal resource used by Pioneer Northstar Beam Plus.",
+    "isBundle": false,
+    "model": "Pioneer-02",
+    "vendor": "Aster Devices",
+    "validFor": {
+      "startDateTime": "2026-01-01T00:00:00.000Z",
+      "endDateTime": "2029-12-31T00:00:00.000Z"
+    },
+    "version": "1.0",
+    "resourceSpecCharacteristic": [
+      {
+        "name": "weight",
+        "valueType": "double",
+        "unitOfMeasure": "kg",
+        "@type": "CharacteristicSpecification"
+      }
+    ],
+    "@type": "ResourceSpecification"
+  },
+  {
+    "name": "Horizon Northstar Access Max Edge Terminal",
+    "category": "Customer edge equipment",
+    "description": "Fictional terminal resource used by Horizon Northstar Access Max.",
+    "isBundle": false,
+    "model": "Horizon-03",
+    "vendor": "Aster Devices",
+    "validFor": {
+      "startDateTime": "2026-01-01T00:00:00.000Z",
+      "endDateTime": "2029-12-31T00:00:00.000Z"
+    },
+    "version": "1.0",
+    "resourceSpecCharacteristic": [
+      {
+        "name": "weight",
+        "valueType": "double",
+        "unitOfMeasure": "kg",
+        "@type": "CharacteristicSpecification"
+      }
+    ],
+    "@type": "ResourceSpecification"
+  }
+]

@@ -1,0 +1,182 @@
+[
+  {
+    "name": "Vector Solstice Trunk Core Offering",
+    "description": "Commercial offering for Vector Solstice Trunk Core with a 12-month term.",
+    "isBundle": false,
+    "isSellable": true,
+    "lifecycleStatus": "Active",
+    "statusReason": "Available for synthetic test scenarios",
+    "version": "1.0",
+    "validFor": {
+      "startDateTime": "2026-01-01T00:00:00.000Z",
+      "endDateTime": "2028-01-01T00:00:00.000Z"
+    },
+    "productSpecification": {
+      "id": "vector_solstice_trunk_core",
+      "name": "Vector Solstice Trunk Core",
+      "version": "1.0",
+      "@type": "ProductSpecificationRef",
+      "@referredType": "ProductSpecification"
+    },
+    "serviceCandidate": {
+      "id": "vector_solstice_trunk_core_managed_service",
+      "name": "Vector Solstice Trunk Core Managed Service",
+      "version": "1.0",
+      "@type": "ServiceCandidateRef",
+      "@referredType": "ServiceSpecification"
+    },
+    "resourceCandidate": {
+      "id": "vector_solstice_trunk_core_edge_terminal",
+      "name": "Vector Solstice Trunk Core Edge Terminal",
+      "version": "1.0",
+      "@type": "ResourceCandidateRef",
+      "@referredType": "ResourceCandidate"
+    },
+    "relatedParty": [
+      {
+        "@type": "RelatedPartyRefOrPartyRoleRef",
+        "role": "Seller",
+        "partyOrPartyRole": {
+          "id": "solstice_array",
+          "name": "Solstice Array",
+          "@type": "PartyRef",
+          "@referredType": "Organization"
+        }
+      }
+    ],
+    "productOfferingPrice": [
+      {
+        "name": "Vector Solstice Trunk Core Offering Monthly Price",
+        "priceType": "recurring",
+        "price": {
+          "taxIncludedAmount": {
+            "unit": "EUR",
+            "value": 120
+          }
+        },
+        "@type": "ProductOfferingPrice"
+      }
+    ],
+    "@type": "ProductOffering"
+  },
+  {
+    "name": "Lumen Solstice Relay Plus Offering",
+    "description": "Commercial offering for Lumen Solstice Relay Plus with a 18-month term.",
+    "isBundle": false,
+    "isSellable": true,
+    "lifecycleStatus": "Active",
+    "statusReason": "Available for synthetic test scenarios",
+    "version": "1.0",
+    "validFor": {
+      "startDateTime": "2026-01-01T00:00:00.000Z",
+      "endDateTime": "2028-01-01T00:00:00.000Z"
+    },
+    "productSpecification": {
+      "id": "lumen_solstice_relay_plus",
+      "name": "Lumen Solstice Relay Plus",
+      "version": "1.0",
+      "@type": "ProductSpecificationRef",
+      "@referredType": "ProductSpecification"
+    },
+    "serviceCandidate": {
+      "id": "lumen_solstice_relay_plus_managed_service",
+      "name": "Lumen Solstice Relay Plus Managed Service",
+      "version": "1.0",
+      "@type": "ServiceCandidateRef",
+      "@referredType": "ServiceSpecification"
+    },
+    "resourceCandidate": {
+      "id": "lumen_solstice_relay_plus_edge_terminal",
+      "name": "Lumen Solstice Relay Plus Edge Terminal",
+      "version": "1.0",
+      "@type": "ResourceCandidateRef",
+      "@referredType": "ResourceCandidate"
+    },
+    "relatedParty": [
+      {
+        "@type": "RelatedPartyRefOrPartyRoleRef",
+        "role": "Seller",
+        "partyOrPartyRole": {
+          "id": "solstice_array",
+          "name": "Solstice Array",
+          "@type": "PartyRef",
+          "@referredType": "Organization"
+        }
+      }
+    ],
+    "productOfferingPrice": [
+      {
+        "name": "Lumen Solstice Relay Plus Offering Monthly Price",
+        "priceType": "recurring",
+        "price": {
+          "taxIncludedAmount": {
+            "unit": "EUR",
+            "value": 165
+          }
+        },
+        "@type": "ProductOfferingPrice"
+      }
+    ],
+    "@type": "ProductOffering"
+  },
+  {
+    "name": "Pioneer Solstice Beam Max Offering",
+    "description": "Commercial offering for Pioneer Solstice Beam Max with a 24-month term.",
+    "isBundle": false,
+    "isSellable": true,
+    "lifecycleStatus": "Active",
+    "statusReason": "Available for synthetic test scenarios",
+    "version": "1.0",
+    "validFor": {
+      "startDateTime": "2026-01-01T00:00:00.000Z",
+      "endDateTime": "2028-01-01T00:00:00.000Z"
+    },
+    "productSpecification": {
+      "id": "pioneer_solstice_beam_max",
+      "name": "Pioneer Solstice Beam Max",
+      "version": "1.0",
+      "@type": "ProductSpecificationRef",
+      "@referredType": "ProductSpecification"
+    },
+    "serviceCandidate": {
+      "id": "pioneer_solstice_beam_max_managed_service",
+      "name": "Pioneer Solstice Beam Max Managed Service",
+      "version": "1.0",
+      "@type": "ServiceCandidateRef",
+      "@referredType": "ServiceSpecification"
+    },
+    "resourceCandidate": {
+      "id": "pioneer_solstice_beam_max_edge_terminal",
+      "name": "Pioneer Solstice Beam Max Edge Terminal",
+      "version": "1.0",
+      "@type": "ResourceCandidateRef",
+      "@referredType": "ResourceCandidate"
+    },
+    "relatedParty": [
+      {
+        "@type": "RelatedPartyRefOrPartyRoleRef",
+        "role": "Seller",
+        "partyOrPartyRole": {
+          "id": "solstice_array",
+          "name": "Solstice Array",
+          "@type": "PartyRef",
+          "@referredType": "Organization"
+        }
+      }
+    ],
+    "productOfferingPrice": [
+      {
+        "name": "Pioneer Solstice Beam Max Offering Monthly Price",
+        "priceType": "recurring",
+        "price": {
+          "taxIncludedAmount": {
+            "unit": "EUR",
+            "value": 210
+          }
+        },
+        "@type": "ProductOfferingPrice"
+      }
+    ],
+    "@type": "ProductOffering"
+  }
+]

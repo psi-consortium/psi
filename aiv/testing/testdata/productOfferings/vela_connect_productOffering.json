@@ -1,0 +1,182 @@
+[
+  {
+    "name": "Horizon Vela Access Core Offering",
+    "description": "Commercial offering for Horizon Vela Access Core with a 12-month term.",
+    "isBundle": false,
+    "isSellable": true,
+    "lifecycleStatus": "Active",
+    "statusReason": "Available for synthetic test scenarios",
+    "version": "1.0",
+    "validFor": {
+      "startDateTime": "2026-01-01T00:00:00.000Z",
+      "endDateTime": "2028-01-01T00:00:00.000Z"
+    },
+    "productSpecification": {
+      "id": "horizon_vela_access_core",
+      "name": "Horizon Vela Access Core",
+      "version": "1.0",
+      "@type": "ProductSpecificationRef",
+      "@referredType": "ProductSpecification"
+    },
+    "serviceCandidate": {
+      "id": "horizon_vela_access_core_managed_service",
+      "name": "Horizon Vela Access Core Managed Service",
+      "version": "1.0",
+      "@type": "ServiceCandidateRef",
+      "@referredType": "ServiceSpecification"
+    },
+    "resourceCandidate": {
+      "id": "horizon_vela_access_core_edge_terminal",
+      "name": "Horizon Vela Access Core Edge Terminal",
+      "version": "1.0",
+      "@type": "ResourceCandidateRef",
+      "@referredType": "ResourceCandidate"
+    },
+    "relatedParty": [
+      {
+        "@type": "RelatedPartyRefOrPartyRoleRef",
+        "role": "Seller",
+        "partyOrPartyRole": {
+          "id": "vela_connect",
+          "name": "Vela Connect",
+          "@type": "PartyRef",
+          "@referredType": "Organization"
+        }
+      }
+    ],
+    "productOfferingPrice": [
+      {
+        "name": "Horizon Vela Access Core Offering Monthly Price",
+        "priceType": "recurring",
+        "price": {
+          "taxIncludedAmount": {
+            "unit": "EUR",
+            "value": 120
+          }
+        },
+        "@type": "ProductOfferingPrice"
+      }
+    ],
+    "@type": "ProductOffering"
+  },
+  {
+    "name": "Vector Vela Trunk Plus Offering",
+    "description": "Commercial offering for Vector Vela Trunk Plus with a 18-month term.",
+    "isBundle": false,
+    "isSellable": true,
+    "lifecycleStatus": "Active",
+    "statusReason": "Available for synthetic test scenarios",
+    "version": "1.0",
+    "validFor": {
+      "startDateTime": "2026-01-01T00:00:00.000Z",
+      "endDateTime": "2028-01-01T00:00:00.000Z"
+    },
+    "productSpecification": {
+      "id": "vector_vela_trunk_plus",
+      "name": "Vector Vela Trunk Plus",
+      "version": "1.0",
+      "@type": "ProductSpecificationRef",
+      "@referredType": "ProductSpecification"
+    },
+    "serviceCandidate": {
+      "id": "vector_vela_trunk_plus_managed_service",
+      "name": "Vector Vela Trunk Plus Managed Service",
+      "version": "1.0",
+      "@type": "ServiceCandidateRef",
+      "@referredType": "ServiceSpecification"
+    },
+    "resourceCandidate": {
+      "id": "vector_vela_trunk_plus_edge_terminal",
+      "name": "Vector Vela Trunk Plus Edge Terminal",
+      "version": "1.0",
+      "@type": "ResourceCandidateRef",
+      "@referredType": "ResourceCandidate"
+    },
+    "relatedParty": [
+      {
+        "@type": "RelatedPartyRefOrPartyRoleRef",
+        "role": "Seller",
+        "partyOrPartyRole": {
+          "id": "vela_connect",
+          "name": "Vela Connect",
+          "@type": "PartyRef",
+          "@referredType": "Organization"
+        }
+      }
+    ],
+    "productOfferingPrice": [
+      {
+        "name": "Vector Vela Trunk Plus Offering Monthly Price",
+        "priceType": "recurring",
+        "price": {
+          "taxIncludedAmount": {
+            "unit": "EUR",
+            "value": 165
+          }
+        },
+        "@type": "ProductOfferingPrice"
+      }
+    ],
+    "@type": "ProductOffering"
+  },
+  {
+    "name": "Lumen Vela Relay Max Offering",
+    "description": "Commercial offering for Lumen Vela Relay Max with a 24-month term.",
+    "isBundle": false,
+    "isSellable": true,
+    "lifecycleStatus": "Active",
+    "statusReason": "Available for synthetic test scenarios",
+    "version": "1.0",
+    "validFor": {
+      "startDateTime": "2026-01-01T00:00:00.000Z",
+      "endDateTime": "2028-01-01T00:00:00.000Z"
+    },
+    "productSpecification": {
+      "id": "lumen_vela_relay_max",
+      "name": "Lumen Vela Relay Max",
+      "version": "1.0",
+      "@type": "ProductSpecificationRef",
+      "@referredType": "ProductSpecification"
+    },
+    "serviceCandidate": {
+      "id": "lumen_vela_relay_max_managed_service",
+      "name": "Lumen Vela Relay Max Managed Service",
+      "version": "1.0",
+      "@type": "ServiceCandidateRef",
+      "@referredType": "ServiceSpecification"
+    },
+    "resourceCandidate": {
+      "id": "lumen_vela_relay_max_edge_terminal",
+      "name": "Lumen Vela Relay Max Edge Terminal",
+      "version": "1.0",
+      "@type": "ResourceCandidateRef",
+      "@referredType": "ResourceCandidate"
+    },
+    "relatedParty": [
+      {
+        "@type": "RelatedPartyRefOrPartyRoleRef",
+        "role": "Seller",
+        "partyOrPartyRole": {
+          "id": "vela_connect",
+          "name": "Vela Connect",
+          "@type": "PartyRef",
+          "@referredType": "Organization"
+        }
+      }
+    ],
+    "productOfferingPrice": [
+      {
+        "name": "Lumen Vela Relay Max Offering Monthly Price",
+        "priceType": "recurring",
+        "price": {
+          "taxIncludedAmount": {
+            "unit": "EUR",
+            "value": 210
+          }
+        },
+        "@type": "ProductOfferingPrice"
+      }
+    ],
+    "@type": "ProductOffering"
+  }
+]

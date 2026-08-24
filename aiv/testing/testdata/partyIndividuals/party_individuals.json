@@ -1,0 +1,30 @@
+[
+  {
+    "givenName": "Mira",
+    "familyName": "Keller",
+    "name": "Mira Keller",
+    "partyCharacteristic": [
+      {
+        "name": "maxPriority",
+        "valueType": "string",
+        "value": "HIGH",
+        "@type": "StringCharacteristic"
+      }
+    ],
+    "@type": "Individual"
+  },
+  {
+    "givenName": "Daniel",
+    "familyName": "Novak",
+    "name": "Daniel Novak",
+    "partyCharacteristic": [
+      {
+        "name": "maxPriority",
+        "valueType": "string",
+        "value": "LOW",
+        "@type": "StringCharacteristic"
+      }
+    ],
+    "@type": "Individual"
+  }
+]

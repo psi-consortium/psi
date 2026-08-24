@@ -1,0 +1,149 @@
+[
+  {
+    "name": "Lumen Northstar Relay Core Managed Service",
+    "description": "Managed delivery for the fictional Lumen Northstar Relay Core product.",
+    "id": "lumen_northstar_relay_core_managed_service",
+    "entity": "ServiceSpecification",
+    "value": "Lumen Northstar Relay Core Managed Service",
+    "valueType": "string",
+    "relationshipType": "uses",
+    "parentSpecificationId": "lumen_northstar_relay_core",
+    "parentSpecificationHref": "https://example.invalid/specifications/lumen_northstar_relay_core",
+    "@referredType": "ServiceSpecification",
+    "@schemaLocation": "https://example.invalid/schemas/service-specification.json",
+    "isBundle": false,
+    "lifecycleStatus": "Active",
+    "validFor": {
+      "startDateTime": "2026-01-01T00:00:00.000Z",
+      "endDateTime": "2028-12-31T00:00:00.000Z"
+    },
+    "version": "1.0",
+    "relatedParty": [
+      {
+        "@type": "RelatedPartyRefOrPartyRoleRef",
+        "role": "ServiceProvider",
+        "partyOrPartyRole": {
+          "id": "northstar_signal",
+          "name": "Northstar Signal",
+          "@type": "PartyRef",
+          "@referredType": "Organization"
+        }
+      }
+    ],
+    "resourceSpecification": [
+      {
+        "id": "lumen_northstar_relay_core_edge_terminal",
+        "name": "Lumen Northstar Relay Core Edge Terminal",
+        "version": "1.0",
+        "@type": "ResourceSpecificationRef",
+        "@referredType": "PhysicalResourceSpecification"
+      }
+    ],
+    "specCharacteristic": [
+      {
+        "name": "serviceLevel",
+        "valueType": "string",
+        "@type": "CharacteristicSpecification"
+      }
+    ],
+    "@type": "ServiceSpecification"
+  },
+  {
+    "name": "Pioneer Northstar Beam Plus Managed Service",
+    "description": "Managed delivery for the fictional Pioneer Northstar Beam Plus product.",
+    "id": "pioneer_northstar_beam_plus_managed_service",
+    "entity": "ServiceSpecification",
+    "value": "Pioneer Northstar Beam Plus Managed Service",
+    "valueType": "string",
+    "relationshipType": "uses",
+    "parentSpecificationId": "pioneer_northstar_beam_plus",
+    "parentSpecificationHref": "https://example.invalid/specifications/pioneer_northstar_beam_plus",
+    "@referredType": "ServiceSpecification",
+    "@schemaLocation": "https://example.invalid/schemas/service-specification.json",
+    "isBundle": false,
+    "lifecycleStatus": "Active",
+    "validFor": {
+      "startDateTime": "2026-01-01T00:00:00.000Z",
+      "endDateTime": "2028-12-31T00:00:00.000Z"
+    },
+    "version": "1.0",
+    "relatedParty": [
+      {
+        "@type": "RelatedPartyRefOrPartyRoleRef",
+        "role": "ServiceProvider",
+        "partyOrPartyRole": {
+          "id": "northstar_signal",
+          "name": "Northstar Signal",
+          "@type": "PartyRef",
+          "@referredType": "Organization"
+        }
+      }
+    ],
+    "resourceSpecification": [
+      {
+        "id": "pioneer_northstar_beam_plus_edge_terminal",
+        "name": "Pioneer Northstar Beam Plus Edge Terminal",
+        "version": "1.0",
+        "@type": "ResourceSpecificationRef",
+        "@referredType": "PhysicalResourceSpecification"
+      }
+    ],
+    "specCharacteristic": [
+      {
+        "name": "serviceLevel",
+        "valueType": "string",
+        "@type": "CharacteristicSpecification"
+      }
+    ],
+    "@type": "ServiceSpecification"
+  },
+  {
+    "name": "Horizon Northstar Access Max Managed Service",
+    "description": "Managed delivery for the fictional Horizon Northstar Access Max product.",
+    "id": "horizon_northstar_access_max_managed_service",
+    "entity": "ServiceSpecification",
+    "value": "Horizon Northstar Access Max Managed Service",
+    "valueType": "string",
+    "relationshipType": "uses",
+    "parentSpecificationId": "horizon_northstar_access_max",
+    "parentSpecificationHref": "https://example.invalid/specifications/horizon_northstar_access_max",
+    "@referredType": "ServiceSpecification",
+    "@schemaLocation": "https://example.invalid/schemas/service-specification.json",
+    "isBundle": false,
+    "lifecycleStatus": "Active",
+    "validFor": {
+      "startDateTime": "2026-01-01T00:00:00.000Z",
+      "endDateTime": "2028-12-31T00:00:00.000Z"
+    },
+    "version": "1.0",
+    "relatedParty": [
+      {
+        "@type": "RelatedPartyRefOrPartyRoleRef",
+        "role": "ServiceProvider",
+        "partyOrPartyRole": {
+          "id": "northstar_signal",
+          "name": "Northstar Signal",
+          "@type": "PartyRef",
+          "@referredType": "Organization"
+        }
+      }
+    ],
+    "resourceSpecification": [
+      {
+        "id": "horizon_northstar_access_max_edge_terminal",
+        "name": "Horizon Northstar Access Max Edge Terminal",
+        "version": "1.0",
+        "@type": "ResourceSpecificationRef",
+        "@referredType": "PhysicalResourceSpecification"
+      }
+    ],
+    "specCharacteristic": [
+      {
+        "name": "serviceLevel",
+        "valueType": "string",
+        "@type": "CharacteristicSpecification"
+      }
+    ],
+    "@type": "ServiceSpecification"
+  }
+]

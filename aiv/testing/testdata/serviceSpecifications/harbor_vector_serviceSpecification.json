@@ -1,0 +1,149 @@
+[
+  {
+    "name": "Lumen Harbor Relay Core Managed Service",
+    "description": "Managed delivery for the fictional Lumen Harbor Relay Core product.",
+    "id": "lumen_harbor_relay_core_managed_service",
+    "entity": "ServiceSpecification",
+    "value": "Lumen Harbor Relay Core Managed Service",
+    "valueType": "string",
+    "relationshipType": "uses",
+    "parentSpecificationId": "lumen_harbor_relay_core",
+    "parentSpecificationHref": "https://example.invalid/specifications/lumen_harbor_relay_core",
+    "@referredType": "ServiceSpecification",
+    "@schemaLocation": "https://example.invalid/schemas/service-specification.json",
+    "isBundle": false,
+    "lifecycleStatus": "Active",
+    "validFor": {
+      "startDateTime": "2026-01-01T00:00:00.000Z",
+      "endDateTime": "2028-12-31T00:00:00.000Z"
+    },
+    "version": "1.0",
+    "relatedParty": [
+      {
+        "@type": "RelatedPartyRefOrPartyRoleRef",
+        "role": "ServiceProvider",
+        "partyOrPartyRole": {
+          "id": "harbor_vector",
+          "name": "Harbor Vector",
+          "@type": "PartyRef",
+          "@referredType": "Organization"
+        }
+      }
+    ],
+    "resourceSpecification": [
+      {
+        "id": "lumen_harbor_relay_core_edge_terminal",
+        "name": "Lumen Harbor Relay Core Edge Terminal",
+        "version": "1.0",
+        "@type": "ResourceSpecificationRef",
+        "@referredType": "PhysicalResourceSpecification"
+      }
+    ],
+    "specCharacteristic": [
+      {
+        "name": "serviceLevel",
+        "valueType": "string",
+        "@type": "CharacteristicSpecification"
+      }
+    ],
+    "@type": "ServiceSpecification"
+  },
+  {
+    "name": "Pioneer Harbor Beam Plus Managed Service",
+    "description": "Managed delivery for the fictional Pioneer Harbor Beam Plus product.",
+    "id": "pioneer_harbor_beam_plus_managed_service",
+    "entity": "ServiceSpecification",
+    "value": "Pioneer Harbor Beam Plus Managed Service",
+    "valueType": "string",
+    "relationshipType": "uses",
+    "parentSpecificationId": "pioneer_harbor_beam_plus",
+    "parentSpecificationHref": "https://example.invalid/specifications/pioneer_harbor_beam_plus",
+    "@referredType": "ServiceSpecification",
+    "@schemaLocation": "https://example.invalid/schemas/service-specification.json",
+    "isBundle": false,
+    "lifecycleStatus": "Active",
+    "validFor": {
+      "startDateTime": "2026-01-01T00:00:00.000Z",
+      "endDateTime": "2028-12-31T00:00:00.000Z"
+    },
+    "version": "1.0",
+    "relatedParty": [
+      {
+        "@type": "RelatedPartyRefOrPartyRoleRef",
+        "role": "ServiceProvider",
+        "partyOrPartyRole": {
+          "id": "harbor_vector",
+          "name": "Harbor Vector",
+          "@type": "PartyRef",
+          "@referredType": "Organization"
+        }
+      }
+    ],
+    "resourceSpecification": [
+      {
+        "id": "pioneer_harbor_beam_plus_edge_terminal",
+        "name": "Pioneer Harbor Beam Plus Edge Terminal",
+        "version": "1.0",
+        "@type": "ResourceSpecificationRef",
+        "@referredType": "PhysicalResourceSpecification"
+      }
+    ],
+    "specCharacteristic": [
+      {
+        "name": "serviceLevel",
+        "valueType": "string",
+        "@type": "CharacteristicSpecification"
+      }
+    ],
+    "@type": "ServiceSpecification"
+  },
+  {
+    "name": "Horizon Harbor Access Max Managed Service",
+    "description": "Managed delivery for the fictional Horizon Harbor Access Max product.",
+    "id": "horizon_harbor_access_max_managed_service",
+    "entity": "ServiceSpecification",
+    "value": "Horizon Harbor Access Max Managed Service",
+    "valueType": "string",
+    "relationshipType": "uses",
+    "parentSpecificationId": "horizon_harbor_access_max",
+    "parentSpecificationHref": "https://example.invalid/specifications/horizon_harbor_access_max",
+    "@referredType": "ServiceSpecification",
+    "@schemaLocation": "https://example.invalid/schemas/service-specification.json",
+    "isBundle": false,
+    "lifecycleStatus": "Active",
+    "validFor": {
+      "startDateTime": "2026-01-01T00:00:00.000Z",
+      "endDateTime": "2028-12-31T00:00:00.000Z"
+    },
+    "version": "1.0",
+    "relatedParty": [
+      {
+        "@type": "RelatedPartyRefOrPartyRoleRef",
+        "role": "ServiceProvider",
+        "partyOrPartyRole": {
+          "id": "harbor_vector",
+          "name": "Harbor Vector",
+          "@type": "PartyRef",
+          "@referredType": "Organization"
+        }
+      }
+    ],
+    "resourceSpecification": [
+      {
+        "id": "horizon_harbor_access_max_edge_terminal",
+        "name": "Horizon Harbor Access Max Edge Terminal",
+        "version": "1.0",
+        "@type": "ResourceSpecificationRef",
+        "@referredType": "PhysicalResourceSpecification"
+      }
+    ],
+    "specCharacteristic": [
+      {
+        "name": "serviceLevel",
+        "valueType": "string",
+        "@type": "CharacteristicSpecification"
+      }
+    ],
+    "@type": "ServiceSpecification"
+  }
+]

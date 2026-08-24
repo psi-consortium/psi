@@ -1,0 +1,198 @@
+[
+  {
+    "name": "Horizon Aurora Access Core Managed Service",
+    "description": "Managed delivery for the fictional Horizon Aurora Access Core product.",
+    "id": "horizon_aurora_access_core_managed_service",
+    "entity": "ServiceSpecification",
+    "value": "Horizon Aurora Access Core Managed Service",
+    "valueType": "string",
+    "relationshipType": "uses",
+    "parentSpecificationId": "horizon_aurora_access_core",
+    "parentSpecificationHref": "https://example.invalid/specifications/horizon_aurora_access_core",
+    "@referredType": "ServiceSpecification",
+    "@schemaLocation": "https://example.invalid/schemas/service-specification.json",
+    "isBundle": false,
+    "lifecycleStatus": "Active",
+    "validFor": {
+      "startDateTime": "2026-01-01T00:00:00.000Z",
+      "endDateTime": "2028-12-31T00:00:00.000Z"
+    },
+    "version": "1.0",
+    "relatedParty": [
+      {
+        "@type": "RelatedPartyRefOrPartyRoleRef",
+        "role": "ServiceProvider",
+        "partyOrPartyRole": {
+          "id": "aurora_relay",
+          "name": "Aurora Relay",
+          "@type": "PartyRef",
+          "@referredType": "Organization"
+        }
+      }
+    ],
+    "resourceSpecification": [
+      {
+        "id": "horizon_aurora_access_core_edge_terminal",
+        "name": "Horizon Aurora Access Core Edge Terminal",
+        "version": "1.0",
+        "@type": "ResourceSpecificationRef",
+        "@referredType": "PhysicalResourceSpecification"
+      }
+    ],
+    "specCharacteristic": [
+      {
+        "name": "serviceLevel",
+        "valueType": "string",
+        "@type": "CharacteristicSpecification"
+      }
+    ],
+    "@type": "ServiceSpecification"
+  },
+  {
+    "name": "Vector Aurora Trunk Plus Managed Service",
+    "description": "Managed delivery for the fictional Vector Aurora Trunk Plus product.",
+    "id": "vector_aurora_trunk_plus_managed_service",
+    "entity": "ServiceSpecification",
+    "value": "Vector Aurora Trunk Plus Managed Service",
+    "valueType": "string",
+    "relationshipType": "uses",
+    "parentSpecificationId": "vector_aurora_trunk_plus",
+    "parentSpecificationHref": "https://example.invalid/specifications/vector_aurora_trunk_plus",
+    "@referredType": "ServiceSpecification",
+    "@schemaLocation": "https://example.invalid/schemas/service-specification.json",
+    "isBundle": false,
+    "lifecycleStatus": "Active",
+    "validFor": {
+      "startDateTime": "2026-01-01T00:00:00.000Z",
+      "endDateTime": "2028-12-31T00:00:00.000Z"
+    },
+    "version": "1.0",
+    "relatedParty": [
+      {
+        "@type": "RelatedPartyRefOrPartyRoleRef",
+        "role": "ServiceProvider",
+        "partyOrPartyRole": {
+          "id": "aurora_relay",
+          "name": "Aurora Relay",
+          "@type": "PartyRef",
+          "@referredType": "Organization"
+        }
+      }
+    ],
+    "resourceSpecification": [
+      {
+        "id": "vector_aurora_trunk_plus_edge_terminal",
+        "name": "Vector Aurora Trunk Plus Edge Terminal",
+        "version": "1.0",
+        "@type": "ResourceSpecificationRef",
+        "@referredType": "PhysicalResourceSpecification"
+      }
+    ],
+    "specCharacteristic": [
+      {
+        "name": "serviceLevel",
+        "valueType": "string",
+        "@type": "CharacteristicSpecification"
+      }
+    ],
+    "@type": "ServiceSpecification"
+  },
+  {
+    "name": "Lumen Aurora Relay Max Managed Service",
+    "description": "Managed delivery for the fictional Lumen Aurora Relay Max product.",
+    "id": "lumen_aurora_relay_max_managed_service",
+    "entity": "ServiceSpecification",
+    "value": "Lumen Aurora Relay Max Managed Service",
+    "valueType": "string",
+    "relationshipType": "uses",
+    "parentSpecificationId": "lumen_aurora_relay_max",
+    "parentSpecificationHref": "https://example.invalid/specifications/lumen_aurora_relay_max",
+    "@referredType": "ServiceSpecification",
+    "@schemaLocation": "https://example.invalid/schemas/service-specification.json",
+    "isBundle": false,
+    "lifecycleStatus": "Active",
+    "validFor": {
+      "startDateTime": "2026-01-01T00:00:00.000Z",
+      "endDateTime": "2028-12-31T00:00:00.000Z"
+    },
+    "version": "1.0",
+    "relatedParty": [
+      {
+        "@type": "RelatedPartyRefOrPartyRoleRef",
+        "role": "ServiceProvider",
+        "partyOrPartyRole": {
+          "id": "aurora_relay",
+          "name": "Aurora Relay",
+          "@type": "PartyRef",
+          "@referredType": "Organization"
+        }
+      }
+    ],
+    "resourceSpecification": [
+      {
+        "id": "lumen_aurora_relay_max_edge_terminal",
+        "name": "Lumen Aurora Relay Max Edge Terminal",
+        "version": "1.0",
+        "@type": "ResourceSpecificationRef",
+        "@referredType": "PhysicalResourceSpecification"
+      }
+    ],
+    "specCharacteristic": [
+      {
+        "name": "serviceLevel",
+        "valueType": "string",
+        "@type": "CharacteristicSpecification"
+      }
+    ],
+    "@type": "ServiceSpecification"
+  },
+  {
+    "name": "Pioneer Aurora Beam Core Managed Service",
+    "description": "Managed delivery for the fictional Pioneer Aurora Beam Core product.",
+    "id": "pioneer_aurora_beam_core_managed_service",
+    "entity": "ServiceSpecification",
+    "value": "Pioneer Aurora Beam Core Managed Service",
+    "valueType": "string",
+    "relationshipType": "uses",
+    "parentSpecificationId": "pioneer_aurora_beam_core",
+    "parentSpecificationHref": "https://example.invalid/specifications/pioneer_aurora_beam_core",
+    "@referredType": "ServiceSpecification",
+    "@schemaLocation": "https://example.invalid/schemas/service-specification.json",
+    "isBundle": false,
+    "lifecycleStatus": "Active",
+    "validFor": {
+      "startDateTime": "2026-01-01T00:00:00.000Z",
+      "endDateTime": "2028-12-31T00:00:00.000Z"
+    },
+    "version": "1.0",
+    "relatedParty": [
+      {
+        "@type": "RelatedPartyRefOrPartyRoleRef",
+        "role": "ServiceProvider",
+        "partyOrPartyRole": {
+          "id": "aurora_relay",
+          "name": "Aurora Relay",
+          "@type": "PartyRef",
+          "@referredType": "Organization"
+        }
+      }
+    ],
+    "resourceSpecification": [
+      {
+        "id": "pioneer_aurora_beam_core_edge_terminal",
+        "name": "Pioneer Aurora Beam Core Edge Terminal",
+        "version": "1.0",
+        "@type": "ResourceSpecificationRef",
+        "@referredType": "PhysicalResourceSpecification"
+      }
+    ],
+    "specCharacteristic": [
+      {
+        "name": "serviceLevel",
+        "valueType": "string",
+        "@type": "CharacteristicSpecification"
+      }
+    ],
+    "@type": "ServiceSpecification"
+  }
+]

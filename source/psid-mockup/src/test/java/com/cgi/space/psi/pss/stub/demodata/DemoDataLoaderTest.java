@@ -28,7 +28,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
-@SpringBootTest(properties = "psi.demo-data.path=../../aiv/testing/aitf/testdata/")
+@SpringBootTest(properties = "psi.demo-data.path=../../aiv/testing/testdata/")
 public class DemoDataLoaderTest {
 
     @Autowired
