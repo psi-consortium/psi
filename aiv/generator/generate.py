@@ -31,11 +31,17 @@ def slug(value: str) -> str:
     return re.sub(r"[^a-z0-9]+", "_", value.lower()).strip("_")
 
 
-def ref(name: str, referred_type: str, version: str = "1.0") -> dict[str, Any]:
+def ref(
+    name: str,
+    referred_type: str,
+    version: str = "1.0",
+    reference_type: str | None = None,
+) -> dict[str, Any]:
+    reference_type = reference_type or referred_type
     return {
         "name": name,
         "version": version,
-        "@type": f"{referred_type}Ref",
+        "@type": f"{reference_type}Ref",
         "@referredType": referred_type,
     }
 
@@ -146,7 +152,7 @@ class Scenario:
                     "bundledProductSpecification": [],
                     "productSpecificationRelationship": [],
                     "serviceSpecification": [ref(service_name, "ServiceSpecification")],
-                    "resourceSpecification": [ref(resource_name, "PhysicalResourceSpecification")],
+                    "resourceSpecification": [ref(resource_name, "PhysicalResourceSpecification", reference_type="ResourceSpecification")],
                     "productSpecCharacteristic": [
                         {"name": "bandwidth", "description": "Configured service bandwidth", "valueType": "integer", "configurable": True, "minCardinality": 1, "maxCardinality": 1, "characteristicValueSpecification": [{"isDefault": True, "valueType": "integer", "value": 50 + product_index * 25, "unitOfMeasure": "Mbps", "@type": "IntegerCharacteristicValueSpecification"}], "@type": "CharacteristicSpecification"},
                         {"name": "networkUptime", "description": "Target network availability", "valueType": "double", "configurable": False, "minCardinality": 1, "maxCardinality": 1, "characteristicValueSpecification": [{"isDefault": True, "valueType": "double", "value": 99.5, "unitOfMeasure": "percent (%)", "@type": "NumberCharacteristicValueSpecification"}], "@type": "CharacteristicSpecification"},
@@ -161,7 +167,7 @@ class Scenario:
                     "validFor": {"startDateTime": iso(START), "endDateTime": iso(START + timedelta(days=1095))},
                     "version": "1.0",
                     "relatedParty": [related_party(organization, "ServiceProvider", "Organization")],
-                    "resourceSpecification": [ref(resource_name, "PhysicalResourceSpecification")],
+                    "resourceSpecification": [ref(resource_name, "PhysicalResourceSpecification", reference_type="ResourceSpecification")],
                     "specCharacteristic": [{"name": "serviceLevel", "valueType": "string", "@type": "StringCharacteristicSpecification"}],
                     "@type": "ServiceSpecification",
                 }
@@ -188,7 +194,7 @@ class Scenario:
                     "validFor": {"startDateTime": iso(START), "endDateTime": iso(START + timedelta(days=730))},
                     "productSpecification": ref(name, "ProductSpecification"),
                     "serviceCandidate": ref(service_name, "ServiceSpecification"),
-                    "resourceCandidate": ref(resource_name, "PhysicalResourceSpecification"),
+                    "resourceCandidate": ref(resource_name, "ResourceCandidate"),
                     "relatedParty": [related_party(organization, "Seller", "Organization")],
                     "productOfferingPrice": [{"name": f"{offering_name} Monthly Price", "priceType": "recurring", "price": {"taxIncludedAmount": {"unit": "EUR", "value": 120 + product_index * 45}}, "@type": "ProductOfferingPrice"}],
                     "@type": "ProductOffering",
