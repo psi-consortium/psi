@@ -48,4 +48,4 @@ We welcome contributions to this initiative. The following outlines the process 
 Before you create a contribution, you should create an issue to describe what you plan to address and make any work visible to the whole team. 
 You should also check that there are no open issues that may conflict with your planned contribution.
 
-Reach out to the maintainers for detailed contribution rules, as they are not yet finalized.
+You can find the contribution guidelines [here](CONTRIBUTING.md).
