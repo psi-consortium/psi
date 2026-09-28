@@ -104,6 +104,12 @@ dcr_overrides:
    version: 'MS12 [2.0.0-alpha]'
    author: 'Wolfgang Robben'
    message: 'No update, PSI Phase 2 version bump.'
+ - dcr:
+   from: '2026-09-28'
+   to: '2026-09-28'
+   version: 'MS12 [2.0.1-alpha]'
+   author: 'Hendrik Oppenberg'
+   message: 'Proposed ADR043 on the placement of governance and algorithm content in the document set.'
  =end
 
 # Document Meta Information
