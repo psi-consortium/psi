@@ -66,6 +66,12 @@ dcr_overrides:
    version: 'MS12 [2.0.0-alpha]'
    author: 'Hendrik Oppenberg'
    message: 'No update, PSI Phase 2 version bump.'
+ - dcr:
+   from: '2026-09-28'
+   to: '2026-09-28'
+   version: 'MS12 [2.0.0-alpha]'
+   author: 'Hendrik Oppenberg'
+   message: 'Mentioned the TOD appendices (ADR043).'
 =end
 
 # Document Meta Information
@@ -263,6 +269,7 @@ The **PSI-TAD** document explains terminology, abbreviations and definitions use
 It determines the *language* which will be applied to the documents, thus reading this document will grant a common understanding to the other documents.
 
 **PSI-TOD** explains tasks and operations supported by PSI, which are based on given requirements.
+Its appendices hold supporting material such as algorithm descriptions and product data sheets; they are informative except where an appendix declares a part normative for the tasks that reference it.
 PSI-TOD already mentions the PSI-ICD document, but we recommend reading the ICD after the general structures have been understood or use it only as a reference for now.
 
 The requirements, defined in **PSI-REQ**, build the basis of the endpoints needed for the operations described here.
