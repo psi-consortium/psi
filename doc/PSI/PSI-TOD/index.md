@@ -78,6 +78,12 @@ dcr_overrides:
    version: 'MS12 [2.0.0-alpha]'
    author: 'Christian Grubert'
    message: 'No update, PSI Phase 2 version bump.'
+ - dcr:
+   from: '2026-09-28'
+   to: '2026-09-28'
+   version: 'MS12 [2.0.0-alpha]'
+   author: 'Hendrik Oppenberg'
+   message: 'Added the Appendices chapter (ADR043) and TOD-A01, the mission-centric matchmaking whitepaper.'
 =end
 
 # Document Meta Information
@@ -114,6 +120,16 @@ Table: Signature Table. {#tbl:signature_table}
 
 Table: Reference Documents. {#tbl:reference-documents}
 
+### External Annexes
+
+The appendices of this document are rendered standalone as well, so that they can be reviewed and distributed on their own.
+
+| Reference   | Title or Filename                                                               |
+|-------------|---------------------------------------------------------------------------------|
+| PSI-TOD-A01 | PSI Tasks and Operations Dictionary - Appendix A01: Mission-Centric Matchmaking |
+
+Table: External Annexes {#tbl:external-annexes}
+
 # Introduction
 
 @include [common introduction](../common/intro_description.md)
@@ -145,3 +161,7 @@ The following sections heavily refer to terms, abbreviations and definitions def
 # Tasks and Operations
 
 @include [tasks_and_operations](tasks_and_operations.md)
+
+# Appendices
+
+@include [appendices](appendices.md)

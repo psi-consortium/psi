@@ -15,6 +15,7 @@ An inquiry is stateful and can be processed in different ways:
 Firstly, the PSS can implement a matchmaking algorithm that searches the local database to provide immediate results.
 This process can also be partially or fully outsourced to other PSSs and sufficiently advanced provider systems that are able to respond in real-time.
 The PSS will then aggregate, rank and possibly filter the results before making them available to the customer.
+One way to realise such an algorithm, with masking of the catalog per requester, filtering by feasibility and ranking under a governed profile, is described in appendix [TOD-A01-Mission_Centric_Matchmaking](#tod-a01-missioncentricmatchmaking).
 In the case of a Request-For-Quote or Invitation-To-Tender, human intervention is foreseen to tailor a product offering, which can take some hours or days.
 
 To prevent long delays for the customer, the response time of the providers to an RFQ or ITT should be limited.
