@@ -692,6 +692,41 @@ tasks.register('transformEvent', com.cgi.space.psi.tasks.TransformOASTask) { tra
   pruneAll()
 }
 
+tasks.register('transformQuote', com.cgi.space.psi.tasks.TransformOASTask) { transformations ->
+  input = file('tmforum/apis/TMF648_Quote_Management/oas/TMF648-Quote-v5.0.0.oas.yaml')
+  output = file('doc/PSI/PSI-ICD/open-apis/oas/PSID648-Quote-v5.0.0.oas.json')
+
+  // Adjust metadata
+  replaceServerUrl("{apiRoot}/tmf-api/", "/psi-api/")
+  replaceServerUrl("v5", "v2")
+  // Remove explicitly unwanted things
+  removeEvents(transformations)
+  // unify schemas
+  importBaseTypes(transformations)
+  importSchema("(.*)Product(.*)", file("tmforum/apis/TMF637_Product_Inventory/oas/TMF637-ProductInventory-v5.0.0.oas.yaml"))
+  // TMF648 is generated without most _FVO/_MVO variants, take whole families from TMF637
+  importSchema("(AccountRef|AgreementItemRef|AgreementRef|BillingAccountRef|BusinessPartner|CalendarPeriod|Consumer|ContactMedium|CreditProfile|Expression|ExpressionLanguageEnum|ExternalIdentifier|GeographicAddress|GeographicLocationRef|GeographicLocationRefOrValue|GeographicSite|GeographicSiteRelationship|GeographicSubAddress|GeographicSubAddressUnit|HourPeriod|Intent|IntentRef|IntentRefOrValue|PaymentMethodRef|PlaceRef|PlaceRefOrValue|Price|PriceAlteration|Producer|RelatedOrderItem|RelatedPlaceRefOrValue|ResourceRef|ServiceRef|StandardIdentifier|Supplier|TaxDefinition)(|_FVO|_MVO)", file("tmforum/apis/TMF637_Product_Inventory/oas/TMF637-ProductInventory-v5.0.0.oas.yaml"))
+  importSchema("(.*)Characteristic(.*)", file("tmforum/apis/TMF637_Product_Inventory/oas/TMF637-ProductInventory-v5.0.0.oas.yaml"))
+  importSchema("(.*)(Certificate|Individual|Organization|Party)(.*)", file("tmforum/apis/TMF632_Party/oas/TMF632-Party_Management-v5.0.0.oas.yaml"))
+  importSchema("(Related)?PartyRefOrPartyRoleRef_MVO", file("tmforum/apis/TMF634_Resource_Catalog/oas/TMF634-Resource_Catalog_Management-v5.0.0.oas.yaml"))
+  importSchema("(.*)", file("doc/PSI/PSI-ICD/open-apis/extensions/PSID675-Geographic_Location.oas.json"))
+  importSchema("(ProductOfferingRef|BundledProductOfferingOption)(.*)", file("tmforum/apis/TMF620_Product_Catalog/oas/TMF620-Product_Catalog_Management-v5.0.0.oas.yaml"))
+  importSchema('BundledProductOffering(.*)', file("doc/PSI/PSI-ICD/open-apis/extensions/PSID620-Product_Catalog_Management-v5.0.0.oas.json"))
+  importSchema("(.*)", file("doc/PSI/PSI-ICD/open-apis/extensions/Characteristic.oas.json"))
+  // PSI specific adjustments
+  overwritePropertyFormat("(.*)", "href", "uri")
+  adjustAttachmentRef(transformations)
+  overwriteProperty("Authorization", "signature", '''
+    {
+      "$ref": "#/components/schemas/AttachmentOrDocumentRef"
+    }
+  ''')
+  removeProperty("(Money|TimePeriod|Quantity)", "\\@(.*)")
+  // Prune things that became superfluous because of above transformations
+  removeSchema("(Feature|FeatureRelationship|GeographicSiteFeature|PolicyRef)(|_FVO|_MVO)")
+  pruneAll()
+}
+
 def transformSwaggerJson = tasks.register('transformSwaggerJson') {
   description = 'Transforms all OpenAPI Specifications'
   group = 'Documentation'
@@ -711,6 +746,7 @@ def transformSwaggerJson = tasks.register('transformSwaggerJson') {
   dependsOn 'transformCustomerBill'
   dependsOn 'transformStock'
   dependsOn 'transformEvent'
+  dependsOn 'transformQuote'
 }
 
 tasks.register('generateDocReferences', com.cgi.space.psi.tasks.GenerateDocReferences.class) {
