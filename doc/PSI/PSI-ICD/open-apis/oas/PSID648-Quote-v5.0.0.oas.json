@@ -7246,18 +7246,6 @@
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/Error"
-            },
-            "examples": {
-              "basic": {
-                "summary": "Bad Request Error",
-                "value": {
-                  "@type": "Error",
-                  "code": "ERR400",
-                  "reason": "Bad Request",
-                  "message": "The server could not understand the request due to invalid syntax. Please correct the syntax and try again.",
-                  "referenceError": "https://host/errors"
-                }
-              }
             }
           }
         }
@@ -7268,18 +7256,6 @@
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/Error"
-            },
-            "examples": {
-              "basic": {
-                "summary": "Unauthorized Error",
-                "value": {
-                  "@type": "Error",
-                  "code": "ERR401",
-                  "reason": "Unauthorized",
-                  "message": "You are not authorized to access the requested resource. Please provide the correct credentials.",
-                  "referenceError": "https://host/errors"
-                }
-              }
             }
           }
         }
@@ -7290,18 +7266,6 @@
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/Error"
-            },
-            "examples": {
-              "basic": {
-                "summary": "Forbidden Error",
-                "value": {
-                  "@type": "Error",
-                  "code": "ERR403",
-                  "reason": "Forbidden",
-                  "message": "You don't have the permission to access the requested resource. It is either read-protected or not readable by the server.",
-                  "referenceError": "https://host/errors"
-                }
-              }
             }
           }
         }
@@ -7312,18 +7276,6 @@
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/Error"
-            },
-            "examples": {
-              "basic": {
-                "summary": "Not Found Error",
-                "value": {
-                  "@type": "Error",
-                  "code": "ERR404",
-                  "reason": "Not Found",
-                  "message": "The requested URL was not found on the server.",
-                  "referenceError": "https://host/errors"
-                }
-              }
             }
           }
         }
@@ -7334,18 +7286,6 @@
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/Error"
-            },
-            "examples": {
-              "basic": {
-                "summary": "Method Not allowed Error",
-                "value": {
-                  "@type": "Error",
-                  "code": "ERR405",
-                  "reason": "Method Not allowed",
-                  "message": "The method is not allowed for the requested URL.",
-                  "referenceError": "https://host/errors"
-                }
-              }
             }
           }
         }
@@ -7356,18 +7296,6 @@
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/Error"
-            },
-            "examples": {
-              "basic": {
-                "summary": "Conflict Error",
-                "value": {
-                  "@type": "Error",
-                  "code": "ERR409",
-                  "reason": "Conflict",
-                  "message": "The request could not be completed due to a conflict with the current state of the target resource.",
-                  "referenceError": "https://host/errors"
-                }
-              }
             }
           }
         }
@@ -7378,18 +7306,6 @@
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/Error"
-            },
-            "examples": {
-              "basic": {
-                "summary": "Internal Server Error example",
-                "value": {
-                  "@type": "Error",
-                  "code": "ERR500",
-                  "reason": "Internal Server Error",
-                  "message": "The server encountered an internal error. Please contact the system administrator.",
-                  "referenceError": "https://host/errors"
-                }
-              }
             }
           }
         }
@@ -7400,18 +7316,6 @@
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/Error"
-            },
-            "examples": {
-              "basic": {
-                "summary": "Not Implemented Error",
-                "value": {
-                  "@type": "Error",
-                  "code": "ERR501",
-                  "reason": "The requested operation is not implemented",
-                  "message": "The requested operation is not implemented. Please contact the system administrator.",
-                  "referenceError": "https://host/errors"
-                }
-              }
             }
           }
         }
@@ -7422,18 +7326,6 @@
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/Error"
-            },
-            "examples": {
-              "basic": {
-                "summary": "Service Unavailable Error",
-                "value": {
-                  "@type": "Error",
-                  "code": "ERR503",
-                  "reason": "Service Unavailable",
-                  "message": "The service is currently unavailable. Please try again later.",
-                  "referenceError": "https://host/errors"
-                }
-              }
             }
           }
         }
@@ -7488,20 +7380,6 @@
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/Quote_RES"
-            },
-            "examples": {
-              "updateQuote_using_json": {
-                "$ref": "#/components/examples/updateQuote_using_json_response"
-              },
-              "updateQuote_using_merge-patch_json": {
-                "$ref": "#/components/examples/updateQuote_using_merge-patch_json_response"
-              },
-              "updateQuote_using_json-patch_json": {
-                "$ref": "#/components/examples/updateQuote_using_json-patch_json_response"
-              },
-              "updateQuote_using_json-patch-query_json": {
-                "$ref": "#/components/examples/updateQuote_using_json-patch-query_json_response"
-              }
             }
           }
         }
@@ -8572,696 +8450,6 @@
             "startDateTime": "2021-05-20T12:45:12.033Z"
           }
         }
-      },
-      "updateQuote_using_json_request": {
-        "description": "PATCH Quote request leveraging json application example",
-        "value": {
-          "validFor": {
-            "endDateTime": "2025-07-20T12:45:12.033Z",
-            "startDateTime": "2021-05-20T12:45:12.028Z"
-          },
-          "@type": "Quote"
-        }
-      },
-      "updateQuote_using_json_response": {
-        "description": "PATCH Quote response leveraging json application example",
-        "value": {
-          "id": "12dd-78hg",
-          "href": "https://host:port/quoteManagement/v5/quote/12dd-78hg",
-          "category": "BSBS Quote",
-          "description": "Quote illustration",
-          "expectedFulfillmentStartDate": "2021-05-16T12:45:12.028Z",
-          "expectedQuoteCompletionDate": "2021-05-14T12:45:12.028Z",
-          "externalId": [
-            {
-              "@type": "ExternalIdentifier",
-              "owner": "TMF",
-              "externalIdentifierType": "Quotenumber",
-              "id": "AK1"
-            }
-          ],
-          "instantSyncQuote": false,
-          "creationDate": "2021-05-06T12:45:12.028Z",
-          "requestedQuoteCompletionDate": "2021-05-14T12:45:12.028Z",
-          "version": "1",
-          "agreement": [
-            {
-              "id": "7778-jj56",
-              "href": "https://host:port/agreementManagement/v5/agreement/7778-jj56",
-              "name": "Global Agrrement",
-              "@type": "AgreementRef",
-              "@referredType": "Agreement"
-            }
-          ],
-          "contactMedium": [
-            {
-              "@type": "EmailContactMedium",
-              "@baseType": "ContactMedium",
-              "id": "11",
-              "preferred": true,
-              "emailAddress": "jean.pontus@PerfectCustomer.com"
-            }
-          ],
-          "note": [
-            {
-              "id": "1",
-              "author": "Jean Pontus",
-              "date": "2021-05-13T12:45:12.031Z",
-              "text": "This is a quote request following today call",
-              "@type": "Note"
-            }
-          ],
-          "productOfferingQualification": [
-            {
-              "id": "22ds-ty55",
-              "@type": "ProductOfferingQualificationRef",
-              "href": "https://host:port/productOfferingQualificationManagement/v5/queryProductOfferingQualification/22ds-ty55",
-              "@referredType": "QueryProductOfferingQualification"
-            }
-          ],
-          "quoteItem": [
-            {
-              "id": "1",
-              "@type": "QuoteItem",
-              "action": "add",
-              "quantity": 1,
-              "product": {
-                "@type": "Product",
-                "productCharacteristic": [
-                  {
-                    "@type": "StringCharacteristic",
-                    "id": "Char1",
-                    "name": "Voice Bundle",
-                    "value": "unlimited"
-                  },
-                  {
-                    "@type": "ObjectCharacteristic",
-                    "id": "Char5",
-                    "name": "Data Bundle",
-                    "value": {
-                      "volume": 50,
-                      "unit": "Gb/month"
-                    }
-                  }
-                ],
-                "productSpecification": {
-                  "id": "ssp7-ty89",
-                  "name": "TMF Tariff Plan",
-                  "@type": "ProductSpecificationRef",
-                  "@referredType": "ProductSpecification"
-                }
-              },
-              "productOffering": {
-                "id": "54gg-zza1",
-                "name": "TMF Tariff Plan 25",
-                "@type": "ProductOfferingRef",
-                "@referredType": "ProductOffering"
-              }
-            },
-            {
-              "id": "2",
-              "@type": "QuoteItem",
-              "action": "add",
-              "quantity": 12,
-              "product": {
-                "@type": "Product",
-                "productSpecification": {
-                  "id": "qq45-ytr7",
-                  "name": "Handset",
-                  "version": "1",
-                  "@type": "ProductSpecificationRef",
-                  "@referredType": "ProductSpecification"
-                }
-              },
-              "productOffering": {
-                "id": "z789-78ga",
-                "name": "TMF handset T9+",
-                "@type": "ProductOfferingRef",
-                "@referredType": "ProductOffering"
-              }
-            }
-          ],
-          "relatedParty": [
-            {
-              "role": "Buyer Contact",
-              "@type": "RelatedPartyRefOrPartyRoleRef",
-              "partyOrPartyRole": {
-                "id": "qsdd-9888",
-                "href": "https://host:port/partyManagement/v5/individual/qsdd-9888",
-                "name": "Jean Pontus",
-                "@referredType": "Individual",
-                "@type": "PartyRef"
-              }
-            },
-            {
-              "role": "Buyer organization",
-              "@type": "RelatedPartyRefOrPartyRoleRef",
-              "partyOrPartyRole": {
-                "id": "55",
-                "href": "https://host:port/partyManagement/v5/organization/55",
-                "name": "PerfectCustomer",
-                "@referredType": "Organization",
-                "@type": "PartyRef"
-              }
-            },
-            {
-              "role": "Seller Contact",
-              "@type": "RelatedPartyRefOrPartyRoleRef",
-              "partyOrPartyRole": {
-                "id": "45gh-gh89",
-                "href": "https://host:port/partyManagement/v5/individual/45gh-gh89",
-                "name": "Joe Doe",
-                "@referredType": "Individual",
-                "@type": "PartyRef"
-              }
-            }
-          ],
-          "state": "inProgress",
-          "@type": "Quote",
-          "validFor": {
-            "endDateTime": "2025-07-20T12:45:12.033Z",
-            "startDateTime": "2021-05-20T12:45:12.028Z"
-          }
-        }
-      },
-      "updateQuote_using_merge-patch_json_request": {
-        "description": "PATCH Quote request leveraging merge-patch+json application example",
-        "value": {
-          "validFor": {
-            "endDateTime": "2025-07-20T12:45:12.033Z",
-            "startDateTime": "2021-05-20T12:45:12.028Z"
-          },
-          "@type": "Quote"
-        }
-      },
-      "updateQuote_using_merge-patch_json_response": {
-        "description": "PATCH Quote response leveraging merge-patch+json application example",
-        "value": {
-          "id": "12dd-78hg",
-          "href": "https://host:port/quoteManagement/v5/quote/12dd-78hg",
-          "category": "BSBS Quote",
-          "description": "Quote illustration",
-          "expectedFulfillmentStartDate": "2021-05-16T12:45:12.028Z",
-          "expectedQuoteCompletionDate": "2021-05-14T12:45:12.028Z",
-          "externalId": [
-            {
-              "@type": "ExternalIdentifier",
-              "owner": "TMF",
-              "externalIdentifierType": "Quotenumber",
-              "id": "AK1"
-            }
-          ],
-          "instantSyncQuote": false,
-          "creationDate": "2021-05-06T12:45:12.028Z",
-          "requestedQuoteCompletionDate": "2021-05-14T12:45:12.028Z",
-          "version": "1",
-          "agreement": [
-            {
-              "id": "7778-jj56",
-              "href": "https://host:port/agreementManagement/v5/agreement/7778-jj56",
-              "name": "Global Agrrement",
-              "@type": "AgreementRef",
-              "@referredType": "Agreement"
-            }
-          ],
-          "contactMedium": [
-            {
-              "@type": "EmailContactMedium",
-              "@baseType": "ContactMedium",
-              "id": "11",
-              "preferred": true,
-              "emailAddress": "jean.pontus@PerfectCustomer.com"
-            }
-          ],
-          "note": [
-            {
-              "id": "1",
-              "author": "Jean Pontus",
-              "date": "2021-05-13T12:45:12.031Z",
-              "text": "This is a quote request following today call",
-              "@type": "Note"
-            }
-          ],
-          "productOfferingQualification": [
-            {
-              "id": "22ds-ty55",
-              "@type": "ProductOfferingQualificationRef",
-              "@referredType": "QueryProductOfferingQualification",
-              "href": "https://host:port/productOfferingQualificationManagement/v5/queryProductOfferingQualification/22ds-ty55"
-            }
-          ],
-          "quoteItem": [
-            {
-              "id": "1",
-              "@type": "QuoteItem",
-              "action": "add",
-              "quantity": 1,
-              "product": {
-                "@type": "Product",
-                "productCharacteristic": [
-                  {
-                    "@type": "StringCharacteristic",
-                    "id": "Char1",
-                    "name": "Voice Bundle",
-                    "value": "unlimited"
-                  },
-                  {
-                    "@type": "ObjectCharacteristic",
-                    "id": "Char5",
-                    "name": "Data Bundle",
-                    "value": {
-                      "volume": 50,
-                      "unit": "Gb/month"
-                    }
-                  }
-                ],
-                "productSpecification": {
-                  "id": "ssp7-ty89",
-                  "name": "TMF Tariff Plan",
-                  "@type": "ProductSpecificationRef",
-                  "@referredType": "ProductSpecification"
-                }
-              },
-              "productOffering": {
-                "id": "54gg-zza1",
-                "name": "TMF Tariff Plan 25",
-                "@type": "ProductOfferingRef",
-                "@referredType": "ProductOffering"
-              }
-            },
-            {
-              "id": "2",
-              "@type": "QuoteItem",
-              "action": "add",
-              "quantity": 12,
-              "product": {
-                "@type": "Product",
-                "productSpecification": {
-                  "id": "qq45-ytr7",
-                  "name": "Handset",
-                  "version": "1",
-                  "@type": "ProductSpecificationRef",
-                  "@referredType": "ProductSpecification"
-                }
-              },
-              "productOffering": {
-                "id": "z789-78ga",
-                "name": "TMF handset T9+",
-                "@type": "ProductOfferingRef",
-                "@referredType": "ProductOffering"
-              }
-            }
-          ],
-          "relatedParty": [
-            {
-              "role": "Buyer Contact",
-              "@type": "RelatedPartyRefOrPartyRoleRef",
-              "partyOrPartyRole": {
-                "id": "qsdd-9888",
-                "href": "https://host:port/partyManagement/v5/individual/qsdd-9888",
-                "name": "Jean Pontus",
-                "@referredType": "Individual",
-                "@type": "PartyRef"
-              }
-            },
-            {
-              "role": "Buyer organization",
-              "@type": "RelatedPartyRefOrPartyRoleRef",
-              "partyOrPartyRole": {
-                "id": "55",
-                "href": "https://host:port/partyManagement/v5/organization/55",
-                "name": "PerfectCustomer",
-                "@referredType": "Organization",
-                "@type": "PartyRef"
-              }
-            },
-            {
-              "role": "Seller Contact",
-              "@type": "RelatedPartyRefOrPartyRoleRef",
-              "partyOrPartyRole": {
-                "id": "45gh-gh89",
-                "href": "https://host:port/partyManagement/v5/individual/45gh-gh89",
-                "name": "Joe Doe",
-                "@referredType": "Individual",
-                "@type": "PartyRef"
-              }
-            }
-          ],
-          "state": "inProgress",
-          "@type": "Quote",
-          "validFor": {
-            "endDateTime": "2025-07-20T12:45:12.033Z",
-            "startDateTime": "2021-05-20T12:45:12.028Z"
-          }
-        }
-      },
-      "updateQuote_using_json-patch_json_request": {
-        "description": "PATCH Quote request leveraging json-patch+json application example",
-        "value": [
-          {
-            "op": "add",
-            "path": "/relatedParty",
-            "value": {
-              "role": "Buyer organization",
-              "@type": "RelatedPartyRefOrPartyRoleRef",
-              "partyOrPartyRole": {
-                "id": "99",
-                "href": "https://host:port/partyManagement/v5/organization/99",
-                "name": "AnotherCustomer",
-                "@referredType": "Organization",
-                "@type": "PartyRef"
-              }
-            }
-          }
-        ]
-      },
-      "updateQuote_using_json-patch_json_response": {
-        "description": "PATCH Quote response leveraging json-patch+json application example",
-        "value": {
-          "id": "12dd-78hg",
-          "href": "https://host:port/quoteManagement/v5/quote/12dd-78hg",
-          "category": "BSBS Quote",
-          "description": "Quote illustration",
-          "expectedFulfillmentStartDate": "2021-05-13T12:45:12.028Z",
-          "expectedQuoteCompletionDate": "2021-05-14T12:45:12.028Z",
-          "externalId": [
-            {
-              "@type": "ExternalIdentifier",
-              "owner": "TMF",
-              "externalIdentifierType": "Quotenumber",
-              "id": "AK1"
-            }
-          ],
-          "instantSyncQuote": false,
-          "creationDate": "2021-05-13T12:45:12.028Z",
-          "requestedQuoteCompletionDate": "2021-05-14T12:45:12.028Z",
-          "version": "1",
-          "agreement": [
-            {
-              "id": "7778-jj56",
-              "href": "https://host:port/agreementManagement/v5/agreement/7778-jj56",
-              "name": "Global Agrrement",
-              "@type": "AgreementRef",
-              "@referredType": "Agreement"
-            }
-          ],
-          "contactMedium": [
-            {
-              "@type": "EmailContactMedium",
-              "@baseType": "ContactMedium",
-              "id": "11",
-              "preferred": true,
-              "emailAddress": "jean.pontus@PerfectCustomer.com"
-            }
-          ],
-          "note": [
-            {
-              "id": "1",
-              "author": "Jean Pontus",
-              "date": "2021-05-13T12:45:12.028Z",
-              "text": "This is a quote request following today call",
-              "@type": "Note"
-            }
-          ],
-          "productOfferingQualification": [
-            {
-              "id": "22ds-ty55",
-              "@type": "ProductOfferingQualificationRef",
-              "href": "https://host:port/productOfferingQualificationManagement/v5/queryProductOfferingQualification/22ds-ty55",
-              "@referredType": "QueryProductOfferingQualification"
-            }
-          ],
-          "quoteItem": [
-            {
-              "id": "1",
-              "@type": "QuoteItem",
-              "action": "add",
-              "quantity": 1,
-              "product": {
-                "@type": "Product",
-                "productCharacteristic": [
-                  {
-                    "@type": "StringCharacteristic",
-                    "id": "Char1",
-                    "name": "Voice Bundle",
-                    "value": "unlimited"
-                  },
-                  {
-                    "@type": "ObjectCharacteristic",
-                    "id": "Char5",
-                    "name": "Data Bundle",
-                    "value": {
-                      "volume": 50,
-                      "unit": "Gb/month"
-                    }
-                  }
-                ],
-                "productSpecification": {
-                  "id": "ssp7-ty89",
-                  "name": "TMF Tariff Plan",
-                  "@type": "ProductSpecificationRef",
-                  "@referredType": "ProductSpecification"
-                }
-              },
-              "productOffering": {
-                "id": "54gg-zza1",
-                "name": "TMF Tariff Plan 25",
-                "@type": "ProductOfferingRef",
-                "@referredType": "ProductOffering"
-              }
-            },
-            {
-              "id": "2",
-              "@type": "QuoteItem",
-              "action": "add",
-              "quantity": 12,
-              "product": {
-                "@type": "Product",
-                "productSpecification": {
-                  "id": "qq45-ytr7",
-                  "name": "Handset",
-                  "version": "1",
-                  "@type": "ProductSpecificationRef",
-                  "@referredType": "ProductSpecification"
-                }
-              },
-              "productOffering": {
-                "id": "z789-78ga",
-                "name": "TMF handset T9+",
-                "@type": "ProductOfferingRef",
-                "@referredType": "ProductOffering"
-              }
-            }
-          ],
-          "relatedParty": [
-            {
-              "role": "Buyer Contact",
-              "@type": "RelatedPartyRefOrPartyRoleRef",
-              "partyOrPartyRole": {
-                "id": "qsdd-9888",
-                "href": "https://host:port/partyManagement/v5/individual/qsdd-9888",
-                "name": "Jean Pontus",
-                "@referredType": "Individual",
-                "@type": "PartyRef"
-              }
-            },
-            {
-              "role": "Buyer organization",
-              "@type": "RelatedPartyRefOrPartyRoleRef",
-              "partyOrPartyRole": {
-                "id": "99",
-                "href": "https://host:port/partyManagement/v5/organization/99",
-                "name": "AnotherCustomer",
-                "@referredType": "Organization",
-                "@type": "PartyRef"
-              }
-            },
-            {
-              "role": "Seller Contact",
-              "@type": "RelatedPartyRefOrPartyRoleRef",
-              "partyOrPartyRole": {
-                "id": "45gh-gh89",
-                "href": "https://host:port/partyManagement/v5/individual/45gh-gh89",
-                "name": "Joe Doe",
-                "@referredType": "Individual",
-                "@type": "PartyRef"
-              }
-            }
-          ],
-          "state": "inProgress",
-          "@type": "Quote",
-          "validFor": {
-            "endDateTime": "2021-05-13T12:45:12.033Z",
-            "startDateTime": "2021-05-20T12:45:12.033Z"
-          }
-        }
-      },
-      "updateQuote_using_json-patch-query_json_request": {
-        "description": "PATCH Quote request leveraging json-patch-query+json application example",
-        "value": [
-          {
-            "op": "replace",
-            "path": "/quoteItem/quantity?id=2",
-            "value": 12
-          }
-        ]
-      },
-      "updateQuote_using_json-patch-query_json_response": {
-        "description": "PATCH Quote response leveraging json-patch-query+json application example",
-        "value": {
-          "id": "12dd-78hg",
-          "href": "https://host:port/quoteManagement/v5/quote/12dd-78hg",
-          "category": "BSBS Quote",
-          "description": "Quote illustration",
-          "expectedFulfillmentStartDate": "2021-05-16T12:45:12.028Z",
-          "expectedQuoteCompletionDate": "2021-05-14T12:45:12.028Z",
-          "externalId": [
-            {
-              "@type": "ExternalIdentifier",
-              "owner": "TMF",
-              "externalIdentifierType": "Quotenumber",
-              "id": "AK1"
-            }
-          ],
-          "instantSyncQuote": false,
-          "creationDate": "2021-05-06T12:45:12.028Z",
-          "requestedQuoteCompletionDate": "2021-05-14T12:45:12.028Z",
-          "version": "1",
-          "agreement": [
-            {
-              "id": "7778-jj56",
-              "href": "https://host:port/agreementManagement/v5/agreement/7778-jj56",
-              "name": "Global Agrrement",
-              "@type": "AgreementRef",
-              "@referredType": "Agreement"
-            }
-          ],
-          "contactMedium": [
-            {
-              "@type": "EmailContactMedium",
-              "@baseType": "ContactMedium",
-              "id": "11",
-              "preferred": true,
-              "emailAddress": "jean.pontus@PerfectCustomer.com"
-            }
-          ],
-          "note": [
-            {
-              "id": "1",
-              "author": "Jean Pontus",
-              "date": "2021-05-13T12:45:12.031Z",
-              "text": "This is a quote request following today call",
-              "@type": "Note"
-            }
-          ],
-          "productOfferingQualification": [
-            {
-              "id": "22ds-ty55",
-              "@type": "ProductOfferingQualificationRef",
-              "href": "https://host:port/productOfferingQualificationManagement/v5/queryProductOfferingQualification/22ds-ty55",
-              "@referredType": "ProductOfferingQualification"
-            }
-          ],
-          "quoteItem": [
-            {
-              "id": "1",
-              "@type": "QuoteItem",
-              "action": "add",
-              "quantity": 1,
-              "product": {
-                "@type": "Product",
-                "productCharacteristic": [
-                  {
-                    "@type": "StringCharacteristic",
-                    "id": "Char1",
-                    "name": "Voice Bundle",
-                    "value": "unlimited"
-                  },
-                  {
-                    "@type": "ObjectCharacteristic",
-                    "id": "Char5",
-                    "name": "Data Bundle",
-                    "value": {
-                      "volume": 50,
-                      "unit": "Gb/month"
-                    }
-                  }
-                ],
-                "productSpecification": {
-                  "id": "ssp7-ty89",
-                  "name": "TMF Tariff Plan",
-                  "@type": "ProductSpecificationRef",
-                  "@referredType": "ProductSpecification"
-                }
-              },
-              "productOffering": {
-                "id": "54gg-zza1",
-                "name": "TMF Tariff Plan 25",
-                "@type": "ProductOfferingRef",
-                "@referredType": "ProductOffering"
-              }
-            },
-            {
-              "id": "2",
-              "@type": "QuoteItem",
-              "action": "add",
-              "quantity": 12,
-              "product": {
-                "@type": "Product",
-                "productSpecification": {
-                  "id": "qq45-ytr7",
-                  "name": "Handset",
-                  "version": "1",
-                  "@type": "ProductSpecificationRef",
-                  "@referredType": "ProductSpecification"
-                }
-              },
-              "productOffering": {
-                "id": "z789-78ga",
-                "name": "TMF handset T9+",
-                "@type": "ProductOfferingRef",
-                "@referredType": "ProductOffering"
-              }
-            }
-          ],
-          "relatedParty": [
-            {
-              "role": "Buyer Contact",
-              "@type": "RelatedPartyRefOrPartyRoleRef",
-              "partyOrPartyRole": {
-                "id": "qsdd-9888",
-                "href": "https://host:port/partyManagement/v5/individual/qsdd-9888",
-                "name": "Jean Pontus",
-                "@referredType": "Individual",
-                "@type": "PartyRef"
-              }
-            },
-            {
-              "role": "Buyer organization",
-              "@type": "RelatedPartyRefOrPartyRoleRef",
-              "partyOrPartyRole": {
-                "id": "55",
-                "href": "https://host:port/partyManagement/v5/organization/55",
-                "name": "PerfectCustomer",
-                "@referredType": "Organization",
-                "@type": "PartyRef"
-              }
-            },
-            {
-              "role": "Seller Contact",
-              "@type": "RelatedPartyRefOrPartyRoleRef",
-              "partyOrPartyRole": {
-                "id": "45gh-gh89",
-                "href": "https://host:port/partyManagement/v5/individual/45gh-gh89",
-                "name": "Joe Doe",
-                "@referredType": "Individual",
-                "@type": "PartyRef"
-              }
-            }
-          ],
-          "state": "inProgress",
-          "@type": "Quote"
-        }
       }
     },
     "requestBodies": {
@@ -9287,41 +8475,21 @@
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/Quote_MVO"
-            },
-            "examples": {
-              "updateQuote_using_json": {
-                "$ref": "#/components/examples/updateQuote_using_json_request"
-              }
             }
           },
           "application/merge-patch+json": {
             "schema": {
               "$ref": "#/components/schemas/Quote_MVO"
-            },
-            "examples": {
-              "updateQuote_using_merge-patch_json": {
-                "$ref": "#/components/examples/updateQuote_using_merge-patch_json_request"
-              }
             }
           },
           "application/json-patch+json": {
             "schema": {
               "$ref": "#/components/schemas/JsonPatchOperations"
-            },
-            "examples": {
-              "updateQuote_using_json-patch_json": {
-                "$ref": "#/components/examples/updateQuote_using_json-patch_json_request"
-              }
             }
           },
           "application/json-patch-query+json": {
             "schema": {
               "$ref": "#/components/schemas/JsonPatchOperations"
-            },
-            "examples": {
-              "updateQuote_using_json-patch-query_json": {
-                "$ref": "#/components/examples/updateQuote_using_json-patch-query_json_request"
-              }
             }
           }
         },

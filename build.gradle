@@ -726,6 +726,8 @@ tasks.register('transformQuote', com.cgi.space.psi.tasks.TransformOASTask) { tra
     }
   ''')
   removeProperty("(Money|TimePeriod|Quantity)", "\\@(.*)")
+  // TMF648 PATCH examples do not match the restricted Quote_MVO
+  removeOperationExamples("/quote/\\{id\\}", "patch")
   // Prune things that became superfluous because of above transformations
   removeSchema("(Feature|FeatureRelationship|GeographicSiteFeature|PolicyRef)(|_FVO|_MVO)")
   removeSchema('(?!Quote_MVO$).*_MVO')

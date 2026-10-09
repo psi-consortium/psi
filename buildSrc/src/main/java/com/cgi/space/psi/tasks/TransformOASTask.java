@@ -26,6 +26,7 @@ import com.cgi.space.psi.tasks.transformers.PruneSchemas;
 import com.cgi.space.psi.tasks.transformers.PruneTags;
 import com.cgi.space.psi.tasks.transformers.RemoveOneOf;
 import com.cgi.space.psi.tasks.transformers.RemoveOperation;
+import com.cgi.space.psi.tasks.transformers.RemoveOperationExamples;
 import com.cgi.space.psi.tasks.transformers.RemovePaths;
 import com.cgi.space.psi.tasks.transformers.RemoveProperty;
 import com.cgi.space.psi.tasks.transformers.RemoveRequiredProperty;
@@ -111,6 +112,10 @@ public class TransformOASTask extends DefaultTask {
 
     public void removeOperation(String pathPattern, String operationPattern) {
         this.transformations.add(new RemoveOperation(pathPattern, operationPattern));
+    }
+
+    public void removeOperationExamples(String pathPattern, String operationPattern) {
+        this.transformations.add(new RemoveOperationExamples(pathPattern, operationPattern));
     }
 
     public void addTagDescription(String tagName, String tagDescription) {
