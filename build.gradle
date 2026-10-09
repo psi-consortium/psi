@@ -715,6 +715,8 @@ tasks.register('transformQuote', com.cgi.space.psi.tasks.TransformOASTask) { tra
   importSchema("(ProductOfferingRef|BundledProductOfferingOption)(.*)", file("tmforum/apis/TMF620_Product_Catalog/oas/TMF620-Product_Catalog_Management-v5.0.0.oas.yaml"))
   importSchema('BundledProductOffering(.*)', file("doc/PSI/PSI-ICD/open-apis/extensions/PSID620-Product_Catalog_Management-v5.0.0.oas.json"))
   importSchema("(.*)", file("doc/PSI/PSI-ICD/open-apis/extensions/Characteristic.oas.json"))
+  // PATCH only accepts or declines a quote, see the PSID648 extension
+  importSchema("(.*)", file("doc/PSI/PSI-ICD/open-apis/extensions/PSID648-Quote-v5.0.0.oas.json"))
   // PSI specific adjustments
   overwritePropertyFormat("(.*)", "href", "uri")
   adjustAttachmentRef(transformations)
@@ -726,6 +728,7 @@ tasks.register('transformQuote', com.cgi.space.psi.tasks.TransformOASTask) { tra
   removeProperty("(Money|TimePeriod|Quantity)", "\\@(.*)")
   // Prune things that became superfluous because of above transformations
   removeSchema("(Feature|FeatureRelationship|GeographicSiteFeature|PolicyRef)(|_FVO|_MVO)")
+  removeSchema('(?!Quote_MVO$).*_MVO')
   pruneAll()
 }
 
