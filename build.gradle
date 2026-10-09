@@ -699,6 +699,8 @@ tasks.register('transformQuote', com.cgi.space.psi.tasks.TransformOASTask) { tra
   // Adjust metadata
   replaceServerUrl("{apiRoot}/tmf-api/", "/psi-api/")
   replaceServerUrl("v5", "v2")
+  replaceInfoDescription('**TMF API Reference : TMF 648 - Quote **\n\n** April 2025**', '## PSID API Reference: PSID648 - Quote Management\n\nBased on TMF API Reference: TMF 648 - Quote v5.0.0 (April 2025)')
+  replaceInfoDescription('\n- Notification of events on quote.', '')
   // Remove explicitly unwanted things
   removeEvents(transformations)
   // unify schemas
