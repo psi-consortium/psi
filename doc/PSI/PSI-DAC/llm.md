@@ -26,8 +26,8 @@ For instance, the Mistral Large[^4] model was launched in February 2024 and posi
 In April 2024, Meta released the publickly available model Llama3[^5], offering optimization for dialogue use cases and variants of 8B and 70B parameters.
 While these LLMs are publicly available and cloud-hosted, their application for company needs demanded locally hosted LLMs to ensure data safety.
 Thus, Ollama[^6] was developed and published in 2023.
-Ollama is an open-source LLM that offers local deployment for the purpose of enhancing privacy and control.
-It is compatible with the OpenAPI API, which serves to simplify its integration.
+Ollama is an open-source tool that offers local LLM deployment for the purpose of enhancing privacy and control.
+It is compatible with the OpenAI API, which serves to simplify its integration.
 In addition, Ollama supports the integration of various LLMs, such as Mistral or Llama3.
 
 The generation of documents represents one of the most promising applications of LLMs.
@@ -44,10 +44,8 @@ Throughout the following chapters, we will delve into the intricacies of the afo
 
 ## Ollama
 
-Ollama is a large language model that represents a significant advancement in the field of natural language processing.
-Its development was driven by the need for a versatile and robust tool capable of handling a wide range of text generation tasks.
-The development of Ollama has been informed by advancements in deep learning, particularly the Transformer architecture, which has become the foundation for many contemporary language models.
 Ollama is a sophisticated piece of software that facilitates the execution of large language models (LLMs) on a local machine.
+Many of these models are based on the transformer architecture, which has become the foundation for many contemporary language models, and support a wide range of text generation tasks.
 This software, which is developed as an open-source project, has been designed with the objective of rendering AI models more accessible and practical for developers and researchers.
 Ollama facilitates the execution of AI models on personal computers, thereby reducing reliance on cloud services.
 The implementation of localised models is pivotal in ensuring the security and confidentiality of user data, thereby addressing the inherent privacy concerns that are often associated with cloud-based AI services.
