@@ -44,7 +44,8 @@ Throughout the following chapters, we will delve into the intricacies of the afo
 
 ## Ollama
 
-Ollama is a sophisticated piece of software that facilitates the execution of large language models (LLMs) on a local machine. Many of these models are based on the Transformer architecture, which has become the foundation for many contemporary language models, and support a wide range of text generation tasks.
+Ollama is a sophisticated piece of software that facilitates the execution of large language models (LLMs) on a local machine.
+Many of these models are based on the transformer architecture, which has become the foundation for many contemporary language models, and support a wide range of text generation tasks.
 This software, which is developed as an open-source project, has been designed with the objective of rendering AI models more accessible and practical for developers and researchers.
 Ollama facilitates the execution of AI models on personal computers, thereby reducing reliance on cloud services.
 The implementation of localised models is pivotal in ensuring the security and confidentiality of user data, thereby addressing the inherent privacy concerns that are often associated with cloud-based AI services.
