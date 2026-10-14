@@ -78,6 +78,12 @@ dcr_overrides:
    version: 'MS12 [2.0.0-alpha]'
    author: 'Christian Grubert'
    message: 'No update, PSI Phase 2 version bump.'
+ - dcr:
+   from: '2026-10-06'
+   to: '2026-10-09'
+   version: 'MS12 [2.0.0-alpha]'
+   author: 'Kinga Kocierz'
+   message: 'Added PSID648 Quote Management API derived from TMF648 v5.0.0, PATCH limited to accepting or declining a quote.'
 =end
 
 # Document Meta Information
