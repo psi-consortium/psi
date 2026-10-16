@@ -122,3 +122,7 @@ The following sections heavily refer to terms, abbreviations and definitions def
 # A User Story: Demonstration of capabilities
 
 @include [userstory](userstory.md)
+
+# Extended User Journeys: End-to-End Satellite Service Delivery
+
+@include [extended_journey](extended_journey.md)
