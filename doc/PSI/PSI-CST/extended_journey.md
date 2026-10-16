@@ -139,28 +139,140 @@ TODO: Overview of the stages from discovery to termination.
 
 ### Baseline Scenario
 
-TODO: A representative mission that progressively requires intelligence, observation, and communications. Could be skipped and only laid out in the "Iterative Mission Evolution" chapter.
+The following scenario is based on a fictional customer responsible for coordinating the emergency response to an emerging wildfire.
+As the situation develops, the customer requires different satellite services to support situational awareness and field operations.
 
-## Alternative Discovery Journeys
+> [!NOTE]
+> Four providers, **Provider A, B, C, and D**, are already connected to the PSS, and their Product Specifications and Product Offerings are known to the system.
+> The providers offer different satellite services, including Earth Observation, AI-based intelligence, and satellite communication (SatCom).
+> The initial onboarding of providers and publication of their catalogs are therefore not covered in this scenario.
 
-TODO: Defines how customers identify products before entering the common ordering process.
+Following reports of an emerging wildfire, the customer needs to determine the geographical extent of the affected area to support the planning and coordination of emergency response activities.
+
+To obtain this information, the customer uses the PSS to discover and order a **bundled Product Offering** consisting of satellite imagery and an AI-based analysis service.
+The satellite imagery provides observation data for the relevant geographical area, while the AI service processes this data to identify and map the areas affected by the fire.
+
+Once the ordered products have been delivered, the customer receives the resulting intelligence and can use it to assess the situation and plan the deployment of emergency personnel.
+
+As the emergency response progresses, the customer decides to deploy personnel to the affected region.
+To ensure reliable communication with the field teams, particularly if terrestrial communication infrastructure becomes unavailable or unreliable, the customer identifies an additional need for satellite communication services.
+
+The customer returns to the PSS to discover and order a suitable **SatCom Product Offering**, providing a backup communication channel for the deployed personnel.
+
+This additional requirement arises after the initial intelligence products have been ordered and demonstrates how the customer can progressively procure different satellite services as operational needs evolve.
+
+## Discovery Journey Alternatives
+
+The way customers discover suitable satellite services depends on their requirements, their familiarity with available products, and the capabilities of the Pooling and Sharing System (PSS) they are using.
+
+Some customers may start with a mission objective and rely on the PSS to identify suitable products through matchmaking.
+Others may already have specific service requirements or know which products they want to procure, allowing them to follow a more direct discovery process.
+
+A PSS may support one or more of the discovery alternatives described in the following sections.
+These alternatives are not mutually exclusive, and customers may use different approaches depending on their needs and the functionality provided by the PSS.
+
+Regardless of the chosen discovery approach, the objective is to identify suitable Product Offerings that can subsequently be qualified, quoted, and ordered through the corresponding business processes.
+
+The following sections illustrate three alternative discovery journeys and a variation in which mission management is performed in an external system.
 
 ### Direct Product Catalog Selection
 
-TODO: The customer browses available offerings and selects a known product without matchmaking.
+In this journey, the customer discovers available satellite services by browsing the Product Catalog provided by the PSS, without first defining a mission or submitting specific service requirements.
+
+The customer opens the Product Catalog, which presents a list of all available Product Specifications.
+Depending on the PSS implementation, the catalog may provide search and filtering capabilities to help customers narrow down the results based on relevant product characteristics, such as service category, geographical coverage, or technical capabilities.
+
+Once the customer selects a Product Specification, the PSS displays the associated Product Offerings.
+These represent the concrete products available for procurement, with different characteristics or commercial conditions.
+
+The way the Product Catalog is populated depends on the architecture and capabilities of the PSS.
+Two approaches are possible:
+
+- *Internal Product Catalog*: The PSS maintains its own catalog containing the available Product Specifications and Product Offerings.
+  Providers must actively register or publish the products they wish to offer through the PSS.
+  This may be achieved through PSI APIs, data imports, or manual registration.
+- *Virtual Product Catalog*: The PSS dynamically combines product information from trusted external catalogs operated by providers or other PSS implementations.
+  Rather than requiring all products to be registered locally, the PSS retrieves and presents the available Product Specifications and Product Offerings from these external sources.
+
+A PSS may also combine both approaches, maintaining an internal catalog while incorporating products from selected external catalogs.
+From the customer's perspective, the discovery process remains largely the same, regardless of how the catalog is implemented.
+
+After selecting a Product Offering, the customer can proceed to the subsequent qualification, quotation, or ordering processes, depending on the requirements of the selected product and the capabilities of the participating systems.
 
 ### Use-case Template Selection
 
-TODO: The customer is selecting and tailoring a use-case template that is provided by the governance.
+In this journey, the customer discovers suitable satellite services by selecting from a set of predefined **Use Cases** configured by the Governance of the PSS.
+Unlike direct catalog selection, where customers browse the available Product Specifications themselves, this approach guides customers towards suitable products based on their intended use.
+
+The process starts with **Governance defining and configuring Use Cases** based on their domain knowledge and understanding of customer needs.
+These Use Cases represent common operational requirements or scenarios for which suitable products have already been identified.
+
+Use Cases may be organized hierarchically, allowing customers to navigate through nested Use Cases or select additional options to further specify their needs.
+For each Use Case and its possible options, Governance assigns suitable Product Specifications and Offerings.
+
+When a customer accesses the PSS, they are presented with the available Use Cases.
+After selecting a Use Case and any applicable sub-options, the PSS presents a **scoped view of the Product Catalog**, containing the Product Specifications and Offerings associated with that selection by Governance.
+
+Depending on the PSS implementation, customers may be allowed to choose between different Product Offerings associated with the selected Use Case.
+For example, a customer might select a higher service tier or an alternative offering from a preferred provider while remaining within the scope of the configured Use Case.
+
+This approach strongly suggests the use of an **internal Product Catalog**, as Governance needs to maintain the relationships between Use Cases, Product Specifications, and Product Offerings.
+However, it is also possible for Governance to reference specifications or offerings maintained in trusted external catalogs operated by providers or other PSS implementations.
+
+From the customer's perspective, the discovery process is simplified by relying on the knowledge and preconfigured product selections of Governance, rather than requiring detailed knowledge of the available satellite services.
+
+Once the customer has selected a suitable Product Offering, they can proceed to the subsequent qualification, quotation, or ordering processes, depending on the requirements of the selected product and the capabilities of the participating systems.
 
 ### Mission-Based Product Inquiry
 
-TODO: The customer defines a mission, specifies requirements, and receives matching product offerings.
+In this journey, the customer discovers suitable satellite services by defining a **Mission** that describes their operational objectives and associated service requirements.
+Unlike the previous discovery approaches, the customer does not select products from a catalog but describes what they want to achieve and relies on the PSS to identify suitable products through matchmaking.
 
+The journey consists of two phases: **Mission Creation and Management**, followed by **Product Inquiry and Matchmaking**.
+Note that both can be done on separate systems, i.e. the mission management can be done using existing, domain-specific software, which only uses the Product Inquiry API to query the PSS.
 
-### Product Inquiry With External Mission
+#### Phase 1: Mission Creation and Management
 
-TODO: A variation in which an external system manages the mission and integrates with the PSS through APIs.
+The customer starts by creating a new Mission or continuing to work on an existing one.
+A Mission defines the operational context in which satellite services are required, including information such as the mission's purpose, timeframe, geographical areas, and associated service requirements.
+
+A Mission may contain requirements for multiple product types, potentially combining satellite communication, Earth Observation, and AI-based intelligence services.
+These requirements may evolve throughout the mission lifecycle as the customer's operational needs change.
+
+To assist customers in defining their missions, the PSS may provide different levels of guidance:
+
+- **Mission Templates:** Governance may define reusable Mission Templates for common operational scenarios, similar to the Use Cases described in the previous journey. Customers can select a suitable template as a starting point and adapt its parameters and service requirements to their specific needs.
+- **AI-Based Mission Companion:** The PSS may provide an AI-based assistant that continuously evaluates changes to the Mission and suggests relevant additions, refinements, or adjustments. Customers may also interact with the assistant through a conversational interface, describing their intentions in natural language and asking it to apply corresponding changes to the Mission.
+- **Knowledge-Based Assistance:** In the background, the PSS may use a knowledge graph that relates operational capabilities and functions to suitable product types. This enables the system to translate high-level mission objectives into more concrete service requirements and to identify dependencies between different capabilities.
+
+These assistance mechanisms may be combined, allowing customers to start with a predefined template and progressively refine their Mission with AI-based recommendations.
+
+The resulting Mission contains one or more sets of service requirements that can be used to discover suitable products.
+
+#### Phase 2: Product Inquiry and Matchmaking
+
+Once the customer has defined the relevant service requirements, the PSS creates a **Product Inquiry** for one or multiple product types associated with the Mission.
+
+In contrast to Direct Product Catalog Selection or Use-Case Selection, the Product Inquiry is **not bound to a specific Product Specification or Product Offering**.
+Instead, it describes the required product types and their characteristics, derived from the Mission.
+
+Consequently, the PSS does not necessarily need to maintain a local Product Catalog to support this discovery approach.
+
+Depending on its architecture, the PSS may process the inquiry in different ways:
+
+- **Local Matchmaking:** The PSS forwards the Product Inquiry to an internal matchmaking algorithm, which evaluates the requirements against Product Specifications and Product Offerings available through a local or accessible external catalog.
+- **Distributed Matchmaking:** The PSS forwards the Product Inquiry to other PSS implementations or provider systems capable of processing it. These systems perform matchmaking against their respective catalogs and return suitable Product Specifications and Product Offerings.
+- **Combined Matchmaking:** The PSS may perform an initial matchmaking step locally and distribute the inquiry to selected external systems for further evaluation.
+
+Regardless of the approach, matchmaking evaluates the requested product types and characteristics against the available products and returns a **selection of suitable Product Specifications and Product Offerings** tailored to the inquiry.
+
+The PSS consolidates the results and presents them to the customer, who can review the proposed products and select the offerings that best meet their mission requirements.
+
+If the results do not sufficiently satisfy the customer's needs, they may refine the Mission and repeat the Product Inquiry, allowing the discovery process to evolve iteratively.
+
+Once suitable Product Offerings have been selected, the customer can proceed to the subsequent qualification, quotation, or ordering processes, depending on the requirements of the selected products and the capabilities of the participating systems.
+
+The Mission remains available as the overarching context for the selected and subsequently ordered products, enabling customers to revisit their requirements and procure additional services as their operational needs evolve.
 
 ## Product Qualification and Ordering
 
@@ -182,15 +294,18 @@ TODO: Translating a selected and, where necessary, qualified offering into a pro
 
 TODO: Provider-side validation, processing, and communication of order status.
 
+### Product Activation
+
+TODO: End of order lifecycle: product gets activated (may be some time after confirmation)
+
 ## Iterative Mission Evolution
 
 TODO: Demonstrates how a mission develops over time rather than ending with the first order. For example:
 
-1. Initial Intelligence Request — Ordering an AI-based intelligence product to obtain information relevant to a mission.
-2. Mission Refinement — Updating mission requirements based on intelligence results or changing operational needs.
-3. Additional Earth Observation Services — Acquiring complementary observation data or analytical services.
-4. Subsequent SatCom Procurement — Ordering communication services required during a later mission phase.
-5. Coordinating Multiple Products — Managing several independently ordered products within the same mission.
+0. Initial Intelligence Request — Ordering an AI-based intelligence product to obtain information relevant to a mission.
+1. Mission Refinement — Updating mission requirements based on intelligence results or changing operational needs.
+2. Additional SatCom Procurement — Ordering communication services required during a later mission phase.
+3. Coordinating Multiple Products — Managing several independently ordered products within the same mission.
 
 ## Post-Order Lifecycle Management
 
