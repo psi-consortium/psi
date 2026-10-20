@@ -115,7 +115,7 @@ The role of a PSS is determined by its position in a particular interaction rath
 This enables federated architectures in which multiple PSS implementations exchange product information and business requests through standardized PSI APIs.
 A PSS may therefore act as a customer towards one system while simultaneously acting as a broker or provider towards another.
 
-In the scenarios, the primary PSS acts as a **Broker PSS**, providing customers with access to products from multiple providers.
+In the scenarios, the primary PSS acts as a **PSS**, providing customers with access to products from multiple providers.
 It may aggregate product catalogs, perform matchmaking, coordinate qualification and quotation processes, and manage product orders and inventories.
 Refer to [PSI-TAD] for more information on other PSS modes.
 
@@ -276,53 +276,204 @@ The Mission remains available as the overarching context for the selected and su
 
 ## Product Qualification and Ordering
 
-TODO: A common process following any of the three discovery journeys.
+Once the customer has discovered and selected suitable Product Offerings, the process continues with product qualification and ordering.
+
+The following steps are **independent of the discovery journey** chosen by the customer.
+Regardless of whether the products were identified through Direct Product Catalog Selection, Use-Case Selection, or Mission-Based Product Inquiry, the subsequent processes follow the same general principles.
+
+> [!NOTE]
+> If the PSS has assembled a bundled Product Offering containing products from multiple providers, it is responsible for decomposing the bundle into provider-specific requests throughout the POQ, Quote, and Order processes.
+> Each provider receives only the information relevant to its own products, without visibility into the products or commercial arrangements of other providers.
+> The PSS coordinates the individual interactions and consolidates their results to present a unified process to the customer.
 
 ### Product Offering Qualification
 
-TODO: Qualification of a selected offering against specific customer requirements and provider capabilities.
+The Product Offering Qualification (POQ) process allows the customer to verify whether a selected Product Offering can be provided under the requested conditions before placing an order.
+
+Following the TM Forum Product Offering Qualification Management approach (TMF679), the PSS creates a POQ request containing the selected Product Offering and the relevant requirements, such as the requested configuration, geographical location, or timeframe.
+Depending on the PSS implementation, the qualification may be initiated **automatically** after product discovery or **explicitly by the customer**.
+
+The PSS forwards the POQ request to the responsible provider, which evaluates whether the requested product can be delivered under the specified conditions.
+This may involve checking technical feasibility, resource availability, geographical coverage, or other product-specific constraints.
+
+The provider may process the request **asynchronously**, particularly when qualification requires complex feasibility checks or manual intervention.
+In this case, the PSS tracks the qualification status and receives or retrieves the result once processing has been completed.
+
+The result indicates whether the requested product is eligible for ordering and may include additional information, such as qualification conditions, restrictions, or reasons why the request cannot be fulfilled.
+If the requested product cannot be provided as specified, the provider may also **propose alternative Product Offerings** that partially or fully satisfy the customer's requirements.
+
+The PSS presents the qualification result and any proposed alternatives to the customer.
+If the qualification is positive, the customer can proceed with the subsequent Quote or Order process, as applicable.
+If the qualification is negative, the customer may adjust their requirements, select an alternative Product Offering, or repeat the qualification process.
 
 ### Quote Negotiation
 
-TODO: Requesting, preparing, presenting, and accepting a customer-specific commercial offer.
+The Quote Negotiation process allows the customer to request a customized commercial offer for a selected Product Offering before placing an order.
+
+Following the TM Forum Quote Management approach (TMF648), this process is **optional**.
+Customers may order a Product Offering directly under its published terms and conditions without requesting a separate Quote.
+However, a Quote may be required when the customer requests specific configurations, pricing, contractual conditions, or other deviations from the standard offering.
+
+The customer initiates the process through the PSS, which creates a Quote request containing the selected Product Offering, the requested configuration, and any additional requirements.
+The PSS forwards the request to the responsible provider.
+
+The provider evaluates the request and prepares a customized Quote, including the applicable pricing, terms and conditions, and validity period.
+Similar to the POQ process, Quote processing may be **asynchronous**, particularly when commercial negotiations, internal approvals, or additional feasibility checks are required.
+
+The provider returns the Quote to the PSS, which presents it to the customer.
+Depending on the provider's response, the customer may accept the proposed terms or request adjustments, resulting in further negotiation between the customer and provider through the PSS.
+
+Once the customer accepts a Quote, the agreed conditions can be used to proceed with the Product Order process.
+If the customer rejects the Quote or no agreement is reached, they may revise their requirements, select another Product Offering, or abandon the request.
 
 ### Product Order Creation
 
-TODO: Translating a selected and, where necessary, qualified offering into a product order.
+The Product Ordering process allows the customer to place an order for one or more selected Product Offerings.
 
-### Order Processing and Confirmation
+Following the TM Forum Product Ordering Management approach (TMF622), the process may be initiated directly after product discovery, following a successful Product Offering Qualification (POQ), or after the acceptance of a negotiated Quote.
+The Product Order contains the selected Product Offerings, their requested configurations, and relevant information such as the customer, requested delivery dates, and applicable commercial conditions.
 
-TODO: Provider-side validation, processing, and communication of order status.
+The customer submits the order through the PSS, which validates the request and, depending on the PSS implementation, may require approval by Governance before forwarding it to the responsible provider.
+
+The provider receives the Product Order and begins processing it.
+This may include validating the order details, checking contractual conditions, reserving resources, and initiating the necessary fulfilment activities.
+
+Once the provider accepts the order, it creates a corresponding Product entry in its Product Inventory using the TM Forum Product Inventory Management API (TMF637), with the initial status `created`.
+This entry represents the ordered product and allows its lifecycle to be tracked independently of the Product Order.
+The PSS can retrieve or receive the inventory information to maintain visibility of the customer's ordered products.
+
+Order processing may be asynchronous, particularly when the requested products require additional preparation, resource allocation, or manual intervention.
+The provider communicates changes to the order status through the TMF622 API, allowing the PSS to track its progress.
+These updates may be delivered through event notifications (TMF688) or retrieved by the PSS.
+
+The PSS presents the current order status to the customer, providing visibility into the processing progress.
+Depending on the provider's workflow, the order may transition through different states, such as acknowledged, in progress, completed, or rejected.
+For orders containing multiple items, the status of individual order items may also be tracked.
 
 ### Product Activation
 
-TODO: End of order lifecycle: product gets activated (may be some time after confirmation)
+The Product Activation process marks the transition from an ordered product to an operational product, making the underlying services available to the customer.
+
+Depending on the product and the agreed activation date, activation may take place immediately after order acceptance or at a later point in time.
+The provider is responsible for preparing and activating the product, which may involve provisioning resources, configuring services, or performing other product-specific activities.
+
+Once the product has been successfully activated, the provider updates the corresponding Product Inventory entry through TMF637, changing its status from `created` to `active`.
+The PSS retrieves or receives this update and presents the product's operational status to the customer.
+
+At this point, the underlying services are being provided and the customer can begin using the ordered product.
+The provider then marks the associated Product Order as `completed` through TMF622, indicating that the order has been successfully fulfilled.
+
+The activated products remain visible in the customer's Product Inventory and can subsequently be managed through the post-order lifecycle processes described in the following sections.
 
 ## Iterative Mission Evolution
 
-TODO: Demonstrates how a mission develops over time rather than ending with the first order. For example:
+A customer's operational requirements may evolve throughout the lifecycle of a mission.
+New information, changing circumstances, or additional operational objectives may lead to the need for further satellite services, even when previously ordered products are already active.
 
-0. Initial Intelligence Request — Ordering an AI-based intelligence product to obtain information relevant to a mission.
-1. Mission Refinement — Updating mission requirements based on intelligence results or changing operational needs.
-2. Additional SatCom Procurement — Ordering communication services required during a later mission phase.
-3. Coordinating Multiple Products — Managing several independently ordered products within the same mission.
+As illustrated in the [Baseline Scenario](#baseline-scenario), the customer initially orders Earth Observation imagery and an AI-based intelligence service to identify the areas affected by an emerging wildfire.
+Based on the intelligence obtained, the customer decides to deploy emergency personnel to the affected region and requires additional satellite communication (SatCom) services as a backup communication channel.
+
+The customer can discover these additional products using any of the previously described [Discovery Journey Alternatives](#discovery-journey-alternatives).
+
+- **Direct Product Catalog Selection:** The customer browses the Product Catalog to identify and select a suitable SatCom Product Offering.
+- **Use-Case Selection:** The customer selects a new Use Case based on the intelligence obtained.
+  This may also involve navigating to another branch or selecting additional options within a previously chosen Use Case.
+- **Mission-Based Product Inquiry:** The customer reopens the existing Mission and extends its requirements to include satellite communication services.
+  The PSS may again assist through Mission Templates or the AI-based Mission Companion, potentially using the intelligence obtained from the previously ordered products to suggest suitable additional capabilities.
+  The updated requirements lead to a new Product Inquiry and matchmaking process.
+
+The Mission-Based approach offers the additional advantage of maintaining a common context for all products associated with the Mission.
+Previously ordered products, newly identified requirements, and additional products can be managed together, providing the customer with a consolidated view of the services supporting their operational objectives.
+
+Regardless of the chosen discovery approach, the subsequent Product Qualification and Ordering processes remain unchanged.
+The newly selected Product Offerings may undergo POQ and Quote Negotiation where required, followed by Product Ordering and Activation as described in the preceding sections.
+
+Additional products are ordered and activated independently of the existing ones, which may remain operational throughout the process.
+The customer can repeat this cycle as often as necessary, progressively extending the services available to support the Mission.
 
 ## Post-Order Lifecycle Management
 
-TODO: Extends the customer journey beyond successful order confirmation.
+Once a product has been ordered and activated, the customer may continue to interact with the PSS throughout the product's lifecycle.
+
+The PSS provides capabilities to view and manage existing products, request modifications to their configurations, and access usage and billing information.
+Eventually, products may also be terminated when they are no longer required.
+
+These processes are independent of the original discovery and ordering journey and may be performed at any point during the operational lifetime of a product.
+
+The following sections describe the relevant lifecycle management processes and how the PSS interacts with providers through the corresponding PSI APIs to maintain a consistent view of the customer's products.
 
 ### Product Inventory
 
-TODO: Retrieving and tracking the products assigned to a customer, including their lifecycle states.
+The Product Inventory provides an overview of all products that have been ordered by the customer, including their configurations, lifecycle states, and associated information.
+
+As described previously, the provider creates a Product Inventory entry with the initial status `created` once an order has been accepted using TMF637.
+The entry is subsequently updated throughout the product's lifecycle, for example changing its status to `active` when the underlying service has been activated.
+
+The PSS retrieves or receives the Product Inventory information from the respective providers and presents a consolidated view to the customer.
+This allows customers to browse their products, including products that have been ordered but are not yet active, products currently in use, and products that have already been terminated.
+
+For each product, the customer can inspect relevant information, such as its Product Offering, configuration, provider, validity period, and current lifecycle status.
+Depending on the PSS implementation, additional details about the underlying services or resources may also be available.
+
+If a product was ordered in the context of a Mission, it is also displayed within the Mission Management interface.
+This allows customers to view all products associated with a Mission in one place, including their current states, and to understand which capabilities are already available or planned.
+
+The Product Inventory also serves as a starting point for subsequent lifecycle management processes.
+Customers may select an existing product to request changes to its configuration, access related usage or billing information, or initiate its termination.
 
 ### Product Change Orders
 
-TODO: Requesting and processing modifications to existing products.
+The Product Change Order process allows customers to modify an existing product, such as changing its configuration, service characteristics, or subscription conditions.
+
+The customer starts by selecting an existing product from their Product Inventory in the PSS.
+Depending on the product and the capabilities of the PSS, the customer may select from a list of alternative Product Offerings associated with the same Product Specification, for example to upgrade to a higher service tier or adjust the product's characteristics.
+
+If the desired modification is not covered by an existing Product Offering, the customer may initiate a [Product Offering Qualification](#product-offering-qualification) and/or [Quote Negotiation](#quote-negotiation) process, as described in the preceding sections, to determine whether the requested change is feasible and under which conditions it can be provided.
+
+Once the customer has selected the desired modification, the PSS creates a new Product Order using TMF622.
+Unlike an order for a new product, the corresponding Product Order Item has its `action` set to `modify` instead of `add` and references the existing Product Inventory entry that is to be changed.
+
+The PSS forwards the change order to the responsible provider, which validates and processes it following the same general principles as a new Product Order.
+The provider communicates order status updates to the PSS, allowing the customer to track the progress of the requested modification.
+
+Once the provider accepts the change order, they update the corresponding Product Inventory entry through TMF637 to reflect the agreed modifications and their applicable lifecycle state.
+Depending on the nature of the change, the actual modification of the underlying service may take effect immediately or at a later point in time.
+
+The PSS retrieves or receives the updated inventory information and presents the modified product to the customer.
+If the product is associated with a Mission, the updated configuration is also reflected in the Mission Management interface.
 
 ### Usage and Billing
 
-TODO: Accessing usage information, charges, and billing-related records.
+The Usage and Billing processes allow customers to access billing information and, where applicable, monitor the consumption of their ordered products.
+Following the TM Forum Customer Bill Management approach (TMF678), **billing information is created and maintained by the provider** and made available to the customer through the PSS.
+
+The customer can access the billing section of the PSS to view bills associated with their products.
+The PSS retrieves the relevant billing information from the respective providers using TMF678 and presents it in a consolidated view.
+Depending on the provider and the product, customers may inspect billing periods, charges, applicable taxes, and payment-related information.
+
+For products where consumption is measured, the provider may additionally support the TM Forum Usage Management API (TMF635).
+This optional API allows the PSS to retrieve usage records associated with the customer's products, such as consumed communication capacity, transferred data volumes, or other product-specific usage metrics.
+
+The PSS presents the available usage information to the customer, allowing them to review their consumption and better understand the charges associated with their products.
+The availability and level of detail of usage information depend on the product characteristics and the capabilities of the provider.
+Products with fixed pricing or without measurable consumption may not require usage reporting.
 
 ### Product Termination and De-allocation
 
-TODO: Ending product usage and releasing associated resources.
+The Product Termination and De-allocation process marks the end of a product's operational lifecycle and ensures that the resources associated with it are released.
+
+A product may be terminated in two ways:
+
+- **Scheduled Termination:** The product reaches the end of its agreed lifetime, as specified during the ordering process.
+  The provider automatically initiates the termination and de-allocation process.
+- **Customer-Initiated Termination:** The customer selects an existing product from their Product Inventory and requests its cancellation.
+  Following the TM Forum Product Ordering Management approach (TMF622), the PSS creates a new Product Order with the corresponding Order Item's `action` set to `delete`, referencing the existing product.
+  The provider processes the cancellation request and communicates its status through TMF622.
+
+In both cases, the provider is responsible for performing the necessary de-allocation activities, such as deactivating the underlying services, releasing reserved resources, and terminating any associated provisioning.
+
+The provider also updates the corresponding Product Inventory entry through TMF637 to reflect the product's termination.
+The PSS retrieves or receives the updated status and presents it to the customer.
+
+Terminated products remain accessible in the customer's Product Inventory as historical records, allowing them to review previously ordered products and their associated information.
+If a product was associated with a Mission, its termination is also reflected in the Mission Management interface.
