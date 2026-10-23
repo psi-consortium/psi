@@ -112,7 +112,7 @@ A business process may be supported even when the corresponding PSI API is not i
 A PSS is a software system that supports the discovery, procurement, and management of satellite services.
 
 The role of a PSS is determined by its position in a particular interaction rather than by its implementation.
-This enables federated architectures in which multiple PSS implementations exchange product information and business requests through standardized PSI APIs.
+This enables distributed architectures in which multiple PSS implementations exchange product information and business requests through standardized PSI APIs.
 A PSS may therefore act as a customer towards one system while simultaneously acting as a broker or provider towards another.
 
 In the scenarios, the primary PSS acts as a **PSS**, providing customers with access to products from multiple providers.
@@ -131,11 +131,162 @@ The scenarios will explicitly identify external systems where their involvement 
 
 ### Satellite Service Categories
 
-TODO: SatCom, Earth Observation, AI-based intelligence, and composite services.
+Satellite services can provide connectivity, observation data, and actionable intelligence to support different operational requirements.
+These services may be offered individually or combined into bundled Product Offerings, allowing customers to obtain complementary capabilities from one or multiple providers.
 
-### Common Service Lifecycle
+The following categories illustrate the types of satellite services that are currently available or expected to become increasingly relevant in the near future.
+The list is not exhaustive, and the PSS is not restricted to any particular service category or technology.
 
-TODO: Overview of the stages from discovery to termination.
+#### Satellite Communication (SatCom)
+
+Satellite Communication services provide connectivity between geographically separated locations, particularly where terrestrial communication infrastructure is unavailable, unreliable, or insufficient.
+These services are already widely available through commercial and governmental satellite systems operating in different orbital configurations.
+
+Typical products include:
+
+- **Raw Satellite Capacity:** Access to satellite bandwidth or other communication resources, allowing customers to operate their own communication infrastructure.
+- **Managed Connectivity:** End-to-end communication services, such as internet access, private network connectivity, and communication links between remote locations.
+- **Mobile Satellite Communication:** Connectivity for moving platforms, including vehicles, ships, and aircraft.
+- **Secure Governmental Communication:** Communication services with enhanced security, availability, and resilience requirements.
+- **Satellite IoT and Direct-to-Device Communication:** Connectivity for remote sensors, tracking devices, or compatible mobile devices, including applications that do not rely on conventional satellite terminals.
+
+Satellite communication services may be provided for a fixed period, on demand, or through longer-term subscriptions.
+
+#### Earth Observation (EO) and Satellite Imagery
+
+Earth Observation services provide information about the Earth's surface, atmosphere, and environment through sensors carried by satellites.
+
+Customers may order existing imagery from archives or request new acquisitions of a specified geographical area within a defined timeframe.
+
+Different sensor technologies provide complementary capabilities:
+
+- **Optical Imagery:** Visible and near-infrared images used for mapping, infrastructure inspection, environmental monitoring, and visual assessment of geographical areas.
+- **Synthetic Aperture Radar (SAR):** Radar imagery capable of observing the Earth's surface during day and night, including through cloud cover, making it particularly valuable for flood mapping, infrastructure monitoring, and change detection.
+- **Thermal Infrared Imagery:** Measurements of emitted thermal radiation, supporting applications such as wildfire detection, temperature monitoring, and the identification of heat anomalies.
+- **Multispectral and Hyperspectral Imagery:** Observations across multiple spectral bands, supporting vegetation monitoring, land classification, mineral detection, environmental analysis, and other applications requiring detailed spectral information.
+
+Product Offerings may differ in spatial resolution, geographical coverage, acquisition time, revisit frequency, processing level, delivery time, and licensing conditions.
+Earth Observation products may consist of individual images, time series, processed datasets, or subscriptions providing continuous monitoring of an area of interest.
+
+#### Derived Intelligence and Analysis Services
+
+Derived Intelligence services transform satellite imagery and other data sources into information that directly supports operational decision-making.
+Rather than delivering only raw observations, these products provide interpreted results, such as detected objects, classified areas, identified changes, or assessments of specific events.
+
+The processing may use conventional geospatial analysis, artificial intelligence (AI), machine learning, or combinations of different techniques.
+Depending on the application, additional information from terrestrial sensors, weather models, historical observations, or other sources may be incorporated.
+
+Examples of available or emerging intelligence products include:
+
+- **Wildfire Detection and Monitoring:** Identification of active fires, thermal anomalies, and affected areas, potentially including repeated observations to monitor their development.
+- **Damage Assessment:** Identification and classification of damage to buildings, infrastructure, vegetation, or other assets following natural disasters or other events.
+- **Change Detection:** Comparison of observations acquired at different times to identify changes in land use, infrastructure, vegetation, or other monitored features.
+- **Object Detection and Classification:** Automated identification of objects or structures, such as vessels, vehicles, buildings, or infrastructure, within satellite imagery.
+- **Flood and Disaster Mapping:** Identification of affected areas, flood extent, and potential impacts on settlements and infrastructure.
+- **Environmental and Agricultural Monitoring:** Analysis of vegetation health, drought conditions, land cover, crop development, or environmental changes.
+- **Predictive Intelligence:** Combining satellite observations with other data sources and analytical models to estimate future developments, such as wildfire propagation or flood risks.
+
+The results may be delivered as maps, geospatial datasets, reports, alerts, or through machine-readable interfaces.
+Intelligence products may also be provided as recurring monitoring services, producing updated results whenever new observations become available.
+
+These services can be offered independently of the underlying imagery.
+For example, an AI analysis provider may process imagery acquired from a different provider or supplied directly by the customer.
+
+#### Combined and Bundled Services
+
+The different categories are not mutually exclusive.
+A customer's operational requirements may involve several services that depend on or complement each other.
+
+For example, an emergency response operation may require Earth Observation imagery to assess an affected area, AI-based intelligence to identify critical locations, and satellite communication to coordinate personnel deployed on site.
+
+These capabilities can be acquired independently throughout an evolving Mission or combined into bundled Product Offerings.
+
+A bundle may contain products from a single provider or combine offerings from multiple providers.
+In the latter case, the PSS coordinates the participating providers while presenting the combined offering as a unified product to the customer.
+
+This flexibility allows the PSS to support not only the procurement of individual satellite services but also the composition of more complex solutions addressing specific operational needs.
+
+### Common Product Lifecycle
+
+The Common Product Lifecycle describes how satellite services are defined, made available to customers, instantiated, managed, and eventually terminated.
+
+Following the principles of the **TM Forum Open APIs** and **Mplify Lifecycle Service Orchestration (LSO)** framework, the lifecycle distinguishes between the definition of a product, its commercial availability, and the actual product instances delivered to customers.
+
+The two central concepts are **Product Specifications** and **Product Instances**:
+
+- **Product Specifications** describe the characteristics and capabilities of a product that a provider can deliver. They are maintained in a Product Catalog (TMF620) and may be referenced by one or more **Product Offerings**.
+- **Product Instances** represent concrete products ordered by customers. They are created and maintained in the Product Inventory (TMF637), where their configurations, relationships, and lifecycle states are tracked.
+
+The following diagram illustrates the relationship between Product Specifications, Product Offerings, Product Orders, and Product Instances, with particular emphasis on the lifecycle of the inventory entries.
+
+```plantuml
+@startuml
+allowmixing
+skinparam shadowing false
+skinparam componentStyle rectangle
+skinparam packageStyle rectangle
+skinparam defaultTextAlignment center
+
+skinparam rectangle {
+  BackgroundColor #EAF2F8
+  BorderColor #54718C
+  RoundCorner 10
+}
+
+package "Product Catalog (TMF620)" {
+  rectangle "Product Specification\nPublished" as SPEC
+  rectangle "Product Offering(s)" as OFFER
+  SPEC --> OFFER : referenced by
+}
+
+package "Product Ordering (TMF622)" {
+  rectangle "Product Order\n(action = add)" as ORDER
+}
+
+package "Product Inventory (TMF637)" {
+  rectangle "Product Instance" as PRODUCT {
+    state "created" as CREATED
+    state "active" as ACTIVE
+    state "terminated" as TERMINATED
+
+    '[*] --> CREATED : Order accepted
+    CREATED --> ACTIVE : Product activation
+    ACTIVE --> ACTIVE : Change Order\n(action = modify)
+    ACTIVE --> TERMINATED : End of lifetime or\nChange Order (action = delete)
+    'TERMINATED --> [*]
+  }
+}
+
+OFFER --> ORDER : selected for ordering
+ORDER -> PRODUCT : creates Product Instance
+SPEC ..> PRODUCT : specification reference
+
+note right of SPEC
+  One specification may be
+  referenced by multiple offerings
+  and instantiated multiple times.
+end note
+
+note left of ACTIVE
+  Underlying services are provided.
+
+  Product configuration may change
+  throughout the operational lifetime.
+end note
+
+@enduml
+```
+![Common Service Lifecycle](../common/pixel.png)
+
+The diagram represents a simplified lifecycle based on the scenarios described in this chapter.
+Product Offerings and Product Orders facilitate the creation and modification of Product Instances but are not themselves the focus of the lifecycle.
+
+The **Product Specification remains independent of its instances**.
+It may continue to be offered and used for new orders while existing Product Instances are active.
+Conversely, a specification or offering may be withdrawn from the catalog without necessarily affecting products that have already been provisioned.
+
+The provider remains responsible for maintaining the Product Inventory and updating the state of its Product Instances.
+The PSS retrieves or receives these updates and provides customers with a consolidated view of their products.
 
 ### Baseline Scenario
 
