@@ -102,7 +102,7 @@ The degree of integration between a provider and a PSS can vary considerably.
 Some providers may implement all relevant PSI APIs, enabling automated interactions throughout the product lifecycle.
 Others may support only a subset of the APIs, while some may have no PSI API integration at all.
 
-In the latter cases, interactions may be handled through manual procedures, data imports, or other integration mechanisms provided by the PSS.
+In the latter cases, interactions may be handled through manual procedures, data imports, or other integration mechanisms provided by the PSS as graphical interfaces.
 
 The scenarios therefore distinguish between business capabilities and their technical implementation.
 A business process may be supported even when the corresponding PSI API is not implemented by the provider.
@@ -115,7 +115,7 @@ The role of a PSS is determined by its position in a particular interaction rath
 This enables distributed architectures in which multiple PSS implementations exchange product information and business requests through standardized PSI APIs.
 A PSS may therefore act as a customer towards one system while simultaneously acting as a broker or provider towards another.
 
-In the scenarios, the primary PSS acts as a **PSS**, providing customers with access to products from multiple providers.
+In the scenarios, the primary PSS acts as a **broker**, providing customers with access to products from multiple providers.
 It may aggregate product catalogs, perform matchmaking, coordinate qualification and quotation processes, and manage product orders and inventories.
 Refer to [PSI-TAD] for more information on other PSS modes.
 
@@ -136,6 +136,10 @@ These services may be offered individually or combined into bundled Product Offe
 
 The following categories illustrate the types of satellite services that are currently available or expected to become increasingly relevant in the near future.
 The list is not exhaustive, and the PSS is not restricted to any particular service category or technology.
+
+Note that there is currently no standard API standard to expose information about product types supported by a particular PSS.
+Filling this gap therefore becomes a goal for PSID.
+It may become a new API or an extension of the TMF620 Product Catalog.
 
 #### Satellite Communication (SatCom)
 
@@ -294,9 +298,9 @@ The following scenario is based on a fictional customer responsible for coordina
 As the situation develops, the customer requires different satellite services to support situational awareness and field operations.
 
 > [!NOTE]
-> Four providers, **Provider A, B, C, and D**, are already connected to the PSS, and their Product Specifications and Product Offerings are known to the system.
+> The initial onboarding of providers and publication of their catalogs are not covered in this scenario.
+> It is assumed that they are already connected to the PSS, and their Product Specifications and Product Offerings are known to the system.
 > The providers offer different satellite services, including Earth Observation, AI-based intelligence, and satellite communication (SatCom).
-> The initial onboarding of providers and publication of their catalogs are therefore not covered in this scenario.
 
 Following reports of an emerging wildfire, the customer needs to determine the geographical extent of the affected area to support the planning and coordination of emergency response activities.
 
@@ -329,6 +333,7 @@ The following sections illustrate three alternative discovery journeys and a var
 ### Direct Product Catalog Selection
 
 In this journey, the customer discovers available satellite services by browsing the Product Catalog provided by the PSS, without first defining a mission or submitting specific service requirements.
+For the sake of this case study, it is assumed that they do so using a graphical user interface, but they could also be using the TMF620 Product Catalog API.
 
 The customer opens the Product Catalog, which presents a list of all available Product Specifications.
 Depending on the PSS implementation, the catalog may provide search and filtering capabilities to help customers narrow down the results based on relevant product characteristics, such as service category, geographical coverage, or technical capabilities.
@@ -369,6 +374,7 @@ For example, a customer might select a higher service tier or an alternative off
 
 This approach strongly suggests the use of an **internal Product Catalog**, as Governance needs to maintain the relationships between Use Cases, Product Specifications, and Product Offerings.
 However, it is also possible for Governance to reference specifications or offerings maintained in trusted external catalogs operated by providers or other PSS implementations.
+In that case, they would leverage the TMF620 Product Catalog API to exchange catalog data.
 
 From the customer's perspective, the discovery process is simplified by relying on the knowledge and preconfigured product selections of Governance, rather than requiring detailed knowledge of the available satellite services.
 
@@ -380,7 +386,8 @@ In this journey, the customer discovers suitable satellite services by defining 
 Unlike the previous discovery approaches, the customer does not select products from a catalog but describes what they want to achieve and relies on the PSS to identify suitable products through matchmaking.
 
 The journey consists of two phases: **Mission Creation and Management**, followed by **Product Inquiry and Matchmaking**.
-Note that both can be done on separate systems, i.e. the mission management can be done using existing, domain-specific software, which only uses the Product Inquiry API to query the PSS.
+Note that both can be done on separate systems, i.e. the mission management can be done using existing, domain-specific software, which only uses the Product Inquiry API (PSID001) to query the PSS.
+It is also possible to exchange mission data between systems using the PSID002 Mission API.
 
 #### Phase 1: Mission Creation and Management
 
@@ -402,7 +409,7 @@ The resulting Mission contains one or more sets of service requirements that can
 
 #### Phase 2: Product Inquiry and Matchmaking
 
-Once the customer has defined the relevant service requirements, the PSS creates a **Product Inquiry** for one or multiple product types associated with the Mission.
+Once the customer has defined the relevant service requirements, the PSS creates a **Product Inquiry** (PSID001) for one or multiple product types associated with the Mission.
 
 In contrast to Direct Product Catalog Selection or Use-Case Selection, the Product Inquiry is **not bound to a specific Product Specification or Product Offering**.
 Instead, it describes the required product types and their characteristics, derived from the Mission.
@@ -418,7 +425,6 @@ Depending on its architecture, the PSS may process the inquiry in different ways
 Regardless of the approach, matchmaking evaluates the requested product types and characteristics against the available products and returns a **selection of suitable Product Specifications and Product Offerings** tailored to the inquiry.
 
 The PSS consolidates the results and presents them to the customer, who can review the proposed products and select the offerings that best meet their mission requirements.
-
 If the results do not sufficiently satisfy the customer's needs, they may refine the Mission and repeat the Product Inquiry, allowing the discovery process to evolve iteratively.
 
 Once suitable Product Offerings have been selected, the customer can proceed to the subsequent qualification, quotation, or ordering processes, depending on the requirements of the selected products and the capabilities of the participating systems.
