@@ -16,13 +16,14 @@ Three kinds of content are waiting for a home in the PSI document set, and none 
 
 1. **The governance framework**: the two-speed model (PSI as innovation space, SODA as maturation channel into TM Forum) and the graduation criteria for patterns that leave the innovation space.
    Both currently target "the PSI governance document", which does not exist.
-2. **Algorithm descriptions** from the interoperability and matchmaking work: the touchpoint mappings between catalog, matchmaking, qualification/POQ, CPQ, quote and ordering, and the mission-masked matching engine with its interfaces and data mappings.
+2. **Algorithm descriptions** from the interoperability and matchmaking work: the touchpoint mappings between catalog, matchmaking, the CPQ process (which qualifies the candidates through POQ, collects the provider quotes and composes them into the quote returned to the customer) and ordering, and the mission-masked matching engine with its interfaces and data mappings.
 3. **The whitepaper "Mission-Centric Matchmaking for Composed Services"** the reference for the mission-masked matching engine and the first concrete artefact: a self-contained method description of roughly fifteen sections with diagrams, written outside the PSI document set, whose masking, filtering and ranking mechanics the matching engine implements and whose other parts (reverse matchmaking, AI augmentation, catalog governance) are background.
 
 The spike question is: which location in the PSI document set holds such content?
 The candidates named by the story are a section of the [PSI-TAD], a section of the [PSI-TOD], or a new document.
 The candidates are compared against the document list of `CONTRIBUTING.md`, §1, which is the list of documents whose sources this repository maintains.
 Product data sheets are decided here as well, because they will arrive with the same question and the same shape as algorithm descriptions: human-readable reference material that supports a task without being a task.
+As a preliminary definition, to be elaborated when the first one is placed: a product data sheet is the human-readable wrapper of a product schema, describing the product type for a reader where the schema describes it for a system, and it may additionally state product dependencies, for example that the output of an Earth Observation product A satisfies the input specification of an analysis product B, so that A can feed B in an innovation pipeline.
 
 Two words are used with a fixed meaning below.
 An **annex** is an external file published next to a document in the release, such as `PSI-ICD-Annex-I.zip`; it is not rendered into the document.

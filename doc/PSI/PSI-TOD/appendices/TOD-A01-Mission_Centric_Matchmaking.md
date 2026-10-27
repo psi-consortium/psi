@@ -8,28 +8,28 @@
 
 **Scope against the TOD body.**
 This appendix is referenced by task TOD-03-01-Customer_Inquiry_Management of the [PSI-TOD] and describes one way a PSS can realise the matchmaking that turns a customer inquiry into a ranked result.
-Its masking, filtering and ranking mechanics are normative for the PSI matching engine (mission-masked matchmaking over the product catalog): an implementation of that engine follows the sections marked normative in Table {@tbl:tod-a01-scope}.
-They are not requirements on a PSS in general; the [PSI-REQ] and the tasks and operations of this document remain the only normative entry point for a PSS implementation.
-Everything else in this appendix is informative.
+It is informative in its entirety; the [PSI-REQ] and the tasks and operations of this document remain the only normative entry point for a PSS implementation.
+Table {@tbl:tod-a01-scope} marks the sections whose mechanics the PSI matching engine, the mission-masked matchmaking over the product catalog built in the PSI mock-up, has adopted as its design, and the sections that are context only.
+Adoption is a statement about that implementation, not a requirement on a PSS.
 In particular, reverse matchmaking, AI-augmented explanation and negotiation, and catalog and ontology governance are not part of the matching engine.
 
-| Section                                                    | Status      | Reason                                                                  |
-|------------------------------------------------------------|-------------|-------------------------------------------------------------------------|
-| Introduction, Why Composed Services are Hard to Match, What the Approach Delivers | informative | motivation and overview                                    |
-| Pipeline Overview                                          | normative   | the two-stage structure of the matching engine                          |
-| The Modelling Foundation: Missions, Products, and Layers   | informative | offer forms and maturity are vocabulary, not a required model           |
-| Mission Ontology, Product Ontology                         | informative | the trees are illustrations; the engine needs a classification, not these |
-| Buckets: Leaf Classes as Executable Filters                | normative   | the filter unit of the engine                                           |
-| Templates and Schema-Driven Onboarding                     | informative | catalog governance, not part of the matching engine                     |
-| Bitmap Indexing and Pool Gates                             | normative   | the masking mechanics                                                   |
-| Stage 1: Readiness as a Non-Probing Control Loop           | normative   | the filtering mechanics                                                 |
-| Stage 2: Plan Construction                                 | normative   | candidate generation and composition                                    |
-| Ranking and Selection                                      | normative   | the ranking mechanics                                                   |
-| Cross-Layer Dependencies and Receiver/Transmitter Compatibility | normative | compatibility filtering during composition                          |
-| Reverse Matchmaking: Tenders as Mission-Shaped Requests    | informative | not part of the matching engine                                         |
-| AI Augmentation                                            | informative | not part of the matching engine                                         |
-| Governance: Keeping the Catalog Evolvable and Trustworthy  | informative | catalog and ontology governance, not part of the matching engine        |
-| Illustrative Example, Conclusion                           | informative | worked example and summary                                              |
+| Section                                                    | Matching engine | Reason                                                              |
+|------------------------------------------------------------|-----------------|---------------------------------------------------------------------|
+| Introduction, Why Composed Services are Hard to Match, What the Approach Delivers | context         | motivation and overview                                    |
+| Pipeline Overview                                          | adopted         | the two-stage structure of the matching engine                          |
+| The Modelling Foundation: Missions, Products, and Layers   | context         | offer forms and maturity are vocabulary, not a required model           |
+| Mission Ontology, Product Ontology                         | context         | the trees are illustrations; the engine needs a classification, not these |
+| Buckets: Leaf Classes as Executable Filters                | adopted         | the filter unit of the engine                                           |
+| Templates and Schema-Driven Onboarding                     | context         | catalog governance, not part of the matching engine                     |
+| Bitmap Indexing and Pool Gates                             | adopted         | the masking mechanics                                                   |
+| Stage 1: Readiness as a Non-Probing Control Loop           | adopted         | the filtering mechanics                                                 |
+| Stage 2: Plan Construction                                 | adopted         | candidate generation and composition                                    |
+| Ranking and Selection                                      | adopted         | the ranking mechanics                                                   |
+| Cross-Layer Dependencies and Receiver/Transmitter Compatibility | adopted         | compatibility filtering during composition                          |
+| Reverse Matchmaking: Tenders as Mission-Shaped Requests    | context         | not part of the matching engine                                         |
+| AI Augmentation                                            | context         | not part of the matching engine                                         |
+| Governance: Keeping the Catalog Evolvable and Trustworthy  | context         | catalog and ontology governance, not part of the matching engine        |
+| Illustrative Example, Conclusion                           | context         | worked example and summary                                              |
 
 Table: Scope of TOD-A01 against the TOD body. {#tbl:tod-a01-scope}
 
@@ -37,7 +37,7 @@ Table: Scope of TOD-A01 against the TOD body. {#tbl:tod-a01-scope}
 The text is the whitepaper "Mission-Centric Matchmaking for Composed Services", written at CGI and shared within the consortium before it was taken up as the reference for the PSI matching engine.
 CGI contributes it to this document under the Apache License 2.0 of the PSI repository; it contains no third-party material, so the [PSI-SLF] is unchanged.
 For this appendix the diagrams were converted to PlantUML, the ranking-profile radar chart was replaced by Table {@tbl:tod-a01-ranking-profiles}, headings were shifted below the appendix heading, and the paper's closing comparison with its source model was replaced by the terminology paragraph below.
-The wording is otherwise unchanged.
+The wording is otherwise unchanged, except for two clarifications from the review of this appendix: the independence of the gated calls after the sequence diagram, and the layer coverage of a bundle.
 Its placement follows [PSI-MADR] ADR043.
 
 **Terminology.**
@@ -58,6 +58,7 @@ A local term becomes a TAD term only by its own decision record.
 | ranking profile                         | a governed set of scoring weights, uncertainty penalties and tie-break rules                                           | no counterpart; ranking of inquiry results is PSS-internal in the TOD                                                                                           |
 | facet                                   | a versioned block of capability detail held outside the classification tree                                           | closest to the TAD's *characteristics*                                                                                                        |
 | committed, offer-only, spec-only        | offer maturity: orderable now; published but needing an availability check; specification only, needing an RFQ       | committed corresponds to an orderable *product offering*; spec-only to a product specification answered by RFQ or ITT |
+| ATP, RFQ, quoting workflow              | the late-stage checks the paper defers until after ranking: an allocation check against capacity, a request that turns a specification into a priced offer, and a provider's configuration-dependent pricing | ATP is the availability part of a *product offering qualification* (POQ); RFQ and quoting workflow are steps of the *CPQ* process in which the PSS obtains provider quotes and composes the *quote* returned to the customer; the paper names the checks by their effect, not by the PSI operation |
 
 Table: Local terms of TOD-A01 and their relation to the TAD. {#tbl:tod-a01-local-terms}
 
@@ -194,21 +195,26 @@ Index --> Matchmaker : Candidate sets
 alt Plan uses committed, fixed-price items
   Matchmaker --> User : Price and availability known + show ranked plans
 else Plan needs dynamic pricing and/or allocation
-  Matchmaker -> Quote : Request quotes for top plans (gated, cached)
-  Quote --> Matchmaker : Prices or quote responses
-
-  Matchmaker -> ATP : ATP for offer-only components
-  ATP --> Matchmaker : Availability results
-
-  Matchmaker -> Provider : RFQ for spec-only (policy-gated)
-  Provider --> Matchmaker : RFQ response
-
+  opt Plan contains configuration-priced or virtual-bundle components
+    Matchmaker -> Quote : Request quotes for top plans (gated, cached)
+    Quote --> Matchmaker : Prices or quote responses
+  end
+  opt Plan contains offer-only components
+    Matchmaker -> ATP : ATP for offer-only components
+    ATP --> Matchmaker : Availability results
+  end
+  opt Plan contains spec-only components
+    Matchmaker -> Provider : RFQ for spec-only (policy-gated)
+    Provider --> Matchmaker : RFQ response
+  end
   Matchmaker --> User : Ranked plans + explanation + next actions
 end
 @enduml
 ```
 
 ![Matchmaking sequence with gated external calls.](../../common/pixel.png){#fig:tod-a01-sequence}
+
+The three gated calls of the second branch are independent of each other: each applies only to the components of a plan that need it, and a plan may need none, one or all of them.
 
 ### The Modelling Foundation: Missions, Products, and Layers
 
@@ -221,6 +227,7 @@ Within this layered view, the market exposes offers in three forms.
 
 1. An offer may be atomic and cover a single layer.
 2. It may be a pre-defined bundle that covers multiple layers under one SKU (a **stock keeping unit**, an orderable catalog identifier used in commerce and fulfilment).
+   Any single offer that spans more than one layer is a bundle in this sense, whether or not its parts are also sold on their own.
 3. Or it may be a virtual bundle that is only priced after a provider quote engine receives a specific configuration.
 
 Offers also differ in existence maturity.
