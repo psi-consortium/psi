@@ -547,7 +547,6 @@
 @include [Product_MVO.md](Product_MVO.md)
 @include [Quantity.md](Quantity.md)
 @include [Quote.md](Quote.md)
-@include [QuoteAcceptanceStateType.md](QuoteAcceptanceStateType.md)
 @include [QuoteItem.md](QuoteItem.md)
 @include [QuoteItemRef.md](QuoteItemRef.md)
 @include [QuoteItemRef_FVO.md](QuoteItemRef_FVO.md)

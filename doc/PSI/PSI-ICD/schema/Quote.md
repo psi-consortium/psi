@@ -30,6 +30,7 @@
 | quoteItem | array | QuoteItem | No |
 | creationDate | string | date-time | No |
 | effectiveQuoteCompletionDate | string | date-time | No |
+| channel | ChannelRef | N/A | No |
 | @baseType | string | N/A | No |
 | @schemaLocation | string | N/A | No |
 | @type | string | "Quote" | Yes |

@@ -42,18 +42,6 @@
           },
           {
             "$ref": "#/components/parameters/Limit"
-          },
-          {
-            "$ref": "#/components/parameters/Before"
-          },
-          {
-            "$ref": "#/components/parameters/After"
-          },
-          {
-            "$ref": "#/components/parameters/Sort"
-          },
-          {
-            "$ref": "#/components/parameters/Filter"
           }
         ],
         "responses": {
@@ -125,6 +113,16 @@
           },
           "409": {
             "$ref": "#/components/responses/409"
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
           },
           "500": {
             "$ref": "#/components/responses/500"
@@ -274,6 +272,16 @@
           },
           "409": {
             "$ref": "#/components/responses/409"
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
           },
           "500": {
             "$ref": "#/components/responses/500"
@@ -4915,7 +4923,10 @@
               },
               "instantSyncQuote": {
                 "type": "boolean",
-                "description": "An indicator which when the value is \"true\" means that requester expects to get quoting result immediately in the response. If the indicator is true then the response code of 200 indicates the operation is successful otherwise a task is created with a response 201. "
+                "description": "An indicator which when the value is \"true\" means that requester expects to get quoting result immediately in the response. If the indicator is true then the response code of 200 indicates the operation is successful otherwise a task is created with a response 201. PSI: only false is allowed; the quote is always asynchronous.",
+                "enum": [
+                  false
+                ]
               },
               "note": {
                 "type": "array",
@@ -4984,6 +4995,9 @@
                 "type": "string",
                 "description": "Date when the quote has been completed",
                 "format": "date-time"
+              },
+              "channel": {
+                "$ref": "#/components/schemas/ChannelRef"
               }
             },
             "description": "Quote can be used to negotiate service and product acquisition or modification between a customer and a service provider. A Quote contain list of quote items, a reference to customer (partyRole), a list of productOffering and attached prices and conditions."
@@ -5047,7 +5061,10 @@
               },
               "instantSyncQuote": {
                 "type": "boolean",
-                "description": "An indicator which when the value is \"true\" means that requester expects to get quoting result immediately in the response. If the indicator is true then the response code of 200 indicates the operation is successful otherwise a task is created with a response 201. "
+                "description": "An indicator which when the value is \"true\" means that requester expects to get quoting result immediately in the response. If the indicator is true then the response code of 200 indicates the operation is successful otherwise a task is created with a response 201. PSI: only false is allowed; the quote is always asynchronous.",
+                "enum": [
+                  false
+                ]
               },
               "note": {
                 "type": "array",
@@ -5086,6 +5103,9 @@
                 "items": {
                   "$ref": "#/components/schemas/QuoteItem_FVO"
                 }
+              },
+              "channel": {
+                "$ref": "#/components/schemas/ChannelRef"
               }
             },
             "description": "Quote can be used to negotiate service and product acquisition or modification between a customer and a service provider. A Quote contain list of quote items, a reference to customer (partyRole), a list of productOffering and attached prices and conditions."
@@ -5101,19 +5121,129 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/Extensible"
+            "$ref": "#/components/schemas/Entity"
           },
           {
-            "required": [
-              "state"
-            ],
             "type": "object",
             "properties": {
+              "agreement": {
+                "type": "array",
+                "description": "A reference to an agreement defining the context of the quote",
+                "items": {
+                  "$ref": "#/components/schemas/AgreementRef"
+                }
+              },
+              "salesOpportunity": {
+                "$ref": "#/components/schemas/SalesOpportunityRef"
+              },
+              "category": {
+                "type": "string",
+                "description": "Used to categorize the quote from a business perspective that can be useful for the CRM system (e.g. \"enterprise\", \"residential\", ...)",
+                "deprecated": true
+              },
+              "contactMedium": {
+                "type": "array",
+                "description": "Information contact related to the quote requester",
+                "items": {
+                  "$ref": "#/components/schemas/ContactMedium"
+                }
+              },
+              "description": {
+                "type": "string",
+                "description": "Description of the quote"
+              },
+              "expectedFulfillmentStartDate": {
+                "type": "string",
+                "description": "This is the date wished by the requester to have the requested quote item delivered",
+                "format": "date-time"
+              },
+              "expectedQuoteCompletionDate": {
+                "type": "string",
+                "description": "This is expected date - from quote supplier - to be able to send back a response for this quote",
+                "format": "date-time"
+              },
+              "externalId": {
+                "type": "array",
+                "description": "An ID given by an external entity and only understandable by it (for example, an ID given by the customer to facilitate his searches afterwards)",
+                "items": {
+                  "$ref": "#/components/schemas/ExternalIdentifier"
+                }
+              },
+              "instantSyncQuote": {
+                "type": "boolean",
+                "description": "An indicator which when the value is \"true\" means that requester expects to get quoting result immediately in the response. If the indicator is true then the response code of 200 indicates the operation is successful otherwise a task is created with a response 201. PSI: only false is allowed; the quote is always asynchronous.",
+                "enum": [
+                  false
+                ]
+              },
+              "note": {
+                "type": "array",
+                "description": "Free form text associated with the quote",
+                "items": {
+                  "$ref": "#/components/schemas/Note"
+                }
+              },
+              "authorization": {
+                "type": "array",
+                "description": "An authorization provided for the quote",
+                "items": {
+                  "$ref": "#/components/schemas/Authorization"
+                }
+              },
+              "quoteTotalPrice": {
+                "type": "array",
+                "description": "Quote total price",
+                "items": {
+                  "$ref": "#/components/schemas/QuotePrice"
+                }
+              },
+              "relatedParty": {
+                "type": "array",
+                "description": "A reference to a party playing a role in this quote (customer, seller, requester, etc.)",
+                "items": {
+                  "$ref": "#/components/schemas/RelatedPartyRefOrPartyRoleRef"
+                }
+              },
+              "productOfferingQualification": {
+                "type": "array",
+                "description": "A reference to a previously done product offering qualification",
+                "items": {
+                  "$ref": "#/components/schemas/ProductOfferingQualificationRef"
+                }
+              },
+              "requestedQuoteCompletionDate": {
+                "type": "string",
+                "description": "This is requested date - from quote requester - to get a complete response for this quote",
+                "format": "date-time"
+              },
               "state": {
-                "$ref": "#/components/schemas/QuoteAcceptanceStateType"
+                "$ref": "#/components/schemas/QuoteStateType"
+              },
+              "validFor": {
+                "$ref": "#/components/schemas/TimePeriod"
+              },
+              "version": {
+                "type": "string",
+                "description": "Quote version - if the customer rejected the quote but negotiations still open a new version of the quote is managed"
+              },
+              "quoteItem": {
+                "minItems": 1,
+                "type": "array",
+                "description": "A quote item describes an action to be performed on a productOffering or a product in order to get pricing elements and condition.",
+                "items": {
+                  "$ref": "#/components/schemas/QuoteItem"
+                }
+              },
+              "effectiveQuoteCompletionDate": {
+                "type": "string",
+                "description": "Date when the quote has been completed",
+                "format": "date-time"
+              },
+              "channel": {
+                "$ref": "#/components/schemas/ChannelRef_MVO"
               }
             },
-            "description": "Quote can be used to negotiate service and product acquisition or modification between a customer and a service provider. A Quote contain list of quote items, a reference to customer (partyRole), a list of productOffering and attached prices and conditions. In PSI, a Quote can only be modified to accept or decline it."
+            "description": "Quote can be used to negotiate service and product acquisition or modification between a customer and a service provider. A Quote contain list of quote items, a reference to customer (partyRole), a list of productOffering and attached prices and conditions."
           }
         ]
       },
@@ -6193,6 +6323,50 @@
         },
         "description": "A uni-directionmal relationship from this entity to a target entity instance"
       },
+      "EntityRelationship_MVO": {
+        "type": "object",
+        "properties": {
+          "href": {
+            "type": "string",
+            "format": "uri"
+          },
+          "name": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string",
+            "description": "The association role for this entity"
+          },
+          "validFor": {
+            "$ref": "#/components/schemas/TimePeriod"
+          },
+          "associationSpec": {
+            "$ref": "#/components/schemas/EntityRef"
+          },
+          "@baseType": {
+            "type": "string",
+            "description": "When sub-classing, this defines the super-class"
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "A URI to a JSON-Schema file that defines additional attributes and relationships"
+          },
+          "relationshipType": {
+            "type": "string",
+            "description": "Type of relationship such as migration, substitution, dependency, exclusivity"
+          },
+          "id": {
+            "type": "string"
+          },
+          "@referredType": {
+            "type": "string"
+          },
+          "@type": {
+            "type": "string"
+          }
+        },
+        "description": "A uni-directionmal relationship from this entity to a target entity instance"
+      },
       "Entity_FVO": {
         "type": "object",
         "description": "Base entity schema for use in TMForum Open-APIs. Property.",
@@ -6202,6 +6376,15 @@
           },
           {
             "$ref": "#/components/schemas/Addressable_FVO"
+          }
+        ]
+      },
+      "Entity_MVO": {
+        "type": "object",
+        "description": "Base entity schema for use in TMForum Open-APIs. Property.",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
           }
         ]
       },
@@ -6249,6 +6432,29 @@
           }
         ]
       },
+      "ProductOfferingPriceRef_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "ProductOfferingPriceRef": "#/components/schemas/ProductOfferingPriceRef_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "version": {
+                "type": "string",
+                "description": "Version of the product offering price"
+              }
+            },
+            "description": "ProductPriceOffering reference. An amount, usually of money, that is asked for or allowed when a ProductOffering is bought, rented, or leased"
+          }
+        ]
+      },
       "ProductOfferingRef_FVO": {
         "discriminator": {
           "propertyName": "@type",
@@ -6273,6 +6479,100 @@
           }
         ]
       },
+      "ProductOfferingRef_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "ProductOfferingRef": "#/components/schemas/ProductOfferingRef_MVO",
+            "BundledProductOffering": "#/components/schemas/BundledProductOffering_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "version": {
+                "type": "string",
+                "description": "Version of the product offering"
+              }
+            },
+            "description": "ProductOffering reference. A product offering represents entities that are orderable from the provider of the catalog, this resource includes pricing information."
+          }
+        ]
+      },
+      "ProductPrice_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "ProductPrice": "#/components/schemas/ProductPrice_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "description": {
+                "type": "string",
+                "description": "Description of the Product price"
+              },
+              "name": {
+                "type": "string",
+                "description": "Name of the Product price"
+              },
+              "productOfferingPrice": {
+                "$ref": "#/components/schemas/ProductOfferingPriceRef_MVO"
+              },
+              "recurringChargePeriod": {
+                "type": "string",
+                "description": "Used for recurring charge to indicate period (month, week, etc..)."
+              },
+              "unitOfMeasure": {
+                "type": "string",
+                "description": "Unit of Measure if price depending on it (Gb, SMS volume, etc..)"
+              },
+              "price": {
+                "$ref": "#/components/schemas/Price_MVO"
+              },
+              "priceAlteration": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/PriceAlteration_MVO"
+                }
+              },
+              "priceType": {
+                "type": "string",
+                "description": "indicate if the price is for recurrent or no-recurrent charge"
+              }
+            },
+            "description": "Description of price and discount awarded"
+          }
+        ]
+      },
+      "ProductRefOrValue_MVO": {
+        "type": "object",
+        "description": "The polymorphic attributes @type, @schemaLocation & @referredType are related to the Product entity and not the ProductRefOrValue class itself",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "Product": "#/components/schemas/Product_MVO",
+            "ProductRef": "#/components/schemas/ProductRef_MVO"
+          }
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/Product_MVO"
+          },
+          {
+            "$ref": "#/components/schemas/ProductRef_MVO"
+          }
+        ]
+      },
       "ProductRef_FVO": {
         "type": "object",
         "description": "A Product reference",
@@ -6288,6 +6588,80 @@
           },
           {
             "$ref": "#/components/schemas/EntityRef_FVO"
+          }
+        ]
+      },
+      "ProductRef_MVO": {
+        "type": "object",
+        "description": "A Product reference",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "ProductRef": "#/components/schemas/ProductRef_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          }
+        ]
+      },
+      "ProductRelationship_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "ProductRelationship": "#/components/schemas/ProductRelationship_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Id of the related product"
+              },
+              "relationshipType": {
+                "type": "string",
+                "description": "Relationship type as relies on, bundles, etc..."
+              }
+            },
+            "description": "Used to describe relationship between product."
+          }
+        ]
+      },
+      "ProductSpecificationRef_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "ProductSpecificationRef": "#/components/schemas/ProductSpecificationRef_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "version": {
+                "type": "string",
+                "description": "Version of the product specification"
+              },
+              "targetProductSchema": {
+                "$ref": "#/components/schemas/TargetProductSchema_MVO"
+              }
+            },
+            "description": "ProductSpecification reference. A product Specification represents entities that are orderable from the provider of the catalog."
           }
         ]
       },
@@ -6325,11 +6699,195 @@
           }
         ]
       },
+      "ProductTerm_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "ProductTerm": "#/components/schemas/ProductTerm_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "description": {
+                "type": "string",
+                "description": "Description of the productTerm"
+              },
+              "duration": {
+                "$ref": "#/components/schemas/Duration"
+              },
+              "validFor": {
+                "$ref": "#/components/schemas/TimePeriod"
+              },
+              "name": {
+                "type": "string",
+                "description": "Name of the productTerm",
+                "example": "12months commitment"
+              }
+            },
+            "description": "Description of a productTerm linked to this product. This represent a commitment with a duration"
+          }
+        ]
+      },
+      "Product_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "Product": "#/components/schemas/Product_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Entity_MVO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "agreementItem": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/AgreementItemRef_MVO"
+                }
+              },
+              "billingAccount": {
+                "$ref": "#/components/schemas/BillingAccountRef_MVO"
+              },
+              "description": {
+                "type": "string",
+                "description": "Is the description of the product. It could be copied from the description of the Product Offering."
+              },
+              "isBundle": {
+                "type": "boolean",
+                "description": "If true, the product is a ProductBundle which is an instantiation of a BundledProductOffering. If false, the product is a ProductComponent which is an instantiation of a SimpleProductOffering."
+              },
+              "isCustomerVisible": {
+                "type": "boolean",
+                "description": "If true, the product is visible by the customer."
+              },
+              "name": {
+                "type": "string",
+                "description": "Name of the product. It could be the same as the name of the product offering"
+              },
+              "orderDate": {
+                "type": "string",
+                "description": "Is the date when the product was ordered",
+                "format": "date-time"
+              },
+              "productCharacteristic": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Characteristic_MVO"
+                }
+              },
+              "productOffering": {
+                "$ref": "#/components/schemas/ProductOfferingRef_MVO"
+              },
+              "productOrderItem": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/RelatedOrderItem_MVO"
+                }
+              },
+              "product": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ProductRefOrValue_MVO"
+                }
+              },
+              "productPrice": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ProductPrice_MVO"
+                }
+              },
+              "productRelationship": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ProductRelationship_MVO"
+                }
+              },
+              "productSerialNumber": {
+                "type": "string",
+                "description": "Is the serial number for the product. This is typically applicable to tangible products e.g. Broadband Router."
+              },
+              "productSpecification": {
+                "$ref": "#/components/schemas/ProductSpecificationRef_MVO"
+              },
+              "productTerm": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ProductTerm_MVO"
+                }
+              },
+              "realizingResource": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ResourceRef_MVO"
+                }
+              },
+              "realizingService": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ServiceRef_MVO"
+                }
+              },
+              "relatedParty": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/RelatedPartyOrPartyRole_MVO"
+                }
+              },
+              "place": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/RelatedPlaceRefOrValue_MVO"
+                }
+              },
+              "startDate": {
+                "type": "string",
+                "description": "Is the date from which the product starts",
+                "format": "date-time"
+              },
+              "status": {
+                "$ref": "#/components/schemas/ProductStatusType"
+              },
+              "terminationDate": {
+                "type": "string",
+                "description": "Is the date when the product was terminated",
+                "format": "date-time"
+              },
+              "intent": {
+                "$ref": "#/components/schemas/IntentRefOrValue_MVO"
+              }
+            },
+            "description": "A product offering procured by a customer or other interested party playing a party role. A product is realized as one or more service(s) and / or resource(s)."
+          }
+        ]
+      },
       "TargetProductSchema_FVO": {
         "required": [
           "@schemaLocation",
           "@type"
         ],
+        "type": "object",
+        "properties": {
+          "@type": {
+            "type": "string",
+            "description": "Class type of the target product"
+          },
+          "@schemaLocation": {
+            "type": "string",
+            "description": "This field provides a link to the schema describing the target product",
+            "format": "uri"
+          }
+        },
+        "description": "The reference object to the schema and type of target product which is described by product specification"
+      },
+      "TargetProductSchema_MVO": {
         "type": "object",
         "properties": {
           "@type": {
@@ -6359,6 +6917,60 @@
           }
         ]
       },
+      "AccountRef_MVO": {
+        "type": "object",
+        "description": "Account reference. A account may be a party account or a financial account.",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "AccountRef": "#/components/schemas/AccountRef_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          }
+        ]
+      },
+      "AgreementItemRef_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "AgreementItemRef": "#/components/schemas/AgreementItemRef_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "agreementName": {
+                "type": "string",
+                "description": "Name of the related entity."
+              },
+              "agreementHref": {
+                "type": "string",
+                "description": "Reference of the related entity."
+              },
+              "@referredType": {
+                "type": "string",
+                "description": "The actual type of the target instance when needed for disambiguation."
+              },
+              "agreementId": {
+                "type": "string",
+                "description": "Unique identifier of a related entity."
+              },
+              "agreementItemId": {
+                "type": "string",
+                "description": "Id of an item of a Agreement"
+              }
+            },
+            "description": "It's a Agreement item that has been executed previously."
+          }
+        ]
+      },
       "AgreementRef_FVO": {
         "type": "object",
         "description": "Agreement reference. An agreement represents a contract or arrangement, either written or verbal and sometimes enforceable by law, such as a service level agreement or a customer price agreement. An agreement involves a number of other business entities, such as products, services, and resources and/or their specifications.",
@@ -6374,6 +6986,24 @@
           },
           {
             "$ref": "#/components/schemas/EntityRef_FVO"
+          }
+        ]
+      },
+      "AgreementRef_MVO": {
+        "type": "object",
+        "description": "Agreement reference. An agreement represents a contract or arrangement, either written or verbal and sometimes enforceable by law, such as a service level agreement or a customer price agreement. An agreement involves a number of other business entities, such as products, services, and resources and/or their specifications.",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "AgreementRef": "#/components/schemas/AgreementRef_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "$ref": "#/components/schemas/EntityRef"
           }
         ]
       },
@@ -6400,6 +7030,85 @@
               }
             },
             "description": "BillingAccount reference. A BillingAccount is a detailed description of a bill structure."
+          }
+        ]
+      },
+      "BillingAccountRef_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "BillingAccountRef": "#/components/schemas/BillingAccountRef_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "ratingType": {
+                "type": "string",
+                "description": "Indicates whether the account follows a specific payment option such as prepaid or postpaid"
+              }
+            },
+            "description": "BillingAccount reference. A BillingAccount is a detailed description of a bill structure."
+          }
+        ]
+      },
+      "BusinessPartner_MVO": {
+        "type": "object",
+        "description": "When business partner is the BusinessPartner ",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/PartyRole_MVO"
+          }
+        ]
+      },
+      "CalendarPeriod_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "CalendarPeriod": "#/components/schemas/CalendarPeriod_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "day": {
+                "type": "string",
+                "description": "Day where the calendar status applies (e.g.: monday, mon-to-fri, weekdays, weekend, all week, ...)"
+              },
+              "timeZone": {
+                "type": "string",
+                "description": "Indication of the timezone applicable to the calendar information (e.g.: Paris, GMT+1)"
+              },
+              "hourPeriod": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/HourPeriod_MVO"
+                }
+              },
+              "status": {
+                "type": "string",
+                "description": "Indication of the availability of the caledar period (e.g.: available, booked, etc.)"
+              }
+            }
+          }
+        ]
+      },
+      "Consumer_MVO": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/PartyRole_MVO"
           }
         ]
       },
@@ -6437,6 +7146,40 @@
           }
         ]
       },
+      "ContactMedium_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "ContactMedium": "#/components/schemas/ContactMedium_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Identifier for this contact medium."
+              },
+              "preferred": {
+                "type": "boolean",
+                "description": "If true, indicates that is the preferred contact medium"
+              },
+              "contactType": {
+                "type": "string",
+                "description": "Type of the contact medium to qualifiy it like pro email / personal email. This is not used to define the contact medium used."
+              },
+              "validFor": {
+                "$ref": "#/components/schemas/TimePeriod"
+              }
+            },
+            "description": "Indicates the contact medium that could be used to contact the party."
+          }
+        ]
+      },
       "CreditProfile_FVO": {
         "discriminator": {
           "propertyName": "@type",
@@ -6447,6 +7190,41 @@
         "allOf": [
           {
             "$ref": "#/components/schemas/Entity_FVO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "creditProfileDate": {
+                "type": "string",
+                "description": "The date the profile was established",
+                "format": "date-time"
+              },
+              "creditRiskRating": {
+                "type": "integer",
+                "description": "This is an integer whose value is used to rate the risk"
+              },
+              "creditScore": {
+                "type": "integer",
+                "description": "A measure of a person or organizations creditworthiness calculated on the basis of a combination of factors such as their income and credit history"
+              },
+              "validFor": {
+                "$ref": "#/components/schemas/TimePeriod"
+              }
+            },
+            "description": "Credit profile for the party (containing credit scoring, ...). By default only the current credit profile  is retrieved. It can be used as a list to give the party credit profiles history, the first one in the list will be the current one."
+          }
+        ]
+      },
+      "CreditProfile_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "CreditProfile": "#/components/schemas/CreditProfile_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Entity_MVO"
           },
           {
             "type": "object",
@@ -6546,6 +7324,175 @@
           }
         ]
       },
+      "Expression_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "Expression": "#/components/schemas/Expression_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "expressionLanguage": {
+                "$ref": "#/components/schemas/ExpressionLanguageEnum"
+              },
+              "iri": {
+                "type": "string",
+                "description": "Internationalized Resource Identifier of the intent Expression"
+              },
+              "expressionValue": {
+                "type": "string",
+                "description": "expression value is the ontology-encoded form of the Intent such as RDF-XML, Turtle, Json-LD,..."
+              }
+            },
+            "description": "Expression is the ontology-encoded form of the Intent"
+          }
+        ]
+      },
+      "ExternalIdentifier_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "ExternalIdentifier": "#/components/schemas/ExternalIdentifier_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "owner": {
+                "type": "string",
+                "description": "Name of the external system that owns the entity.",
+                "example": "MagentoCommerce"
+              },
+              "externalIdentifierType": {
+                "type": "string",
+                "description": "Type of the identification, typically would be the type of the entity within the external system",
+                "example": "ProductOrder"
+              },
+              "id": {
+                "type": "string",
+                "description": "identification of the entity within the external system."
+              }
+            },
+            "description": "An identification of an entity that is owned by or originates in a software system different from the current system, for example a ProductOrder handed off from a commerce platform into an order handling system. The structure identifies the system itself, the nature of the entity within the system (e.g. class name) and the unique ID of the entity within the system. It is anticipated that multiple external IDs can be held for a single entity, e.g. if the entity passed through multiple systems on the way to the current system. In this case the consumer is expected to sequence the IDs in the array in reverse order of provenance, i.e. most recent system first in the list."
+          }
+        ]
+      },
+      "GeographicAddress_MVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Place_MVO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "city": {
+                "type": "string",
+                "description": "City that the address is in"
+              },
+              "country": {
+                "type": "string",
+                "description": "Country that the address is in"
+              },
+              "locality": {
+                "type": "string",
+                "description": "An area of defined or undefined boundaries within a local authority or other legislatively defined area, usually rural or semi rural in nature. [ANZLIC-STREET], or a suburb, a bounded locality within a city, town or shire principally of urban character [ANZLICSTREET]"
+              },
+              "postcode": {
+                "type": "string",
+                "description": "descriptor for a postal delivery area, used to speed and simplify the delivery of mail (also know as zipcode)"
+              },
+              "stateOrProvince": {
+                "type": "string",
+                "description": "the State or Province that the address is in"
+              },
+              "streetName": {
+                "type": "string",
+                "description": "Name of the street or other street type"
+              },
+              "streetNr": {
+                "type": "string",
+                "description": "Number identifying a specific property on a public street. It may be combined with streetNrLast for ranged addresses"
+              },
+              "streetNrLast": {
+                "type": "string",
+                "description": "Last number in a range of street numbers allocated to a property"
+              },
+              "streetNrLastSuffix": {
+                "type": "string",
+                "description": "Last street number suffix for a ranged address"
+              },
+              "streetNrSuffix": {
+                "type": "string",
+                "description": "the first street number suffix"
+              },
+              "streetSuffix": {
+                "type": "string",
+                "description": "A modifier denoting a relative direction"
+              },
+              "streetType": {
+                "type": "string",
+                "description": "alley, avenue, boulevard, brae, crescent, drive, highway, lane, terrace, parade, place, tarn, way, wharf "
+              },
+              "countryCode": {
+                "type": "array",
+                "description": "Country codes are short alphabetic or numeric geographical codes (geocodes) developed to represent countries and dependent areas, for use in data processing and communications. Several different systems have been developed to do this. The term country code frequently refers to ISO 3166-1 alpha-2 or international dialing codes, the E.164 country calling codes.",
+                "items": {
+                  "$ref": "#/components/schemas/StandardIdentifier_MVO"
+                }
+              },
+              "externalIdentifier": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ExternalIdentifier_MVO"
+                }
+              },
+              "geographicLocation": {
+                "$ref": "#/components/schemas/GeographicLocationRefOrValue_MVO"
+              },
+              "geographicSubAddress": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/GeographicSubAddress_MVO"
+                }
+              },
+              "geographicAddressType": {
+                "type": "string",
+                "description": "Classification of the address, e.g., residential, industrial "
+              }
+            },
+            "description": "Structured textual way of describing how to find a Property in an urban area (country properties are often defined differently).\nNote : Address corresponds to SID UrbanPropertyAddress"
+          }
+        ]
+      },
+      "GeographicLocationRefOrValue_MVO": {
+        "type": "object",
+        "description": "The polymorphic attributes @type, @schemaLocation & @referredType are related to the GeographicLocation entity and not the GeographicLocationRefOrValue class itself",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "GeographicLocation": "#/components/schemas/GeographicLocation_MVO",
+            "GeographicLocationRef": "#/components/schemas/GeographicLocationRef_MVO"
+          }
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/GeographicLocation_MVO"
+          },
+          {
+            "$ref": "#/components/schemas/GeographicLocationRef_MVO"
+          }
+        ]
+      },
       "GeographicLocationRef_FVO": {
         "type": "object",
         "discriminator": {
@@ -6557,6 +7504,207 @@
         "allOf": [
           {
             "$ref": "#/components/schemas/EntityRef_FVO"
+          }
+        ]
+      },
+      "GeographicLocationRef_MVO": {
+        "type": "object",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "GeographicLocationRef": "#/components/schemas/GeographicLocationRef_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          }
+        ]
+      },
+      "GeographicSiteRelationship_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "GeographicSiteRelationship": "#/components/schemas/GeographicSiteRelationship_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "href": {
+                "type": "string",
+                "description": "Reference of the related geographic site",
+                "format": "uri"
+              },
+              "role": {
+                "type": "string",
+                "description": "Role of the related site in the relationship"
+              },
+              "validFor": {
+                "$ref": "#/components/schemas/TimePeriod"
+              },
+              "id": {
+                "type": "string",
+                "description": "Unique identifier of the related site entity within the server"
+              },
+              "relationshipType": {
+                "type": "string",
+                "description": "Type of relationship"
+              }
+            }
+          }
+        ]
+      },
+      "GeographicSite_MVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Place_MVO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "code": {
+                "type": "string",
+                "description": "A code that may be used for some addressing schemes eg: [ANSI T1.253-1999]"
+              },
+              "creationDate": {
+                "type": "string",
+                "description": "Date and time when the GeographicSite was created",
+                "format": "date-time"
+              },
+              "description": {
+                "type": "string",
+                "description": "Text describing additional information regarding the site"
+              },
+              "status": {
+                "type": "string",
+                "description": "The condition of the GeographicSite, such as planned, underConstruction, cancelled, active, inactive, former"
+              },
+              "relatedParty": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/RelatedPartyOrPartyRole_MVO"
+                }
+              },
+              "externalIdentifier": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ExternalIdentifier_MVO"
+                }
+              },
+              "calendar": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CalendarPeriod_MVO"
+                }
+              },
+              "place": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/PlaceRefOrValue_MVO"
+                }
+              },
+              "siteRelationship": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/GeographicSiteRelationship_MVO"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "GeographicSubAddressUnit_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "GeographicSubAddressUnit": "#/components/schemas/GeographicSubAddressUnit_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "subUnitNumber": {
+                "type": "string",
+                "description": "The discriminator used for the subunit, often just a simple number but may also be a range."
+              },
+              "subUnitType": {
+                "type": "string",
+                "description": "The type of subunit e.g.BERTH, FLAT, PIER, SUITE, SHOP, TOWER, UNIT, WHARF, RACK"
+              }
+            },
+            "description": "Representation of a SubUnit. It is used for describing subunit within a subAddress e.g. BERTH, FLAT, PIER, SUITE, SHOP, TOWER, UNIT, WHARF."
+          }
+        ]
+      },
+      "GeographicSubAddress_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "GeographicSubAddress": "#/components/schemas/GeographicSubAddress_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Entity_MVO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "buildingName": {
+                "type": "string",
+                "description": "allows for buildings that have well-known names"
+              },
+              "href": {
+                "type": "string",
+                "description": "Link to the subAddress",
+                "format": "uri"
+              },
+              "id": {
+                "type": "string",
+                "description": "Unique Identifier of the subAddress"
+              },
+              "levelNumber": {
+                "type": "string",
+                "description": "used where a level type may be repeated e.g. BASEMENT 1, BASEMENT 2"
+              },
+              "levelType": {
+                "type": "string",
+                "description": "describes level types within a building"
+              },
+              "name": {
+                "type": "string",
+                "description": "Name of the subAddress to identify it with a meaningful identification"
+              },
+              "privateStreetName": {
+                "type": "string",
+                "description": "private streets internal to a property (e.g. a university) may have internal names that are not recorded by the land title office."
+              },
+              "privateStreetNumber": {
+                "type": "string",
+                "description": "private streets numbers internal to a private street"
+              },
+              "subUnit": {
+                "type": "array",
+                "description": "Representation of a SubUnit. It is used for describing subunit within a subAddress e.g. BERTH, FLAT, PIER, SUITE, SHOP, TOWER, UNIT, WHARF.",
+                "items": {
+                  "$ref": "#/components/schemas/GeographicSubAddressUnit_MVO"
+                }
+              },
+              "subAddressType": {
+                "type": "string",
+                "description": "Type of subAddress : it can be a subunit or a private street"
+              }
+            },
+            "description": "Representation of a GeographicSubAddress \nIt is used for addressing within a property in an urban area (country properties are often defined differently). It may refer to a building, a building cluster, or a floor of a multistory building."
           }
         ]
       },
@@ -6586,6 +7734,51 @@
           }
         ]
       },
+      "HourPeriod_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "HourPeriod": "#/components/schemas/HourPeriod_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "endHour": {
+                "type": "string",
+                "description": "The time when the status ends applying"
+              },
+              "startHour": {
+                "type": "string",
+                "description": "The time when the status starts applying"
+              }
+            }
+          }
+        ]
+      },
+      "IntentRefOrValue_MVO": {
+        "type": "object",
+        "description": "Intent Ref (if Intent already exists) or Value (if Intent be created or its details be presented)",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "IntentRef": "#/components/schemas/IntentRef_MVO",
+            "Intent": "#/components/schemas/Intent_MVO"
+          }
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/IntentRef_MVO"
+          },
+          {
+            "$ref": "#/components/schemas/Intent_MVO"
+          }
+        ]
+      },
       "IntentRef_FVO": {
         "type": "object",
         "description": "Intent reference, for when Intent is used by other entities",
@@ -6598,6 +7791,117 @@
         "allOf": [
           {
             "$ref": "#/components/schemas/EntityRef_FVO"
+          }
+        ]
+      },
+      "IntentRef_MVO": {
+        "type": "object",
+        "description": "Intent reference, for when Intent is used by other entities",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "IntentRef": "#/components/schemas/IntentRef_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          }
+        ]
+      },
+      "Intent_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "Intent": "#/components/schemas/Intent_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Entity_MVO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "description": {
+                "type": "string",
+                "description": "The description of the intent."
+              },
+              "validFor": {
+                "$ref": "#/components/schemas/TimePeriod"
+              },
+              "isBundle": {
+                "type": "boolean",
+                "description": "isBundle determines whether an intent represents a single intent (false), or a bundle of intents(true)."
+              },
+              "priority": {
+                "type": "string",
+                "description": "Can be used by intent owner to prioritize intents in an intent management system"
+              },
+              "statusChangeDate": {
+                "type": "string",
+                "description": "A date time( DateTime). The date that the entity status changed to the current one",
+                "format": "date-time"
+              },
+              "context": {
+                "type": "string",
+                "description": "A string used to give a context to the intent"
+              },
+              "version": {
+                "type": "string",
+                "description": "A field that identifies the specific version of an instance of an intent."
+              },
+              "intentSpecification": {
+                "$ref": "#/components/schemas/EntityRef"
+              },
+              "intentRelationship": {
+                "type": "array",
+                "description": "A list of intents related to this intent",
+                "items": {
+                  "$ref": "#/components/schemas/EntityRelationship_MVO"
+                }
+              },
+              "characteristic": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Characteristic_MVO"
+                }
+              },
+              "relatedParty": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/RelatedPartyRefOrPartyRoleRef_MVO"
+                }
+              },
+              "attachment": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/AttachmentOrDocumentRef"
+                }
+              },
+              "name": {
+                "type": "string",
+                "description": "The name of the intent."
+              },
+              "expression": {
+                "$ref": "#/components/schemas/Expression_MVO"
+              },
+              "creationDate": {
+                "type": "string",
+                "description": "Date and time of the creation of this REST resource",
+                "format": "date-time"
+              },
+              "lastUpdate": {
+                "type": "string",
+                "description": "Date and time of the last update of this REST resource",
+                "format": "date-time"
+              },
+              "lifecycleStatus": {
+                "type": "string",
+                "description": "Used to indicate the current lifecycle status of this intent"
+              }
+            },
+            "description": "An Intent instance is the formal description of all expectations including requirements, goals, and constraints given to a technical system"
           }
         ]
       },
@@ -6616,6 +7920,48 @@
           }
         ]
       },
+      "PaymentMethodRef_MVO": {
+        "type": "object",
+        "description": "PaymentMethod reference. A payment method defines a specific mean of payment (e.g direct debit).",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "PaymentMethodRef": "#/components/schemas/PaymentMethodRef_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          }
+        ]
+      },
+      "PlaceRefOrValue_MVO": {
+        "type": "object",
+        "description": "The polymorphic attributes @type, @schemaLocation & @referredType are related to the Place entity and not the PlaceRefOrValue class itself",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "GeographicLocation": "#/components/schemas/GeographicLocation_MVO",
+            "GeographicSite": "#/components/schemas/GeographicSite_MVO",
+            "GeographicAddress": "#/components/schemas/GeographicAddress_MVO",
+            "PlaceRef": "#/components/schemas/PlaceRef_MVO"
+          }
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/GeographicLocation_MVO"
+          },
+          {
+            "$ref": "#/components/schemas/GeographicSite_MVO"
+          },
+          {
+            "$ref": "#/components/schemas/GeographicAddress_MVO"
+          },
+          {
+            "$ref": "#/components/schemas/PlaceRef_MVO"
+          }
+        ]
+      },
       "PlaceRef_FVO": {
         "type": "object",
         "description": "Place reference.",
@@ -6631,6 +7977,77 @@
           },
           {
             "$ref": "#/components/schemas/EntityRef_FVO"
+          }
+        ]
+      },
+      "PlaceRef_MVO": {
+        "type": "object",
+        "description": "Place reference.",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "PlaceRef": "#/components/schemas/PlaceRef_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          }
+        ]
+      },
+      "PriceAlteration_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "PriceAlteration": "#/components/schemas/PriceAlteration_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "applicationDuration": {
+                "type": "integer",
+                "description": "Duration during which the alteration applies on the order item price (for instance 2 months free of charge for the recurring charge)"
+              },
+              "description": {
+                "type": "string",
+                "description": "A narrative that explains in detail the semantics of this order item price alteration"
+              },
+              "name": {
+                "type": "string",
+                "description": "Name of the order item price alteration"
+              },
+              "productOfferingPrice": {
+                "$ref": "#/components/schemas/ProductOfferingPriceRef_MVO"
+              },
+              "priceType": {
+                "type": "string",
+                "description": "A category that describes the price such as recurring, one time and usage."
+              },
+              "priority": {
+                "type": "integer",
+                "description": "Priority level for applying this alteration among all the defined alterations on the order item price"
+              },
+              "recurringChargePeriod": {
+                "type": "string",
+                "description": "Could be month, week..."
+              },
+              "unitOfMeasure": {
+                "type": "string",
+                "description": "Could be minutes, GB..."
+              },
+              "price": {
+                "$ref": "#/components/schemas/Price_MVO"
+              }
+            },
+            "description": "Is an amount, usually of money, that modifies the price charged for an order item."
           }
         ]
       },
@@ -6669,6 +8086,116 @@
           }
         ]
       },
+      "Price_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "Price": "#/components/schemas/Price_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "dutyFreeAmount": {
+                "$ref": "#/components/schemas/Money"
+              },
+              "percentage": {
+                "type": "number",
+                "description": "Percentage to apply for ProdOfferPriceAlteration",
+                "format": "float"
+              },
+              "taxIncludedAmount": {
+                "$ref": "#/components/schemas/Money"
+              },
+              "taxRate": {
+                "type": "number",
+                "description": "Tax rate",
+                "format": "float"
+              }
+            },
+            "description": "Provides all amounts (tax included, duty free, tax rate), used currency and percentage to apply for Price and Price Alteration."
+          }
+        ]
+      },
+      "Producer_MVO": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/PartyRole_MVO"
+          }
+        ]
+      },
+      "RelatedOrderItem_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "RelatedOrderItem": "#/components/schemas/RelatedOrderItem_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "orderItemAction": {
+                "$ref": "#/components/schemas/ItemActionType"
+              },
+              "orderHref": {
+                "type": "string",
+                "description": "Reference of the related entity."
+              },
+              "@referredType": {
+                "type": "string",
+                "description": "The actual type of the target instance when needed for disambiguation."
+              },
+              "role": {
+                "type": "string",
+                "description": "Role played by the  Order"
+              },
+              "orderId": {
+                "type": "string",
+                "description": "Unique identifier of a related  Order."
+              },
+              "orderItemId": {
+                "type": "string",
+                "description": "Id of an item of a prduct order"
+              }
+            },
+            "description": "It's a Order item that has been executed previously."
+          }
+        ]
+      },
+      "RelatedPlaceRefOrValue_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "RelatedPlaceRefOrValue": "#/components/schemas/RelatedPlaceRefOrValue_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "role": {
+                "type": "string"
+              },
+              "place": {
+                "$ref": "#/components/schemas/PlaceRefOrValue_MVO"
+              }
+            },
+            "description": "Entity reference. The polymorphic attributes @type, @schemaLocation & @referredType are related to the RelatedPlace entity and not the RelatedPlaceRefOrValue class itself"
+          }
+        ]
+      },
       "ResourceRef_FVO": {
         "type": "object",
         "description": "Resource reference, for when Resource is used by other entities.",
@@ -6681,6 +8208,21 @@
         "allOf": [
           {
             "$ref": "#/components/schemas/EntityRef_FVO"
+          }
+        ]
+      },
+      "ResourceRef_MVO": {
+        "type": "object",
+        "description": "Resource reference, for when Resource is used by other entities.",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "ResourceRef": "#/components/schemas/ResourceRef_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
           }
         ]
       },
@@ -6699,6 +8241,24 @@
           },
           {
             "$ref": "#/components/schemas/EntityRef_FVO"
+          }
+        ]
+      },
+      "ServiceRef_MVO": {
+        "type": "object",
+        "description": "Service reference, for when Service is used by other entities.",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "ServiceRef": "#/components/schemas/ServiceRef_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "$ref": "#/components/schemas/EntityRef"
           }
         ]
       },
@@ -6728,6 +8288,44 @@
               }
             },
             "description": "The corresponding identification of the resource in different standard, regulatory definitions. The standard specification identifier (e.g., ISO 3166-1 Alpha-2) and the corresponding value (e.g., BE) relevant to a particular resource. It is anticipated that multiple standards can provide definitions for a single entity, e.g., a country identifier can be specified in various standards (e.g., \"ISO 3166-1 Alpha 2\",  \"ISO 3166-1 Alpha 3\", \"ISO 3166-1 Numeric\")"
+          }
+        ]
+      },
+      "StandardIdentifier_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "StandardIdentifier": "#/components/schemas/StandardIdentifier_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Entity_MVO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "format": {
+                "type": "string",
+                "description": "Standard/Regulatory definition identifier. e.g., ISO 3166-1",
+                "example": "ISO 3166-1"
+              },
+              "value": {
+                "type": "string",
+                "description": "The value of the resource in the corresponding standard.e.g., a country code value",
+                "example": "GB"
+              }
+            },
+            "description": "The corresponding identification of the resource in different standard, regulatory definitions. The standard specification identifier (e.g., ISO 3166-1 Alpha-2) and the corresponding value (e.g., BE) relevant to a particular resource. It is anticipated that multiple standards can provide definitions for a single entity, e.g., a country identifier can be specified in various standards (e.g., \"ISO 3166-1 Alpha 2\",  \"ISO 3166-1 Alpha 3\", \"ISO 3166-1 Numeric\")"
+          }
+        ]
+      },
+      "Supplier_MVO": {
+        "type": "object",
+        "description": "When business partner is the Supplier ",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/PartyRole_MVO"
           }
         ]
       },
@@ -6776,6 +8374,512 @@
           }
         ]
       },
+      "TaxDefinition_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "TaxDefinition": "#/components/schemas/TaxDefinition_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Unique identifier of the tax."
+              },
+              "name": {
+                "type": "string",
+                "description": "Tax name."
+              },
+              "validFor": {
+                "$ref": "#/components/schemas/TimePeriod"
+              },
+              "jurisdictionName": {
+                "type": "string",
+                "description": "Name of the jurisdiction that levies the tax",
+                "example": "USA"
+              },
+              "jurisdictionLevel": {
+                "type": "string",
+                "description": "Level of the jurisdiction that levies the tax",
+                "example": "Country"
+              },
+              "taxType": {
+                "type": "string",
+                "description": "Type of the tax.",
+                "example": "VAT"
+              }
+            },
+            "description": "Reference of a tax definition. A tax is levied by an authorized tax jurisdiction. For example, there are many different types of tax (Federal Tax levied by the US Government, State Tax levied by the State of California, City Tax levied by the City of Los Angeles, etc.)."
+          }
+        ]
+      },
+      "BooleanArrayCharacteristic_MVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic_MVO"
+          },
+          {
+            "required": [
+              "value"
+            ],
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "array",
+                "items": {
+                  "type": "boolean"
+                }
+              }
+            },
+            "description": "A characteristic which value is an array of Boolean(s)."
+          }
+        ]
+      },
+      "BooleanCharacteristic_MVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic_MVO"
+          },
+          {
+            "required": [
+              "value"
+            ],
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "boolean",
+                "description": "Value of the characteristic"
+              }
+            },
+            "description": "A characteristic which value is a Boolean."
+          }
+        ]
+      },
+      "CharacteristicRelationship_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "CharacteristicRelationship": "#/components/schemas/CharacteristicRelationship_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Unique identifier of the characteristic"
+              },
+              "relationshipType": {
+                "type": "string",
+                "description": "The type of relationship"
+              }
+            },
+            "description": "Another Characteristic that is related to the current Characteristic;"
+          }
+        ]
+      },
+      "Characteristic_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "Characteristic": "#/components/schemas/Characteristic_MVO",
+            "StringCharacteristic": "#/components/schemas/StringCharacteristic_MVO",
+            "StringArrayCharacteristic": "#/components/schemas/StringArrayCharacteristic_MVO",
+            "ObjectCharacteristic": "#/components/schemas/ObjectCharacteristic_MVO",
+            "ObjectArrayCharacteristic": "#/components/schemas/ObjectArrayCharacteristic_MVO",
+            "NumberCharacteristic": "#/components/schemas/NumberCharacteristic_MVO",
+            "NumberArrayCharacteristic": "#/components/schemas/NumberArrayCharacteristic_MVO",
+            "IntegerCharacteristic": "#/components/schemas/IntegerCharacteristic_MVO",
+            "IntegerArrayCharacteristic": "#/components/schemas/IntegerArrayCharacteristic_MVO",
+            "FloatCharacteristic": "#/components/schemas/FloatCharacteristic_MVO",
+            "FloatArrayCharacteristic": "#/components/schemas/FloatArrayCharacteristic_MVO",
+            "BooleanCharacteristic": "#/components/schemas/BooleanCharacteristic_MVO",
+            "BooleanArrayCharacteristic": "#/components/schemas/BooleanArrayCharacteristic_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Unique identifier of the characteristic"
+              },
+              "name": {
+                "type": "string",
+                "description": "Name of the characteristic"
+              },
+              "valueType": {
+                "type": "string",
+                "description": "Data type of the value of the characteristic"
+              },
+              "characteristicRelationship": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CharacteristicRelationship_MVO"
+                }
+              },
+              "unitOfMeasure": {
+                "type": "string",
+                "description": "A length, surface, volume, dry measure, liquid measure, money, weight, time, and the like. In general, a determinate quantity or magnitude of the kind designated, taken as a standard of comparison for others of the same kind, in assigning them to numerical values, as 1 foot, 1 yard, 1 mile, 1 square foot."
+              }
+            },
+            "description": "Describes a given characteristic of an object or entity through a name/value pair."
+          }
+        ]
+      },
+      "IntegerArrayCharacteristic_MVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic_MVO"
+          },
+          {
+            "required": [
+              "value"
+            ],
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                }
+              }
+            },
+            "description": "A characteristic which value is an array of Integer(s)."
+          }
+        ]
+      },
+      "IntegerCharacteristic_MVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic_MVO"
+          },
+          {
+            "required": [
+              "value"
+            ],
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "integer",
+                "description": "Value of the characteristic"
+              }
+            },
+            "description": "A characteristic which value is a Integer."
+          }
+        ]
+      },
+      "NumberArrayCharacteristic_MVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic_MVO"
+          },
+          {
+            "required": [
+              "value"
+            ],
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                }
+              }
+            },
+            "description": "A characteristic which value is an array of Number(s)."
+          }
+        ]
+      },
+      "NumberCharacteristic_MVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic_MVO"
+          },
+          {
+            "required": [
+              "value"
+            ],
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "number",
+                "description": "Value of the characteristic"
+              }
+            },
+            "description": "A characteristic which value is a Number."
+          }
+        ]
+      },
+      "ObjectArrayCharacteristic_MVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic_MVO"
+          },
+          {
+            "required": [
+              "value"
+            ],
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "array",
+                "items": {
+                  "type": "object"
+                }
+              }
+            },
+            "description": "A characteristic which value is an array of Object(s)."
+          }
+        ]
+      },
+      "ObjectCharacteristic_MVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic_MVO"
+          },
+          {
+            "required": [
+              "value"
+            ],
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "object",
+                "description": "Value of the characteristic"
+              }
+            },
+            "description": "A characteristic which value is a Object."
+          }
+        ]
+      },
+      "StringArrayCharacteristic_MVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic_MVO"
+          },
+          {
+            "required": [
+              "value"
+            ],
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "A characteristic which value is an array of String(s)."
+          }
+        ]
+      },
+      "StringCharacteristic_MVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic_MVO"
+          },
+          {
+            "required": [
+              "value"
+            ],
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "string",
+                "description": "Value of the characteristic"
+              }
+            },
+            "description": "A characteristic which value is a String."
+          }
+        ]
+      },
+      "IndividualIdentification_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "IndividualIdentification": "#/components/schemas/IndividualIdentification_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "identificationId": {
+                "type": "string",
+                "description": "Identifier"
+              },
+              "issuingAuthority": {
+                "type": "string",
+                "description": "Authority which has issued the identifier, such as: social security, town hall"
+              },
+              "issuingDate": {
+                "type": "string",
+                "description": "Date at which the identifier was issued",
+                "format": "date-time"
+              },
+              "identificationType": {
+                "type": "string",
+                "description": "Identification type (passport, national identity card, drivers license, social security number, birth certificate)"
+              },
+              "validFor": {
+                "$ref": "#/components/schemas/TimePeriod"
+              },
+              "attachment": {
+                "$ref": "#/components/schemas/AttachmentOrDocumentRef"
+              }
+            },
+            "description": "Represents our registration of information used as proof of identity by an individual (passport, national identity card, drivers license, social security number, birth certificate)"
+          }
+        ]
+      },
+      "Individual_MVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Party_MVO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "gender": {
+                "type": "string",
+                "description": "Gender"
+              },
+              "placeOfBirth": {
+                "type": "string",
+                "description": "Reference to the place where the individual was born"
+              },
+              "countryOfBirth": {
+                "type": "string",
+                "description": "Country where the individual was born"
+              },
+              "nationality": {
+                "type": "string",
+                "description": "Nationality"
+              },
+              "maritalStatus": {
+                "type": "string",
+                "description": "Marital status (married, divorced, widow ...)"
+              },
+              "birthDate": {
+                "type": "string",
+                "description": "Birth date",
+                "format": "date-time"
+              },
+              "deathDate": {
+                "type": "string",
+                "description": "Date of death",
+                "format": "date-time"
+              },
+              "title": {
+                "type": "string",
+                "description": "Useful for titles (aristocratic, social,...) Pr, Dr, Sir, ..."
+              },
+              "aristocraticTitle": {
+                "type": "string",
+                "description": "e.g. Baron, Graf, Earl"
+              },
+              "generation": {
+                "type": "string",
+                "description": "e.g.. Sr, Jr, III (the third)"
+              },
+              "preferredGivenName": {
+                "type": "string",
+                "description": "Contains the chosen name by which the individual prefers to be addressed. Note: This name may be a name other than a given name, such as a nickname"
+              },
+              "familyNamePrefix": {
+                "type": "string",
+                "description": "Family name prefix"
+              },
+              "legalName": {
+                "type": "string",
+                "description": "Legal name or birth name (name one has for official purposes)"
+              },
+              "middleName": {
+                "type": "string",
+                "description": "Middles name or initial"
+              },
+              "name": {
+                "type": "string",
+                "description": "Full name flatten (first, middle, and last names) - this is the name that is expected to be presented in reference data types such as PartyRef, RelatedParty, etc. that refer to Individual"
+              },
+              "formattedName": {
+                "type": "string",
+                "description": "A fully formatted name in one string with all of its pieces in their proper place and all of the necessary punctuation. Useful for specific contexts (Chinese, Japanese, Korean)"
+              },
+              "location": {
+                "type": "string",
+                "description": "Temporary current location of the individual (may be used if the individual has approved its sharing)"
+              },
+              "status": {
+                "$ref": "#/components/schemas/IndividualStateType"
+              },
+              "otherName": {
+                "type": "array",
+                "description": "List of other names by which this individual is known",
+                "items": {
+                  "$ref": "#/components/schemas/OtherNameIndividual"
+                }
+              },
+              "individualIdentification": {
+                "type": "array",
+                "description": "List of official identifications issued to the individual, such as passport, driving licence, social security number",
+                "items": {
+                  "$ref": "#/components/schemas/IndividualIdentification_MVO"
+                }
+              },
+              "disability": {
+                "type": "array",
+                "description": "List of disabilities suffered by the individual",
+                "items": {
+                  "$ref": "#/components/schemas/Disability"
+                }
+              },
+              "languageAbility": {
+                "type": "array",
+                "description": "List of national languages known by the individual",
+                "items": {
+                  "$ref": "#/components/schemas/LanguageAbility"
+                }
+              },
+              "skill": {
+                "type": "array",
+                "description": "List of skills exhibited by the individual",
+                "items": {
+                  "$ref": "#/components/schemas/Skill"
+                }
+              },
+              "familyName": {
+                "type": "string",
+                "description": "Contains the non-chosen or inherited name. Also known as last name in the Western context"
+              },
+              "givenName": {
+                "type": "string",
+                "description": "First name of the individual"
+              }
+            },
+            "description": "Individual represents a single human being (a man, woman or child). The individual can be a customer, an employee or any other person that the organization needs to store information about."
+          }
+        ]
+      },
       "OrganizationChildRelationship_FVO": {
         "discriminator": {
           "propertyName": "@type",
@@ -6799,6 +8903,74 @@
               }
             },
             "description": "Child references of an organization in a structure of organizations."
+          }
+        ]
+      },
+      "OrganizationChildRelationship_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "OrganizationChildRelationship": "#/components/schemas/OrganizationChildRelationship_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "relationshipType": {
+                "type": "string",
+                "description": "Type of the relationship. Could be juridical, hierarchical, geographical, functional for example."
+              },
+              "organization": {
+                "$ref": "#/components/schemas/OrganizationRef_MVO"
+              }
+            },
+            "description": "Child references of an organization in a structure of organizations."
+          }
+        ]
+      },
+      "OrganizationIdentification_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "OrganizationIdentification": "#/components/schemas/OrganizationIdentification_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "identificationId": {
+                "type": "string",
+                "description": "Identifier"
+              },
+              "issuingAuthority": {
+                "type": "string",
+                "description": "Authority which has issued the identifier (chamber of commerce...)"
+              },
+              "issuingDate": {
+                "type": "string",
+                "description": "Date at which the identifier was issued",
+                "format": "date-time"
+              },
+              "identificationType": {
+                "type": "string",
+                "description": "Type of identification information used to identify the company in a country or internationally"
+              },
+              "validFor": {
+                "$ref": "#/components/schemas/TimePeriod"
+              },
+              "attachment": {
+                "$ref": "#/components/schemas/AttachmentOrDocumentRef"
+              }
+            },
+            "description": "Represents our registration of information used as proof of identity by an organization"
           }
         ]
       },
@@ -6828,6 +9000,32 @@
           }
         ]
       },
+      "OrganizationParentRelationship_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "OrganizationParentRelationship": "#/components/schemas/OrganizationParentRelationship_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "relationshipType": {
+                "type": "string",
+                "description": "Type of the relationship. Could be juridical, hierarchical, geographical, functional for example."
+              },
+              "organization": {
+                "$ref": "#/components/schemas/OrganizationRef_MVO"
+              }
+            },
+            "description": "Parent references of an organization in a structure of organizations."
+          }
+        ]
+      },
       "OrganizationRef_FVO": {
         "type": "object",
         "discriminator": {
@@ -6842,6 +9040,87 @@
           }
         ]
       },
+      "OrganizationRef_MVO": {
+        "type": "object",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "OrganizationRef": "#/components/schemas/OrganizationRef_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          }
+        ]
+      },
+      "Organization_MVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Party_MVO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "isLegalEntity": {
+                "type": "boolean",
+                "description": "If value is true, the organization is a legal entity known by a national referential."
+              },
+              "isHeadOffice": {
+                "type": "boolean",
+                "description": "If value is true, the organization is the head office"
+              },
+              "organizationType": {
+                "type": "string",
+                "description": "Type of Organization (company, department...)"
+              },
+              "existsDuring": {
+                "$ref": "#/components/schemas/TimePeriod"
+              },
+              "name": {
+                "type": "string",
+                "description": "Organization name (department name for example)"
+              },
+              "nameType": {
+                "type": "string",
+                "description": "Type of the name : Co, Inc, Ltd, etc."
+              },
+              "status": {
+                "$ref": "#/components/schemas/OrganizationStateType"
+              },
+              "otherName": {
+                "type": "array",
+                "description": "List of additional names by which the organization is known",
+                "items": {
+                  "$ref": "#/components/schemas/OtherNameOrganization_MVO"
+                }
+              },
+              "organizationIdentification": {
+                "type": "array",
+                "description": "List of official identifiers given to the organization, for example company number in the registry of companies",
+                "items": {
+                  "$ref": "#/components/schemas/OrganizationIdentification_MVO"
+                }
+              },
+              "organizationChildRelationship": {
+                "type": "array",
+                "description": "List of organizations that are contained within this organization. For example if this organization is the Legal Department, the child organizations might include Claims, Courts, Contracts",
+                "items": {
+                  "$ref": "#/components/schemas/OrganizationChildRelationship_MVO"
+                }
+              },
+              "organizationParentRelationship": {
+                "$ref": "#/components/schemas/OrganizationParentRelationship_MVO"
+              },
+              "tradingName": {
+                "type": "string",
+                "description": "Name that the organization (unit) trades under"
+              }
+            },
+            "description": "Organization represents a group of people identified by shared interests or purpose. Examples include business, department and enterprise. Because of the complex nature of many businesses, both organizations and organization units are represented by the same data."
+          }
+        ]
+      },
       "OtherNameOrganization_FVO": {
         "discriminator": {
           "propertyName": "@type",
@@ -6852,6 +9131,40 @@
         "allOf": [
           {
             "$ref": "#/components/schemas/Extensible_FVO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "tradingName": {
+                "type": "string",
+                "description": "The name that the organization trades under"
+              },
+              "nameType": {
+                "type": "string",
+                "description": "Co. , Inc. , Ltd. , Pty Ltd. , Plc; , Gmbh"
+              },
+              "name": {
+                "type": "string",
+                "description": "Organization name (department name for example)"
+              },
+              "validFor": {
+                "$ref": "#/components/schemas/TimePeriod"
+              }
+            },
+            "description": "Keeps track of other names, for example the old name of an organization."
+          }
+        ]
+      },
+      "OtherNameOrganization_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "OtherNameOrganization": "#/components/schemas/OtherNameOrganization_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
           },
           {
             "type": "object",
@@ -6915,6 +9228,92 @@
           }
         ]
       },
+      "PartyCreditProfile_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "PartyCreditProfile": "#/components/schemas/PartyCreditProfile_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Entity_MVO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "creditAgencyName": {
+                "type": "string",
+                "description": "Name of the credit agency giving the score"
+              },
+              "creditAgencyType": {
+                "type": "string",
+                "description": "Type of the credit agency giving the score"
+              },
+              "ratingReference": {
+                "type": "string",
+                "description": "Reference corresponding to the credit rating"
+              },
+              "ratingScore": {
+                "type": "integer",
+                "description": "A measure of a party's creditworthiness calculated on the basis of a combination of factors such as their income and credit history",
+                "format": "int32"
+              },
+              "validFor": {
+                "$ref": "#/components/schemas/TimePeriod"
+              }
+            },
+            "description": "An individual might be evaluated for its worthiness and this evaluation might be based on a credit rating given by a credit agency."
+          }
+        ]
+      },
+      "PartyOrPartyRole_MVO": {
+        "type": "object",
+        "description": "",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "PartyRef": "#/components/schemas/PartyRef_MVO",
+            "PartyRoleRef": "#/components/schemas/PartyRoleRef_MVO",
+            "Individual": "#/components/schemas/Individual_MVO",
+            "Organization": "#/components/schemas/Organization_MVO",
+            "PartyRole": "#/components/schemas/PartyRole_MVO",
+            "Supplier": "#/components/schemas/Supplier_MVO",
+            "BusinessPartner": "#/components/schemas/BusinessPartner_MVO",
+            "Consumer": "#/components/schemas/Consumer_MVO",
+            "Producer": "#/components/schemas/Producer_MVO"
+          }
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/PartyRef_MVO"
+          },
+          {
+            "$ref": "#/components/schemas/PartyRoleRef_MVO"
+          },
+          {
+            "$ref": "#/components/schemas/Individual_MVO"
+          },
+          {
+            "$ref": "#/components/schemas/Organization_MVO"
+          },
+          {
+            "$ref": "#/components/schemas/PartyRole_MVO"
+          },
+          {
+            "$ref": "#/components/schemas/Supplier_MVO"
+          },
+          {
+            "$ref": "#/components/schemas/BusinessPartner_MVO"
+          },
+          {
+            "$ref": "#/components/schemas/Consumer_MVO"
+          },
+          {
+            "$ref": "#/components/schemas/Producer_MVO"
+          }
+        ]
+      },
       "PartyRef_FVO": {
         "type": "object",
         "description": "A Party reference",
@@ -6927,6 +9326,21 @@
         "allOf": [
           {
             "$ref": "#/components/schemas/EntityRef_FVO"
+          }
+        ]
+      },
+      "PartyRef_MVO": {
+        "type": "object",
+        "description": "A Party reference",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "PartyRef": "#/components/schemas/PartyRef_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
           }
         ]
       },
@@ -6957,6 +9371,33 @@
           }
         ]
       },
+      "PartyRoleRef_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "PartyRoleRef": "#/components/schemas/PartyRoleRef_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "partyId": {
+                "type": "string",
+                "description": "The identifier of the engaged party that is linked to the PartyRole object."
+              },
+              "partyName": {
+                "type": "string",
+                "description": "The name of the engaged party that is linked to the PartyRole object."
+              }
+            },
+            "description": "Party role reference. A party role represents the part played by a party in a given context."
+          }
+        ]
+      },
       "PartyRoleSpecificationRef_FVO": {
         "type": "object",
         "description": "Party role specification reference. A party role specification gives additional details on the part played by a party in a given context.",
@@ -6969,6 +9410,356 @@
         "allOf": [
           {
             "$ref": "#/components/schemas/EntityRef_FVO"
+          }
+        ]
+      },
+      "PartyRoleSpecificationRef_MVO": {
+        "type": "object",
+        "description": "Party role specification reference. A party role specification gives additional details on the part played by a party in a given context.",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "PartyRoleSpecificationRef": "#/components/schemas/PartyRoleSpecificationRef_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          }
+        ]
+      },
+      "PartyRole_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "PartyRole": "#/components/schemas/PartyRole_MVO",
+            "Supplier": "#/components/schemas/Supplier_MVO",
+            "Producer": "#/components/schemas/Producer_MVO",
+            "Consumer": "#/components/schemas/Consumer_MVO",
+            "BusinessPartner": "#/components/schemas/BusinessPartner_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Entity_MVO"
+          },
+          {
+            "required": [
+              "engagedParty",
+              "name"
+            ],
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "A word, term, or phrase by which the PartyRole is known and distinguished from other PartyRoles. It's the name of the PartyRole unique entity."
+              },
+              "description": {
+                "type": "string",
+                "description": "A description of the PartyRole."
+              },
+              "role": {
+                "type": "string",
+                "description": "Role played by the engagedParty in this context. As role is defined by partyRoleSpecification, this role attribute can be used to precise the role defined by partyRoleSpecification, or it can be used to define the role in case there is no partyRoleSpecification."
+              },
+              "engagedParty": {
+                "$ref": "#/components/schemas/PartyRef_MVO"
+              },
+              "partyRoleSpecification": {
+                "$ref": "#/components/schemas/PartyRoleSpecificationRef_MVO"
+              },
+              "characteristic": {
+                "type": "array",
+                "description": "Describes the characteristic of a party role.",
+                "items": {
+                  "$ref": "#/components/schemas/Characteristic_MVO"
+                }
+              },
+              "account": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/AccountRef_MVO"
+                }
+              },
+              "agreement": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/AgreementRef_MVO"
+                }
+              },
+              "contactMedium": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ContactMedium_MVO"
+                }
+              },
+              "paymentMethod": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/PaymentMethodRef_MVO"
+                }
+              },
+              "creditProfile": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CreditProfile_MVO"
+                }
+              },
+              "relatedParty": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/RelatedPartyOrPartyRole_MVO"
+                }
+              },
+              "status": {
+                "type": "string",
+                "description": "Used to track the lifecycle status of the party role."
+              },
+              "statusReason": {
+                "type": "string",
+                "description": "A string providing an explanation on the value of the status lifecycle. For instance if the status is Rejected, statusReason will provide the reason for rejection."
+              },
+              "validFor": {
+                "$ref": "#/components/schemas/TimePeriod"
+              }
+            },
+            "description": "The part played by a party in a given context."
+          }
+        ]
+      },
+      "Party_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "Party": "#/components/schemas/Party_MVO",
+            "Organization": "#/components/schemas/Organization_MVO",
+            "Individual": "#/components/schemas/Individual_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Entity_MVO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "externalReference": {
+                "type": "array",
+                "description": "List of identifiers of the Party in an external system, for example when party information is imported from a commerce system",
+                "items": {
+                  "$ref": "#/components/schemas/ExternalIdentifier_MVO"
+                }
+              },
+              "partyCharacteristic": {
+                "type": "array",
+                "description": "List of additional characteristics that a Party can take on.",
+                "items": {
+                  "$ref": "#/components/schemas/Characteristic_MVO"
+                }
+              },
+              "taxExemptionCertificate": {
+                "type": "array",
+                "description": "List of tax exemptions granted to the party. For example, a war veteran might have partial exemption from state tax and a full exemption from federal tax",
+                "items": {
+                  "$ref": "#/components/schemas/TaxExemptionCertificate_MVO"
+                }
+              },
+              "creditRating": {
+                "type": "array",
+                "description": "List of credit profiles and scores for the party, typically received from an external credit broker",
+                "items": {
+                  "$ref": "#/components/schemas/PartyCreditProfile_MVO"
+                }
+              },
+              "relatedParty": {
+                "type": "array",
+                "description": "List of parties and/or party roles related to this party",
+                "items": {
+                  "$ref": "#/components/schemas/RelatedPartyOrPartyRole_MVO"
+                }
+              },
+              "contactMedium": {
+                "type": "array",
+                "description": "List of means for contacting the party, e.g. mobile phone, email address",
+                "items": {
+                  "$ref": "#/components/schemas/ContactMedium_MVO"
+                }
+              }
+            },
+            "description": "Generic and Abstract Party structure used to define commonalities between sub concepts of Individual and Organization."
+          }
+        ]
+      },
+      "RelatedPartyOrPartyRole_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "RelatedPartyOrPartyRole": "#/components/schemas/RelatedPartyOrPartyRole_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "required": [
+              "role"
+            ],
+            "type": "object",
+            "properties": {
+              "role": {
+                "type": "string",
+                "description": "Role played by the related party or party role in the context of the specific entity it is linked to. Such as 'initiator', 'customer',  'salesAgent', 'user'"
+              },
+              "partyOrPartyRole": {
+                "$ref": "#/components/schemas/PartyOrPartyRole_MVO"
+              }
+            },
+            "description": "RelatedParty reference. A related party defines party or party role or its reference, linked to a specific entity"
+          }
+        ]
+      },
+      "RelatedPartyRefOrPartyRoleRef_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "RelatedPartyRefOrPartyRoleRef": "#/components/schemas/RelatedPartyRefOrPartyRoleRef_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "role": {
+                "type": "string",
+                "description": "Role played by the related party or party role in the context of the specific entity it is linked to. Such as 'initiator', 'customer',  'salesAgent', 'user'"
+              },
+              "partyOrPartyRole": {
+                "$ref": "#/components/schemas/PartyRefOrPartyRoleRef_MVO"
+              }
+            },
+            "description": "RelatedParty reference. A related party defines party or party role or its reference, linked to a specific entity"
+          }
+        ]
+      },
+      "TaxExemptionCertificate_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "TaxExemptionCertificate": "#/components/schemas/TaxExemptionCertificate_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Identifier of the tax exemption within list of the exemptions"
+              },
+              "taxDefinition": {
+                "type": "array",
+                "description": "A list of taxes that are covered by the exemption, e.g. City Tax, State Tax. The definition would include the exemption (e.g. for a rate exemption 0% would be a full exemption, 5% could be a partial exemption if the actual rate was 10%).",
+                "items": {
+                  "$ref": "#/components/schemas/TaxDefinition_MVO"
+                }
+              },
+              "validFor": {
+                "$ref": "#/components/schemas/TimePeriod"
+              },
+              "certificateNumber": {
+                "type": "string",
+                "description": "Identifier of a document that shows proof of exemption from taxes for the taxing jurisdiction"
+              },
+              "issuingJurisdiction": {
+                "type": "string",
+                "description": "Name of the jurisdiction that issued the exemption",
+                "example": "USA"
+              },
+              "reason": {
+                "type": "string",
+                "description": "Reason for the tax exemption"
+              },
+              "attachment": {
+                "$ref": "#/components/schemas/AttachmentOrDocumentRef"
+              }
+            },
+            "description": "A tax exemption certificate represents a tax exemption granted to a party (individual or organization) by a tax jurisdiction which may be a city, state, country,... An exemption has a certificate identifier (received from the jurisdiction that levied the tax) and a validity period. An exemption is per tax types and determines for each type of tax what portion of the tax is exempted (partial by percentage or complete) via the tax definition."
+          }
+        ]
+      },
+      "PartyRefOrPartyRoleRef_MVO": {
+        "type": "object",
+        "description": "",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "PartyRef": "#/components/schemas/PartyRef_MVO",
+            "PartyRoleRef": "#/components/schemas/PartyRoleRef_MVO"
+          }
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/PartyRef_MVO"
+          },
+          {
+            "$ref": "#/components/schemas/PartyRoleRef_MVO"
+          }
+        ]
+      },
+      "Place_MVO": {
+        "type": "object",
+        "description": "Place reference.",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "Place": "#/components/schemas/Place_MVO",
+            "GeographicSite": "#/components/schemas/GeographicSite_MVO",
+            "GeographicLocation": "#/components/schemas/GeographicLocation_MVO",
+            "GeographicAddress": "#/components/schemas/GeographicAddress_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Entity_MVO"
+          },
+          {
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Name of the Place"
+              }
+            }
+          }
+        ]
+      },
+      "GeographicLocation_MVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Place_MVO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "geoJson": {
+                "$ref": "#/components/schemas/Geometry"
+              },
+              "bbox": {
+                "minItems": 4,
+                "type": "array",
+                "description": "A bounding box array that contains the geometry. The axes order follows the axes order of the geometry",
+                "items": {
+                  "type": "number"
+                }
+              }
+            },
+            "description": "A GeographicLocation is a pure-virtual super-class to the GeoJSON-aligned geometries of Point (addresses and locations), MultiPoint, LineString (streets, highways and boundaries), MultiLineString and Polygon (countries, provinces, tracts of land). Use the @type attribute to specify which of these is being specified by the geometry attribute."
           }
         ]
       },
@@ -7180,6 +9971,37 @@
           }
         ]
       },
+      "BundledProductOfferingOption_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "BundledProductOfferingOption": "#/components/schemas/BundledProductOfferingOption_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "numberRelOfferDefault": {
+                "type": "integer",
+                "description": "Default number of produc offereings that should be procured as part of the related BundledProductOffering"
+              },
+              "numberRelOfferLowerLimit": {
+                "type": "integer",
+                "description": "lower limit for a product offering that can be procured as part of the related BundledProductOffering"
+              },
+              "numberRelOfferUpperLimit": {
+                "type": "integer",
+                "description": "upper limit for a product offering that can be procured as part of the related BundledProductOffering"
+              }
+            },
+            "description": "A set of numbers that specifies the lower and upper limits for a ProductOffering that can be procured as part of the related BundledProductOffering. Values can range from 0 to unbounded"
+          }
+        ]
+      },
       "BundledProductOffering": {
         "discriminator": {
           "propertyName": "@type",
@@ -7224,12 +10046,100 @@
           }
         ]
       },
-      "QuoteAcceptanceStateType": {
-        "type": "string",
-        "description": "Possible values for the state of the quote set by the requester to accept or decline the quote",
-        "enum": [
-          "accepted",
-          "declined"
+      "BundledProductOffering_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "BundledProductOffering": "#/components/schemas/BundledProductOffering_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ProductOfferingRef_MVO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "bundledProductOfferingOption": {
+                "$ref": "#/components/schemas/BundledProductOfferingOption_MVO"
+              }
+            },
+            "description": "Represents a containment of a product offering within another product offering, including specification of cardinality (e.g. is the bundled offering mandatory, how many times can it be instantiated in the parent product, etc.)."
+          }
+        ]
+      },
+      "FloatArrayCharacteristic_MVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic_MVO"
+          },
+          {
+            "required": [
+              "value"
+            ],
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "array",
+                "items": {
+                  "type": "number",
+                  "format": "float"
+                }
+              }
+            },
+            "description": "A characteristic which value is an array of Float(s)."
+          }
+        ]
+      },
+      "FloatCharacteristic_MVO": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Characteristic_MVO"
+          },
+          {
+            "required": [
+              "value"
+            ],
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "number",
+                "description": "Value of the characteristic",
+                "format": "float"
+              }
+            },
+            "description": "A characteristic which value is a Float."
+          }
+        ]
+      },
+      "ChannelRef": {
+        "type": "object",
+        "description": "The channel to which the resource reference to. e.g. channel for selling product offerings, channel for opening a trouble ticket etc..",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "ChannelRef": "#/components/schemas/ChannelRef"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          }
+        ]
+      },
+      "ChannelRef_MVO": {
+        "type": "object",
+        "description": "The channel to which the resource reference to. e.g. channel for selling product offerings, channel for opening a trouble ticket etc..",
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "ChannelRef": "#/components/schemas/ChannelRef_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityRef"
+          }
         ]
       }
     },
@@ -7246,6 +10156,18 @@
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/Error"
+            },
+            "examples": {
+              "basic": {
+                "summary": "Bad Request Error",
+                "value": {
+                  "@type": "Error",
+                  "code": "ERR400",
+                  "reason": "Bad Request",
+                  "message": "The server could not understand the request due to invalid syntax. Please correct the syntax and try again.",
+                  "referenceError": "https://host/errors"
+                }
+              }
             }
           }
         }
@@ -7256,6 +10178,18 @@
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/Error"
+            },
+            "examples": {
+              "basic": {
+                "summary": "Unauthorized Error",
+                "value": {
+                  "@type": "Error",
+                  "code": "ERR401",
+                  "reason": "Unauthorized",
+                  "message": "You are not authorized to access the requested resource. Please provide the correct credentials.",
+                  "referenceError": "https://host/errors"
+                }
+              }
             }
           }
         }
@@ -7266,6 +10200,18 @@
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/Error"
+            },
+            "examples": {
+              "basic": {
+                "summary": "Forbidden Error",
+                "value": {
+                  "@type": "Error",
+                  "code": "ERR403",
+                  "reason": "Forbidden",
+                  "message": "You don't have the permission to access the requested resource. It is either read-protected or not readable by the server.",
+                  "referenceError": "https://host/errors"
+                }
+              }
             }
           }
         }
@@ -7276,6 +10222,18 @@
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/Error"
+            },
+            "examples": {
+              "basic": {
+                "summary": "Not Found Error",
+                "value": {
+                  "@type": "Error",
+                  "code": "ERR404",
+                  "reason": "Not Found",
+                  "message": "The requested URL was not found on the server.",
+                  "referenceError": "https://host/errors"
+                }
+              }
             }
           }
         }
@@ -7286,6 +10244,18 @@
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/Error"
+            },
+            "examples": {
+              "basic": {
+                "summary": "Method Not allowed Error",
+                "value": {
+                  "@type": "Error",
+                  "code": "ERR405",
+                  "reason": "Method Not allowed",
+                  "message": "The method is not allowed for the requested URL.",
+                  "referenceError": "https://host/errors"
+                }
+              }
             }
           }
         }
@@ -7296,6 +10266,18 @@
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/Error"
+            },
+            "examples": {
+              "basic": {
+                "summary": "Conflict Error",
+                "value": {
+                  "@type": "Error",
+                  "code": "ERR409",
+                  "reason": "Conflict",
+                  "message": "The request could not be completed due to a conflict with the current state of the target resource.",
+                  "referenceError": "https://host/errors"
+                }
+              }
             }
           }
         }
@@ -7306,6 +10288,18 @@
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/Error"
+            },
+            "examples": {
+              "basic": {
+                "summary": "Internal Server Error example",
+                "value": {
+                  "@type": "Error",
+                  "code": "ERR500",
+                  "reason": "Internal Server Error",
+                  "message": "The server encountered an internal error. Please contact the system administrator.",
+                  "referenceError": "https://host/errors"
+                }
+              }
             }
           }
         }
@@ -7316,6 +10310,18 @@
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/Error"
+            },
+            "examples": {
+              "basic": {
+                "summary": "Not Implemented Error",
+                "value": {
+                  "@type": "Error",
+                  "code": "ERR501",
+                  "reason": "The requested operation is not implemented",
+                  "message": "The requested operation is not implemented. Please contact the system administrator.",
+                  "referenceError": "https://host/errors"
+                }
+              }
             }
           }
         }
@@ -7326,6 +10332,18 @@
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/Error"
+            },
+            "examples": {
+              "basic": {
+                "summary": "Service Unavailable Error",
+                "value": {
+                  "@type": "Error",
+                  "code": "ERR503",
+                  "reason": "Service Unavailable",
+                  "message": "The service is currently unavailable. Please try again later.",
+                  "referenceError": "https://host/errors"
+                }
+              }
             }
           }
         }
@@ -7380,6 +10398,20 @@
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/Quote_RES"
+            },
+            "examples": {
+              "updateQuote_using_json": {
+                "$ref": "#/components/examples/updateQuote_using_json_response"
+              },
+              "updateQuote_using_merge-patch_json": {
+                "$ref": "#/components/examples/updateQuote_using_merge-patch_json_response"
+              },
+              "updateQuote_using_json-patch_json": {
+                "$ref": "#/components/examples/updateQuote_using_json-patch_json_response"
+              },
+              "updateQuote_using_json-patch-query_json": {
+                "$ref": "#/components/examples/updateQuote_using_json-patch-query_json_response"
+              }
             }
           }
         }
@@ -8450,6 +11482,696 @@
             "startDateTime": "2021-05-20T12:45:12.033Z"
           }
         }
+      },
+      "updateQuote_using_json_request": {
+        "description": "PATCH Quote request leveraging json application example",
+        "value": {
+          "validFor": {
+            "endDateTime": "2025-07-20T12:45:12.033Z",
+            "startDateTime": "2021-05-20T12:45:12.028Z"
+          },
+          "@type": "Quote"
+        }
+      },
+      "updateQuote_using_json_response": {
+        "description": "PATCH Quote response leveraging json application example",
+        "value": {
+          "id": "12dd-78hg",
+          "href": "https://host:port/quoteManagement/v5/quote/12dd-78hg",
+          "category": "BSBS Quote",
+          "description": "Quote illustration",
+          "expectedFulfillmentStartDate": "2021-05-16T12:45:12.028Z",
+          "expectedQuoteCompletionDate": "2021-05-14T12:45:12.028Z",
+          "externalId": [
+            {
+              "@type": "ExternalIdentifier",
+              "owner": "TMF",
+              "externalIdentifierType": "Quotenumber",
+              "id": "AK1"
+            }
+          ],
+          "instantSyncQuote": false,
+          "creationDate": "2021-05-06T12:45:12.028Z",
+          "requestedQuoteCompletionDate": "2021-05-14T12:45:12.028Z",
+          "version": "1",
+          "agreement": [
+            {
+              "id": "7778-jj56",
+              "href": "https://host:port/agreementManagement/v5/agreement/7778-jj56",
+              "name": "Global Agrrement",
+              "@type": "AgreementRef",
+              "@referredType": "Agreement"
+            }
+          ],
+          "contactMedium": [
+            {
+              "@type": "EmailContactMedium",
+              "@baseType": "ContactMedium",
+              "id": "11",
+              "preferred": true,
+              "emailAddress": "jean.pontus@PerfectCustomer.com"
+            }
+          ],
+          "note": [
+            {
+              "id": "1",
+              "author": "Jean Pontus",
+              "date": "2021-05-13T12:45:12.031Z",
+              "text": "This is a quote request following today call",
+              "@type": "Note"
+            }
+          ],
+          "productOfferingQualification": [
+            {
+              "id": "22ds-ty55",
+              "@type": "ProductOfferingQualificationRef",
+              "href": "https://host:port/productOfferingQualificationManagement/v5/queryProductOfferingQualification/22ds-ty55",
+              "@referredType": "QueryProductOfferingQualification"
+            }
+          ],
+          "quoteItem": [
+            {
+              "id": "1",
+              "@type": "QuoteItem",
+              "action": "add",
+              "quantity": 1,
+              "product": {
+                "@type": "Product",
+                "productCharacteristic": [
+                  {
+                    "@type": "StringCharacteristic",
+                    "id": "Char1",
+                    "name": "Voice Bundle",
+                    "value": "unlimited"
+                  },
+                  {
+                    "@type": "ObjectCharacteristic",
+                    "id": "Char5",
+                    "name": "Data Bundle",
+                    "value": {
+                      "volume": 50,
+                      "unit": "Gb/month"
+                    }
+                  }
+                ],
+                "productSpecification": {
+                  "id": "ssp7-ty89",
+                  "name": "TMF Tariff Plan",
+                  "@type": "ProductSpecificationRef",
+                  "@referredType": "ProductSpecification"
+                }
+              },
+              "productOffering": {
+                "id": "54gg-zza1",
+                "name": "TMF Tariff Plan 25",
+                "@type": "ProductOfferingRef",
+                "@referredType": "ProductOffering"
+              }
+            },
+            {
+              "id": "2",
+              "@type": "QuoteItem",
+              "action": "add",
+              "quantity": 12,
+              "product": {
+                "@type": "Product",
+                "productSpecification": {
+                  "id": "qq45-ytr7",
+                  "name": "Handset",
+                  "version": "1",
+                  "@type": "ProductSpecificationRef",
+                  "@referredType": "ProductSpecification"
+                }
+              },
+              "productOffering": {
+                "id": "z789-78ga",
+                "name": "TMF handset T9+",
+                "@type": "ProductOfferingRef",
+                "@referredType": "ProductOffering"
+              }
+            }
+          ],
+          "relatedParty": [
+            {
+              "role": "Buyer Contact",
+              "@type": "RelatedPartyRefOrPartyRoleRef",
+              "partyOrPartyRole": {
+                "id": "qsdd-9888",
+                "href": "https://host:port/partyManagement/v5/individual/qsdd-9888",
+                "name": "Jean Pontus",
+                "@referredType": "Individual",
+                "@type": "PartyRef"
+              }
+            },
+            {
+              "role": "Buyer organization",
+              "@type": "RelatedPartyRefOrPartyRoleRef",
+              "partyOrPartyRole": {
+                "id": "55",
+                "href": "https://host:port/partyManagement/v5/organization/55",
+                "name": "PerfectCustomer",
+                "@referredType": "Organization",
+                "@type": "PartyRef"
+              }
+            },
+            {
+              "role": "Seller Contact",
+              "@type": "RelatedPartyRefOrPartyRoleRef",
+              "partyOrPartyRole": {
+                "id": "45gh-gh89",
+                "href": "https://host:port/partyManagement/v5/individual/45gh-gh89",
+                "name": "Joe Doe",
+                "@referredType": "Individual",
+                "@type": "PartyRef"
+              }
+            }
+          ],
+          "state": "inProgress",
+          "@type": "Quote",
+          "validFor": {
+            "endDateTime": "2025-07-20T12:45:12.033Z",
+            "startDateTime": "2021-05-20T12:45:12.028Z"
+          }
+        }
+      },
+      "updateQuote_using_merge-patch_json_request": {
+        "description": "PATCH Quote request leveraging merge-patch+json application example",
+        "value": {
+          "validFor": {
+            "endDateTime": "2025-07-20T12:45:12.033Z",
+            "startDateTime": "2021-05-20T12:45:12.028Z"
+          },
+          "@type": "Quote"
+        }
+      },
+      "updateQuote_using_merge-patch_json_response": {
+        "description": "PATCH Quote response leveraging merge-patch+json application example",
+        "value": {
+          "id": "12dd-78hg",
+          "href": "https://host:port/quoteManagement/v5/quote/12dd-78hg",
+          "category": "BSBS Quote",
+          "description": "Quote illustration",
+          "expectedFulfillmentStartDate": "2021-05-16T12:45:12.028Z",
+          "expectedQuoteCompletionDate": "2021-05-14T12:45:12.028Z",
+          "externalId": [
+            {
+              "@type": "ExternalIdentifier",
+              "owner": "TMF",
+              "externalIdentifierType": "Quotenumber",
+              "id": "AK1"
+            }
+          ],
+          "instantSyncQuote": false,
+          "creationDate": "2021-05-06T12:45:12.028Z",
+          "requestedQuoteCompletionDate": "2021-05-14T12:45:12.028Z",
+          "version": "1",
+          "agreement": [
+            {
+              "id": "7778-jj56",
+              "href": "https://host:port/agreementManagement/v5/agreement/7778-jj56",
+              "name": "Global Agrrement",
+              "@type": "AgreementRef",
+              "@referredType": "Agreement"
+            }
+          ],
+          "contactMedium": [
+            {
+              "@type": "EmailContactMedium",
+              "@baseType": "ContactMedium",
+              "id": "11",
+              "preferred": true,
+              "emailAddress": "jean.pontus@PerfectCustomer.com"
+            }
+          ],
+          "note": [
+            {
+              "id": "1",
+              "author": "Jean Pontus",
+              "date": "2021-05-13T12:45:12.031Z",
+              "text": "This is a quote request following today call",
+              "@type": "Note"
+            }
+          ],
+          "productOfferingQualification": [
+            {
+              "id": "22ds-ty55",
+              "@type": "ProductOfferingQualificationRef",
+              "@referredType": "QueryProductOfferingQualification",
+              "href": "https://host:port/productOfferingQualificationManagement/v5/queryProductOfferingQualification/22ds-ty55"
+            }
+          ],
+          "quoteItem": [
+            {
+              "id": "1",
+              "@type": "QuoteItem",
+              "action": "add",
+              "quantity": 1,
+              "product": {
+                "@type": "Product",
+                "productCharacteristic": [
+                  {
+                    "@type": "StringCharacteristic",
+                    "id": "Char1",
+                    "name": "Voice Bundle",
+                    "value": "unlimited"
+                  },
+                  {
+                    "@type": "ObjectCharacteristic",
+                    "id": "Char5",
+                    "name": "Data Bundle",
+                    "value": {
+                      "volume": 50,
+                      "unit": "Gb/month"
+                    }
+                  }
+                ],
+                "productSpecification": {
+                  "id": "ssp7-ty89",
+                  "name": "TMF Tariff Plan",
+                  "@type": "ProductSpecificationRef",
+                  "@referredType": "ProductSpecification"
+                }
+              },
+              "productOffering": {
+                "id": "54gg-zza1",
+                "name": "TMF Tariff Plan 25",
+                "@type": "ProductOfferingRef",
+                "@referredType": "ProductOffering"
+              }
+            },
+            {
+              "id": "2",
+              "@type": "QuoteItem",
+              "action": "add",
+              "quantity": 12,
+              "product": {
+                "@type": "Product",
+                "productSpecification": {
+                  "id": "qq45-ytr7",
+                  "name": "Handset",
+                  "version": "1",
+                  "@type": "ProductSpecificationRef",
+                  "@referredType": "ProductSpecification"
+                }
+              },
+              "productOffering": {
+                "id": "z789-78ga",
+                "name": "TMF handset T9+",
+                "@type": "ProductOfferingRef",
+                "@referredType": "ProductOffering"
+              }
+            }
+          ],
+          "relatedParty": [
+            {
+              "role": "Buyer Contact",
+              "@type": "RelatedPartyRefOrPartyRoleRef",
+              "partyOrPartyRole": {
+                "id": "qsdd-9888",
+                "href": "https://host:port/partyManagement/v5/individual/qsdd-9888",
+                "name": "Jean Pontus",
+                "@referredType": "Individual",
+                "@type": "PartyRef"
+              }
+            },
+            {
+              "role": "Buyer organization",
+              "@type": "RelatedPartyRefOrPartyRoleRef",
+              "partyOrPartyRole": {
+                "id": "55",
+                "href": "https://host:port/partyManagement/v5/organization/55",
+                "name": "PerfectCustomer",
+                "@referredType": "Organization",
+                "@type": "PartyRef"
+              }
+            },
+            {
+              "role": "Seller Contact",
+              "@type": "RelatedPartyRefOrPartyRoleRef",
+              "partyOrPartyRole": {
+                "id": "45gh-gh89",
+                "href": "https://host:port/partyManagement/v5/individual/45gh-gh89",
+                "name": "Joe Doe",
+                "@referredType": "Individual",
+                "@type": "PartyRef"
+              }
+            }
+          ],
+          "state": "inProgress",
+          "@type": "Quote",
+          "validFor": {
+            "endDateTime": "2025-07-20T12:45:12.033Z",
+            "startDateTime": "2021-05-20T12:45:12.028Z"
+          }
+        }
+      },
+      "updateQuote_using_json-patch_json_request": {
+        "description": "PATCH Quote request leveraging json-patch+json application example",
+        "value": [
+          {
+            "op": "add",
+            "path": "/relatedParty",
+            "value": {
+              "role": "Buyer organization",
+              "@type": "RelatedPartyRefOrPartyRoleRef",
+              "partyOrPartyRole": {
+                "id": "99",
+                "href": "https://host:port/partyManagement/v5/organization/99",
+                "name": "AnotherCustomer",
+                "@referredType": "Organization",
+                "@type": "PartyRef"
+              }
+            }
+          }
+        ]
+      },
+      "updateQuote_using_json-patch_json_response": {
+        "description": "PATCH Quote response leveraging json-patch+json application example",
+        "value": {
+          "id": "12dd-78hg",
+          "href": "https://host:port/quoteManagement/v5/quote/12dd-78hg",
+          "category": "BSBS Quote",
+          "description": "Quote illustration",
+          "expectedFulfillmentStartDate": "2021-05-13T12:45:12.028Z",
+          "expectedQuoteCompletionDate": "2021-05-14T12:45:12.028Z",
+          "externalId": [
+            {
+              "@type": "ExternalIdentifier",
+              "owner": "TMF",
+              "externalIdentifierType": "Quotenumber",
+              "id": "AK1"
+            }
+          ],
+          "instantSyncQuote": false,
+          "creationDate": "2021-05-13T12:45:12.028Z",
+          "requestedQuoteCompletionDate": "2021-05-14T12:45:12.028Z",
+          "version": "1",
+          "agreement": [
+            {
+              "id": "7778-jj56",
+              "href": "https://host:port/agreementManagement/v5/agreement/7778-jj56",
+              "name": "Global Agrrement",
+              "@type": "AgreementRef",
+              "@referredType": "Agreement"
+            }
+          ],
+          "contactMedium": [
+            {
+              "@type": "EmailContactMedium",
+              "@baseType": "ContactMedium",
+              "id": "11",
+              "preferred": true,
+              "emailAddress": "jean.pontus@PerfectCustomer.com"
+            }
+          ],
+          "note": [
+            {
+              "id": "1",
+              "author": "Jean Pontus",
+              "date": "2021-05-13T12:45:12.028Z",
+              "text": "This is a quote request following today call",
+              "@type": "Note"
+            }
+          ],
+          "productOfferingQualification": [
+            {
+              "id": "22ds-ty55",
+              "@type": "ProductOfferingQualificationRef",
+              "href": "https://host:port/productOfferingQualificationManagement/v5/queryProductOfferingQualification/22ds-ty55",
+              "@referredType": "QueryProductOfferingQualification"
+            }
+          ],
+          "quoteItem": [
+            {
+              "id": "1",
+              "@type": "QuoteItem",
+              "action": "add",
+              "quantity": 1,
+              "product": {
+                "@type": "Product",
+                "productCharacteristic": [
+                  {
+                    "@type": "StringCharacteristic",
+                    "id": "Char1",
+                    "name": "Voice Bundle",
+                    "value": "unlimited"
+                  },
+                  {
+                    "@type": "ObjectCharacteristic",
+                    "id": "Char5",
+                    "name": "Data Bundle",
+                    "value": {
+                      "volume": 50,
+                      "unit": "Gb/month"
+                    }
+                  }
+                ],
+                "productSpecification": {
+                  "id": "ssp7-ty89",
+                  "name": "TMF Tariff Plan",
+                  "@type": "ProductSpecificationRef",
+                  "@referredType": "ProductSpecification"
+                }
+              },
+              "productOffering": {
+                "id": "54gg-zza1",
+                "name": "TMF Tariff Plan 25",
+                "@type": "ProductOfferingRef",
+                "@referredType": "ProductOffering"
+              }
+            },
+            {
+              "id": "2",
+              "@type": "QuoteItem",
+              "action": "add",
+              "quantity": 12,
+              "product": {
+                "@type": "Product",
+                "productSpecification": {
+                  "id": "qq45-ytr7",
+                  "name": "Handset",
+                  "version": "1",
+                  "@type": "ProductSpecificationRef",
+                  "@referredType": "ProductSpecification"
+                }
+              },
+              "productOffering": {
+                "id": "z789-78ga",
+                "name": "TMF handset T9+",
+                "@type": "ProductOfferingRef",
+                "@referredType": "ProductOffering"
+              }
+            }
+          ],
+          "relatedParty": [
+            {
+              "role": "Buyer Contact",
+              "@type": "RelatedPartyRefOrPartyRoleRef",
+              "partyOrPartyRole": {
+                "id": "qsdd-9888",
+                "href": "https://host:port/partyManagement/v5/individual/qsdd-9888",
+                "name": "Jean Pontus",
+                "@referredType": "Individual",
+                "@type": "PartyRef"
+              }
+            },
+            {
+              "role": "Buyer organization",
+              "@type": "RelatedPartyRefOrPartyRoleRef",
+              "partyOrPartyRole": {
+                "id": "99",
+                "href": "https://host:port/partyManagement/v5/organization/99",
+                "name": "AnotherCustomer",
+                "@referredType": "Organization",
+                "@type": "PartyRef"
+              }
+            },
+            {
+              "role": "Seller Contact",
+              "@type": "RelatedPartyRefOrPartyRoleRef",
+              "partyOrPartyRole": {
+                "id": "45gh-gh89",
+                "href": "https://host:port/partyManagement/v5/individual/45gh-gh89",
+                "name": "Joe Doe",
+                "@referredType": "Individual",
+                "@type": "PartyRef"
+              }
+            }
+          ],
+          "state": "inProgress",
+          "@type": "Quote",
+          "validFor": {
+            "endDateTime": "2021-05-13T12:45:12.033Z",
+            "startDateTime": "2021-05-20T12:45:12.033Z"
+          }
+        }
+      },
+      "updateQuote_using_json-patch-query_json_request": {
+        "description": "PATCH Quote request leveraging json-patch-query+json application example",
+        "value": [
+          {
+            "op": "replace",
+            "path": "/quoteItem/quantity?id=2",
+            "value": 12
+          }
+        ]
+      },
+      "updateQuote_using_json-patch-query_json_response": {
+        "description": "PATCH Quote response leveraging json-patch-query+json application example",
+        "value": {
+          "id": "12dd-78hg",
+          "href": "https://host:port/quoteManagement/v5/quote/12dd-78hg",
+          "category": "BSBS Quote",
+          "description": "Quote illustration",
+          "expectedFulfillmentStartDate": "2021-05-16T12:45:12.028Z",
+          "expectedQuoteCompletionDate": "2021-05-14T12:45:12.028Z",
+          "externalId": [
+            {
+              "@type": "ExternalIdentifier",
+              "owner": "TMF",
+              "externalIdentifierType": "Quotenumber",
+              "id": "AK1"
+            }
+          ],
+          "instantSyncQuote": false,
+          "creationDate": "2021-05-06T12:45:12.028Z",
+          "requestedQuoteCompletionDate": "2021-05-14T12:45:12.028Z",
+          "version": "1",
+          "agreement": [
+            {
+              "id": "7778-jj56",
+              "href": "https://host:port/agreementManagement/v5/agreement/7778-jj56",
+              "name": "Global Agrrement",
+              "@type": "AgreementRef",
+              "@referredType": "Agreement"
+            }
+          ],
+          "contactMedium": [
+            {
+              "@type": "EmailContactMedium",
+              "@baseType": "ContactMedium",
+              "id": "11",
+              "preferred": true,
+              "emailAddress": "jean.pontus@PerfectCustomer.com"
+            }
+          ],
+          "note": [
+            {
+              "id": "1",
+              "author": "Jean Pontus",
+              "date": "2021-05-13T12:45:12.031Z",
+              "text": "This is a quote request following today call",
+              "@type": "Note"
+            }
+          ],
+          "productOfferingQualification": [
+            {
+              "id": "22ds-ty55",
+              "@type": "ProductOfferingQualificationRef",
+              "href": "https://host:port/productOfferingQualificationManagement/v5/queryProductOfferingQualification/22ds-ty55",
+              "@referredType": "ProductOfferingQualification"
+            }
+          ],
+          "quoteItem": [
+            {
+              "id": "1",
+              "@type": "QuoteItem",
+              "action": "add",
+              "quantity": 1,
+              "product": {
+                "@type": "Product",
+                "productCharacteristic": [
+                  {
+                    "@type": "StringCharacteristic",
+                    "id": "Char1",
+                    "name": "Voice Bundle",
+                    "value": "unlimited"
+                  },
+                  {
+                    "@type": "ObjectCharacteristic",
+                    "id": "Char5",
+                    "name": "Data Bundle",
+                    "value": {
+                      "volume": 50,
+                      "unit": "Gb/month"
+                    }
+                  }
+                ],
+                "productSpecification": {
+                  "id": "ssp7-ty89",
+                  "name": "TMF Tariff Plan",
+                  "@type": "ProductSpecificationRef",
+                  "@referredType": "ProductSpecification"
+                }
+              },
+              "productOffering": {
+                "id": "54gg-zza1",
+                "name": "TMF Tariff Plan 25",
+                "@type": "ProductOfferingRef",
+                "@referredType": "ProductOffering"
+              }
+            },
+            {
+              "id": "2",
+              "@type": "QuoteItem",
+              "action": "add",
+              "quantity": 12,
+              "product": {
+                "@type": "Product",
+                "productSpecification": {
+                  "id": "qq45-ytr7",
+                  "name": "Handset",
+                  "version": "1",
+                  "@type": "ProductSpecificationRef",
+                  "@referredType": "ProductSpecification"
+                }
+              },
+              "productOffering": {
+                "id": "z789-78ga",
+                "name": "TMF handset T9+",
+                "@type": "ProductOfferingRef",
+                "@referredType": "ProductOffering"
+              }
+            }
+          ],
+          "relatedParty": [
+            {
+              "role": "Buyer Contact",
+              "@type": "RelatedPartyRefOrPartyRoleRef",
+              "partyOrPartyRole": {
+                "id": "qsdd-9888",
+                "href": "https://host:port/partyManagement/v5/individual/qsdd-9888",
+                "name": "Jean Pontus",
+                "@referredType": "Individual",
+                "@type": "PartyRef"
+              }
+            },
+            {
+              "role": "Buyer organization",
+              "@type": "RelatedPartyRefOrPartyRoleRef",
+              "partyOrPartyRole": {
+                "id": "55",
+                "href": "https://host:port/partyManagement/v5/organization/55",
+                "name": "PerfectCustomer",
+                "@referredType": "Organization",
+                "@type": "PartyRef"
+              }
+            },
+            {
+              "role": "Seller Contact",
+              "@type": "RelatedPartyRefOrPartyRoleRef",
+              "partyOrPartyRole": {
+                "id": "45gh-gh89",
+                "href": "https://host:port/partyManagement/v5/individual/45gh-gh89",
+                "name": "Joe Doe",
+                "@referredType": "Individual",
+                "@type": "PartyRef"
+              }
+            }
+          ],
+          "state": "inProgress",
+          "@type": "Quote"
+        }
       }
     },
     "requestBodies": {
@@ -8475,21 +12197,41 @@
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/Quote_MVO"
+            },
+            "examples": {
+              "updateQuote_using_json": {
+                "$ref": "#/components/examples/updateQuote_using_json_request"
+              }
             }
           },
           "application/merge-patch+json": {
             "schema": {
               "$ref": "#/components/schemas/Quote_MVO"
+            },
+            "examples": {
+              "updateQuote_using_merge-patch_json": {
+                "$ref": "#/components/examples/updateQuote_using_merge-patch_json_request"
+              }
             }
           },
           "application/json-patch+json": {
             "schema": {
               "$ref": "#/components/schemas/JsonPatchOperations"
+            },
+            "examples": {
+              "updateQuote_using_json-patch_json": {
+                "$ref": "#/components/examples/updateQuote_using_json-patch_json_request"
+              }
             }
           },
           "application/json-patch-query+json": {
             "schema": {
               "$ref": "#/components/schemas/JsonPatchOperations"
+            },
+            "examples": {
+              "updateQuote_using_json-patch-query_json": {
+                "$ref": "#/components/examples/updateQuote_using_json-patch-query_json_request"
+              }
             }
           }
         },

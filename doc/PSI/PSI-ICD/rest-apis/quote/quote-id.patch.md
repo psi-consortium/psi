@@ -41,6 +41,7 @@ Table: Request Body of PATCH quote/{id}. {#tbl:quote-id.patch.md:request_body}
 | 404 | Not Found | Error |
 | 405 | Method Not allowed | Error |
 | 409 | Conflict | Error |
+| 422 | Unprocessable Content | Error |
 | 500 | Internal Server Error | Error |
 | 501 | Not Implemented | Error |
 | 503 | Service Unavailable | Error |

@@ -23,6 +23,7 @@
 | requestedQuoteCompletionDate | string | date-time | No |
 | version | string | N/A | No |
 | quoteItem | array | QuoteItem_FVO | Yes |
+| channel | ChannelRef | N/A | No |
 | @baseType | string | N/A | No |
 | @schemaLocation | string | N/A | No |
 | @type | string | "Quote" | Yes |

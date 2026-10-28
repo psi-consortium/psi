@@ -1,39 +1,181 @@
 {
     "openapi": "3.0.1",
-    "components": {
-        "schemas": {
-            "Quote_MVO": {
-                "discriminator": {
-                    "propertyName": "@type",
-                    "mapping": {
-                        "Quote": "#/components/schemas/Quote_MVO"
-                    }
-                },
-                "allOf": [
+    "paths": {
+        "/quote": {
+            "get": {
+                "tags": [
+                    "quote"
+                ],
+                "summary": "List or find Quote objects",
+                "description": "List or find Quote objects",
+                "operationId": "listQuote",
+                "parameters": [
                     {
-                        "$ref": "#/components/schemas/Extensible"
+                        "$ref": "#/components/parameters/Fields"
                     },
                     {
-                        "required": [
-                            "state"
-                        ],
-                        "type": "object",
-                        "properties": {
-                            "state": {
-                                "$ref": "#/components/schemas/QuoteAcceptanceStateType"
-                            }
-                        },
-                        "description": "Quote can be used to negotiate service and product acquisition or modification between a customer and a service provider. A Quote contain list of quote items, a reference to customer (partyRole), a list of productOffering and attached prices and conditions. In PSI, a Quote can only be modified to accept or decline it."
+                        "$ref": "#/components/parameters/Offset"
+                    },
+                    {
+                        "$ref": "#/components/parameters/Limit"
                     }
-                ]
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/200QuoteArray"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "405": {
+                        "$ref": "#/components/responses/405"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    },
+                    "501": {
+                        "$ref": "#/components/responses/501"
+                    },
+                    "503": {
+                        "$ref": "#/components/responses/503"
+                    }
+                }
             },
-            "QuoteAcceptanceStateType": {
-                "type": "string",
-                "description": "Possible values for the state of the quote set by the requester to accept or decline the quote",
-                "enum": [
-                    "accepted",
-                    "declined"
-                ]
+            "post": {
+                "tags": [
+                    "quote"
+                ],
+                "summary": "Creates a Quote",
+                "description": "This operation creates a Quote entity.",
+                "operationId": "createQuote",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/Fields"
+                    }
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/Quote_FVO"
+                },
+                "responses": {
+                    "201": {
+                        "$ref": "#/components/responses/201Quote"
+                    },
+                    "202": {
+                        "description": "Accepted"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "405": {
+                        "$ref": "#/components/responses/405"
+                    },
+                    "409": {
+                        "$ref": "#/components/responses/409"
+                    },
+                    "422": {
+                        "description": "Unprocessable Content",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    },
+                    "501": {
+                        "$ref": "#/components/responses/501"
+                    },
+                    "503": {
+                        "$ref": "#/components/responses/503"
+                    }
+                }
+            }
+        },
+        "/quote/{id}": {
+            "patch": {
+                "tags": [
+                    "quote"
+                ],
+                "summary": "Updates partially a Quote",
+                "description": "This operation updates partially a Quote entity.",
+                "operationId": "patchQuote",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/Id"
+                    },
+                    {
+                        "$ref": "#/components/parameters/Fields"
+                    }
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/Quote_MVO"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/200Quote_Patch"
+                    },
+                    "202": {
+                        "description": "Accepted"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "405": {
+                        "$ref": "#/components/responses/405"
+                    },
+                    "409": {
+                        "$ref": "#/components/responses/409"
+                    },
+                    "422": {
+                        "description": "Unprocessable Content",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    },
+                    "501": {
+                        "$ref": "#/components/responses/501"
+                    },
+                    "503": {
+                        "$ref": "#/components/responses/503"
+                    }
+                }
             }
         }
     }
