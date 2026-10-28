@@ -83,7 +83,18 @@
             "$ref": "#/components/responses/201CheckProductOfferingQualification"
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "The location of the created CheckProductOfferingQualification, which the client retrieves to follow its state and result.",
+                "style": "simple",
+                "explode": false,
+                "schema": {
+                  "type": "string",
+                  "format": "uri"
+                }
+              }
+            }
           },
           "400": {
             "$ref": "#/components/responses/400"
