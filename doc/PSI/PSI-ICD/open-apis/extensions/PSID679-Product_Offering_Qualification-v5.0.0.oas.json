@@ -1,0 +1,301 @@
+{
+    "openapi": "3.0.1",
+    "tags": [
+        {
+            "name": "checkProductOfferingQualification",
+            "description": "Operations for CheckProductOfferingQualification Resource"
+        }
+    ],
+    "paths": {
+        "/checkProductOfferingQualification": {
+            "get": {
+                "tags": [
+                    "checkProductOfferingQualification"
+                ],
+                "summary": "List or find CheckProductOfferingQualification objects",
+                "description": "List or find CheckProductOfferingQualification objects",
+                "operationId": "listCheckProductOfferingQualification",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/Fields"
+                    },
+                    {
+                        "$ref": "#/components/parameters/Offset"
+                    },
+                    {
+                        "$ref": "#/components/parameters/Limit"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/200CheckProductOfferingQualificationArray"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "405": {
+                        "$ref": "#/components/responses/405"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    },
+                    "501": {
+                        "$ref": "#/components/responses/501"
+                    },
+                    "503": {
+                        "$ref": "#/components/responses/503"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "checkProductOfferingQualification"
+                ],
+                "summary": "Creates a CheckProductOfferingQualification",
+                "description": "This operation creates a CheckProductOfferingQualification entity.",
+                "operationId": "createCheckProductOfferingQualification",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/Fields"
+                    }
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/CheckProductOfferingQualification_FVO"
+                },
+                "responses": {
+                    "201": {
+                        "$ref": "#/components/responses/201CheckProductOfferingQualification"
+                    },
+                    "202": {
+                        "description": "Accepted",
+                        "headers": {
+                            "Location": {
+                                "description": "The location of the created CheckProductOfferingQualification, which the client retrieves to follow its state and result.",
+                                "schema": {
+                                    "type": "string",
+                                    "format": "uri"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "405": {
+                        "$ref": "#/components/responses/405"
+                    },
+                    "409": {
+                        "$ref": "#/components/responses/409"
+                    },
+                    "422": {
+                        "description": "Unprocessable Content",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    },
+                    "501": {
+                        "$ref": "#/components/responses/501"
+                    },
+                    "503": {
+                        "$ref": "#/components/responses/503"
+                    }
+                }
+            }
+        },
+        "/checkProductOfferingQualification/{id}": {
+            "patch": {
+                "tags": [
+                    "checkProductOfferingQualification"
+                ],
+                "summary": "Updates partially a CheckProductOfferingQualification",
+                "description": "This operation updates partially a CheckProductOfferingQualification entity.",
+                "operationId": "patchCheckProductOfferingQualification",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/Id"
+                    },
+                    {
+                        "$ref": "#/components/parameters/Fields"
+                    }
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/CheckProductOfferingQualification_MVO"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/200CheckProductOfferingQualification_Patch"
+                    },
+                    "202": {
+                        "description": "Accepted"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "405": {
+                        "$ref": "#/components/responses/405"
+                    },
+                    "409": {
+                        "$ref": "#/components/responses/409"
+                    },
+                    "422": {
+                        "description": "Unprocessable Content",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    },
+                    "501": {
+                        "$ref": "#/components/responses/501"
+                    },
+                    "503": {
+                        "$ref": "#/components/responses/503"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "CheckProductOfferingQualificationStateType": {
+                "enum": [
+                    "acknowledged",
+                    "rejected",
+                    "inProgress",
+                    "cancelled",
+                    "done",
+                    "terminatedWithError"
+                ],
+                "type": "string",
+                "description": "Possible values for the state of a task. Named TaskStateType in TMF679; renamed in PSI because PSID687 defines a TaskStateType with other values."
+            },
+            "CheckProductOfferingQualification_FVO": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/Extensible"
+                    },
+                    {
+                        "type": "object",
+                        "description": "CheckProductOfferingQualification is used to perform a commercial eligibility. It allows to request an eligibility check for a list of productOfferings (one per item). The response will provide qualification result depending on catalog rules and of the context of the interaction (defined be place, channel, party, product).",
+                        "properties": {
+                            "channel": {
+                                "$ref": "#/components/schemas/ChannelRef"
+                            },
+                            "description": {
+                                "type": "string",
+                                "description": "Description of the CheckProductOfferingQualification"
+                            },
+                            "instantSyncQualification": {
+                                "type": "boolean",
+                                "description": "A previous indicator which when the value is \"true\" means that requester expects to get qualifcation result immedi3ately in the response. If the indicator is true (or by default now without it) then the response code of 200 indicates the operation is successful otherwise a task is created with a response 201. For asynchronous, this attribute is now replaced by the header request \"Expect: 202-Accepted\" PSI: only false is allowed; the qualification is always asynchronous (ADR046).",
+                                "deprecated": true,
+                                "enum": [
+                                    false
+                                ]
+                            },
+                            "note": {
+                                "type": "array",
+                                "description": "Free form text associated with the qualification request",
+                                "items": {
+                                    "$ref": "#/components/schemas/Note"
+                                }
+                            },
+                            "checkProductOfferingQualificationItem": {
+                                "type": "array",
+                                "description": "Qualification item for a product or a category",
+                                "items": {
+                                    "$ref": "#/components/schemas/CheckProductOfferingQualificationItem_FVO"
+                                }
+                            },
+                            "provideAlternative": {
+                                "type": "boolean",
+                                "description": "An indicator which when the value is \"true\" means that alternative solutions should be provided"
+                            },
+                            "provideOnlyAvailable": {
+                                "type": "boolean",
+                                "description": "An indicator which when the value is \"true\" means that only available product offering must be listed in the response"
+                            },
+                            "provideResultReason": {
+                                "type": "boolean",
+                                "description": "An indicator which when the value is \"true\" means that result reason are expected for available or not of product offering"
+                            },
+                            "relatedParty": {
+                                "type": "array",
+                                "description": "Party playing a role for this qualification (as requester for example)",
+                                "items": {
+                                    "$ref": "#/components/schemas/RelatedPartyOrPartyRole_FVO"
+                                },
+                                "minItems": 1
+                            },
+                            "requestedQualificationCompletionDate": {
+                                "type": "string",
+                                "format": "date-time",
+                                "description": "Deadline date when the requester expected a qualification answer"
+                            }
+                        },
+                        "required": [
+                            "relatedParty"
+                        ]
+                    }
+                ],
+                "discriminator": {
+                    "propertyName": "@type",
+                    "mapping": {
+                        "CheckProductOfferingQualification": "#/components/schemas/CheckProductOfferingQualification_FVO"
+                    }
+                }
+            },
+            "QualificationItemResultType": {
+                "type": "string",
+                "description": "PSI closed vocabulary for the result of a qualification item, fixed for interoperability between PSSs and providers. green = the provider can deliver the requested product offering or product specification as requested (configuration, place and date); no alternatives are proposed. yellow = the provider cannot fully confirm that it can deliver the item as requested; alternatives may be proposed. red = the provider cannot deliver the item as requested; alternatives may be proposed. Alternatives are carried in alternateProductOfferingProposal. For an item that contains other items (a bundle) the result is derived from the contained items: red as soon as any completed contained item is red; once every contained item is completed, yellow if any of them is yellow, otherwise green; absent until then. Replaces the free-form string of TMF679 v5; the values follow the example TMF679 v5 gives for the overall result and the serviceabilityConfidence of MEF LSO Sonata.",
+                "enum": [
+                    "green",
+                    "yellow",
+                    "red"
+                ]
+            },
+            "QualificationResultType": {
+                "type": "string",
+                "description": "PSI closed vocabulary for the result of the whole qualification request; same values and meaning as QualificationItemResultType, fixed for interoperability. The result is red as soon as any completed item is red; once every item is completed, yellow if any item is yellow, otherwise green; absent until then. Replaces the free-form string of TMF679 v5.",
+                "enum": [
+                    "green",
+                    "yellow",
+                    "red"
+                ]
+            }
+        }
+    }
+}
