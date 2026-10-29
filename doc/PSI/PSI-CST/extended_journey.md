@@ -36,7 +36,10 @@ fork again
     :Product Inquiry;
 end fork
 note left: Discovery\nJourney\nAlternatives
-:Product Offering Qualification;
+split
+split again
+  :Product Offering Qualification;
+end split
 split
 split again
     :Quote Negotiation;
