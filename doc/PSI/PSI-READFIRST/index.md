@@ -63,7 +63,7 @@ dcr_overrides:
  - dcr:
    from: '2026-07-27'
    to: '2026-07-31'
-   version: 'MS12 [PSI-DOC-VERSION]'
+   version: 'PSI-DOC-VERSION'
    author: 'Hendrik Oppenberg'
    message: 'No update, PSI Phase 2 version bump.'
 =end
@@ -282,4 +282,3 @@ Accordingly, (software) licenses applicable to PSI can be reviewed in document *
 
 Eventually, the **PSI-VVP** document contains information on the planned verification and validation.
 Those depend on the ICD definitions as well as the requirements and may change due to the implementation and description of interfaces.
-
