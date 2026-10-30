@@ -26,12 +26,14 @@ import com.cgi.space.psi.tasks.transformers.PruneSchemas;
 import com.cgi.space.psi.tasks.transformers.PruneTags;
 import com.cgi.space.psi.tasks.transformers.RemoveOneOf;
 import com.cgi.space.psi.tasks.transformers.RemoveOperation;
+import com.cgi.space.psi.tasks.transformers.RemoveOperationExamples;
 import com.cgi.space.psi.tasks.transformers.RemovePaths;
 import com.cgi.space.psi.tasks.transformers.RemoveProperty;
 import com.cgi.space.psi.tasks.transformers.RemoveRequiredProperty;
 import com.cgi.space.psi.tasks.transformers.RemoveSchema;
 import com.cgi.space.psi.tasks.transformers.RenameProperty;
 import com.cgi.space.psi.tasks.transformers.RenameSchema;
+import com.cgi.space.psi.tasks.transformers.ReplaceInfoDescription;
 import com.cgi.space.psi.tasks.transformers.ReplaceResponseContent;
 import com.cgi.space.psi.tasks.transformers.ReplaceServerUrl;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -91,6 +93,10 @@ public class TransformOASTask extends DefaultTask {
         this.transformations.add(new ReplaceServerUrl(pattern, replacement));
     }
 
+    public void replaceInfoDescription(String pattern, String replacement) {
+        this.transformations.add(new ReplaceInfoDescription(pattern, replacement));
+    }
+
     public void replaceResponseContent(String pattern, String replacement) {
         this.transformations.add(new ReplaceResponseContent(pattern, replacement));
     }
@@ -106,6 +112,10 @@ public class TransformOASTask extends DefaultTask {
 
     public void removeOperation(String pathPattern, String operationPattern) {
         this.transformations.add(new RemoveOperation(pathPattern, operationPattern));
+    }
+
+    public void removeOperationExamples(String pathPattern, String operationPattern) {
+        this.transformations.add(new RemoveOperationExamples(pathPattern, operationPattern));
     }
 
     public void addTagDescription(String tagName, String tagDescription) {

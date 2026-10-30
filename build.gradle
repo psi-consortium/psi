@@ -692,6 +692,67 @@ tasks.register('transformEvent', com.cgi.space.psi.tasks.TransformOASTask) { tra
   pruneAll()
 }
 
+tasks.register('transformQuote', com.cgi.space.psi.tasks.TransformOASTask) { transformations ->
+  input = file('tmforum/apis/TMF648_Quote_Management/oas/TMF648-Quote-v5.0.0.oas.yaml')
+  output = file('doc/PSI/PSI-ICD/open-apis/oas/PSID648-Quote-v5.0.0.oas.json')
+
+  // Adjust metadata
+  replaceServerUrl("{apiRoot}/tmf-api/", "/psi-api/")
+  replaceServerUrl("v5", "v2")
+  replaceInfoDescription('**TMF API Reference : TMF 648 - Quote **\n\n** April 2025**', '## PSID API Reference: PSID648 - Quote Management\n\nBased on TMF API Reference: TMF 648 - Quote v5.0.0 (April 2025)')
+  replaceInfoDescription('\n- Notification of events on quote.', '')
+  // Remove explicitly unwanted things
+  removeEvents(transformations)
+  // unify schemas
+  importBaseTypes(transformations)
+  importSchema("(.*)Product(.*)", file("tmforum/apis/TMF637_Product_Inventory/oas/TMF637-ProductInventory-v5.0.0.oas.yaml"))
+  // TMF648 is generated without most _FVO/_MVO variants, take whole families from TMF637
+  importSchema("(AccountRef|AgreementItemRef|AgreementRef|BillingAccountRef|BusinessPartner|CalendarPeriod|Consumer|ContactMedium|CreditProfile|Expression|ExpressionLanguageEnum|ExternalIdentifier|GeographicAddress|GeographicLocationRef|GeographicLocationRefOrValue|GeographicSite|GeographicSiteRelationship|GeographicSubAddress|GeographicSubAddressUnit|HourPeriod|Intent|IntentRef|IntentRefOrValue|PaymentMethodRef|PlaceRef|PlaceRefOrValue|Price|PriceAlteration|Producer|RelatedOrderItem|RelatedPlaceRefOrValue|ResourceRef|ServiceRef|StandardIdentifier|Supplier|TaxDefinition)(|_FVO|_MVO)", file("tmforum/apis/TMF637_Product_Inventory/oas/TMF637-ProductInventory-v5.0.0.oas.yaml"))
+  importSchema("(.*)Characteristic(.*)", file("tmforum/apis/TMF637_Product_Inventory/oas/TMF637-ProductInventory-v5.0.0.oas.yaml"))
+  importSchema("(.*)(Certificate|Individual|Organization|Party)(.*)", file("tmforum/apis/TMF632_Party/oas/TMF632-Party_Management-v5.0.0.oas.yaml"))
+  importSchema("(Related)?PartyRefOrPartyRoleRef_MVO", file("tmforum/apis/TMF634_Resource_Catalog/oas/TMF634-Resource_Catalog_Management-v5.0.0.oas.yaml"))
+  importSchema("(.*)", file("doc/PSI/PSI-ICD/open-apis/extensions/PSID675-Geographic_Location.oas.json"))
+  importSchema("(ProductOfferingRef|BundledProductOfferingOption)(.*)", file("tmforum/apis/TMF620_Product_Catalog/oas/TMF620-Product_Catalog_Management-v5.0.0.oas.yaml"))
+  importSchema('BundledProductOffering(.*)', file("doc/PSI/PSI-ICD/open-apis/extensions/PSID620-Product_Catalog_Management-v5.0.0.oas.json"))
+  importSchema("(.*)", file("doc/PSI/PSI-ICD/open-apis/extensions/Characteristic.oas.json"))
+  importSchema("ChannelRef(|_FVO|_MVO)", file("tmforum/apis/TMF622_Product_Ordering/oas/TMF622-ProductOrdering-v5.0.0.oas.yaml"))
+  // PSID648: the quote paths as in PSID679 (422 on POST and PATCH, the list without Before, After, Sort and Filter)
+  importPath("/quote(.*)", file("doc/PSI/PSI-ICD/open-apis/extensions/PSID648-Quote-v5.0.0.oas.json"))
+  // PSI specific adjustments
+  overwritePropertyFormat("(.*)", "href", "uri")
+  adjustAttachmentRef(transformations)
+  overwriteProperty("Authorization", "signature", '''
+    {
+      "$ref": "#/components/schemas/AttachmentOrDocumentRef"
+    }
+  ''')
+  removeProperty("(Money|TimePeriod|Quantity)", "\\@(.*)")
+  // the quote is always asynchronous, as the qualification in PSID679
+  overwriteProperty("Quote(|_FVO|_MVO)", "instantSyncQuote", '''
+    {
+      "type": "boolean",
+      "description": "An indicator which when the value is \\"true\\" means that requester expects to get quoting result immediately in the response. If the indicator is true then the response code of 200 indicates the operation is successful otherwise a task is created with a response 201. PSI: only false is allowed; the quote is always asynchronous.",
+      "enum": [
+        false
+      ]
+    }
+  ''')
+  // the sales channel of the quote, as in PSID679 and PSID622
+  addProperty("Quote(|_FVO)", "channel", '''
+    {
+      "$ref": "#/components/schemas/ChannelRef"
+    }
+  ''')
+  addProperty("Quote_MVO", "channel", '''
+    {
+      "$ref": "#/components/schemas/ChannelRef_MVO"
+    }
+  ''')
+  // Prune things that became superfluous because of above transformations
+  removeSchema("(Feature|FeatureRelationship|GeographicSiteFeature|PolicyRef)(|_FVO|_MVO)")
+  pruneAll()
+}
+
 def transformSwaggerJson = tasks.register('transformSwaggerJson') {
   description = 'Transforms all OpenAPI Specifications'
   group = 'Documentation'
@@ -711,6 +772,7 @@ def transformSwaggerJson = tasks.register('transformSwaggerJson') {
   dependsOn 'transformCustomerBill'
   dependsOn 'transformStock'
   dependsOn 'transformEvent'
+  dependsOn 'transformQuote'
 }
 
 tasks.register('generateDocReferences', com.cgi.space.psi.tasks.GenerateDocReferences.class) {

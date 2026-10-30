@@ -26,6 +26,7 @@
 @include [productorder](productorder/index.md)
 @include [productspecification](productspecification/index.md)
 @include [producttemplate](producttemplate/index.md)
+@include [quote](quote/index.md)
 @include [resource](resource/index.md)
 @include [resourcespecification](resourcespecification/index.md)
 @include [resourcetemplate](resourcetemplate/index.md)
