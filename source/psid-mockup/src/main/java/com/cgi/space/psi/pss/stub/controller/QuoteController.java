@@ -34,6 +34,12 @@ public class QuoteController {
         return notImplemented();
     }
 
+    @PsiOperation("TOD-03-06-04")
+    @RequestMapping(method = RequestMethod.GET, value = "/quote")
+    public ResponseEntity<Void> listQuote() {
+        return notImplemented();
+    }
+
     private static ResponseEntity<Void> notImplemented() {
         return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
     }
