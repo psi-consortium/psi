@@ -96,9 +96,7 @@ A quote is requested for a fully configured product.
 If the inquiry left open characteristics that the provider needs to price the product (e.g. the frequency band), the customer sets them before requesting the quote.
 If a POQ was done before, the characteristics set in the POQ stay the same in the quote and in the product order; characteristics that the POQ did not set may be added.
 
-The terms of a product (e.g. contract duration, renewal, charge period) are given in its product terms (*productTerm*).
-All items of one quote have the same terms; for example, one item for three months with automatic renewal and another for one month with a monthly roll-over cannot be combined in one quote.
-The PSS unifies the terms: it requests the quote of every part or item with the same product terms.
+The terms of a product (e.g. contract duration, renewal, charge period) are given in its product terms (*productTerm*). The implementer MAY require equal terms for all the QUOTE items.
 
 **Bundles and several providers**
 
@@ -131,6 +129,7 @@ P --> O
   Since the POQ is optional, a quote can also be requested without a POQ before it.
 * The PSS unifies the currency: the total price of the quote is given in one currency, also when the providers price their parts in different currencies.
   The choice of the currency and of the exchange rate is left to the PSS implementer.
+* The PSS SHOULD unify the terms: The logic of unification is left to the PSS implementer.
 * The quote succeeds only as a whole: if one part is rejected or not answered, the whole quote is `rejected`, and the reason names the part that failed.
   A part that its provider cannot offer with the common terms fails as well.
   The PSS does not need to cancel the quotes of the other parts at their providers: a quote binds no one until it is accepted, and it can no longer be accepted after its validity period.
@@ -278,7 +277,7 @@ Table: Quote Management Endpoints. {#tbl:quote-management-endpoints}
 
 **eTOM Reference**
 
-To be determined.
+eTOM: Customer Domain → Selling → Develop Sales Proposal; Negotiate Sales/Contract
 
 =begin
 
