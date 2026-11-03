@@ -6,52 +6,6 @@
 
 =end
 
-```plantuml
-@startuml
-skinparam actor {
-  BackgroundColor<< 0 >> 	SteelBlue
-  BorderColor<< 0 >> 		SteelBlue
-  BackgroundColor<< 1 >> 	Green
-  BorderColor<< 1 >> 		Green
-  BackgroundColor<< 3 >> 	Red
-  BorderColor<< 3 >> 		Red
-}
-
-skinparam entity{
-  BackgroundColor<< 2 >> 	Orange
-  BorderColor<< 2 >> 		Orange
-}
-
-Customer << 0 >> 
-entity PSS << 2 >> as PSS1
-
-rectangle "PSI" {
-  interface "PSS-USR I/F" as I1
-  interface "PSS-PSS I/F" as I3
-  interface "PSS-PVD I/F" as I2
-}
-
-package "PSS" {
-  rectangle "Create Quote" as Operation1
-}
-
-package "Provider" {
-  rectangle "Create Quote" as Operation2
-}
-
-Customer --	    I1
-I1 --           Operation1
-PSS1 --         I3
-I3 --           Operation1
-Operation1 --   I2
-I2 --           Operation2
-
-@enduml
-
-```
-
-![TOD-03-06-01: Create Quote](../../common/pixel.png){#fig:TOD-03-06-01-Create_Quote}
-
 **Prerequisites**
 
 The quote does not exist in the PSS datastore.

@@ -52,7 +52,7 @@ J   ..> PO  : without POQ and quote
 Whether a quote is required before an order is accepted is not defined by the interface; it may be required by the provider, by the governance of the PSS or by the PSS implementer, and it may depend on the product and on the provider's processes.
 
 Who requests the quote is not defined by the interface either.
-The customer may request a quote for an offering of its choice, or the PSS may request quotes on its own, for example for the few best-ranked candidates of an inquiry; which of the two a PSS does is a configuration left to the PSS implementer.
+The customer may request a quote for an offering of its choice, or the PSS may request quotes on its own; which of the two a PSS does is a configuration left to the PSS implementer.
 
 **Roles and interfaces**
 
@@ -96,7 +96,8 @@ A quote is requested for a fully configured product.
 If the inquiry left open characteristics that the provider needs to price the product (e.g. the frequency band), the customer sets them before requesting the quote.
 If a POQ was done before, the characteristics set in the POQ stay the same in the quote and in the product order; characteristics that the POQ did not set may be added.
 
-The terms of a product (e.g. contract duration, renewal, charge period) are given in its product terms (*productTerm*). The implementer MAY require equal terms for all the QUOTE items.
+The terms of a product (e.g. contract duration, renewal, charge period) are given in its product terms (*productTerm*).
+The implementer MAY require equal terms for all quote items.
 
 **Bundles and several providers**
 
@@ -129,9 +130,9 @@ P --> O
   Since the POQ is optional, a quote can also be requested without a POQ before it.
 * The PSS unifies the currency: the total price of the quote is given in one currency, also when the providers price their parts in different currencies.
   The choice of the currency and of the exchange rate is left to the PSS implementer.
-* The PSS SHOULD unify the terms: The logic of unification is left to the PSS implementer.
+* The PSS SHOULD unify the terms: the logic of unification is left to the PSS implementer.
 * The quote succeeds only as a whole: if one part is rejected or not answered, the whole quote is `rejected`, and the reason names the part that failed.
-  A part that its provider cannot offer with the common terms fails as well.
+  A part that its provider cannot offer with the common terms SHOULD fail as well.
   The PSS does not need to cancel the quotes of the other parts at their providers: a quote binds no one until it is accepted, and it can no longer be accepted after its validity period.
 
 The same applies when the customer selects several offerings, from the catalog or from the results of an inquiry, and requests one quote with several quote items: each item is sent to the provider of its offering, and if one item fails, the whole quote fails.
@@ -168,10 +169,16 @@ For an asynchronous quote, the PSS learns the provider's answer from the provide
 
 The provider states for how long the quote is valid (*validFor*); the customer accepts or refuses the quote within that period, and an accepted quote is referenced by the product order.
 After the validity period has ended, the quote stays in the state `approved` but can no longer be accepted; there is no separate state for an expired quote.
+A product order cannot be requested with a quote whose validity period has ended, even if the quote was accepted.
 
 **Quote lifecycle**
 
-A quote and each of its quote items go through the following states, which are those of TMF648 with `declined` renamed to `refused`.
+A quote and each of its quote items go through the following states, which are based on those of TMF648 with these changes:
+
+* `declined` is not used;
+* the TMF648 state `rejected`, in which the customer rejects the quote, is renamed to `refused`;
+* `rejected` is used for a quote that failed the business validation, as for product orders.
+
 The labels on the transitions name the event and, where only one party may cause it, that party.
 
 ```plantuml
@@ -202,7 +209,7 @@ cancelled --> [*]
 ![TOD-03-06: Quote States](../../common/pixel.png){#fig:TOD-03-06-Quote_States}
 
 | State          | Meaning                                                                                                                                                                                                                  | Processing     |
-|----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:--------------:|
+|------------------|--------------------------------------------------------------------|:------------:|
 | `acknowledged` | The quote request has been received and stored by the server (PSS or provider), and its identifier has been returned to the client; the quote has not been priced yet. Set by the server.                              | async          |
 | `inProgress`   | The quote is being priced; at the PSS this means that it has been forwarded to the provider (to every provider of a decomposed quote). Set by the server.                                                               | async          |
 | `pending`      | The provider needs further information or an internal authorisation before it can price the quote. Set by the provider; the PSS takes the state over from the provider's notification.                                 | async          |
@@ -267,7 +274,7 @@ Each endpoint is implemented by the PSS and by the provider's system.
 The table states which clients call it on which side; besides these calls, the provider sends notifications.
 
 | Operation           | Endpoint                                     | Called by                                                                    |
-|---------------------|----------------------------------------------|------------------------------------------------------------------------------|
+|------------------|--------------------------------------------------|--------------------------------|
 | **Create Quote**    | `POST /quoteManagement/v2/quote`             | customer, other PSS on the PSS; PSS on the provider                          |
 | **Update Quote**    | `PATCH /quoteManagement/v2/quote/{id}`       | customer, other PSS on the PSS; PSS on the provider, on behalf of the customer |
 | **View Quote**      | `GET /quoteManagement/v2/quote/{id}`         | customer, other PSS, provider (own quotes) on the PSS; PSS on the provider   |
@@ -277,10 +284,4 @@ Table: Quote Management Endpoints. {#tbl:quote-management-endpoints}
 
 **eTOM Reference**
 
-eTOM: Customer Domain → Selling → Develop Sales Proposal; Negotiate Sales/Contract
-
-=begin
-
-> Open: the eTOM v22.0.0 process identifier for quotes (GB921 L3 decomposition) is still to be looked up.
-
-=end
+The task is based on the Develop Sales Proposal and Negotiate Sales/Contract processes of Selling in the Customer domain from the eTOM.
