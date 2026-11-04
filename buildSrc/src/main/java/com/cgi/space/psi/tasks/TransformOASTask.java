@@ -14,7 +14,10 @@ package com.cgi.space.psi.tasks;
 
 import com.cgi.space.psi.tasks.transformers.AddProperty;
 import com.cgi.space.psi.tasks.transformers.AddTagDescription;
+import com.cgi.space.psi.tasks.transformers.ImportExample;
 import com.cgi.space.psi.tasks.transformers.ImportPath;
+import com.cgi.space.psi.tasks.transformers.ImportRequestBody;
+import com.cgi.space.psi.tasks.transformers.ImportResponse;
 import com.cgi.space.psi.tasks.transformers.ImportSchema;
 import com.cgi.space.psi.tasks.transformers.OasTransformer;
 import com.cgi.space.psi.tasks.transformers.OverwriteProperty;
@@ -135,6 +138,21 @@ public class TransformOASTask extends DefaultTask {
     public void importSchema(String name, File file) {
         implicitInputs.add(file);
         this.transformations.add(new ImportSchema(name, file));
+    }
+
+    public void importResponse(String name, File file) {
+        implicitInputs.add(file);
+        this.transformations.add(new ImportResponse(name, file));
+    }
+
+    public void importRequestBody(String name, File file) {
+        implicitInputs.add(file);
+        this.transformations.add(new ImportRequestBody(name, file));
+    }
+
+    public void importExample(String name, File file) {
+        implicitInputs.add(file);
+        this.transformations.add(new ImportExample(name, file));
     }
 
     public void addProperty(String schemaPattern, String propertyName, String propertyJson) throws JsonProcessingException {
