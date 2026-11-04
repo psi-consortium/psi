@@ -267,6 +267,12 @@ doc_path["PSI-TOD"]=doc/PSI/PSI-TOD/index.md
 doc_abbr["PSI-TOD"]=PSI-TOD
 doc_skip["PSI-TOD"]=$global_skip
 
+# TOD appendices are rendered standalone as well (ADR043), one document per appendix.
+doc_path["PSI-TOD-A01"]=doc/PSI/PSI-TOD/appendix-a01.md
+doc_abbr["PSI-TOD-A01"]=PSI-TOD-A01
+doc_opts["PSI-TOD-A01"]=--no-compare #new in MS12
+doc_skip["PSI-TOD-A01"]=$global_skip
+
 # ======================================================================================
 # Business logic starts here
 # The following loop renders all of the previously defined documents

@@ -82,6 +82,7 @@ Not enforced by tooling yet; treat it as convention until contributor volume jus
 - [ ] References the issue it addresses.
 - [ ] For changes to a PSI-* document: added a new entry to the document's Document Change Record (the `dcr_overrides` list in the metadata block of its `index.md`) with your name and a summary of the change.
 - [ ] For changes introducing third-party material: updated **PSI-SLF** with the corresponding licence information.
+- [ ] For a new TOD appendix: the opening scope, origin/licence and terminology paragraphs are present, and a task or operation references the appendix.
 - [ ] Edits target hand-written sources, not generated files (see §6).
 
 ## 4. Repository Structure
@@ -90,6 +91,7 @@ Not enforced by tooling yet; treat it as convention until contributor volume jus
 |---|---|
 | `doc/PSI/` | Source of the PSI-* standard documents (see §1), including shared fragments under `doc/PSI/common/`. |
 | `doc/PSI/PSI-ICD/open-apis/` | The PSI OpenAPI definitions — the machine-readable core of the standard. |
+| `doc/PSI/PSI-TOD/appendices/` | TOD appendices: algorithm and method descriptions, reference papers and product data sheets that support a task without being one (see ADR043 in PSI-MADR). |
 | `tmforum/` | TM Forum Open Digital Framework source APIs and schemas, from which the PSI APIs are derived (see `LICENSE` / PSI-SLF for attribution). |
 | `mef/` | MEF source APIs, likewise inputs to the PSI API transformation (see `LICENSE` / PSI-SLF for attribution). |
 | `source/` | Implementations validating the defined interfaces: the Java mock-up (`common/`, `psid-mockup/`, both Gradle subprojects), the Go `mission-management-backend/`, the Svelte/TypeScript `mission-management-frontend/`, plus `docker/`, `mongodb/` and a Helm chart for running them. See `source/README.md`. |
@@ -125,6 +127,9 @@ When editing:
   If you change OpenAPI definitions or requirements, re-run `./gradlew generate` and commit the regenerated files along with your change.
 - Add an entry to the `dcr_overrides` list in the metadata block of the document's `index.md`, with your name, date range, version, and a one-line summary of the change.
 - New decision records start from `doc/PSI/PSI-ADR/ID-decision-template.md` and go into `doc/PSI/PSI-ADR/Proposed/`; they move to `Accepted/` (or `Rejected/` etc.) as the consortium decides.
+- Content that fits no document body goes where ADR043 (PSI-MADR) puts it: algorithm and method descriptions, reference papers and product data sheets become **TOD appendices** under `doc/PSI/PSI-TOD/appendices/` (`TOD-A<nn>-<Title>.md`, listed in `appendices.md`, rendered standalone as `PSI-TOD-A<nn>` from `doc/PSI/PSI-TOD/appendix-a<nn>.md` via an entry in `aiv/rhod/rhod-playbook.sh`); governance and process rules become PSI-MADR decision records of category Governance; machine-readable artefacts remain ICD annexes.
+  An appendix opens with its scope against the TOD body (which parts are normative for which tasks), its origin and licence, and its terminology against the TAD, and is referenced by at least one task or operation.
+- A text written outside the PSI document set (e.g. a whitepaper or a vendor data sheet) is additionally reviewed by a person from a consortium member other than the contributing organisation, through the issue that places it; every finding is resolved in the text or declined with its reason in the issue.
 - Standard documents are written in **British English**.
   This file follows the same convention.
 - Substantive changes require sign-off from the document's Approver(s) per its Document Signature Table.
