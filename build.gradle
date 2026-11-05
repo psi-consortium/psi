@@ -698,7 +698,7 @@ tasks.register('transformProductOfferingQualification', com.cgi.space.psi.tasks.
 
   // Adjust metadata
   // TODO after psi PR #75: replaceInfoDescription for the PSI text of info.description (no QueryProductOfferingQualification,
-  // asynchronous creation only, no notification line) and removeOperationExamples for the TM Forum examples
+  // creation always answered with 201, no notification line) and removeOperationExamples for the TM Forum examples
   replaceServerUrl("{apiRoot}/tmf-api/productOfferingQualification/v5/", "/psi-api/productOfferingQualification/v2/")
 
   // Remove explicitly unwanted things
@@ -706,7 +706,7 @@ tasks.register('transformProductOfferingQualification', com.cgi.space.psi.tasks.
   removePaths("/queryProductOfferingQualification(.*)")
 
   // unify schemas
-  // PSID679: the qualification paths (no 200 on POST, 422 on POST and PATCH, no 404 on the list and POST)
+  // PSID679: the qualification paths (POST answers 201 only: no 200, no 202; 422 on POST and PATCH; no 404 on the list and POST)
   importPath("/checkProductOfferingQualification(.*)", file("doc/PSI/PSI-ICD/open-apis/extensions/PSID679-Product_Offering_Qualification-v5.0.0.oas.json"))
   importBaseTypes(transformations)
   importSchema("(.*)", file("doc/PSI/PSI-ICD/open-apis/extensions/Characteristic.oas.json"))
@@ -745,16 +745,6 @@ tasks.register('transformProductOfferingQualification', com.cgi.space.psi.tasks.
   overwriteProperty("CheckProductOfferingQualificationItem(.*)", "action", '''
     {
       "$ref": "#/components/schemas/ItemActionType"
-    }
-  ''')
-  overwriteProperty("CheckProductOfferingQualification", "instantSyncQualification", '''
-    {
-      "type": "boolean",
-      "description": "A previous indicator which when the value is \\"true\\" means that requester expects to get qualifcation result immedi3ately in the response. If the indicator is true (or by default now without it) then the response code of 200 indicates the operation is successful otherwise a task is created with a response 201. For asynchronous, this attribute is now replaced by the header request \\"Expect: 202-Accepted\\" PSI: only false is allowed; the qualification is always asynchronous (ADR046).",
-      "deprecated": true,
-      "enum": [
-        false
-      ]
     }
   ''')
   overwriteProperty("CheckProductOfferingQualificationItem", "qualificationItemResult", '''

@@ -30,7 +30,6 @@ Table: Request Body of POST checkProductOfferingQualification. {#tbl:checkProduc
 | Code | Description | Content |
 |------|-------------|---------|
 | 201 | OK/Created | CheckProductOfferingQualification |
-| 202 | Accepted | N/A |
 | 400 | Bad Request | Error |
 | 401 | Unauthorized | Error |
 | 403 | Forbidden | Error |
