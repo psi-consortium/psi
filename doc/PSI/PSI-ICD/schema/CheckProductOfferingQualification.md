@@ -7,7 +7,7 @@
 
 | Field | Type | Format | Required |
 | ------- | ------- | ------- | --- |
-| id | string | N/A | No |
+| id | string | N/A | Yes |
 | href | string | uri | No |
 | description | string | N/A | No |
 | channel | ChannelRef | N/A | No |
@@ -25,6 +25,7 @@
 | requestedQualificationCompletionDate | string | date-time | No |
 | state | CheckProductOfferingQualificationStateType | N/A | No |
 | creationDate | string | date-time | No |
+| externalId | array | ExternalIdentifier | No |
 | @baseType | string | N/A | No |
 | @schemaLocation | string | N/A | No |
 | @type | string | "CheckProductOfferingQualification" | Yes |

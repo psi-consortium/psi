@@ -58,7 +58,7 @@
                     "checkProductOfferingQualification"
                 ],
                 "summary": "Creates a CheckProductOfferingQualification",
-                "description": "This operation creates a CheckProductOfferingQualification entity.",
+                "description": "This operation creates a CheckProductOfferingQualification entity. The qualification is always created, and the operation is answered with 201 only, whatever the value of instantSyncQualification: the response carries the qualification either in its final state with the result, or in state acknowledged. An Expect: 202-Accepted header is ignored.",
                 "operationId": "createCheckProductOfferingQualification",
                 "parameters": [
                     {
@@ -88,14 +88,7 @@
                         "$ref": "#/components/responses/409"
                     },
                     "422": {
-                        "description": "Unprocessable Content",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Error"
-                                }
-                            }
-                        }
+                        "$ref": "#/components/responses/422"
                     },
                     "500": {
                         "$ref": "#/components/responses/500"
@@ -115,7 +108,7 @@
                     "checkProductOfferingQualification"
                 ],
                 "summary": "Updates partially a CheckProductOfferingQualification",
-                "description": "This operation updates partially a CheckProductOfferingQualification entity.",
+                "description": "This operation updates partially a CheckProductOfferingQualification entity. A client may change the attributes it sets, including the items, and may cancel the qualification by setting state to cancelled; it cannot set any other state, nor the attributes set by the server. The server decides which changes it accepts in which state.",
                 "operationId": "patchCheckProductOfferingQualification",
                 "parameters": [
                     {
@@ -154,14 +147,7 @@
                         "$ref": "#/components/responses/409"
                     },
                     "422": {
-                        "description": "Unprocessable Content",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Error"
-                                }
-                            }
-                        }
+                        "$ref": "#/components/responses/422"
                     },
                     "500": {
                         "$ref": "#/components/responses/500"
@@ -208,7 +194,7 @@
                             },
                             "instantSyncQualification": {
                                 "type": "boolean",
-                                "description": "A previous indicator which when the value is \"true\" means that requester expects to get qualifcation result immedi3ately in the response. If the indicator is true (or by default now without it) then the response code of 200 indicates the operation is successful otherwise a task is created with a response 201. For asynchronous, this attribute is now replaced by the header request \"Expect: 202-Accepted\"",
+                                "description": "An indicator which when the value is true means that the requester expects to get the qualification result immediately in the response. PSID679 answers the creation with 201 whatever its value: the server returns the qualification in its final state with the result where it can qualify it at once, otherwise in state acknowledged.",
                                 "deprecated": true
                             },
                             "note": {
@@ -223,7 +209,8 @@
                                 "description": "Qualification item for a product or a category",
                                 "items": {
                                     "$ref": "#/components/schemas/CheckProductOfferingQualificationItem_FVO"
-                                }
+                                },
+                                "minItems": 1
                             },
                             "provideAlternative": {
                                 "type": "boolean",
@@ -231,7 +218,7 @@
                             },
                             "provideOnlyAvailable": {
                                 "type": "boolean",
-                                "description": "An indicator which when the value is \"true\" means that only available product offering must be listed in the response"
+                                "description": "An indicator which when the value is true means that only available product offerings must be listed in the response: alternateProductOfferingProposal then lists only alternatives that can be delivered. The items of the qualification are always returned."
                             },
                             "provideResultReason": {
                                 "type": "boolean",
@@ -252,7 +239,8 @@
                             }
                         },
                         "required": [
-                            "relatedParty"
+                            "relatedParty",
+                            "checkProductOfferingQualificationItem"
                         ]
                     }
                 ],
@@ -280,6 +268,241 @@
                     "yellow",
                     "red"
                 ]
+            }
+        },
+        "requestBodies": {
+            "CheckProductOfferingQualification_FVO": {
+                "description": "The CheckProductOfferingQualification to be created",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/CheckProductOfferingQualification_FVO"
+                        }
+                    }
+                },
+                "required": true
+            },
+            "CheckProductOfferingQualification_MVO": {
+                "description": "The CheckProductOfferingQualification to be patched",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/CheckProductOfferingQualification_MVO"
+                        }
+                    },
+                    "application/merge-patch+json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/CheckProductOfferingQualification_MVO"
+                        }
+                    },
+                    "application/json-patch+json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/JsonPatchOperations"
+                        }
+                    },
+                    "application/json-patch-query+json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/JsonPatchOperations"
+                        }
+                    }
+                },
+                "required": true
+            }
+        },
+        "responses": {
+            "200CheckProductOfferingQualificationArray": {
+                "description": "Success",
+                "headers": {
+                    "X-Total-Count": {
+                        "$ref": "#/components/headers/X-Total-Count"
+                    },
+                    "X-Result-Count": {
+                        "$ref": "#/components/headers/X-Result-Count"
+                    }
+                },
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/components/schemas/CheckProductOfferingQualification"
+                            }
+                        }
+                    }
+                }
+            },
+            "200CheckProductOfferingQualification_Get": {
+                "description": "Success",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/CheckProductOfferingQualification"
+                        }
+                    }
+                }
+            },
+            "200CheckProductOfferingQualification_Patch": {
+                "description": "Success",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/CheckProductOfferingQualification"
+                        }
+                    },
+                    "application/merge-patch+json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/CheckProductOfferingQualification"
+                        }
+                    },
+                    "application/json-patch+json": {
+                        "schema": {
+                            "oneOf": [
+                                {
+                                    "$ref": "#/components/schemas/CheckProductOfferingQualification"
+                                },
+                                {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/CheckProductOfferingQualification"
+                                    }
+                                },
+                                {
+                                    "type": "string",
+                                    "nullable": true
+                                }
+                            ]
+                        }
+                    },
+                    "application/json-patch-query+json": {
+                        "schema": {
+                            "oneOf": [
+                                {
+                                    "$ref": "#/components/schemas/CheckProductOfferingQualification"
+                                },
+                                {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/CheckProductOfferingQualification"
+                                    }
+                                },
+                                {
+                                    "type": "string",
+                                    "nullable": true
+                                }
+                            ]
+                        }
+                    }
+                }
+            },
+            "201CheckProductOfferingQualification": {
+                "description": "OK/Created",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/CheckProductOfferingQualification"
+                        }
+                    }
+                }
+            },
+            "400": {
+                "description": "Bad Request",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Error"
+                        }
+                    }
+                }
+            },
+            "401": {
+                "description": "Unauthorized",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Error"
+                        }
+                    }
+                }
+            },
+            "403": {
+                "description": "Forbidden",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Error"
+                        }
+                    }
+                }
+            },
+            "404": {
+                "description": "Not Found",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Error"
+                        }
+                    }
+                }
+            },
+            "405": {
+                "description": "Method Not allowed",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Error"
+                        }
+                    }
+                }
+            },
+            "409": {
+                "description": "Conflict",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Error"
+                        }
+                    }
+                }
+            },
+            "422": {
+                "description": "Unprocessable Content",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Error"
+                        }
+                    }
+                }
+            },
+            "500": {
+                "description": "Internal Server Error",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Error"
+                        }
+                    }
+                }
+            },
+            "501": {
+                "description": "Not Implemented",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Error"
+                        }
+                    }
+                }
+            },
+            "503": {
+                "description": "Service Unavailable",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Error"
+                        }
+                    }
+                }
             }
         }
     }

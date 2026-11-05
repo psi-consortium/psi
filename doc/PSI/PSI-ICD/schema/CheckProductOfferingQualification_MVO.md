@@ -17,6 +17,7 @@
 | relatedParty | array | RelatedPartyOrPartyRole_MVO | No |
 | requestedQualificationCompletionDate | string | date-time | No |
 | state | CheckProductOfferingQualificationStateType | N/A | No |
+| externalId | array | ExternalIdentifier_MVO | No |
 | @baseType | string | N/A | No |
 | @schemaLocation | string | N/A | No |
 | @type | string | "CheckProductOfferingQualification" | Yes |

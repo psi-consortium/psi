@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "Product Offering Qualification",
-    "description": "**TMF API Reference : TMF 679 - Product Offering Qualification** - June 2024\n\nProduct Offering Qualification API provides Product Offering commercial eligibility. This API features 2 distinct resources: CheckProductOfferingQualification  and QueryProductOfferingQualification \n\n**CheckProductOfferingQualification** allows to:\n- Request for a (or a set of)  productOffering and/or Product specification  (with configuration) commercial eligibility check. A CheckProductOfferingQualification is made of item (One item per product).\n- Provide a validation result for each item\n- Provide, if requested by the client side and if eligibility fails, an alternate productOffering and/or productSpecification\n- Provide in the response eligible productOffering if the request provided only product specification description.\n- Note: CheckProductOfferingQualification allows describing product from the inventory, so it is also possible to use it to retrieve productOffering available for a migration, to complete existing asset, or to check terminate operation eligibility.  In order to manage this UC, an action has to be provided for each item.\n\nIn a nutshell CheckProductOfferingQualification is for precise question/precise response\n\n**QueryProductOfferingQualification** allows to\n- look for productOffering eligibles from a context passed by search criteria structure\n- The response will provide a list of item - each item for a productOffering eligible\n\n\n In a nutshell QueryProductOfferingQualification is for 'vague 'request and get a list of available productOffering\n\n\n\n**QueryProductOfferingQualification and CheckProductOfferingQualification resources**\n\n\n These are 2 separate resources.\n\nBoth resources are following task-based pattern. They both leverage Task status lifecycle to monitor progress.\nFor both resources the API provided the following operations :\n- Retrieval of a QueryProductOfferingQualification/CheckProductOfferingQualification or a collection of QueryProductOfferingQualification/CheckProductOfferingQualification depending on filter criteria\n- Partial update of a QueryProductOfferingQualification or CheckProductOfferingQualification (including updating rules and for administration purpose)\n- Creation of a QueryProductOfferingQualification or CheckProductOfferingQualification (including default values and creation rules and for administration purpose). It should note that the API support 200 as 201 response as it is not striclty requested to save QueryProductOfferingQualification or CheckProductOfferingQualification. Indeed for instant sync qualification (qualification result provided in the respone)  it is possible to not provide  a GET operation to retrieve this resource later.\n- Deletion of a QueryProductOfferingQualification or CheckProductOfferingQualification  (for administration purposes)\n- Notification of events on QueryProductOfferingQualification and CheckProductOfferingQualification .  ",
+    "description": "## PSID API Reference: PSID679 - Product Offering Qualification\n\nBased on TMF API Reference: TMF 679 - Product Offering Qualification v5.0.0 (June 2024)\n\nProduct Offering Qualification API provides Product Offering commercial eligibility. This API features the CheckProductOfferingQualification resource.\n\n**CheckProductOfferingQualification** allows to:\n- Request for a (or a set of)  productOffering and/or Product specification  (with configuration) commercial eligibility check. A CheckProductOfferingQualification is made of item (One item per product).\n- Provide a validation result for each item\n- Provide, if requested by the client side and if eligibility fails, an alternate productOffering and/or productSpecification\n- Provide in the response eligible productOffering if the request provided only product specification description.\n- Note: CheckProductOfferingQualification allows describing product from the inventory, so it is also possible to use it to retrieve productOffering available for a migration, to complete existing asset, or to check terminate operation eligibility.  In order to manage this UC, an action has to be provided for each item.\n\nIn a nutshell CheckProductOfferingQualification is for precise question/precise response\n\n**CheckProductOfferingQualification resource**\n\nThe resource follows the task-based pattern: its state shows the progress of the qualification.\nThe API provides the following operations:\n- Retrieval of a CheckProductOfferingQualification or of a collection of CheckProductOfferingQualification\n- Creation of a CheckProductOfferingQualification. The qualification is always created, and the API answers 201 only, whatever the value of instantSyncQualification: the response carries the qualification either in its final state with the result, or in state acknowledged, in which case the result is retrieved later with a GET operation or received with an event notification. An Expect: 202-Accepted header is ignored.\n- Partial update of a CheckProductOfferingQualification: a client may change the attributes it sets, including the items, and may cancel the qualification; the server decides which changes it accepts in which state.\n- Deletion of a CheckProductOfferingQualification (for administration purposes)",
     "version": "5.0.0"
   },
   "servers": [
@@ -68,7 +68,7 @@
           "checkProductOfferingQualification"
         ],
         "summary": "Creates a CheckProductOfferingQualification",
-        "description": "This operation creates a CheckProductOfferingQualification entity.",
+        "description": "This operation creates a CheckProductOfferingQualification entity. The qualification is always created, and the operation is answered with 201 only, whatever the value of instantSyncQualification: the response carries the qualification either in its final state with the result, or in state acknowledged. An Expect: 202-Accepted header is ignored.",
         "operationId": "createCheckProductOfferingQualification",
         "parameters": [
           {
@@ -98,14 +98,7 @@
             "$ref": "#/components/responses/409"
           },
           "422": {
-            "description": "Unprocessable Content",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/422"
           },
           "500": {
             "$ref": "#/components/responses/500"
@@ -218,7 +211,7 @@
           "checkProductOfferingQualification"
         ],
         "summary": "Updates partially a CheckProductOfferingQualification",
-        "description": "This operation updates partially a CheckProductOfferingQualification entity.",
+        "description": "This operation updates partially a CheckProductOfferingQualification entity. A client may change the attributes it sets, including the items, and may cancel the qualification by setting state to cancelled; it cannot set any other state, nor the attributes set by the server. The server decides which changes it accepts in which state.",
         "operationId": "patchCheckProductOfferingQualification",
         "parameters": [
           {
@@ -257,14 +250,7 @@
             "$ref": "#/components/responses/409"
           },
           "422": {
-            "description": "Unprocessable Content",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/422"
           },
           "500": {
             "$ref": "#/components/responses/500"
@@ -1190,6 +1176,9 @@
             "$ref": "#/components/schemas/Extensible"
           },
           {
+            "required": [
+              "id"
+            ],
             "type": "object",
             "properties": {
               "href": {
@@ -1225,7 +1214,7 @@
               },
               "instantSyncQualification": {
                 "type": "boolean",
-                "description": "A previous indicator which when the value is \"true\" means that requester expects to get qualifcation result immedi3ately in the response. If the indicator is true (or by default now without it) then the response code of 200 indicates the operation is successful otherwise a task is created with a response 201. For asynchronous, this attribute is now replaced by the header request \"Expect: 202-Accepted\"",
+                "description": "An indicator which when the value is true means that the requester expects to get the qualification result immediately in the response. PSID679 answers the creation with 201 whatever its value: the server returns the qualification in its final state with the result where it can qualify it at once, otherwise in state acknowledged.",
                 "deprecated": true
               },
               "note": {
@@ -1248,7 +1237,7 @@
               },
               "provideOnlyAvailable": {
                 "type": "boolean",
-                "description": "An indicator which when the value is \"true\" means that only available product offering must be listed in the response"
+                "description": "An indicator which when the value is true means that only available product offerings must be listed in the response: alternateProductOfferingProposal then lists only alternatives that can be delivered. The items of the qualification are always returned."
               },
               "provideResultReason": {
                 "type": "boolean",
@@ -1276,6 +1265,12 @@
                 "type": "string",
                 "description": "Date and time when the CheckProductOfferingQualification was created",
                 "format": "date-time"
+              },
+              "externalId": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ExternalIdentifier"
+                }
               }
             },
             "description": "CheckProductOfferingQualification is used to perform a commercial eligibility. It allows to request an eligibility check for a list of productOfferings (one per item). The response will provide qualification result depending on catalog rules and of the context of the interaction (defined be place, channel, party, product)."
@@ -1317,7 +1312,7 @@
               },
               "CheckProductOfferingQualificationItem": {
                 "type": "array",
-                "description": "A structure to embed check qualification item within check qualification item",
+                "description": "A structure to embed check qualification item within check qualification item, e.g. the parts of a bundle offering. The name starts with a capital letter, as in TMF679 v5.0.0; PSID679 keeps it for conformance.",
                 "items": {
                   "$ref": "#/components/schemas/CheckProductOfferingQualificationItem"
                 }
@@ -1381,6 +1376,10 @@
             "$ref": "#/components/schemas/Extensible"
           },
           {
+            "required": [
+              "action",
+              "id"
+            ],
             "type": "object",
             "properties": {
               "expectedActivationDate": {
@@ -1397,7 +1396,7 @@
               },
               "CheckProductOfferingQualificationItem": {
                 "type": "array",
-                "description": "A structure to embed check qualification item within check qualification item",
+                "description": "A structure to embed check qualification item within check qualification item, e.g. the parts of a bundle offering. The name starts with a capital letter, as in TMF679 v5.0.0; PSID679 keeps it for conformance.",
                 "items": {
                   "$ref": "#/components/schemas/CheckProductOfferingQualificationItem_FVO"
                 }
@@ -1457,7 +1456,7 @@
               },
               "CheckProductOfferingQualificationItem": {
                 "type": "array",
-                "description": "A structure to embed check qualification item within check qualification item",
+                "description": "A structure to embed check qualification item within check qualification item, e.g. the parts of a bundle offering. The name starts with a capital letter, as in TMF679 v5.0.0; PSID679 keeps it for conformance.",
                 "items": {
                   "$ref": "#/components/schemas/CheckProductOfferingQualificationItem_MVO"
                 }
@@ -1502,6 +1501,7 @@
           },
           {
             "required": [
+              "checkProductOfferingQualificationItem",
               "relatedParty"
             ],
             "type": "object",
@@ -1515,7 +1515,7 @@
               },
               "instantSyncQualification": {
                 "type": "boolean",
-                "description": "A previous indicator which when the value is \"true\" means that requester expects to get qualifcation result immedi3ately in the response. If the indicator is true (or by default now without it) then the response code of 200 indicates the operation is successful otherwise a task is created with a response 201. For asynchronous, this attribute is now replaced by the header request \"Expect: 202-Accepted\"",
+                "description": "An indicator which when the value is true means that the requester expects to get the qualification result immediately in the response. PSID679 answers the creation with 201 whatever its value: the server returns the qualification in its final state with the result where it can qualify it at once, otherwise in state acknowledged.",
                 "deprecated": true
               },
               "note": {
@@ -1526,6 +1526,7 @@
                 }
               },
               "checkProductOfferingQualificationItem": {
+                "minItems": 1,
                 "type": "array",
                 "description": "Qualification item for a product or a category",
                 "items": {
@@ -1538,7 +1539,7 @@
               },
               "provideOnlyAvailable": {
                 "type": "boolean",
-                "description": "An indicator which when the value is \"true\" means that only available product offering must be listed in the response"
+                "description": "An indicator which when the value is true means that only available product offerings must be listed in the response: alternateProductOfferingProposal then lists only alternatives that can be delivered. The items of the qualification are always returned."
               },
               "provideResultReason": {
                 "type": "boolean",
@@ -1556,6 +1557,12 @@
                 "type": "string",
                 "description": "Deadline date when the requester expected a qualification answer",
                 "format": "date-time"
+              },
+              "externalId": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ExternalIdentifier_FVO"
+                }
               }
             },
             "description": "CheckProductOfferingQualification is used to perform a commercial eligibility. It allows to request an eligibility check for a list of productOfferings (one per item). The response will provide qualification result depending on catalog rules and of the context of the interaction (defined be place, channel, party, product)."
@@ -1603,7 +1610,7 @@
               },
               "provideOnlyAvailable": {
                 "type": "boolean",
-                "description": "An indicator which when the value is \"true\" means that only available product offering must be listed in the response"
+                "description": "An indicator which when the value is true means that only available product offerings must be listed in the response: alternateProductOfferingProposal then lists only alternatives that can be delivered. The items of the qualification are always returned."
               },
               "provideResultReason": {
                 "type": "boolean",
@@ -1623,6 +1630,12 @@
               },
               "state": {
                 "$ref": "#/components/schemas/CheckProductOfferingQualificationStateType"
+              },
+              "externalId": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ExternalIdentifier_MVO"
+                }
               }
             },
             "description": "CheckProductOfferingQualification is used to perform a commercial eligibility. It allows to request an eligibility check for a list of productOfferings (one per item). The response will provide qualification result depending on catalog rules and of the context of the interaction (defined be place, channel, party, product)."
@@ -10031,18 +10044,6 @@
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/Error"
-            },
-            "examples": {
-              "basic": {
-                "summary": "Bad Request Error",
-                "value": {
-                  "@type": "Error",
-                  "code": "ERR400",
-                  "reason": "Bad Request",
-                  "message": "The server could not understand the request due to invalid syntax. Please correct the syntax and try again.",
-                  "referenceError": "https://host/errors"
-                }
-              }
             }
           }
         }
@@ -10053,18 +10054,6 @@
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/Error"
-            },
-            "examples": {
-              "basic": {
-                "summary": "Unauthorized Error",
-                "value": {
-                  "@type": "Error",
-                  "code": "ERR401",
-                  "reason": "Unauthorized",
-                  "message": "You are not authorized to access the requested resource. Please provide the correct credentials.",
-                  "referenceError": "https://host/errors"
-                }
-              }
             }
           }
         }
@@ -10075,18 +10064,6 @@
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/Error"
-            },
-            "examples": {
-              "basic": {
-                "summary": "Forbidden Error",
-                "value": {
-                  "@type": "Error",
-                  "code": "ERR403",
-                  "reason": "Forbidden",
-                  "message": "You don't have the permission to access the requested resource. It is either read-protected or not readable by the server.",
-                  "referenceError": "https://host/errors"
-                }
-              }
             }
           }
         }
@@ -10097,18 +10074,6 @@
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/Error"
-            },
-            "examples": {
-              "basic": {
-                "summary": "Not Found Error",
-                "value": {
-                  "@type": "Error",
-                  "code": "ERR404",
-                  "reason": "Not Found",
-                  "message": "The requested URL was not found on the server.",
-                  "referenceError": "https://host/errors"
-                }
-              }
             }
           }
         }
@@ -10119,18 +10084,6 @@
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/Error"
-            },
-            "examples": {
-              "basic": {
-                "summary": "Method Not allowed Error",
-                "value": {
-                  "@type": "Error",
-                  "code": "ERR405",
-                  "reason": "Method Not allowed",
-                  "message": "The method is not allowed for the requested URL.",
-                  "referenceError": "https://host/errors"
-                }
-              }
             }
           }
         }
@@ -10141,18 +10094,6 @@
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/Error"
-            },
-            "examples": {
-              "basic": {
-                "summary": "Conflict Error",
-                "value": {
-                  "@type": "Error",
-                  "code": "ERR409",
-                  "reason": "Conflict",
-                  "message": "The request could not be completed due to a conflict with the current state of the target resource.",
-                  "referenceError": "https://host/errors"
-                }
-              }
             }
           }
         }
@@ -10163,18 +10104,6 @@
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/Error"
-            },
-            "examples": {
-              "basic": {
-                "summary": "Internal Server Error example",
-                "value": {
-                  "@type": "Error",
-                  "code": "ERR500",
-                  "reason": "Internal Server Error",
-                  "message": "The server encountered an internal error. Please contact the system administrator.",
-                  "referenceError": "https://host/errors"
-                }
-              }
             }
           }
         }
@@ -10185,18 +10114,6 @@
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/Error"
-            },
-            "examples": {
-              "basic": {
-                "summary": "Not Implemented Error",
-                "value": {
-                  "@type": "Error",
-                  "code": "ERR501",
-                  "reason": "The requested operation is not implemented",
-                  "message": "The requested operation is not implemented. Please contact the system administrator.",
-                  "referenceError": "https://host/errors"
-                }
-              }
             }
           }
         }
@@ -10207,18 +10124,6 @@
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/Error"
-            },
-            "examples": {
-              "basic": {
-                "summary": "Service Unavailable Error",
-                "value": {
-                  "@type": "Error",
-                  "code": "ERR503",
-                  "reason": "Service Unavailable",
-                  "message": "The service is currently unavailable. Please try again later.",
-                  "referenceError": "https://host/errors"
-                }
-              }
             }
           }
         }
@@ -10240,14 +10145,6 @@
               "items": {
                 "$ref": "#/components/schemas/CheckProductOfferingQualification"
               }
-            },
-            "examples": {
-              "RetrieveCPOQByList": {
-                "$ref": "#/components/examples/RetrieveCPOQByList_response"
-              },
-              "RetrieveCPOQByListwithFieldsSelection": {
-                "$ref": "#/components/examples/RetrieveCPOQByListwithFieldsSelection_response"
-              }
             }
           }
         }
@@ -10258,14 +10155,6 @@
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/CheckProductOfferingQualification"
-            },
-            "examples": {
-              "retrieveCPOQById1": {
-                "$ref": "#/components/examples/retrieveCPOQById1_response"
-              },
-              "retrieveCPOQById2": {
-                "$ref": "#/components/examples/retrieveCPOQById2_response"
-              }
             }
           }
         }
@@ -10276,21 +10165,11 @@
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/CheckProductOfferingQualification"
-            },
-            "examples": {
-              "CPOQ_partialupdate_example_application_json": {
-                "$ref": "#/components/examples/CPOQ_partialupdate_example_application_json_response"
-              }
             }
           },
           "application/merge-patch+json": {
             "schema": {
               "$ref": "#/components/schemas/CheckProductOfferingQualification"
-            },
-            "examples": {
-              "CheckProductOfferingQualification_partialupdate_example_application_merge_patch_json": {
-                "$ref": "#/components/examples/CheckProductOfferingQualification_partialupdate_example_application_merge_patch_json_response"
-              }
             }
           },
           "application/json-patch+json": {
@@ -10310,11 +10189,6 @@
                   "nullable": true
                 }
               ]
-            },
-            "examples": {
-              "CheckProductOfferingQualification_partialupdate_example_application_json_patch_json": {
-                "$ref": "#/components/examples/CheckProductOfferingQualification_partialupdate_example_application_json_patch_json_response"
-              }
             }
           },
           "application/json-patch-query+json": {
@@ -10334,11 +10208,6 @@
                   "nullable": true
                 }
               ]
-            },
-            "examples": {
-              "CheckProductOfferingQualification_partialupdate_example_application_json_patch_query_json": {
-                "$ref": "#/components/examples/CheckProductOfferingQualification_partialupdate_example_application_json_patch_query_json_response"
-              }
             }
           }
         }
@@ -10349,11 +10218,16 @@
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/CheckProductOfferingQualification"
-            },
-            "examples": {
-              "CreateCheckProductOfferingQualification": {
-                "$ref": "#/components/examples/CreateCheckProductOfferingQualification_response"
-              }
+            }
+          }
+        }
+      },
+      "422": {
+        "description": "Unprocessable Content",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
             }
           }
         }
@@ -10405,1071 +10279,7 @@
         }
       }
     },
-    "examples": {
-      "retrieveCPOQById1_response": {
-        "description": "CheckProductOfferingQualification representation.",
-        "value": {
-          "href": "https://host:port/productOfferingQualification/v5/CheckProductOfferingQualification/99",
-          "id": "99",
-          "@type": "CheckProductOfferingQualification",
-          "channel": {
-            "id": "1",
-            "name": "Web",
-            "@type": "ChannelRef"
-          },
-          "description": "Example for a CheckProductOfferingQualification resource",
-          "effectiveQualificationDate": "2021-09-01T14:21:03.352Z",
-          "expectedQualificationCompletionDate": "2021-09-01T14:21:03.352Z",
-          "expirationDate": "2021-09-01T14:21:03.352Z",
-          "note": [
-            {
-              "@type": "Note",
-              "author": "Mr. N. Bene",
-              "date": "2020-11-20T08:00:00Z",
-              "id": "1",
-              "text": "Not for a CheckProductOfferingQualification"
-            }
-          ],
-          "checkProductOfferingQualificationItem": [
-            {
-              "@type": "CheckProductOfferingQualificationItem",
-              "expectedActivationDate": "2021-09-01T14:21:03.352Z",
-              "productOffering": {
-                "id": "DPI123",
-                "name": "International Data Plan - 20 GB",
-                "href": "https://host:port/productCatalogManagement/v5/productOffering/DPI123",
-                "@type": "ProductOfferingRef"
-              },
-              "action": "add",
-              "id": "1",
-              "qualificationItemResult": "green",
-              "state": "done"
-            },
-            {
-              "@type": "CheckProductOfferingQualificationItem",
-              "expectedActivationDate": "2021-09-01T14:21:03.352Z",
-              "eligibilityResultReason": [
-                {
-                  "@type": "EligibilityResultReason",
-                  "label": "This offering is not anymore available but similar offer exists",
-                  "code": "TE45A"
-                }
-              ],
-              "productOffering": {
-                "id": "DPI123",
-                "name": "International Data Plan - 40 GB",
-                "href": "https://host:port/productCatalogManagement/v5/productOffering/DPI123",
-                "@type": "ProductOfferingRef"
-              },
-              "alternateProductOfferingProposal": [
-                {
-                  "@type": "AlternateProductOfferingProposal",
-                  "alternateActivationDate": "2021-09-01T14:21:03.353Z",
-                  "alternateProductOffering": {
-                    "id": "DPI124",
-                    "name": "International Data Plan - 50 GB",
-                    "href": "https://host:port/productCatalogManagement/v5/productOffering/DPI124",
-                    "@type": "ProductOfferingRef"
-                  },
-                  "id": "1"
-                }
-              ],
-              "action": "add",
-              "id": "2",
-              "qualificationItemResult": "orange",
-              "state": "done"
-            },
-            {
-              "@type": "CheckProductOfferingQualificationItem",
-              "expectedActivationDate": "2021-09-01T14:21:03.352Z",
-              "eligibilityResultReason": [
-                {
-                  "@type": "EligibilityResultReason",
-                  "label": "This offering is not anymore open to new customer",
-                  "code": "TE45"
-                }
-              ],
-              "productOffering": {
-                "id": "DPI128",
-                "name": "France Voice Plan - 3 hours",
-                "href": "https://host:port/productCatalogManagement/v5/productOffering/DPI128",
-                "@type": "ProductOfferingRef"
-              },
-              "action": "add",
-              "id": "3",
-              "qualificationItemResult": "red",
-              "state": "done"
-            }
-          ],
-          "provideAlternative": true,
-          "provideResultReason": true,
-          "relatedParty": [
-            {
-              "role": "requester",
-              "partyOrPartyRole": {
-                "id": "45hj-999",
-                "href": "https://host:port/partyManagement/v5/individual/45hj-999",
-                "name": "Louise",
-                "@type": "PartyRef",
-                "@referredType": "Individual"
-              },
-              "@type": "RelatedPartyOrPartyRole"
-            }
-          ],
-          "requestedQualificationCompletionDate": "2021-09-01T14:21:03.354Z",
-          "state": "done",
-          "creationDate": "2021-09-01T14:21:03.354Z"
-        }
-      },
-      "retrieveCPOQById2_response": {
-        "description": "CheckProductOfferingQualification representation.",
-        "value": {
-          "href": "https://host:port/productOfferingQualification/v5/CheckProductOfferingQualification/101",
-          "id": "101",
-          "@type": "CheckProductOfferingQualification",
-          "channel": {
-            "id": "1",
-            "name": "Web",
-            "@type": "ChannelRef"
-          },
-          "description": "Example for an acknowledged CheckProductOfferingQualification resource",
-          "expectedQualificationCompletionDate": "2021-09-05T07:11:53.167Z",
-          "CheckProductOfferingQualificationItem": [
-            {
-              "@type": "CheckProductOfferingQualificationItem",
-              "expectedActivationDate": "2021-09-02T07:11:53.167Z",
-              "product": {
-                "@type": "Product",
-                "productSpecification": {
-                  "id": "77",
-                  "href": "https://host:port/productCatalogManagement/v5/productSpecification/77",
-                  "name": "NEST for enhanced MobileBroadband with IMS support"
-                },
-                "productCharacteristic": [
-                  {
-                    "@type": "ObjectCharacteristic",
-                    "id": "Slice5G_Characteristic",
-                    "name": "Slice 5G POQ configuration",
-                    "valueType": "Slice5G JSON descriptor",
-                    "value": {
-                      "@valueSchemaLocation": "https://github.com/..5GPOQ.json",
-                      "@type": "5GSliceJsonSpecification",
-                      "availability": 99.999,
-                      "MMTel_Support": 1,
-                      "Session _Service_Continuity_support": 1,
-                      "Slice_Quality_Of_Service": [
-                        1,
-                        2,
-                        5,
-                        6,
-                        7,
-                        8,
-                        9
-                      ]
-                    }
-                  }
-                ],
-                "place": [
-                  {
-                    "role": "Coverage",
-                    "place": {
-                      "id": "BEL",
-                      "href": "https://host:port/geographicLocationManagement/v5/geographicLocation/BEL",
-                      "name": "Belgium",
-                      "@referredType": "GeographicLocation",
-                      "@type": "PlaceRef"
-                    },
-                    "@type": "RelatedPlaceRefOrValue"
-                  }
-                ]
-              },
-              "action": "add",
-              "id": "1",
-              "state": "acknowledged"
-            }
-          ],
-          "provideAlternative": true,
-          "provideResultReason": true,
-          "relatedParty": [
-            {
-              "role": "requester",
-              "partyOrPartyRole": {
-                "id": "45hj-999",
-                "href": "https://host:port/partyManagement/v5/individual/45hj-999",
-                "name": "Louise",
-                "@type": "PartyRef",
-                "@referredType": "Individual"
-              },
-              "@type": "RelatedPartyOrPartyRole"
-            }
-          ],
-          "requestedQualificationCompletionDate": "2021-09-02T07:11:53.168Z",
-          "state": "acknowledged",
-          "creationDate": "2021-09-02T07:11:53.168Z"
-        }
-      },
-      "RetrieveCPOQByList_response": {
-        "description": "A collection of CheckProductOfferingQualification representation",
-        "value": [
-          {
-            "href": "https://host:port/productOfferingQualification/v5/CheckProductOfferingQualification/99",
-            "id": "99",
-            "@type": "CheckProductOfferingQualification",
-            "channel": {
-              "id": "1",
-              "name": "Web",
-              "@type": "ChannelRef"
-            },
-            "description": "Example for a CheckProductOfferingQualification resource",
-            "effectiveQualificationDate": "2021-09-01T14:21:03.352Z",
-            "expectedQualificationCompletionDate": "2021-09-01T14:21:03.352Z",
-            "expirationDate": "2021-09-01T14:21:03.352Z",
-            "note": [
-              {
-                "@type": "Note",
-                "author": "Mr. N. Bene",
-                "date": "2020-11-20T08:00:00Z",
-                "id": "1",
-                "text": "Not for a CheckProductOfferingQualification"
-              }
-            ],
-            "checkProductOfferingQualificationItem": [
-              {
-                "@type": "CheckProductOfferingQualificationItem",
-                "expectedActivationDate": "2021-09-01T14:21:03.352Z",
-                "productOffering": {
-                  "id": "DPI123",
-                  "name": "International Data Plan - 20 GB",
-                  "href": "https://host:port/productCatalogManagement/v5/productOffering/DPI123",
-                  "@type": "ProductOfferingRef"
-                },
-                "action": "add",
-                "id": "1",
-                "qualificationItemResult": "green",
-                "state": "done"
-              },
-              {
-                "@type": "CheckProductOfferingQualificationItem",
-                "expectedActivationDate": "2021-09-01T14:21:03.352Z",
-                "eligibilityResultReason": [
-                  {
-                    "@type": "EligibilityResultReason",
-                    "label": "This offering is not anymore available but similar offer exists",
-                    "code": "TE45A"
-                  }
-                ],
-                "productOffering": {
-                  "id": "DPI123",
-                  "name": "International Data Plan - 40 GB",
-                  "href": "https://host:port/productCatalogManagement/v5/productOffering/DPI123",
-                  "@type": "ProductOfferingRef"
-                },
-                "alternateProductOfferingProposal": [
-                  {
-                    "@type": "AlternateProductOfferingProposal",
-                    "alternateActivationDate": "2021-09-01T14:21:03.353Z",
-                    "alternateProductOffering": {
-                      "id": "DPI124",
-                      "name": "International Data Plan - 50 GB",
-                      "href": "https://host:port/productCatalogManagement/v5/productOffering/DPI124",
-                      "@type": "ProductOfferingRef"
-                    },
-                    "id": "1"
-                  }
-                ],
-                "action": "add",
-                "id": "2",
-                "qualificationItemResult": "orange",
-                "state": "done"
-              },
-              {
-                "@type": "CheckProductOfferingQualificationItem",
-                "expectedActivationDate": "2021-09-01T14:21:03.352Z",
-                "eligibilityResultReason": [
-                  {
-                    "@type": "EligibilityResultReason",
-                    "label": "This offering is not anymore open to new customer",
-                    "code": "TE45"
-                  }
-                ],
-                "productOffering": {
-                  "id": "DPI128",
-                  "name": "France Voice Plan - 3 hours",
-                  "href": "https://host:port/productCatalogManagement/v5/productOffering/DPI128",
-                  "@type": "ProductOfferingRef"
-                },
-                "action": "add",
-                "id": "3",
-                "qualificationItemResult": "red",
-                "state": "done"
-              }
-            ],
-            "provideAlternative": true,
-            "provideResultReason": true,
-            "relatedParty": [
-              {
-                "role": "requester",
-                "partyOrPartyRole": {
-                  "id": "45hj-999",
-                  "href": "https://host:port/partyManagement/v5/individual/45hj-999",
-                  "name": "Louise",
-                  "@type": "PartyRef",
-                  "@referredType": "Individual"
-                },
-                "@type": "RelatedPartyOrPartyRole"
-              }
-            ],
-            "requestedQualificationCompletionDate": "2021-09-01T14:21:03.354Z",
-            "state": "done",
-            "creationDate": "2021-09-01T14:21:03.354Z"
-          },
-          {
-            "href": "https://host:port/productOfferingQualification/v5/CheckProductOfferingQualification/101",
-            "id": "101",
-            "@type": "CheckProductOfferingQualification",
-            "channel": {
-              "id": "1",
-              "name": "Web",
-              "@type": "ChannelRef"
-            },
-            "description": "Example for an acknowledged CheckProductOfferingQualification resource",
-            "expectedQualificationCompletionDate": "2021-09-05T07:11:53.167Z",
-            "CheckProductOfferingQualificationItem": [
-              {
-                "@type": "CheckProductOfferingQualificationItem",
-                "expectedActivationDate": "2021-09-02T07:11:53.167Z",
-                "product": {
-                  "@type": "Product",
-                  "productSpecification": {
-                    "id": "77",
-                    "href": "https://host:port/productCatalogManagement/v5/productSpecification/77",
-                    "name": "NEST for enhanced MobileBroadband with IMS support"
-                  },
-                  "productCharacteristic": [
-                    {
-                      "@type": "ObjectCharacteristic",
-                      "id": "Slice5G_Characteristic",
-                      "name": "Slice 5G POQ configuration",
-                      "valueType": "Slice5G JSON descriptor",
-                      "value": {
-                        "@valueSchemaLocation": "https://github.com/..5GPOQ.json",
-                        "@type": "5GSliceJsonSpecification",
-                        "availability": 99.999,
-                        "MMTel_Support": 1,
-                        "Session _Service_Continuity_support": 1,
-                        "Slice_Quality_Of_Service": [
-                          1,
-                          2,
-                          5,
-                          6,
-                          7,
-                          8,
-                          9
-                        ]
-                      }
-                    }
-                  ],
-                  "place": [
-                    {
-                      "role": "Coverage",
-                      "place": {
-                        "id": "FRA",
-                        "href": "https://host:port/geographicLocationManagement/v5/geographicLocation/FRA",
-                        "name": "France",
-                        "@referredType": "GeographicLocation",
-                        "@type": "PlaceRef"
-                      },
-                      "@type": "RelatedPlaceRefOrValue"
-                    }
-                  ]
-                },
-                "action": "add",
-                "id": "1",
-                "state": "acknowledged"
-              }
-            ],
-            "provideAlternative": true,
-            "provideResultReason": true,
-            "relatedParty": [
-              {
-                "role": "requester",
-                "partyOrPartyRole": {
-                  "id": "45hj-999",
-                  "href": "https://host:port/partyManagement/v5/individual/45hj-999",
-                  "name": "Louise",
-                  "@type": "PartyRef",
-                  "@referredType": "Individual"
-                },
-                "@type": "RelatedPartyOrPartyRole"
-              }
-            ],
-            "requestedQualificationCompletionDate": "2021-09-02T07:11:53.168Z",
-            "state": "acknowledged",
-            "creationDate": "2021-09-02T07:11:53.168Z"
-          }
-        ]
-      },
-      "RetrieveCPOQByListwithFieldsSelection_response": {
-        "description": "A collection of CheckProductOfferingQualification with fields selection",
-        "value": [
-          {
-            "id": "9",
-            "href": "https://host:port/productOfferingQualification/v5/CheckProductOfferingQualification/9",
-            "state": "done",
-            "expirationDate": "2021-09-03T11:33:54.172Z",
-            "qualificationResult": "green",
-            "@type": "CheckProductOfferingQualification"
-          },
-          {
-            "id": "19",
-            "href": "https://host:port/productOfferingQualification/v5/CheckProductOfferingQualification/19",
-            "state": "done",
-            "expirationDate": "2021-09-03T14:25:54.172Z",
-            "qualificationResult": "red",
-            "@type": "CheckProductOfferingQualification"
-          },
-          {
-            "id": "31",
-            "href": "https://host:port/productOfferingQualification/v5/CheckProductOfferingQualification/31",
-            "state": "done",
-            "expirationDate": "2021-09-02T15:25:54.172Z",
-            "qualificationResult": "green",
-            "@type": "CheckProductOfferingQualification"
-          },
-          {
-            "id": "547",
-            "href": "https://host:port/productOfferingQualification/v5/CheckProductOfferingQualification/547",
-            "state": "done",
-            "expirationDate": "2021-09-03T15:25:54.172Z",
-            "qualificationResult": "green",
-            "@type": "CheckProductOfferingQualification"
-          }
-        ]
-      },
-      "CreateCheckProductOfferingQualification_request": {
-        "description": "POST CheckProductOfferingQualification Request example",
-        "value": {
-          "@type": "CheckProductOfferingQualification",
-          "channel": {
-            "id": "1",
-            "name": "Web",
-            "@type": "ChannelRef"
-          },
-          "description": "Example for a CheckProductOfferingQualification resource",
-          "note": [
-            {
-              "@type": "Note",
-              "author": "Mr. N. Bene",
-              "date": "2020-11-20T08:00:00Z",
-              "id": "1",
-              "text": "Not for a CheckProductOfferingQualification"
-            }
-          ],
-          "checkProductOfferingQualificationItem": [
-            {
-              "@type": "CheckProductOfferingQualificationItem",
-              "expectedActivationDate": "2021-09-01T14:21:03.352Z",
-              "productOffering": {
-                "id": "DPI123",
-                "name": "International Data Plan - 20 GB",
-                "@type": "ProductOfferingRef"
-              },
-              "action": "add",
-              "id": "1"
-            },
-            {
-              "@type": "CheckProductOfferingQualificationItem",
-              "expectedActivationDate": "2021-09-01T14:21:03.352Z",
-              "productOffering": {
-                "id": "DPI123",
-                "name": "International Data Plan - 40 GB",
-                "@type": "ProductOfferingRef"
-              },
-              "action": "add",
-              "id": "2"
-            },
-            {
-              "@type": "CheckProductOfferingQualificationItem",
-              "expectedActivationDate": "2021-09-01T14:21:03.352Z",
-              "productOffering": {
-                "id": "DPI128",
-                "name": "France Voice Plan - 3 hours",
-                "@type": "ProductOfferingRef"
-              },
-              "action": "add",
-              "id": "3"
-            }
-          ],
-          "provideAlternative": true,
-          "provideResultReason": true,
-          "relatedParty": [
-            {
-              "role": "requester",
-              "partyOrPartyRole": {
-                "id": "45hj-999",
-                "href": "https://host:port/partyManagement/v5/individual/45hj-999",
-                "name": "Louise",
-                "@type": "PartyRef",
-                "@referredType": "Individual"
-              },
-              "@type": "RelatedPartyOrPartyRole"
-            }
-          ],
-          "requestedQualificationCompletionDate": "2021-09-01T14:21:03.354Z"
-        }
-      },
-      "CreateCheckProductOfferingQualification_response": {
-        "description": "POST CheckProductOfferingQualification Response example.",
-        "value": {
-          "href": "https://host:port/ProductOfferingQualification/v5/CheckProductOfferingQualification/99",
-          "id": "99",
-          "@type": "CheckProductOfferingQualification",
-          "channel": {
-            "id": "1",
-            "name": "Web",
-            "@type": "ChannelRef"
-          },
-          "description": "Example for a CheckProductOfferingQualification resource",
-          "effectiveQualificationDate": "2021-09-01T14:21:03.352Z",
-          "expectedQualificationCompletionDate": "2021-09-01T14:21:03.352Z",
-          "expirationDate": "2021-09-01T14:21:03.352Z",
-          "note": [
-            {
-              "@type": "Note",
-              "author": "Mr. N. Bene",
-              "date": "2020-11-20T08:00:00Z",
-              "id": "1",
-              "text": "Not for a CheckProductOfferingQualification"
-            }
-          ],
-          "checkProductOfferingQualificationItem": [
-            {
-              "@type": "CheckProductOfferingQualificationItem",
-              "expectedActivationDate": "2021-09-01T14:21:03.352Z",
-              "productOffering": {
-                "id": "DPI123",
-                "name": "International Data Plan - 20 GB",
-                "href": "https://host:port/productCatalogManagement/v5/productOffering/DPI123",
-                "@type": "ProductOfferingRef"
-              },
-              "action": "add",
-              "id": "1",
-              "qualificationItemResult": "green",
-              "state": "done"
-            },
-            {
-              "@type": "CheckProductOfferingQualificationItem",
-              "expectedActivationDate": "2021-09-01T14:21:03.352Z",
-              "eligibilityResultReason": [
-                {
-                  "@type": "EligibilityResultReason",
-                  "label": "This offering is not anymore available but similar offer exists",
-                  "code": "TE45A"
-                }
-              ],
-              "productOffering": {
-                "id": "DPI123",
-                "name": "International Data Plan - 40 GB",
-                "href": "https://host:port/productCatalogManagement/v5/productOffering/DPI123",
-                "@type": "ProductOfferingRef"
-              },
-              "alternateProductOfferingProposal": [
-                {
-                  "@type": "AlternateProductOfferingProposal",
-                  "alternateActivationDate": "2021-09-01T14:21:03.353Z",
-                  "alternateProductOffering": {
-                    "id": "DPI124",
-                    "name": "International Data Plan - 50 GB",
-                    "href": "https://host:port/productCatalogManagement/v5/productOffering/DPI124",
-                    "@type": "ProductOfferingRef"
-                  },
-                  "id": "1"
-                }
-              ],
-              "action": "add",
-              "id": "2",
-              "qualificationItemResult": "orange",
-              "state": "done"
-            },
-            {
-              "@type": "CheckProductOfferingQualificationItem",
-              "expectedActivationDate": "2021-09-01T14:21:03.352Z",
-              "eligibilityResultReason": [
-                {
-                  "@type": "EligibilityResultReason",
-                  "label": "This offering is not anymore open to new customer",
-                  "code": "TE45"
-                }
-              ],
-              "productOffering": {
-                "id": "DPI128",
-                "name": "France Voice Plan - 3 hours",
-                "href": "https://host:port/productCatalogManagement/v5/productOffering/DPI128",
-                "@type": "ProductOfferingRef"
-              },
-              "action": "add",
-              "id": "3",
-              "qualificationItemResult": "red",
-              "state": "done"
-            }
-          ],
-          "provideAlternative": true,
-          "provideResultReason": true,
-          "relatedParty": [
-            {
-              "role": "requester",
-              "partyOrPartyRole": {
-                "id": "45hj-999",
-                "href": "https://host:port/partyManagement/v5/individual/45hj-999",
-                "name": "Louise",
-                "@type": "PartyRef",
-                "@referredType": "Individual"
-              },
-              "@type": "RelatedPartyOrPartyRole"
-            }
-          ],
-          "requestedQualificationCompletionDate": "2021-09-01T14:21:03.354Z",
-          "state": "done",
-          "creationDate": "2021-09-01T14:21:03.354Z"
-        }
-      },
-      "CPOQ_partialupdate_example_application_json_request": {
-        "description": "Here's an example of a request for updating a CheckProductOfferingQualification resource - set status to acknoweldged. This example illustrates patch using application/json.",
-        "value": {
-          "@type": "CheckProductOfferingQualification",
-          "status": "acknoweldged"
-        }
-      },
-      "CPOQ_partialupdate_example_application_json_response": {
-        "description": "Response message",
-        "value": {
-          "href": "https://host:port/productOfferingQualification/v5/CheckProductOfferingQualification/101",
-          "id": "101",
-          "@type": "CheckProductOfferingQualification",
-          "channel": {
-            "id": "1",
-            "name": "Web",
-            "@type": "ChannelRef"
-          },
-          "description": "Example for an acknowledged CheckProductOfferingQualification resource",
-          "expectedQualificationCompletionDate": "2021-09-05T07:11:53.167Z",
-          "CheckProductOfferingQualificationItem": [
-            {
-              "@type": "CheckProductOfferingQualificationItem",
-              "expectedActivationDate": "2021-09-02T07:11:53.167Z",
-              "product": {
-                "@type": "Product",
-                "productSpecification": {
-                  "id": "77",
-                  "href": "https://host:port/productCatalogManagement/v5/productSpecification/77",
-                  "name": "NEST for enhanced MobileBroadband with IMS support"
-                },
-                "productCharacteristic": [
-                  {
-                    "@type": "ObjectCharacteristic",
-                    "id": "Slice5G_Characteristic",
-                    "name": "Slice 5G POQ configuration",
-                    "valueType": "Slice5G JSON descriptor",
-                    "value": {
-                      "@valueSchemaLocation": "https://github.com/..5GPOQ.json",
-                      "@type": "5GSliceJsonSpecification",
-                      "availability": 99.999,
-                      "MMTel_Support": 1,
-                      "Session _Service_Continuity_support": 1,
-                      "Slice_Quality_Of_Service": [
-                        1,
-                        2,
-                        5,
-                        6,
-                        7,
-                        8,
-                        9
-                      ]
-                    }
-                  }
-                ],
-                "place": [
-                  {
-                    "role": "Coverage",
-                    "place": {
-                      "id": "FRA",
-                      "href": "https://host:port/geographicLocationManagement/v5/geographicLocation/FRA",
-                      "name": "France",
-                      "@referredType": "GeographicLocation",
-                      "@type": "PlaceRef"
-                    },
-                    "@type": "RelatedPlaceRefOrValue"
-                  },
-                  {
-                    "role": "Coverage",
-                    "place": {
-                      "id": "BEL",
-                      "href": "https://host:port/geographicLocationManagement/v5/geographicLocation/BEL",
-                      "name": "Belgium",
-                      "@referredType": "GeographicLocation",
-                      "@type": "PlaceRef"
-                    },
-                    "@type": "RelatedPlaceRefOrValue"
-                  }
-                ]
-              },
-              "action": "add",
-              "id": "1",
-              "state": "acknowledged"
-            }
-          ],
-          "provideAlternative": true,
-          "provideResultReason": true,
-          "relatedParty": [
-            {
-              "role": "requester",
-              "partyOrPartyRole": {
-                "id": "45hj-999",
-                "href": "https://host:port/partyManagement/v5/individual/45hj-999",
-                "name": "Louise",
-                "@type": "PartyRef",
-                "@referredType": "Individual"
-              },
-              "@type": "RelatedPartyOrPartyRole"
-            }
-          ],
-          "requestedQualificationCompletionDate": "2021-09-02T07:11:53.168Z",
-          "state": "acknowledged",
-          "creationDate": "2021-09-02T07:11:53.168Z"
-        }
-      },
-      "CheckProductOfferingQualification_partialupdate_example_application_merge_patch_json_request": {
-        "description": "Here's an example of a request for updating a CheckProductOfferingQualification resource - set status to acknoweldged. This example illustrates patch using application/merge-patch+json.",
-        "value": {
-          "@type": "CheckProductOfferingQualification",
-          "status": "acknoweldged"
-        }
-      },
-      "CheckProductOfferingQualification_partialupdate_example_application_merge_patch_json_response": {
-        "description": "Response message",
-        "value": {
-          "href": "https://host:port/productOfferingQualification/v5/CheckProductOfferingQualification/101",
-          "id": "101",
-          "@type": "CheckProductOfferingQualification",
-          "channel": {
-            "id": "1",
-            "name": "Web",
-            "@type": "ChannelRef"
-          },
-          "description": "Example for an acknowledged CheckProductOfferingQualification resource",
-          "expectedQualificationCompletionDate": "2021-09-05T07:11:53.167Z",
-          "CheckProductOfferingQualificationItem": [
-            {
-              "@type": "CheckProductOfferingQualificationItem",
-              "expectedActivationDate": "2021-09-02T07:11:53.167Z",
-              "product": {
-                "@type": "Product",
-                "productSpecification": {
-                  "id": "77",
-                  "href": "https://host:port/productCatalogManagement/v5/productSpecification/77",
-                  "name": "NEST for enhanced MobileBroadband with IMS support"
-                },
-                "productCharacteristic": [
-                  {
-                    "@type": "ObjectCharacteristic",
-                    "id": "Slice5G_Characteristic",
-                    "name": "Slice 5G POQ configuration",
-                    "valueType": "Slice5G JSON descriptor",
-                    "value": {
-                      "@valueSchemaLocation": "https://github.com/..5GPOQ.json",
-                      "@type": "5GSliceJsonSpecification",
-                      "availability": 99.999,
-                      "MMTel_Support": 1,
-                      "Session _Service_Continuity_support": 1,
-                      "Slice_Quality_Of_Service": [
-                        1,
-                        2,
-                        5,
-                        6,
-                        7,
-                        8,
-                        9
-                      ]
-                    }
-                  }
-                ],
-                "place": [
-                  {
-                    "role": "Coverage",
-                    "place": {
-                      "id": "FRA",
-                      "href": "https://host:port/geographicLocationManagement/v5/geographicLocation/FRA",
-                      "name": "France",
-                      "@referredType": "GeographicLocation",
-                      "@type": "PlaceRef"
-                    },
-                    "@type": "RelatedPlaceRefOrValue"
-                  },
-                  {
-                    "role": "Coverage",
-                    "place": {
-                      "id": "BEL",
-                      "href": "https://host:port/geographicLocationManagement/v5/geographicLocation/BEL",
-                      "name": "Belgium",
-                      "@referredType": "GeographicLocation",
-                      "@type": "PlaceRef"
-                    },
-                    "@type": "RelatedPlaceRefOrValue"
-                  }
-                ]
-              },
-              "action": "add",
-              "id": "1",
-              "state": "acknowledged"
-            }
-          ],
-          "provideAlternative": true,
-          "provideResultReason": true,
-          "relatedParty": [
-            {
-              "role": "requester",
-              "partyOrPartyRole": {
-                "id": "45hj-999",
-                "href": "https://host:port/partyManagement/v5/individual/45hj-999",
-                "name": "Louise",
-                "@type": "PartyRef",
-                "@referredType": "Individual"
-              },
-              "@type": "RelatedPartyOrPartyRole"
-            }
-          ],
-          "requestedQualificationCompletionDate": "2021-09-02T07:11:53.168Z",
-          "state": "acknowledged",
-          "creationDate": "2021-09-02T07:11:53.168Z"
-        }
-      },
-      "CheckProductOfferingQualification_partialupdate_example_application_json_patch_json_request": {
-        "description": "Here's an example of a request for updating a CheckProductOfferingQualification resource - set status to acknoweldged. This example illustrates patch using application/json-patch+json.",
-        "value": [
-          {
-            "op": "replace",
-            "path": "/status",
-            "value": "acknoweldged"
-          }
-        ]
-      },
-      "CheckProductOfferingQualification_partialupdate_example_application_json_patch_json_response": {
-        "description": "Response message",
-        "value": {
-          "href": "https://host:port/productOfferingQualification/v5/CheckProductOfferingQualification/101",
-          "id": "101",
-          "@type": "CheckProductOfferingQualification",
-          "channel": {
-            "id": "1",
-            "name": "Web",
-            "@type": "ChannelRef"
-          },
-          "description": "Example for an acknowledged CheckProductOfferingQualification resource",
-          "expectedQualificationCompletionDate": "2021-09-05T07:11:53.167Z",
-          "CheckProductOfferingQualificationItem": [
-            {
-              "@type": "CheckProductOfferingQualificationItem",
-              "expectedActivationDate": "2021-09-02T07:11:53.167Z",
-              "product": {
-                "@type": "Product",
-                "productSpecification": {
-                  "id": "77",
-                  "href": "https://host:port/productCatalogManagement/v5/productSpecification/77",
-                  "name": "NEST for enhanced MobileBroadband with IMS support"
-                },
-                "productCharacteristic": [
-                  {
-                    "@type": "ObjectCharacteristic",
-                    "id": "Slice5G_Characteristic",
-                    "name": "Slice 5G POQ configuration",
-                    "valueType": "Slice5G JSON descriptor",
-                    "value": {
-                      "@valueSchemaLocation": "https://github.com/..5GPOQ.json",
-                      "@type": "5GSliceJsonSpecification",
-                      "availability": 99.999,
-                      "MMTel_Support": 1,
-                      "Session _Service_Continuity_support": 1,
-                      "Slice_Quality_Of_Service": [
-                        1,
-                        2,
-                        5,
-                        6,
-                        7,
-                        8,
-                        9
-                      ]
-                    }
-                  }
-                ],
-                "place": [
-                  {
-                    "role": "Coverage",
-                    "place": {
-                      "id": "FRA",
-                      "href": "https://host:port/geographicLocationManagement/v5/geographicLocation/FRA",
-                      "name": "France",
-                      "@referredType": "GeographicLocation",
-                      "@type": "PlaceRef"
-                    },
-                    "@type": "RelatedPlaceRefOrValue"
-                  },
-                  {
-                    "role": "Coverage",
-                    "place": {
-                      "id": "BEL",
-                      "href": "https://host:port/geographicLocationManagement/v5/geographicLocation/BEL",
-                      "name": "Belgium",
-                      "@referredType": "GeographicLocation",
-                      "@type": "PlaceRef"
-                    },
-                    "@type": "RelatedPlaceRefOrValue"
-                  }
-                ]
-              },
-              "action": "add",
-              "id": "1",
-              "state": "acknowledged"
-            }
-          ],
-          "provideAlternative": true,
-          "provideResultReason": true,
-          "relatedParty": [
-            {
-              "role": "requester",
-              "partyOrPartyRole": {
-                "id": "45hj-999",
-                "href": "https://host:port/partyManagement/v5/individual/45hj-999",
-                "name": "Louise",
-                "@type": "PartyRef",
-                "@referredType": "Individual"
-              },
-              "@type": "RelatedPartyOrPartyRole"
-            }
-          ],
-          "requestedQualificationCompletionDate": "2021-09-02T07:11:53.168Z",
-          "state": "acknowledged",
-          "creationDate": "2021-09-02T07:11:53.168Z"
-        }
-      },
-      "CheckProductOfferingQualification_partialupdate_example_application_json_patch_query_json_request": {
-        "description": "Here's an example of a request for updating a CheckProductOfferingQualification resource - adding a place in the first CheckProductOfferingQualificationItem. This example illustrates patch using application/json-patch-query+json.",
-        "value": [
-          {
-            "op": "add",
-            "path": "/CheckProductOfferingQualificationItem/product/place?CheckProductOfferingQualificationItem.id=1",
-            "value": {
-              "role": "Coverage",
-              "place": {
-                "id": "BEL",
-                "href": "https://host:port/geographicLocationManagement/v5/geographicLocation/BEL",
-                "name": "Belgium",
-                "@referredType": "GeographicLocation",
-                "@type": "PlaceRef"
-              },
-              "@type": "RelatedPlaceRefOrValue"
-            }
-          }
-        ]
-      },
-      "CheckProductOfferingQualification_partialupdate_example_application_json_patch_query_json_response": {
-        "description": "Response message",
-        "value": {
-          "href": "https://host:port/productOfferingQualification/v5/CheckProductOfferingQualification/101",
-          "id": "101",
-          "@type": "CheckProductOfferingQualification",
-          "channel": {
-            "id": "1",
-            "name": "Web",
-            "@type": "ChannelRef"
-          },
-          "description": "Example for an acknowledged CheckProductOfferingQualification resource",
-          "expectedQualificationCompletionDate": "2021-09-05T07:11:53.167Z",
-          "CheckProductOfferingQualificationItem": [
-            {
-              "@type": "CheckProductOfferingQualificationItem",
-              "expectedActivationDate": "2021-09-02T07:11:53.167Z",
-              "product": {
-                "@type": "Product",
-                "productSpecification": {
-                  "id": "77",
-                  "href": "https://host:port/productCatalogManagement/v5/productSpecification/77",
-                  "name": "NEST for enhanced MobileBroadband with IMS support"
-                },
-                "productCharacteristic": [
-                  {
-                    "@type": "ObjectCharacteristic",
-                    "id": "Slice5G_Characteristic",
-                    "name": "Slice 5G POQ configuration",
-                    "valueType": "Slice5G JSON descriptor",
-                    "value": {
-                      "@valueSchemaLocation": "https://github.com/..5GPOQ.json",
-                      "@type": "5GSliceJsonSpecification",
-                      "availability": 99.999,
-                      "MMTel_Support": 1,
-                      "Session _Service_Continuity_support": 1,
-                      "Slice_Quality_Of_Service": [
-                        1,
-                        2,
-                        5,
-                        6,
-                        7,
-                        8,
-                        9
-                      ]
-                    }
-                  }
-                ],
-                "place": [
-                  {
-                    "role": "Coverage",
-                    "place": {
-                      "id": "FRA",
-                      "href": "https://host:port/geographicLocationManagement/v5/geographicLocation/FRA",
-                      "name": "France",
-                      "@referredType": "GeographicLocation",
-                      "@type": "PlaceRef"
-                    },
-                    "@type": "RelatedPlaceRefOrValue"
-                  },
-                  {
-                    "role": "Coverage",
-                    "place": {
-                      "id": "BEL",
-                      "href": "https://host:port/geographicLocationManagement/v5/geographicLocation/BEL",
-                      "name": "Belgium",
-                      "@referredType": "GeographicLocation",
-                      "@type": "PlaceRef"
-                    },
-                    "@type": "RelatedPlaceRefOrValue"
-                  }
-                ]
-              },
-              "action": "add",
-              "id": "1",
-              "state": "acknowledged"
-            }
-          ],
-          "provideAlternative": true,
-          "provideResultReason": true,
-          "relatedParty": [
-            {
-              "role": "requester",
-              "partyOrPartyRole": {
-                "id": "45hj-999",
-                "href": "https://host:port/partyManagement/v5/individual/45hj-999",
-                "name": "Louise",
-                "@type": "PartyRef",
-                "@referredType": "Individual"
-              },
-              "@type": "RelatedPartyOrPartyRole"
-            }
-          ],
-          "requestedQualificationCompletionDate": "2021-09-02T07:11:53.168Z",
-          "state": "acknowledged",
-          "creationDate": "2021-09-02T07:11:53.168Z"
-        }
-      }
-    },
+    "examples": { },
     "requestBodies": {
       "CheckProductOfferingQualification_FVO": {
         "description": "The CheckProductOfferingQualification to be created",
@@ -11477,11 +10287,6 @@
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/CheckProductOfferingQualification_FVO"
-            },
-            "examples": {
-              "CreateCheckProductOfferingQualification": {
-                "$ref": "#/components/examples/CreateCheckProductOfferingQualification_request"
-              }
             }
           }
         },
@@ -11493,41 +10298,21 @@
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/CheckProductOfferingQualification_MVO"
-            },
-            "examples": {
-              "CPOQ_partialupdate_example_application_json": {
-                "$ref": "#/components/examples/CPOQ_partialupdate_example_application_json_request"
-              }
             }
           },
           "application/merge-patch+json": {
             "schema": {
               "$ref": "#/components/schemas/CheckProductOfferingQualification_MVO"
-            },
-            "examples": {
-              "CheckProductOfferingQualification_partialupdate_example_application_merge_patch_json": {
-                "$ref": "#/components/examples/CheckProductOfferingQualification_partialupdate_example_application_merge_patch_json_request"
-              }
             }
           },
           "application/json-patch+json": {
             "schema": {
               "$ref": "#/components/schemas/JsonPatchOperations"
-            },
-            "examples": {
-              "CheckProductOfferingQualification_partialupdate_example_application_json_patch_json": {
-                "$ref": "#/components/examples/CheckProductOfferingQualification_partialupdate_example_application_json_patch_json_request"
-              }
             }
           },
           "application/json-patch-query+json": {
             "schema": {
               "$ref": "#/components/schemas/JsonPatchOperations"
-            },
-            "examples": {
-              "CheckProductOfferingQualification_partialupdate_example_application_json_patch_query_json": {
-                "$ref": "#/components/examples/CheckProductOfferingQualification_partialupdate_example_application_json_patch_query_json_request"
-              }
             }
           }
         },

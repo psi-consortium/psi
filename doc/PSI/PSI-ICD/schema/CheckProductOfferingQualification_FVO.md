@@ -11,12 +11,13 @@
 | channel | ChannelRef | N/A | No |
 | instantSyncQualification | boolean | N/A | No |
 | note | array | Note | No |
-| checkProductOfferingQualificationItem | array | CheckProductOfferingQualificationItem_FVO | No |
+| checkProductOfferingQualificationItem | array | CheckProductOfferingQualificationItem_FVO | Yes |
 | provideAlternative | boolean | N/A | No |
 | provideOnlyAvailable | boolean | N/A | No |
 | provideResultReason | boolean | N/A | No |
 | relatedParty | array | RelatedPartyOrPartyRole_FVO | Yes |
 | requestedQualificationCompletionDate | string | date-time | No |
+| externalId | array | ExternalIdentifier_FVO | No |
 | @baseType | string | N/A | No |
 | @schemaLocation | string | N/A | No |
 | @type | string | "CheckProductOfferingQualification" | Yes |

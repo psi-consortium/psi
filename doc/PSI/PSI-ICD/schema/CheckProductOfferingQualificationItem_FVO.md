@@ -7,7 +7,7 @@
 
 | Field | Type | Format | Required |
 | ------- | ------- | ------- | --- |
-| id | string | N/A | No |
+| id | string | N/A | Yes |
 | expectedActivationDate | string | date-time | No |
 | qualificationItemRelationship | array | ProductOfferingQualificationItemRelationship_FVO | No |
 | CheckProductOfferingQualificationItem | array | CheckProductOfferingQualificationItem_FVO | No |
@@ -15,7 +15,7 @@
 | product | ProductRefOrValue_FVO | N/A | No |
 | category | CategoryRef | N/A | No |
 | productOffering | ProductOfferingRef | N/A | No |
-| action | ItemActionType | N/A | No |
+| action | ItemActionType | N/A | Yes |
 | @baseType | string | N/A | No |
 | @schemaLocation | string | N/A | No |
 | @type | string | "CheckProductOfferingQualificationItem" | Yes |
