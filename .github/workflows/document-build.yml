@@ -6,6 +6,9 @@ on:
             draft:
                 required: true
                 type: boolean
+            version:
+                required: false
+                type: string
 
 jobs:
     build_docs:
@@ -18,6 +21,10 @@ jobs:
         steps:
             - name: Checkout repository
               uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+            - name: Set document release version
+              if: inputs.version != ''
+              run: python3 aiv/rhod/set_doc_version.py '${{ inputs.version }}'
 
             - name: Run RHOD
               run: task docs:document-build
