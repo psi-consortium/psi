@@ -40,6 +40,12 @@ public class CheckProductOfferingQualificationController {
         return notImplemented();
     }
 
+    @PsiOperation("TOD-03-05-05")
+    @RequestMapping(method = RequestMethod.GET, value = "/checkProductOfferingQualification")
+    public ResponseEntity<Void> listCheckProductOfferingQualification() {
+        return notImplemented();
+    }
+
     private static ResponseEntity<Void> notImplemented() {
         return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
     }
