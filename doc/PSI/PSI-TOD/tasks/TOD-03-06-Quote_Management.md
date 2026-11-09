@@ -233,6 +233,7 @@ The PSS cancels quotes at the provider only on behalf of the customer.
 
 * A quote request that does not conform to the PSID648 schema is refused with `400`, and no quote is stored.
 * A quote request that fails a business validation which the server can carry out at once (e.g. an unknown product offering) is refused with `422`, and no quote is stored.
+* A quote request that conflicts with an existing quote (e.g. a quote with the same identifier already exists) is refused with `409`, and no quote is stored.
 * An error that is found only later, during the pricing (in particular by the provider), ends the quote in the state `rejected` with the reason in *quoteErrorMessage*, which names the failed quote items; it reaches the client in a notification and when the quote is viewed.
   In a synchronous quote both kinds of errors are found during the request.
   Business validation failures are e.g.:
@@ -257,7 +258,7 @@ The PSS and the provider answer the quote operations with the following codes; a
 | `401` | All                    | The client is not authenticated.                                                                          |
 | `403` | All                    | The client is not allowed to carry out the operation, e.g. on a quote of another customer.               |
 | `404` | Update, View           | There is no quote with the given identifier that the client can read.                                    |
-| `409` | Update                 | The current state of the quote does not allow the update; the quote is unchanged.                        |
+| `409` | Create, Update         | Create: a quote with the same identifier already exists, and no quote is stored. Update: the current state of the quote does not allow the update; the quote is unchanged. |
 | `422` | Create, Update         | The request fails a business validation that the server carries out at once (e.g. an unknown product offering, or a characteristic outside the bounds of the offering); nothing is stored or changed. |
 | `500` | All                    | An error of the server; the client can retry later.                                                       |
 | `503` | All                    | The server is temporarily unavailable; the client can retry later.                                       |
@@ -311,7 +312,7 @@ The two last columns state who calls the endpoint on each of them; another PSS c
 Besides these calls, the provider informs the PSS about changes of its quotes by notifications.
 
 | Operation           | Endpoint                                 | Called on the PSS by                             | Called on the provider by      |
-|----------------|------------------------------------|------------------------------|----------------------|
+|--------------|----------------------------------------------------|--------------------|--------------|
 | **Create Quote**    | `POST /quoteManagement/v2/quote`         | customer, another PSS                            | PSS                            |
 | **Update Quote**    | `PATCH /quoteManagement/v2/quote/{id}`   | customer, another PSS                            | PSS, on behalf of the customer |
 | **View Quote**      | `GET /quoteManagement/v2/quote/{id}`     | customer, another PSS, provider (its own quotes) | PSS                            |

@@ -55,7 +55,7 @@ The provider completes the quote with:
 **Post Conditions**
 
 The quote is successfully created in the PSS and provider datastores and returned with `201`, in the state `approved` (synchronous), `acknowledged` (asynchronous) or `rejected` with the reason in *quoteErrorMessage*.
-A request that does not conform to the schema (`400`) or has an error detected at once (`422`) is refused, and nothing is stored.
+A request that does not conform to the schema (`400`), conflicts with an existing quote (`409`) or fails a business validation carried out at once (`422`) is refused, and nothing is stored.
 
 **Applicable Requirements**
 
