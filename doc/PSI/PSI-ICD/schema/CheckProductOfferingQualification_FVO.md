@@ -15,7 +15,7 @@
 | provideAlternative | boolean | N/A | No |
 | provideOnlyAvailable | boolean | N/A | No |
 | provideResultReason | boolean | N/A | No |
-| relatedParty | array | RelatedPartyOrPartyRole_FVO | Yes |
+| relatedParty | array | RelatedPartyOrPartyRole_FVO | No |
 | requestedQualificationCompletionDate | string | date-time | No |
 | externalId | array | ExternalIdentifier_FVO | No |
 | @baseType | string | N/A | No |

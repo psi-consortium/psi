@@ -1359,6 +1359,10 @@
               },
               "state": {
                 "$ref": "#/components/schemas/CheckProductOfferingQualificationStateType"
+              },
+              "quantity": {
+                "type": "integer",
+                "description": "Quantity asked for this qualification item"
               }
             }
           }
@@ -1423,6 +1427,10 @@
               "id": {
                 "type": "string",
                 "description": "Identifier of the CheckProductOfferingQualification item (generally it is a sequence number 01, 02, 03, ...)"
+              },
+              "quantity": {
+                "type": "integer",
+                "description": "Quantity asked for this qualification item"
               }
             }
           }
@@ -1483,6 +1491,10 @@
               "id": {
                 "type": "string",
                 "description": "Identifier of the CheckProductOfferingQualification item (generally it is a sequence number 01, 02, 03, ...)"
+              },
+              "quantity": {
+                "type": "integer",
+                "description": "Quantity asked for this qualification item"
               }
             }
           }
@@ -1501,8 +1513,7 @@
           },
           {
             "required": [
-              "checkProductOfferingQualificationItem",
-              "relatedParty"
+              "checkProductOfferingQualificationItem"
             ],
             "type": "object",
             "properties": {
@@ -1546,7 +1557,6 @@
                 "description": "An indicator which when the value is \"true\" means that result reason are expected for available or not of product offering"
               },
               "relatedParty": {
-                "minItems": 1,
                 "type": "array",
                 "description": "Party playing a role for this qualification (as requester for example)",
                 "items": {

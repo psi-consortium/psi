@@ -229,8 +229,7 @@
                                 "description": "Party playing a role for this qualification (as requester for example)",
                                 "items": {
                                     "$ref": "#/components/schemas/RelatedPartyOrPartyRole_FVO"
-                                },
-                                "minItems": 1
+                                }
                             },
                             "requestedQualificationCompletionDate": {
                                 "type": "string",
@@ -239,7 +238,6 @@
                             }
                         },
                         "required": [
-                            "relatedParty",
                             "checkProductOfferingQualificationItem"
                         ]
                     }

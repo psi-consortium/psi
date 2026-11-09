@@ -16,6 +16,7 @@
 | category | CategoryRef | N/A | No |
 | productOffering | ProductOfferingRef | N/A | No |
 | action | ItemActionType | N/A | Yes |
+| quantity | integer | N/A | No |
 | @baseType | string | N/A | No |
 | @schemaLocation | string | N/A | No |
 | @type | string | "CheckProductOfferingQualificationItem" | Yes |

@@ -830,6 +830,13 @@ tasks.register('transformProductOfferingQualification', com.cgi.space.psi.tasks.
       }
     }
   ''')
+  // the quantity of an item, as in PSID622 (ProductOrderItem) and PSID648 (QuoteItem); not in TMF679
+  addProperty("CheckProductOfferingQualificationItem(|_FVO|_MVO)", "quantity", '''
+    {
+      "type": "integer",
+      "description": "Quantity asked for this qualification item"
+    }
+  ''')
   // required: the id of the qualification; id and action of an item, as in PSID622 (the create view requires at least one item)
   addRequiredProperty("CheckProductOfferingQualification", "id")
   addRequiredProperty("CheckProductOfferingQualificationItem_FVO", "id")

@@ -80,7 +80,7 @@ dcr_overrides:
    message: 'No update, PSI Phase 2 version bump.'
  - dcr:
    from: '2026-10-27'
-   to: '2026-11-05'
+   to: '2026-11-09'
    version: 'MS12 [2.0.0-alpha]'
    author: 'Dominik Ogrodnik'
    message: 'Added PSID679 Product Offering Qualification API derived from TMF679 v5.0.0: CheckProductOfferingQualification only, creation always answered with 201'
