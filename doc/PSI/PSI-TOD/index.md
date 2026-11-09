@@ -80,10 +80,10 @@ dcr_overrides:
    message: 'No update, PSI Phase 2 version bump.'
  - dcr:
    from: '2026-11-02'
-   to: '2026-11-03'
+   to: '2026-11-09'
    version: 'MS12 [2.0.0-alpha]'
    author: 'Kinga Kocierz'
-   message: 'Added Quote Management (TOD-03-06) for PSID648: create, update, view and view all quotes, quote lifecycle, bundles and changes to existing products.'
+   message: 'Added Quote Management (TOD-03-06) for PSID648: create, update, view and view all quotes, quote lifecycle, bundles and changes to existing products, response codes, quoteErrorMessage, correlation identifier and changes of the product offering by a modification.'
 =end
 
 # Document Meta Information

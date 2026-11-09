@@ -46,6 +46,7 @@ The provider completes the quote with:
 * *validFor* - The period in which the quote can be accepted.
 * *expectedQuoteCompletionDate*/*effectiveQuoteCompletionDate* - When the provider expects to answer and when it answered.
 * *state*/*quoteItem.state* - The state of the quote and of each item (see [TOD-03-06](#tod-03-06-quotemanagement)).
+* *quoteErrorMessage* - For a `rejected` quote, the reason, with the quote items that failed.
 
 **REST Endpoints**
 
@@ -53,7 +54,7 @@ The provider completes the quote with:
 
 **Post Conditions**
 
-The quote is successfully created in the PSS and provider datastores, in the state `approved` (synchronous), `acknowledged` (asynchronous) or `rejected` with the reason.
+The quote is successfully created in the PSS and provider datastores and returned with `201`, in the state `approved` (synchronous), `acknowledged` (asynchronous) or `rejected` with the reason in *quoteErrorMessage*.
 A request that does not conform to the schema (`400`) or has an error detected at once (`422`) is refused, and nothing is stored.
 
 **Applicable Requirements**

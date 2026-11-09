@@ -150,9 +150,9 @@ Quotes are also used for changes to an existing product.
 A modification (`modify`) or termination (`delete`) of a product from the product inventory does not go through a customer inquiry.
 It is a product order with the action `modify` or `delete`, which may be preceded by a POQ, by a quote, or by both; a quote answers e.g. the price of the change or the fee for a termination.
 
-A modification changes only the characteristics of the product, within the bounds that the product offering allows.
-The product offering, the product specification and the provider of a product cannot be changed by a modification.
-Replacing a product by one of another offering or of another provider is the termination of the existing product and a new order, usually after a new customer inquiry.
+A modification changes the characteristics of the product, within the bounds that its product offering allows, or the product offering itself, e.g. an upgrade to another offering of the same provider.
+The product specification and the provider of a product cannot be changed by a modification.
+Replacing a product by one of another provider is the termination of the existing product and a new order, usually after a new customer inquiry.
 
 **Synchronous and asynchronous processing**
 
@@ -162,6 +162,7 @@ A quote can be processed synchronously or asynchronously; the client states its 
 * `false` - The server stores the request and returns the quote in the state `acknowledged`; the pricing continues afterwards.
   This is the usual case when the provider needs time or human intervention to price the quote.
 
+In both cases the quote is created and the server answers with `201` and the quote in the response; the state of the quote tells the client which answer it got.
 Though *instantSyncQuote* signals the expectation of the client, the server may answer asynchronously when it cannot price the quote at once, and the client has to handle both answers (as for Check Product Stock, see [TOD-05-04-01](#tod-05-04-01-checkproductstock)).
 A synchronous answer from the PSS requires that the PSS in turn obtains a synchronous answer from the provider (from each provider of a bundle offering).
 
@@ -216,7 +217,7 @@ cancelled --> [*]
 | `approved`     | The quote is priced and valid for the period *validFor*; it waits for the customer's decision. Set by the provider; for a decomposed quote, the PSS sets it once all parts are approved. It stays `approved` after *validFor* has ended, but can then no longer be accepted. | sync and async |
 | `accepted`     | The customer has accepted the quote within its validity period; it can be referenced by a product order. Set by the customer only.                                                                                      | sync and async |
 | `refused`      | The customer refuses the quote, i.e. its price or terms. Set by the customer only.                                                                                                                                      | sync and async |
-| `rejected`     | The quote failed the business validation, in the same way as a rejected product order, or a part of a decomposed quote failed; the reason is given. Set by the server (PSS or provider).                                | sync and async |
+| `rejected`     | The quote failed the business validation, in the same way as a rejected product order, or a part of a decomposed quote failed; the reason is given in *quoteErrorMessage*. Set by the server (PSS or provider).          | sync and async |
 | `cancelled`    | The customer withdrew the quote request before it was priced. Set by the customer only; the provider cannot cancel a quote, it rejects it. An `approved` quote cannot be cancelled; the customer refuses it instead.    | async          |
 
 Table: Quote States. {#tbl:quote-states}
@@ -224,30 +225,64 @@ Table: Quote States. {#tbl:quote-states}
 `accepted`, `refused`, `rejected` and `cancelled` are final states; a quote in one of them cannot be updated and does not change its state any more.
 
 As for product orders, only the customer cancels: it sets the state to `cancelled` in the PSS, and the PSS forwards the update to the provider.
-A provider that cannot or will not price a quote does not cancel it but sets it to `rejected` with the reason.
+A provider that cannot or will not price a quote does not cancel it but sets it to `rejected` with the reason in *quoteErrorMessage*.
 The PSS cancels quotes at the provider only on behalf of the customer.
 
 **Failure handling**
 
 * A quote request that does not conform to the PSID648 schema is refused with `400`, and no quote is stored.
 * A quote request with an error that the server can detect at once (e.g. an unknown product offering) is refused with `422`, and no quote is stored.
-* An error that is found only later, during the pricing (in particular by the provider), ends the quote in the state `rejected` with the reason; it reaches the client in a notification and when the quote is viewed.
+* An error that is found only later, during the pricing (in particular by the provider), ends the quote in the state `rejected` with the reason in *quoteErrorMessage*, which names the failed quote items; it reaches the client in a notification and when the quote is viewed.
   In a synchronous quote both kinds of errors are found during the request.
   Business validation failures are e.g.:
   * an unknown or not accessible product offering,
   * a characteristic outside the bounds of the product specification or offering,
   * an item with action `modify` or `delete` without a reference to the existing product,
-  * an item with action `modify` that changes the product offering or specification,
+  * an item with action `modify` that changes the product specification or the provider,
   * characteristics that differ from the referenced POQ,
   * a part or item that its provider cannot offer with the common terms,
   * an offering that no provider of the PSS delivers (then no call reaches a provider).
 * If a part of a decomposed quote fails, the whole quote is `rejected`.
-* An update that the current state of the quote does not allow, including any update of a quote in a final state and the acceptance of a quote whose validity period has ended, is refused with an error and leaves the quote unchanged.
+* An update that the current state of the quote does not allow, including any update of a quote in a final state and the acceptance of a quote whose validity period has ended, is refused with `409` and leaves the quote unchanged.
+
+The PSS and the provider answer the quote operations with the following codes; a refused request carries an error with a code and the reason.
+
+| Code  | Operations             | Meaning                                                                                                   |
+|-------|------------------------|-----------------------------------------------------------------------------------------------------------|
+| `201` | Create                 | The quote is created; it is returned in the state `acknowledged`, `approved` or `rejected`.              |
+| `200` | Update, View, View All | The quote is updated, or the quote or a page of quotes is returned.                                      |
+| `202` | Update                 | The update is accepted and processed afterwards; its result reaches the client in a notification.       |
+| `400` | All                    | The request does not conform to the PSID648 schema, or a parameter is invalid; nothing is stored or changed. |
+| `401` | All                    | The client is not authenticated.                                                                          |
+| `403` | All                    | The client is not allowed to carry out the operation, e.g. on a quote of another customer.               |
+| `404` | Update, View           | There is no quote with the given identifier that the client can read.                                    |
+| `409` | Update                 | The current state of the quote does not allow the update; the quote is unchanged.                        |
+| `422` | Create, Update         | The request has an error that the server detects at once; nothing is stored or changed.                  |
+| `500` | All                    | An error of the server; the client can retry later.                                                       |
+| `503` | All                    | The server is temporarily unavailable; the client can retry later.                                       |
+
+Table: Quote Response Codes. {#tbl:quote-response-codes}
 
 **Observability**
 
-Each quote request carries a correlation identifier that the PSS returns in its response, also when the request is refused, and passes on to the provider; for a decomposed quote, it relates every provider's quote to the quote of the bundle offering.
-A request without a correlation identifier gets one from the PSS.
+The correlation identifier relates all requests, events and log entries that belong to one business transaction across the systems involved: the customer, the PSS and the providers.
+It allows a quote to be traced from the request of the customer to every provider that priced it; for a decomposed quote, it relates every provider's quote to the quote of the bundle offering, so that the part that failed can be found.
+
+TMF Open APIs define *correlationId* only in the structure of events.
+PSI extends its use to the synchronous REST communication and to logging, without changing the TMF resource models.
+
+* REST communication:
+  * The correlation identifier MUST be passed in the HTTP header `X-Correlation-ID`.
+  * If a request carries the header, the server MUST use the received value.
+    If it does not, the component that receives the request first (e.g. the PSS for a request of the customer) MUST generate a new value (UUID version 4).
+  * The server SHOULD return the same value in the header of its response, also when the request is refused.
+  * The PSS MUST pass the value on in its requests to the providers.
+  * The correlation identifier MUST NOT be added to the body of the TMF resources.
+* Events: an event published as a result of processing a request or another event MUST carry in *correlationId* the value of the request or event that caused it.
+* Logging:
+  * Each log entry related to the processing of a request or an event MUST contain the correlation identifier.
+  * Logs MUST be structured (JSON), with the correlation identifier in a field of its own, not in the text of the message.
+  * For calls to external systems, the identifier of the TMF resource (*id*, *externalId*) SHOULD be logged as well.
 
 **Operations and endpoints**
 

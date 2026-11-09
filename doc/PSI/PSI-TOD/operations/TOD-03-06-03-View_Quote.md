@@ -24,7 +24,8 @@ Viewing is one way to learn the state a quote has reached and the provider's pri
 
 **Post Conditions**
 
-The quote that the client can read is successfully returned to be viewed.
+The quote that the client can read is successfully returned to be viewed (`200`).
+A quote that does not exist or that the client cannot read is answered with `404`.
 
 **Applicable Requirements**
 

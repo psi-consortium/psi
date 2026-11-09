@@ -31,7 +31,8 @@ A quote whose validity period has ended stays `approved` but can no longer be ac
 
 **Post Conditions**
 
-The quote is successfully updated in the PSS and provider datastores.
+The quote is successfully updated in the PSS and provider datastores (`200`, or `202` when the update is processed afterwards).
+An update that the state of the quote does not allow is refused with `409`, an error detected at once with `422`, and the quote is unchanged.
 An accepted quote can be referenced by a product order within its validity period (see [TOD-03-02](#tod-03-02-productordermanagement)).
 
 **Applicable Requirements**
