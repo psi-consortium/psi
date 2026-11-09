@@ -27,7 +27,6 @@ Table: Parameters of GET quote. {#tbl:quote.get.md:parameters}
 | 400 | Bad Request | Error |
 | 401 | Unauthorized | Error |
 | 403 | Forbidden | Error |
-| 404 | Not Found | Error |
 | 405 | Method Not allowed | Error |
 | 500 | Internal Server Error | Error |
 | 501 | Not Implemented | Error |

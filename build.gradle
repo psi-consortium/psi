@@ -716,7 +716,7 @@ tasks.register('transformQuote', com.cgi.space.psi.tasks.TransformOASTask) { tra
   importSchema('BundledProductOffering(.*)', file("doc/PSI/PSI-ICD/open-apis/extensions/PSID620-Product_Catalog_Management-v5.0.0.oas.json"))
   importSchema("(.*)", file("doc/PSI/PSI-ICD/open-apis/extensions/Characteristic.oas.json"))
   importSchema("ChannelRef(|_FVO|_MVO)", file("tmforum/apis/TMF622_Product_Ordering/oas/TMF622-ProductOrdering-v5.0.0.oas.yaml"))
-  // PSID648: the quote paths as in PSID679 (422 on POST and PATCH, the list without Before, After, Sort and Filter)
+  // PSID648: the quote paths as in PSID679 (POST answered with 201 only, no 404 on POST and the list, 422 on POST and PATCH, the list without Before, After, Sort and Filter)
   importPath("/quote(.*)", file("doc/PSI/PSI-ICD/open-apis/extensions/PSID648-Quote-v5.0.0.oas.json"))
   // PSI specific adjustments
   overwritePropertyFormat("(.*)", "href", "uri")
@@ -727,16 +727,40 @@ tasks.register('transformQuote', com.cgi.space.psi.tasks.TransformOASTask) { tra
     }
   ''')
   removeProperty("(Money|TimePeriod|Quantity)", "\\@(.*)")
-  // the quote is always asynchronous, as the qualification in PSID679
+  // synchronous or asynchronous quote, as in TOD-03-06: the client's expectation, the server may answer asynchronously
   overwriteProperty("Quote(|_FVO|_MVO)", "instantSyncQuote", '''
     {
       "type": "boolean",
-      "description": "An indicator which when the value is \\"true\\" means that requester expects to get quoting result immediately in the response. If the indicator is true then the response code of 200 indicates the operation is successful otherwise a task is created with a response 201. PSI: only false is allowed; the quote is always asynchronous.",
-      "enum": [
-        false
-      ]
+      "description": "An indicator which when the value is \\"true\\" means that the requester expects to get the priced quote immediately in the response, in state approved or, if it fails the business validation, rejected. When the value is false, or when the server cannot price the quote at once, the quote is returned in state acknowledged and priced afterwards. The response is 201 in both cases."
     }
   ''')
+  // the quote states of TOD-03-06: refused instead of declined (the enumeration is in the extension)
+  importSchema("QuoteStateType", file("doc/PSI/PSI-ICD/open-apis/extensions/PSID648-Quote-v5.0.0.oas.json"))
+  // a quote item always carries the product, as in TOD-03-06-01 (id and action are required in TMF648)
+  addRequiredProperty("QuoteItem_FVO", "product")
+  // the provider always returns the quote with its identifier, as in PSID679 (id comes from Entity, so it is declared in Quote to be required)
+  addProperty("Quote", "id", '''
+    {
+      "type": "string",
+      "description": "unique identifier"
+    }
+  ''')
+  addRequiredProperty("Quote", "id")
+  // the errors that caused a status change of the quote (for example rejected), as productOrderErrorMessage in PSID622;
+  // in the quote and in its create and update views, as productOrderErrorMessage in the product order
+  importSchema("QuoteErrorMessage(|_FVO|_MVO)", file("doc/PSI/PSI-ICD/open-apis/extensions/PSID648-Quote-v5.0.0.oas.json"))
+  importSchema("QuoteItemRef(|_FVO|_MVO)", file("tmforum/apis/TMF622_Product_Ordering/oas/TMF622-ProductOrdering-v5.0.0.oas.yaml"))
+  ['', '_FVO', '_MVO'].each { suffix ->
+    addProperty("Quote${suffix}", "quoteErrorMessage", """
+      {
+        "type": "array",
+        "description": "The errors that caused a status change of the quote, for example the reason why the quote was rejected, naming the quote items that failed",
+        "items": {
+          "\$ref": "#/components/schemas/QuoteErrorMessage${suffix}"
+        }
+      }
+    """)
+  }
   // the sales channel of the quote, as in PSID679 and PSID622
   addProperty("Quote(|_FVO)", "channel", '''
     {

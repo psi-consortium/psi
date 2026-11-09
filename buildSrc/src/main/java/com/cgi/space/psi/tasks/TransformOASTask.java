@@ -13,6 +13,7 @@
 package com.cgi.space.psi.tasks;
 
 import com.cgi.space.psi.tasks.transformers.AddProperty;
+import com.cgi.space.psi.tasks.transformers.AddRequiredProperty;
 import com.cgi.space.psi.tasks.transformers.AddTagDescription;
 import com.cgi.space.psi.tasks.transformers.ImportPath;
 import com.cgi.space.psi.tasks.transformers.ImportSchema;
@@ -169,6 +170,10 @@ public class TransformOASTask extends DefaultTask {
 
     public void removeRequiredProperty(String schemaPattern, String propertyPattern) {
         this.transformations.add(new RemoveRequiredProperty(schemaPattern, propertyPattern));
+    }
+
+    public void addRequiredProperty(String schemaPattern, String propertyName) {
+        this.transformations.add(new AddRequiredProperty(schemaPattern, propertyName));
     }
 
     public void pruneAll() {

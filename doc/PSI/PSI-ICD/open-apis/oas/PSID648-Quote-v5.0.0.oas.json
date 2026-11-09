@@ -57,9 +57,6 @@
           "403": {
             "$ref": "#/components/responses/403"
           },
-          "404": {
-            "$ref": "#/components/responses/404"
-          },
           "405": {
             "$ref": "#/components/responses/405"
           },
@@ -79,7 +76,7 @@
           "quote"
         ],
         "summary": "Creates a Quote",
-        "description": "This operation creates a Quote entity.",
+        "description": "This operation creates a Quote entity. The quote is always created, and the operation is answered with 201 only, whatever the value of instantSyncQuote: the response carries the quote either priced, in state approved, or in state rejected, or in state acknowledged, in which case it is priced afterwards. An Expect: 202-Accepted header is ignored.",
         "operationId": "createQuote",
         "parameters": [
           {
@@ -93,9 +90,6 @@
           "201": {
             "$ref": "#/components/responses/201Quote"
           },
-          "202": {
-            "description": "Accepted"
-          },
           "400": {
             "$ref": "#/components/responses/400"
           },
@@ -104,9 +98,6 @@
           },
           "403": {
             "$ref": "#/components/responses/403"
-          },
-          "404": {
-            "$ref": "#/components/responses/404"
           },
           "405": {
             "$ref": "#/components/responses/405"
@@ -4876,6 +4867,9 @@
             "$ref": "#/components/schemas/Entity"
           },
           {
+            "required": [
+              "id"
+            ],
             "type": "object",
             "properties": {
               "agreement": {
@@ -4923,10 +4917,7 @@
               },
               "instantSyncQuote": {
                 "type": "boolean",
-                "description": "An indicator which when the value is \"true\" means that requester expects to get quoting result immediately in the response. If the indicator is true then the response code of 200 indicates the operation is successful otherwise a task is created with a response 201. PSI: only false is allowed; the quote is always asynchronous.",
-                "enum": [
-                  false
-                ]
+                "description": "An indicator which when the value is \"true\" means that the requester expects to get the priced quote immediately in the response, in state approved or, if it fails the business validation, rejected. When the value is false, or when the server cannot price the quote at once, the quote is returned in state acknowledged and priced afterwards. The response is 201 in both cases."
               },
               "note": {
                 "type": "array",
@@ -4996,6 +4987,17 @@
                 "description": "Date when the quote has been completed",
                 "format": "date-time"
               },
+              "id": {
+                "type": "string",
+                "description": "unique identifier"
+              },
+              "quoteErrorMessage": {
+                "type": "array",
+                "description": "The errors that caused a status change of the quote, for example the reason why the quote was rejected, naming the quote items that failed",
+                "items": {
+                  "$ref": "#/components/schemas/QuoteErrorMessage"
+                }
+              },
               "channel": {
                 "$ref": "#/components/schemas/ChannelRef"
               }
@@ -5061,10 +5063,7 @@
               },
               "instantSyncQuote": {
                 "type": "boolean",
-                "description": "An indicator which when the value is \"true\" means that requester expects to get quoting result immediately in the response. If the indicator is true then the response code of 200 indicates the operation is successful otherwise a task is created with a response 201. PSI: only false is allowed; the quote is always asynchronous.",
-                "enum": [
-                  false
-                ]
+                "description": "An indicator which when the value is \"true\" means that the requester expects to get the priced quote immediately in the response, in state approved or, if it fails the business validation, rejected. When the value is false, or when the server cannot price the quote at once, the quote is returned in state acknowledged and priced afterwards. The response is 201 in both cases."
               },
               "note": {
                 "type": "array",
@@ -5102,6 +5101,13 @@
                 "description": "A quote item describes an action to be performed on a productOffering or a product in order to get pricing elements and condition.",
                 "items": {
                   "$ref": "#/components/schemas/QuoteItem_FVO"
+                }
+              },
+              "quoteErrorMessage": {
+                "type": "array",
+                "description": "The errors that caused a status change of the quote, for example the reason why the quote was rejected, naming the quote items that failed",
+                "items": {
+                  "$ref": "#/components/schemas/QuoteErrorMessage_FVO"
                 }
               },
               "channel": {
@@ -5171,10 +5177,7 @@
               },
               "instantSyncQuote": {
                 "type": "boolean",
-                "description": "An indicator which when the value is \"true\" means that requester expects to get quoting result immediately in the response. If the indicator is true then the response code of 200 indicates the operation is successful otherwise a task is created with a response 201. PSI: only false is allowed; the quote is always asynchronous.",
-                "enum": [
-                  false
-                ]
+                "description": "An indicator which when the value is \"true\" means that the requester expects to get the priced quote immediately in the response, in state approved or, if it fails the business validation, rejected. When the value is false, or when the server cannot price the quote at once, the quote is returned in state acknowledged and priced afterwards. The response is 201 in both cases."
               },
               "note": {
                 "type": "array",
@@ -5238,6 +5241,13 @@
                 "type": "string",
                 "description": "Date when the quote has been completed",
                 "format": "date-time"
+              },
+              "quoteErrorMessage": {
+                "type": "array",
+                "description": "The errors that caused a status change of the quote, for example the reason why the quote was rejected, naming the quote items that failed",
+                "items": {
+                  "$ref": "#/components/schemas/QuoteErrorMessage_MVO"
+                }
               },
               "channel": {
                 "$ref": "#/components/schemas/ChannelRef_MVO"
@@ -5363,7 +5373,8 @@
           {
             "required": [
               "action",
-              "id"
+              "id",
+              "product"
             ],
             "type": "object",
             "properties": {
@@ -5538,7 +5549,7 @@
       },
       "QuoteStateType": {
         "type": "string",
-        "description": "Possible values for the state of the quote",
+        "description": "Possible values for the state of the quote. In PSI, the state in which the customer rejects an approved quote is named refused (rejected in TMF648); rejected is the state of a quote that failed the business validation; declined is not used.",
         "enum": [
           "acknowledged",
           "rejected",
@@ -5547,7 +5558,7 @@
           "cancelled",
           "approved",
           "accepted",
-          "declined"
+          "refused"
         ]
       },
       "RelatedOrderItem": {
@@ -10139,6 +10150,268 @@
         "allOf": [
           {
             "$ref": "#/components/schemas/EntityRef"
+          }
+        ]
+      },
+      "QuoteErrorMessage": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "QuoteErrorMessage": "#/components/schemas/QuoteErrorMessage"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "code": {
+                "type": "string",
+                "description": "error code"
+              },
+              "reason": {
+                "type": "string",
+                "description": "Explanation of the reason for the error"
+              },
+              "message": {
+                "type": "string",
+                "description": "More details and corrective actions related to the error"
+              },
+              "status": {
+                "type": "string",
+                "description": "error code extension like sys-ABC-2001"
+              },
+              "referenceError": {
+                "type": "string",
+                "description": "URI of documentation describing the error"
+              },
+              "timestamp": {
+                "type": "string",
+                "description": "Date when the error happened",
+                "format": "date-time"
+              },
+              "quoteItem": {
+                "type": "array",
+                "description": "A list of quote item references corresponded to this error",
+                "items": {
+                  "$ref": "#/components/schemas/QuoteItemRef"
+                }
+              }
+            },
+            "description": "A QuoteErrorMessage represents an error that causes a status change in a quote, as the ProductOrderErrorMessage of TMF622 for a product order."
+          }
+        ]
+      },
+      "QuoteErrorMessage_FVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "QuoteErrorMessage": "#/components/schemas/QuoteErrorMessage_FVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible_FVO"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "code": {
+                "type": "string",
+                "description": "error code"
+              },
+              "reason": {
+                "type": "string",
+                "description": "Explanation of the reason for the error"
+              },
+              "message": {
+                "type": "string",
+                "description": "More details and corrective actions related to the error"
+              },
+              "status": {
+                "type": "string",
+                "description": "error code extension like sys-ABC-2001"
+              },
+              "referenceError": {
+                "type": "string",
+                "description": "URI of documentation describing the error"
+              },
+              "timestamp": {
+                "type": "string",
+                "description": "Date when the error happened",
+                "format": "date-time"
+              },
+              "quoteItem": {
+                "type": "array",
+                "description": "A list of quote item references corresponded to this error",
+                "items": {
+                  "$ref": "#/components/schemas/QuoteItemRef_FVO"
+                }
+              }
+            },
+            "description": "A QuoteErrorMessage represents an error that causes a status change in a quote, as the ProductOrderErrorMessage of TMF622 for a product order."
+          }
+        ]
+      },
+      "QuoteErrorMessage_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "QuoteErrorMessage": "#/components/schemas/QuoteErrorMessage_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "code": {
+                "type": "string",
+                "description": "error code"
+              },
+              "reason": {
+                "type": "string",
+                "description": "Explanation of the reason for the error"
+              },
+              "message": {
+                "type": "string",
+                "description": "More details and corrective actions related to the error"
+              },
+              "status": {
+                "type": "string",
+                "description": "error code extension like sys-ABC-2001"
+              },
+              "referenceError": {
+                "type": "string",
+                "description": "URI of documentation describing the error"
+              },
+              "timestamp": {
+                "type": "string",
+                "description": "Date when the error happened",
+                "format": "date-time"
+              },
+              "quoteItem": {
+                "type": "array",
+                "description": "A list of quote item references corresponded to this error",
+                "items": {
+                  "$ref": "#/components/schemas/QuoteItemRef_MVO"
+                }
+              }
+            },
+            "description": "A QuoteErrorMessage represents an error that causes a status change in a quote, as the ProductOrderErrorMessage of TMF622 for a product order."
+          }
+        ]
+      },
+      "QuoteItemRef": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "QuoteItemRef": "#/components/schemas/QuoteItemRef"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "quoteHref": {
+                "type": "string",
+                "description": "Reference of the related quote."
+              },
+              "@referredType": {
+                "type": "string",
+                "description": "The actual type of the target instance when needed for disambiguation."
+              },
+              "quoteId": {
+                "type": "string",
+                "description": "Unique identifier of a refered quote."
+              },
+              "quoteItemId": {
+                "type": "string",
+                "description": "Identifier of a quote item. "
+              }
+            },
+            "description": "A reference to Quote item that has been executed previously."
+          }
+        ]
+      },
+      "QuoteItemRef_FVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "QuoteItemRef": "#/components/schemas/QuoteItemRef_FVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible_FVO"
+          },
+          {
+            "required": [
+              "quoteId",
+              "quoteItemId"
+            ],
+            "type": "object",
+            "properties": {
+              "quoteHref": {
+                "type": "string",
+                "description": "Reference of the related quote."
+              },
+              "@referredType": {
+                "type": "string",
+                "description": "The actual type of the target instance when needed for disambiguation."
+              },
+              "quoteId": {
+                "type": "string",
+                "description": "Unique identifier of a refered quote."
+              },
+              "quoteItemId": {
+                "type": "string",
+                "description": "Identifier of a quote item. "
+              }
+            },
+            "description": "A reference to Quote item that has been executed previously."
+          }
+        ]
+      },
+      "QuoteItemRef_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "QuoteItemRef": "#/components/schemas/QuoteItemRef_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "quoteHref": {
+                "type": "string",
+                "description": "Reference of the related quote."
+              },
+              "@referredType": {
+                "type": "string",
+                "description": "The actual type of the target instance when needed for disambiguation."
+              },
+              "quoteId": {
+                "type": "string",
+                "description": "Unique identifier of a refered quote."
+              },
+              "quoteItemId": {
+                "type": "string",
+                "description": "Identifier of a quote item. "
+              }
+            },
+            "description": "A reference to Quote item that has been executed previously."
           }
         ]
       }

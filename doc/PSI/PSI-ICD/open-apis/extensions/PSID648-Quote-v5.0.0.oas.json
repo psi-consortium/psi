@@ -33,9 +33,6 @@
                     "403": {
                         "$ref": "#/components/responses/403"
                     },
-                    "404": {
-                        "$ref": "#/components/responses/404"
-                    },
                     "405": {
                         "$ref": "#/components/responses/405"
                     },
@@ -55,7 +52,7 @@
                     "quote"
                 ],
                 "summary": "Creates a Quote",
-                "description": "This operation creates a Quote entity.",
+                "description": "This operation creates a Quote entity. The quote is always created, and the operation is answered with 201 only, whatever the value of instantSyncQuote: the response carries the quote either priced, in state approved, or in state rejected, or in state acknowledged, in which case it is priced afterwards. An Expect: 202-Accepted header is ignored.",
                 "operationId": "createQuote",
                 "parameters": [
                     {
@@ -69,9 +66,6 @@
                     "201": {
                         "$ref": "#/components/responses/201Quote"
                     },
-                    "202": {
-                        "description": "Accepted"
-                    },
                     "400": {
                         "$ref": "#/components/responses/400"
                     },
@@ -80,9 +74,6 @@
                     },
                     "403": {
                         "$ref": "#/components/responses/403"
-                    },
-                    "404": {
-                        "$ref": "#/components/responses/404"
                     },
                     "405": {
                         "$ref": "#/components/responses/405"
@@ -174,6 +165,177 @@
                     },
                     "503": {
                         "$ref": "#/components/responses/503"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "QuoteStateType": {
+                "enum": [
+                    "acknowledged",
+                    "rejected",
+                    "pending",
+                    "inProgress",
+                    "cancelled",
+                    "approved",
+                    "accepted",
+                    "refused"
+                ],
+                "type": "string",
+                "description": "Possible values for the state of the quote. In PSI, the state in which the customer rejects an approved quote is named refused (rejected in TMF648); rejected is the state of a quote that failed the business validation; declined is not used."
+            },
+            "QuoteErrorMessage": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/Extensible"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "code": {
+                                "type": "string",
+                                "description": "error code"
+                            },
+                            "reason": {
+                                "type": "string",
+                                "description": "Explanation of the reason for the error"
+                            },
+                            "message": {
+                                "type": "string",
+                                "description": "More details and corrective actions related to the error"
+                            },
+                            "status": {
+                                "type": "string",
+                                "description": "error code extension like sys-ABC-2001"
+                            },
+                            "referenceError": {
+                                "type": "string",
+                                "description": "URI of documentation describing the error"
+                            },
+                            "timestamp": {
+                                "type": "string",
+                                "description": "Date when the error happened",
+                                "format": "date-time"
+                            },
+                            "quoteItem": {
+                                "type": "array",
+                                "description": "A list of quote item references corresponded to this error",
+                                "items": {
+                                    "$ref": "#/components/schemas/QuoteItemRef"
+                                }
+                            }
+                        },
+                        "description": "A QuoteErrorMessage represents an error that causes a status change in a quote, as the ProductOrderErrorMessage of TMF622 for a product order."
+                    }
+                ],
+                "discriminator": {
+                    "propertyName": "@type",
+                    "mapping": {
+                        "QuoteErrorMessage": "#/components/schemas/QuoteErrorMessage"
+                    }
+                }
+            },
+            "QuoteErrorMessage_FVO": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/Extensible_FVO"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "code": {
+                                "type": "string",
+                                "description": "error code"
+                            },
+                            "reason": {
+                                "type": "string",
+                                "description": "Explanation of the reason for the error"
+                            },
+                            "message": {
+                                "type": "string",
+                                "description": "More details and corrective actions related to the error"
+                            },
+                            "status": {
+                                "type": "string",
+                                "description": "error code extension like sys-ABC-2001"
+                            },
+                            "referenceError": {
+                                "type": "string",
+                                "description": "URI of documentation describing the error"
+                            },
+                            "timestamp": {
+                                "type": "string",
+                                "description": "Date when the error happened",
+                                "format": "date-time"
+                            },
+                            "quoteItem": {
+                                "type": "array",
+                                "description": "A list of quote item references corresponded to this error",
+                                "items": {
+                                    "$ref": "#/components/schemas/QuoteItemRef_FVO"
+                                }
+                            }
+                        },
+                        "description": "A QuoteErrorMessage represents an error that causes a status change in a quote, as the ProductOrderErrorMessage of TMF622 for a product order."
+                    }
+                ],
+                "discriminator": {
+                    "propertyName": "@type",
+                    "mapping": {
+                        "QuoteErrorMessage": "#/components/schemas/QuoteErrorMessage_FVO"
+                    }
+                }
+            },
+            "QuoteErrorMessage_MVO": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/Extensible"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "code": {
+                                "type": "string",
+                                "description": "error code"
+                            },
+                            "reason": {
+                                "type": "string",
+                                "description": "Explanation of the reason for the error"
+                            },
+                            "message": {
+                                "type": "string",
+                                "description": "More details and corrective actions related to the error"
+                            },
+                            "status": {
+                                "type": "string",
+                                "description": "error code extension like sys-ABC-2001"
+                            },
+                            "referenceError": {
+                                "type": "string",
+                                "description": "URI of documentation describing the error"
+                            },
+                            "timestamp": {
+                                "type": "string",
+                                "description": "Date when the error happened",
+                                "format": "date-time"
+                            },
+                            "quoteItem": {
+                                "type": "array",
+                                "description": "A list of quote item references corresponded to this error",
+                                "items": {
+                                    "$ref": "#/components/schemas/QuoteItemRef_MVO"
+                                }
+                            }
+                        },
+                        "description": "A QuoteErrorMessage represents an error that causes a status change in a quote, as the ProductOrderErrorMessage of TMF622 for a product order."
+                    }
+                ],
+                "discriminator": {
+                    "propertyName": "@type",
+                    "mapping": {
+                        "QuoteErrorMessage": "#/components/schemas/QuoteErrorMessage_MVO"
                     }
                 }
             }

@@ -11,7 +11,7 @@
 | action | ItemActionType | N/A | Yes |
 | attachment | array | AttachmentOrDocumentRef | No |
 | note | array | Note | No |
-| product | ProductRefOrValue_FVO | N/A | No |
+| product | ProductRefOrValue_FVO | N/A | Yes |
 | productOffering | ProductOfferingRef | N/A | No |
 | quantity | integer | N/A | No |
 | quoteItem | array | QuoteItem_FVO | No |

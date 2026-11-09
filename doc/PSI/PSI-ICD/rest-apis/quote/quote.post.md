@@ -30,11 +30,9 @@ Table: Request Body of POST quote. {#tbl:quote.post.md:request_body}
 | Code | Description | Content |
 |------|-------------|---------|
 | 201 | Created | Quote_RES |
-| 202 | Accepted | N/A |
 | 400 | Bad Request | Error |
 | 401 | Unauthorized | Error |
 | 403 | Forbidden | Error |
-| 404 | Not Found | Error |
 | 405 | Method Not allowed | Error |
 | 409 | Conflict | Error |
 | 422 | Unprocessable Content | Error |
