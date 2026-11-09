@@ -34,7 +34,6 @@ Table: Request Body of POST checkProductOfferingQualification. {#tbl:checkProduc
 | 401 | Unauthorized | Error |
 | 403 | Forbidden | Error |
 | 405 | Method Not allowed | Error |
-| 409 | Conflict | Error |
 | 422 | Unprocessable Content | Error |
 | 500 | Internal Server Error | Error |
 | 501 | Not Implemented | Error |

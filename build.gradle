@@ -708,7 +708,7 @@ tasks.register('transformProductOfferingQualification', com.cgi.space.psi.tasks.
   removePaths("/queryProductOfferingQualification(.*)")
 
   // unify schemas
-  // PSID679: the qualification paths (POST answers 201 only: no 200, no 202; 422 on POST and PATCH; no 404 on the list and POST)
+  // PSID679: the qualification paths (POST answers 201 only: no 200, no 202; 422 on POST and PATCH; no 404 on the list and POST; no 409 on POST; no 501 on DELETE)
   importPath("/checkProductOfferingQualification(.*)", file("doc/PSI/PSI-ICD/open-apis/extensions/PSID679-Product_Offering_Qualification-v5.0.0.oas.json"))
   importBaseTypes(transformations)
   importSchema("(.*)", file("doc/PSI/PSI-ICD/open-apis/extensions/Characteristic.oas.json"))

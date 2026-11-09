@@ -94,9 +94,6 @@
           "405": {
             "$ref": "#/components/responses/405"
           },
-          "409": {
-            "$ref": "#/components/responses/409"
-          },
           "422": {
             "$ref": "#/components/responses/422"
           },
@@ -197,9 +194,6 @@
           },
           "500": {
             "$ref": "#/components/responses/500"
-          },
-          "501": {
-            "$ref": "#/components/responses/501"
           },
           "503": {
             "$ref": "#/components/responses/503"
