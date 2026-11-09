@@ -83,7 +83,7 @@ dcr_overrides:
    to: '2026-11-09'
    version: 'MS12 [2.0.0-alpha]'
    author: 'Kinga Kocierz'
-   message: 'Added Quote Management (TOD-03-06) for PSID648: create, update, view and view all quotes, quote lifecycle, bundles and changes to existing products, response codes, quoteErrorMessage, correlation identifier and changes of the product offering by a modification.'
+   message: 'Added Quote Management (TOD-03-06).'
 =end
 
 # Document Meta Information

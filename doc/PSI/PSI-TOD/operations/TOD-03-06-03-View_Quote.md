@@ -33,4 +33,4 @@ A quote that does not exist or that the client cannot read is answered with `404
 
 **eTOM Reference**
 
-None
+The operation is based on the Develop Sales Proposal and Negotiate Sales/Contract processes of Selling in the Customer domain from the eTOM.

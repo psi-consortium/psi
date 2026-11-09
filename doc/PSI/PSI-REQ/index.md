@@ -80,7 +80,7 @@ dcr_overrides:
    message: 'No update, PSI Phase 2 version bump.'
  - dcr:
    from: '2026-11-03'
-   to: '2026-11-03'
+   to: '2026-11-09'
    version: 'MS12 [2.0.0-alpha]'
    author: 'Kinga Kocierz'
    message: 'Added Quote Management requirements (REQ-03-06) for PSID648 and the QUOTE category.'

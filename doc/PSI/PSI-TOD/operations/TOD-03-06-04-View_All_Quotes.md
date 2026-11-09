@@ -29,4 +29,4 @@ All quotes which the client can read are successfully returned to be viewed.
 
 **eTOM Reference**
 
-None
+The operation is based on the Develop Sales Proposal and Negotiate Sales/Contract processes of Selling in the Customer domain from the eTOM.

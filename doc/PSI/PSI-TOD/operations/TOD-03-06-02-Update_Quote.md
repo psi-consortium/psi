@@ -17,7 +17,7 @@ The PSS then forwards the update to the provider via the same endpoint on the pr
 All attributes that TMF648 allows to be modified can be updated: *agreement*, *authorization*, *category*, *channel*, *contactMedium*, *description*, *effectiveQuoteCompletionDate*, *expectedFulfillmentStartDate*, *expectedQuoteCompletionDate*, *externalId*, *instantSyncQuote*, *note*, *productOfferingQualification*, *quoteItem*, *quoteTotalPrice*, *relatedParty*, *requestedQuoteCompletionDate*, *salesOpportunity*, *state*, *validFor* and *version*.
 
 The decision of the customer on a quote in the state `approved` is an update of its state to `accepted` or `refused`.
-Withdrawing a quote request before it is priced is an update of its state to `cancelled`; an `approved` quote cannot be cancelled.
+Withdrawing a quote request before it is accepted or refused, also an `approved` quote, is an update of its state to `cancelled`.
 
 Only the customer updates a quote.
 The provider does not update quotes in the PSS; the changes on its side (e.g. the prices, *validFor*, the state) reach the PSS by notifications (see [TOD-01-02](#tod-01-02-eventmanagement)).
@@ -41,4 +41,4 @@ An accepted quote can be referenced by a product order within its validity perio
 
 **eTOM Reference**
 
-To be determined.
+The operation is based on the Negotiate Sales/Contract process of Selling in the Customer domain from the eTOM.

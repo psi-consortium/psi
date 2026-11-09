@@ -63,4 +63,4 @@ A request that does not conform to the schema (`400`) or has an error detected a
 
 **eTOM Reference**
 
-To be determined.
+The operation is based on the Develop Sales Proposal process of Selling in the Customer domain from the eTOM.

@@ -86,7 +86,7 @@ P .up.>   C  : notifications\n(Event Management)
 
 ![TOD-03-06: Quote Interfaces](../../common/pixel.png){#fig:TOD-03-06-Quote_Interfaces}
 
-Every atomic product offering has exactly one provider, and the quote request for it is forwarded to that provider only (one offering, one POQ, one quote).
+Every atomic product offering has exactly one provider.
 A customer who wants to compare the offerings of several providers requests one quote per offering and selects among them.
 The PSS does not choose a provider on behalf of the customer, but its governance may apply rules that filter offerings before the customer sees them.
 
@@ -197,6 +197,7 @@ inProgress   --> approved   : priced by the provider
 inProgress   --> rejected   : validation failed / a part failed
 inProgress   --> cancelled  : cancelled by the customer
 pending      --> cancelled  : cancelled by the customer
+approved     --> cancelled  : cancelled by the customer
 approved     --> accepted   : accepted by the customer (within validFor)
 approved     --> refused    : refused by the customer
 accepted  --> [*]
@@ -211,14 +212,14 @@ cancelled --> [*]
 
 | State          | Meaning                                                                                                                                                                                                                  | Processing     |
 |------------------|--------------------------------------------------------------------|:------------:|
-| `acknowledged` | The quote request has been received and stored by the server (PSS or provider), and its identifier has been returned to the client; the quote has not been priced yet. Set by the server.                              | async          |
-| `inProgress`   | The quote is being priced; at the PSS this means that it has been forwarded to the provider (to every provider of a decomposed quote). Set by the server.                                                               | async          |
-| `pending`      | The provider needs further information or an internal authorisation before it can price the quote. Set by the provider; the PSS takes the state over from the provider's notification.                                 | async          |
-| `approved`     | The quote is priced and valid for the period *validFor*; it waits for the customer's decision. Set by the provider; for a decomposed quote, the PSS sets it once all parts are approved. It stays `approved` after *validFor* has ended, but can then no longer be accepted. | sync and async |
+| `acknowledged` | The quote request has been received and stored by the server (PSS or provider), and its identifier has been returned to the client; the quote has not been priced yet. Set by the server (PSS or provider).            | async          |
+| `inProgress`   | The quote is being priced; at the PSS this means that it has been forwarded to the provider (to every provider of a decomposed quote). Set by the server (PSS or provider).                                             | async          |
+| `pending`      | The provider needs further information or an internal authorisation before it can price the quote. Set by the server (PSS or provider).                                                                                | async          |
+| `approved`     | The quote is priced and valid for the period *validFor*; it waits for the customer's decision. Set by the server (PSS or provider); for a decomposed quote, the PSS sets it once all parts are approved. It stays `approved` after *validFor* has ended, but can then no longer be accepted. | sync and async |
 | `accepted`     | The customer has accepted the quote within its validity period; it can be referenced by a product order. Set by the customer only.                                                                                      | sync and async |
 | `refused`      | The customer refuses the quote, i.e. its price or terms. Set by the customer only.                                                                                                                                      | sync and async |
 | `rejected`     | The quote failed the business validation, in the same way as a rejected product order, or a part of a decomposed quote failed; the reason is given in *quoteErrorMessage*. Set by the server (PSS or provider).          | sync and async |
-| `cancelled`    | The customer withdrew the quote request before it was priced. Set by the customer only; the provider cannot cancel a quote, it rejects it. An `approved` quote cannot be cancelled; the customer refuses it instead.    | async          |
+| `cancelled`    | The customer withdrew the quote request before it was accepted or refused, also after it was priced (`approved`). Set by the customer only; the provider cannot cancel a quote, it rejects it.                        | sync and async |
 
 Table: Quote States. {#tbl:quote-states}
 
@@ -231,7 +232,7 @@ The PSS cancels quotes at the provider only on behalf of the customer.
 **Failure handling**
 
 * A quote request that does not conform to the PSID648 schema is refused with `400`, and no quote is stored.
-* A quote request with an error that the server can detect at once (e.g. an unknown product offering) is refused with `422`, and no quote is stored.
+* A quote request that fails a business validation which the server can carry out at once (e.g. an unknown product offering) is refused with `422`, and no quote is stored.
 * An error that is found only later, during the pricing (in particular by the provider), ends the quote in the state `rejected` with the reason in *quoteErrorMessage*, which names the failed quote items; it reaches the client in a notification and when the quote is viewed.
   In a synchronous quote both kinds of errors are found during the request.
   Business validation failures are e.g.:
@@ -257,7 +258,7 @@ The PSS and the provider answer the quote operations with the following codes; a
 | `403` | All                    | The client is not allowed to carry out the operation, e.g. on a quote of another customer.               |
 | `404` | Update, View           | There is no quote with the given identifier that the client can read.                                    |
 | `409` | Update                 | The current state of the quote does not allow the update; the quote is unchanged.                        |
-| `422` | Create, Update         | The request has an error that the server detects at once; nothing is stored or changed.                  |
+| `422` | Create, Update         | The request fails a business validation that the server carries out at once (e.g. an unknown product offering, or a characteristic outside the bounds of the offering); nothing is stored or changed. |
 | `500` | All                    | An error of the server; the client can retry later.                                                       |
 | `503` | All                    | The server is temporarily unavailable; the client can retry later.                                       |
 
@@ -305,15 +306,16 @@ Task  ..> O4    : <<includes>>
 
 ![TOD-03-06: Quote Management](../../common/pixel.png){#fig:TOD-03-06-Quote_Management}
 
-Each endpoint is implemented by the PSS and by the provider's system.
-The table states which clients call it on which side; besides these calls, the provider sends notifications.
+Each endpoint is implemented both by the PSS and by the provider's system.
+The two last columns state who calls the endpoint on each of them; another PSS calls the PSS in the role of a customer.
+Besides these calls, the provider informs the PSS about changes of its quotes by notifications.
 
-| Operation           | Endpoint                                     | Called by                                                                    |
-|------------------|--------------------------------------------------|--------------------------------|
-| **Create Quote**    | `POST /quoteManagement/v2/quote`             | customer, other PSS on the PSS; PSS on the provider                          |
-| **Update Quote**    | `PATCH /quoteManagement/v2/quote/{id}`       | customer, other PSS on the PSS; PSS on the provider, on behalf of the customer |
-| **View Quote**      | `GET /quoteManagement/v2/quote/{id}`         | customer, other PSS, provider (own quotes) on the PSS; PSS on the provider   |
-| **View All Quotes** | `GET /quoteManagement/v2/quote`              | customer, other PSS, provider (own quotes) on the PSS; PSS on the provider   |
+| Operation           | Endpoint                                 | Called on the PSS by                             | Called on the provider by      |
+|----------------|------------------------------------|------------------------------|----------------------|
+| **Create Quote**    | `POST /quoteManagement/v2/quote`         | customer, another PSS                            | PSS                            |
+| **Update Quote**    | `PATCH /quoteManagement/v2/quote/{id}`   | customer, another PSS                            | PSS, on behalf of the customer |
+| **View Quote**      | `GET /quoteManagement/v2/quote/{id}`     | customer, another PSS, provider (its own quotes) | PSS                            |
+| **View All Quotes** | `GET /quoteManagement/v2/quote`          | customer, another PSS, provider (its own quotes) | PSS                            |
 
 Table: Quote Management Endpoints. {#tbl:quote-management-endpoints}
 
