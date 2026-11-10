@@ -58,7 +58,7 @@
                     "checkProductOfferingQualification"
                 ],
                 "summary": "Creates a CheckProductOfferingQualification",
-                "description": "This operation creates a CheckProductOfferingQualification entity. The qualification is always created, and the operation is answered with 201 only, whatever the value of instantSyncQualification: the response carries the qualification either in its final state with the result, or in state acknowledged. An Expect: 202-Accepted header is ignored.",
+                "description": "This operation creates a CheckProductOfferingQualification entity. The qualification is always created, and the operation is answered with 201 only, whatever the value of instantSyncQualification: the response carries the qualification either in its final state with the result, or in a state that is not final (acknowledged or inProgress). An Expect: 202-Accepted header is ignored.",
                 "operationId": "createCheckProductOfferingQualification",
                 "parameters": [
                     {
@@ -236,7 +236,7 @@
                             },
                             "instantSyncQualification": {
                                 "type": "boolean",
-                                "description": "An indicator which when the value is true means that the requester expects to get the qualification result immediately in the response. PSID679 answers the creation with 201 whatever its value: the server returns the qualification in its final state with the result where it can qualify it at once, otherwise in state acknowledged.",
+                                "description": "An indicator which when the value is true means that the requester expects to get the qualification result immediately in the response. PSID679 answers the creation with 201 whatever its value: the server returns the qualification in its final state with the result where it can qualify it at once, otherwise in a state that is not final (acknowledged or inProgress).",
                                 "deprecated": true
                             },
                             "note": {
