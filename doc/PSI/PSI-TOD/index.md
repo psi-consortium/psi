@@ -78,6 +78,12 @@ dcr_overrides:
    version: 'MS12 [2.0.0-alpha]'
    author: 'Christian Grubert'
    message: 'No update, PSI Phase 2 version bump.'
+ - dcr:
+   from: '2026-11-02'
+   to: '2026-11-09'
+   version: 'MS12 [2.0.0-alpha]'
+   author: 'Kinga Kocierz'
+   message: 'Added Quote Management (TOD-03-06).'
 =end
 
 # Document Meta Information
