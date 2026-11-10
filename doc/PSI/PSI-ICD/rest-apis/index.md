@@ -6,6 +6,7 @@
 @include [alarm](alarm/index.md)
 @include [attachment](attachment/index.md)
 @include [cancelperformancejob](cancelperformancejob/index.md)
+@include [checkproductofferingqualification](checkproductofferingqualification/index.md)
 @include [checkproductstock](checkproductstock/index.md)
 @include [customerbill](customerbill/index.md)
 @include [customerinquiry](customerinquiry/index.md)
