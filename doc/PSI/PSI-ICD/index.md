@@ -78,6 +78,12 @@ dcr_overrides:
    version: 'PSI-DOC-VERSION'
    author: 'Christian Grubert'
    message: 'No update, PSI Phase 2 version bump.'
+ - dcr:
+   from: '2026-10-06'
+   to: '2026-11-10'
+   version: 'MS12 [2.0.0-alpha]'
+   author: 'Kinga Kocierz'
+   message: 'Added PSID648 Quote Management API derived from TMF648 v5.0.0, aligned with PSID679 and TOD-03-06: synchronous or asynchronous quote answered with 201 only, no 404 on create and list, no 409 on create, no 501 on delete, quote id required, quote states with refused, quoteErrorMessage with the reason of a status change, product required in a quote item, 422 on create and update, channel, list without cursor, sort and filter parameters.'
 =end
 
 # Document Meta Information
