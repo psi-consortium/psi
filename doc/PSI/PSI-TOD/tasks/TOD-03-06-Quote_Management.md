@@ -159,7 +159,7 @@ Replacing a product by one of another provider is the termination of the existin
 A quote can be processed synchronously or asynchronously; the client states its expectation with *instantSyncQuote*:
 
 * `true` - The server prices the quote at once and returns it in the response, in the state `approved` or, if it fails the business validation, `rejected`.
-* `false` - The server stores the request and returns the quote in the state `acknowledged`; the pricing continues afterwards.
+* `false` - The server stores the request and returns the quote in a state that is not final, `acknowledged` or `inProgress`; the pricing continues afterwards.
   This is the usual case when the provider needs time or human intervention to price the quote.
 
 In both cases the quote is created and the server answers with `201` and the quote in the response; the state of the quote tells the client which answer it got.
@@ -233,7 +233,6 @@ The PSS cancels quotes at the provider only on behalf of the customer.
 
 * A quote request that does not conform to the PSID648 schema is refused with `400`, and no quote is stored.
 * A quote request that fails a business validation which the server can carry out at once (e.g. an unknown product offering) is refused with `422`, and no quote is stored.
-* A quote request that conflicts with an existing quote (e.g. a quote with the same identifier already exists) is refused with `409`, and no quote is stored.
 * An error that is found only later, during the pricing (in particular by the provider), ends the quote in the state `rejected` with the reason in *quoteErrorMessage*, which names the failed quote items; it reaches the client in a notification and when the quote is viewed.
   In a synchronous quote both kinds of errors are found during the request.
   Business validation failures are e.g.:
@@ -251,14 +250,14 @@ The PSS and the provider answer the quote operations with the following codes; a
 
 | Code  | Operations             | Meaning                                                                                                   |
 |-------|------------------------|-----------------------------------------------------------------------------------------------------------|
-| `201` | Create                 | The quote is created; it is returned in the state `acknowledged`, `approved` or `rejected`.              |
+| `201` | Create                 | The quote is created; it is returned in the state `acknowledged`, `inProgress`, `approved` or `rejected`. |
 | `200` | Update, View, View All | The quote is updated, or the quote or a page of quotes is returned.                                      |
 | `202` | Update                 | The update is accepted and processed afterwards; its result reaches the client in a notification.       |
 | `400` | All                    | The request does not conform to the PSID648 schema, or a parameter is invalid; nothing is stored or changed. |
 | `401` | All                    | The client is not authenticated.                                                                          |
 | `403` | All                    | The client is not allowed to carry out the operation, e.g. on a quote of another customer.               |
 | `404` | Update, View           | There is no quote with the given identifier that the client can read.                                    |
-| `409` | Create, Update         | Create: a quote with the same identifier already exists, and no quote is stored. Update: the current state of the quote does not allow the update; the quote is unchanged. |
+| `409` | Update                 | The current state of the quote does not allow the update; the quote is unchanged.                        |
 | `422` | Create, Update         | The request fails a business validation that the server carries out at once (e.g. an unknown product offering, or a characteristic outside the bounds of the offering); nothing is stored or changed. |
 | `500` | All                    | An error of the server; the client can retry later.                                                       |
 | `503` | All                    | The server is temporarily unavailable; the client can retry later.                                       |

@@ -15,7 +15,7 @@ The quoted product offering exists in the PSS catalog or was returned by a custo
 
 The customer creates a new quote request in the PSS via a standard interface specification.
 The PSS validates it and creates the quote at the provider of each quoted offering via the same endpoint on the provider's system; for a bundle offering or several offerings it decomposes the request as described in [TOD-03-06](#tod-03-06-quotemanagement).
-With *instantSyncQuote* set to `true` the priced quote is returned in the response, otherwise the quote is acknowledged and priced afterwards.
+With *instantSyncQuote* set to `true` the priced quote is returned in the response, otherwise the quote is returned in a state that is not final (`acknowledged` or `inProgress`) and priced afterwards.
 
 Some properties of the quote request are:
 
@@ -54,8 +54,8 @@ The provider completes the quote with:
 
 **Post Conditions**
 
-The quote is successfully created in the PSS and provider datastores and returned with `201`, in the state `approved` (synchronous), `acknowledged` (asynchronous) or `rejected` with the reason in *quoteErrorMessage*.
-A request that does not conform to the schema (`400`), conflicts with an existing quote (`409`) or fails a business validation carried out at once (`422`) is refused, and nothing is stored.
+The quote is successfully created in the PSS and provider datastores and returned with `201`, in the state `approved` (synchronous), `acknowledged` or `inProgress` (asynchronous) or `rejected` with the reason in *quoteErrorMessage*.
+A request that does not conform to the schema (`400`) or fails a business validation carried out at once (`422`) is refused, and nothing is stored.
 
 **Applicable Requirements**
 
