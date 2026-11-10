@@ -716,7 +716,7 @@ tasks.register('transformQuote', com.cgi.space.psi.tasks.TransformOASTask) { tra
   importSchema('BundledProductOffering(.*)', file("doc/PSI/PSI-ICD/open-apis/extensions/PSID620-Product_Catalog_Management-v5.0.0.oas.json"))
   importSchema("(.*)", file("doc/PSI/PSI-ICD/open-apis/extensions/Characteristic.oas.json"))
   importSchema("ChannelRef(|_FVO|_MVO)", file("tmforum/apis/TMF622_Product_Ordering/oas/TMF622-ProductOrdering-v5.0.0.oas.yaml"))
-  // PSID648: the quote paths as in PSID679 (POST answered with 201 only, no 404 on POST and the list, 422 on POST and PATCH, the list without Before, After, Sort and Filter)
+  // PSID648: the quote paths as in PSID679 (POST answered with 201 only, no 404 on POST and the list, no 409 on POST, no 501 on DELETE, 422 on POST and PATCH, the list without Before, After, Sort and Filter)
   importPath("/quote(.*)", file("doc/PSI/PSI-ICD/open-apis/extensions/PSID648-Quote-v5.0.0.oas.json"))
   // PSI specific adjustments
   overwritePropertyFormat("(.*)", "href", "uri")
@@ -731,7 +731,7 @@ tasks.register('transformQuote', com.cgi.space.psi.tasks.TransformOASTask) { tra
   overwriteProperty("Quote(|_FVO|_MVO)", "instantSyncQuote", '''
     {
       "type": "boolean",
-      "description": "An indicator which when the value is \\"true\\" means that the requester expects to get the priced quote immediately in the response, in state approved or, if it fails the business validation, rejected. When the value is false, or when the server cannot price the quote at once, the quote is returned in state acknowledged and priced afterwards. The response is 201 in both cases."
+      "description": "An indicator which when the value is \\"true\\" means that the requester expects to get the priced quote immediately in the response, in state approved or, if it fails the business validation, rejected. When the value is false, or when the server cannot price the quote at once, the quote is returned in a state that is not final (acknowledged or inProgress) and priced afterwards. The response is 201 in both cases."
     }
   ''')
   // the quote states of TOD-03-06: refused instead of declined (the enumeration is in the extension)

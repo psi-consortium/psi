@@ -52,7 +52,7 @@
                     "quote"
                 ],
                 "summary": "Creates a Quote",
-                "description": "This operation creates a Quote entity. The quote is always created, and the operation is answered with 201 only, whatever the value of instantSyncQuote: the response carries the quote either priced, in state approved, or in state rejected, or in state acknowledged, in which case it is priced afterwards. An Expect: 202-Accepted header is ignored.",
+                "description": "This operation creates a Quote entity. The quote is always created, and the operation is answered with 201 only, whatever the value of instantSyncQuote: the response carries the quote either priced, in state approved, or in state rejected, or in a state that is not final (acknowledged or inProgress), in which case it is priced afterwards. An Expect: 202-Accepted header is ignored.",
                 "operationId": "createQuote",
                 "parameters": [
                     {
@@ -77,9 +77,6 @@
                     },
                     "405": {
                         "$ref": "#/components/responses/405"
-                    },
-                    "409": {
-                        "$ref": "#/components/responses/409"
                     },
                     "422": {
                         "description": "Unprocessable Content",
@@ -162,6 +159,51 @@
                     },
                     "501": {
                         "$ref": "#/components/responses/501"
+                    },
+                    "503": {
+                        "$ref": "#/components/responses/503"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "quote"
+                ],
+                "summary": "Deletes a Quote",
+                "description": "This operation deletes a Quote entity.",
+                "operationId": "deleteQuote",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/Id"
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "$ref": "#/components/responses/202"
+                    },
+                    "204": {
+                        "$ref": "#/components/responses/204"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "405": {
+                        "$ref": "#/components/responses/405"
+                    },
+                    "409": {
+                        "$ref": "#/components/responses/409"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
                     },
                     "503": {
                         "$ref": "#/components/responses/503"
