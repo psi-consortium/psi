@@ -625,6 +625,7 @@ tasks.register('transformStock', com.cgi.space.psi.tasks.TransformOASTask) { tra
   removePaths("/queryProductStock(.*)")
   // unify schemas
   importBaseTypes(transformations)
+  importPath("/checkProductStock(.*)", file("doc/PSI/PSI-ICD/open-apis/extensions/PSID687-Stock-v4.1.0.oas.json"))
   importSchema("(.*)(Product|Price|RelatedOrderItem|PartyOrPartyRole|Intent|Duration|Expression|RelatedPartyRefOrPartyRoleRef)(.*)", file("tmforum/apis/TMF637_Product_Inventory/oas/TMF637-ProductInventory-v5.0.0.oas.yaml"))
   importSchema("(Geo|RelatedPlaceRefOrValue|Place|ItemActionType|StandardIdentifier|ExternalIdentifier|CalendarPeriod|HourPeriod)(.*)", file("tmforum/apis/TMF637_Product_Inventory/oas/TMF637-ProductInventory-v5.0.0.oas.yaml"))
   importSchema("(.*)", file("doc/PSI/PSI-ICD/open-apis/extensions/PSID675-Geographic_Location.oas.json"))
