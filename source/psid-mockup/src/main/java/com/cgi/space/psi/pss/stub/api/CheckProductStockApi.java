@@ -32,8 +32,7 @@ public interface CheckProductStockApi {
      * This operation creates a CheckProductStock entity.
      *
      * @param checkProductStock The CheckProductStock to be created (required)
-     * @return Sucess (status code 200)
-     *         or Created (status code 201)
+     * @return Created (status code 201)
      *         or Bad Request (status code 400)
      *         or Unauthorized (status code 401)
      *         or Forbidden (status code 403)
@@ -46,9 +45,6 @@ public interface CheckProductStockApi {
         summary = "Creates a CheckProductStock",
         tags = { "checkProductStock" },
         responses = {
-            @ApiResponse(responseCode = "200", description = "Sucess", content = {
-                @Content(mediaType = "application/json;charset=utf-8", schema = @Schema(implementation = CheckProductStock.class))
-            }),
             @ApiResponse(responseCode = "201", description = "Created", content = {
                 @Content(mediaType = "application/json;charset=utf-8", schema = @Schema(implementation = CheckProductStock.class))
             }),
