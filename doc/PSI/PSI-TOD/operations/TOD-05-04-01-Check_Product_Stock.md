@@ -62,10 +62,9 @@ It contains the following information:
 
 The action is created via the `POST` endpoint and will get a unique ID by the server.
 The result is written to the `availabilityResult` field of each requested item, indicating whether it is available, unavailable or alternatives are provided in the `alternate` field.
-Though the `instantSyncCheck` signals the expectation of the client, the server can **always** return two status codes which have to be handled appropriately (e.g. by visualising it to the customer):
 
-* Code `200` means that the result is available immediately in the first response.
-* Code `201` means that the result can be fetched later via the `GET` endpoint using the ID.
+Though the `instantSyncCheck` signals the expectation of the client, the server can diverge from it.
+The client is therefore required to check the `state` and handle the response accordingly.
 
 **REST Endpoints**
 

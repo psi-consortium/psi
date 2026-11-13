@@ -1,11 +1,111 @@
 {
     "openapi": "3.0.1",
+    "paths": {
+        "/checkProductStock": {
+            "post": {
+                "tags": [
+                    "checkProductStock"
+                ],
+                "summary": "Creates a CheckProductStock",
+                "description": "This operation creates a CheckProductStock entity.",
+                "operationId": "createCheckProductStock",
+                "requestBody": {
+                    "description": "The CheckProductStock to be created",
+                    "content": {
+                        "application/json;charset=utf-8": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CheckProductStock_Create"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json;charset=utf-8": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CheckProductStock"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json;charset=utf-8": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json;charset=utf-8": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json;charset=utf-8": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    },
+                    "405": {
+                        "description": "Method Not allowed",
+                        "content": {
+                            "application/json;charset=utf-8": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "Conflict",
+                        "content": {
+                            "application/json;charset=utf-8": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json;charset=utf-8": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-codegen-request-body-name": "checkProductStock"
+            }
+        }
+    },
     "components": {
         "schemas": {
             "AvailabilityResultType": {
                 "type": "string",
                 "description": "Possible values of the availability result check for CheckProductStockItem.",
-                "enum": ["available", "notAvailable", "alternate"]
+                "enum": [
+                    "available",
+                    "notAvailable",
+                    "alternate"
+                ]
             }
         }
     }
