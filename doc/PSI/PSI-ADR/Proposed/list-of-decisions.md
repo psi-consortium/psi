@@ -3,4 +3,4 @@
                Do NOT manually edit this file! Any such changes will be overwritten!
 -->
 
-There are currently no decisions in this category.
+@include [ADR043 Placement of Governance and Algorithm Content in the PSI Document Set](ADR043-document-set-placement-governance-and-algorithms.md)
