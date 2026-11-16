@@ -67,7 +67,7 @@ public class CheckProductStockApiIT {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(getCheckProductStockAsBody(true, false)))
                 .andDo(print())
-                .andExpect(status().isOk())
+                .andExpect(status().isCreated())
                 .andExpect(jsonPath("id").exists())
                 .andExpect(jsonPath("href").exists())
                 .andExpect(jsonPath("creationDate").exists())

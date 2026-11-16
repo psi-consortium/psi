@@ -52,8 +52,7 @@ public class CheckProductStockController implements CheckProductStockApi {
     public ResponseEntity<CheckProductStock> createCheckProductStock(CheckProductStockCreate checkProductStockCreate) {
         CheckProductStock result = service.createCheckProductStock(checkProductStockCreate);
         log.debug("Created new CheckProductStock: {}", result);
-        HttpStatus status = checkProductStockCreate.getInstantSyncCheck() ? HttpStatus.OK : HttpStatus.CREATED;
-        return new ResponseEntity<>(result, status);
+        return new ResponseEntity<>(result, HttpStatus.CREATED);
     }
 
     /**
