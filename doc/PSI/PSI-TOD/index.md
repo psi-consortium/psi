@@ -78,6 +78,12 @@ dcr_overrides:
    version: 'PSI-DOC-VERSION'
    author: 'Christian Grubert'
    message: 'No update, PSI Phase 2 version bump.'
+ - dcr:
+   from: '2026-11-19'
+   to: '2026-11-19'
+   version: 'PSI-DOC-VERSION'
+   author: 'Dominik Ogrodnik'
+   message: 'Dispatch Event (TOD-01-02-03): the correlationId of an event refers to PSI-ICD Observability.'
 =end
 
 # Document Meta Information
