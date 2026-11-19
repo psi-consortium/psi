@@ -124,16 +124,20 @@ PSS --> Customer -- : 200 OK (approved, prices)\nX-Correlation-ID C2
   When the PSS splits the quote of a bundle between several providers, all their quotes carry `T1` and `C1`, so that the part that failed can be found.
 * The parent-ids `a` to `f` differ: each names the step that made the request, e.g. `b` the step of the PSS that passes the quote on, `d` the step of the provider that reports its quote.
   From the steps that the systems report, the tracing tool draws the trace `T1` as the following tree:
-  * `a`: the customer's step that requests the quote
-    * the PSS's handling of the request
-      * `b`: the PSS's step that passes the quote on
-        * the provider's handling of the request
-          * `d`: the provider's step that reports its quote
-            * the PSS's handling of the event
-              * `e`: the PSS's step that retrieves the provider's quote
-                * the provider's handling of the request
-              * `f`: the PSS's step that informs the customer that the quote is approved
-      * `c`: the PSS's step that informs the customer that the quote is in progress
+
+  ```
+  a  customer: requests the quote
+  +- PSS: handles the request
+     +- b  PSS: passes the quote on
+     |  +- provider: handles the request
+     |     +- d  provider: reports its quote
+     |        +- PSS: handles the event
+     |           +- e  PSS: retrieves the provider's quote
+     |           |  +- provider: handles the request
+     |           +- f  PSS: informs the customer (approved)
+     +- c  PSS: informs the customer (in progress)
+  ```
+
 * The customer's later retrieval is a request of its own: it carries a new trace `T2` and a new correlation identifier `C2`, and relates to the quote only by the identifier of the quote.
   A cancellation of the quote would likewise carry identifiers of its own, and so would the PSS's request that cancels the quote at the provider and the event that the quote was cancelled.
 
