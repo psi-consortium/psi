@@ -78,6 +78,12 @@ dcr_overrides:
    version: 'PSI-DOC-VERSION'
    author: 'Christian Grubert'
    message: 'No update, PSI Phase 2 version bump.'
+ - dcr:
+   from: '2026-11-19'
+   to: '2026-11-19'
+   version: 'PSI-DOC-VERSION'
+   author: 'Dominik Ogrodnik'
+   message: 'Event Management (TOD-01-02): added the event topics of the PSI APIs.'
 =end
 
 # Document Meta Information
