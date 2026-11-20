@@ -56,3 +56,7 @@
 @include [ADR041 MEF Convergence](ADR041-mef-convergence.md)
 
 @include [ADR042 Advanced OpenAPI Specification Patching](ADR042-advanced-oas-patching.md)
+
+@include [ADR044 Quote Management: Deviations from TMF648](ADR044-quote-management-tmf648-deviations.md)
+
+@include [ADR045 Scope of a Product Modification](ADR045-scope-of-product-modification.md)
