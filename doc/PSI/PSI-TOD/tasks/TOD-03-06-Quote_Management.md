@@ -13,7 +13,7 @@ SLA information is not part of the quote itself; it is conveyed by the quoted pr
 
 **Position in the customer journey**
 
-The quote completes the pre-order steps: the customer inquiry (see [TOD-03-01](#tod-03-01-customerinquirymanagement)) finds candidate offerings for a request, the product offering qualification (POQ, see TOD-03-05) confirms that one specific candidate is available and can be delivered, and the quote fixes its final price and terms.
+The quote completes the pre-order steps: the customer inquiry (see [TOD-03-01](#tod-03-01-customerinquirymanagement)) finds candidate offerings for a request, the product offering qualification (POQ, see TOD-03-05) confirms that the candidates are available and can be delivered, and the quote fixes the final price and terms of the selected offerings.
 
 POQ and quote are both optional from the point of view of the interface, each on its own.
 A product order (see [TOD-03-02](#tod-03-02-productordermanagement)) refers to the POQ and to the quote where they were done.
@@ -88,7 +88,8 @@ P .up.>   C  : notifications\n(Event Management)
 
 Every atomic product offering has exactly one provider.
 A customer who wants to compare the offerings of several providers requests one quote per offering and selects among them.
-The PSS does not choose a provider on behalf of the customer, but its governance may apply rules that filter offerings before the customer sees them.
+The customer selects the product offering, and the offering determines the provider: the PSS forwards the quote request to the provider of the selected offering and does not search among the providers for one that fits better.
+The governance of the PSS may, however, apply rules that filter the offerings before the customer sees them.
 
 **Content of a quote request**
 
@@ -98,6 +99,8 @@ If a POQ was done before, the characteristics set in the POQ stay the same in th
 
 The terms of a product (e.g. contract duration, renewal, charge period) are given in its product terms (*productTerm*).
 The implementer MAY require equal terms for all quote items.
+
+Prices are usually given in an ISO 4217 currency, but a PSS MAY also accept its own prepaid tokens (credits) as the currency of a quote and of the subsequent product order; the *unit* of a price then names the token instead of an ISO 4217 code.
 
 **Bundles and several providers**
 
@@ -180,36 +183,6 @@ A quote and each of its quote items go through the following states, which are b
 * the TMF648 state `rejected`, in which the customer rejects the quote, is renamed to `refused`;
 * `rejected` is used for a quote that failed the business validation, as for product orders.
 
-The labels on the transitions name the event and, where only one party may cause it, that party.
-
-```plantuml
-@startuml
-hide empty description
-[*] --> acknowledged : POST, async
-[*] --> approved     : POST, sync: priced
-[*] --> rejected     : POST, sync: validation failed
-acknowledged --> inProgress : pricing started
-acknowledged --> rejected   : validation failed
-acknowledged --> cancelled  : cancelled by the customer
-inProgress   --> pending    : information or authorisation needed
-pending      --> inProgress : resumed
-inProgress   --> approved   : priced by the provider
-inProgress   --> rejected   : validation failed / a part failed
-inProgress   --> cancelled  : cancelled by the customer
-pending      --> cancelled  : cancelled by the customer
-approved     --> cancelled  : cancelled by the customer
-approved     --> accepted   : accepted by the customer (within validFor)
-approved     --> refused    : refused by the customer
-accepted  --> [*]
-refused   --> [*]
-rejected  --> [*]
-cancelled --> [*]
-@enduml
-
-```
-
-![TOD-03-06: Quote States](../../common/pixel.png){#fig:TOD-03-06-Quote_States}
-
 | State          | Meaning                                                                                                                                                                                                                  | Processing     |
 |------------------|--------------------------------------------------------------------|:------------:|
 | `acknowledged` | The quote request has been received and stored by the server (PSS or provider), and its identifier has been returned to the client; the quote has not been priced yet. Set by the server (PSS or provider).            | async          |
@@ -256,34 +229,19 @@ The PSS and the provider answer the quote operations with the following codes; a
 | `400` | All                    | The request does not conform to the PSID648 schema, or a parameter is invalid; nothing is stored or changed. |
 | `401` | All                    | The client is not authenticated.                                                                          |
 | `403` | All                    | The client is not allowed to carry out the operation, e.g. on a quote of another customer.               |
-| `404` | Update, View           | There is no quote with the given identifier that the client can read.                                    |
+| `404` | Update, View           | There is no quote with the given identifier.                                                             |
+| `405` | All                    | The HTTP method is not allowed on the resource, e.g. the server does not offer the operation.             |
 | `409` | Update                 | The current state of the quote does not allow the update; the quote is unchanged.                        |
 | `422` | Create, Update         | The request fails a business validation that the server carries out at once (e.g. an unknown product offering, or a characteristic outside the bounds of the offering); nothing is stored or changed. |
 | `500` | All                    | An error of the server; the client can retry later.                                                       |
+| `501` | All                    | The server does not implement the operation.                                                              |
 | `503` | All                    | The server is temporarily unavailable; the client can retry later.                                       |
 
 Table: Quote Response Codes. {#tbl:quote-response-codes}
 
 **Observability**
 
-The correlation identifier relates all requests, events and log entries that belong to one business transaction across the systems involved: the customer, the PSS and the providers.
-It allows a quote to be traced from the request of the customer to every provider that priced it; for a decomposed quote, it relates every provider's quote to the quote of the bundle offering, so that the part that failed can be found.
-
-TMF Open APIs define *correlationId* only in the structure of events.
-PSI extends its use to the synchronous REST communication and to logging, without changing the TMF resource models.
-
-* REST communication:
-  * The correlation identifier MUST be passed in the HTTP header `X-Correlation-ID`.
-  * If a request carries the header, the server MUST use the received value.
-    If it does not, the component that receives the request first (e.g. the PSS for a request of the customer) MUST generate a new value (UUID version 4).
-  * The server SHOULD return the same value in the header of its response, also when the request is refused.
-  * The PSS MUST pass the value on in its requests to the providers.
-  * The correlation identifier MUST NOT be added to the body of the TMF resources.
-* Events: an event published as a result of processing a request or another event MUST carry in *correlationId* the value of the request or event that caused it.
-* Logging:
-  * Each log entry related to the processing of a request or an event MUST contain the correlation identifier.
-  * Logs MUST be structured (JSON), with the correlation identifier in a field of its own, not in the text of the message.
-  * For calls to external systems, the identifier of the TMF resource (*id*, *externalId*) SHOULD be logged as well.
+The requests and events of a quote carry the trace context and the correlation identifier as described in [PSI-ICD], Observability.
 
 **Operations and endpoints**
 
@@ -306,18 +264,18 @@ Task  ..> O4    : <<includes>>
 
 ![TOD-03-06: Quote Management](../../common/pixel.png){#fig:TOD-03-06-Quote_Management}
 
-Each endpoint is implemented both by the PSS and by the provider's system.
-The two last columns state who calls the endpoint on each of them; another PSS calls the PSS in the role of a customer.
+|                     |  Customer  |  Provider  | Other PSS  | Governance |    PSS     |
+|---------------------|:----------:|:----------:|:----------:|:----------:|:----------:|
+| **Create Quote**    | \checkmark |            | \checkmark |            | \checkmark |
+| **Update Quote**    | \checkmark |            | \checkmark |            | \checkmark |
+| **View Quote**      | \checkmark | \checkmark | \checkmark |            | \checkmark |
+| **View All Quotes** | \checkmark | \checkmark | \checkmark |            | \checkmark |
+
+Table: Quote Management Matrix. {#tbl:quote-management-matrix}
+
+Please note that each endpoint is implemented both by the PSS and by the provider's system.
+The column PSS marks the calls of the PSS to the provider's system, where the PSS acts as the client (for an update, on behalf of the customer); another PSS calls the PSS in the role of a customer, and a provider views only its own quotes in the PSS.
 Besides these calls, the provider informs the PSS about changes of its quotes by notifications.
-
-| Operation           | Endpoint                                 | Called on the PSS by                             | Called on the provider by      |
-|--------------|----------------------------------------------------|--------------------|--------------|
-| **Create Quote**    | `POST /quoteManagement/v2/quote`         | customer, another PSS                            | PSS                            |
-| **Update Quote**    | `PATCH /quoteManagement/v2/quote/{id}`   | customer, another PSS                            | PSS, on behalf of the customer |
-| **View Quote**      | `GET /quoteManagement/v2/quote/{id}`     | customer, another PSS, provider (its own quotes) | PSS                            |
-| **View All Quotes** | `GET /quoteManagement/v2/quote`          | customer, another PSS, provider (its own quotes) | PSS                            |
-
-Table: Quote Management Endpoints. {#tbl:quote-management-endpoints}
 
 **eTOM Reference**
 

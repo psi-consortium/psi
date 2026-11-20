@@ -15,6 +15,7 @@ The quote exists in the PSS datastore.
 Gets a quote with a specific identifier via a standard interface specification.
 The customer can request to view the quote from the PSS, and the PSS can view the quote on the provider's system.
 A provider can also view a quote in the PSS if the quote is its own.
+With the parameter *fields*, the client can select the attributes of the quote to be returned.
 
 Viewing is one way to learn the state a quote has reached and the provider's prices; the other are the notifications of the Event Management API (see [TOD-01-02](#tod-01-02-eventmanagement)).
 
@@ -25,7 +26,8 @@ Viewing is one way to learn the state a quote has reached and the provider's pri
 **Post Conditions**
 
 The quote that the client can read is successfully returned to be viewed (`200`).
-A quote that does not exist or that the client cannot read is answered with `404`.
+A quote that does not exist is answered with `404`.
+A quote that exists but that the client is not allowed to read (e.g. a quote of another customer) is answered with `403`.
 
 **Applicable Requirements**
 
