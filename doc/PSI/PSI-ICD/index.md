@@ -78,6 +78,12 @@ dcr_overrides:
    version: 'PSI-DOC-VERSION'
    author: 'Christian Grubert'
    message: 'No update, PSI Phase 2 version bump.'
+ - dcr:
+   from: '2026-11-09'
+   to: '2026-11-19'
+   version: 'PSI-DOC-VERSION'
+   author: 'Dominik Ogrodnik'
+   message: 'Added Observability: the trace context and the correlation identifier in REST headers, events and logs.'
 =end
 
 # Document Meta Information
@@ -170,6 +176,10 @@ Client implementors are advised to clarify which filters are available on the se
 ## Security Considerations
 
 @include [security](security.md)
+
+## Observability
+
+@include [observability](observability.md)
 
 ## Types and Characteristics
 
