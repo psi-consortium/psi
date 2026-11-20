@@ -106,10 +106,10 @@ dcr_overrides:
    message: 'No update, PSI Phase 2 version bump.'
  - dcr:
    from: '2026-11-10'
-   to: '2026-11-10'
+   to: '2026-11-20'
    version: 'PSI-DOC-VERSION'
    author: 'Kinga Kocierz'
-   message: 'Proposed ADR044 on the deviations of PSID648 Quote Management from TMF648 and ADR045 on the scope of a product modification.'
+   message: 'Accepted ADR044 on the deviations of PSID648 Quote Management from TMF648 and ADR045 on the scope of a product modification.'
  =end
 
 # Document Meta Information

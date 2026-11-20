@@ -1,18 +1,18 @@
 # Quote Management: Deviations from TMF648
 
 * ID: ADR044
-* Status: :proposed:
+* Status: :accepted:
 * Deciders: Kinga Kocierz
 * Consulted: Dominik Ogrodnik, @hop, @cgr
-* Date: 2026-11-10
-* Version: 0.1
+* Date: 2026-11-20
+* Version: 1.0
 * Category: Design
 
 Technical Story: PSID648 Quote Management API (psi issue #66, PR #75) and its task description TOD-03-06 (psi issue #62)
 
 ## Context and Problem Statement
 
-PSID648 Quote Management is derived from TM Forum TMF648 Quote Management v5.0.0, as all PSI APIs are derived from the TM Forum Open APIs ([ADR006](../Accepted/ADR006-use-tmforum-openapis-and-sid_V1.0.md)).
+PSID648 Quote Management is derived from TM Forum TMF648 Quote Management v5.0.0, as most PSI APIs are derived from the TM Forum Open APIs ([ADR006](../Accepted/ADR006-use-tmforum-openapis-and-sid_V1.0.md)).
 Used as is, TMF648 does not fit the PSI quote process described in TOD-03-06 in four respects:
 
 1. **State semantics.**
@@ -33,7 +33,7 @@ How should PSID648 deviate from TMF648 so that it supports the PSI quote process
 ## Decision Drivers
 
 * An unambiguous quote life cycle for the customer, the PSS and the provider.
-* Consistency with PSID622 Product Ordering and PSID679 Product Offering Qualification: same state names for the same meaning, same error structure, same required attributes.
+* An approach aligned with PSID622 Product Ordering or PSID679 Product Offering Qualification, especially for state names and their meaning, response codes, error structures and required attributes.
 * As few changes to TM Forum structures as possible.
 
 ## Considered Options
@@ -44,7 +44,7 @@ How should PSID648 deviate from TMF648 so that it supports the PSI quote process
 
 ## Decision Outcome
 
-Chosen option: "Option 2: Align PSID648 with PSID622 and PSID679", because it is the only option in which a state name means the same in quote, order and qualification, and it needs no new structures beyond those PSID622 already uses.
+Chosen option: "Option 2: Align PSID648 with PSID622 and PSID679", because it is the only option in which a state name means the same in quote and order, and it needs no new structures beyond those PSID622 already uses.
 
 ### 1. Quote states
 
@@ -83,7 +83,7 @@ The provider never cancels a quote; it rejects it.
 
 Table: Response codes of PSID648 compared with TMF648 {#tbl:adr044-response-codes}
 
-`GET /quote` supports only the `fields`, `offset` and `limit` parameters, as `GET /productOfferingQualification` in PSID679; the cursor parameters (`before`, `after`), `sort` and `filter` are removed.
+`GET /quote` supports only the `fields`, `offset` and `limit` parameters, as `GET /checkProductOfferingQualification` in PSID679; the cursor parameters (`before`, `after`), `sort` and `filter` are removed.
 `DELETE /quote/{id}` stays in the interface but is not mapped to a TOD operation, as `DELETE /productOrder/{id}` in PSID622.
 
 ### 4. Added attributes
@@ -135,7 +135,7 @@ A quote without an `id` could not be followed up, so the provider always returns
 
 ### Positive Consequences
 
-* A state name means the same in quote, product order and product offering qualification.
+* A state name means the same in quote and product order.
 * A rejected quote always says why, and which items failed, in the same structure as a rejected product order.
 * A client always gets `201` and an identified quote, and can follow it up.
 

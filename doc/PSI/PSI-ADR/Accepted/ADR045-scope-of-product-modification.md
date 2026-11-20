@@ -1,11 +1,11 @@
 # Scope of a Product Modification
 
 * ID: ADR045
-* Status: :proposed:
+* Status: :accepted:
 * Deciders: Kinga Kocierz
 * Consulted: Dominik Ogrodnik, @hop, @cgr
-* Date: 2026-11-10
-* Version: 0.1
+* Date: 2026-11-20
+* Version: 1.0
 * Category: Design
 
 Technical Story: Changes to an existing product in Quote Management (TOD-03-06, psi issue #62) and Product Offering Qualification (PSID679)
