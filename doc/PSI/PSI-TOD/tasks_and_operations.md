@@ -341,6 +341,26 @@ This task contains all operations to order products (and therefore services and 
 
 @include [TOD-03-04-05-View_All_Missions](operations/TOD-03-04-05-View_All_Missions.md)
 
+### TOD-03-06-Quote_Management
+
+@include [TOD-03-06-Quote_Management](tasks/TOD-03-06-Quote_Management.md)
+
+#### TOD-03-06-01-Create_Quote
+
+@include [TOD-03-06-01-Create_Quote](operations/TOD-03-06-01-Create_Quote.md)
+
+#### TOD-03-06-02-Update_Quote
+
+@include [TOD-03-06-02-Update_Quote](operations/TOD-03-06-02-Update_Quote.md)
+
+#### TOD-03-06-03-View_Quote
+
+@include [TOD-03-06-03-View_Quote](operations/TOD-03-06-03-View_Quote.md)
+
+#### TOD-03-06-04-View_All_Quotes
+
+@include [TOD-03-06-04-View_All_Quotes](operations/TOD-03-06-04-View_All_Quotes.md)
+
 ## TOD-04-Template_Management
 
 The category consists of tasks and operations related to managing templates for resources, services and products.
