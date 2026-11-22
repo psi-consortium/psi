@@ -68,6 +68,12 @@
 
 {#page:break}
 
+## REQ-03-05-Product_Offering_Qualification_Management
+
+@include [REQ-03-05-index](requirements/REQ-03-05-index.md)
+
+{#page:break}
+
 # REQ-04-Template_Management
 
 ## REQ-04-01-Resource_Template_Management

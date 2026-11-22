@@ -78,6 +78,12 @@ dcr_overrides:
    version: 'MS12 [2.0.0-alpha]'
    author: 'Christian Grubert'
    message: 'No update, PSI Phase 2 version bump.'
+ - dcr:
+   from: '2026-10-27'
+   to: '2026-11-20'
+   version: 'PSI-DOC-VERSION'
+   author: 'Dominik Ogrodnik'
+   message: 'Added Product Offering Qualification Management (TOD-03-05) for PSID679.'
 =end
 
 # Document Meta Information

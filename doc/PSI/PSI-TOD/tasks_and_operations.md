@@ -341,6 +341,26 @@ This task contains all operations to order products (and therefore services and 
 
 @include [TOD-03-04-05-View_All_Missions](operations/TOD-03-04-05-View_All_Missions.md)
 
+### TOD-03-05-Product_Offering_Qualification_Management
+
+@include [TOD-03-05-Product_Offering_Qualification_Management](tasks/TOD-03-05-Product_Offering_Qualification_Management.md)
+
+#### TOD-03-05-01-Create_Product_Offering_Qualification
+
+@include [TOD-03-05-01-Create_Product_Offering_Qualification](operations/TOD-03-05-01-Create_Product_Offering_Qualification.md)
+
+#### TOD-03-05-02-Update_Product_Offering_Qualification
+
+@include [TOD-03-05-02-Update_Product_Offering_Qualification](operations/TOD-03-05-02-Update_Product_Offering_Qualification.md)
+
+#### TOD-03-05-03-View_Product_Offering_Qualification
+
+@include [TOD-03-05-03-View_Product_Offering_Qualification](operations/TOD-03-05-03-View_Product_Offering_Qualification.md)
+
+#### TOD-03-05-04-View_All_Product_Offering_Qualifications
+
+@include [TOD-03-05-04-View_All_Product_Offering_Qualifications](operations/TOD-03-05-04-View_All_Product_Offering_Qualifications.md)
+
 ## TOD-04-Template_Management
 
 The category consists of tasks and operations related to managing templates for resources, services and products.

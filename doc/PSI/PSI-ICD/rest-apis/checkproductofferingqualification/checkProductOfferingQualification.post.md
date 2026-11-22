@@ -7,6 +7,8 @@
 
 **Absolute Path:** /productOfferingQualification/v2/checkProductOfferingQualification
 
+**TOD Reference:** TOD-03-05-01-Create_Product_Offering_Qualification
+
 **Summary:** Creates a CheckProductOfferingQualification
 
 ## Parameters
