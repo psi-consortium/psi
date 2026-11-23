@@ -79,14 +79,7 @@
                         "$ref": "#/components/responses/405"
                     },
                     "422": {
-                        "description": "Unprocessable Content",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Error"
-                                }
-                            }
-                        }
+                        "$ref": "#/components/responses/422"
                     },
                     "500": {
                         "$ref": "#/components/responses/500"
@@ -145,14 +138,7 @@
                         "$ref": "#/components/responses/409"
                     },
                     "422": {
-                        "description": "Unprocessable Content",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Error"
-                                }
-                            }
-                        }
+                        "$ref": "#/components/responses/422"
                     },
                     "500": {
                         "$ref": "#/components/responses/500"
@@ -378,6 +364,204 @@
                     "propertyName": "@type",
                     "mapping": {
                         "QuoteErrorMessage": "#/components/schemas/QuoteErrorMessage_MVO"
+                    }
+                }
+            }
+        },
+        "requestBodies": {
+            "Quote_FVO": {
+                "description": "The Quote to be created",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Quote_FVO"
+                        }
+                    }
+                },
+                "required": true
+            },
+            "Quote_MVO": {
+                "description": "The Quote to be patched",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Quote_MVO"
+                        }
+                    },
+                    "application/merge-patch+json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Quote_MVO"
+                        }
+                    },
+                    "application/json-patch+json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/JsonPatchOperations"
+                        }
+                    },
+                    "application/json-patch-query+json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/JsonPatchOperations"
+                        }
+                    }
+                },
+                "required": true
+            }
+        },
+        "responses": {
+            "200QuoteArray": {
+                "description": "Success",
+                "headers": {
+                    "X-Total-Count": {
+                        "$ref": "#/components/headers/X-Total-Count"
+                    },
+                    "X-Result-Count": {
+                        "$ref": "#/components/headers/X-Result-Count"
+                    }
+                },
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/components/schemas/Quote_RES"
+                            }
+                        }
+                    }
+                }
+            },
+            "200Quote_Get": {
+                "description": "Success",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Quote_RES"
+                        }
+                    }
+                }
+            },
+            "200Quote_Patch": {
+                "description": "Success",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Quote_RES"
+                        }
+                    }
+                }
+            },
+            "201Quote": {
+                "description": "Created",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Quote_RES"
+                        }
+                    }
+                }
+            },
+            "202": {
+                "description": "Accepted"
+            },
+            "204": {
+                "description": "Deleted"
+            },
+            "400": {
+                "description": "Bad Request",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Error"
+                        }
+                    }
+                }
+            },
+            "401": {
+                "description": "Unauthorized",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Error"
+                        }
+                    }
+                }
+            },
+            "403": {
+                "description": "Forbidden",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Error"
+                        }
+                    }
+                }
+            },
+            "404": {
+                "description": "Not Found",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Error"
+                        }
+                    }
+                }
+            },
+            "405": {
+                "description": "Method Not allowed",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Error"
+                        }
+                    }
+                }
+            },
+            "409": {
+                "description": "Conflict",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Error"
+                        }
+                    }
+                }
+            },
+            "422": {
+                "description": "Unprocessable Content",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Error"
+                        }
+                    }
+                }
+            },
+            "500": {
+                "description": "Internal Server Error",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Error"
+                        }
+                    }
+                }
+            },
+            "501": {
+                "description": "Not Implemented",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Error"
+                        }
+                    }
+                }
+            },
+            "503": {
+                "description": "Service Unavailable",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Error"
+                        }
                     }
                 }
             }

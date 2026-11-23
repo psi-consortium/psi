@@ -876,6 +876,9 @@ tasks.register('transformQuote', com.cgi.space.psi.tasks.TransformOASTask) { tra
   importSchema("ChannelRef(|_FVO|_MVO)", file("tmforum/apis/TMF622_Product_Ordering/oas/TMF622-ProductOrdering-v5.0.0.oas.yaml"))
   // PSID648: the quote paths as in PSID679 (POST answered with 201 only, no 404 on POST and the list, no 409 on POST, no 501 on DELETE, 422 on POST and PATCH, the list without Before, After, Sort and Filter)
   importPath("/quote(.*)", file("doc/PSI/PSI-ICD/open-apis/extensions/PSID648-Quote-v5.0.0.oas.json"))
+  // PSID648: the request bodies and responses without TM Forum's generic examples (pruneAll drops them); 422 as a component, as in PSID679
+  importRequestBody("(.*)", file("doc/PSI/PSI-ICD/open-apis/extensions/PSID648-Quote-v5.0.0.oas.json"))
+  importResponse("(.*)", file("doc/PSI/PSI-ICD/open-apis/extensions/PSID648-Quote-v5.0.0.oas.json"))
   // PSI specific adjustments
   overwritePropertyFormat("(.*)", "href", "uri")
   adjustAttachmentRef(transformations)
