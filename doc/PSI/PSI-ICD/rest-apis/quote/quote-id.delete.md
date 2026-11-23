@@ -30,7 +30,6 @@ Table: Parameters of DELETE quote/{id}. {#tbl:quote-id.delete.md:parameters}
 | 405 | Method Not allowed | Error |
 | 409 | Conflict | Error |
 | 500 | Internal Server Error | Error |
-| 501 | Not Implemented | Error |
 | 503 | Service Unavailable | Error |
 
 Table: Responses of DELETE quote/{id}. {#tbl:quote-id.delete.md:responses}

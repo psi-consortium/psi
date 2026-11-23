@@ -29,6 +29,7 @@
 | version | string | N/A | No |
 | quoteItem | array | QuoteItem | No |
 | effectiveQuoteCompletionDate | string | date-time | No |
+| quoteErrorMessage | array | QuoteErrorMessage_MVO | No |
 | channel | ChannelRef_MVO | N/A | No |
 | @baseType | string | N/A | No |
 | @schemaLocation | string | N/A | No |

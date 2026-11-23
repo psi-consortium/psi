@@ -75,7 +75,7 @@ dcr_overrides:
  - dcr:
    from: '2026-07-27'
    to: '2026-07-31'
-   version: 'MS12 [2.0.0-alpha]'
+   version: 'PSI-DOC-VERSION'
    author: 'Christian Grubert'
    message: 'No update, PSI Phase 2 version bump.'
  - dcr:
@@ -84,6 +84,18 @@ dcr_overrides:
    version: 'MS12 [2.0.0-alpha]'
    author: 'Kinga Kocierz'
    message: 'Added Quote Management (TOD-03-06).'
+ - dcr:
+   from: '2026-11-19'
+   to: '2026-11-19'
+   version: 'PSI-DOC-VERSION'
+   author: 'Dominik Ogrodnik'
+   message: 'Event Management (TOD-01-02): added the event topics of the PSI APIs.'
+ - dcr:
+   from: '2026-11-19'
+   to: '2026-11-19'
+   version: 'PSI-DOC-VERSION'
+   author: 'Dominik Ogrodnik'
+   message: 'Register Event Callback (TOD-01-02-02): refers to the TMF630 REST API Design Guidelines 5.0.0.'
 =end
 
 # Document Meta Information

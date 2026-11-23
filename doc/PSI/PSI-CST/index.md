@@ -57,7 +57,7 @@ dcr_overrides:
  - dcr:
    from: '2026-07-27'
    to: '2026-07-31'
-   version: 'MS12 [2.0.0-alpha]'
+   version: 'PSI-DOC-VERSION'
    author: 'Wolfgang Robben'
    message: 'No update, PSI Phase 2 version bump.'
 =end
@@ -122,3 +122,7 @@ The following sections heavily refer to terms, abbreviations and definitions def
 # A User Story: Demonstration of capabilities
 
 @include [userstory](userstory.md)
+
+# Extended User Journeys: End-to-End Satellite Service Delivery
+
+@include [extended_journey](extended_journey.md)

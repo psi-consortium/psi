@@ -33,9 +33,6 @@
                     "403": {
                         "$ref": "#/components/responses/403"
                     },
-                    "404": {
-                        "$ref": "#/components/responses/404"
-                    },
                     "405": {
                         "$ref": "#/components/responses/405"
                     },
@@ -55,7 +52,7 @@
                     "quote"
                 ],
                 "summary": "Creates a Quote",
-                "description": "This operation creates a Quote entity.",
+                "description": "This operation creates a Quote entity. The quote is always created, and the operation is answered with 201 only, whatever the value of instantSyncQuote: the response carries the quote either priced, in state approved, or in state rejected, or in a state that is not final (acknowledged or inProgress), in which case it is priced afterwards. An Expect: 202-Accepted header is ignored.",
                 "operationId": "createQuote",
                 "parameters": [
                     {
@@ -69,9 +66,6 @@
                     "201": {
                         "$ref": "#/components/responses/201Quote"
                     },
-                    "202": {
-                        "description": "Accepted"
-                    },
                     "400": {
                         "$ref": "#/components/responses/400"
                     },
@@ -81,24 +75,11 @@
                     "403": {
                         "$ref": "#/components/responses/403"
                     },
-                    "404": {
-                        "$ref": "#/components/responses/404"
-                    },
                     "405": {
                         "$ref": "#/components/responses/405"
                     },
-                    "409": {
-                        "$ref": "#/components/responses/409"
-                    },
                     "422": {
-                        "description": "Unprocessable Content",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Error"
-                                }
-                            }
-                        }
+                        "$ref": "#/components/responses/422"
                     },
                     "500": {
                         "$ref": "#/components/responses/500"
@@ -157,14 +138,7 @@
                         "$ref": "#/components/responses/409"
                     },
                     "422": {
-                        "description": "Unprocessable Content",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Error"
-                                }
-                            }
-                        }
+                        "$ref": "#/components/responses/422"
                     },
                     "500": {
                         "$ref": "#/components/responses/500"
@@ -174,6 +148,420 @@
                     },
                     "503": {
                         "$ref": "#/components/responses/503"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "quote"
+                ],
+                "summary": "Deletes a Quote",
+                "description": "This operation deletes a Quote entity.",
+                "operationId": "deleteQuote",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/Id"
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "$ref": "#/components/responses/202"
+                    },
+                    "204": {
+                        "$ref": "#/components/responses/204"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "405": {
+                        "$ref": "#/components/responses/405"
+                    },
+                    "409": {
+                        "$ref": "#/components/responses/409"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    },
+                    "503": {
+                        "$ref": "#/components/responses/503"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "QuoteStateType": {
+                "enum": [
+                    "acknowledged",
+                    "rejected",
+                    "pending",
+                    "inProgress",
+                    "cancelled",
+                    "approved",
+                    "accepted",
+                    "refused"
+                ],
+                "type": "string",
+                "description": "Possible values for the state of the quote. In PSI, the state in which the customer rejects an approved quote is named refused (rejected in TMF648); rejected is the state of a quote that failed the business validation; declined is not used."
+            },
+            "QuoteErrorMessage": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/Extensible"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "code": {
+                                "type": "string",
+                                "description": "error code"
+                            },
+                            "reason": {
+                                "type": "string",
+                                "description": "Explanation of the reason for the error"
+                            },
+                            "message": {
+                                "type": "string",
+                                "description": "More details and corrective actions related to the error"
+                            },
+                            "status": {
+                                "type": "string",
+                                "description": "error code extension like sys-ABC-2001"
+                            },
+                            "referenceError": {
+                                "type": "string",
+                                "description": "URI of documentation describing the error"
+                            },
+                            "timestamp": {
+                                "type": "string",
+                                "description": "Date when the error happened",
+                                "format": "date-time"
+                            },
+                            "quoteItem": {
+                                "type": "array",
+                                "description": "A list of quote item references corresponded to this error",
+                                "items": {
+                                    "$ref": "#/components/schemas/QuoteItemRef"
+                                }
+                            }
+                        },
+                        "description": "A QuoteErrorMessage represents an error that causes a status change in a quote, as the ProductOrderErrorMessage of TMF622 for a product order."
+                    }
+                ],
+                "discriminator": {
+                    "propertyName": "@type",
+                    "mapping": {
+                        "QuoteErrorMessage": "#/components/schemas/QuoteErrorMessage"
+                    }
+                }
+            },
+            "QuoteErrorMessage_FVO": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/Extensible_FVO"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "code": {
+                                "type": "string",
+                                "description": "error code"
+                            },
+                            "reason": {
+                                "type": "string",
+                                "description": "Explanation of the reason for the error"
+                            },
+                            "message": {
+                                "type": "string",
+                                "description": "More details and corrective actions related to the error"
+                            },
+                            "status": {
+                                "type": "string",
+                                "description": "error code extension like sys-ABC-2001"
+                            },
+                            "referenceError": {
+                                "type": "string",
+                                "description": "URI of documentation describing the error"
+                            },
+                            "timestamp": {
+                                "type": "string",
+                                "description": "Date when the error happened",
+                                "format": "date-time"
+                            },
+                            "quoteItem": {
+                                "type": "array",
+                                "description": "A list of quote item references corresponded to this error",
+                                "items": {
+                                    "$ref": "#/components/schemas/QuoteItemRef_FVO"
+                                }
+                            }
+                        },
+                        "description": "A QuoteErrorMessage represents an error that causes a status change in a quote, as the ProductOrderErrorMessage of TMF622 for a product order."
+                    }
+                ],
+                "discriminator": {
+                    "propertyName": "@type",
+                    "mapping": {
+                        "QuoteErrorMessage": "#/components/schemas/QuoteErrorMessage_FVO"
+                    }
+                }
+            },
+            "QuoteErrorMessage_MVO": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/Extensible"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "code": {
+                                "type": "string",
+                                "description": "error code"
+                            },
+                            "reason": {
+                                "type": "string",
+                                "description": "Explanation of the reason for the error"
+                            },
+                            "message": {
+                                "type": "string",
+                                "description": "More details and corrective actions related to the error"
+                            },
+                            "status": {
+                                "type": "string",
+                                "description": "error code extension like sys-ABC-2001"
+                            },
+                            "referenceError": {
+                                "type": "string",
+                                "description": "URI of documentation describing the error"
+                            },
+                            "timestamp": {
+                                "type": "string",
+                                "description": "Date when the error happened",
+                                "format": "date-time"
+                            },
+                            "quoteItem": {
+                                "type": "array",
+                                "description": "A list of quote item references corresponded to this error",
+                                "items": {
+                                    "$ref": "#/components/schemas/QuoteItemRef_MVO"
+                                }
+                            }
+                        },
+                        "description": "A QuoteErrorMessage represents an error that causes a status change in a quote, as the ProductOrderErrorMessage of TMF622 for a product order."
+                    }
+                ],
+                "discriminator": {
+                    "propertyName": "@type",
+                    "mapping": {
+                        "QuoteErrorMessage": "#/components/schemas/QuoteErrorMessage_MVO"
+                    }
+                }
+            }
+        },
+        "requestBodies": {
+            "Quote_FVO": {
+                "description": "The Quote to be created",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Quote_FVO"
+                        }
+                    }
+                },
+                "required": true
+            },
+            "Quote_MVO": {
+                "description": "The Quote to be patched",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Quote_MVO"
+                        }
+                    },
+                    "application/merge-patch+json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Quote_MVO"
+                        }
+                    },
+                    "application/json-patch+json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/JsonPatchOperations"
+                        }
+                    },
+                    "application/json-patch-query+json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/JsonPatchOperations"
+                        }
+                    }
+                },
+                "required": true
+            }
+        },
+        "responses": {
+            "200QuoteArray": {
+                "description": "Success",
+                "headers": {
+                    "X-Total-Count": {
+                        "$ref": "#/components/headers/X-Total-Count"
+                    },
+                    "X-Result-Count": {
+                        "$ref": "#/components/headers/X-Result-Count"
+                    }
+                },
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/components/schemas/Quote_RES"
+                            }
+                        }
+                    }
+                }
+            },
+            "200Quote_Get": {
+                "description": "Success",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Quote_RES"
+                        }
+                    }
+                }
+            },
+            "200Quote_Patch": {
+                "description": "Success",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Quote_RES"
+                        }
+                    }
+                }
+            },
+            "201Quote": {
+                "description": "Created",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Quote_RES"
+                        }
+                    }
+                }
+            },
+            "202": {
+                "description": "Accepted"
+            },
+            "204": {
+                "description": "Deleted"
+            },
+            "400": {
+                "description": "Bad Request",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Error"
+                        }
+                    }
+                }
+            },
+            "401": {
+                "description": "Unauthorized",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Error"
+                        }
+                    }
+                }
+            },
+            "403": {
+                "description": "Forbidden",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Error"
+                        }
+                    }
+                }
+            },
+            "404": {
+                "description": "Not Found",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Error"
+                        }
+                    }
+                }
+            },
+            "405": {
+                "description": "Method Not allowed",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Error"
+                        }
+                    }
+                }
+            },
+            "409": {
+                "description": "Conflict",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Error"
+                        }
+                    }
+                }
+            },
+            "422": {
+                "description": "Unprocessable Content",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Error"
+                        }
+                    }
+                }
+            },
+            "500": {
+                "description": "Internal Server Error",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Error"
+                        }
+                    }
+                }
+            },
+            "501": {
+                "description": "Not Implemented",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Error"
+                        }
+                    }
+                }
+            },
+            "503": {
+                "description": "Service Unavailable",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Error"
+                        }
                     }
                 }
             }

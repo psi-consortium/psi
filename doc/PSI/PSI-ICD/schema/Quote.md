@@ -7,7 +7,7 @@
 
 | Field | Type | Format | Required |
 | ------- | ------- | ------- | --- |
-| id | string | N/A | No |
+| id | string | N/A | Yes |
 | href | string | uri | No |
 | description | string | N/A | No |
 | agreement | array | AgreementRef | No |
@@ -30,6 +30,7 @@
 | quoteItem | array | QuoteItem | No |
 | creationDate | string | date-time | No |
 | effectiveQuoteCompletionDate | string | date-time | No |
+| quoteErrorMessage | array | QuoteErrorMessage | No |
 | channel | ChannelRef | N/A | No |
 | @baseType | string | N/A | No |
 | @schemaLocation | string | N/A | No |

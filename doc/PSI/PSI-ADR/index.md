@@ -101,9 +101,15 @@ dcr_overrides:
  - dcr:
    from: '2026-07-27'
    to: '2026-07-31'
-   version: 'MS12 [2.0.0-alpha]'
+   version: 'PSI-DOC-VERSION'
    author: 'Wolfgang Robben'
    message: 'No update, PSI Phase 2 version bump.'
+ - dcr:
+   from: '2026-11-10'
+   to: '2026-11-20'
+   version: 'PSI-DOC-VERSION'
+   author: 'Kinga Kocierz'
+   message: 'Accepted ADR044 on the deviations of PSID648 Quote Management from TMF648 and ADR045 on the scope of a product modification.'
  =end
 
 # Document Meta Information
