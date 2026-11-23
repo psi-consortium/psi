@@ -11,8 +11,6 @@
 skinparam actor {
   BackgroundColor<< 0 >> 	SteelBlue
   BorderColor<< 0 >> 		SteelBlue
-  BackgroundColor<< 3 >> 	Red
-  BorderColor<< 3 >> 		Red
 }
 
 skinparam entity{
@@ -21,14 +19,12 @@ skinparam entity{
 }
 
 Customer << 0 >>
-Governance << 3 >>
 entity PSS << 2 >> as PSS1
 
 rectangle "PSI" {
   interface "PSS-USR I/F" as I1
   interface "PSS-PVD I/F" as I2
   interface "PSS-PSS I/F" as I3
-  interface "PSS-GOV I/F" as I4
 }
 
 package "PSS" {
@@ -49,8 +45,6 @@ PSS1 --      I2
 I2 --        OperationP
 PSS1 --      I3
 I3 --        OperationO
-Governance -- I4
-I4 --        Operation
 
 @enduml
 

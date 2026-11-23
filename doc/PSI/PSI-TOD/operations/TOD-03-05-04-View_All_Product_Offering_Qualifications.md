@@ -11,8 +11,6 @@
 skinparam actor {
   BackgroundColor<< 0 >> 	SteelBlue
   BorderColor<< 0 >> 		SteelBlue
-  BackgroundColor<< 3 >> 	Red
-  BorderColor<< 3 >> 		Red
 }
 
 skinparam entity{
@@ -21,14 +19,12 @@ skinparam entity{
 }
 
 Customer << 0 >>
-Governance << 3 >>
 entity PSS << 2 >> as PSS1
 
 rectangle "PSI" {
   interface "PSS-USR I/F" as I1
   interface "PSS-PVD I/F" as I2
   interface "PSS-PSS I/F" as I3
-  interface "PSS-GOV I/F" as I4
 }
 
 package "PSS" {
@@ -49,8 +45,6 @@ PSS1 --      I2
 I2 --        OperationP
 PSS1 --      I3
 I3 --        OperationO
-Governance -- I4
-I4 --        Operation
 
 @enduml
 
@@ -66,7 +60,7 @@ Product Offering Qualifications exist in the PSS or Provider datastore.
 
 Retrieves the qualifications the client may read via a standard interface specification, page by page with *offset* and *limit* (see [PSI-ICD], High-Level Connection).
 A server may also offer filtering by attributes, e.g. by *state* or by *qualificationResult*; as for every list in PSI, filtering is optional (PSI-ICD).
-The customer lists its qualifications at the PSS; the PSS lists the qualifications it created at a provider or at another PSS.
+The customer lists their qualifications at the PSS; the PSS lists the qualifications it created at a provider or at another PSS.
 
 The list contains only qualifications the client may read: those it created, unless their owner extended the access (see [PSI-ICD], Authorization and Data Visibility).
 When none matches, or the *offset* lies beyond the end of the list, the answer is `200` with an empty list, not an error.

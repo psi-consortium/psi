@@ -48,7 +48,7 @@ J   ..> PO  : without POQ and quote
 Whether a qualification is required before an order is accepted is not defined by the interface; it may be required by the provider, by the governance of the PSS or by the PSS implementer, and it may depend on the product and on the provider's processes.
 
 Who requests the qualification is not defined by the interface either.
-The customer may qualify the offerings of its choice.
+The customer may qualify the offerings of their choice.
 The PSS may also qualify offerings automatically, on behalf of its customer, e.g. the offerings that a customer inquiry returned, right after the inquiry.
 This is an option under conditions that the PSS defines, e.g. that the configuration of each item can be completed without the customer, from the inquiry result or from the product catalog; whether a PSS offers it, and under which conditions, is left to the PSS implementer.
 
@@ -60,7 +60,7 @@ A quote or a product order that refers to a qualification keeps the characterist
 
 **Content of a qualification**
 
-The customer qualifies offerings it selected from the results of a customer inquiry or from the product catalog.
+The customer qualifies offerings they selected from the results of a customer inquiry or from the product catalog.
 A qualification carries one item per selected offering; it may carry several items, also for the offerings of different providers.
 Each item carries the full configuration the customer wants, as characteristics of the product, and the quantity asked for.
 
@@ -92,7 +92,7 @@ Table: Product Offering Qualification Content Taken Over and Completed. {#tbl:pr
 * The place of delivery is a characteristic of the product where its product schema defines one, e.g. the location of the satellite access link trunk (*ipUniAccessLinkTrunk.location* of a Basic Internet Access), and *product.place* is then not used; a product whose schema defines no place, e.g. a satellite terminal, carries it in *product.place*.
 * The price of the result (*totalPrice*) is not taken over: a qualification carries no price, the quote fixes it.
 * The inquired providers (*inquiredProvider*) are not taken over: each offering has exactly one provider, which the PSS knows from its product catalog.
-* The estimated usage (*inquiredProduct.estimatedUsage*), the resources the customer already has (*customerResource*) and the customer profile (*customerProfile*) are not taken over either: the inquiry has already taken them into account in the offerings it returned, and the qualification refers to the customer only by its party (*relatedParty*).
+* The estimated usage (*inquiredProduct.estimatedUsage*), the resources the customer already has (*customerResource*) and the customer profile (*customerProfile*) are not taken over either: the inquiry has already taken them into account in the offerings it returned, and the qualification refers to the customer only by their party (*relatedParty*).
 * Where the inquiry result names only a product specification, without an offering, because the product needs a tailored offering (RFQ or ITT, see [TOD-03-01](#tod-03-01-customerinquirymanagement)), there is nothing to qualify yet: a qualification needs a product offering.
 
 **Changes to an active product**
@@ -111,7 +111,8 @@ The PSS informs the customer in the same way about every change of state of its 
 An event carries the whole qualification, so the client does not need to retrieve it (see [TOD-01-02-03](#tod-01-02-03-dispatchevent)).
 The requests and events of a qualification carry the trace context and the correlation identifier as described in [PSI-ICD], Observability.
 
-The following sequence shows a qualification that the PSS passes to a provider.
+The following sequence shows a qualification that the PSS passes to a provider and processes asynchronously: the PSS answers once it has validated the request, and passes the items on afterwards.
+A PSS that wants to return the result at once, when the client asks for it (*instantSyncQualification*), passes the items on before it answers (see Synchronous and asynchronous processing below).
 The PSS sets its own qualification `inProgress` as soon as it has passed the items on; it does not wait for the state of the qualification at the provider.
 
 ```plantuml
@@ -188,6 +189,7 @@ The state and the result of a qualification are separate:
 * The **state** says how far the processing has got (see the lifecycle below).
 * The **result** of each item says what the server answered, the provider or the PSS itself: `green` if the item can be delivered as requested, `yellow` if that cannot be fully confirmed, `red` if it cannot be delivered as requested.
   An item that is `yellow` or `red` may carry alternative proposals, where the client asked for them (*provideAlternative*).
+  Besides the answer of the provider, the result may reflect rules of the governance of the PSS, e.g. a policy that does not allow a customer an offering; how the PSS applies them is up to its implementation.
   The result of the whole qualification, and of an item that contains other items, follows from the results of its items:
   * `red` as soon as one item is `red`, even while other items have no result yet;
   * otherwise, once every item has its result, `yellow` if at least one item is `yellow`;
@@ -196,6 +198,7 @@ The state and the result of a qualification are separate:
   A `yellow` item does not yet decide the result of the whole: the server waits for the other items, since an item that is still open may end `red`, which makes the whole `red`.
 
 The server may state until when the result is valid (*expirationDate*); without it, the interface does not define how long the result is valid, e.g. the provider may apply rules of its own.
+When the PSS combines the results of several providers or other PSSs, how it sets its date is up to its implementation, e.g. the earliest of their dates.
 After that date the qualification stays `done`.
 Whether a quote or a product order may refer to a qualification whose result has expired, and whether a `red` or `yellow` result prevents a quote or an order for the item, is up to the implementation.
 
@@ -274,21 +277,20 @@ Task  ..> O4    : <<includes>>
 |                                              |  Customer  | Provider | Other PSS | Governance |    PSS     |
 |----------------------------------------------|:----------:|:--------:|:---------:|:----------:|:----------:|
 | **Create Product Offering Qualification**    | \checkmark |          | \checkmark |            | \checkmark |
-| **Update Product Offering Qualification**    | \checkmark |          | \checkmark | \checkmark | \checkmark |
-| **View Product Offering Qualification**      | \checkmark |          | \checkmark | \checkmark | \checkmark |
-| **View All Product Offering Qualifications** | \checkmark |          | \checkmark | \checkmark | \checkmark |
+| **Update Product Offering Qualification**    | \checkmark |          | \checkmark |            | \checkmark |
+| **View Product Offering Qualification**      | \checkmark |          | \checkmark |            | \checkmark |
+| **View All Product Offering Qualifications** | \checkmark |          | \checkmark |            | \checkmark |
 
 Table: Product Offering Qualification Management Matrix. {#tbl:product-offering-qualification-management-matrix}
 
 Please note that the endpoints are implemented on two interfaces.
-The PSS implements them for its customers, for its governance and for other PSSs that act as its customers, e.g. in a distributed scenario (columns Customer, Governance and Other PSS).
+The PSS implements them for its customers and for other PSSs that act as its customers, e.g. in a distributed scenario (columns Customer and Other PSS).
 The provider of an offering, and another PSS that offers it, implement them for the PSS, which acts as the client (column PSS).
 The provider does not call the qualification endpoints of the PSS; it informs the PSS by notifications.
 The interface also contains the removal of a qualification (`DELETE`), which is not mapped to an operation: it is meant for the governance of a server, not for a client, and whether a server offers it is up to its implementation; a server that does not answers `405`.
 A client that no longer needs a qualification cancels it (see [TOD-03-05-02](#tod-03-05-02-updateproductofferingqualification)): cancelling only changes the state of the qualification, which stays retrievable, while the removal deletes it.
 
 As for every entity in PSI, a client reads and changes only the qualifications it created, unless their owner extends the access, e.g. to other persons of the same organisation (see [PSI-ICD], Authorization and Data Visibility).
-The governance of the PSS reads and changes all qualifications of the PSS.
 A client that acts for several customers, e.g. an aggregator, therefore sees all qualifications it created; whether and how it names the customer concerned, e.g. in *relatedParty*, is up to the implementation.
 A request for a qualification the client may not access is answered with `403`, as distinct from `404`, which means that the identifier is unknown.
 
