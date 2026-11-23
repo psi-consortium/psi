@@ -58,7 +58,7 @@
                     "checkProductOfferingQualification"
                 ],
                 "summary": "Creates a CheckProductOfferingQualification",
-                "description": "This operation creates a CheckProductOfferingQualification entity. The qualification is always created, and the operation is answered with 201 only, whatever the value of instantSyncQualification: the response carries the qualification either in its final state with the result, or in a state that is not final (acknowledged or inProgress). An Expect: 202-Accepted header is ignored.",
+                "description": "This operation creates a CheckProductOfferingQualification entity. The qualification is always created, and the operation is answered with 201 only, whatever the value of instantSyncQualification: the response carries the qualification either in its final state with the result, or in a state that is not final (acknowledged or inProgress).",
                 "operationId": "createCheckProductOfferingQualification",
                 "parameters": [
                     {
@@ -105,7 +105,7 @@
                     "checkProductOfferingQualification"
                 ],
                 "summary": "Updates partially a CheckProductOfferingQualification",
-                "description": "This operation updates partially a CheckProductOfferingQualification entity. A client may change the attributes it sets, including the items, and may cancel the qualification by setting state to cancelled; it cannot set any other state, nor the attributes set by the server. The server decides which changes it accepts in which state.",
+                "description": "This operation updates partially a CheckProductOfferingQualification entity. A client may change the attributes it sets, including the items, and may cancel the qualification by setting state to cancelled; it cannot set any other state, nor the attributes that only the server can modify. The server decides which changes it accepts in which state.",
                 "operationId": "patchCheckProductOfferingQualification",
                 "parameters": [
                     {
@@ -293,7 +293,7 @@
             },
             "QualificationItemResultType": {
                 "type": "string",
-                "description": "PSI closed vocabulary for the result of a qualification item, fixed for interoperability between PSSs and providers. green = the provider can deliver the requested product offering or product specification as requested (configuration, place and date); no alternatives are proposed. yellow = the provider cannot fully confirm that it can deliver the item as requested; alternatives may be proposed. red = the provider cannot deliver the item as requested; alternatives may be proposed. Alternatives are carried in alternateProductOfferingProposal. For an item that contains other items (a bundle) the result is derived from the contained items: red as soon as any completed contained item is red; once every contained item is completed, yellow if any of them is yellow, otherwise green; absent until then. Replaces the free-form string of TMF679 v5; the values follow the example TMF679 v5 gives for the overall result and the serviceabilityConfidence of MEF LSO Sonata.",
+                "description": "PSI closed vocabulary for the result of a qualification item, fixed for interoperability between PSSs and providers. green = the provider can deliver the requested product offering as requested (configuration, place and date); no alternatives are proposed. yellow = the provider cannot fully confirm that it can deliver the item as requested; alternatives may be proposed. red = the provider cannot deliver the item as requested; alternatives may be proposed. Alternatives are carried in alternateProductOfferingProposal. For an item that contains other items (a bundle) the result is derived from the contained items: red as soon as any completed contained item is red; once every contained item is completed, yellow if any of them is yellow, otherwise green; absent until then. Replaces the free-form string of TMF679 v5; the values follow the example TMF679 v5 gives for the overall result and the serviceabilityConfidence of MEF LSO Sonata.",
                 "enum": [
                     "green",
                     "yellow",

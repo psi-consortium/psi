@@ -12,7 +12,7 @@
 | qualificationItemRelationship | array | ProductOfferingQualificationItemRelationship_FVO | No |
 | CheckProductOfferingQualificationItem | array | CheckProductOfferingQualificationItem_FVO | No |
 | note | array | Note | No |
-| product | ProductRefOrValue_FVO | N/A | No |
+| product | ProductRefOrValue_FVO | N/A | Yes |
 | category | CategoryRef | N/A | No |
 | productOffering | ProductOfferingRef | N/A | No |
 | action | ItemActionType | N/A | Yes |
