@@ -25,6 +25,7 @@ jobs:
         uses: ./.github/workflows/document-build.yml
         with:
             draft: false
+            version: ${{ github.ref_name }}
 
     release:
         name: Release

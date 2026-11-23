@@ -132,6 +132,10 @@ class GenerateRestApiSchemasTask extends DefaultTask {
             logger.error(name + " diverging in format: " + schemaA.format + " != " + schemaB.format)
             return false
         }
+        if (schemaA.enum?.toSet() != schemaB.enum?.toSet()) {
+            logger.error(name + " diverging in enum values: " + schemaA.enum + " != " + schemaB.enum)
+            return false
+        }
         if (schemaA.minItems != schemaB.minItems) {
             logger.error(name + " diverging in minItems: " + schemaA.minItems + " != " + schemaB.minItems)
             return false
