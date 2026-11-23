@@ -1,3 +1,5 @@
+=begin
+
 # SAR Model Notes — Design Commentary
 
 **Version 0.11** · **author: DO**
@@ -5,6 +7,8 @@
 `SAR-model-UML-EN_DO_v0.11.puml`
 
 ---
+
+=end
 
 > **What this file is.** The reasoning behind the model, one section per class:
 > why each construct is shaped the way it is, and what goes wrong under the
@@ -55,6 +59,8 @@ a configuration mixing archive attributes with tasking attributes is
 | `ArchiveAccess` | archive depth, update latency, delivery latency, catalogue interface, scene references, standing access |
 | `TaskingAccess` | service tiers, acquisition patterns, scheduling bounds, exclusivity |
 
+Table: AccessProfile subtypes. {#tbl:sar-access-subtypes}
+
 **Both subtypes carry `orderingMode`, and the base class does not.** How the
 buyer names what they want is the axis that decides whether an order carries a
 geometry and a time window or a reference to a candidate pass, so both sides of
@@ -97,6 +103,8 @@ where the images are taken anyway, without the buyer's involvement.
 | `SingleAcquisition` | retask after a failed acquisition | one image within a window |
 | `RecurringAcquisition` | cadence, repetition count, iteration failure policy, conditions between members | *n* images in a rhythm |
 | `ContinuousAcquisition` | coverage period | whatever can be acquired within the period |
+
+Table: AcquisitionPattern subtypes. {#tbl:sar-acquisition-pattern-subtypes}
 
 **Why subtypes rather than one field with rules.** The attribute sets are
 disjoint **in three directions**: cadence is meaningless for `SINGLE` and
@@ -157,6 +165,8 @@ rather than merely a selectable one.
 |---|---|
 | `SPOTLIGHT`, `SLIDING_SPOTLIGHT` | `SceneCoverage` |
 | `STRIPMAP`, `PARALLEL_STRIPMAP`, `SCANSAR`, `TOPSAR` | `SwathCoverage` |
+
+Table: CoverageGeometry subtypes by collection strategy. {#tbl:sar-coverage-subtypes}
 
 The notion of a *swath* **does not exist** in scene modes — the radar does not
 sweep a strip, it stares at one point while rotating the beam. Conversely, in
@@ -228,6 +238,8 @@ confusion:
 | `basis = PREDICTED_BUDGET` | **where the number came from** — that it is a design budget rather than the result of a calibration campaign |
 | `ephemerisClass = PREDICTED` | **for which input data it holds** — that it applies to predicted ephemeris |
 
+Table: GeolocationAccuracy fields. {#tbl:sar-geolocation-fields}
+
 The axes are independent: a **measured** value for a **predicted** orbit is the
 most common case in performance reports.
 
@@ -277,6 +289,8 @@ three concepts at once; these do not fold into one another:
 | `exportControl` | which **export-control regime** applies |
 | `securityClassification` | which state **classification** |
 
+Table: LicensingProfile fields. {#tbl:sar-licensing-fields}
+
 The split was necessary because the query "available commercially to an EU buyer"
 was unanswerable against a single field.
 
@@ -308,6 +322,8 @@ of them were already carried:
 | temporal — interval between consecutive members | recurring tasking, InSAR | `cadenceMin` / `cadenceMax` |
 | quantitative — size of the set | recurring and continuous tasking | `repetitionCountMin` / `Max` |
 | geometric — baselines, burst synchronisation | InSAR only | **`MemberConstraint`** |
+
+Table: Constraint dimensions and their carriers. {#tbl:sar-member-constraint-dimensions}
 
 An interferometric set with a twelve-day repeat cycle **is** a recurring order
 with a cadence of twelve days, plus a condition on the perpendicular baseline.
@@ -405,6 +421,8 @@ the reader through twenty fields with no indication of which ones relate to whic
 | Product Definition (theoretical) | **1 dB at 3σ** |
 | Annual Performance Report 2025 (measured) | **0.317 dB at 1σ** |
 
+Table: One radiometric quantity as stated by two ESA sources. {#tbl:sar-radiometric-sources}
+
 Converted: 0.317 × 3 ≈ **0.95 dB at 3σ**, i.e. essentially what the declaration
 says. **The figures agree.** But anyone comparing "1 dB" against "0.317 dB"
 without the multiplier concludes a threefold improvement, which is wrong.
@@ -428,6 +446,8 @@ ambiguities in two different ways:
 |---|---|---|---|
 | **target-type** | distributed versus point | ESA | DTAR −22.3 dB · PTAR −32.2 dB |
 | **directional** | azimuth versus range | ICEYE | separately per direction |
+
+Table: Conventions for splitting radiometric ambiguities. {#tbl:sar-ambiguity-conventions}
 
 The 10 dB gap between DTAR and PTAR shows these are **not alternative names for
 the same thing**. All four fields are therefore optional `[0..1]` — a vendor
@@ -475,6 +495,8 @@ ordinary uncertainty.
 | `revisitTime*` | how often a place can be **observed** from any geometry |
 | `repeatCycle` | after how many days the satellite returns to **exactly the same track** |
 
+Table: RevisitProfile fields. {#tbl:sar-revisit-fields}
+
 A constellation can have six-hour revisit and **be unusable for InSAR** if it does
 not control its orbital track. Conversely, a mission on a twelve-day cycle can be
 excellent interferometrically while having poor revisit. InSAR requires
@@ -501,6 +523,8 @@ The distinction is easy to blur and worth keeping sharp:
 |---|---|---|
 | **subtype selector** | splits into **disjoint** attribute sets carried by subclasses | `accessMode`, `collectionStrategy`, `patternType` |
 | **classifier** | creates no subclasses; makes some attributes inapplicable, but the sets **overlap heavily** | `productType` |
+
+Table: Classifier versus subtype selector. {#tbl:sar-classifier-vs-selector}
 
 `SLC` and `GRD` share most of their attributes. The difference is that some apply
 to one and not the other, and vice versa. That is an inapplicability rule, not a
@@ -574,6 +598,8 @@ in operational use.
 | `TARGET` | the vendor measures and publishes attainment, with no remedy on failure |
 | `GUARANTEED` | a contractual commitment with consequences on breach |
 
+Table: Service commitment levels. {#tbl:sar-commitment-levels}
+
 The same mechanism as in `Resolution` and `GeolocationAccuracy`: a number without
 its qualifier is uninterpretable, so the qualifier becomes structurally
 inseparable.
@@ -603,6 +629,8 @@ which is why this class has to declare which modes the product accepts:
 |---|---|
 | `BY_SCENE` | a **cut-out** from the referenced scene — must lie inside it (W-15) |
 | `BY_CONSTRAINT`, `BY_OPPORTUNITY` | a **target** — an area to cover or photograph |
+
+Table: Meaning of the requested area by ordering mode. {#tbl:sar-requested-area}
 
 With `clippingSupported = false` the buyer always receives the **full acquisition
 footprint**, and a cut-out is inapplicable under `BY_SCENE` (W-16). In every mode
@@ -638,6 +666,8 @@ campaign needs that difference, and the geometry alone will not tell them.
 | `targetAreaMin` / `Max` | the **seller** — bounds on the size of the requested area |
 | `clippingSupported` | the **seller** — a product capability |
 
+Table: Who sets which TargetProfile field. {#tbl:sar-target-field-owners}
+
 One configurable field and four declaring domain - and one more thing the buyer
 sets which is not in this list at all, because it is not a characteristic.
 
@@ -649,6 +679,8 @@ sets which is not in this list at all, because it is not a characteristic.
 | `requestedAoi` | what the buyer asked for | inquiry, qualification, order |
 | `acquisitionFootprint` | what the satellite actually imaged | the product inventory |
 | `deliveredExtent` | what the buyer can actually download | the product inventory |
+
+Table: Kinds of area in the ordering chain. {#tbl:sar-area-kinds}
 
 The last three travel as `RelatedPlaceRefOrValue.role`. Collapsing the first two
 loses the refusal; collapsing the last two makes the **clip invisible**. Section
@@ -674,6 +706,8 @@ the characteristic's domain (`valueFrom`).
 | Commercial 3h | `COMMERCIAL` | 12 h | 3 h | > 90% |
 | Commercial 8h | `COMMERCIAL` | 12 h | 8 h | > 90% |
 | Background 24h | `BACKGROUND` | 24 h | 24 h | not published |
+
+Table: ICEYE tasking tiers. {#tbl:sar-iceye-tiers}
 
 **`minLeadTime` belongs in the tuple, not on `TaskingAccess`.** ICEYE states it
 **per priority** (Table 3-2: Commercial 12 h, Background 24 h), so one number per
@@ -706,6 +740,10 @@ own density limiter, but the documentation gives no evidence that a second,
 independent limit exists. One quantity under two names is the error already found
 once, at `pixelSpacing*`.
 
+=begin
+
 ---
 
 **Version:** 0.11 · **author:** DO
+
+=end
