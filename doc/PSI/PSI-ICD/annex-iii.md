@@ -74,6 +74,10 @@ The following sections heavily refer to terms, abbreviations and definitions def
 
 @include [SAR-model-notes](annex-iii/SAR-model-notes.md)
 
+{#page:beginlandscape}
+
 # SAR Model UML
 
-![SAR product specification UML model](annex-iii/SAR-model-UML.svg){#fig:sar-model-uml}
+@include [SAR product specification UML model](annex-iii/SAR-model-UML.puml){#fig:sar-product-model width=130%}
+
+{#page:endlandscape}

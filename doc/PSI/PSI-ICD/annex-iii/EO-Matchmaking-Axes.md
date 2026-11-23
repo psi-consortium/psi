@@ -8,33 +8,33 @@
 
 ## 1. Where matchmaking sits
 
-Matchmaking is **step ② and ③** of the PSI customer journey. Two further steps follow that are
+Matchmaking is **step 2 and 3** of the PSI customer journey. Two further steps follow that are
 often confused with it, and keeping them apart decides which attributes may be used as axes at
 all.
 
 ```
- ①  Mission                  what I need, where, when — no market involved
- ②  Customer Inquiry         "what is on the market for these characteristics"
+ 1  Mission                  what I need, where, when — no market involved
+ 2  Customer Inquiry         "what is on the market for these characteristics"
      + matchmaking            PSS, on catalogue data
- ③  InquiryResult[]          which offerings fit and how well
- ④  Availability Discovery   "which CONFIGURATIONS are deliverable in MY context"
- ⑤  Pricing Discovery        "what does each cost, from the price list"
- ⑥  Quote                    only when ④⑤ could not answer
- ⑦  POQ                      "may THIS be sold to THIS customer in THIS place"
- ⑧  Stock → ⑨ Order
+ 3  InquiryResult[]          which offerings fit and how well
+ 4  Availability Discovery   "which CONFIGURATIONS are deliverable in MY context"
+ 5  Pricing Discovery        "what does each cost, from the price list"
+ 6  Quote                    only when step 4/5 could not answer
+ 7  POQ                      "may THIS be sold to THIS customer in THIS place"
+ 8  Stock → 9 Order
 ```
 
 **Three different questions, three different APIs, three different knowledge bases:**
 
 | Step | Question | Who answers, from what |
 |---|---|---|
-| **②③ Matchmaking** | What is on the market for these characteristics? | PSS, from **catalogue data** — what a provider can do *in general* |
-| **④ Availability** | Can this be delivered over *my* area, in *my* window? | Provider, from **technical inventory** — capacity, coverage, contention |
-| **⑦ POQ** | May this be sold to *this* customer? | Provider, from the **commercial relationship** — contract, quota, clearance |
+| **2/3 Matchmaking** | What is on the market for these characteristics? | PSS, from **catalogue data** — what a provider can do *in general* |
+| **4 Availability** | Can this be delivered over *my* area, in *my* window? | Provider, from **technical inventory** — capacity, coverage, contention |
+| **7 POQ** | May this be sold to *this* customer? | Provider, from the **commercial relationship** — contract, quota, clearance |
 
 This matters because a catalogue does not know context. A specification saying the product
 covers 1–10 000 km² does not say that *this* AOI is coverable next Tuesday. Matchmaking can
-only filter on what the catalogue knows; everything else belongs to ④ or ⑦.
+only filter on what the catalogue knows; everything else belongs to step 4 or 7.
 
 > **Consequence for this document.** An attribute is a matchmaking axis only if its value is
 > knowable from the catalogue. Section 3 assigns each candidate gate to its proper layer, and
@@ -346,7 +346,7 @@ These follow from what each use case physically requires. **They are not directl
 in the current API** — see gap M-1 — so they are offered as the ranking the PSS should apply,
 not as something the buyer can state.
 
-> **What `≫` means here.** It means *contributes more to the score in stage 2*, not
+> **What `>>` means here.** It means *contributes more to the score in stage 2*, not
 > *overrides*. All constraints still hold as a conjunction (§4.2): an offering that wins on the
 > leftmost axis and fails a bound on the rightmost is **excluded**, not ranked first. The
 > ordering decides how much an unmet **preference** costs, never whether a **requirement** can
@@ -354,21 +354,21 @@ not as something the buyer can state.
 
 ### 7.1 Emergency response and rapid mapping
 **Gates:** access `TASKING` · licence permits humanitarian use
-**Ranking:** A3 ≫ A2 ≫ A19 > A1 > A4
+**Ranking:** A3 >> A2 >> A19 > A1 > A4
 
 Speed dominates. A 3 m image today beats a 0.5 m image in four days. `collectionSuccessRate`
 ranks unusually high because a missed acquisition is not a delay, it is a failure.
 
 ### 7.2 Change detection and monitoring
 **Gates:** `acquisitionPattern` contains `RECURRING` or `CONTINUOUS`
-**Ranking:** A5 ≈ A15 ≫ A1 > A9
+**Ranking:** A5 = A15 >> A1 > A9
 
 The rhythm and its reliability matter, not any single image. Geolocation accuracy ranks higher
 than usual because scenes must overlay each other across the series.
 
 ### 7.3 Interferometry
 **Gates:** phase preserved · `interferometricUse` · `repeatCycle` · `orbitTubeDiameter` — all four
-**Ranking:** A5 ≫ A1 > A12
+**Ranking:** A5 >> A1 > A12
 
 The gates do nearly all the work. A constellation with six-hour revisit that does not control
 its orbital track is **excluded**, not down-ranked.
@@ -380,12 +380,12 @@ baseline and the perpendicular baseline as conditions on the order. Matchmaking 
 this — the gates were never the missing half.
 
 ### 7.4 Maritime and wide-area surveillance
-**Ranking:** A13 ≫ A5 > A12 ≫ A1
+**Ranking:** A13 >> A5 > A12 >> A1
 
 Area per pass dominates. NESZ ranks high because vessels are detected against calm water.
 
 ### 7.5 Infrastructure and asset inspection
-**Ranking:** A1 ≫ A9 > A10 ≫ A5
+**Ranking:** A1 >> A9 > A10 >> A5
 
 Sharpness dominates. Incidence angle appears because facade inspection needs a *specific*
 viewing geometry, not merely a good one.
@@ -476,7 +476,7 @@ specification too thin to describe what the buyer receives.
    Gap M-6. Returning them is honest; returning them without saying they cannot be ordered is
    not.
 6. **Is price an axis in the same inquiry?** It is not in the product specification — it belongs
-   to the offering, and after ④⑤ it belongs to pricing discovery — but it is certainly a
+   to the offering, and after step 4/5 it belongs to pricing discovery — but it is certainly a
    precedence-bearing buyer concern.
 7. **Who are the reviewing stakeholders, and in what form is the review expected?** Recorded
    against task `T-A102010-US002-003`.

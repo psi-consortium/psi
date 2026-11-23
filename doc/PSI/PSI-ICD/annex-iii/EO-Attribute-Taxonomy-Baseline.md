@@ -711,36 +711,36 @@ Applied across the register, that filter closed nine points without adding a sin
 
 ## 10. Source register
 
-Three levels: `●` verified at source · `◐` partly verified · `○` not read at source.
+Three levels: `FV` verified at source · `PV` partly verified · `NV` not read at source.
 
 ### 10.1 Standards
 
 | | Document | Taken from it |
 |:---:|---|---|
-| `●` | **TMF620 Product Catalog Management, OAS v5.0.0** | Characteristic structure, `charSpecRelationship` with aggregation/dependency/exclusivity, `targetProductSchema`, `@valueSchemaLocation`. **Negative finding:** no `minimumQuantity`, no `Constraint` schema |
-| `●` | **OGC 10-157r4**, schema `omeo/1.0/sar.xsd` | The seven SAR elements; `polarisationMode` values including `T`; the enumerated set of permitted polarisation channel combinations |
-| `●` | **STAC Specification 1.1** + `sar` 1.3.2, `product`, `processing`, `raster`, `sat`, `view`, `proj` | Asset roles, field mapping, deprecated fields |
-| `●` | **OGC Community Standard 25-004 / 25-005** *(STAC, adopted 28 Oct 2025)* | STAC's status as an OGC standard |
-| `●` | **CEOS-ARD SAR PFS v1.3.1** | Six sub-product families, Threshold and Goal levels, required asset roles |
-| `●` | **CEOS OpenSearch Best Practice** | Catalogue interface conventions |
-| `●` | **MEF LSO Sonata product schemas** (Access E-Line) | Schema convention: draft-07, URN `$id`, `oneOf` with commented discriminator hints |
-| `●` | **PSI consortium product schemas** (satelliteCapacity) | Directory and reference convention, GeoJSON binding |
-| `◐` | **OGC 17-084r1**, **OGC 13-026r9** | Document character and scope |
-| `○` | **NGA SICD / SIDD / CPHD** | Present as conformance values; the metadata field sets were not reviewed |
-| `○` | **NASA EOSDIS Data Processing Levels** | Basis of the level mapping |
+| `FV` | **TMF620 Product Catalog Management, OAS v5.0.0** | Characteristic structure, `charSpecRelationship` with aggregation/dependency/exclusivity, `targetProductSchema`, `@valueSchemaLocation`. **Negative finding:** no `minimumQuantity`, no `Constraint` schema |
+| `FV` | **OGC 10-157r4**, schema `omeo/1.0/sar.xsd` | The seven SAR elements; `polarisationMode` values including `T`; the enumerated set of permitted polarisation channel combinations |
+| `FV` | **STAC Specification 1.1** + `sar` 1.3.2, `product`, `processing`, `raster`, `sat`, `view`, `proj` | Asset roles, field mapping, deprecated fields |
+| `FV` | **OGC Community Standard 25-004 / 25-005** *(STAC, adopted 28 Oct 2025)* | STAC's status as an OGC standard |
+| `FV` | **CEOS-ARD SAR PFS v1.3.1** | Six sub-product families, Threshold and Goal levels, required asset roles |
+| `FV` | **CEOS OpenSearch Best Practice** | Catalogue interface conventions |
+| `FV` | **MEF LSO Sonata product schemas** (Access E-Line) | Schema convention: draft-07, URN `$id`, `oneOf` with commented discriminator hints |
+| `FV` | **PSI consortium product schemas** (satelliteCapacity) | Directory and reference convention, GeoJSON binding |
+| `PV` | **OGC 17-084r1**, **OGC 13-026r9** | Document character and scope |
+| `NV` | **NGA SICD / SIDD / CPHD** | Present as conformance values; the metadata field sets were not reviewed |
+| `NV` | **NASA EOSDIS Data Processing Levels** | Basis of the level mapping |
 
 ### 10.2 Mission and product documentation
 
 | | Source | Taken from it |
 |:---:|---|---|
-| `◐` | **Sentinel-1 Product Definition, S1-RS-MDA-52-7440**, issue 2/7 (2016) | Product Performance Parameters table; the caveat that all values are theoretical; the resolution measurement-point rule; PSLR, NESZ, radiometric accuracy and ALE declarations |
-| `○` | **Sentinel-1 Product Definition, issue 2/11** (Nov 2025) | **Deliberately unverified.** Behind a Confluence REST API returning 403. Numeric values in examples come from issue 2/7 and may be out of date; the **field structure**, which is what this baseline takes, is stable between issues |
-| `●` | **Sentinel-1 Annual Performance Report 2025** | Measured versus declared figures; the reporting format `−20.56 ± 0.49 (311)`; per-sub-swath and per-satellite breakdown |
-| `●` | **SentiWiki — S1 Products / S1 Mission** | Current product breakdown |
-| `●` | **Capella Space SAR Imagery Products Guide** | Product formats; the three-way confusion between trade name, strategy and parameter set |
-| `○` | **ICEYE Data Product Specification** | Known from product pages; the specification document was not retrieved |
-| `○` | **ASF HyP3 Products (RTC)** | Basis of open point O-1 |
-| `○` | **Sentinel-1 SAR Technical Guide** | **Unavailable at source** — `sentinel.esa.int` no longer resolves; treated as superseded by SentiWiki |
+| `PV` | **Sentinel-1 Product Definition, S1-RS-MDA-52-7440**, issue 2/7 (2016) | Product Performance Parameters table; the caveat that all values are theoretical; the resolution measurement-point rule; PSLR, NESZ, radiometric accuracy and ALE declarations |
+| `NV` | **Sentinel-1 Product Definition, issue 2/11** (Nov 2025) | **Deliberately unverified.** Behind a Confluence REST API returning 403. Numeric values in examples come from issue 2/7 and may be out of date; the **field structure**, which is what this baseline takes, is stable between issues |
+| `FV` | **Sentinel-1 Annual Performance Report 2025** | Measured versus declared figures; the reporting format `−20.56 ± 0.49 (311)`; per-sub-swath and per-satellite breakdown |
+| `FV` | **SentiWiki — S1 Products / S1 Mission** | Current product breakdown |
+| `FV` | **Capella Space SAR Imagery Products Guide** | Product formats; the three-way confusion between trade name, strategy and parameter set |
+| `NV` | **ICEYE Data Product Specification** | Known from product pages; the specification document was not retrieved |
+| `NV` | **ASF HyP3 Products (RTC)** | Basis of open point O-1 |
+| `NV` | **Sentinel-1 SAR Technical Guide** | **Unavailable at source** — `sentinel.esa.int` no longer resolves; treated as superseded by SentiWiki |
 
 ---
 
