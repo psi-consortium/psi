@@ -51,8 +51,12 @@ The customer selects an on-demand product they found via matchmaking in the PSS.
 Since the availability is unknown to the system, it sends a request to the provider to check it.
 It contains the following information:
 
-* *instantSyncCheck* - Whether the result should be returned as part of the response.
-  If false, the action is created on the provider side and can be fetched later.
+* *instantSyncCheck* - Whether the client expects the result as part of the response.
+  If true, the server shall try to respond with the final result.
+  If false, the server may return a response in an unfinished state and process it later.
+  The check is created with an `id` in either case and can be fetched later.
+  Note that this is just a client expectation and the server may diverge.
+  The client is therefore required to check the `state` and handle the response accordingly.
 * *provideAlternative* - Whether the provider is allowed to return alternatives if the product is not available.
 * *requestedAvailabilityStart* / *requestedAvailabilityEnd* - The time interval where the product is to be booked.
   Usually equal to the interval defined in the inquiry.
@@ -62,10 +66,6 @@ It contains the following information:
 
 The action is created via the `POST` endpoint and will get a unique ID by the server.
 The result is written to the `availabilityResult` field of each requested item, indicating whether it is available, unavailable or alternatives are provided in the `alternate` field.
-Though the `instantSyncCheck` signals the expectation of the client, the server can **always** return two status codes which have to be handled appropriately (e.g. by visualising it to the customer):
-
-* Code `200` means that the result is available immediately in the first response.
-* Code `201` means that the result can be fetched later via the `GET` endpoint using the ID.
 
 **REST Endpoints**
 

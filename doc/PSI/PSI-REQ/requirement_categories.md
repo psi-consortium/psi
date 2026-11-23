@@ -17,6 +17,7 @@ The categories are listed and described in the table below.
 | SEC      | Requirements on security                                      |
 | ORDER    | Requirements on product ordering                              |
 | QUALIFICATION | Requirements on product offering qualification           |
+| QUOTE    | Requirements on quotes                                        |
 | DOC      | Requirements on managing documents as attachments             |
 | TICKET   | Requirements on managing trouble tickets                      |
 | MONITOR  | Requirements on managing service monitoring                   |

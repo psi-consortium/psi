@@ -66,7 +66,7 @@ The event topics are created on the other system.
 **Main operation**
 
 This operation allows one system to query the available event topics of another system.
-Since the relevant names for PSID are predefined, doing so is considered optional, though it may reveal additional topics.
+Since the relevant names for PSID are predefined (see [TOD-01-02](#tod-01-02-eventmanagement)), doing so is considered optional, though it may reveal additional topics.
 The topics can then be subscribed to using [TOD-01-02-02](#tod-01-02-02-registereventcallback).
 
 **REST Endpoints**

@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "Product Offering Qualification",
-    "description": "## PSID API Reference: PSID679 - Product Offering Qualification\n\nBased on TMF API Reference: TMF 679 - Product Offering Qualification v5.0.0 (June 2024)\n\nProduct Offering Qualification API provides Product Offering commercial eligibility. This API features the CheckProductOfferingQualification resource.\n\n**CheckProductOfferingQualification** allows to:\n- Request for a (or a set of)  productOffering and/or Product specification  (with configuration) commercial eligibility check. A CheckProductOfferingQualification is made of item (One item per product).\n- Provide a validation result for each item\n- Provide, if requested by the client side and if eligibility fails, an alternate productOffering and/or productSpecification\n- Provide in the response eligible productOffering if the request provided only product specification description.\n- Note: CheckProductOfferingQualification allows describing product from the inventory, so it is also possible to use it to retrieve productOffering available for a migration, to complete existing asset, or to check terminate operation eligibility.  In order to manage this UC, an action has to be provided for each item.\n\nIn a nutshell CheckProductOfferingQualification is for precise question/precise response\n\n**CheckProductOfferingQualification resource**\n\nThe resource follows the task-based pattern: its state shows the progress of the qualification.\nThe API provides the following operations:\n- Retrieval of a CheckProductOfferingQualification or of a collection of CheckProductOfferingQualification\n- Creation of a CheckProductOfferingQualification. The qualification is always created, and the API answers 201 only, whatever the value of instantSyncQualification: the response carries the qualification either in its final state with the result, or in state acknowledged, in which case the result is retrieved later with a GET operation or received with an event notification. An Expect: 202-Accepted header is ignored.\n- Partial update of a CheckProductOfferingQualification: a client may change the attributes it sets, including the items, and may cancel the qualification; the server decides which changes it accepts in which state.\n- Deletion of a CheckProductOfferingQualification (for administration purposes)",
+    "description": "## PSID API Reference: PSID679 - Product Offering Qualification\n\nBased on TMF API Reference: TMF 679 - Product Offering Qualification v5.0.0 (June 2024)\n\nProduct Offering Qualification API provides Product Offering commercial eligibility. This API features the CheckProductOfferingQualification resource.\n\n**CheckProductOfferingQualification** allows to:\n- Request for a (or a set of) productOffering (with configuration) commercial eligibility check. A CheckProductOfferingQualification is made of item (One item per product).\n- Provide a validation result for each item\n- Provide, if requested by the client side and if eligibility fails, an alternate productOffering and/or productSpecification\n- Note: CheckProductOfferingQualification allows describing product from the inventory, so it is also possible to use it to retrieve productOffering available for a migration, to complete existing asset, or to check terminate operation eligibility.  In order to manage this UC, an action has to be provided for each item.\n\nIn a nutshell CheckProductOfferingQualification is for precise question/precise response\n\n**CheckProductOfferingQualification resource**\n\nThe resource follows the task-based pattern: its state shows the progress of the qualification.\nThe API provides the following operations:\n- Retrieval of a CheckProductOfferingQualification or of a collection of CheckProductOfferingQualification\n- Creation of a CheckProductOfferingQualification. The qualification is always created, and the API answers 201 only, whatever the value of instantSyncQualification: the response carries the qualification either in its final state with the result, or in a state that is not final (acknowledged or inProgress), in which case the result is retrieved later with a GET operation or received with an event notification.\n- Partial update of a CheckProductOfferingQualification: a client may change the attributes it sets, including the items, and may cancel the qualification; the server decides which changes it accepts in which state.\n- Deletion of a CheckProductOfferingQualification (for administration purposes)",
     "version": "5.0.0"
   },
   "servers": [
@@ -68,7 +68,7 @@
           "checkProductOfferingQualification"
         ],
         "summary": "Creates a CheckProductOfferingQualification",
-        "description": "This operation creates a CheckProductOfferingQualification entity. The qualification is always created, and the operation is answered with 201 only, whatever the value of instantSyncQualification: the response carries the qualification either in its final state with the result, or in state acknowledged. An Expect: 202-Accepted header is ignored.",
+        "description": "This operation creates a CheckProductOfferingQualification entity. The qualification is always created, and the operation is answered with 201 only, whatever the value of instantSyncQualification: the response carries the qualification either in its final state with the result, or in a state that is not final (acknowledged or inProgress).",
         "operationId": "createCheckProductOfferingQualification",
         "parameters": [
           {
@@ -93,9 +93,6 @@
           },
           "405": {
             "$ref": "#/components/responses/405"
-          },
-          "409": {
-            "$ref": "#/components/responses/409"
           },
           "422": {
             "$ref": "#/components/responses/422"
@@ -198,9 +195,6 @@
           "500": {
             "$ref": "#/components/responses/500"
           },
-          "501": {
-            "$ref": "#/components/responses/501"
-          },
           "503": {
             "$ref": "#/components/responses/503"
           }
@@ -211,7 +205,7 @@
           "checkProductOfferingQualification"
         ],
         "summary": "Updates partially a CheckProductOfferingQualification",
-        "description": "This operation updates partially a CheckProductOfferingQualification entity. A client may change the attributes it sets, including the items, and may cancel the qualification by setting state to cancelled; it cannot set any other state, nor the attributes set by the server. The server decides which changes it accepts in which state.",
+        "description": "This operation updates partially a CheckProductOfferingQualification entity. A client may change the attributes it sets, including the items, and may cancel the qualification by setting state to cancelled; it cannot set any other state, nor the attributes that only the server can modify. The server decides which changes it accepts in which state.",
         "operationId": "patchCheckProductOfferingQualification",
         "parameters": [
           {
@@ -1214,7 +1208,7 @@
               },
               "instantSyncQualification": {
                 "type": "boolean",
-                "description": "An indicator which when the value is true means that the requester expects to get the qualification result immediately in the response. PSID679 answers the creation with 201 whatever its value: the server returns the qualification in its final state with the result where it can qualify it at once, otherwise in state acknowledged.",
+                "description": "An indicator which when the value is true means that the requester expects to get the qualification result immediately in the response. PSID679 answers the creation with 201 whatever its value: the server returns the qualification in its final state with the result where it can qualify it at once, otherwise in a state that is not final (acknowledged or inProgress).",
                 "deprecated": true
               },
               "note": {
@@ -1359,6 +1353,10 @@
               },
               "state": {
                 "$ref": "#/components/schemas/CheckProductOfferingQualificationStateType"
+              },
+              "quantity": {
+                "type": "integer",
+                "description": "Quantity asked for this qualification item"
               }
             }
           }
@@ -1378,7 +1376,8 @@
           {
             "required": [
               "action",
-              "id"
+              "id",
+              "product"
             ],
             "type": "object",
             "properties": {
@@ -1423,6 +1422,10 @@
               "id": {
                 "type": "string",
                 "description": "Identifier of the CheckProductOfferingQualification item (generally it is a sequence number 01, 02, 03, ...)"
+              },
+              "quantity": {
+                "type": "integer",
+                "description": "Quantity asked for this qualification item"
               }
             }
           }
@@ -1483,6 +1486,10 @@
               "id": {
                 "type": "string",
                 "description": "Identifier of the CheckProductOfferingQualification item (generally it is a sequence number 01, 02, 03, ...)"
+              },
+              "quantity": {
+                "type": "integer",
+                "description": "Quantity asked for this qualification item"
               }
             }
           }
@@ -1501,8 +1508,7 @@
           },
           {
             "required": [
-              "checkProductOfferingQualificationItem",
-              "relatedParty"
+              "checkProductOfferingQualificationItem"
             ],
             "type": "object",
             "properties": {
@@ -1515,7 +1521,7 @@
               },
               "instantSyncQualification": {
                 "type": "boolean",
-                "description": "An indicator which when the value is true means that the requester expects to get the qualification result immediately in the response. PSID679 answers the creation with 201 whatever its value: the server returns the qualification in its final state with the result where it can qualify it at once, otherwise in state acknowledged.",
+                "description": "An indicator which when the value is true means that the requester expects to get the qualification result immediately in the response. PSID679 answers the creation with 201 whatever its value: the server returns the qualification in its final state with the result where it can qualify it at once, otherwise in a state that is not final (acknowledged or inProgress).",
                 "deprecated": true
               },
               "note": {
@@ -1546,7 +1552,6 @@
                 "description": "An indicator which when the value is \"true\" means that result reason are expected for available or not of product offering"
               },
               "relatedParty": {
-                "minItems": 1,
                 "type": "array",
                 "description": "Party playing a role for this qualification (as requester for example)",
                 "items": {
@@ -10014,7 +10019,7 @@
       },
       "QualificationItemResultType": {
         "type": "string",
-        "description": "PSI closed vocabulary for the result of a qualification item, fixed for interoperability between PSSs and providers. green = the provider can deliver the requested product offering or product specification as requested (configuration, place and date); no alternatives are proposed. yellow = the provider cannot fully confirm that it can deliver the item as requested; alternatives may be proposed. red = the provider cannot deliver the item as requested; alternatives may be proposed. Alternatives are carried in alternateProductOfferingProposal. For an item that contains other items (a bundle) the result is derived from the contained items: red as soon as any completed contained item is red; once every contained item is completed, yellow if any of them is yellow, otherwise green; absent until then. Replaces the free-form string of TMF679 v5; the values follow the example TMF679 v5 gives for the overall result and the serviceabilityConfidence of MEF LSO Sonata.",
+        "description": "PSI closed vocabulary for the result of a qualification item, fixed for interoperability between PSSs and providers. green = the provider can deliver the requested product offering as requested (configuration, place and date); no alternatives are proposed. yellow = the provider cannot fully confirm that it can deliver the item as requested; alternatives may be proposed. red = the provider cannot deliver the item as requested; alternatives may be proposed. Alternatives are carried in alternateProductOfferingProposal. For an item that contains other items (a bundle) the result is derived from the contained items: red as soon as any completed contained item is red; once every contained item is completed, yellow if any of them is yellow, otherwise green; absent until then. Replaces the free-form string of TMF679 v5; the values follow the example TMF679 v5 gives for the overall result and the serviceabilityConfidence of MEF LSO Sonata.",
         "enum": [
           "green",
           "yellow",

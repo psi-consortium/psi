@@ -21,6 +21,7 @@
 | action | ItemActionType | N/A | No |
 | qualificationItemResult | QualificationItemResultType | N/A | No |
 | state | CheckProductOfferingQualificationStateType | N/A | No |
+| quantity | integer | N/A | No |
 | @baseType | string | N/A | No |
 | @schemaLocation | string | N/A | No |
 | @type | string | "CheckProductOfferingQualificationItem" | Yes |

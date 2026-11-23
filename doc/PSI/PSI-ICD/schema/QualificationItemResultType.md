@@ -6,7 +6,7 @@
 # QualificationItemResultType
 
 PSI closed vocabulary for the result of a qualification item, fixed for interoperability between PSSs and providers.
-green = the provider can deliver the requested product offering or product specification as requested (configuration, place and date); no alternatives are proposed.
+green = the provider can deliver the requested product offering as requested (configuration, place and date); no alternatives are proposed.
 yellow = the provider cannot fully confirm that it can deliver the item as requested; alternatives may be proposed.
 red = the provider cannot deliver the item as requested; alternatives may be proposed.
 Alternatives are carried in alternateProductOfferingProposal.

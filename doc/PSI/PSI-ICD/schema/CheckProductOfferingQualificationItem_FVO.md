@@ -12,10 +12,11 @@
 | qualificationItemRelationship | array | ProductOfferingQualificationItemRelationship_FVO | No |
 | CheckProductOfferingQualificationItem | array | CheckProductOfferingQualificationItem_FVO | No |
 | note | array | Note | No |
-| product | ProductRefOrValue_FVO | N/A | No |
+| product | ProductRefOrValue_FVO | N/A | Yes |
 | category | CategoryRef | N/A | No |
 | productOffering | ProductOfferingRef | N/A | No |
 | action | ItemActionType | N/A | Yes |
+| quantity | integer | N/A | No |
 | @baseType | string | N/A | No |
 | @schemaLocation | string | N/A | No |
 | @type | string | "CheckProductOfferingQualificationItem" | Yes |

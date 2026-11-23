@@ -74,11 +74,7 @@ At least one event topic must exist.
 **Main operation**
 
 Each system has to register callbacks for the events they want to receive from one another.
-Usually, both systems will register for the following topics named after the corresponding entities:
-
-* inquiry
-* order
-* invoice
+The topics of the PSI APIs are named in [TOD-01-02](#tod-01-02-eventmanagement); a system registers for the topics of the APIs whose events it needs, e.g. *inquiry* and *order*.
 
 The registration must contain the URL of the callback endpoint, which is expected to be the one described in [TOD-01-02-03](#tod-01-02-03-dispatchevent).
 Note that the implementation may reject callbacks if the host is not whitelisted beforehand (see PSI-ICD).
@@ -88,7 +84,7 @@ Additionally, the registration may contain a filter query to tailor the scope of
 Those can be defined as a conjunction of attributes and expected values.
 The available attributes depend on the event type and can be nested using dot-notation.
 When a list of items is queried, only one of them has to match the given value.
-Implementations may offer additional capabilities as described in the TMF630 REST API Design Guidelines 4.2.0[^tmf_api_guidelines].
+Implementations may offer additional capabilities as described in the TMF630 REST API Design Guidelines 5.0.0[^tmf_api_guidelines].
 For example, an order event could be filtered using:
 
 * `event.priority=1` (receive only orders with high priority)
@@ -111,4 +107,4 @@ The callback is registered in the other system.
 
 None
 
-[^tmf_api_guidelines]: https://www.tmforum.org/resources/specification/tmf630-rest-api-design-guidelines-4-2-0/
+[^tmf_api_guidelines]: https://www.tmforum.org/resources/specifications/tmf630-rest-api-design-guidelines-5-0-0/

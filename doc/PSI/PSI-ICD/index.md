@@ -75,15 +75,27 @@ dcr_overrides:
  - dcr:
    from: '2026-07-27'
    to: '2026-07-31'
-   version: 'MS12 [2.0.0-alpha]'
+   version: 'PSI-DOC-VERSION'
    author: 'Christian Grubert'
    message: 'No update, PSI Phase 2 version bump.'
  - dcr:
-   from: '2026-10-27'
-   to: '2026-11-05'
+   from: '2026-10-06'
+   to: '2026-11-23'
    version: 'MS12 [2.0.0-alpha]'
+   author: 'Kinga Kocierz'
+   message: 'Added PSID648 Quote Management API derived from TMF648 v5.0.0, aligned with PSID679 and TOD-03-06: synchronous or asynchronous quote answered with 201 only, no 404 on create and list, no 409 on create, no 501 on delete, quote id required, quote states with refused, quoteErrorMessage with the reason of a status change, product required in a quote item, 422 on create and update as a component, channel, list without cursor, sort and filter parameters, no TMF648 request and response examples.'
+ - dcr:
+   from: '2026-10-27'
+   to: '2026-11-23'
+   version: 'PSI-DOC-VERSION'
    author: 'Dominik Ogrodnik'
    message: 'Added PSID679 Product Offering Qualification API derived from TMF679 v5.0.0: CheckProductOfferingQualification only, creation always answered with 201'
+ - dcr:
+   from: '2026-11-19'
+   to: '2026-11-19'
+   version: 'PSI-DOC-VERSION'
+   author: 'Dominik Ogrodnik'
+   message: 'TMF630 REST API Design Guidelines 5.0.0 as the reference; the paging of lists by offset.'
 =end
 
 # Document Meta Information
@@ -163,13 +175,23 @@ Especially the broker-type PSS will often receive data from one party (e.g. the 
 The PSI mock-up is a sample implementation of the endpoints described in the ICD.
 
 It is up to the implementor to decide how the endpoints will be implemented internally on their side.
-For recommended guidelines and design patterns when implementing TM Forum's REST APIs, use the TMF630 REST API Design Guidelines 4.2.0[^2] document as a reference.
+For recommended guidelines and design patterns when implementing TM Forum's REST APIs, use the TMF630 REST API Design Guidelines 5.0.0[^2] as a reference.
 Filtering, for instance, is an optional function that is not required to be implemented for the GET endpoints returning lists of objects.
 Therefore, it is not part of the parameters listed in the respective endpoint sections of the ICD.
-If an implementor of the server side decides to develop it, *Part One* of the REST API Design Guidelines describes the recommendations for querying resources with attribute filtering, while *Part Six* describes advanced collection filtering using JSON Path.
+If an implementor of the server side decides to develop it, *Part 1* of the REST API Design Guidelines describes the querying of resources with attribute filtering, while *Part 6* describes advanced collection filtering using JSONPath.
 Client implementors are advised to clarify which filters are available on the server side.
 
-[^2]: https://www.tmforum.org/resources/specification/tmf630-rest-api-design-guidelines-4-2-0/
+The GET endpoints returning lists of objects are paged by offset, as *Part 1* describes it (Offset Pagination – Query Based Style):
+
+* The client gives the index of the first object in the parameter *offset* and the number of objects it requests in *limit*.
+  Without *offset*, the list starts with the first object; without *limit*, the server applies its own page size or returns the whole list.
+  A server may limit the page size to a maximum of its own.
+* The server answers with `200`, also when it returns only a part of the list, and states the number of objects in the response in the header `X-Result-Count` and the number of all matching objects in `X-Total-Count`.
+* A list that no object matches, or an *offset* beyond the end of the list, is answered with `200` and an empty list; a negative *offset* is answered with `400`.
+* The navigation links in the header `Link`, which *Part 1* requires, are not declared by the PSI APIs; a server may return them.
+* The other pagination methods of *Part 1*, by range header and by cursor, are not used.
+
+[^2]: https://www.tmforum.org/resources/specifications/tmf630-rest-api-design-guidelines-5-0-0/
 [^3]: https://swagger.io/resources/open-api/
 [^4]: https://swagger.io/tools/swagger-codegen/
 
