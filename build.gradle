@@ -692,6 +692,252 @@ tasks.register('transformEvent', com.cgi.space.psi.tasks.TransformOASTask) { tra
   pruneAll()
 }
 
+tasks.register('transformProductOfferingQualification', com.cgi.space.psi.tasks.TransformOASTask) { transformations ->
+  input = file('tmforum/apis/TMF679_Product_Offering_Qualification/oas/TMF679-Product_Offering_Qualification-v5.0.0.oas.yaml')
+  output = file('doc/PSI/PSI-ICD/open-apis/oas/PSID679-Product_Offering_Qualification-v5.0.0.oas.json')
+
+  // Adjust metadata
+  // PSID679: PSI header; only CheckProductOfferingQualification; creation always answered with 201; no notification line
+  replaceInfoDescription("**TMF API Reference : TMF 679 - Product Offering Qualification** - June 2024", "## PSID API Reference: PSID679 - Product Offering Qualification\n\nBased on TMF API Reference: TMF 679 - Product Offering Qualification v5.0.0 (June 2024)")
+  replaceInfoDescription("This API features 2 distinct resources: CheckProductOfferingQualification  and QueryProductOfferingQualification ", "This API features the CheckProductOfferingQualification resource.")
+  replaceInfoDescription("\n\n**QueryProductOfferingQualification** allows to\n- look for productOffering eligibles from a context passed by search criteria structure\n- The response will provide a list of item - each item for a productOffering eligible\n\n\n In a nutshell QueryProductOfferingQualification is for 'vague 'request and get a list of available productOffering\n\n\n\n**QueryProductOfferingQualification and CheckProductOfferingQualification resources**\n\n\n These are 2 separate resources.\n\nBoth resources are following task-based pattern. They both leverage Task status lifecycle to monitor progress.\nFor both resources the API provided the following operations :\n- Retrieval of a QueryProductOfferingQualification/CheckProductOfferingQualification or a collection of QueryProductOfferingQualification/CheckProductOfferingQualification depending on filter criteria\n- Partial update of a QueryProductOfferingQualification or CheckProductOfferingQualification (including updating rules and for administration purpose)\n- Creation of a QueryProductOfferingQualification or CheckProductOfferingQualification (including default values and creation rules and for administration purpose). It should note that the API support 200 as 201 response as it is not striclty requested to save QueryProductOfferingQualification or CheckProductOfferingQualification. Indeed for instant sync qualification (qualification result provided in the respone)  it is possible to not provide  a GET operation to retrieve this resource later.\n- Deletion of a QueryProductOfferingQualification or CheckProductOfferingQualification  (for administration purposes)\n- Notification of events on QueryProductOfferingQualification and CheckProductOfferingQualification .  ", "\n\n**CheckProductOfferingQualification resource**\n\nThe resource follows the task-based pattern: its state shows the progress of the qualification.\nThe API provides the following operations:\n- Retrieval of a CheckProductOfferingQualification or of a collection of CheckProductOfferingQualification\n- Creation of a CheckProductOfferingQualification. The qualification is always created, and the API answers 201 only, whatever the value of instantSyncQualification: the response carries the qualification either in its final state with the result, or in a state that is not final (acknowledged or inProgress), in which case the result is retrieved later with a GET operation or received with an event notification.\n- Partial update of a CheckProductOfferingQualification: a client may change the attributes it sets, including the items, and may cancel the qualification; the server decides which changes it accepts in which state.\n- Deletion of a CheckProductOfferingQualification (for administration purposes)")
+  // PSID679: every item names a product offering (TOD-03-05), so there is no qualification of a product specification alone
+  replaceInfoDescription("Request for a (or a set of)  productOffering and/or Product specification  (with configuration)", "Request for a (or a set of) productOffering (with configuration)")
+  replaceInfoDescription("\n- Provide in the response eligible productOffering if the request provided only product specification description.", "")
+  replaceServerUrl("{apiRoot}/tmf-api/productOfferingQualification/v5/", "/psi-api/productOfferingQualification/v2/")
+
+  // Remove explicitly unwanted things
+  removeEvents(transformations)
+  removePaths("/queryProductOfferingQualification(.*)")
+
+  // unify schemas
+  // PSID679: the qualification paths (POST answers 201 only: no 200, no 202; 422 on POST and PATCH; no 404 on the list and POST; no 409 on POST; no 501 on DELETE)
+  importPath("/checkProductOfferingQualification(.*)", file("doc/PSI/PSI-ICD/open-apis/extensions/PSID679-Product_Offering_Qualification-v5.0.0.oas.json"))
+  importBaseTypes(transformations)
+  importSchema("(.*)", file("doc/PSI/PSI-ICD/open-apis/extensions/Characteristic.oas.json"))
+  importSchema("BundledProductOffering(|_.*)", file("doc/PSI/PSI-ICD/open-apis/extensions/PSID620-Product_Catalog_Management-v5.0.0.oas.json"))
+  importSchema("(.*)", file("doc/PSI/PSI-ICD/open-apis/extensions/PSID675-Geographic_Location.oas.json"))
+  importSchema("(BundledProductOfferingOption|ProductOfferingRef)(|_.*)", file("tmforum/apis/TMF620_Product_Catalog/oas/TMF620-Product_Catalog_Management-v5.0.0.oas.yaml"))
+  // TMF679 carries older versions of the shared types; the families come from TMF622, as PSID622 has them
+  importSchema("(AccountRef|AgreementItemRef|AgreementRef|BillingAccountRef|BooleanArrayCharacteristic|BooleanCharacteristic|CalendarPeriod|CharacteristicRelationship|ContactMedium|CreditProfile|Expression|ExpressionLanguageEnum|ExternalIdentifier|FloatArrayCharacteristic|FloatCharacteristic|GeographicAddress|GeographicLocationRef|GeographicLocationRefOrValue|GeographicSite|GeographicSiteRelationship|GeographicSubAddress|GeographicSubAddressUnit|HourPeriod|IndividualIdentification|IntegerArrayCharacteristic|IntegerCharacteristic|Intent|IntentRef|IntentRefOrValue|NumberArrayCharacteristic|NumberCharacteristic|ObjectArrayCharacteristic|ObjectCharacteristic|OrganizationChildRelationship|OrganizationIdentification|OrganizationParentRelationship|OrganizationRef|OtherNameOrganization|Party|PartyCreditProfile|PartyOrPartyRole|PartyRef|PartyRole|PartyRoleRef|PartyRoleSpecificationRef|PaymentMethodRef|PlaceRef|PlaceRefOrValue|Price|PriceAlteration|Product|ProductOfferingPriceRef|ProductPrice|ProductRef|ProductRefOrValue|ProductRelationship|ProductSpecificationRef|ProductTerm|RelatedOrderItem|RelatedPartyOrPartyRole|RelatedPlaceRefOrValue|ResourceRef|ServiceRef|StandardIdentifier|StringArrayCharacteristic|StringCharacteristic|TaxDefinition|TaxExemptionCertificate)(|_FVO|_MVO)", file("tmforum/apis/TMF622_Product_Ordering/oas/TMF622-ProductOrdering-v5.0.0.oas.yaml"))
+  importSchema("(Individual_FVO|Organization_FVO|PartyRole_MVO|RelatedPartyOrPartyRole_MVO)", file("tmforum/apis/TMF632_Party/oas/TMF632-Party_Management-v5.0.0.oas.yaml"))
+  importSchema("Product(_FVO|_MVO)", file("tmforum/apis/TMF637_Product_Inventory/oas/TMF637-ProductInventory-v5.0.0.oas.yaml"))
+  removeSchema("(AlternateProductOfferingProposal_MVO|EligibilityResultReason_MVO|Feature|FeatureRelationship|FeatureRelationship_FVO|FeatureRelationship_MVO|Feature_FVO|Feature_MVO|GeographicSiteFeature|GeographicSiteFeature_FVO|GeographicSiteFeature_MVO|PolicyRef|PolicyRef_FVO|PolicyRef_MVO|PromotionRef|PromotionRef_MVO|TerminationError_MVO)")
+  // PSID679: the state enumeration (renamed from TaskStateType), the result vocabularies and the create view
+  importSchema("(.*)", file("doc/PSI/PSI-ICD/open-apis/extensions/PSID679-Product_Offering_Qualification-v5.0.0.oas.json"))
+  // PSID679: the request bodies and responses without TM Forum's generic examples (pruneExamples drops them); 422 as a component
+  importRequestBody("(.*)", file("doc/PSI/PSI-ICD/open-apis/extensions/PSID679-Product_Offering_Qualification-v5.0.0.oas.json"))
+  importResponse("(.*)", file("doc/PSI/PSI-ICD/open-apis/extensions/PSID679-Product_Offering_Qualification-v5.0.0.oas.json"))
+
+  // PSI specific adjustments
+  adjustAttachmentRef(transformations)
+  overwritePropertyFormat("(.*)", "href", "uri")
+  // qualification states
+  overwriteProperty("CheckProductOfferingQualification(|Item)(|_FVO|_MVO)", "state", '''
+    {
+      "$ref": "#/components/schemas/CheckProductOfferingQualificationStateType"
+    }
+  ''')
+  // no promotion in a qualification; the update views carry no server-set attributes
+  removeProperty("CheckProductOfferingQualificationItem_MVO", "alternateProductOfferingProposal")
+  removeProperty("CheckProductOfferingQualification_MVO", "effectiveQualificationDate")
+  removeProperty("CheckProductOfferingQualificationItem_MVO", "eligibilityResultReason")
+  removeProperty("CheckProductOfferingQualification_MVO", "expectedQualificationCompletionDate")
+  removeProperty("CheckProductOfferingQualification_MVO", "expirationDate")
+  removeProperty("CheckProductOfferingQualification_MVO", "instantSyncQualification")
+  removeProperty("(AlternateProductOfferingProposal|CheckProductOfferingQualificationItem|CheckProductOfferingQualificationItem_FVO|CheckProductOfferingQualificationItem_MVO)", "promotion")
+  removeProperty("CheckProductOfferingQualificationItem_MVO", "qualificationItemResult")
+  removeProperty("CheckProductOfferingQualification_MVO", "qualificationResult")
+  removeProperty("CheckProductOfferingQualificationItem_MVO", "state")
+  removeProperty("CheckProductOfferingQualificationItem_(.+)", "terminationError")
+  overwriteProperty("CheckProductOfferingQualificationItem(.*)", "action", '''
+    {
+      "$ref": "#/components/schemas/ItemActionType"
+    }
+  ''')
+  overwriteProperty("CheckProductOfferingQualificationItem", "qualificationItemResult", '''
+    {
+      "$ref": "#/components/schemas/QualificationItemResultType"
+    }
+  ''')
+  overwriteProperty("CheckProductOfferingQualification", "qualificationResult", '''
+    {
+      "$ref": "#/components/schemas/QualificationResultType"
+    }
+  ''')
+
+  // the client's expectation as in TMF679; the answer is always 201 (the create view is in the extension)
+  overwriteProperty("CheckProductOfferingQualification", "instantSyncQualification", '''
+    {
+      "type": "boolean",
+      "description": "An indicator which when the value is true means that the requester expects to get the qualification result immediately in the response. PSID679 answers the creation with 201 whatever its value: the server returns the qualification in its final state with the result where it can qualify it at once, otherwise in a state that is not final (acknowledged or inProgress).",
+      "deprecated": true
+    }
+  ''')
+  overwriteProperty("CheckProductOfferingQualification(|_MVO)", "provideOnlyAvailable", '''
+    {
+      "type": "boolean",
+      "description": "An indicator which when the value is true means that only available product offerings must be listed in the response: alternateProductOfferingProposal then lists only alternatives that can be delivered. The items of the qualification are always returned."
+    }
+  ''')
+  // nested items: the TMF679 v5.0.0 name is kept for conformance
+  overwriteProperty("CheckProductOfferingQualificationItem", "CheckProductOfferingQualificationItem", '''
+    {
+      "type": "array",
+      "description": "A structure to embed check qualification item within check qualification item, e.g. the parts of a bundle offering. The name starts with a capital letter, as in TMF679 v5.0.0; PSID679 keeps it for conformance.",
+      "items": {
+        "$ref": "#/components/schemas/CheckProductOfferingQualificationItem"
+      }
+    }
+  ''')
+  overwriteProperty("CheckProductOfferingQualificationItem_FVO", "CheckProductOfferingQualificationItem", '''
+    {
+      "type": "array",
+      "description": "A structure to embed check qualification item within check qualification item, e.g. the parts of a bundle offering. The name starts with a capital letter, as in TMF679 v5.0.0; PSID679 keeps it for conformance.",
+      "items": {
+        "$ref": "#/components/schemas/CheckProductOfferingQualificationItem_FVO"
+      }
+    }
+  ''')
+  overwriteProperty("CheckProductOfferingQualificationItem_MVO", "CheckProductOfferingQualificationItem", '''
+    {
+      "type": "array",
+      "description": "A structure to embed check qualification item within check qualification item, e.g. the parts of a bundle offering. The name starts with a capital letter, as in TMF679 v5.0.0; PSID679 keeps it for conformance.",
+      "items": {
+        "$ref": "#/components/schemas/CheckProductOfferingQualificationItem_MVO"
+      }
+    }
+  ''')
+  // the id of the qualification at another party, e.g. the PSS that forwards it (as in PSID622 and PSID648)
+  addProperty("CheckProductOfferingQualification", "externalId", '''
+    {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/ExternalIdentifier"
+      }
+    }
+  ''')
+  addProperty("CheckProductOfferingQualification_FVO", "externalId", '''
+    {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/ExternalIdentifier_FVO"
+      }
+    }
+  ''')
+  addProperty("CheckProductOfferingQualification_MVO", "externalId", '''
+    {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/ExternalIdentifier_MVO"
+      }
+    }
+  ''')
+  // the quantity of an item, as in PSID622 (ProductOrderItem) and PSID648 (QuoteItem); not in TMF679
+  addProperty("CheckProductOfferingQualificationItem(|_FVO|_MVO)", "quantity", '''
+    {
+      "type": "integer",
+      "description": "Quantity asked for this qualification item"
+    }
+  ''')
+  // required: the id of the qualification; id and action of an item, as in PSID622, and its product, as in PSID648 (the create view requires at least one item)
+  addRequiredProperty("CheckProductOfferingQualification", "id")
+  addRequiredProperty("CheckProductOfferingQualificationItem_FVO", "id")
+  addRequiredProperty("CheckProductOfferingQualificationItem_FVO", "action")
+  addRequiredProperty("CheckProductOfferingQualificationItem_FVO", "product")
+
+  // Prune things that became superfluous because of above transformations
+  pruneAll()
+}
+
+tasks.register('transformQuote', com.cgi.space.psi.tasks.TransformOASTask) { transformations ->
+  input = file('tmforum/apis/TMF648_Quote_Management/oas/TMF648-Quote-v5.0.0.oas.yaml')
+  output = file('doc/PSI/PSI-ICD/open-apis/oas/PSID648-Quote-v5.0.0.oas.json')
+
+  // Adjust metadata
+  replaceServerUrl("{apiRoot}/tmf-api/", "/psi-api/")
+  replaceServerUrl("v5", "v2")
+  replaceInfoDescription('**TMF API Reference : TMF 648 - Quote **\n\n** April 2025**', '## PSID API Reference: PSID648 - Quote Management\n\nBased on TMF API Reference: TMF 648 - Quote v5.0.0 (April 2025)')
+  replaceInfoDescription('\n- Notification of events on quote.', '')
+  // Remove explicitly unwanted things
+  removeEvents(transformations)
+  // unify schemas
+  importBaseTypes(transformations)
+  importSchema("(.*)Product(.*)", file("tmforum/apis/TMF637_Product_Inventory/oas/TMF637-ProductInventory-v5.0.0.oas.yaml"))
+  // TMF648 is generated without most _FVO/_MVO variants, take whole families from TMF637
+  importSchema("(AccountRef|AgreementItemRef|AgreementRef|BillingAccountRef|BusinessPartner|CalendarPeriod|Consumer|ContactMedium|CreditProfile|Expression|ExpressionLanguageEnum|ExternalIdentifier|GeographicAddress|GeographicLocationRef|GeographicLocationRefOrValue|GeographicSite|GeographicSiteRelationship|GeographicSubAddress|GeographicSubAddressUnit|HourPeriod|Intent|IntentRef|IntentRefOrValue|PaymentMethodRef|PlaceRef|PlaceRefOrValue|Price|PriceAlteration|Producer|RelatedOrderItem|RelatedPlaceRefOrValue|ResourceRef|ServiceRef|StandardIdentifier|Supplier|TaxDefinition)(|_FVO|_MVO)", file("tmforum/apis/TMF637_Product_Inventory/oas/TMF637-ProductInventory-v5.0.0.oas.yaml"))
+  importSchema("(.*)Characteristic(.*)", file("tmforum/apis/TMF637_Product_Inventory/oas/TMF637-ProductInventory-v5.0.0.oas.yaml"))
+  importSchema("(.*)(Certificate|Individual|Organization|Party)(.*)", file("tmforum/apis/TMF632_Party/oas/TMF632-Party_Management-v5.0.0.oas.yaml"))
+  importSchema("(Related)?PartyRefOrPartyRoleRef_MVO", file("tmforum/apis/TMF634_Resource_Catalog/oas/TMF634-Resource_Catalog_Management-v5.0.0.oas.yaml"))
+  importSchema("(.*)", file("doc/PSI/PSI-ICD/open-apis/extensions/PSID675-Geographic_Location.oas.json"))
+  importSchema("(ProductOfferingRef|BundledProductOfferingOption)(.*)", file("tmforum/apis/TMF620_Product_Catalog/oas/TMF620-Product_Catalog_Management-v5.0.0.oas.yaml"))
+  importSchema('BundledProductOffering(.*)', file("doc/PSI/PSI-ICD/open-apis/extensions/PSID620-Product_Catalog_Management-v5.0.0.oas.json"))
+  importSchema("(.*)", file("doc/PSI/PSI-ICD/open-apis/extensions/Characteristic.oas.json"))
+  importSchema("ChannelRef(|_FVO|_MVO)", file("tmforum/apis/TMF622_Product_Ordering/oas/TMF622-ProductOrdering-v5.0.0.oas.yaml"))
+  // PSID648: the quote paths as in PSID679 (POST answered with 201 only, no 404 on POST and the list, no 409 on POST, no 501 on DELETE, 422 on POST and PATCH, the list without Before, After, Sort and Filter)
+  importPath("/quote(.*)", file("doc/PSI/PSI-ICD/open-apis/extensions/PSID648-Quote-v5.0.0.oas.json"))
+  // PSID648: the request bodies and responses without TM Forum's generic examples (pruneAll drops them); 422 as a component, as in PSID679
+  importRequestBody("(.*)", file("doc/PSI/PSI-ICD/open-apis/extensions/PSID648-Quote-v5.0.0.oas.json"))
+  importResponse("(.*)", file("doc/PSI/PSI-ICD/open-apis/extensions/PSID648-Quote-v5.0.0.oas.json"))
+  // PSI specific adjustments
+  overwritePropertyFormat("(.*)", "href", "uri")
+  adjustAttachmentRef(transformations)
+  overwriteProperty("Authorization", "signature", '''
+    {
+      "$ref": "#/components/schemas/AttachmentOrDocumentRef"
+    }
+  ''')
+  removeProperty("(Money|TimePeriod|Quantity)", "\\@(.*)")
+  // synchronous or asynchronous quote, as in TOD-03-06: the client's expectation, the server may answer asynchronously
+  overwriteProperty("Quote(|_FVO|_MVO)", "instantSyncQuote", '''
+    {
+      "type": "boolean",
+      "description": "An indicator which when the value is \\"true\\" means that the requester expects to get the priced quote immediately in the response, in state approved or, if it fails the business validation, rejected. When the value is false, or when the server cannot price the quote at once, the quote is returned in a state that is not final (acknowledged or inProgress) and priced afterwards. The response is 201 in both cases."
+    }
+  ''')
+  // the quote states of TOD-03-06: refused instead of declined (the enumeration is in the extension)
+  importSchema("QuoteStateType", file("doc/PSI/PSI-ICD/open-apis/extensions/PSID648-Quote-v5.0.0.oas.json"))
+  // a quote item always carries the product, as in TOD-03-06-01 (id and action are required in TMF648)
+  addRequiredProperty("QuoteItem_FVO", "product")
+  // the provider always returns the quote with its identifier, as in PSID679 (id comes from Entity, so it is declared in Quote to be required)
+  addProperty("Quote", "id", '''
+    {
+      "type": "string",
+      "description": "unique identifier"
+    }
+  ''')
+  addRequiredProperty("Quote", "id")
+  // the errors that caused a status change of the quote (for example rejected), as productOrderErrorMessage in PSID622;
+  // in the quote and in its create and update views, as productOrderErrorMessage in the product order
+  importSchema("QuoteErrorMessage(|_FVO|_MVO)", file("doc/PSI/PSI-ICD/open-apis/extensions/PSID648-Quote-v5.0.0.oas.json"))
+  importSchema("QuoteItemRef(|_FVO|_MVO)", file("tmforum/apis/TMF622_Product_Ordering/oas/TMF622-ProductOrdering-v5.0.0.oas.yaml"))
+  ['', '_FVO', '_MVO'].each { suffix ->
+    addProperty("Quote${suffix}", "quoteErrorMessage", """
+      {
+        "type": "array",
+        "description": "The errors that caused a status change of the quote, for example the reason why the quote was rejected, naming the quote items that failed",
+        "items": {
+          "\$ref": "#/components/schemas/QuoteErrorMessage${suffix}"
+        }
+      }
+    """)
+  }
+  // the sales channel of the quote, as in PSID679 and PSID622
+  addProperty("Quote(|_FVO)", "channel", '''
+    {
+      "$ref": "#/components/schemas/ChannelRef"
+    }
+  ''')
+  addProperty("Quote_MVO", "channel", '''
+    {
+      "$ref": "#/components/schemas/ChannelRef_MVO"
+    }
+  ''')
+  // Prune things that became superfluous because of above transformations
+  removeSchema("(Feature|FeatureRelationship|GeographicSiteFeature|PolicyRef)(|_FVO|_MVO)")
+  pruneAll()
+}
+
 def transformSwaggerJson = tasks.register('transformSwaggerJson') {
   description = 'Transforms all OpenAPI Specifications'
   group = 'Documentation'
@@ -711,6 +957,8 @@ def transformSwaggerJson = tasks.register('transformSwaggerJson') {
   dependsOn 'transformCustomerBill'
   dependsOn 'transformStock'
   dependsOn 'transformEvent'
+  dependsOn 'transformProductOfferingQualification'
+  dependsOn 'transformQuote'
 }
 
 tasks.register('generateDocReferences', com.cgi.space.psi.tasks.GenerateDocReferences.class) {

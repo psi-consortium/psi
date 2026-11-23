@@ -83,6 +83,18 @@ dcr_overrides:
    to: '2026-11-19'
    version: 'PSI-DOC-VERSION'
    author: 'Dominik Ogrodnik'
+   message: 'Event Management (TOD-01-02): added the event topics of the PSI APIs.'
+ - dcr:
+   from: '2026-11-19'
+   to: '2026-11-19'
+   version: 'PSI-DOC-VERSION'
+   author: 'Dominik Ogrodnik'
+   message: 'Register Event Callback (TOD-01-02-02): refers to the TMF630 REST API Design Guidelines 5.0.0.'
+ - dcr:
+   from: '2026-11-19'
+   to: '2026-11-19'
+   version: 'PSI-DOC-VERSION'
+   author: 'Dominik Ogrodnik'
    message: 'Dispatch Event (TOD-01-02-03): the correlationId of an event refers to PSI-ICD Observability.'
 =end
 
