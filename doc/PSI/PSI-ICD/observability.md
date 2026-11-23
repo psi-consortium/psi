@@ -25,6 +25,7 @@ The two identifiers serve different purposes:
 
 The TM Forum APIs know the correlation identifier only as the attribute *correlationId* of an event.
 PSI also carries it in the header `X-Correlation-ID` of every request and answer; no attribute is added to the TM Forum resources.
+Neither header is declared in the PSI OpenAPI definitions, in the same way as the authentication (see Security Considerations): they apply to every PSI API alike, as this chapter describes.
 
 ## Processing of a Request
 
@@ -43,7 +44,7 @@ The header `traceparent` is defined by the [W3C Trace Context](https://www.w3.or
 traceparent: 00-4bf92f3577b34da6a3ce929d0e0e4736-00f067aa0ba902b7-01
 ```
 
-Besides the version (`00`) and the flags (`01`, the trace is recorded), it carries two identifiers:
+Besides the version (`00`) and the flags (`01`, sampled: the caller may have recorded the trace), it carries two identifiers:
 
 * The **trace-id** (`4bf92f35…`) identifies the trace.
   The system that starts the trace sets it, and every system passes it on unchanged, so that a tracing tool collects the work of all systems into one trace.
@@ -57,10 +58,11 @@ Whether a system records traces, and with which tool, is up to its implementatio
 The answer to a request carries no trace context: the calling system knows which of its steps made the request.
 
 * Every PSI request must carry the header `traceparent`.
-* A system that receives a request without `traceparent` starts a new trace, with a new trace-id.
-* The requests that a system makes in the processing of a request carry the trace-id of that request, also after the initial answer, e.g. the PSS's requests to the providers and the requests by which it delivers its events about the quote.
+* A system that receives a request without `traceparent`, or with one that is not valid by the W3C Trace Context recommendation, e.g. with a trace-id of all zeros, must start a new trace, with a new trace-id.
+* The requests that a system makes in the processing of a request must carry the trace-id of that request, also after the initial answer, e.g. the PSS's requests to the providers and the requests by which it delivers its events about the quote.
   How a system keeps the trace context until then is up to its implementation.
-* In the parent-id of such a request, a system that records traces puts the identifier of the step that makes the request; a system that does not record traces may pass the parent-id that it received on unchanged.
+* In the parent-id of such a request, a system that records traces must put the identifier of the step that makes the request; a system that does not record traces may pass the parent-id that it received on unchanged.
+* A system that receives the header `tracestate` must pass it on together with `traceparent`, as the W3C Trace Context recommendation requires.
 
 ## Correlation Identifier
 
@@ -70,13 +72,14 @@ The header `X-Correlation-ID` carries the correlation identifier, a string, e.g.
 X-Correlation-ID: 019a8f3c-5e21-7b4d-9c0a-3f6e8d2b1a47
 ```
 
-* Every PSI request and every answer carries the header `X-Correlation-ID`.
-* A system that makes a request in the processing of a request or an event that it received passes the correlation identifier of that request or event on unchanged.
-* For any other request, its sender sets a new value, e.g. the customer for its request for a quote, and again for its later retrieval of the quote.
-* A system that receives a request without the header, or with a value it cannot use, e.g. one that is too long, sets a new value for it.
-  How a new value is built is up to the system that sets it, e.g. a UUID.
-* The server returns the correlation identifier of the request in the header of its answer, also when it refuses the request; when it set a new value, it returns that value.
-* A system keeps the correlation identifier of a request for as long as the processing of the request lasts, so that its requests and events after the initial answer carry it, e.g. the PSS keeps the correlation identifier of a request for a quote until the quote is approved or rejected.
+* Every PSI request and every answer must carry the header `X-Correlation-ID`.
+* A system that makes a request in the processing of a request or an event that it received must pass the correlation identifier of that request or event on unchanged.
+* For any other request, its sender must set a new value, e.g. the customer for its request for a quote, and again for its later retrieval of the quote.
+* A system must accept a correlation identifier of 1 to 128 characters, each a letter, a digit, `.`, `_`, `:` or `-`.
+  A system that receives a request without the header, or with any other value, must set a new value for it.
+  How a new value within this range is built is up to the system that sets it, e.g. a UUID.
+* The server must return the correlation identifier of the request in the header of its answer, also when it refuses the request; when it set a new value, it returns that value.
+* A system must keep the correlation identifier of a request for as long as the processing of the request lasts, so that its requests and events after the initial answer carry it, e.g. the PSS keeps the correlation identifier of a request for a quote until the quote is approved or rejected.
 * The correlation identifier must not be added to the body of the TM Forum resources.
 
 ## Events
@@ -84,11 +87,11 @@ X-Correlation-ID: 019a8f3c-5e21-7b4d-9c0a-3f6e8d2b1a47
 An event is delivered to every subscriber in a request of its own (see the Event Management API), it may be passed on, e.g. by the PSS from a provider to the customer, and it may be read long after it was sent.
 It therefore carries the correlation identifier in its body, in *correlationId*, as the TM Forum Event structure provides.
 
-* An event that a system publishes in the processing of a request or of another event carries the correlation identifier of that request or event in *correlationId*.
+* An event that a system publishes in the processing of a request or of another event must carry the correlation identifier of that request or event in *correlationId*.
   E.g. the event by which the PSS passes a product order on to the provider, and the events that the order is in progress and completed, carry the correlation identifier of the request that created the order; the event that the order was cancelled carries the correlation identifier of the request that cancelled the order.
-* An event about a change that is not part of the processing of any request carries a new correlation identifier, set by the system that publishes it, e.g. an event about a change of an offering in the catalog of a provider.
-* A system that passes an event on, e.g. the PSS that informs the customer about a change at the provider, keeps its *correlationId*.
-* The request by which an event is delivered to a subscriber carries the two headers as well: its `traceparent` carries the trace-id of the processing that published the event and, in the parent-id, the step that delivers the event, and its `X-Correlation-ID` carries the *correlationId* of the event, i.e. the correlation identifier of the processing that published the event.
+* An event about a change that is not part of the processing of any request must carry a new correlation identifier, set by the system that publishes it, e.g. an event about a change of an offering in the catalog of a provider.
+* A system that passes an event on, e.g. the PSS that informs the customer about a change at the provider, must keep its *correlationId*.
+* The request by which an event is delivered to a subscriber must carry the two headers as well: its `traceparent` carries the trace-id of the processing that published the event and, in the parent-id, the step that delivers the event, and its `X-Correlation-ID` carries the *correlationId* of the event, i.e. the correlation identifier of the processing that published the event.
   E.g. the PSS's event that a quote is in progress is delivered with the trace-id of the customer's request for the quote and the identifier of the PSS's step that delivers it, not the parent-id of the customer's request, and with the correlation identifier of the customer's request.
 
 ## Example
