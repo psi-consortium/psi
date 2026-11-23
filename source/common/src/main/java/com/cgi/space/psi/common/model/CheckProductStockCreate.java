@@ -72,11 +72,11 @@ public class CheckProductStockCreate {
   }
 
   /**
-   * An indicator which when the value is \"true\" means that requester expects to get result immediately in the response. If the indicator is true then the response code of 200 indicates the operation is successful otherwise a task is created with a response 201.
+   * An indicator which when the value is \"true\" means that the requester expects to get the result immediately in the response. The server always response with HTTP status 201. The client must check the `state` attribute in the response to verify if the instant check was possible or not.
    * @return instantSyncCheck
   */
   
-  @Schema(name = "instantSyncCheck", description = "An indicator which when the value is \"true\" means that requester expects to get result immediately in the response. If the indicator is true then the response code of 200 indicates the operation is successful otherwise a task is created with a response 201.", required = false)
+  @Schema(name = "instantSyncCheck", description = "An indicator which when the value is \"true\" means that the requester expects to get the result immediately in the response. The server always response with HTTP status 201. The client must check the `state` attribute in the response to verify if the instant check was possible or not.", required = false)
   public Boolean getInstantSyncCheck() {
     return instantSyncCheck;
   }

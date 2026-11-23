@@ -23,7 +23,6 @@ Table: Request Body of POST checkProductStock. {#tbl:checkProductStock.post.md:r
 
 | Code | Description | Content |
 |------|-------------|---------|
-| 200 | Sucess | CheckProductStock |
 | 201 | Created | CheckProductStock |
 | 400 | Bad Request | Error |
 | 401 | Unauthorized | Error |

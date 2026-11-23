@@ -625,6 +625,7 @@ tasks.register('transformStock', com.cgi.space.psi.tasks.TransformOASTask) { tra
   removePaths("/queryProductStock(.*)")
   // unify schemas
   importBaseTypes(transformations)
+  importPath("/checkProductStock(.*)", file("doc/PSI/PSI-ICD/open-apis/extensions/PSID687-Stock-v4.1.0.oas.json"))
   importSchema("(.*)(Product|Price|RelatedOrderItem|PartyOrPartyRole|Intent|Duration|Expression|RelatedPartyRefOrPartyRoleRef)(.*)", file("tmforum/apis/TMF637_Product_Inventory/oas/TMF637-ProductInventory-v5.0.0.oas.yaml"))
   importSchema("(Geo|RelatedPlaceRefOrValue|Place|ItemActionType|StandardIdentifier|ExternalIdentifier|CalendarPeriod|HourPeriod)(.*)", file("tmforum/apis/TMF637_Product_Inventory/oas/TMF637-ProductInventory-v5.0.0.oas.yaml"))
   importSchema("(.*)", file("doc/PSI/PSI-ICD/open-apis/extensions/PSID675-Geographic_Location.oas.json"))
@@ -654,6 +655,12 @@ tasks.register('transformStock', com.cgi.space.psi.tasks.TransformOASTask) { tra
     {
       "$ref": "#/components/schemas/TimePeriod",
       "description": "Period for which the product is to be booked, i.e. the stock has to be available."
+    }
+  ''')
+  overwriteProperty("(.*)", "instantSyncCheck", '''
+    {
+      "type": "boolean",
+      "description": "An indicator which when the value is \\"true\\" means that the requester expects to get the result immediately in the response. The server always response with HTTP status 201. The client must check the `state` attribute in the response to verify if the instant check was possible or not."
     }
   ''')
   adjustAttachmentRef(transformations)
