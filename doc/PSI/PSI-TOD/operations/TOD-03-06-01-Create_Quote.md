@@ -63,4 +63,4 @@ A request that does not conform to the schema (`400`) or fails a business valida
 
 **eTOM Reference**
 
-The operation is based on the Develop Sales Proposal process of Selling in the Customer domain from the eTOM.
+The operation is based on 1.1.9.2 process identifier from the eTOM.

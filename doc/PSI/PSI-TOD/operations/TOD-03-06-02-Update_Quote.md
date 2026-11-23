@@ -41,4 +41,4 @@ An accepted quote can be referenced by a product order within its validity perio
 
 **eTOM Reference**
 
-The operation is based on the Negotiate Sales/Contract process of Selling in the Customer domain from the eTOM.
+The operation is based on 1.1.9.5 process identifier from the eTOM.

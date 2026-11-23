@@ -14,7 +14,6 @@ The quote exists in the PSS datastore.
 
 Gets a quote with a specific identifier via a standard interface specification.
 The customer can request to view the quote from the PSS, and the PSS can view the quote on the provider's system.
-A provider can also view a quote in the PSS if the quote is its own.
 With the parameter *fields*, the client can select the attributes of the quote to be returned.
 
 Viewing is one way to learn the state a quote has reached and the provider's prices; the other are the notifications of the Event Management API (see [TOD-01-02](#tod-01-02-eventmanagement)).
@@ -35,4 +34,4 @@ A quote that exists but that the client is not allowed to read (e.g. a quote of 
 
 **eTOM Reference**
 
-The operation is based on the Develop Sales Proposal and Negotiate Sales/Contract processes of Selling in the Customer domain from the eTOM.
+The operation is based on 1.1.9.2 and 1.1.9.5 process identifiers from the eTOM.

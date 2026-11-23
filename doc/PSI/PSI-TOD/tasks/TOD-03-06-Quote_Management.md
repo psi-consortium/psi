@@ -62,8 +62,8 @@ The quote endpoints are implemented both by the PSS and by the provider's system
 * The PSS calls the same endpoints on the provider's system via the PSS-PVD I/F, to forward the quote request and the customer's updates and to retrieve the provider's answer.
   The PSS therefore acts as the server towards the customer and as the client towards the provider.
 * The provider informs the PSS about the changes of a quote (e.g. that it has been priced) by notifications via the Event Management API (see [TOD-01-02](#tod-01-02-eventmanagement)), and the PSS informs the customer in the same way.
-* As for product orders, a provider can also view quotes in the PSS via the PSS-PVD I/F, but only its own.
-  It does not update quotes in the PSS; updating a quote is reserved for the customer.
+* As for the product offering qualification, the PSS-PVD I/F is used in one direction only, from the PSS to the provider's system.
+  The provider keeps its quotes in its own system and does not call the quote endpoints of the PSS.
 
 ```plantuml
 @startuml
@@ -77,7 +77,6 @@ rectangle "Provider's system\nQuote API (server)"           as V
 
 C -down-> P  : POST / PATCH / GET /quote
 P -down-> V  : POST / PATCH / GET /quote\n(PSS-PVD I/F)
-V -up->   P  : GET /quote\n(own quotes, PSS-PVD I/F)
 V .up.>   P  : notifications\n(Event Management)
 P .up.>   C  : notifications\n(Event Management)
 @enduml
@@ -95,12 +94,28 @@ The governance of the PSS may, however, apply rules that filter the offerings be
 
 A quote is requested for a fully configured product.
 If the inquiry left open characteristics that the provider needs to price the product (e.g. the frequency band), the customer sets them before requesting the quote.
-If a POQ was done before, the characteristics set in the POQ stay the same in the quote and in the product order; characteristics that the POQ did not set may be added.
 
 The terms of a product (e.g. contract duration, renewal, charge period) are given in its product terms (*productTerm*).
 The implementer MAY require equal terms for all quote items.
 
 Prices are usually given in an ISO 4217 currency, but a PSS MAY also accept its own prepaid tokens (credits) as the currency of a quote and of the subsequent product order; the *unit* of a price then names the token instead of an ISO 4217 code.
+
+**Data taken over from a POQ**
+
+If a quote follows a POQ, the quote request can be built from the qualified items, so that the customer does not have to enter their data again.
+Whether the GUI validates that the duplicated attributes are unchanged, or whether a user interface fills them in for the user from the POQ, is left to the implementer of the user interface.
+The quote refers to the POQ in *productOfferingQualification*, and each quote item to the qualified item in *productOfferingQualificationItem*.
+
+The following attributes of a qualified item are taken over into the quote item and SHOULD NOT be changed, so that the quote prices what has been qualified:
+
+* *action* and *productOffering*;
+* in *product*: *productSpecification*, the characteristics set in the POQ (*productCharacteristic*; their values are not changed, but characteristics that the POQ did not set may be added), *place* and, for the actions `modify` and `delete`, the identifier of the existing product (*id*);
+* *quantity*;
+* the structure of the items, i.e. nested items and their relationships (*qualificationItemRelationship* in the POQ, *quoteItemRelationship* in the quote);
+* at the level of the request, *channel* and the customer in *relatedParty*.
+
+The API interfaces themselves are not changed by this: the quote request remains a complete request that conforms to the PSID648 OpenAPI specification.
+The taken-over attributes are duplicated in the quote request, i.e. sent again with their values from the POQ; the references to the POQ do not replace them.
 
 **Bundles and several providers**
 
@@ -140,12 +155,6 @@ P --> O
 
 The same applies when the customer selects several offerings, from the catalog or from the results of an inquiry, and requests one quote with several quote items: each item is sent to the provider of its offering, and if one item fails, the whole quote fails.
 
-=begin
-
-> Open: whether one quote with items of several offerings is allowed, or only one quote per offering (atomic or bundle).
-> CGI confirmed several items for the product order on 2026-10-20, not for the quote.
-
-=end
 
 **Changes to an existing product**
 
@@ -213,9 +222,11 @@ The PSS cancels quotes at the provider only on behalf of the customer.
   * a characteristic outside the bounds of the product specification or offering,
   * an item with action `modify` or `delete` without a reference to the existing product,
   * an item with action `modify` that changes the product specification or the provider,
-  * characteristics that differ from the referenced POQ,
+  * characteristics that differ from the referenced POQ, if the implementation checks them (see *Data taken over from a POQ* above),
   * a part or item that its provider cannot offer with the common terms,
   * an offering that no provider of the PSS delivers (then no call reaches a provider).
+
+  These validations are examples, not a closed list; the error messages returned for them (*reason*, *message*) are left to the implementer.
 * If a part of a decomposed quote fails, the whole quote is `rejected`.
 * An update that the current state of the quote does not allow, including any update of a quote in a final state and the acceptance of a quote whose validity period has ended, is refused with `409` and leaves the quote unchanged.
 
@@ -268,15 +279,15 @@ Task  ..> O4    : <<includes>>
 |---------------------|:----------:|:----------:|:----------:|:----------:|:----------:|
 | **Create Quote**    | \checkmark |            | \checkmark |            | \checkmark |
 | **Update Quote**    | \checkmark |            | \checkmark |            | \checkmark |
-| **View Quote**      | \checkmark | \checkmark | \checkmark |            | \checkmark |
-| **View All Quotes** | \checkmark | \checkmark | \checkmark |            | \checkmark |
+| **View Quote**      | \checkmark |            | \checkmark |            | \checkmark |
+| **View All Quotes** | \checkmark |            | \checkmark |            | \checkmark |
 
 Table: Quote Management Matrix. {#tbl:quote-management-matrix}
 
 Please note that each endpoint is implemented both by the PSS and by the provider's system.
-The column PSS marks the calls of the PSS to the provider's system, where the PSS acts as the client (for an update, on behalf of the customer); another PSS calls the PSS in the role of a customer, and a provider views only its own quotes in the PSS.
+The column PSS marks the calls of the PSS to the provider's system, where the PSS acts as the client (for an update, on behalf of the customer); another PSS calls the PSS in the role of a customer.
 Besides these calls, the provider informs the PSS about changes of its quotes by notifications.
 
 **eTOM Reference**
 
-The task is based on the Develop Sales Proposal and Negotiate Sales/Contract processes of Selling in the Customer domain from the eTOM.
+The task is based on the 1.1.9 process identifier from the eTOM.
