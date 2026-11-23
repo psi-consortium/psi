@@ -74,11 +74,7 @@ At least one event topic must exist.
 **Main operation**
 
 Each system has to register callbacks for the events they want to receive from one another.
-Usually, both systems will register for the following topics named after the corresponding entities:
-
-* inquiry
-* order
-* invoice
+The topics of the PSI APIs are named in [TOD-01-02](#tod-01-02-eventmanagement); a system registers for the topics of the APIs whose events it needs, e.g. *inquiry* and *order*.
 
 The registration must contain the URL of the callback endpoint, which is expected to be the one described in [TOD-01-02-03](#tod-01-02-03-dispatchevent).
 Note that the implementation may reject callbacks if the host is not whitelisted beforehand (see PSI-ICD).

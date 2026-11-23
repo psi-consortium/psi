@@ -24,6 +24,28 @@ Hence, all events related to orders are collected in the *order* topic, while th
 Alarms related to breaching service level specification are stored in the *alarm* topic.
 However, PSS and provider systems are allowed to define additional topics, if needed, to organise the events in their interface implementation.
 
+The following table names the topics of the PSI APIs whose resources one system changes and another system needs to know about, e.g. a quote that the provider prices for the customer, or a product offering that another PSS shows in its catalog.
+A system that offers one of these APIs and publishes events about its resources publishes them on the topic named in the table.
+Except for the three topics above, the topics are optional.
+
+| Topic             | PSI API                                     | Events about                                                    | Mandatory |
+|-------------------|---------------------------------------------|-----------------------------------------------------------------|:---------:|
+| *alarm*           | PSID642 Alarm                               | alarms                                                          |    yes    |
+| *inquiry*         | PSID001 Customer Inquiry Management         | customer inquiries                                              |    yes    |
+| *order*           | PSID622 Product Ordering                    | product orders                                                  |    yes    |
+| *invoice*         | PSID678 Customer Bill                       | customer bills                                                  |    no     |
+| *mission*         | PSID002 Mission Management                  | missions                                                        |    no     |
+| *performance*     | PSID143 Performance Monitoring              | performance monitoring jobs and reports                         |    no     |
+| *product*         | PSID637 Product Inventory                   | products                                                        |    no     |
+| *productCatalog*  | PSID620 Product Catalog Management          | product offerings, product specifications and templates         |    no     |
+| *qualification*   | PSID679 Product Offering Qualification      | product offering qualifications                                 |    no     |
+| *quote*           | PSID648 Quote                               | quotes                                                          |    no     |
+| *resourceCatalog* | PSID634 Resource Catalog Management         | resource specifications and templates                           |    no     |
+| *serviceCatalog*  | PSID633 Service Catalog Management          | service specifications and templates                            |    no     |
+| *troubleTicket*   | PSID621 Trouble Ticket                      | trouble tickets                                                 |    no     |
+
+Table: Event Topics. {#tbl:event-topics}
+
 The following diagram illustrates a usual execution sequence, using the "order" topic as an example:
 
 ```plantuml
