@@ -657,6 +657,12 @@ tasks.register('transformStock', com.cgi.space.psi.tasks.TransformOASTask) { tra
       "description": "Period for which the product is to be booked, i.e. the stock has to be available."
     }
   ''')
+  overwriteProperty("(.*)", "instantSyncCheck", '''
+    {
+      "type": "boolean",
+      "description": "An indicator which when the value is \\"true\\" means that the requester expects to get the result immediately in the response. The server always response with HTTP status 201. The client must check the `state` attribute in the response to verify if the instant check was possible or not."
+    }
+  ''')
   adjustAttachmentRef(transformations)
   // Prune things that became superfluous because of above transformations
   pruneAll()
