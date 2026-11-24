@@ -72,7 +72,8 @@ They are selected by:
 * Matching filter query
 
 The message body contains the event type and the whole affected entity, meaning there is no need to query it additionally.
-The `correlationId` helps to identify the event across the systems, as it will get a different `ID` in each.
+The `correlationId` carries the correlation identifier of the request or event whose processing caused the event (see [PSI-ICD], Observability).
+A PSS that passes an event on, e.g. an event of a provider to the customer, sends an event of its own with a new `eventId`, but with the same `correlationId`.
 
 The sender has to ensure that every qualified callback is called successfully exactly once.
 This includes failover mechanisms in particular.

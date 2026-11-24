@@ -96,6 +96,12 @@ dcr_overrides:
    version: 'PSI-DOC-VERSION'
    author: 'Dominik Ogrodnik'
    message: 'TMF630 REST API Design Guidelines 5.0.0 as the reference; the paging of lists by offset.'
+ - dcr:
+   from: '2026-11-09'
+   to: '2026-11-19'
+   version: 'PSI-DOC-VERSION'
+   author: 'Dominik Ogrodnik'
+   message: 'Added Observability: the trace context and the correlation identifier in REST headers, events and logs.'
 =end
 
 # Document Meta Information
@@ -198,6 +204,10 @@ The GET endpoints returning lists of objects are paged by offset, as *Part 1* de
 ## Security Considerations
 
 @include [security](security.md)
+
+## Observability
+
+@include [observability](observability.md)
 
 ## Types and Characteristics
 
