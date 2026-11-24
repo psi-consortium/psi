@@ -7,6 +7,8 @@
 
 **Absolute Path:** /productOfferingQualification/v2/checkProductOfferingQualification/{id}
 
+**TOD Reference:** TOD-03-05-03-View_Product_Offering_Qualification
+
 **Summary:** Retrieves a CheckProductOfferingQualification by ID
 
 ## Parameters

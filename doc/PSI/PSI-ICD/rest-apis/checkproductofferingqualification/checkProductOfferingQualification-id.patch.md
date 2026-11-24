@@ -7,6 +7,8 @@
 
 **Absolute Path:** /productOfferingQualification/v2/checkProductOfferingQualification/{id}
 
+**TOD Reference:** TOD-03-05-02-Update_Product_Offering_Qualification
+
 **Summary:** Updates partially a CheckProductOfferingQualification
 
 ## Parameters
