@@ -14,7 +14,9 @@ The quote exists in the PSS and provider datastores and is not in a final state.
 
 The customer updates an existing quote in the PSS via a standard interface specification.
 The PSS then forwards the update to the provider via the same endpoint on the provider's system.
-All attributes that TMF648 allows to be modified can be updated: *agreement*, *authorization*, *category*, *channel*, *contactMedium*, *description*, *effectiveQuoteCompletionDate*, *expectedFulfillmentStartDate*, *expectedQuoteCompletionDate*, *externalId*, *instantSyncQuote*, *note*, *productOfferingQualification*, *quoteItem*, *quoteTotalPrice*, *relatedParty*, *requestedQuoteCompletionDate*, *salesOpportunity*, *state*, *validFor* and *version*.
+The following attributes can be updated: *agreement*, *authorization*, *category*, *channel*, *contactMedium*, *description*, *expectedFulfillmentStartDate*, *externalId*, *note*, *quoteItem*, *quoteTotalPrice*, *relatedParty*, *requestedQuoteCompletionDate*, *salesOpportunity*, *state* and *version*.
+The attributes that only the provider sets (*validFor*, *expectedQuoteCompletionDate*, *effectiveQuoteCompletionDate* and *quoteErrorMessage*) cannot be updated, nor can *instantSyncQuote* and *productOfferingQualification*, which are given only when the quote is created.
+In a quote item, *quoteItem.productOffering*, *quoteItem.productOfferingQualificationItem* and *quoteItem.state* cannot be updated.
 
 The decision of the customer on a quote in the state `approved` is an update of its state to `accepted` or `refused`.
 Withdrawing a quote request before it is accepted or refused, also an `approved` quote, is an update of its state to `cancelled`.

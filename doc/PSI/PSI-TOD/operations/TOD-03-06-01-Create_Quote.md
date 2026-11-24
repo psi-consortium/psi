@@ -32,7 +32,6 @@ Some properties of the quote request are:
 * *quoteItem.quantity* - The quantity asked for the item.
 * *quoteItem.productOfferingQualificationItem* - A reference to the POQ item done before, if any.
 * *quoteItem.quoteItemRelationship* - Relations between the items of the quote, e.g. that one item depends on another.
-* *quoteItem.quoteItem* - Nested quote items, to reflect the parts of a bundle offering.
 * *productOfferingQualification* - A reference to the POQ done before, if any.
 * *requestedQuoteCompletionDate* - The date by which the customer wants the quote to be answered.
 * *expectedFulfillmentStartDate* - The date on which the customer wishes the quoted items to be delivered.
@@ -44,7 +43,8 @@ The provider completes the quote with:
 * *quoteItem.quoteItemPrice* - The prices of an item: price, price type (one-time, recurring, usage), recurring charge period and price alterations such as discounts.
 * *quoteTotalPrice* - The total prices of the quote, in one currency.
 * *validFor* - The period in which the quote can be accepted.
-* *expectedQuoteCompletionDate*/*effectiveQuoteCompletionDate* - When the provider expects to answer and when it answered.
+* *expectedQuoteCompletionDate* - The date by which the provider expects the quote to be completed.
+* *effectiveQuoteCompletionDate* - The date on which the quote was actually completed.
 * *state*/*quoteItem.state* - The state of the quote and of each item (see [TOD-03-06](#tod-03-06-quotemanagement)).
 * *quoteErrorMessage* - For a `rejected` quote, the reason, with the quote items that failed.
 

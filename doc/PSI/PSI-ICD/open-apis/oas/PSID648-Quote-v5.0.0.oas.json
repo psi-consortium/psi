@@ -5143,21 +5143,12 @@
                 "description": "This is the date wished by the requester to have the requested quote item delivered",
                 "format": "date-time"
               },
-              "expectedQuoteCompletionDate": {
-                "type": "string",
-                "description": "This is expected date - from quote supplier - to be able to send back a response for this quote",
-                "format": "date-time"
-              },
               "externalId": {
                 "type": "array",
                 "description": "An ID given by an external entity and only understandable by it (for example, an ID given by the customer to facilitate his searches afterwards)",
                 "items": {
                   "$ref": "#/components/schemas/ExternalIdentifier"
                 }
-              },
-              "instantSyncQuote": {
-                "type": "boolean",
-                "description": "An indicator which when the value is \"true\" means that the requester expects to get the priced quote immediately in the response, in state approved or, if it fails the business validation, rejected. When the value is false, or when the server cannot price the quote at once, the quote is returned in a state that is not final (acknowledged or inProgress) and priced afterwards. The response is 201 in both cases."
               },
               "note": {
                 "type": "array",
@@ -5187,23 +5178,13 @@
                   "$ref": "#/components/schemas/RelatedPartyRefOrPartyRoleRef"
                 }
               },
-              "productOfferingQualification": {
-                "type": "array",
-                "description": "A reference to a previously done product offering qualification",
-                "items": {
-                  "$ref": "#/components/schemas/ProductOfferingQualificationRef"
-                }
-              },
               "requestedQuoteCompletionDate": {
                 "type": "string",
                 "description": "This is requested date - from quote requester - to get a complete response for this quote",
                 "format": "date-time"
               },
               "state": {
-                "$ref": "#/components/schemas/QuoteStateType"
-              },
-              "validFor": {
-                "$ref": "#/components/schemas/TimePeriod"
+                "$ref": "#/components/schemas/QuoteUpdateStateType"
               },
               "version": {
                 "type": "string",
@@ -5214,19 +5195,7 @@
                 "type": "array",
                 "description": "A quote item describes an action to be performed on a productOffering or a product in order to get pricing elements and condition.",
                 "items": {
-                  "$ref": "#/components/schemas/QuoteItem"
-                }
-              },
-              "effectiveQuoteCompletionDate": {
-                "type": "string",
-                "description": "Date when the quote has been completed",
-                "format": "date-time"
-              },
-              "quoteErrorMessage": {
-                "type": "array",
-                "description": "The errors that caused a status change of the quote, for example the reason why the quote was rejected, naming the quote items that failed",
-                "items": {
-                  "$ref": "#/components/schemas/QuoteErrorMessage_MVO"
+                  "$ref": "#/components/schemas/QuoteItem_MVO"
                 }
               },
               "channel": {
@@ -10133,6 +10102,89 @@
           }
         ]
       },
+      "QuoteUpdateStateType": {
+        "type": "string",
+        "description": "Possible values for the state of the quote that the customer sets by an update: accepted or refused for an approved quote within its validity period, cancelled to withdraw the quote before it is accepted or refused. The other states are set only by the PSS or the provider.",
+        "enum": [
+          "accepted",
+          "refused",
+          "cancelled"
+        ]
+      },
+      "QuoteItem_MVO": {
+        "discriminator": {
+          "propertyName": "@type",
+          "mapping": {
+            "QuoteItem": "#/components/schemas/QuoteItem_MVO"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Extensible"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "action": {
+                "$ref": "#/components/schemas/ItemActionType"
+              },
+              "attachment": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/AttachmentOrDocumentRef"
+                }
+              },
+              "note": {
+                "type": "array",
+                "description": "Free form text associated with the quote item",
+                "items": {
+                  "$ref": "#/components/schemas/Note"
+                }
+              },
+              "product": {
+                "$ref": "#/components/schemas/ProductRefOrValue"
+              },
+              "quantity": {
+                "type": "integer",
+                "description": "Quantity asked for this quote item"
+              },
+              "quoteItem": {
+                "type": "array",
+                "description": "A structure to embedded quote item within quote item",
+                "items": {
+                  "$ref": "#/components/schemas/QuoteItem_MVO"
+                }
+              },
+              "quoteItemPrice": {
+                "type": "array",
+                "description": "Price for this quote item",
+                "items": {
+                  "$ref": "#/components/schemas/QuotePrice"
+                }
+              },
+              "quoteItemRelationship": {
+                "type": "array",
+                "description": "A relationship from item within a quote",
+                "items": {
+                  "$ref": "#/components/schemas/QuoteItemRelationship"
+                }
+              },
+              "relatedParty": {
+                "type": "array",
+                "description": "A reference to a party playing a role in this quote item",
+                "items": {
+                  "$ref": "#/components/schemas/RelatedPartyOrPartyRole"
+                }
+              },
+              "id": {
+                "type": "string",
+                "description": "Identifier of the quote item (generally it is a sequence number 01, 02, 03, ...)"
+              }
+            },
+            "description": "A quote item in the update of a quote. It has the attributes of QuoteItem except those that the customer cannot change: the product offering and the POQ item it refers to, which are set when the quote is created, and the state of the item, which is set by the PSS and the provider."
+          }
+        ]
+      },
       "QuoteErrorMessage": {
         "discriminator": {
           "propertyName": "@type",
@@ -10235,57 +10287,6 @@
           }
         ]
       },
-      "QuoteErrorMessage_MVO": {
-        "discriminator": {
-          "propertyName": "@type",
-          "mapping": {
-            "QuoteErrorMessage": "#/components/schemas/QuoteErrorMessage_MVO"
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/Extensible"
-          },
-          {
-            "type": "object",
-            "properties": {
-              "code": {
-                "type": "string",
-                "description": "error code"
-              },
-              "reason": {
-                "type": "string",
-                "description": "Explanation of the reason for the error"
-              },
-              "message": {
-                "type": "string",
-                "description": "More details and corrective actions related to the error"
-              },
-              "status": {
-                "type": "string",
-                "description": "error code extension like sys-ABC-2001"
-              },
-              "referenceError": {
-                "type": "string",
-                "description": "URI of documentation describing the error"
-              },
-              "timestamp": {
-                "type": "string",
-                "description": "Date when the error happened",
-                "format": "date-time"
-              },
-              "quoteItem": {
-                "type": "array",
-                "description": "A list of quote item references corresponded to this error",
-                "items": {
-                  "$ref": "#/components/schemas/QuoteItemRef_MVO"
-                }
-              }
-            },
-            "description": "A QuoteErrorMessage represents an error that causes a status change in a quote, as the ProductOrderErrorMessage of TMF622 for a product order."
-          }
-        ]
-      },
       "QuoteItemRef": {
         "discriminator": {
           "propertyName": "@type",
@@ -10337,41 +10338,6 @@
               "quoteId",
               "quoteItemId"
             ],
-            "type": "object",
-            "properties": {
-              "quoteHref": {
-                "type": "string",
-                "description": "Reference of the related quote."
-              },
-              "@referredType": {
-                "type": "string",
-                "description": "The actual type of the target instance when needed for disambiguation."
-              },
-              "quoteId": {
-                "type": "string",
-                "description": "Unique identifier of a refered quote."
-              },
-              "quoteItemId": {
-                "type": "string",
-                "description": "Identifier of a quote item. "
-              }
-            },
-            "description": "A reference to Quote item that has been executed previously."
-          }
-        ]
-      },
-      "QuoteItemRef_MVO": {
-        "discriminator": {
-          "propertyName": "@type",
-          "mapping": {
-            "QuoteItemRef": "#/components/schemas/QuoteItemRef_MVO"
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/Extensible"
-          },
-          {
             "type": "object",
             "properties": {
               "quoteHref": {

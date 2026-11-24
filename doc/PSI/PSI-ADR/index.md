@@ -110,6 +110,12 @@ dcr_overrides:
    version: 'PSI-DOC-VERSION'
    author: 'Kinga Kocierz'
    message: 'Accepted ADR044 on the deviations of PSID648 Quote Management from TMF648 and ADR045 on the scope of a product modification.'
+ - dcr:
+   from: '2026-11-24'
+   to: '2026-11-24'
+   version: 'PSI-DOC-VERSION'
+   author: 'Kinga Kocierz'
+   message: 'ADR044 v1.1: the update view of PSID648 (Quote_MVO, new QuoteItem_MVO) carries no server-set attributes and accepts only the states set by the customer.'
  =end
 
 # Document Meta Information

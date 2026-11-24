@@ -4,8 +4,8 @@
 * Status: :accepted:
 * Deciders: Kinga Kocierz
 * Consulted: Dominik Ogrodnik, @hop, @cgr
-* Date: 2026-11-20
-* Version: 1.0
+* Date: 2026-11-24
+* Version: 1.1
 * Category: Design
 
 Technical Story: PSID648 Quote Management API (psi issue #66, PR #75) and its task description TOD-03-06 (psi issue #62)
@@ -66,6 +66,9 @@ Table: Quote states in PSID648 {#tbl:adr044-quote-states}
 `declined` is not used.
 The provider never cancels a quote; it rejects it.
 
+In the update view (`Quote_MVO`), `state` is of type `QuoteUpdateStateType`, which holds only the states set by the customer: `accepted`, `refused` and `cancelled`.
+The other states are set only by the PSS or the provider and cannot be sent in `PATCH /quote/{id}`.
+
 ### 2. `instantSyncQuote` and the response to `POST /quote`
 
 * `instantSyncQuote` stays a free boolean. It states what the client *expects*: with `true`, the priced quote in the response (`approved`, or `rejected` if it fails the validation); with `false`, a quote in a state that is not final (`acknowledged` or `inProgress`) that is priced afterwards.
@@ -90,7 +93,7 @@ Table: Response codes of PSID648 compared with TMF648 {#tbl:adr044-response-code
 
 | Attribute | Added to | Type | Content | Aligned with |
 |---|---|---|---|---|
-| `quoteErrorMessage` | `Quote`, `Quote_FVO`, `Quote_MVO` | array of `QuoteErrorMessage` (`_FVO`, `_MVO` respectively) | The errors that caused a state change of the quote, in particular the reason why it was `rejected`. | `productOrderErrorMessage` in PSID622 |
+| `quoteErrorMessage` | `Quote`, `Quote_FVO` | array of `QuoteErrorMessage` (`_FVO` respectively) | The errors that caused a state change of the quote, in particular the reason why it was `rejected`. | `productOrderErrorMessage` in PSID622 |
 | `channel` | `Quote`, `Quote_FVO` | `ChannelRef` | The sales channel through which the quote was requested. | `channel` in PSID622 and PSID679 |
 | `channel` | `Quote_MVO` | `ChannelRef_MVO` | As above, in the update view. | PSID622 |
 
@@ -126,12 +129,44 @@ The quote therefore always exists as a resource, and the client needs its identi
 The PSS also needs the identifier to relate the quotes it requested from the providers, for example the parts of a decomposed bundle quote, to the customer's quote.
 A quote without an `id` could not be followed up, so the provider always returns the quote with its identifier, as PSID679 does for a product offering qualification.
 
+### 6. Server-set attributes removed from the update view
+
+`Quote_MVO` is used only as the request body of `PATCH /quote/{id}`.
+Except the prices (`quoteTotalPrice`, `quoteItem.quoteItemPrice`), which stay as in TMF648, it carries no attribute that only the PSS or the provider sets, and no attribute that applies only to the creation of a quote, as `CheckProductOfferingQualification_MVO` in PSID679.
+
+| Attribute | TMF648 `Quote_MVO` | PSID648 `Quote_MVO` | Set by |
+|---|---|---|---|
+| `validFor` | present | removed | provider, the validity period of the priced quote |
+| `effectiveQuoteCompletionDate` | present | removed | provider, when the quote is completed |
+| `expectedQuoteCompletionDate` | present | removed | provider, the date by which it expects to answer the quote |
+| `instantSyncQuote` | present | removed | customer, only when it creates the quote (section 2) |
+| `productOfferingQualification` | present | removed | customer, only when it creates the quote |
+| `quoteErrorMessage` | – (added by PSID648, section 4) | not added | PSS / provider, when the quote is rejected |
+
+Table: Attributes not in the update view of PSID648 {#tbl:adr044-mvo-removed}
+
+PSID679 removes `expectedQualificationCompletionDate` and `instantSyncQualification` from its update view in the same way.
+
+In TMF648, `Quote_MVO.quoteItem` refers to the full `QuoteItem`, as TMF648 has no `QuoteItem_MVO`.
+PSID648 adds `QuoteItem_MVO`, which has the attributes of `QuoteItem` except:
+
+| Attribute | Set by |
+|---|---|
+| `productOffering` | customer, only when it creates the quote |
+| `productOfferingQualificationItem` | customer, only when it creates the quote |
+| `state` | PSS / provider, as the state of the item in `CheckProductOfferingQualificationItem_MVO` in PSID679 |
+
+Table: Attributes not in the quote items of the update view of PSID648 {#tbl:adr044-item-mvo-removed}
+
+The attributes stay in `Quote`, so the client still reads them in every response and notification.
+The changes of the provider reach the PSS by notifications, not by `PATCH` (TOD-03-06-02).
+
 ## Compliance
 
-* The deviations are implemented by the `transformQuote` rules in `build.gradle` and by the extension `doc/PSI/PSI-ICD/open-apis/extensions/PSID648-Quote-v5.0.0.oas.json`, which holds the quote paths, `QuoteStateType` and `QuoteErrorMessage`.
-* The generated `PSID648-Quote-v5.0.0.oas.json` and its PSI-ICD pages show the states, the response codes and the added and required attributes as described above.
+* The deviations are implemented by the `transformQuote` rules in `build.gradle` and by the extension `doc/PSI/PSI-ICD/open-apis/extensions/PSID648-Quote-v5.0.0.oas.json`, which holds the quote paths, `QuoteStateType`, `QuoteUpdateStateType` and `QuoteErrorMessage`.
+* The generated `PSID648-Quote-v5.0.0.oas.json` and its PSI-ICD pages show the states, the response codes, the added and required attributes and the update view as described above.
 * TOD-03-06 and REQ-03-06 use the state names and response codes of this record.
-* Reviewers of a later PSID648 change check that a new TMF648 version taken over by the transformation keeps sections 1 to 5.
+* Reviewers of a later PSID648 change check that a new TMF648 version taken over by the transformation keeps sections 1 to 6.
 
 ### Positive Consequences
 

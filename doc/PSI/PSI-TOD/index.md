@@ -108,6 +108,12 @@ dcr_overrides:
    version: 'PSI-DOC-VERSION'
    author: 'Dominik Ogrodnik'
    message: 'Added Product Offering Qualification Management (TOD-03-05) for PSID679.'
+ - dcr:
+   from: '2026-11-24'
+   to: '2026-11-24'
+   version: 'PSI-DOC-VERSION'
+   author: 'Kinga Kocierz'
+   message: 'Quote Management: Create Quote (TOD-03-06-01) no longer lists nested quote items and tells the expected from the effective completion date; Update Quote (TOD-03-06-02): the attributes set only by the provider, instantSyncQuote, the POQ, and the product offering, POQ item and state of a quote item cannot be updated.'
 =end
 
 # Document Meta Information
