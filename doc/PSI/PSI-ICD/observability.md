@@ -8,20 +8,15 @@ The processing of a request in PSI often spans several systems and goes on after
 E.g. a request for a quote is processed asynchronously: the PSS answers it with `201` once it has validated the request, before it has passed the quote on to the providers and they have processed it.
 To follow such processing across the systems, e.g. to find at which system and in which step it failed, or which part of a bundle failed when its processing is split between several providers or PSSs, every request carries two identifiers in HTTP headers, and the systems write both into their log entries:
 
-* The **trace context**, in the header `traceparent`, serves tracing tools, e.g. those based on OpenTelemetry: from it, a tool records which system made which request, and when, and shows the whole processing as a tree, the trace.
-* The **correlation identifier**, in the header `X-Correlation-ID`, is one value that all requests, answers, events and log entries of the processing carry unchanged.
+* The **trace context**, in the header `traceparent`, describes the course of the processing and serves tracing tools, e.g. those based on OpenTelemetry.
+  It changes with every request, since it names the step that made the request (see Trace Context), and a tracing tool draws from it which step of which system made the request, when, and how long each step took, and shows the whole processing as a tree.
+  It is carried only in the headers of requests.
+* The **correlation identifier**, in the header `X-Correlation-ID`, is one value that does not change, the same in every request, answer, event and log entry of the processing; it says what belongs together, not how the processing went.
+  The client may set it and gets it back in every answer, also when the request is refused, so that it can refer to it, e.g. when reporting a problem.
+  The header is also carried in the body of events, so that it stays with an event that is stored, passed on or read later.
 
 Both identifiers belong to a request, not to a resource.
 The identifiers of a request cover everything that its processing causes, until the processing has ended; a later request about the same resource, e.g. the retrieval or the cancellation of a quote, has identifiers of its own.
-
-The two identifiers serve different purposes:
-
-* The trace context describes the course of the processing.
-  It changes with every request, since it names the step that made the request (see Trace Context), and a tracing tool draws from it which step of which system made which request, when, and how long each step took.
-  It is carried only in the headers of requests.
-* The correlation identifier is one value that does not change, the same in every request, answer, event and log entry of the processing; it says what belongs together, not how the processing went.
-  The client may set it and gets it back in every answer, also when its request is refused, so that it can refer to its request, e.g. when it reports a problem.
-  It is also carried in the body of events, so that it stays with an event that is stored, passed on or read later.
 
 The TM Forum APIs know the correlation identifier only as the attribute *correlationId* of an event.
 PSI also carries it in the header `X-Correlation-ID` of every request and answer; no attribute is added to the TM Forum resources.
@@ -34,7 +29,7 @@ E.g. the processing of a request for a quote comprises the checks of the PSS, it
 The processing of an event that a system receives is defined in the same way.
 
 * A request that a system makes, or an event that it publishes, in the processing of a request or an event that it received carries the identifiers of that request or event, as the following sections describe.
-* Any other request or event starts with new identifiers, e.g. the customer's request for a quote, its later retrieval or cancellation of that quote, or an event about a change that is not part of the processing of any request, such as a change of an offering in the catalog of a provider.
+* Any other request or event starts with new identifiers, e.g. the customer's request for a quote, their later retrieval or cancellation of that quote, or an event about a change that is not part of the processing of any request, such as a change of an offering in the catalog of a provider.
 
 ## Trace Context
 
@@ -74,7 +69,7 @@ X-Correlation-ID: 019a8f3c-5e21-7b4d-9c0a-3f6e8d2b1a47
 
 * Every PSI request and every answer must carry the header `X-Correlation-ID`.
 * A system that makes a request in the processing of a request or an event that it received must pass the correlation identifier of that request or event on unchanged.
-* For any other request, its sender must set a new value, e.g. the customer for its request for a quote, and again for its later retrieval of the quote.
+* For any other request, its sender must set a new value, e.g. the customer for their request for a quote, and again for their later retrieval of the quote.
 * A system must accept a correlation identifier of 1 to 128 characters, each a letter, a digit, `.`, `_`, `:` or `-`.
   A system that receives a request without the header, or with any other value, must set a new value for it.
   How a new value within this range is built is up to the system that sets it, e.g. a UUID.
