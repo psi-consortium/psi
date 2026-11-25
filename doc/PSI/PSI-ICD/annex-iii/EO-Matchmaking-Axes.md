@@ -6,7 +6,6 @@
 **Activity:** A102010 — EO Domain Modeling & Matchmaking Criteria
 **Status:** drafted for stakeholder review
 
----
 
 =end
 
@@ -42,18 +41,18 @@ This matters because a catalogue does not know context. A specification saying t
 covers 1–10 000 km² does not say that *this* AOI is coverable next Tuesday. Matchmaking can
 only filter on what the catalogue knows; everything else belongs to step 4 or 7.
 
+> [!NOTE]
 > **Consequence for this document.** An attribute is a matchmaking axis only if its value is
-> knowable from the catalogue. The section [Gates, and which layer each belongs to](#sec:mm-gates) assigns each candidate gate to its proper layer, and
+> knowable from the catalogue. The section [Gates, and which layer each belongs to](#mm-gates) assigns each candidate gate to its proper layer, and
 > several of them turn out **not** to belong to matchmaking at all.
 
----
 
 ## What the inquiry actually carries
 
 The PSI `customer_inquiry` API (PSID001) carries, per characteristic:
 
 | Field | Values | Meaning |
-|---|---|---|
+|---|--|--|
 | `inquiredProductCharacteristic[].name` | — | which characteristic |
 | `inquiredProductCharacteristic[].value` | — | the value the buyer states |
 | **`inquiredProductCharacteristic[].precedence`** | **`preferred` · `minimum` · `maximum` · `alternative`** | **how to read that value** |
@@ -65,11 +64,11 @@ Table: Per-characteristic fields of the customer inquiry. {#tbl:mm-inquiry-field
 
 **`precedence` is not a weight.** It is a **constraint kind**: it says whether the stated value
 is a target, a floor, a ceiling, or one of several acceptable substitutes. This is the field
-that decides how an axis is scored, and it maps directly onto the attribute taxonomy in [How constraints combine](#sec:mm-constraints).
+that decides how an axis is scored, and it maps directly onto the attribute taxonomy in [How constraints combine](#mm-constraints).
 
 **The numeric importance is `priority`, and it is one number for the whole inquiry**, carried
 as a customer characteristic. There is **no per-characteristic weighting** in the current API —
-a consequence that [What the current API cannot express](#sec:mm-api-gaps) returns to, because it makes the [precedence patterns](#sec:mm-precedence) aspirational
+a consequence that [What the current API cannot express](#mm-api-gaps) returns to, because it makes the [precedence patterns](#mm-precedence) aspirational
 rather than directly implementable.
 
 ### What comes back
@@ -96,9 +95,8 @@ settled on a free-text `note` plus `precedence`. A ranking engine cannot sort on
 the result carries *how well* an offering matched. The rank exists only in the order the PSS
 returns rows.
 
----
 
-## Gates, and which layer each belongs to {#sec:mm-gates}
+## Gates, and which layer each belongs to {#mm-gates}
 
 A gate excludes rather than down-ranks. The mistake to avoid is applying one at the wrong layer.
 
@@ -130,10 +128,10 @@ Table: Gates that depend on the delivery context. {#tbl:mm-delivery-gates}
 Matchmaking can **narrow** on the catalogue's declared ranges — axes A4 and A10 below — but the
 answer is indicative. The binding answer comes from `POST /productOfferingAvailability`.
 
-### Requirements applied automatically — the buyer never states them {#sec:mm-automatic-requirements}
+### Requirements applied automatically — the buyer never states them {#mm-automatic-requirements}
 
 | Requirement | Attribute path | Applied from |
-|---|---|---|
+|-|---|-|
 | Legal permission to buy | `licensingProfile.eligibleBuyerClass` | the buyer's organisation type |
 | Export control regime | `licensingProfile.exportControl` | the buyer's jurisdiction |
 | Security classification | `licensingProfile.securityClassification` | the buyer's clearance |
@@ -156,6 +154,7 @@ Two properties follow, and both matter:
   contract, the quota and the clearance. The same reasoning that puts `marketSegment` and
   `isSellable` into POQ rather than availability discovery applies here.
 
+> [!IMPORTANT]
 > **A provisional exclusion still has to be visible.** If a product is dropped during
 > matchmaking on a legal rule, the buyer should learn that it was dropped and why — otherwise
 > they never reach the POQ reason code that would have explained it, and the absence looks like
@@ -166,9 +165,8 @@ are. Asking for interferometry implies the three preconditions of rule W-11; ask
 values over an OGC service implies `WCS`. The buyer states the goal, the PSS derives the
 constraints.
 
----
 
-## How constraints combine {#sec:mm-constraints}
+## How constraints combine {#mm-constraints}
 
 ### Three sources of constraint
 
@@ -180,7 +178,7 @@ constraints.
 
 Table: Sources of constraint. {#tbl:mm-constraint-sources}
 
-### Evaluation is a conjunction, then a ranking {#sec:mm-conjunction}
+### Evaluation is a conjunction, then a ranking {#mm-conjunction}
 
 **Stage 1 — admissibility. This is a logical AND.** Every automatic requirement and every
 explicit hard bound must hold **simultaneously**. One failure excludes the offering, regardless
@@ -232,7 +230,6 @@ buyer shops by equivalent number of looks. They shop by sharpness and smoothness
 `enl` is a consequence. Exposing consequences invites the buyer to over-constrain the query and
 receive nothing.
 
----
 
 ## The axes
 
@@ -242,7 +239,7 @@ which direction is better.
 ### Primary axes — present in most inquiries
 
 | # | Axis | Attribute path | `precedence` | Better is | Unit |
-|---|---|---|---|---|---|
+|-|--|-----|-|-|-|
 | **A1** | **Spatial resolution** | `resolution[].valueMax` per `axis` | `maximum` | lower | m |
 | **A2** | **Delivery latency** | `deliveryLatency.duration` (archive) · `taskingTier[].deliveryLatency.duration` (tasking) | `maximum` | lower | h |
 | **A3** | **Time to acquisition** | `taskingTier[].fulfilmentTime.duration` | `maximum` | lower | d |
@@ -251,7 +248,7 @@ which direction is better.
 
 Table: Primary matchmaking axes. {#tbl:mm-primary-axes}
 
-**A1 is the axis most likely to be used and most likely to be used wrongly** — see [Resolution — normalise the plane before comparing](#sec:mm-normalise-resolution).
+**A1 is the axis most likely to be used and most likely to be used wrongly** — see [Resolution — normalise the plane before comparing](#mm-normalise-resolution).
 
 **A2 and A3 are different questions** and a buyer usually means one of them. *When will the
 satellite photograph it* and *when will the file reach me* are separate in the model precisely
@@ -260,7 +257,7 @@ because vendors quote them interchangeably.
 ### Secondary axes — common, decisive when present
 
 | # | Axis | Attribute path | `precedence` | Note |
-|---|---|---|---|---|
+|-|-|---|-|-|
 | **A6** | Frequency band | `sensorProfile.frequencyBand` | `alternative` | `X` and `C` are near-substitutes for surface work, `L` is not |
 | **A7** | Polarimetric capability | `polarizationMode`, `polarization` | `alternative` or `minimum` | preference order `QUAD ⊃ DUAL ⊃ SINGLE` |
 | **A8** | Processing level | `processingLevel`, `productType` | `alternative` | not ordered — higher is more processed, not better |
@@ -278,7 +275,7 @@ oil spills or mapping floods over smooth water cares about NESZ more than about 
 ### Specialist axes — rare, decisive in their niche
 
 | # | Axis | Attribute path | Used by |
-|---|---|---|---|
+|-|-|---|--|
 | **A13** | Swath width | `coverageGeometry.swathWidth` | Maritime and wide-area surveillance, where area per pass beats sharpness |
 | **A14** | Acquisition pattern | `acquisitionPattern[].patternType` | Monitoring programmes needing a rhythm, not a single image |
 | **A15** | Cadence | `recurringAcquisition.cadenceMin` / `cadenceMax` | Same; must contain the buyer's desired interval |
@@ -298,19 +295,19 @@ Table: Specialist matchmaking axes. {#tbl:mm-specialist-axes}
 
 Table: Cross-vendor classification axis. {#tbl:mm-cross-vendor-axis}
 
+> [!NOTE]
 > **Source caveat.** ICEYE publishes the assignment of its modes to these classes; the normative
 > thresholds were not located in ESA/Copernicus documentation. An offering's value here is a
 > **label quoted from the vendor**, not a verifiable claim. Usable as a coarse filter, not as a
 > tie-breaker.
 
----
 
-## Normalisation — the part that must be built {#sec:mm-normalisation}
+## Normalisation — the part that must be built {#mm-normalisation}
 
 Five attributes are **not comparable as raw numbers across offerings**. A matchmaking engine
 that skips these rules produces a ranking that looks plausible and is wrong.
 
-### Resolution — normalise the plane before comparing {#sec:mm-normalise-resolution}
+### Resolution — normalise the plane before comparing {#mm-normalise-resolution}
 
 A slant-plane figure is always numerically better than the ground-plane figure describing the
 same product, by one over the sine of the incidence angle — **exactly two at 30°**, approaching
@@ -374,16 +371,16 @@ Table: Qualifiers required before comparing accuracy figures. {#tbl:mm-accuracy-
 convert between metrics** — compare within metric groups, or treat a mismatch as incomparable
 rather than guessing.
 
----
 
-## Precedence patterns by buyer profile {#sec:mm-precedence}
+## Precedence patterns by buyer profile {#mm-precedence}
 
 These follow from what each use case physically requires. **They are not directly expressible
 in the current API** — see gap M-1 — so they are offered as the ranking the PSS should apply,
 not as something the buyer can state.
 
+> [!NOTE]
 > **What `>>` means here.** It means *contributes more to the score in stage 2*, not
-> *overrides*. All constraints still hold as a conjunction ([Evaluation is a conjunction, then a ranking](#sec:mm-conjunction)): an offering that wins on the
+> *overrides*. All constraints still hold as a conjunction ([Evaluation is a conjunction, then a ranking](#mm-conjunction)): an offering that wins on the
 > leftmost axis and fails a bound on the rightmost is **excluded**, not ranked first. The
 > ordering decides how much an unmet **preference** costs, never whether a **requirement** can
 > be skipped.
@@ -432,20 +429,19 @@ viewing geometry, not merely a good one.
 
 The gates dominate. A pipeline consuming CEOS-ARD NRB cannot use a better non-conformant product.
 
----
 
-## What the current API cannot express {#sec:mm-api-gaps}
+## What the current API cannot express {#mm-api-gaps}
 
 Nine gaps, each traceable to a field that exists or does not. These are the matchmaking
 counterpart of the PSI gap register.
 
 | # | Gap | Consequence |
 |---|---|---|
-| **M-1** | **No per-characteristic weighting.** `precedence` is a constraint kind (`preferred`/`minimum`/`maximum`/`alternative`), and `priority` is a single number for the whole inquiry, carried in `customerProfile` | A buyer cannot say "latency matters three times more than resolution". Stage 1 is unaffected — the conjunction of requirements works without weights — but every stage-2 ranking pattern in [Precedence patterns by buyer profile](#sec:mm-precedence) has to be **inferred by the PSS**, not stated by the buyer |
-| **M-1b** | **No field marks a constraint as automatic.** The [requirements applied automatically](#sec:mm-automatic-requirements) are applied by the PSS from `customerProfile`, but the inquiry has no way to record that they were applied | The buyer cannot tell an offering that was never on the market from one excluded on a legal rule. Both look like absence |
+| **M-1** | **No per-characteristic weighting.** `precedence` is a constraint kind (`preferred`/`minimum`/`maximum`/`alternative`), and `priority` is a single number for the whole inquiry, carried in `customerProfile` | A buyer cannot say "latency matters three times more than resolution". Stage 1 is unaffected — the conjunction of requirements works without weights — but every stage-2 ranking pattern in [Precedence patterns by buyer profile](#mm-precedence) has to be **inferred by the PSS**, not stated by the buyer |
+| **M-1b** | **No field marks a constraint as automatic.** The [requirements applied automatically](#mm-automatic-requirements) are applied by the PSS from `customerProfile`, but the inquiry has no way to record that they were applied | The buyer cannot tell an offering that was never on the market from one excluded on a legal rule. Both look like absence |
 | **M-2** | **`deviation` in the result is free text.** ADR022 rejected boolean deviation flags for trust reasons, settling on a free-text `note` plus `precedence` | A ranking engine cannot sort on prose. How far an offering departs from the request is visible to a human and invisible to the sort |
 | **M-3** | **No score field in `InquiredProductRelationship`.** `coverage` is `complete`\|`partial`, `totalPrice` is a price | Match quality survives only as row order. Two offerings both marked `partial` are indistinguishable, and the reason for the rank is unrecoverable |
-| **M-4** | **The [normalisation rules](#sec:mm-normalisation) have no home.** They are not in the catalogue, not in the inquiry, not in the result | Today they live nowhere, so every implementation will either reinvent them or skip them. Skipping them produces a ranking that is confidently wrong |
+| **M-4** | **The [normalisation rules](#mm-normalisation) have no home.** They are not in the catalogue, not in the inquiry, not in the result | Today they live nowhere, so every implementation will either reinvent them or skip them. Skipping them produces a ranking that is confidently wrong |
 | **M-5** | **`priority` rides in `customerProfile`, which is in `_FVO`** — the client supplies it | On PSS-PSS a broker raises the inquiry for its own customer, so the field must be writable. But nothing documents whether the PSS must overwrite or reject a client-supplied `priority`. A matching input the client controls is a matching input the client can game |
 | **M-6** | **ADR022: "the order management API only allows the booking of complete offers"** | A partial match can be reported and ranked but **not ordered**. A well-ranked `coverage: partial` row is a dead end unless order management changes |
 | **M-7** | **A legal bound looks like any other bound.** `precedence: maximum` expresses both "no worse than 2 m, but I'd stretch" and "export control forbids this" | Nothing marks a constraint as non-negotiable. If the PSS ever weights rather than filters, an attractive offering can outrank a legal exclusion |
@@ -454,8 +450,9 @@ counterpart of the PSI gap register.
 
 Table: API gaps affecting matchmaking. {#tbl:mm-api-gaps}
 
+> [!IMPORTANT]
 > **M-7 is the one with the worst failure mode.** The other six degrade ranking quality; this
-> one can produce a recommendation that must not be acted on. [Requirements applied automatically](#sec:mm-automatic-requirements) is the mitigation:
+> one can produce a recommendation that must not be acted on. [Requirements applied automatically](#mm-automatic-requirements) is the mitigation:
 > keep licence, export control, security classification and permitted purpose in POQ, and treat
 > any matchmaking-level filtering on them as a convenience that POQ still has to confirm.
 
@@ -477,7 +474,6 @@ have asked something reasonable.
 
 Table: Attributes that are not matchmaking axes. {#tbl:mm-non-axes}
 
----
 
 ## Attribute-to-axis coverage
 
@@ -499,17 +495,16 @@ result.** A product specification exists to describe a product completely; an in
 narrow a choice. Conflating them produces either an unusable inquiry form with 153 fields, or a
 specification too thin to describe what the buyer receives.
 
----
 
 ## Open questions for stakeholder review
 
 1. **Does the PSS filter or weight on eligibility attributes?** If licence, export control and
    security classification are weighted rather than filtered, an attractive offering can
-   outrank a legal exclusion. Gap M-7; mitigation in [Requirements applied automatically](#sec:mm-automatic-requirements).
-2. **Where do the [normalisation rules](#sec:mm-normalisation) live** — in the PSS matching engine, in an adapter,
+   outrank a legal exclusion. Gap M-7; mitigation in [Requirements applied automatically](#mm-automatic-requirements).
+2. **Where do the [normalisation rules](#mm-normalisation) live** — in the PSS matching engine, in an adapter,
    or in the product specification as derived attributes? Gap M-4.
 3. **Is per-characteristic weighting worth adding to PSID001?** Gap M-1 makes every pattern in
-   [Precedence patterns by buyer profile](#sec:mm-precedence) a PSS-side inference. Adding a weight would move it to where the buyer can state it — at
+   [Precedence patterns by buyer profile](#mm-precedence) a PSS-side inference. Adding a weight would move it to where the buyer can state it — at
    the cost of extending the API.
 4. **How is "incomparable" represented?** Two offerings quoting geolocation accuracy under
    different metrics cannot be ranked against each other. Does the PSS have a way to say so, or
@@ -523,15 +518,14 @@ specification too thin to describe what the buyer receives.
 7. **Who are the reviewing stakeholders, and in what form is the review expected?** Recorded
    against task `T-A102010-US002-003`.
 
----
 
 ## Status
 
-Drafted from `EO-Attribute-Taxonomy-Baseline-EN_DO_v0.11.md`, with the PSI interaction model
+Drafted from `EO-Attribute-Taxonomy-Baseline.md`, with the PSI interaction model
 taken from the POQ/Quote analysis of 2026-09-08 (`customer_inquiry` field semantics, ADR022,
 ADR036, the journey with availability and pricing discovery).
 
 Axis definitions, the layer assignment of gates and the normalisation rules are complete. **The
-stakeholder review has not taken place**, the [ranking patterns](#sec:mm-precedence) are reasoned from physical
+stakeholder review has not taken place**, the [ranking patterns](#mm-precedence) are reasoned from physical
 requirements rather than validated against buyer behaviour, and seven of them cannot be stated
 in the current API at all.

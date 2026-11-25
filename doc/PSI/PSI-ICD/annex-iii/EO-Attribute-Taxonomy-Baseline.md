@@ -6,72 +6,8 @@
 **Activity:** A102010 — EO Domain Modeling & Matchmaking Criteria
 **Status:** delivered for review
 
----
 
 =end
-
-## Purpose
-
-This document answers four questions, in order:
-
-1. **Which EO product types** are represented, and how is the set extended later?
-2. **What is the core metadata set**, and what does each field mean?
-3. **Which controlled vocabularies, units and value ranges** apply to each attribute?
-4. **Where does each value come from**, and how well was that source verified?
-
-It is the input to build PSI product data sheet templates and to define candidate axes.
-
-### What this document is not
-
-It is not the full technical reference. This baseline states **what the attribute set is**, not **why it came out that way**.
-
-### Companion documents
-
-| Document | Contains |
-|---|---|
-| `SAR-model-UML.puml` | Class diagram — structure only |
-| `SAR-model-notes.md` | Design commentary per class |
-
-Table: Companion documents. {#tbl:tax-companion-docs}
-
-### Abbreviations
-
-| | | |
-|---|---|---|
-| **AOI** | Area of Interest | the area a buyer asks to have imaged |
-| **ALE** | Absolute Location Error | a geolocation accuracy figure |
-| **ARD** | Analysis Ready Data | CEOS family of pre-processed product definitions |
-| **CEOS** | Committee on Earth Observation Satellites | publisher of ARD and of the OpenSearch Best Practice |
-| **CE90 / LE90** | Circular / Linear Error at 90 % | geolocation statistics; see also RMSE |
-| **ENL** | Equivalent Number of Looks | [Resolution](#sec:tax-resolution) |
-| **EO** | Earth Observation | |
-| **ESA** | European Space Agency | operator of Sentinel-1 |
-| **GCP** | Ground Control Point | a surveyed point the buyer supplies to improve geolocation |
-| **GeoJSON** | — | the geometry format geometries are bound to |
-| **IEEE** | Institute of Electrical and Electronics Engineers | source of the radar band letters |
-| **ISLR / PSLR** | Integrated / Peak Sidelobe Ratio | image quality figures: how much energy a bright target spills into its neighbours |
-| **MEF** | MEF Forum | source of the LSO Sonata schema convention this baseline follows |
-| **NASA EOSDIS** | NASA Earth Observing System Data and Information System | source of the processing-level scale |
-| **NESZ** | Noise Equivalent Sigma Zero | the backscatter level at which signal equals instrument noise — the floor of what can be measured |
-| **NGA** | National Geospatial-Intelligence Agency (United States) | publisher of the SICD / SIDD / CPHD formats |
-| **OAS** | OpenAPI Specification | the machine-readable form of a TM Forum API |
-| **OGC** | Open Geospatial Consortium | publisher of the EO metadata and service standards cited here |
-| **PRF** | Pulse Repetition Frequency | an instrument parameter, deliberately out of scope ([What is deliberately excluded](#sec:tax-excluded)) |
-| **PSI** | the consortium and standard this baseline feeds | its interface definitions are numbered PSID\*\*\* |
-| **RMSE** | Root Mean Square Error | |
-| **SAR** | Synthetic Aperture Radar | |
-| **SICD / SIDD / CPHD** | Sensor Independent Complex Data / Derived Data / Compensated Phase History Data | NGA formats, present here as conformance values |
-| **STAC** | SpatioTemporal Asset Catalog | catalogue specification, an OGC Community Standard since October 2025 |
-| **TMF** | TM Forum | TMF620, TMF622 and so on are its Open API specifications |
-| **URN** | Uniform Resource Name | the identifier form used for `$id` in the schema |
-| **VHR** | Very High Resolution | a Copernicus Contributing Mission class, [Cross-vendor resolution class](#sec:tax-cross-vendor-resolution-class) |
-
-Table: Abbreviations. {#tbl:tax-abbreviations}
-
-Product type codes (`GRD`, `SLC`, `SSC` and the rest) are expanded in [Product types](#sec:tax-product-types); processing
-levels in [Processing levels](#sec:tax-processing-levels).
-
----
 
 ## Scope and extensibility
 
@@ -81,7 +17,7 @@ Synthetic Aperture Radar imaging products at processing levels **L0 through L3**
 **from the buyer's point of view** — that is, the namespace of characteristics a buyer needs
 in order to decide what to purchase and how to configure it.
 
-### What is deliberately excluded {#sec:tax-excluded}
+### What is deliberately excluded {#tax-excluded}
 
 | Excluded | Reason |
 |---|---|
@@ -108,11 +44,10 @@ Six of eleven groups are already sensor-agnostic. That is the substance of the e
 claim — the remaining five would need an abstract class with two subtypes, in the same pattern
 already used for `AccessProfile`, `AcquisitionPattern` and `CoverageGeometry`.
 
----
 
 ## Product type taxonomy
 
-### Product types {#sec:tax-product-types}
+### Product types {#tax-product-types}
 
 The primary classifier. It encodes three things at once: whether phase is preserved, which
 geometry the pixels sit in, and whether terrain relief was accounted for.
@@ -138,7 +73,7 @@ Table: SAR product types. {#tbl:tax-product-types}
 physical fact, not a model field — amplitude detection irreversibly discards phase. Without
 phase there is no interferometry and no polarimetry.
 
-### Processing levels {#sec:tax-processing-levels}
+### Processing levels {#tax-processing-levels}
 
 How far the vendor has taken the data before handing it over. Each step is work the buyer
 no longer has to do — and, from L1A onwards, information the buyer can no longer recover.
@@ -182,7 +117,7 @@ Table: Collection strategies and their coverage geometry. {#tbl:tax-collection-s
 
 **How much resolution was traded away for smoothness.** After focusing, a detected product
 can be multi-looked: neighbouring samples are averaged to suppress speckle, the grainy
-interference pattern every radar image carries ([Resolution](#sec:tax-resolution)). Averaging makes the image easier to
+interference pattern every radar image carries ([Resolution](#tax-resolution)). Averaging makes the image easier to
 read and the measurements less noisy, and it costs spatial detail. The resolution class
 records how far that was taken.
 
@@ -208,24 +143,24 @@ Two warnings about reading it:
   `looksRange` / `looksAzimuth` and `enl` are three different statements and the baseline
   carries all three.
 
-### Cross-vendor resolution class {#sec:tax-cross-vendor-resolution-class}
+### Cross-vendor resolution class {#tax-cross-vendor-resolution-class}
 
 `copernicusCMClass` — `VHR1` or `VHR2`. The only **cross-vendor** resolution vocabulary found
 in this work: ICEYE reports the ESA Copernicus Contributing Mission class in its own
 performance tables, which maps commercial acquisition modes directly onto Copernicus
 categories.
 
+> [!NOTE]
 > **Source status: unverified.** ICEYE publishes the assignments; the normative threshold
 > definitions were not located in ESA/Copernicus documentation. The field carries a label
 > quoted from the vendor, not a verifiable claim.
 
----
 
 ## Core metadata set
 
 The five fields named in the activity, with their semantics.
 
-### Resolution {#sec:tax-resolution}
+### Resolution {#tax-resolution}
 
 **The smallest separation at which two targets can still be told apart.** Not the pixel size —
 that is sampling, and the two differ by design.
@@ -234,7 +169,7 @@ A single number is not interpretable. The baseline carries resolution as a **lis
 entry per axis**, each entry qualified:
 
 | Field | Type · unit | Domain | Meaning |
-|---|---|---|---|
+|--|-|--|---|
 | `axis` | enum | `RANGE` \| `AZIMUTH` | Range resolution follows from bandwidth, azimuth resolution from illumination time — two independent physical mechanisms |
 | `valueMin` / `valueMax` | Decimal · m | 0.05 – 100 | Best and worst attainable on this axis |
 | `plane` | enum | `SLANT` \| `GROUND` | A slant value is always numerically better than the corresponding ground value by 1/sin(incidence angle) — **exactly a factor of two at 30°** |
@@ -247,7 +182,7 @@ Table: Resolution fields. {#tbl:tax-resolution-fields}
 **Companion fields**, in `ProcessingProfile`:
 
 | Field | Type · unit | Domain | Meaning |
-|---|---|---|---|
+|--|-|-|---|
 | `pixelSpacingRange` / `Azimuth` | Decimal · m | 0.1 – 100 | Grid sampling interval. Usually finer than the resolution — the image is oversampled so that later interpolation does not lose information |
 | `looksRange` / `looksAzimuth` | Integer | 1 – 30 | How many independent samples were averaged. Smoothness is bought with resolution |
 | `enl` | Decimal | 1 – 500 | **Equivalent number of looks** — how much smoothing was actually achieved, as against how much was attempted. Explained below |
@@ -289,6 +224,7 @@ the corresponding characteristic is the transmitted frequency and its bandwidth.
 
 Table: Radar frequency and bandwidth fields. {#tbl:tax-frequency-fields}
 
+> [!NOTE]
 > **Permitted polarisation combinations are constrained.** The OGC schema `omeo/1.0/sar.xsd`
 > enumerates singles (`HH`, `VV`, `HV`, `VH`) and specific pairs (`HH,HV` · `HH,VH` · `HH,VV` ·
 > `HV,VH` · `VH,HV` · `VH,VV` · `VV,HV` · `VV,VH`). **There are no triples** — full polarimetry
@@ -309,6 +245,7 @@ meaningless; the baseline carries five fields together.
 
 Table: Geolocation accuracy fields. {#tbl:tax-geolocation-fields}
 
+> [!NOTE]
 > `basis` and `ephemerisClass` are independent axes and both may read `PREDICTED` while meaning
 > different things. A **measured** value for a **predicted** orbit is the commonest case in
 > performance reports.
@@ -319,7 +256,7 @@ accuracy that then applies (`geolocationAccuracyWithGcp`). The improved figure h
 the supplied points meet the declared accuracy — points measured with a phone would give a worse
 result than none at all.
 
-### Acquisition time and acquisition window {#sec:tax-acquisition-time}
+### Acquisition time and acquisition window {#tax-acquisition-time}
 
 Three independent time axes.
 
@@ -332,10 +269,10 @@ Three independent time axes.
 Table: Time axes of an acquisition. {#tbl:tax-time-axes}
 
 Supporting fields. **A duration carries no enforceable range** — the Observed column
-below is what real products show, not a rule the catalogue applies; [Where a stated range is not a constraint](#sec:tax-range-not-constraint) says why.
+below is what real products show, not a rule the catalogue applies; [Where a stated range is not a constraint](#tax-range-not-constraint) says why.
 
 | Field | Type | Observed | Meaning |
-|---|---|---|---|
+|---|-|-|---|
 | `illuminationTime` | `Duration` | 0.8 – 25 s | How long the radar keeps one point inside its beam — **the source of azimuth resolution**. Explained below |
 | `minAcquisitionWindowWidth` | `Duration` | hours to days | The narrowest acquisition window the operator will accept. Explained below |
 | `minLeadTime` | `Duration` | hours to days | How much notice an order requires before the window may open. Stated per service level, because it differs between them |
@@ -413,6 +350,7 @@ Product capability, in `CoverageGeometry`:
 
 Table: Coverage geometry subtypes. {#tbl:tax-coverage-subtypes}
 
+> [!NOTE]
 > `footprintAreaNominal` describes the **acquisition**, not the delivered extent.
 
 The limits the seller declares on what may be asked for, in `TargetProfile`:
@@ -422,12 +360,13 @@ The limits the seller declares on what may be asked for, in `TargetProfile`:
 | `serviceArea` | `ServiceArea` `[0..*]` | — | Where the product may be ordered **at all**, with the reason the limit is drawn (`ORBITAL` \| `COMMERCIAL` \| `REGULATORY`). Written as inclusions and exclusions, so a worldwide product with two embargoed countries is two exclusions rather than a hand-cut polygon |
 | `targetGeometryType` | enum list | `POINT` \| `POLYGON` \| `CORRIDOR` | Which geometries the product accepts. Corridor mode matters for linear infrastructure |
 | `targetAreaMin` / `Max` | Decimal · km² | 1 – 25 000 / 1 – 250 000 | Smallest and largest orderable area |
-| `timeOfInterest` | `TimePeriod` | — | That the product accepts an interval, and under which ordering modes — [Acquisition time and acquisition window](#sec:tax-acquisition-time) |
+| `timeOfInterest` | `TimePeriod` | — | That the product accepts an interval, and under which ordering modes — [Acquisition time and acquisition window](#tax-acquisition-time) |
 | `clippingSupported` | Boolean | — | Whether the delivered extent can be narrowed to the requested area, or the buyer always receives the full acquisition footprint |
 | `minCoverageFraction` | Decimal | 0 – 1 | The smallest fraction of the requested area the seller will offer a pass for. A long thin target is refused by this, so the buyer can tell before asking |
 
 Table: Target limits declared in TargetProfile. {#tbl:tax-target-limits}
 
+> [!IMPORTANT]
 > **The requested area itself is not in this table, and not a characteristic at all.** It
 > travels on the order as `Product.place` with `role = requestedAoi`. TM Forum gives a
 > product a first-class place slot with a role; carrying the same polygon as a characteristic
@@ -443,6 +382,7 @@ Table: Target limits declared in TargetProfile. {#tbl:tax-target-limits}
 > `BY_CONSTRAINT` and `BY_OPPORTUNITY` it is a **target** to cover. In every mode it must lie
 > inside the declared `serviceArea`.
 
+> [!NOTE]
 > **Four kinds of area, and conflating any two loses something.**
 >
 > | Role | Means | Lives in |
@@ -457,7 +397,6 @@ Table: Target limits declared in TargetProfile. {#tbl:tax-target-limits}
 > The first two merged lose the refusal; the last two merged make **clipping invisible**. The
 > last three travel as `RelatedPlaceRefOrValue.role`.
 
----
 
 ## Full attribute inventory
 
@@ -492,11 +431,11 @@ incomparable:
 |---|---|---|
 | `radiometricAccuracyAbs` / `Rel` | `sigmaMultiplier` (1, 2 or 3) | ESA states 1 dB at 3σ; the performance report states 0.317 dB at 1σ. Converted, these **agree**; compared directly they look like a threefold difference |
 | `deliveryLatency`, `fulfilmentTime`, `archiveUpdateLatency` | `commitmentLevel` + `achievementRate` | Eight hours guaranteed and eight hours best-effort are two different products behind the same number |
-| Resolution | `plane`, `referenceAngle`, `measurementPoint`, `measurementAggregation` | See [Resolution](#sec:tax-resolution) |
+| Resolution | `plane`, `referenceAngle`, `measurementPoint`, `measurementAggregation` | See [Resolution](#tax-resolution) |
 
 Table: Qualifiers required by quality attributes. {#tbl:tax-quality-qualifiers}
 
-### Two declarations that apply to every quality figure at once {#sec:tax-quality-declarations}
+### Two declarations that apply to every quality figure at once {#tax-quality-declarations}
 
 A quality number on its own does not say what kind of statement it is. Two fields on
 `QualityProfile` say it once for the whole block, in the same way `qualityValidIncidence`
@@ -522,12 +461,12 @@ that is the finding**: the industry mostly does not declare this.
 
 And one attribute whose absence **fails silently**:
 
+> [!IMPORTANT]
 > **`pixelScale`** — `POWER` \| `AMPLITUDE` \| `DECIBEL`. The same backscatter value can arrive
 > as linear power, as amplitude (its square root) or in decibels (its logarithm). A recipient
 > treating amplitude as power gets a result that looks correct and is wrong by an order of
 > magnitude. Every other missing field shows up as missing data; this one does not.
 
----
 
 ## Controlled vocabularies
 
@@ -538,7 +477,7 @@ rather than vocabularies — they select a subtype (`accessMode`, `patternType`,
 and offer the buyer no choice.
 
 | Vocabulary | Values | Source |
-|---|---|---|
+|---|-|---|
 | `ProductType` | 12 | OGC `eo:productType`, vendor documentation |
 | `ProcessingLevel` | 6 | NASA EOSDIS data processing levels, refined for SAR |
 | `DataType` | 5 | derived from product type |
@@ -568,7 +507,6 @@ and offer the buyer no choice.
 
 Table: Controlled vocabularies. {#tbl:tax-vocabularies}
 
----
 
 ## Units
 
@@ -589,6 +527,7 @@ Table: Controlled vocabularies. {#tbl:tax-vocabularies}
 
 Table: Units. {#tbl:tax-units}
 
+> [!IMPORTANT]
 > **`Duration` and `TimePeriod` are different things and are never interchanged.**
 > `Duration` is a *length* of time with no position on the calendar — a lead time, a latency,
 > a repeat cycle. `TimePeriod` is an *absolute* interval with a start and an end, and the only
@@ -602,7 +541,6 @@ Table: Units. {#tbl:tax-units}
 >
 > STAC requires **GHz** for `center_frequency` and `bandwidth`, so 600 MHz is written `0.6`.
 
----
 
 ## Value ranges and their provenance
 
@@ -617,10 +555,11 @@ Each numeric attribute carries a domain in the machine-readable schema as `minim
 
 Table: Provenance of value ranges. {#tbl:tax-range-provenance}
 
+> [!NOTE]
 > The third row is recorded in the discrepancy register of the main specification, section
 > "Inferred values". It is stated here so that no reader mistakes an estimate for a citation.
 
-### Where a stated range is not a constraint {#sec:tax-range-not-constraint}
+### Where a stated range is not a constraint {#tax-range-not-constraint}
 
 Seventeen attributes are of type `Duration` — lead times, latencies, windows, repeat
 cycles. For most of them this document quotes a range: "6 h – 7 d", "7 – 365 d". **None of
@@ -671,7 +610,6 @@ generated from it will not validate against either schema as published. Recorded
 and because the PSI copy carries it too, it is a question for consortium governance rather
 than a note about somebody else's standard.
 
----
 
 ## Machine-readable form
 
@@ -700,7 +638,6 @@ IW GRDH, ICEYE Spot SLC, Capella Spot GEO, ASF HyP3 RTC, and one invented produc
 from the archive and through tasking, which exists to exercise the combinations no single
 real product shows.
 
----
 
 ## Open points
 
@@ -712,19 +649,19 @@ Twenty-five are recorded in the main specification and **all twenty-five are now
 | ~~O-10~~ | Can a buyer order an interferometric pair, not just be told the product suits one? | **Yes, from version 0.11.** Conditions *between* the acquisitions of a set attach to the recurring acquisition pattern — same track, temporal and perpendicular baselines |
 | ~~O-19~~ | Burst synchronisation tolerance for TOPSAR interferometry | **Added**, as part of the same construction. It had been waiting since 0.7 for somewhere to live |
 | ~~O-3~~ | Is `enl` declared or derived from `looks`? | **Declared, and optional.** The relation is not deterministic, so deriving it would be guessing; `enl` is a property measured off the delivered image |
-| ~~O-13~~ | Are quality figures theoretical, measured or guaranteed? | **One field, `qualityBasis`** — [Two declarations that apply to every quality figure at once](#sec:tax-quality-declarations). Not a qualifier inside 26 values: the question is about the seller's posture, and that is one statement for the block |
+| ~~O-13~~ | Are quality figures theoretical, measured or guaranteed? | **One field, `qualityBasis`** — [Two declarations that apply to every quality figure at once](#tax-quality-declarations). Not a qualifier inside 26 values: the question is about the seller's posture, and that is one statement for the block |
 | ~~O-14~~ | Should a figure carry its uncertainty and sample count? | **No — out of scope for a catalogue.** A value with σ and a sample size is a *performance report*; nobody filters products by sample count. The specification carries a reference to the vendor's report instead |
-| ~~O-15~~ | Is a quality declaration worst case, typical or a range? | **One field, `qualityAggregation`** — [Two declarations that apply to every quality figure at once](#sec:tax-quality-declarations), with `MINIMUM_ACROSS_FLEET` for constellations |
+| ~~O-15~~ | Is a quality declaration worst case, typical or a range? | **One field, `qualityAggregation`** — [Two declarations that apply to every quality figure at once](#tax-quality-declarations), with `MINIMUM_ACROSS_FLEET` for constellations |
 | ~~O-17~~ | A hard ceiling on a single band file | **Added** as `maxBandFileSize`. It decides whether the recipient must handle BigTIFF, so it is a buying decision |
 | ~~O-18~~ | Can a format be paired with its metadata, and marked as being retired? | **Added** as a pairing — §3.1 of the technical specification. Two parallel lists implied combinations that do not exist, so this was a correctness fix |
-| ~~O-20~~ | Is there a second horizon, for feasibility rather than commitment? | **Added** as `feasibilityHorizon` — [Acquisition time and acquisition window](#sec:tax-acquisition-time) |
+| ~~O-20~~ | Is there a second horizon, for feasibility rather than commitment? | **Added** as `feasibilityHorizon` — [Acquisition time and acquisition window](#tax-acquisition-time) |
 | ~~O-23~~ | Will the catalogue gain a geographic Place service? | **Not needed.** A place registry could not carry the *reason* a limit is drawn, so geometry and reason would split across two carriers — the error this model has just finished removing elsewhere. Re-using embargo geometries is answered more cheaply by naming the regime |
-| ~~O-24~~ | Which names that a real transaction carries belong in the product model? | **One of six.** Explained in [What O-24 was, and what it settled](#sec:tax-o24) |
-| ~~O-25~~ | How should the domain of a duration be expressed? | **It should not be** — [Where a stated range is not a constraint](#sec:tax-range-not-constraint). The relations that matter are rules; the filtering problem is a matchmaking concern |
+| ~~O-24~~ | Which names that a real transaction carries belong in the product model? | **One of six.** Explained in [What O-24 was, and what it settled](#tax-o24) |
+| ~~O-25~~ | How should the domain of a duration be expressed? | **It should not be** — [Where a stated range is not a constraint](#tax-range-not-constraint). The relations that matter are rules; the filtering problem is a matchmaking concern |
 
 Table: Settled open points. {#tbl:tax-open-points}
 
-### What O-24 was, and what it settled {#sec:tax-o24}
+### What O-24 was, and what it settled {#tax-o24}
 
 Every other gap in this register was found by reading: a source document names something the
 model has no field for. O-24 was found differently, and that is the whole of its value.
@@ -756,7 +693,6 @@ the contract, what is true of one delivered instance, what varies with the selle
 implementation, or what the buyer learns anyway from the metadata delivered with the data.
 Applied across the register, that filter closed nine points without adding a single field.
 
----
 
 ## Source register
 
@@ -795,7 +731,6 @@ Table: Standards used as sources. {#tbl:tax-standards}
 
 Table: Mission and product documentation used as sources. {#tbl:tax-mission-docs}
 
----
 
 ## Status and next steps
 

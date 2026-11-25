@@ -51,8 +51,16 @@ Table: Reference Documents. {#tbl:reference-documents}
 
 ## Scope of Document
 
-This document is the Interface Control Document of the Pooling & Sharing Interface (PSI).
-It contains the description of the interfaces between a PSS and a provider or two PSS, which are based on TM Forum OpenAPIs.
+This document answers four questions, in order:
+
+1. **Which EO product types** are represented, and how is the set extended later?
+2. **What is the core metadata set**, and what does each field mean?
+3. **Which controlled vocabularies, units and value ranges** apply to each attribute?
+4. **Where does each value come from**, and how well was that source verified?
+
+It is the input to build PSI product data sheet templates and to define candidate axes.
+
+It is not the full technical reference. This baseline states what the attribute set is, **not** why it came out that way.
 
 The following sections heavily refer to terms, abbreviations and definitions defined in the [PSI-TAD].
 
@@ -62,6 +70,45 @@ The following sections heavily refer to terms, abbreviations and definitions def
 
 @include [Release Notes](../common/release_notes.md)
 
+
+## Abbreviations
+
+| | | |
+|---|---|---|
+| **AOI** | Area of Interest | the area a buyer asks to have imaged |
+| **ALE** | Absolute Location Error | a geolocation accuracy figure |
+| **ARD** | Analysis Ready Data | CEOS family of pre-processed product definitions |
+| **CEOS** | Committee on Earth Observation Satellites | publisher of ARD and of the OpenSearch Best Practice |
+| **CE90 / LE90** | Circular / Linear Error at 90 % | geolocation statistics; see also RMSE |
+| **ENL** | Equivalent Number of Looks | [Resolution](#sec:tax-resolution) |
+| **EO** | Earth Observation | |
+| **ESA** | European Space Agency | operator of Sentinel-1 |
+| **GCP** | Ground Control Point | a surveyed point the buyer supplies to improve geolocation |
+| **GeoJSON** | — | the geometry format geometries are bound to |
+| **IEEE** | Institute of Electrical and Electronics Engineers | source of the radar band letters |
+| **ISLR / PSLR** | Integrated / Peak Sidelobe Ratio | image quality figures: how much energy a bright target spills into its neighbours |
+| **MEF** | MEF Forum | source of the LSO Sonata schema convention this baseline follows |
+| **NASA EOSDIS** | NASA Earth Observing System Data and Information System | source of the processing-level scale |
+| **NESZ** | Noise Equivalent Sigma Zero | the backscatter level at which signal equals instrument noise — the floor of what can be measured |
+| **NGA** | National Geospatial-Intelligence Agency (United States) | publisher of the SICD / SIDD / CPHD formats |
+| **OAS** | OpenAPI Specification | the machine-readable form of a TM Forum API |
+| **OGC** | Open Geospatial Consortium | publisher of the EO metadata and service standards cited here |
+| **PRF** | Pulse Repetition Frequency | an instrument parameter, deliberately out of scope ([What is deliberately excluded](#sec:tax-excluded)) |
+| **PSI** | the consortium and standard this baseline feeds | its interface definitions are numbered PSID\*\*\* |
+| **RMSE** | Root Mean Square Error | |
+| **SAR** | Synthetic Aperture Radar | |
+| **SICD / SIDD / CPHD** | Sensor Independent Complex Data / Derived Data / Compensated Phase History Data | NGA formats, present here as conformance values |
+| **STAC** | SpatioTemporal Asset Catalog | catalogue specification, an OGC Community Standard since October 2025 |
+| **TMF** | TM Forum | TMF620, TMF622 and so on are its Open API specifications |
+| **URN** | Uniform Resource Name | the identifier form used for `$id` in the schema |
+| **VHR** | Very High Resolution | a Copernicus Contributing Mission class, [Cross-vendor resolution class](#sec:tax-cross-vendor-resolution-class) |
+
+Table: Abbreviations. {#tbl:tax-abbreviations}
+
+Product type codes (`GRD`, `SLC`, `SSC` and the rest) are expanded in [Product types](#tax-product-types); processing
+levels in [Processing levels](#tax-processing-levels).
+
+
 # EO Attribute and Taxonomy Baseline
 
 @include [EO-Attribute-Taxonomy-Baseline](annex-iii/EO-Attribute-Taxonomy-Baseline.md)
@@ -70,14 +117,6 @@ The following sections heavily refer to terms, abbreviations and definitions def
 
 @include [EO-Matchmaking-Axes](annex-iii/EO-Matchmaking-Axes.md)
 
-# SAR Model Notes — Design Commentary
+# SAR Data Model
 
-@include [SAR-model-notes](annex-iii/SAR-model-notes.md)
-
-{#page:beginlandscape}
-
-# SAR Model UML
-
-@include [SAR product specification UML model](annex-iii/SAR-model-UML.puml){#fig:sar-product-model width=130%}
-
-{#page:endlandscape}
+@include [SAR-data-model](annex-iii/SAR-data-model.md)

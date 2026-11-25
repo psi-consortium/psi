@@ -4,9 +4,9 @@
 ' Version 0.11 · author: DO
 '
 ' Companion documents:
-'   SAR-TMF-Product-Specification-EN_DO_v0.11.md  — rationale and history
-'   SAR-technical-specification-EN_DO_v0.11.md    — class and attribute reference
-'   SAR-model-notes-EN_DO_v0.11.md                — design commentary
+'   SAR-TMF-Product-Specification.md  — rationale and history
+'   SAR-technical-specification.md    — class and attribute reference
+'   SAR-data-model.md                — design commentary
 '
 ' Scope: product description only.
 ' No POQ / Quote / Order / Product layer,

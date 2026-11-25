@@ -1,25 +1,32 @@
 =begin
 
-# SAR Model Notes — Design Commentary
+# SAR Data Model
 
 **Version 0.11** · **author: DO**
-**Companion files:** `SAR-technical-specification-EN_DO_v0.11.md` ·
-`SAR-model-UML-EN_DO_v0.11.puml`
+**Companion files:** `SAR-technical-specification.md` ·
+`SAR-model-UML.puml`
 
----
 
 =end
 
-> **What this file is.** The reasoning behind the model, one section per class:
-> why each construct is shaped the way it is, and what goes wrong under the
-> alternatives. The class diagram carries **structure only** and this file
-> carries the argument, so that neither has to be read through the other.
->
-> This is not the technical reference. That is in
-> `SAR-technical-specification-EN_DO_v0.11.md` and describes the **current
-> state**: what each class and attribute means. This file holds the **reasons**:
-> why something is modelled one way rather than another, and what would go wrong
-> under a different choice.
+{#page:beginlandscape}
+
+# SAR Model UML
+
+@include [SAR product specification UML model](SAR-model-UML.puml){#fig:sar-product-model width=130%}
+
+{#page:endlandscape}
+
+**What this chapter is.** The reasoning behind the model, one section per class:
+why each construct is shaped the way it is, and what goes wrong under the
+alternatives. The class diagram carries **structure only** and this description
+carries the argument, so that neither has to be read through the other.
+
+This is not the technical reference. That is in
+`SAR-technical-specification.md` and describes the **current
+state**: what each class and attribute means. This chapter holds the **reasons**:
+why something is modelled one way rather than another, and what would go wrong
+under a different choice.
 
 ## Class index
 
@@ -45,7 +52,6 @@
 [TargetProfile](#targetprofile) ·
 [TaskingTier](#taskingtier)
 
----
 
 ## AccessProfile
 
@@ -88,7 +94,6 @@ As a side effect the base class now carries **only the subtype selector**. That
 is fine — its job is to branch, not to hold common fields that, on inspection,
 turned out not to exist.
 
----
 
 ## AcquisitionPattern
 
@@ -122,7 +127,6 @@ Proof that the axes are independent: all four combinations occur in the market �
 one image for one invoice, one image on a monthly subscription, twelve images
 paid up front, twelve images with a monthly invoice.
 
----
 
 ## AssetLayer
 
@@ -155,7 +159,6 @@ format". No such case was found at the vendors reviewed, so it is not modelled �
 but if one appeared, `AssetLayer` would have to become a configurable object
 rather than merely a selectable one.
 
----
 
 ## CoverageGeometry
 
@@ -184,7 +187,6 @@ bounded by `TargetProfile`. The field must not be used for area-based pricing.
 market values** (Sentinel-1 IW 250 km, EW 400 km; Capella and ICEYE strip
 lengths), not published limits. Recorded in the inferred-values register.
 
----
 
 ## DeliveryProfile
 
@@ -203,7 +205,6 @@ looking at, not for computing on: pixel values are inaccessible, so
 `radiometricCalibrationApplied` and `backscatterConvention` become descriptive
 rather than usable.
 
----
 
 ## GcpSet
 
@@ -221,7 +222,6 @@ customer points" is unachievable — points measured with a phone would give a
 result worse than no points at all. It is **the condition under which the seller
 takes on the better number**.
 
----
 
 ## GeolocationAccuracy
 
@@ -257,7 +257,6 @@ by inserting a claim the vendor never made.
 first: "we have a number, we do not know which statistic it represents." The
 second: "the vendor publishes no number at all."
 
----
 
 ## GeometricQuality
 
@@ -275,7 +274,6 @@ PSLR without a stated function is unverifiable.
 channels offset by half a pixel, channel ratios are worthless. The field is
 meaningful only when `polarizationMode ≠ SINGLE`.
 
----
 
 ## LicensingProfile
 
@@ -303,7 +301,6 @@ constrains the technical one**. A product technically capable of being served vi
 concerns money — every field is legal. A name suggesting commerce invites a price
 to be inserted here, which is exactly what the pricing layer is for.
 
----
 
 ## MemberConstraint
 
@@ -351,7 +348,6 @@ and not a reading of anyone's price list. `coherenceTarget` is the clearest case
 coherence depends on what is on the ground, so no seller can commit to it, and
 the field says *aimed for* rather than *guaranteed*.
 
----
 
 ## ProcessingProfile
 
@@ -377,7 +373,6 @@ destroys phase relationships, so in a complex product it is ruled out; in a
 temporal composite the phase is long gone, so filtering takes nothing away and
 improves legibility.
 
----
 
 ## QualityProfile
 
@@ -410,7 +405,6 @@ conditions**: the first depends on incidence angle, the second on ephemeris clas
 and control points, the third is a qualitative assessment. A flat table forced
 the reader through twenty fields with no indication of which ones relate to which.
 
----
 
 ## RadiometricFigure
 
@@ -430,7 +424,6 @@ without the multiplier concludes a threefold improvement, which is wrong.
 Hence the multiplier as an **inseparable part of the value**, not a separate
 field beside it.
 
----
 
 ## RadiometricQuality
 
@@ -454,7 +447,6 @@ the same thing**. All four fields are therefore optional `[0..1]` — a vendor
 fills in whichever they publish. A `convention` field alongside two fields would
 force the buyer to know both conventions in order to read the number.
 
----
 
 ## Resolution
 
@@ -465,6 +457,7 @@ given without its plane and reference angle. The difference between `SLANT` and
 **Cardinality `1..*`, one instance per axis** — because the measurement point
 differs per axis. Sentinel-1 Product Definition, section 7:
 
+> [!NOTE]
 > *"The resolutions in the tables correspond to an average over the minimum and
 > maximum orbits, and to the following swath range positions: **near range**, for
 > azimuth resolution; **mid range**, for ground range resolution."*
@@ -484,7 +477,6 @@ incidence-angle range). Both values mean the declaration **is not a single
 number** but a set or a function — and without this field they look exactly like
 ordinary uncertainty.
 
----
 
 ## RevisitProfile
 
@@ -511,7 +503,6 @@ angles in an offering **lengthens actual revisit**. Without a reference latitude
 a **diameter** (Sentinel-1: 120 m RMS). The previous name systematically doubled
 the interpretation of the same number.
 
----
 
 ## SarProductSpecification
 
@@ -538,6 +529,7 @@ their values follow from `productType`. They are not computed by the system — 
 vendor enters them deliberately, and the validation layer checks consistency. The
 mapping is in the technical specification.
 
+> [!IMPORTANT]
 > **There is no `phasePreserved` field, deliberately.** It would be `true`
 > exactly when `dataType ∈ {COMPLEX, PHASE_HISTORY}`, so it would **carry no
 > information beyond `dataType`**. The temptation is real — phase preservation is
@@ -567,7 +559,6 @@ for selected modes and areas**. Without this field, `archiveDepthFrom =
 planning an SLC time series over Africa would discover otherwise only when
 querying the catalogue.
 
----
 
 ## SceneReference
 
@@ -583,7 +574,6 @@ points at and within which limits, not what they pointed at**. The identifier of
 a specific scene belongs to the order; the specification only says that such an
 identifier is required and what shape it must take.
 
----
 
 ## ServiceCommitment
 
@@ -604,7 +594,6 @@ The same mechanism as in `Resolution` and `GeolocationAccuracy`: a number withou
 its qualifier is uninterpretable, so the qualifier becomes structurally
 inseparable.
 
----
 
 ## TargetProfile
 
@@ -695,7 +684,6 @@ separate "declare the bounds here, the characteristic there".
 TMF620 v5.0 has no `minimumQuantity` field, so the minimum is the lower bound of
 the characteristic's domain (`valueFrom`).
 
----
 
 ## TaskingTier
 
@@ -742,7 +730,6 @@ once, at `pixelSpacing*`.
 
 =begin
 
----
 
 **Version:** 0.11 · **author:** DO
 
