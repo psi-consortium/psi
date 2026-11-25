@@ -154,10 +154,11 @@ Classification: reduction, an open string restricted by an enumeration (TMF630 P
 |---|---|---|---|
 | `action` of an item | free string ("add, modify, remove, etc.") | `ItemActionType`: `add`, `modify`, `delete`, `noChange` | The TMF679 OAS defines `ItemActionType` but uses it only in `RelatedOrderItem`, not for `action`; PSID622 and PSID648 use it for the same attribute (ADR048, rule 6). |
 | `state` of an item | free string | `CheckProductOfferingQualificationStateType` | Section 2. |
+| `state` in the update schema | `TaskStateType`, all six states | `CheckProductOfferingQualificationUpdateStateType`: `cancelled` | `cancelled` is the only state a client may set (section 2; ADR048, rule 4). |
 
 Table: Other values restricted in PSID679 {#tbl:adr047-restricted-values}
 
-Classification: reduction (TMF630 Part 8, Rule 5); ADR048, rule 6.
+Classification: reduction (TMF630 Part 8, Rule 5); ADR048, rules 4 and 6.
 
 ### 7. Removed attributes
 
