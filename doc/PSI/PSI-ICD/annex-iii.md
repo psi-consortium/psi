@@ -120,3 +120,7 @@ levels in [Processing levels](#tax-processing-levels).
 # SAR Data Model
 
 @include [SAR-data-model](annex-iii/SAR-data-model.md)
+
+# SAR Technical Specification
+
+@include [SAR-technical-specification](annex-iii/SAR-technical-specification.md)
