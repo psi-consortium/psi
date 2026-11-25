@@ -214,6 +214,89 @@
                 "type": "string",
                 "description": "Possible values for the state of the quote. In PSI, the state in which the customer rejects an approved quote is named refused (rejected in TMF648); rejected is the state of a quote that failed the business validation; declined is not used."
             },
+            "QuoteUpdateStateType": {
+                "enum": [
+                    "accepted",
+                    "refused",
+                    "cancelled"
+                ],
+                "type": "string",
+                "description": "Possible values for the state of the quote that the customer sets by an update: accepted or refused for an approved quote within its validity period, cancelled to withdraw the quote before it is accepted or refused. The other states are set only by the PSS or the provider."
+            },
+            "QuoteItem_MVO": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/Extensible"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "action": {
+                                "$ref": "#/components/schemas/ItemActionType"
+                            },
+                            "attachment": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/AttachmentOrDocumentRef"
+                                }
+                            },
+                            "note": {
+                                "type": "array",
+                                "description": "Free form text associated with the quote item",
+                                "items": {
+                                    "$ref": "#/components/schemas/Note"
+                                }
+                            },
+                            "product": {
+                                "$ref": "#/components/schemas/ProductRefOrValue"
+                            },
+                            "quantity": {
+                                "type": "integer",
+                                "description": "Quantity asked for this quote item"
+                            },
+                            "quoteItem": {
+                                "type": "array",
+                                "description": "A structure to embedded quote item within quote item",
+                                "items": {
+                                    "$ref": "#/components/schemas/QuoteItem_MVO"
+                                }
+                            },
+                            "quoteItemPrice": {
+                                "type": "array",
+                                "description": "Price for this quote item",
+                                "items": {
+                                    "$ref": "#/components/schemas/QuotePrice"
+                                }
+                            },
+                            "quoteItemRelationship": {
+                                "type": "array",
+                                "description": "A relationship from item within a quote",
+                                "items": {
+                                    "$ref": "#/components/schemas/QuoteItemRelationship"
+                                }
+                            },
+                            "relatedParty": {
+                                "type": "array",
+                                "description": "A reference to a party playing a role in this quote item",
+                                "items": {
+                                    "$ref": "#/components/schemas/RelatedPartyOrPartyRole"
+                                }
+                            },
+                            "id": {
+                                "type": "string",
+                                "description": "Identifier of the quote item (generally it is a sequence number 01, 02, 03, ...)"
+                            }
+                        },
+                        "description": "A quote item in the update of a quote. It has the attributes of QuoteItem except those that the customer cannot change: the product offering and the POQ item it refers to, which are set when the quote is created, and the state of the item, which is set by the PSS and the provider."
+                    }
+                ],
+                "discriminator": {
+                    "propertyName": "@type",
+                    "mapping": {
+                        "QuoteItem": "#/components/schemas/QuoteItem_MVO"
+                    }
+                }
+            },
             "QuoteErrorMessage": {
                 "allOf": [
                     {
@@ -313,57 +396,6 @@
                     "propertyName": "@type",
                     "mapping": {
                         "QuoteErrorMessage": "#/components/schemas/QuoteErrorMessage_FVO"
-                    }
-                }
-            },
-            "QuoteErrorMessage_MVO": {
-                "allOf": [
-                    {
-                        "$ref": "#/components/schemas/Extensible"
-                    },
-                    {
-                        "type": "object",
-                        "properties": {
-                            "code": {
-                                "type": "string",
-                                "description": "error code"
-                            },
-                            "reason": {
-                                "type": "string",
-                                "description": "Explanation of the reason for the error"
-                            },
-                            "message": {
-                                "type": "string",
-                                "description": "More details and corrective actions related to the error"
-                            },
-                            "status": {
-                                "type": "string",
-                                "description": "error code extension like sys-ABC-2001"
-                            },
-                            "referenceError": {
-                                "type": "string",
-                                "description": "URI of documentation describing the error"
-                            },
-                            "timestamp": {
-                                "type": "string",
-                                "description": "Date when the error happened",
-                                "format": "date-time"
-                            },
-                            "quoteItem": {
-                                "type": "array",
-                                "description": "A list of quote item references corresponded to this error",
-                                "items": {
-                                    "$ref": "#/components/schemas/QuoteItemRef_MVO"
-                                }
-                            }
-                        },
-                        "description": "A QuoteErrorMessage represents an error that causes a status change in a quote, as the ProductOrderErrorMessage of TMF622 for a product order."
-                    }
-                ],
-                "discriminator": {
-                    "propertyName": "@type",
-                    "mapping": {
-                        "QuoteErrorMessage": "#/components/schemas/QuoteErrorMessage_MVO"
                     }
                 }
             }

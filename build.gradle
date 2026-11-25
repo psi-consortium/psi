@@ -904,6 +904,25 @@ tasks.register('transformQuote', com.cgi.space.psi.tasks.TransformOASTask) { tra
   ''')
   // the quote states of TOD-03-06: refused instead of declined (the enumeration is in the extension)
   importSchema("QuoteStateType", file("doc/PSI/PSI-ICD/open-apis/extensions/PSID648-Quote-v5.0.0.oas.json"))
+  // the update view accepts only the states the customer sets (accepted, refused, cancelled), as in TOD-03-06-02
+  importSchema("QuoteUpdateStateType", file("doc/PSI/PSI-ICD/open-apis/extensions/PSID648-Quote-v5.0.0.oas.json"))
+  overwriteProperty("Quote_MVO", "state", '''
+    {
+      "$ref": "#/components/schemas/QuoteUpdateStateType"
+    }
+  ''')
+  // the quote items of the update view without the product offering, the POQ item and the state of the item (TMF648 has no QuoteItem_MVO)
+  importSchema("QuoteItem_MVO", file("doc/PSI/PSI-ICD/open-apis/extensions/PSID648-Quote-v5.0.0.oas.json"))
+  overwriteProperty("Quote_MVO", "quoteItem", '''
+    {
+      "minItems": 1,
+      "type": "array",
+      "description": "A quote item describes an action to be performed on a productOffering or a product in order to get pricing elements and condition.",
+      "items": {
+        "$ref": "#/components/schemas/QuoteItem_MVO"
+      }
+    }
+  ''')
   // a quote item always carries the product, as in TOD-03-06-01 (id and action are required in TMF648)
   addRequiredProperty("QuoteItem_FVO", "product")
   // the provider always returns the quote with its identifier, as in PSID679 (id comes from Entity, so it is declared in Quote to be required)
@@ -915,10 +934,10 @@ tasks.register('transformQuote', com.cgi.space.psi.tasks.TransformOASTask) { tra
   ''')
   addRequiredProperty("Quote", "id")
   // the errors that caused a status change of the quote (for example rejected), as productOrderErrorMessage in PSID622;
-  // in the quote and in its create and update views, as productOrderErrorMessage in the product order
-  importSchema("QuoteErrorMessage(|_FVO|_MVO)", file("doc/PSI/PSI-ICD/open-apis/extensions/PSID648-Quote-v5.0.0.oas.json"))
-  importSchema("QuoteItemRef(|_FVO|_MVO)", file("tmforum/apis/TMF622_Product_Ordering/oas/TMF622-ProductOrdering-v5.0.0.oas.yaml"))
-  ['', '_FVO', '_MVO'].each { suffix ->
+  // in the quote and in its create view; not in the update view, because only the server sets them
+  importSchema("QuoteErrorMessage(|_FVO)", file("doc/PSI/PSI-ICD/open-apis/extensions/PSID648-Quote-v5.0.0.oas.json"))
+  importSchema("QuoteItemRef(|_FVO)", file("tmforum/apis/TMF622_Product_Ordering/oas/TMF622-ProductOrdering-v5.0.0.oas.yaml"))
+  ['', '_FVO'].each { suffix ->
     addProperty("Quote${suffix}", "quoteErrorMessage", """
       {
         "type": "array",
@@ -940,6 +959,10 @@ tasks.register('transformQuote', com.cgi.space.psi.tasks.TransformOASTask) { tra
       "$ref": "#/components/schemas/ChannelRef_MVO"
     }
   ''')
+  // the update view carries no server-set attributes, as in PSID679: the validity period and the completion dates are set by the provider (the prices stay, as in TMF648);
+  // instantSyncQuote applies only to the creation of a quote
+  // the POQ the quote refers to is fixed when the quote is created
+  removeProperty("Quote_MVO", "(validFor|effectiveQuoteCompletionDate|expectedQuoteCompletionDate|instantSyncQuote|productOfferingQualification)")
   // Prune things that became superfluous because of above transformations
   removeSchema("(Feature|FeatureRelationship|GeographicSiteFeature|PolicyRef)(|_FVO|_MVO)")
   pruneAll()

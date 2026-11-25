@@ -102,6 +102,12 @@ dcr_overrides:
    version: 'PSI-DOC-VERSION'
    author: 'Dominik Ogrodnik'
    message: 'Added Observability: the trace context and the correlation identifier in REST headers, events and logs.'
+ - dcr:
+   from: '2026-11-24'
+   to: '2026-11-24'
+   version: 'PSI-DOC-VERSION'
+   author: 'Kinga Kocierz'
+   message: 'PSID648 Quote Management: the server-set attributes, instantSyncQuote and productOfferingQualification removed from Quote_MVO; its state limited to QuoteUpdateStateType (accepted, refused, cancelled); new QuoteItem_MVO without productOffering, productOfferingQualificationItem and state.'
 =end
 
 # Document Meta Information
