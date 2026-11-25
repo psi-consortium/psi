@@ -89,7 +89,7 @@ A change that the server refuses is answered with the following codes:
 
 * Code `409` for a change that the server does not accept in the current state, e.g. any change of a qualification that is already completed (`done`, `rejected`, `cancelled` or `terminatedWithError`), or any change while an earlier change is still being carried out.
 * Code `400` for a change that does not conform to the interface specification or to the product schema, e.g. a value of the wrong type or an attribute that only the server can modify.
-* Code `422` for a value that a client may not set, e.g. a *state* other than `cancelled`.
+* Code `422` for a change that a business rule prevents, e.g. an item with an offering that is not in the catalog of the PSS.
 * Code `404` for an unknown identifier, `403` for a qualification the client may not change.
 
 **REST Endpoints**

@@ -108,6 +108,12 @@ dcr_overrides:
    version: 'PSI-DOC-VERSION'
    author: 'Kinga Kocierz'
    message: 'PSID648 Quote Management: the server-set attributes, instantSyncQuote and productOfferingQualification removed from Quote_MVO; its state limited to QuoteUpdateStateType (accepted, refused, cancelled); new QuoteItem_MVO without productOffering, productOfferingQualificationItem and state.'
+ - dcr:
+   from: '2026-11-25'
+   to: '2026-11-25'
+   version: 'PSI-DOC-VERSION'
+   author: 'Dominik Ogrodnik'
+   message: 'PSID679 Product Offering Qualification: the state of CheckProductOfferingQualification_MVO limited to the new CheckProductOfferingQualificationUpdateStateType (cancelled).'
 =end
 
 # Document Meta Information

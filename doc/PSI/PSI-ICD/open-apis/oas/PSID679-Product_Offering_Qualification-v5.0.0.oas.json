@@ -1634,7 +1634,7 @@
                 "format": "date-time"
               },
               "state": {
-                "$ref": "#/components/schemas/CheckProductOfferingQualificationStateType"
+                "$ref": "#/components/schemas/CheckProductOfferingQualificationUpdateStateType"
               },
               "externalId": {
                 "type": "array",
@@ -10015,6 +10015,13 @@
           "cancelled",
           "done",
           "terminatedWithError"
+        ]
+      },
+      "CheckProductOfferingQualificationUpdateStateType": {
+        "type": "string",
+        "description": "Possible values for the state of a qualification that the client sets by an update: cancelled to withdraw the qualification while it is acknowledged or inProgress. The other states are set only by the server.",
+        "enum": [
+          "cancelled"
         ]
       },
       "QualificationItemResultType": {

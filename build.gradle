@@ -745,6 +745,12 @@ tasks.register('transformProductOfferingQualification', com.cgi.space.psi.tasks.
       "$ref": "#/components/schemas/CheckProductOfferingQualificationStateType"
     }
   ''')
+  // the update view accepts only the state the client sets (cancelled), as in TOD-03-05-02 (the enumeration is in the extension)
+  overwriteProperty("CheckProductOfferingQualification_MVO", "state", '''
+    {
+      "$ref": "#/components/schemas/CheckProductOfferingQualificationUpdateStateType"
+    }
+  ''')
   // no promotion in a qualification; the update views carry no server-set attributes
   removeProperty("CheckProductOfferingQualificationItem_MVO", "alternateProductOfferingProposal")
   removeProperty("CheckProductOfferingQualification_MVO", "effectiveQualificationDate")
