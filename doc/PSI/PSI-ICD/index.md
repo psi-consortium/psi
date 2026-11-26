@@ -153,6 +153,7 @@ Table: Reference Documents. {#tbl:reference-documents}
 |------------------|----------------------|
 | PSI-ICD-Annex-I  | PSI-ICD-Annex-I.zip  |
 | PSI-ICD-Annex-II | PSI-ICD-Annex-II.zip |
+| PSI-ICD-Annex-III | PSI-ICD-Annex-III.pdf |
 
 Table: External Annexes {#tbl:external-annexes}
 

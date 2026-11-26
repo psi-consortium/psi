@@ -1,0 +1,435 @@
+@startuml SAR_ProductSpecification_v02_EN
+' =============================================================
+' SAR Product Specification — TM Forum model
+' Version 0.2
+'
+' Companion documents:
+'   SAR-technical-specification.md    — class and attribute reference
+'   SAR-data-model.md                — design commentary
+'
+' Scope: product description only.
+' No POQ / Quote / Order / Product layer,
+' no fulfilment layer, no TMF620 catalogue frame.
+'
+' MARKER LEGEND:
+'   *  mandatory attribute (cardinality 1; no asterisk = optional)
+'
+' Who sets an attribute — seller or buyer — is not on the diagram.
+' It is in the technical specification, column "Role".
+'
+' Simple value types (Duration, AngleRange) have no drawn
+' associations — they are used in many places, are easy to
+' understand, and would clutter the diagram.
+' =============================================================
+
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam linetype ortho
+hide empty methods
+
+' =============================================================
+' ROOT
+' =============================================================
+
+class SarProductSpecification {
+  .. classification ..
+  +sensorType : SensorType *
+  +productType : ProductType *
+  .. identity labels ..
+  +resolutionClass : ResolutionClass
+  +copernicusCMClass : CopernicusCMClass
+  +systematicProduction : Boolean *
+  .. dependent on productType ..
+  +dataType : DataType *
+  +processingLevel : ProcessingLevel *
+  +geophysicalVariable : GeophysicalVariable
+}
+
+' =============================================================
+' ACCESS — subtype selector: accessMode
+' =============================================================
+
+abstract class AccessProfile {
+  +accessMode : AccessMode *
+}
+
+class ArchiveAccess {
+  +orderingMode : OrderingMode [1..*] *
+  +standingAccess : Boolean *
+  +catalogueInterface : CatalogueInterface [1..*] *
+  +archiveDepthFrom : Date *
+  +includesHistoricalArchive : Boolean *
+  +archiveUpdateLatency : ServiceCommitment *
+  +deliveryLatency : ServiceCommitment *
+  +sourceSceneRef : SceneReference [0..*]
+}
+
+class TaskingAccess {
+  +orderingMode : OrderingMode [1..2] *
+  +maxSchedulingHorizon : Duration *
+  +feasibilityHorizon : Duration
+  +exclusivity : Exclusivity *
+  +holdbackPeriod : Duration
+}
+
+class TaskingTier <<valueType>> {
+  +tierName : String *
+  +priority : TaskingPriority *
+  +minLeadTime : Duration *
+  +fulfilmentTime : ServiceCommitment *
+  +deliveryLatency : ServiceCommitment *
+  +collectionSuccessRate : Percent *
+  +passLimit : Integer
+}
+
+' =============================================================
+' ACQUISITION PATTERN — subtype selector: patternType
+' =============================================================
+
+abstract class AcquisitionPattern {
+  +patternType : AcquisitionPatternType *
+  +minAcquisitionWindowWidth : Duration *
+}
+
+class SingleAcquisition {
+  +retaskOnFailure : Boolean *
+}
+
+class RecurringAcquisition {
+  +cadenceMin : Duration *
+  +cadenceMax : Duration *
+  +repetitionCountMin : Integer *
+  +repetitionCountMax : Integer *
+  +iterationFailurePolicy : IterationFailurePolicy *
+}
+
+class MemberConstraint {
+  .. pairing ..
+  +pairingScheme : PairingScheme
+  .. pass geometry ..
+  +sameTrack : Boolean
+  +samePassDirection : Boolean
+  +sameLookSide : Boolean
+  .. baselines ..
+  +temporalBaselineMax : Duration
+  +perpendicularBaselineMin : Decimal <<m>>
+  +perpendicularBaselineMax : Decimal <<m>>
+  .. phase conditions ..
+  +burstSyncTolerance : Decimal <<ms>>
+  +dopplerCentroidDifferenceMax : Decimal <<Hz>>
+  .. coverage ..
+  +commonCoverageFractionMin : Decimal
+}
+
+class ContinuousAcquisition {
+  +coveragePeriodMin : Duration *
+  +coveragePeriodMax : Duration *
+}
+
+' =============================================================
+' REVISIT, TARGET, SENSOR
+' =============================================================
+
+class RevisitProfile {
+  +revisitTimeMin : Duration *
+  +revisitTimeMax : Duration *
+  +revisitReferenceLatitude : Decimal <<deg>> *
+  +repeatCycle : Duration
+  +orbitTubeDiameter : Decimal <<m>>
+}
+
+class TargetProfile {
+  +serviceArea : ServiceArea [0..*]
+  +timeOfInterest : TimePeriod
+  .. requested area travels as Product.place[role=requestedAoi] ..
+  +targetGeometryType : TargetGeometryType [1..*] *
+  +targetAreaMin : Decimal <<km2>> *
+  +targetAreaMax : Decimal <<km2>> *
+  +clippingSupported : Boolean *
+  +minCoverageFraction : Decimal
+}
+
+class SensorProfile {
+  +frequencyBand : FrequencyBand *
+  +centerFrequency : Decimal <<GHz>> *
+  +bandwidth : Decimal <<GHz>> *
+  +polarization : Polarization [1..4] *
+  +polarizationMode : PolarizationMode *
+}
+
+' =============================================================
+' ACQUISITION — subtype selector: collectionStrategy
+' =============================================================
+
+class AcquisitionProfile {
+  +collectionStrategy : CollectionStrategy *
+  +incidenceAngle : AngleRange *
+  +incidenceAngleVariation : Decimal <<deg>> *
+  +lookAngle : AngleRange *
+  +orbitDirection : OrbitDirection [1..*] *
+  +observationDirection : ObservationDirection [1..*] *
+  +squintAngleMax : Decimal <<deg>>
+  +illuminationTime : Duration *
+}
+
+abstract class CoverageGeometry {
+  +footprintAreaNominal : Decimal <<km2>> *
+}
+
+class SwathCoverage {
+  +swathWidth : Decimal <<km>> *
+  +subSwathCount : Integer *
+  +stripLengthMin : Decimal <<km>> *
+  +stripLengthMax : Decimal <<km>> *
+}
+
+class SceneCoverage {
+  +sceneWidth : Decimal <<km>> *
+  +sceneLengthMin : Decimal <<km>> *
+  +sceneLengthMax : Decimal <<km>> *
+}
+
+class Resolution <<valueType>> {
+  +axis : ResolutionAxis *
+  +valueMin : Decimal <<m>> *
+  +valueMax : Decimal <<m>> *
+  +plane : ResolutionPlane *
+  +referenceAngle : AngleRange
+  +averagedOverOrbits : Boolean *
+}
+
+' =============================================================
+' PROCESSING
+' =============================================================
+
+class ProcessingProfile {
+  .. multi-looking ..
+  +looksRange : Integer *
+  +looksAzimuthMin : Integer *
+  +looksAzimuthMax : Integer *
+  +enl : Decimal *
+  +lookOverlapRange : Decimal
+  +lookOverlapAzimuth : Decimal
+  +lookBandwidthRange : Decimal <<Hz>>
+  +lookBandwidthAzimuth : Decimal <<Hz>>
+  .. spectral weighting ..
+  +weightingFunctionRange : WeightingFunction *
+  +weightingFunctionAzimuth : WeightingFunction *
+  +weightingCoefficientRange : Decimal
+  +weightingCoefficientAzimuth : Decimal
+  .. grid sampling ..
+  +pixelSpacingRange : Decimal <<m>> *
+  +pixelSpacingAzimuth : Decimal <<m>> *
+  .. geometry and terrain ..
+  +geometryProjection : GeometryProjection *
+  +terrainHandling : TerrainHandling *
+  +elevationModel : ElevationModel *
+  +mapProjectionFamily : MapProjectionFamily *
+  +epsgCode : Integer *
+  .. pixel values ..
+  +radiometricCalibrationApplied : Boolean *
+  +backscatterConvention : BackscatterRef [1..*] *
+  +pixelScale : PixelScale *
+  +pixelDataType : PixelDataType *
+  +bitsPerSample : Integer *
+  +speckleFilter : SpeckleFilter *
+  .. fitness and conformance ..
+  +interferometricUse : Boolean *
+  +ardFamily : ArdFamily *
+  +ardConformanceLevel : ArdConformanceLevel *
+  +ardSpecVersion : String *
+  +standardConformance : StandardConformance [0..*]
+}
+
+class StandardConformance <<valueType>> {
+  +standard : ConformanceStandard *
+  +version : String *
+}
+
+' =============================================================
+' QUALITY
+' =============================================================
+
+class QualityProfile {
+  +qualityQualifier : QualityQualifier [1..3] *
+  +qualityValidIncidence : AngleRange *
+}
+
+class QualityQualifier <<valueType>> {
+  +scope : QualityScope *
+  +basis : QualityBasis *
+  +aggregation : QualityAggregation *
+}
+
+class RadiometricQuality {
+  +neszMin : Decimal <<dB>> *
+  +neszMax : Decimal <<dB>> *
+  +radiometricAccuracyAbs : RadiometricFigure *
+  +radiometricAccuracyRel : RadiometricFigure *
+  +radiometricResolution : Decimal <<dB>>
+  .. ambiguities — two conventions ..
+  +azimuthAmbiguityRatio : Decimal <<dB>>
+  +rangeAmbiguityRatio : Decimal <<dB>>
+  +distributedTargetAmbiguityRatio : Decimal <<dB>>
+  +pointTargetAmbiguityRatio : Decimal <<dB>>
+}
+
+class GeometricQuality {
+  +geolocationAccuracy : GeolocationAccuracy *
+  +channelCoRegistrationAccuracy : Decimal <<pixel>>
+  .. impulse response side lobes ..
+  +peakSideLobeRatioRange : Decimal <<dB>>
+  +peakSideLobeRatioAzimuth : Decimal <<dB>>
+  +integratedSideLobeRatioRange : Decimal <<dB>>
+  +integratedSideLobeRatioAzimuth : Decimal <<dB>>
+  .. buyer-supplied control points ..
+  +gcpSupported : Boolean *
+  +gcpFormatAccepted : GcpFileFormat [0..*]
+  +gcpTypeAccepted : GcpType [0..*]
+  +gcpMinCount : Integer
+  +gcpMaxCount : Integer
+  +gcpAccuracyRequired : Decimal <<m>>
+  +geolocationAccuracyWithGcp : GeolocationAccuracy
+  +gcpSet : GcpSet
+}
+
+class InterpretabilityQuality {
+  +informationDensity : Decimal <<bit/m2>>
+  +rniirs : Decimal
+}
+
+class RadiometricFigure <<valueType>> {
+  +value : Decimal <<dB>> *
+  +sigmaMultiplier : Integer *
+}
+
+class GeolocationAccuracy <<valueType>> {
+  +value : Decimal <<m>> *
+  +metric : GeolocationMetric *
+  +terrainCorrected : Boolean *
+  +ephemerisClass : EphemerisClass *
+}
+
+class GcpSet <<valueType>> {
+  +reference : URI *
+  +format : GcpFileFormat *
+  +pointType : GcpType [1..*] *
+  +epsgCode : Integer *
+  +pointCount : Integer *
+  +declaredAccuracy : Decimal <<m>> *
+}
+
+' =============================================================
+' DELIVERY, COMPOSITE, LICENSING
+' =============================================================
+
+class DeliveryProfile {
+  +fileFormat : FileFormatSpec [1..*] *
+  +volumeMinGB : Decimal *
+  +volumeMaxGB : Decimal *
+  +maxBandFileSize : Decimal <<GB>>
+  +deliveryChannel : DeliveryChannel [1..*] *
+  +ogcService : OgcService [0..*]
+  +multiSceneDelivery : MultiSceneDelivery [1..*] *
+}
+
+class FileFormatSpec <<valueType>> {
+  +format : FileFormat *
+  +metadataFormat : MetadataStandard *
+  +metadataExtensions : String [0..*]
+  +deprecated : Boolean
+}
+
+class AssetLayer <<valueType>> {
+  +role : AssetRole *
+  +presence : AssetPresence *
+}
+
+class CompositeProfile {
+  +temporalAggregation : TemporalAggregation *
+  +aggregationPeriod : Duration *
+  +gridReferenceSystem : GridReferenceSystem *
+  +gridSpacing : Decimal <<m>> *
+  +normalizedIncidenceAngle : Decimal <<deg>>
+  +gapFillingMethod : GapFillingMethod *
+  +minSourceAcquisitions : Integer *
+}
+
+class LicensingProfile {
+  +licenceModel : LicenceModel *
+  +eulaTemplate : EulaTemplate *
+  +permittedPurpose : PermittedPurpose [1..*] *
+  +eligibleBuyerClass : EligibleBuyerClass [1..*] *
+  +exportControl : ExportControl [1..*] *
+  +securityClassification : SecurityClassification *
+}
+
+class SceneReference <<valueType>> {
+  +catalogueRef : URI *
+  +collectionId : String *
+  +itemId : String *
+}
+
+class TimePeriod <<valueType>> {
+  +startDateTime : DateTime
+  +endDateTime : DateTime
+}
+
+class ServiceArea <<valueType>> {
+  +area : GeoJSON *
+  +coverageType : CoverageType *
+  +restrictionBasis : RestrictionBasis *
+  +note : String
+}
+
+' =============================================================
+' ASSOCIATIONS
+' =============================================================
+
+SarProductSpecification "1" *-- "1..2" AccessProfile
+SarProductSpecification "1" *-- "1" RevisitProfile
+SarProductSpecification "1" *-- "1" TargetProfile
+SarProductSpecification "1" *-- "1" SensorProfile
+SarProductSpecification "1" *-- "1" AcquisitionProfile
+SarProductSpecification "1" *-- "1..*" Resolution : one or more per axis >
+SarProductSpecification "1" *-- "1" ProcessingProfile
+SarProductSpecification "1" *-- "0..1" QualityProfile
+SarProductSpecification "1" *-- "1" DeliveryProfile
+SarProductSpecification "1" *-- "0..1" CompositeProfile
+SarProductSpecification "1" *-- "1" LicensingProfile
+
+AccessProfile <|-- ArchiveAccess
+AccessProfile <|-- TaskingAccess
+
+ArchiveAccess "1" *-- "0..*" SceneReference : points to >
+TaskingAccess "1" *-- "1..*" TaskingTier : one per tier >
+TaskingAccess "1" *-- "1..*" AcquisitionPattern : one per pattern >
+
+AcquisitionPattern <|-- SingleAcquisition
+AcquisitionPattern <|-- RecurringAcquisition
+AcquisitionPattern <|-- ContinuousAcquisition
+
+RecurringAcquisition "1" *-- "0..1" MemberConstraint : conditions between members >
+
+AcquisitionProfile "1" *-- "1" CoverageGeometry
+CoverageGeometry <|-- SwathCoverage
+CoverageGeometry <|-- SceneCoverage
+
+ProcessingProfile "1" *-- "0..*" StandardConformance
+
+QualityProfile "1" *-- "1" RadiometricQuality
+QualityProfile "1" *-- "1" GeometricQuality
+QualityProfile "1" *-- "0..1" InterpretabilityQuality
+QualityProfile "1" *-- "1..3" QualityQualifier : one per group >
+
+RadiometricQuality "1" *-- "2" RadiometricFigure : abs. and rel. >
+GeometricQuality "1" *-- "1..2" GeolocationAccuracy : base and with GCP >
+GeometricQuality "1" *-- "0..1" GcpSet : buyer input >
+
+DeliveryProfile "1" *-- "1..*" FileFormatSpec : one per format pairing >
+DeliveryProfile "1" *-- "1..*" AssetLayer : one per layer >
+
+TargetProfile "1" *-- "0..*" ServiceArea : declared reach >
+TargetProfile "1" *-- "0..1" TimePeriod : timeOfInterest >
+
+@enduml

@@ -247,6 +247,10 @@ doc_path["PSI-ICD"]=doc/PSI/PSI-ICD/index.md
 doc_abbr["PSI-ICD"]=PSI-ICD
 doc_skip["PSI-ICD"]=$global_skip
 
+doc_path["PSI-ICD-Annex-III"]=doc/PSI/PSI-ICD/annex-iii.md
+doc_abbr["PSI-ICD-Annex-III"]=PSI-ICD-Annex-III
+doc_skip["PSI-ICD-Annex-III"]=$global_skip
+
 doc_path["PSI-READFIRST"]=doc/PSI/PSI-READFIRST/index.md
 doc_abbr["PSI-READFIRST"]=PSI-READFIRST
 doc_skip["PSI-READFIRST"]=$global_skip
