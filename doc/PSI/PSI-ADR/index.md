@@ -122,6 +122,10 @@ dcr_overrides:
    version: 'PSI-DOC-VERSION'
    author: 'Alexander Brehmer'
    message: 'Proposed ADR049 on AI-assisted capability extraction for the mission-based product inquiry.'
+   to: '2026-11-26'
+   version: 'PSI-DOC-VERSION'
+   author: 'Dominik Ogrodnik'
+   message: 'Accepted ADR046 on the adoption of TMF679 and TMF648, ADR047 on the deviations of PSID679 Product Offering Qualification from TMF679 and ADR048 on the rules for deviations from TM Forum APIs; ADR031 deprecated with ADR046, and a note in ADR021 refers to ADR046.'
  =end
 
 # Document Meta Information

@@ -218,6 +218,13 @@
                 "type": "string",
                 "description": "Possible values for the state of a task. Named TaskStateType in TMF679; renamed in PSI because PSID687 defines a TaskStateType with other values."
             },
+            "CheckProductOfferingQualificationUpdateStateType": {
+                "enum": [
+                    "cancelled"
+                ],
+                "type": "string",
+                "description": "Possible values for the state of a qualification that the client sets by an update: cancelled to withdraw the qualification while it is acknowledged or inProgress. The other states are set only by the server."
+            },
             "CheckProductOfferingQualification_FVO": {
                 "allOf": [
                     {
