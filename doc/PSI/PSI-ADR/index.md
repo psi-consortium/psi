@@ -118,10 +118,10 @@ dcr_overrides:
    message: 'ADR044 v1.1: the update view of PSID648 (Quote_MVO, new QuoteItem_MVO) carries no server-set attributes and accepts only the states set by the customer.'
  - dcr:
    from: '2026-11-25'
-   to: '2026-11-25'
+   to: '2026-11-26'
    version: 'PSI-DOC-VERSION'
    author: 'Dominik Ogrodnik'
-   message: 'Proposed ADR046 on the adoption of TMF679 and TMF648, ADR047 on the deviations of PSID679 Product Offering Qualification from TMF679 and ADR048 on the rules for deviations from TM Forum APIs.'
+   message: 'Proposed ADR046 on the adoption of TMF679 and TMF648, ADR047 on the deviations of PSID679 Product Offering Qualification from TMF679 and ADR048 on the rules for deviations from TM Forum APIs; ADR031 deprecated with ADR046, and a note in ADR021 refers to ADR046.'
  =end
 
 # Document Meta Information

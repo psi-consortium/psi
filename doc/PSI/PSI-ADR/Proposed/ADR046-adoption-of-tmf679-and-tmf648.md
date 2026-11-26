@@ -14,7 +14,7 @@ Technical Story: PSID679 Product Offering Qualification API (psi issue #83, PR #
 PSI has previously decided against a qualification API:
 
 * [ADR021](../Accepted/ADR021-inventory-stock-api_V1.0.md) de-scoped the TMF679 Product Offering Qualification API, because eligibility "should already been checked as part of the inquiry process", and named the check of change requests for eligibility as a reason to consider it again.
-* [ADR031](../Rejected/ADR031-qualification-apis_V0.1.md) then chose "Not adapting TMF645 and TMF679", because "the major implementation effort required does not justify the marginal benefits at the current stage", and named the cost of that choice: it "may require additional work if these APIs become relevant in the future".
+* [ADR031](../Deprecated/ADR031-qualification-apis_V0.1.md) then chose "Not adapting TMF645 and TMF679", because "the major implementation effort required does not justify the marginal benefits at the current stage", and named the cost of that choice: it "may require additional work if these APIs become relevant in the future".
 
 For a quote, PSI has no decision at all: the Customer Inquiry returns non-binding prices, and a Request-for-Quote returns a tailored offering (PSI-TAD).
 
@@ -46,12 +46,12 @@ POQ and Quote were confirmed as optional from the API's point of view.
 
 ## Decision Outcome
 
-Chosen option: "Option 3: Adopt TMF679 v5.0.0 and TMF648 v5.0.0 as the PSI profiles PSID679 and PSID648", because it gives each question of the journey one standard API, keeps the data of the provider with the provider, and is what CCN #4 asks for and the consortium agreed on; option 4 would add an API whose questions the other steps already answer (section 4).
+Chosen option: "Option 3: Adopt TMF679 v5.0.0 and TMF648 v5.0.0 as the PSI profiles PSID679 and PSID648", because it gives each question of the journey one standard API, keeps the data of the provider with the provider, and is what CCN #4 asks for and the consortium agreed on; option 4 would add an API whose questions the other steps already answer (see "Availability and pricing discovery").
 
 TMF645 Service Qualification Management stays out of PSI: the customer buys products, so the qualification is done on product offerings, and whether the services behind them can be delivered is the provider's own concern.
 Mplify (formerly MEF) LSO Sonata serves as a reference where it settles a question that TM Forum leaves open ([ADR041](../Accepted/ADR041-mef-convergence.md)).
 
-### 1. Customer Inquiry, POQ and Quote
+### Customer Inquiry, POQ and Quote
 
 The three steps answer different questions, so none of them replaces another:
 
@@ -62,7 +62,7 @@ The three steps answer different questions, so none of them replaces another:
   The provider answers with its own data and rules, e.g. the capacity of a satellite, which ADR031 found "may be considered proprietary or confidential business information", and discloses only the result.
 * The Quote gives the binding price and terms of a selected offering: the prices in the catalog and in the inquiry results are list prices only, whereas the Quote can take into consideration the price modifiers relevant to the customer.
 
-### 2. Place in the customer journey
+### Place in the customer journey
 
 * The steps follow each other as Customer Inquiry or product catalog query, POQ, Quote and Product Order.
   POQ and Quote are optional and independent of each other: a customer may order without either, qualify without quoting, or quote without qualifying.
@@ -78,7 +78,7 @@ The three steps answer different questions, so none of them replaces another:
 * For a bundle composed by the PSS from the offerings of several providers, the PSS sends one POQ and one Quote per provider, each with the parts of that provider, and combines the answers.
   How the PSS decomposes the bundle and combines the answers is not part of the PSID679 and PSID648 interfaces; it belongs to what CCN #4 calls the distributed CPQ (A204010, A204020).
 
-### 3. Interfaces and calls between the systems
+### Interfaces and calls between the systems
 
 * POQ and Quote are offered on three interfaces: the PSS-USR I/F, where the customer is the client of the PSS; the PSS-PVD I/F, where the PSS is the client of the provider; and the PSS-PSS I/F, where a PSS is the client of another PSS.
   They are not offered on the PSS-GOV I/F.
@@ -93,7 +93,7 @@ The three steps answer different questions, so none of them replaces another:
   ADR015 rejected this pattern ("Distinct inquiry per system") for the Customer Inquiry, but ADR015 is about communication that "is not 1-to-1", so there is no contradiction.
 * The provider informs the PSS about the changes of its POQ or Quote by notifications (PSID688), and the PSS informs its customer in the same way; the provider does not call the qualification or quote endpoints of the PSS.
 
-### 4. Availability and pricing discovery
+### Availability and pricing discovery
 
 PSI adopts no separate discovery API, such as the Mplify LSO Sonata Product Offering Availability and Pricing Discovery API:
 
@@ -101,16 +101,16 @@ PSI adopts no separate discovery API, such as the Mplify LSO Sonata Product Offe
 * The questions it answers are answered by the steps above: which offerings fit a need (Customer Inquiry, product catalog), whether a selected configuration can be delivered at the requested place and date (POQ, with alternatives), what it costs as a list price (product catalog, inquiry results), and what it costs bindingly (Quote).
 * The "Availability/Pricing Discovery APIs (or equivalent)" of CCN #4 are therefore realised by the Customer Inquiry, the product catalog, the POQ and the Quote.
 
-### 5. Earlier decisions and the earlier scope of PSI
+### Earlier decisions and the earlier scope of PSI
 
 * ADR031 is deprecated by this record; TMF645 stays out of PSI.
 * The de-scoping of the qualification API in ADR021 is reversed; the rest of ADR021 stays.
-* The inquiry type "Change Request" of the PSI-TAD, in which the customer checks "the feasibility and potentially new price with the provider", is replaced by a POQ, which answers the feasibility, and a Quote, which answers the new price; the change itself is then ordered with `action: modify` (section 2; ACTION-2026-10-05-002).
+* The inquiry type "Change Request" of the PSI-TAD, in which the customer checks "the feasibility and potentially new price with the provider", is replaced by a POQ, which answers the feasibility, and a Quote, which answers the new price; the change itself is then ordered with `action: modify` (see "Place in the customer journey"; ACTION-2026-10-05-002).
 * Request-for-Quote (RFQ) and Invitation-to-Tender (ITT) stay inquiry types.
   Despite its name, an RFQ asks a provider for a tailored offering, which comes back as an offering (PSI-TAD), not as a quote; that offering can then be qualified and quoted like any other.
 * How PSID648 and PSID679 deviate from TMF648 and TMF679 is recorded in ADR044 and ADR047.
 
-### 6. What this record does not decide
+### What this record does not decide
 
 * How a customer learns that a provider or a governance requires a POQ or a Quote before an order.
 

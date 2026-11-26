@@ -52,7 +52,7 @@ How should PSID679 deviate from TMF679 so that it supports the PSI qualification
 
 Chosen option: "Option 2: Specialise TMF679 by the rules of ADR048", because it improves interoperability: closed values let a PSS combine the answers of several providers, every qualification can be referred to by its identifier, and an item has the same structure as in the quote and the order; every deviation stays within what ADR048 allows.
 
-### 1. Operations and endpoints
+### Operations and endpoints
 
 | Removed from TMF679 | Reason |
 |---|---|
@@ -65,10 +65,10 @@ Table: Operations and endpoints removed from TMF679 {#tbl:adr047-removed-operati
 
 Classification: reduction (TMF630 Part 8, Rule 5). The hub and listener endpoints are removed, and the server URL set, as for every PSID API (ADR048, rule 9).
 
-### 2. Qualification states
+### Qualification states
 
 The state enumeration keeps the six values of TMF679's `TaskStateType` and is named `CheckProductOfferingQualificationStateType`, because PSID687 already defines a `TaskStateType` with other values and the PSI build keeps one definition per schema name (ADR048, rule 7).
-The `state` of an item uses the same enumeration (section 6).
+The `state` of an item uses the same enumeration (see "Other restricted values").
 PSI adds no state; it gives a meaning to the two states that the TMF679 user guide does not describe, and narrows a third:
 
 | State | TMF679 user guide | PSI |
@@ -83,7 +83,7 @@ TOD-03-05 gives the meaning of every state, who sets it and the transitions.
 
 Classification: the renaming is not covered by TMF630 Part 8 (ADR048, rule 7); the meanings extend the descriptions of TMF679 without changing what the values stand for (TMF630 Part 8, Rules 6 and 8).
 
-### 3. Creation of a qualification: always `201`
+### Creation of a qualification: always `201`
 
 * `POST /checkProductOfferingQualification` always creates and keeps the qualification and answers with **`201 Created`**, including its `id`; `200` and `202` are removed (ADR048, rule 1).
 * The server decides at runtime whether the `201` already carries the result (TMF630 Part 1 §9.6) and sets: `done` with the results when it could qualify at once, `rejected` when a business validation refused it at once, `terminatedWithError` when it could not process it at all, otherwise a state that is not final, which the client follows by `GET` or through the notifications of PSID688.
@@ -102,11 +102,11 @@ The TMF679 conformance profile requires only `201` on `POST` and treats `200` as
 
 Classification: not covered by TMF630 Part 8; the TMF679 conformance profile is kept (ADR048, rule 1).
 
-### 4. Response codes
+### Response codes
 
 | Operation | Removed from TMF679 | Added | Meaning fixed by PSI |
 |---|---|---|---|
-| `POST /checkProductOfferingQualification` | `200`, `202`, `404`, `409` | `400`, `401`, `403`, `422`, `501`, `503` | `201` in every case (section 3). `422` = the request failed a business validation at once and no qualification was created. An offering that is not in the catalog is not answered with `404` but refused (`422` or `rejected`). The client does not set the identifier, so a new qualification cannot conflict with an existing one (`409`). |
+| `POST /checkProductOfferingQualification` | `200`, `202`, `404`, `409` | `400`, `401`, `403`, `422`, `501`, `503` | `201` in every case (see "Creation of a qualification: always `201`"). `422` = the request failed a business validation at once and no qualification was created. An offering that is not in the catalog is not answered with `404` but refused (`422` or `rejected`). The client does not set the identifier, so a new qualification cannot conflict with an existing one (`409`). |
 | `GET /checkProductOfferingQualification` | `404` | – | An empty list is answered with `200`. |
 | `PATCH /checkProductOfferingQualification/{id}` | – | `422` | `422` = a well-formed change that a business rule prevents, e.g. an item with an offering that is not in the catalog (ADR048, rule 3). |
 | `DELETE /checkProductOfferingQualification/{id}` | `501` | – | A server that does not offer the removal answers `405`. |
@@ -117,7 +117,7 @@ Table: Response codes of PSID679 compared with TMF679 {#tbl:adr047-response-code
 
 Classification: not covered by TMF630 Part 8; the TMF679 conformance profile, which requires only `201` on `POST`, is kept (ADR048, rule 3).
 
-### 5. Result vocabulary
+### Result vocabulary
 
 `qualificationItemResult` and `qualificationResult` use one closed vocabulary:
 
@@ -148,31 +148,31 @@ The other vocabularies were not chosen:
 
 Classification: reduction, an open string restricted by an enumeration (TMF630 Part 8, Rule 5).
 
-### 6. Other restricted values
+### Other restricted values
 
 | Attribute | TMF679 | PSID679 | Reason |
 |---|---|---|---|
 | `action` of an item | free string ("add, modify, remove, etc.") | `ItemActionType`: `add`, `modify`, `delete`, `noChange` | The TMF679 OAS defines `ItemActionType` but uses it only in `RelatedOrderItem`, not for `action`; PSID622 and PSID648 use it for the same attribute (ADR048, rule 6). |
-| `state` of an item | free string | `CheckProductOfferingQualificationStateType` | Section 2. |
-| `state` in the update schema | `TaskStateType`, all six states | `CheckProductOfferingQualificationUpdateStateType`: `cancelled` | `cancelled` is the only state a client may set (section 2; ADR048, rule 4). |
+| `state` of an item | free string | `CheckProductOfferingQualificationStateType` | See "Qualification states". |
+| `state` in the update schema | `TaskStateType`, all six states | `CheckProductOfferingQualificationUpdateStateType`: `cancelled` | `cancelled` is the only state a client may set (see "Qualification states"; ADR048, rule 4). |
 
 Table: Other values restricted in PSID679 {#tbl:adr047-restricted-values}
 
 Classification: reduction (TMF630 Part 8, Rule 5); ADR048, rules 4 and 6.
 
-### 7. Removed attributes
+### Removed attributes
 
 | Attribute | Removed from | Reason |
 |---|---|---|
 | `promotion` | the item, its create and update schemas, `AlternateProductOfferingProposal` | The qualification carries no price; the price belongs to the quote. `Product.productPrice` stays, as in the other PSI APIs. |
-| `instantSyncQualification` | the update schema | Section 3. |
+| `instantSyncQualification` | the update schema only; it stays in the create schema and the qualification resource | How a qualification was created cannot be changed afterwards (see "Creation of a qualification: always `201`"). |
 | The attributes that only the server sets: the results, the reasons, the alternatives, the termination error, the dates of the provider | the create and update schemas | A client must not set them (ADR048, rule 4). |
 
 Table: Attributes removed from TMF679 {#tbl:adr047-removed-attributes}
 
 Classification: reduction (TMF630 Part 8, Rule 5); ADR048, rule 4.
 
-### 8. Added attributes
+### Added attributes
 
 | Attribute | Added to | Type | Content | Aligned with |
 |---|---|---|---|---|
@@ -183,11 +183,11 @@ Table: Attributes added to PSID679 {#tbl:adr047-added-attributes}
 
 Classification: extension (TMF630 Part 8, Rule 6); ADR048, rule 6.
 
-### 9. Attributes made mandatory
+### Attributes made mandatory
 
 | Schema | Attribute | TMF679 | PSID679 | Reason |
 |---|---|---|---|---|
-| `CheckProductOfferingQualification` | `id` | optional (from `Entity`) | **required** | Every qualification is kept: the client and a PSS refer to it by its identifier, and a quote or a product order may refer to it (section 3); as `Quote.id` in PSID648 (ADR048, rule 2). |
+| `CheckProductOfferingQualification` | `id` | optional (from `Entity`) | **required** | Every qualification is kept: the client and a PSS refer to it by its identifier, and a quote or a product order may refer to it (see "Creation of a qualification: always `201`"); as `Quote.id` in PSID648 (ADR048, rule 2). |
 | `CheckProductOfferingQualification_FVO` | `checkProductOfferingQualificationItem` | optional | **required**, at least one item | A qualification without an item checks nothing. |
 | `CheckProductOfferingQualificationItem_FVO` | `id`, `action`, `product` | optional | **required** | An item is identified within the qualification, states what is to be done, and describes the product to be qualified: for `add` its configuration, for `modify` and `delete` the existing product. |
 
@@ -197,10 +197,10 @@ An item names the offering to qualify in its own `productOffering`, not in `prod
 TOD-03-05 requires it as a business rule (`422` when it is missing), not as a required attribute, as PSID622 and PSID648 leave the offering of an item optional in their schemas.
 Classification: extension (TMF630 Part 8, Rule 6); ADR048, rule 2 for `id`.
 
-### 10. Shared schemas, descriptions and examples
+### Shared schemas, descriptions and examples
 
 * The schemas that PSID679 shares with the other PSI APIs take their PSI definition (ADR048, rules 7 and 9).
-* The descriptions of the attributes stay as in TMF679, except where an attribute now refers to a PSI enumeration (sections 5 and 6) and where PSI states its behaviour: `instantSyncQualification` (section 3) and `provideOnlyAvailable`, which in PSI limits only the proposed alternatives to available offerings, while every requested item is returned with its result, also a `red` one.
+* The descriptions of the attributes stay as in TMF679, except where an attribute now refers to a PSI enumeration (see "Result vocabulary" and "Other restricted values") and where PSI states its behaviour: `instantSyncQualification` (see "Creation of a qualification: always `201`") and `provideOnlyAvailable`, which in PSI limits only the proposed alternatives to available offerings, while every requested item is returned with its result, also a `red` one.
 * `info.description` stays as in TMF679 except where it describes `QueryProductOfferingQualification`, the `200` answer, a request for a product specification without an offering, and the notification of events.
 * The TM Forum examples are removed as they do not apply to PSI.
 
@@ -211,7 +211,7 @@ Classification: reduction and extension (TMF630 Part 8, Rules 5, 6 and 10); ADR0
 * The deviations are implemented by the `transformProductOfferingQualification` rules in `build.gradle` and by the extension `doc/PSI/PSI-ICD/open-apis/extensions/PSID679-Product_Offering_Qualification-v5.0.0.oas.json`, which holds the qualification paths, `CheckProductOfferingQualificationStateType`, `QualificationItemResultType` and `QualificationResultType`.
 * The generated `PSID679-Product_Offering_Qualification-v5.0.0.oas.json` and its PSI-ICD pages show the operations, the states, `201` on `POST`, the response codes, the result vocabulary and other modifications as described above.
 * TOD-03-05 and REQ-03-05 use the state names, the result vocabulary and the response codes of this record; TOD-03-05 describes when the result and `effectiveQualificationDate` are present, and the notifications on the event topic *qualification* (TOD-01-02).
-* Reviewers of a later PSID679 change check that a new TMF679 version taken over by the transformation keeps sections 1 to 10.
+* Reviewers of a later PSID679 change check that a new TMF679 version taken over by the transformation keeps the deviations recorded here.
 
 ### Positive Consequences
 

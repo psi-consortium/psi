@@ -1,7 +1,7 @@
 # Adaptation of TMF645 and TMF679 (V0.1)
 
 * ID: ADR031
-* Status: :rejected:
+* Status: :deprecated: on 2026-11-26 with [Adoption of TMF679 and TMF648](../Proposed/ADR046-adoption-of-tmf679-and-tmf648.md) in [PSI-ADR]
 * Deciders: @hop, @cgr, @wr
 * Consulted: @cg, @bmu, @ncz
 * Date: 2023-11-21
