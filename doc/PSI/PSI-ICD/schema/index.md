@@ -97,6 +97,7 @@
 @include [CheckProductOfferingQualificationItem_FVO.md](CheckProductOfferingQualificationItem_FVO.md)
 @include [CheckProductOfferingQualificationItem_MVO.md](CheckProductOfferingQualificationItem_MVO.md)
 @include [CheckProductOfferingQualificationStateType.md](CheckProductOfferingQualificationStateType.md)
+@include [CheckProductOfferingQualificationUpdateStateType.md](CheckProductOfferingQualificationUpdateStateType.md)
 @include [CheckProductOfferingQualification_FVO.md](CheckProductOfferingQualification_FVO.md)
 @include [CheckProductOfferingQualification_MVO.md](CheckProductOfferingQualification_MVO.md)
 @include [CheckProductStock.md](CheckProductStock.md)
