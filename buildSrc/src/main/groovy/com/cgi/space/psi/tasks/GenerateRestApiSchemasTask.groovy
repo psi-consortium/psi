@@ -190,7 +190,12 @@ class GenerateRestApiSchemasTask extends DefaultTask {
             writer.writeLine("# $name")
             if (schema.description) {
                 writer.newLine()
-                writer.writeLine(schema.description.replace('. ', '.\n'))
+                def shortDescription = schema.description
+                def indexOfTable = shortDescription.indexOf('|')
+                if (indexOfTable > 0) {
+                    shortDescription = shortDescription.substring(0, indexOfTable).trim()
+                }
+                writer.writeLine(shortDescription.replace('. ', '.\n'))
             }
             writer.writeLine("""\
 
