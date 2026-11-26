@@ -1,10 +1,10 @@
 # Rules for Deviations from TM Forum APIs
 
 * ID: ADR048
-* Status: :proposed:
+* Status: :accepted:
 * Deciders: Dominik Ogrodnik, @hop, @cgr
-* Date: 2026-11-25
-* Version: 0.1
+* Date: 2026-11-26
+* Version: 1.0
 * Category: Architecture
 
 ## Context and Problem Statement

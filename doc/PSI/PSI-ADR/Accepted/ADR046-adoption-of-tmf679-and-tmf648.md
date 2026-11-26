@@ -1,10 +1,10 @@
 # Adoption of TMF679 and TMF648
 
 * ID: ADR046
-* Status: :proposed:
+* Status: :accepted:
 * Deciders: Dominik Ogrodnik, Kinga Kocierz, @hop, @cgr
-* Date: 2026-11-25
-* Version: 0.1
+* Date: 2026-11-26
+* Version: 1.0
 * Category: Architecture
 
 Technical Story: PSID679 Product Offering Qualification API (psi issue #83, PR #100) with its task description TOD-03-05 (psi issue #87, PR #110); PSID648 Quote Management API (psi issue #66, PR #75) with its task description TOD-03-06 (psi issue #62, PR #102)

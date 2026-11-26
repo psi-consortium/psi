@@ -351,7 +351,7 @@ It is intended for checking commercial eligibility of a product offering.
 Since this should already been checked as part of the inquiry process, it can currently be de-scoped.
 It may be considered again to check change requests for eligibility.
 
-Note (2026-11-26): [ADR046](../Proposed/ADR046-adoption-of-tmf679-and-tmf648.md) reverses this de-scoping: PSI adopts TMF679 as PSID679 Product Offering Qualification.
+Note (2026-11-26): [ADR046](../Accepted/ADR046-adoption-of-tmf679-and-tmf648.md) reverses this de-scoping: PSI adopts TMF679 as PSID679 Product Offering Qualification.
 
 ## Implications for the Scope
 

@@ -1,11 +1,11 @@
 # Product Offering Qualification Management: Deviations from TMF679
 
 * ID: ADR047
-* Status: :proposed:
+* Status: :accepted:
 * Deciders: Dominik Ogrodnik, @hop, @cgr
 * Consulted: Kinga Kocierz
-* Date: 2026-11-25
-* Version: 0.1
+* Date: 2026-11-26
+* Version: 1.0
 * Category: Design
 
 Technical Story: PSID679 specialises TMF679 v5.0.0 for the PSI qualification process; this record collects its deviations from TMF679 with their reasons, as the spike T-A201020-US001-003 asks (psi issue #85). The API was added in psi PR #100 (issue #83), and TOD-03-05 describes the process (PR #110, issue #87).
