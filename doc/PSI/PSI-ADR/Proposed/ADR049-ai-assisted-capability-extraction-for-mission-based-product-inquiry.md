@@ -51,7 +51,7 @@ How should PSI help a customer turn a mission description into reviewed requirem
 
 Chosen option: "Option 4: Capability knowledge graph with an AI mission companion", because it is the only option that covers all service categories without depending on a catalog, keeps the customer in control and can be tested step by step.
 
-### 1. Components
+### Components
 
 | Component | Does | Decides |
 |---|---|---|
@@ -72,7 +72,7 @@ The **capability knowledge graph** describes customer needs, not products:
 Scenarios give the AI a frame for situations described in everyday words, suggest what the customer has not yet mentioned and what typically comes next, and serve as templates and test cases.
 The graph is open, stored in the Open Knowledge Format (OKF), and every change is validated and reviewed.
 
-### 2. Principles
+### Principles
 
 * **The mission is the context.** A PSID002 Mission is created as soon as the customer starts and grows with every confirmed *required capability*: a capability of the graph with this mission's parameter values, e.g. group voice for twelve crews in the fire area. A mission usually has several, and the same capability can be required more than once. Each required capability is held by a MissionAsset, which needs no product type when it is created.
 * **The AI proposes, the graph checks, the customer decides.** The AI reads the customer's text, recognises the scenario and proposes capabilities and values. The graph decides what a rule can decide: which concepts are valid, which dependencies follow, which parameters are missing and which phase comes next.
@@ -81,7 +81,7 @@ The graph is open, stored in the Open Knowledge Format (OKF), and every change i
 * **AI output never goes to the PSS directly.** Mission and inquiries are built by ordinary code from confirmed content and validated against PSID001 and PSID002.
 * **Mission terms, not product terms.** Questions are asked in terms of the mission; product types appear in the final review and on request.
 
-### 3. Workflow
+### Workflow
 
 1. **Describe.** The customer describes the mission in free text or starts from a scenario. The Mission is created.
 2. **Understand.** The companion extracts requirements, place, time and stated values.
@@ -108,14 +108,14 @@ start
 <size:11>customer</size>;
 :**Understand and classify**
 <size:11>intent classification, graph checks</size>;
-#D5F5E3:**Confirm the required capabilities**
-<size:11>dialogue until confirmed · each becomes a MissionAsset</size>;
+:**Confirm the required capabilities**
+<size:11>dialogue until confirmed · each becomes a MissionAsset</size>;<<#D5F5E3>>
 :**Plan** products
 <size:11>product planning · product plan and unmapped needs</size>;
 :**Resolve** open points
 <size:11>customer, asked in mission terms</size>;
-#D5F5E3:**Confirm the inquiries**
-<size:11>dialogue until confirmed · PSID001 inquiries prepared</size>;
+:**Confirm the inquiries**
+<size:11>dialogue until confirmed · PSID001 inquiries prepared</size>;<<#D5F5E3>>
 :**Hand over to matchmaking**
 <size:11>PSS</size>;
 stop
@@ -130,7 +130,7 @@ end note
 
 ![Workflow of AI-assisted capability extraction](../../common/pixel.png){#fig:adr049-workflow}
 
-### 4. Capability extraction (intent classification)
+### Capability extraction (intent classification)
 
 Capability extraction is the core of this decision: turning the customer's words into confirmed required capabilities.
 Its central step is *intent classification*, which assigns each customer requirement to the capabilities of the graph.
@@ -167,7 +167,7 @@ In step 3, the graph turns the AI's proposals into checked, complete required ca
 * *Constraints along dependencies:* requirements pass to the prerequisites in the order of the `requires` graph. An analysis needed within six hours over an area means imagery of that place, delivered sooner; the derived values are marked as such and can be changed by the customer.
 * *Next phase:* the scenario suggests what typically follows, e.g. communications for field teams after the situation has been assessed.
 
-### 5. Product planning
+### Product planning
 
 Product planning is outlined here and decided in a follow-up record.
 It is not a one-to-one lookup: one required capability can need several products (a private network needs a VPN and terminals), one product can serve several capabilities (one VPN carries the crews' data and the situational picture), products must fit together (a terminal must match the frequency band and access network of the service), and values add up when products are shared.
@@ -187,7 +187,7 @@ Candidate methods, compared in one evaluation on the same missions:
 * **Graph algorithms** for composition: a weighted set cover over capabilities and product types with dependency and compatibility constraints.
 * **Combinations** of these, run during mission creation or prepared in advance.
 
-### 6. Deferred decisions
+### Deferred decisions
 
 | Topic | Open question | Decided by |
 |---|---|---|
@@ -246,7 +246,7 @@ This record does not change PSID001 or PSID002.
 5. The customer reviews the inquiry and confirms it.
 6. Later the customer adds the field phase: *group voice communication* and a *private network between sites* that switches over automatically when a link fails. They are added to the same Mission, and product planning proposes the plan described in section 5; voice has no product type yet. A second inquiry is prepared for them.
 
-## Links
+## References
 
 * PSI-CST, Extended User Journeys: mission-based product inquiry
 * PSI-ICD: PSID001 Customer Inquiry, PSID002 Mission Management; Annex III (in review)
