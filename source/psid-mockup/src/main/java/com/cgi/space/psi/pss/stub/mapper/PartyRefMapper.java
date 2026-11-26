@@ -25,7 +25,7 @@ public interface PartyRefMapper {
      * The method maps a {@link PartyRefOrPartyRoleRefFVO} instance to a
      * {@link PartyRefOrPartyRoleRef} object.
      *
-     * @param partyRefOrPartyRoleRefFVO The {@link partyRefOrPartyRoleRefFVO} object to be mapped.
+     * @param partyRefOrPartyRoleRefFVO The {@link PartyRefOrPartyRoleRefFVO} object to be mapped.
      * @return The mapped {@link PartyRefOrPartyRoleRef}.
      */
     @SubclassMapping(source = PartyRefFVO.class, target = PartyRef.class)

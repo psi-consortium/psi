@@ -68,7 +68,7 @@ public class MissionController implements MissionApi {
     }
 
     /**
-     * An endpoint for listing all {@link Missio Organizations}.
+     * An endpoint for listing all {@link Missions}.
      *
      * @param filter Properties for filtering resources to be returned to the response (optional)
      * @param fields Comma-separated properties to be provided in response (optional)

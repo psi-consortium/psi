@@ -66,7 +66,6 @@ public class PSIMongoDBAutoConfiguration {
      * Registers codecs in MongoDB to be able to store {@link OffsetDateTime} properties correctly.
      * These are used by the MongoDB driver and must be compatible with the spring-data conversions.
      *
-     * @see #customConversions()
      * @return the MongoClientSettingsBuilderCustomizer
      */
     @Bean
