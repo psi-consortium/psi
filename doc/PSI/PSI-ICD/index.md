@@ -75,45 +75,15 @@ dcr_overrides:
  - dcr:
    from: '2026-07-27'
    to: '2026-07-31'
-   version: 'PSI-DOC-VERSION'
+   version: 'MS12 [2.0.0-alpha]'
    author: 'Christian Grubert'
    message: 'No update, PSI Phase 2 version bump.'
  - dcr:
-   from: '2026-10-06'
-   to: '2026-11-23'
-   version: 'MS12 [2.0.0-alpha]'
-   author: 'Kinga Kocierz'
-   message: 'Added PSID648 Quote Management API derived from TMF648 v5.0.0, aligned with PSID679 and TOD-03-06: synchronous or asynchronous quote answered with 201 only, no 404 on create and list, no 409 on create, no 501 on delete, quote id required, quote states with refused, quoteErrorMessage with the reason of a status change, product required in a quote item, 422 on create and update as a component, channel, list without cursor, sort and filter parameters, no TMF648 request and response examples.'
- - dcr:
-   from: '2026-10-27'
-   to: '2026-11-23'
-   version: 'PSI-DOC-VERSION'
-   author: 'Dominik Ogrodnik'
-   message: 'Added PSID679 Product Offering Qualification API derived from TMF679 v5.0.0: CheckProductOfferingQualification only, creation always answered with 201'
- - dcr:
-   from: '2026-11-19'
-   to: '2026-11-19'
-   version: 'PSI-DOC-VERSION'
-   author: 'Dominik Ogrodnik'
-   message: 'TMF630 REST API Design Guidelines 5.0.0 as the reference; the paging of lists by offset.'
- - dcr:
-   from: '2026-11-09'
-   to: '2026-11-19'
-   version: 'PSI-DOC-VERSION'
-   author: 'Dominik Ogrodnik'
-   message: 'Added Observability: the trace context and the correlation identifier in REST headers, events and logs.'
- - dcr:
-   from: '2026-11-24'
-   to: '2026-11-24'
-   version: 'PSI-DOC-VERSION'
-   author: 'Kinga Kocierz'
-   message: 'PSID648 Quote Management: the server-set attributes, instantSyncQuote and productOfferingQualification removed from Quote_MVO; its state limited to QuoteUpdateStateType (accepted, refused, cancelled); new QuoteItem_MVO without productOffering, productOfferingQualificationItem and state.'
- - dcr:
-   from: '2026-11-25'
-   to: '2026-11-25'
-   version: 'PSI-DOC-VERSION'
-   author: 'Dominik Ogrodnik'
-   message: 'PSID679 Product Offering Qualification: the state of CheckProductOfferingQualification_MVO limited to the new CheckProductOfferingQualificationUpdateStateType (cancelled).'
+   from: '2026-08-01'
+   to: '2026-12-11'
+   version: 'MS13 [2.1.0]'
+   author: 'Kinga Kocierz, Dominik Ogrodnik'
+   message: 'Added PSID648 Quote Management API derived from TMF648 v5.0.0, aligned with PSID679 and TOD-03-06: synchronous or asynchronous quote answered with 201 only, no 404 on create and list, no 409 on create, no 501 on delete, quote id required, quote states with refused, quoteErrorMessage with the reason of a status change, product required in a quote item, 422 on create and update as a component, channel, list without cursor, sort and filter parameters, no TMF648 request and response examples. Added PSID679 Product Offering Qualification API derived from TMF679 v5.0.0: CheckProductOfferingQualification only, creation always answered with 201. TMF630 REST API Design Guidelines 5.0.0 as the reference; the paging of lists by offset. Added Observability: the trace context and the correlation identifier in REST headers, events and logs. PSID648 Quote Management: the server-set attributes, instantSyncQuote and productOfferingQualification removed from Quote_MVO; its state limited to QuoteUpdateStateType (accepted, refused, cancelled); new QuoteItem_MVO without productOffering, productOfferingQualificationItem and state. PSID679 Product Offering Qualification: the state of CheckProductOfferingQualification_MVO limited to the new CheckProductOfferingQualificationUpdateStateType (cancelled).'
 =end
 
 # Document Meta Information

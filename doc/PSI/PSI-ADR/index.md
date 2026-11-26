@@ -101,27 +101,15 @@ dcr_overrides:
  - dcr:
    from: '2026-07-27'
    to: '2026-07-31'
-   version: 'PSI-DOC-VERSION'
+   version: 'MS12 [2.0.0-alpha]'
    author: 'Wolfgang Robben'
    message: 'No update, PSI Phase 2 version bump.'
  - dcr:
-   from: '2026-11-10'
-   to: '2026-11-20'
-   version: 'PSI-DOC-VERSION'
-   author: 'Kinga Kocierz'
-   message: 'Accepted ADR044 on the deviations of PSID648 Quote Management from TMF648 and ADR045 on the scope of a product modification.'
- - dcr:
-   from: '2026-11-24'
-   to: '2026-11-24'
-   version: 'PSI-DOC-VERSION'
-   author: 'Kinga Kocierz'
-   message: 'ADR044 v1.1: the update view of PSID648 (Quote_MVO, new QuoteItem_MVO) carries no server-set attributes and accepts only the states set by the customer.'
- - dcr:
-   from: '2026-11-25'
-   to: '2026-11-26'
-   version: 'PSI-DOC-VERSION'
-   author: 'Dominik Ogrodnik'
-   message: 'Accepted ADR046 on the adoption of TMF679 and TMF648, ADR047 on the deviations of PSID679 Product Offering Qualification from TMF679 and ADR048 on the rules for deviations from TM Forum APIs; ADR031 deprecated with ADR046, and a note in ADR021 refers to ADR046.'
+   from: '2026-08-01'
+   to: '2026-12-11'
+   version: 'MS13 [2.1.0]'
+   author: 'Kinga Kocierz, Dominik Ogrodnik'
+   message: 'Accepted ADR044 on the deviations of PSID648 Quote Management from TMF648 and ADR045 on the scope of a product modification. ADR044 v1.1: the update view of PSID648 (Quote_MVO, new QuoteItem_MVO) carries no server-set attributes and accepts only the states set by the customer. Accepted ADR046 on the adoption of TMF679 and TMF648, ADR047 on the deviations of PSID679 Product Offering Qualification from TMF679 and ADR048 on the rules for deviations from TM Forum APIs; ADR031 deprecated with ADR046, and a note in ADR021 refers to ADR046.'
  =end
 
 # Document Meta Information

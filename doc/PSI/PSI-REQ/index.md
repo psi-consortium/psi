@@ -75,21 +75,15 @@ dcr_overrides:
  - dcr:
    from: '2026-07-27'
    to: '2026-07-31'
-   version: 'PSI-DOC-VERSION'
+   version: 'MS12 [2.0.0-alpha]'
    author: 'Christian Grubert'
    message: 'No update, PSI Phase 2 version bump.'
  - dcr:
-   from: '2026-11-03'
-   to: '2026-11-23'
-   version: 'MS12 [2.0.0-alpha]'
-   author: 'Kinga Kocierz'
-   message: 'Added Quote Management requirements (REQ-03-06) for PSID648 and the QUOTE category.'
- - dcr:
-   from: '2026-11-06'
-   to: '2026-11-20'
-   version: 'PSI-DOC-VERSION'
-   author: 'Dominik Ogrodnik'
-   message: 'Added Product Offering Qualification Management requirements (REQ-03-05) for PSID679 and the QUALIFICATION category.'
+   from: '2026-08-01'
+   to: '2026-12-11'
+   version: 'MS13 [2.1.0]'
+   author: 'Kinga Kocierz, Dominik Ogrodnik'
+   message: 'Added Quote Management requirements (REQ-03-06) for PSID648 and the QUOTE category. Added Product Offering Qualification Management requirements (REQ-03-05) for PSID679 and the QUALIFICATION category.'
 =end
 
 # Document Meta Information

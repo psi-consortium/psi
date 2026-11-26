@@ -75,51 +75,15 @@ dcr_overrides:
  - dcr:
    from: '2026-07-27'
    to: '2026-07-31'
-   version: 'PSI-DOC-VERSION'
+   version: 'MS12 [2.0.0-alpha]'
    author: 'Christian Grubert'
    message: 'No update, PSI Phase 2 version bump.'
  - dcr:
-   from: '2026-11-02'
-   to: '2026-11-23'
-   version: 'MS12 [2.0.0-alpha]'
-   author: 'Kinga Kocierz'
-   message: 'Added Quote Management (TOD-03-06).'
- - dcr:
-   from: '2026-11-19'
-   to: '2026-11-19'
-   version: 'PSI-DOC-VERSION'
-   author: 'Dominik Ogrodnik'
-   message: 'Event Management (TOD-01-02): added the event topics of the PSI APIs.'
- - dcr:
-   from: '2026-11-19'
-   to: '2026-11-19'
-   version: 'PSI-DOC-VERSION'
-   author: 'Dominik Ogrodnik'
-   message: 'Register Event Callback (TOD-01-02-02): refers to the TMF630 REST API Design Guidelines 5.0.0.'
- - dcr:
-   from: '2026-11-19'
-   to: '2026-11-19'
-   version: 'PSI-DOC-VERSION'
-   author: 'Dominik Ogrodnik'
-   message: 'Dispatch Event (TOD-01-02-03): the correlationId of an event refers to PSI-ICD Observability.'
- - dcr:
-   from: '2026-10-27'
-   to: '2026-11-20'
-   version: 'PSI-DOC-VERSION'
-   author: 'Dominik Ogrodnik'
-   message: 'Added Product Offering Qualification Management (TOD-03-05) for PSID679.'
- - dcr:
-   from: '2026-11-24'
-   to: '2026-11-24'
-   version: 'PSI-DOC-VERSION'
-   author: 'Kinga Kocierz'
-   message: 'Quote Management: Create Quote (TOD-03-06-01) no longer lists nested quote items and tells the expected from the effective completion date; Update Quote (TOD-03-06-02): the attributes set only by the provider, instantSyncQuote, the POQ, and the product offering, POQ item and state of a quote item cannot be updated.'
- - dcr:
-   from: '2026-11-25'
-   to: '2026-11-25'
-   version: 'PSI-DOC-VERSION'
-   author: 'Dominik Ogrodnik'
-   message: 'Product Offering Qualification Management: a state other than cancelled in an update (TOD-03-05-02) is answered with 400, not 422.'
+   from: '2026-08-01'
+   to: '2026-12-11'
+   version: 'MS13 [2.1.0]'
+   author: 'Kinga Kocierz, Dominik Ogrodnik'
+   message: 'Added Quote Management (TOD-03-06). Event Management (TOD-01-02): added the event topics of the PSI APIs. Register Event Callback (TOD-01-02-02): refers to the TMF630 REST API Design Guidelines 5.0.0. Dispatch Event (TOD-01-02-03): the correlationId of an event refers to PSI-ICD Observability. Added Product Offering Qualification Management (TOD-03-05) for PSID679. Quote Management: Create Quote (TOD-03-06-01) no longer lists nested quote items and tells the expected from the effective completion date; Update Quote (TOD-03-06-02): the attributes set only by the provider, instantSyncQuote, the POQ, and the product offering, POQ item and state of a quote item cannot be updated. Product Offering Qualification Management: a state other than cancelled in an update (TOD-03-05-02) is answered with 400, not 422.'
 =end
 
 # Document Meta Information
