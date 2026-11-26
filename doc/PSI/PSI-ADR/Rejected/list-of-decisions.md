@@ -7,8 +7,6 @@
 
 @include [ADR028 Resource and Service Order Management](ADR028-resource-and-service-order.md)
 
-@include [ADR031 Adaptation of TMF645 and TMF679 (V0.1)](ADR031-qualification-apis_V0.1.md)
-
 @include [ADR033 Implementation of (Gov)SatCom Hardware Logistics Process (V0.1)](ADR033-logistics-and-shipment_V0.1.md)
 
 @include [ADR034 Advanced Billing](ADR034-advanced-billing.md)
