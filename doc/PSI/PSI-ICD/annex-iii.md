@@ -7,9 +7,9 @@ reference: "PSI-ICD-Annex-III"
 ---
 dcr_overrides:
  - dcr:
-   from: '2024-01-01'
+   from: '2026-08-01'
    to: '2026-12-11'
-   version: 'PSI-DOC-VERSION'
+   version: 'MS13 [2.1.0]'
    author: 'Dominik Ogrodnik'
    message: 'Initial version (activity A102010 EO Domain Modeling & Matchmaking Criteria): EO attribute and taxonomy baseline, EO matchmaking axes and scoring guidance, SAR model notes and UML model, based on draft v0.11 of 2026-11-12. Delivered for stakeholder review.'
 =end
