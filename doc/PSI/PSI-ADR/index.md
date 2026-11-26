@@ -118,10 +118,6 @@ dcr_overrides:
    message: 'ADR044 v1.1: the update view of PSID648 (Quote_MVO, new QuoteItem_MVO) carries no server-set attributes and accepts only the states set by the customer.'
  - dcr:
    from: '2026-11-25'
-   to: '2026-11-25'
-   version: 'PSI-DOC-VERSION'
-   author: 'Alexander Brehmer'
-   message: 'Proposed ADR049 on AI-assisted capability extraction for the mission-based product inquiry.'
    to: '2026-11-26'
    version: 'PSI-DOC-VERSION'
    author: 'Dominik Ogrodnik'
