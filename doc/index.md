@@ -40,7 +40,7 @@ dcr_overrides:
 
 # Document Meta Information
 
-@include [Document Change Record](common/document-change-record.md)
+@include [Document Change Record](PSI/common/document-change-record.md)
 
 # Introduction
 
