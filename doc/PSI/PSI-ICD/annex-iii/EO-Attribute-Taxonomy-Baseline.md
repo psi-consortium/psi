@@ -2,10 +2,11 @@
 
 # EO Attribute & Taxonomy Baseline
 
-**Version:** 0.11 · **Author:** DO · **Date:** 2026-11-12
+**Version:** 0.2 · **Date:** 2026-11-25
 **Activity:** A102010 — EO Domain Modeling & Matchmaking Criteria
 **Status:** delivered for review
 
+---
 
 =end
 
@@ -17,7 +18,7 @@ Synthetic Aperture Radar imaging products at processing levels **L0 through L3**
 **from the buyer's point of view** — that is, the namespace of characteristics a buyer needs
 in order to decide what to purchase and how to configure it.
 
-### What is deliberately excluded {#tax-excluded}
+### What is deliberately excluded
 
 | Excluded | Reason |
 |---|---|
@@ -43,7 +44,6 @@ Table: Extension of the attribute groups to optical and multispectral products. 
 Six of eleven groups are already sensor-agnostic. That is the substance of the extensibility
 claim — the remaining five would need an abstract class with two subtypes, in the same pattern
 already used for `AccessProfile`, `AcquisitionPattern` and `CoverageGeometry`.
-
 
 ## Product type taxonomy
 
@@ -140,10 +140,10 @@ Two warnings about reading it:
   modes, and `F` exists only for Stripmap.
 * **It is not derivable from pixel spacing.** Two vendors can quote the same 10 m grid having
   averaged different numbers of looks, which means different noise in the result. The class,
-  `looksRange` / `looksAzimuth` and `enl` are three different statements and the baseline
+  `looksRange` / `looksAzimuthMin` / `looksAzimuthMax` and `enl` are three different statements and the baseline
   carries all three.
 
-### Cross-vendor resolution class {#tax-cross-vendor-resolution-class}
+### Cross-vendor resolution class
 
 `copernicusCMClass` — `VHR1` or `VHR2`. The only **cross-vendor** resolution vocabulary found
 in this work: ICEYE reports the ESA Copernicus Contributing Mission class in its own
@@ -155,7 +155,6 @@ categories.
 > definitions were not located in ESA/Copernicus documentation. The field carries a label
 > quoted from the vendor, not a verifiable claim.
 
-
 ## Core metadata set
 
 The five fields named in the activity, with their semantics.
@@ -165,17 +164,18 @@ The five fields named in the activity, with their semantics.
 **The smallest separation at which two targets can still be told apart.** Not the pixel size —
 that is sampling, and the two differ by design.
 
-A single number is not interpretable. The baseline carries resolution as a **list with one
-entry per axis**, each entry qualified:
+A single number is not interpretable. The baseline carries resolution as a **list of qualified
+entries, at least one per axis**. Where the figure differs by beam, the product carries one entry
+per beam, each at that beam's incidence angle — the angle identifies the beam, so no beam field is
+needed:
 
 | Field | Type · unit | Domain | Meaning |
 |--|-|--|---|
 | `axis` | enum | `RANGE` \| `AZIMUTH` | Range resolution follows from bandwidth, azimuth resolution from illumination time — two independent physical mechanisms |
 | `valueMin` / `valueMax` | Decimal · m | 0.05 – 100 | Best and worst attainable on this axis |
 | `plane` | enum | `SLANT` \| `GROUND` | A slant value is always numerically better than the corresponding ground value by 1/sin(incidence angle) — **exactly a factor of two at 30°** |
-| `referenceAngle` | Decimal · ° | 5 – 60 | The incidence angle the figure was computed at. Without it a ground-plane value cannot be compared |
-| `measurementPoint` | enum | `NEAR_RANGE` \| `MID_RANGE` \| `FAR_RANGE` \| `SCENE_CENTRE` | Where in the scene the figure holds. Ground range resolution varies as 1/sin θ across the swath — a factor approaching three between 20° and 45° |
-| `measurementAggregation` | enum | `SINGLE` \| `AVERAGED_OVER_ORBITS` \| `PER_BEAM` \| `OVER_ANGLE_RANGE` | What the figure was averaged over. ESA states azimuth resolution at near range and ground range resolution at mid range, both averaged over orbits — two separate statements, hence two fields |
+| `referenceAngle` | `AngleRange` · ° | 0 – 90 | The incidence angle, or angular range, at which the figure holds; `min` = `max` for a single angle. Where it is a range, `valueMin` and `valueMax` are the figures at its two ends. **Mandatory for a `GROUND` figure**, which cannot be compared without it — ground range resolution varies as 1/sin θ across the swath, a factor approaching three between 20° and 45°. A `SLANT` figure does not depend on the angle |
+| `averagedOverOrbits` | Boolean | — | Whether the figure is an average over the minimum and the maximum orbit, as ESA states it for Sentinel-1, rather than a figure for one geometry. Where the figure holds and how it was averaged are two independent statements, hence two fields |
 
 Table: Resolution fields. {#tbl:tax-resolution-fields}
 
@@ -184,7 +184,8 @@ Table: Resolution fields. {#tbl:tax-resolution-fields}
 | Field | Type · unit | Domain | Meaning |
 |--|-|-|---|
 | `pixelSpacingRange` / `Azimuth` | Decimal · m | 0.1 – 100 | Grid sampling interval. Usually finer than the resolution — the image is oversampled so that later interpolation does not lose information |
-| `looksRange` / `looksAzimuth` | Integer | 1 – 30 | How many independent samples were averaged. Smoothness is bought with resolution |
+| `looksRange` | Integer | 1 – 30 | How many independent samples were averaged in range. Smoothness is bought with resolution |
+| `looksAzimuthMin` / `Max` | Integer | 1 – 30 | The same in azimuth, as a range: equal where the number is fixed, apart where the seller selects it per image — Capella chooses azimuth looks adaptively and publishes ranges such as 9 to 10 |
 | `enl` | Decimal | 1 – 500 | **Equivalent number of looks** — how much smoothing was actually achieved, as against how much was attempted. Explained below |
 
 Table: Resolution companion fields in ProcessingProfile. {#tbl:tax-resolution-companion-fields}
@@ -195,7 +196,7 @@ between the many scatterers inside one resolution cell, and it is the reason a s
 SAR image is hard to read. Averaging several *independent* looks at the same ground reduces
 it: with `N` independent looks the graininess falls by a factor of about √`N`.
 
-`looksRange` × `looksAzimuth` is what the processor **attempted** — how many looks it cut and
+`looksRange` × the azimuth looks is what the processor **attempted** — how many looks it cut and
 averaged. `enl` is what it **achieved**, measured back off the image over an area that should
 be uniform, and read as "this image is as smooth as a perfect average of `enl` independent
 looks would be".
@@ -206,8 +207,8 @@ interference, so each one after the first contributes less than a whole look's w
 smoothing. A product cut as 5 × 1 looks typically measures around 4. The gap is not an error
 in either number: one is a processing setting, the other a property of the delivered image.
 
-This is also why open point **O-3** exists — `enl` cannot simply be computed from the look
-counts, so it has to be declared.
+This is also why `enl` has to be declared: it cannot simply be computed from the look
+counts.
 
 ### Spectral bands — the radar equivalent
 
@@ -219,7 +220,7 @@ the corresponding characteristic is the transmitted frequency and its bandwidth.
 | `frequencyBand` | enum | `X` \| `C` \| `S` \| `L` \| `P` | Sets penetration depth: X reaches the surface, L penetrates tree canopy |
 | `centerFrequency` | Decimal · GHz | 0.4 – 12.0 | Centre frequency of the transmitted signal |
 | `bandwidth` | Decimal · GHz | 0.01 – 1.5 | **Determines range resolution** — resolution equals c divided by twice the bandwidth |
-| `polarization` | enum list `[1..4]` | `HH` \| `VV` \| `HV` \| `VH` | Transmit and receive polarisation pairs |
+| `polarization` | enum list `[1..4]` | `HH` \| `VV` \| `HV` \| `VH` | Transmit and receive polarisation pairs. In a specification or an offering the list is the **domain** the product supports; in an order it is the **set of channels acquired together** on every image, not a choice among alternatives, and it is fixed for a whole series |
 | `polarizationMode` | enum | `SINGLE` \| `DUAL` \| `TWIN` \| `QUAD` | `DUAL` records two channels simultaneously, `TWIN` alternately, pulse by pulse |
 
 Table: Radar frequency and bandwidth fields. {#tbl:tax-frequency-fields}
@@ -233,28 +234,37 @@ Table: Radar frequency and bandwidth fields. {#tbl:tax-frequency-fields}
 ### Geolocation accuracy
 
 **How closely a pixel corresponds to its true position on the ground.** A bare number is
-meaningless; the baseline carries five fields together.
+meaningless; the baseline carries four fields together, and a fifth statement for the whole
+geometric group.
 
 | Field | Type · unit | Domain | Meaning |
 |---|---|---|---|
 | `value` | Decimal · m | 0.01 – 30 | The figure |
 | `metric` | enum | `UNDEFINED` \| `CE90` \| `CE95` \| `LE90` \| `RMSE` \| `SIGMA_1` \| `SIGMA_3` | Which statistic. `UNDEFINED` means the vendor published a number without stating the statistic — distinct from publishing nothing |
-| `basis` | enum | `PREDICTED_BUDGET` \| `MEASURED_CALVAL` \| `NOT_PUBLISHED` | **Where the figure came from** |
 | `terrainCorrected` | Boolean | — | Whether stated after terrain correction |
 | `ephemerisClass` | enum | `PREDICTED` \| `RESTITUTED` \| `PRECISE` | **For which orbital ephemeris the figure holds** |
 
 Table: Geolocation accuracy fields. {#tbl:tax-geolocation-fields}
 
 > [!NOTE]
-> `basis` and `ephemerisClass` are independent axes and both may read `PREDICTED` while meaning
-> different things. A **measured** value for a **predicted** orbit is the commonest case in
-> performance reports.
+> **Where the figure came from** — a design budget, a measurement or a guarantee — is not a field
+> of the figure. It is stated once for the geometric group as a whole, in the `GEOMETRIC` entry
+> of `qualityQualifier` ([Where the quality figures come from — one declaration per group](#tax-where-the-quality-figures-come-from-one-declaration-per-group)), and so covers PSLR, ISLR and co-registration as well. That basis
+> and `ephemerisClass` are independent axes: a **measured** value for a **predicted** orbit is
+> the commonest case in performance reports.
 
 Buyer-supplied ground control points can improve this. The baseline declares what the buyer may
-supply (`gcpFormatAccepted`, `gcpMinCount`, `gcpMaxCount`, `gcpAccuracyRequired`) and the
-accuracy that then applies (`geolocationAccuracyWithGcp`). The improved figure holds **only if**
-the supplied points meet the declared accuracy — points measured with a phone would give a worse
-result than none at all.
+supply (`gcpFormatAccepted`, `gcpTypeAccepted`, `gcpMinCount`, `gcpMaxCount`,
+`gcpAccuracyRequired`) and the accuracy that then applies (`geolocationAccuracyWithGcp`). The
+improved figure holds **only if** the supplied points meet the declared accuracy — points
+measured with a phone would give a worse result than none at all.
+
+**In radar geometry the kind of point matters as much as its accuracy.** `gcpTypeAccepted`
+takes `CORNER_REFLECTOR`, `TRANSPONDER` and `SURVEYED_FEATURE`: a corner reflector or a
+transponder is a bright point with a known phase centre, while a surveyed natural feature may be
+faint in the image or displaced by layover. The submitted set states its own kinds, which must be
+among those accepted. No vendor publishes this today; the field exists because the distinction
+decides whether the improved figure can hold.
 
 ### Acquisition time and acquisition window {#tax-acquisition-time}
 
@@ -330,11 +340,31 @@ Acquisition can follow three patterns, which carry disjoint attribute sets:
 | Pattern | Adds |
 |---|---|
 | `SINGLE` | `retaskOnFailure` |
-| `RECURRING` | `cadenceMin` / `cadenceMax`, `repetitionCountMin` / `Max`, `iterationFailurePolicy` |
+| `RECURRING` | `cadenceMin` / `cadenceMax`, `repetitionCountMin` / `Max`, `iterationFailurePolicy`, optionally `memberConstraint` |
 | `CONTINUOUS` | `coveragePeriodMin` / `Max` |
 
 Table: Acquisition patterns. {#tbl:tax-acquisition-patterns}
 
+**`memberConstraint` — what must hold between the acquisitions of a set.** A recurring order is
+how a buyer orders an interferometric pair, a longer interferometric stack or a monitoring
+series; the difference lies in what is constrained between the members.
+
+| Field | Type · unit | Meaning |
+|---|---|---|
+| `sameTrack`, `samePassDirection`, `sameLookSide` | Boolean | Equality conditions. They hold across the **whole set**, whatever the pairing |
+| `pairingScheme` | `CONSECUTIVE` \| `COMMON_REFERENCE` \| `ALL_PAIRS` | **Which pairs the pair-wise bounds below hold between**: each member and the next; each member and one reference acquisition, which the seller selects, normally to minimise baseline spread; or every pair. Mandatory as soon as any pair-wise bound is present. For a set of two all three name the same pair |
+| `temporalBaselineMax` | `Duration` | Largest time between paired acquisitions. Adds information only under `COMMON_REFERENCE` (distance from the reference) and `ALL_PAIRS` (span of the stack); under `CONSECUTIVE` it would restate `cadenceMax` and is not allowed. No minimum — the smallest gap is always a consecutive one, which `cadenceMin` already bounds |
+| `perpendicularBaselineMin` / `Max` | Decimal · m | Bounds on the perpendicular baseline. The maximum keeps a pair from decorrelating geometrically; the minimum exists for a pair meant for height retrieval, where the height of ambiguity is inversely proportional to the baseline, and is allowed only for a set of two |
+| `burstSyncTolerance` | Decimal · ms | Largest burst synchronisation error — the interferometry condition of the burst modes `TOPSAR` and `SCANSAR` |
+| `dopplerCentroidDifferenceMax` | Decimal · Hz | Largest difference in Doppler centroid between paired acquisitions — the stripmap and spotlight counterpart: once the azimuth spectra stop overlapping the pair does not interfere, however good the baselines are |
+| `commonCoverageFractionMin` | Decimal · 0 – 1 | Smallest fraction of the requested area covered by **every** member at once — the set counterpart of `minCoverageFraction`. Independent of the pairing scheme |
+
+Table: Conditions between the acquisitions of a set (memberConstraint). {#tbl:tax-member-constraint}
+
+An acquisition outside a bound counts as a failed iteration under `iterationFailurePolicy`, and
+under `CONSECUTIVE` that policy cannot be `SKIP`, because a skipped member would create a new
+consecutive pair with a doubled gap. A tandem acquisition — two satellites imaging at the same
+moment — is not described: the pattern assumes acquisitions at different times.
 
 ### Coverage and footprint
 
@@ -362,7 +392,7 @@ The limits the seller declares on what may be asked for, in `TargetProfile`:
 | `targetAreaMin` / `Max` | Decimal · km² | 1 – 25 000 / 1 – 250 000 | Smallest and largest orderable area |
 | `timeOfInterest` | `TimePeriod` | — | That the product accepts an interval, and under which ordering modes — [Acquisition time and acquisition window](#tax-acquisition-time) |
 | `clippingSupported` | Boolean | — | Whether the delivered extent can be narrowed to the requested area, or the buyer always receives the full acquisition footprint |
-| `minCoverageFraction` | Decimal | 0 – 1 | The smallest fraction of the requested area the seller will offer a pass for. A long thin target is refused by this, so the buyer can tell before asking |
+| `minCoverageFraction` | Decimal | 0 – 1 | The smallest fraction of the requested area the seller will offer a pass for. A long thin target is refused by this, so the buyer can tell before asking. It bounds each pass on its own; for a set, the share all members cover together is `commonCoverageFractionMin` ([Acquisition time and acquisition window](#tax-acquisition-time)) |
 
 Table: Target limits declared in TargetProfile. {#tbl:tax-target-limits}
 
@@ -397,27 +427,28 @@ Table: Target limits declared in TargetProfile. {#tbl:tax-target-limits}
 > The first two merged lose the refusal; the last two merged make **clipping invisible**. The
 > last three travel as `RelatedPlaceRefOrValue.role`.
 
-
 ## Full attribute inventory
 
-Eleven groups, 153 leaf attributes. Full definitions in the technical specification; this
+Eleven groups, 151 leaf attributes. Full definitions in the technical specification; this
 table is the index.
 
 | Group | Attributes | What it answers |
 |---|---|---|
-| Root classification | `sensorType`, `productType`, `resolutionClass`, `copernicusCMClass`, `systematicProduction`, `dataType`, `processingLevel` | What kind of product this is |
+| Root classification | `sensorType`, `productType`, `resolutionClass`, `copernicusCMClass`, `systematicProduction`, `dataType`, `processingLevel`, `geophysicalVariable` | What kind of product this is. `geophysicalVariable` is present exactly when `dataType = GEOPHYSICAL` — an L2 wind field as much as an L3 composite |
 | `ArchiveAccess` | `orderingMode`, `standingAccess`, `catalogueInterface`, `archiveDepthFrom`, `includesHistoricalArchive`, `archiveUpdateLatency`, `deliveryLatency`, `sourceSceneRef` | How an already existing scene is obtained |
 | `TaskingAccess` | `orderingMode`, `maxSchedulingHorizon`, `feasibilityHorizon`, `exclusivity`, `holdbackPeriod`, `taskingTier` `[1..*]`, `acquisitionPattern` `[1..3]` | How a new acquisition is ordered |
 | `TaskingTier` | `tierName`, `priority`, `minLeadTime`, `fulfilmentTime`, `deliveryLatency`, `collectionSuccessRate`, `passLimit` | What service levels are sold |
 | `AcquisitionPattern` | `patternType`, `minAcquisitionWindowWidth` + subtype fields | One acquisition, a rhythm, or standing access |
+| `MemberConstraint` | `pairingScheme`, `sameTrack`, `samePassDirection`, `sameLookSide`, `temporalBaselineMax`, `perpendicularBaselineMin` / `Max`, `burstSyncTolerance`, `dopplerCentroidDifferenceMax`, `commonCoverageFractionMin` | What must hold between the acquisitions of a recurring set — a pair or a stack ([Acquisition time and acquisition window](#tax-acquisition-time)) |
 | `RevisitProfile` | `revisitTimeMin` / `Max`, `revisitReferenceLatitude`, `repeatCycle`, `orbitTubeDiameter` | How soon the same place can be imaged again, and whether the track repeats closely enough for interferometry |
 | `TargetProfile` | `serviceArea`, `timeOfInterest`, `targetGeometryType`, `targetAreaMin` / `Max`, `clippingSupported`, `minCoverageFraction` | The limits on what may be asked for: which geometries, how large, when, how completely covered, and where at all |
-| `SensorProfile` | `frequencyBand`, `centerFrequency`, `bandwidth`, `polarization`, `polarizationMode`, `observationDirection` | What the instrument transmits and receives |
-| `AcquisitionProfile` | `collectionStrategy`, `incidenceAngle`, `incidenceAngleVariation`, `lookAngle`, `orbitDirection`, `squintAngleMax`, `illuminationTime`, `coverageGeometry` | The geometry the image was taken in |
-| `ProcessingProfile` | 28 attributes — looks, weighting, pixel grid, projection, terrain, calibration, ARD conformance | What was done to the signal before delivery |
-| `QualityProfile` | `qualityBasis`, `qualityAggregation`, `qualityValidIncidence` + radiometric (9), geometric (13), interpretability (2) | How good the product is, where the figures come from, and under which conditions they hold |
-| `DeliveryProfile` | `fileFormat` *(format + metadata + deprecated)*, `assetLayer` `[1..*]`, `volumeMinGB` / `Max`, `maxBandFileSize`, `deliveryChannel`, `ogcService`, `multiSceneDelivery` | In what form and by what route the data arrives |
-| `CompositeProfile` | `temporalAggregation`, `gridReferenceSystem`, `gridSpacing`, `normalizedIncidenceAngle`, `geophysicalVariable`, `gapFillingMethod`, `minSourceAcquisitions` | Only at L3 |
+| `SensorProfile` | `frequencyBand`, `centerFrequency`, `bandwidth`, `polarization`, `polarizationMode` | What the instrument transmits and receives |
+| `AcquisitionProfile` | `collectionStrategy`, `incidenceAngle`, `incidenceAngleVariation`, `lookAngle`, `orbitDirection`, `observationDirection`, `squintAngleMax`, `illuminationTime`, `coverageGeometry` | The geometry the image was taken in. `observationDirection` is the side of the ground track the antenna points to; with `orbitDirection` it fixes whether the scene is lit from the east or the west. `incidenceAngleVariation` is the far-range minus near-range angle within one image — for a steerable sensor, the maximum over the orderable range |
+| `Resolution` | `axis`, `valueMin` / `valueMax`, `plane`, `referenceAngle`, `averagedOverOrbits` | One resolution figure and the conditions it holds under ([Resolution](#tax-resolution)) |
+| `ProcessingProfile` | 28 attributes — looks (`looksRange`, `looksAzimuthMin` / `Max`, `enl`), weighting, pixel grid, projection, terrain, calibration, ARD conformance | What was done to the signal before delivery. `geometryProjection` follows completely from `productType`; `terrainHandling` does not — one product type permits several handlings |
+| `QualityProfile` | `qualityQualifier`, `qualityValidIncidence` + radiometric (9), geometric (14, including `gcpTypeAccepted`), interpretability (2) | How good the product is, where the figures come from — per group — and under which conditions they hold |
+| `DeliveryProfile` | `fileFormat` *(format + metadata + `metadataExtensions` + deprecated)*, `assetLayer` `[1..*]`, `volumeMinGB` / `Max`, `maxBandFileSize`, `deliveryChannel`, `ogcService`, `multiSceneDelivery` | In what form and by what route the data arrives |
+| `CompositeProfile` | `temporalAggregation`, `gridReferenceSystem`, `gridSpacing`, `normalizedIncidenceAngle`, `gapFillingMethod`, `minSourceAcquisitions` | Only at L3. `normalizedIncidenceAngle` is optional and applies only to backscatter — terrain-flattened `gamma^0` is usually composited without it |
 | `LicensingProfile` | `licenceModel`, `eulaTemplate`, `permittedPurpose`, `eligibleBuyerClass`, `exportControl`, `securityClassification` | What the buyer may do with the data, and whether they may buy it at all |
 
 Table: Attribute groups. {#tbl:tax-attribute-groups}
@@ -431,33 +462,46 @@ incomparable:
 |---|---|---|
 | `radiometricAccuracyAbs` / `Rel` | `sigmaMultiplier` (1, 2 or 3) | ESA states 1 dB at 3σ; the performance report states 0.317 dB at 1σ. Converted, these **agree**; compared directly they look like a threefold difference |
 | `deliveryLatency`, `fulfilmentTime`, `archiveUpdateLatency` | `commitmentLevel` + `achievementRate` | Eight hours guaranteed and eight hours best-effort are two different products behind the same number |
-| Resolution | `plane`, `referenceAngle`, `measurementPoint`, `measurementAggregation` | See [Resolution](#tax-resolution) |
+| Resolution | `plane`, `referenceAngle` (an angle or an angular range), `averagedOverOrbits` | See [Resolution](#tax-resolution) |
 
 Table: Qualifiers required by quality attributes. {#tbl:tax-quality-qualifiers}
 
-### Two declarations that apply to every quality figure at once {#tax-quality-declarations}
+> [!NOTE]
+> **`archiveUpdateLatency` is measured from the end of sensing** to the moment the scene is
+> discoverable and orderable in the archive. Downlink and processing lie inside the interval;
+> the buyer's own download does not — that is `deliveryLatency`, measured from order placement.
 
-A quality number on its own does not say what kind of statement it is. Two fields on
-`QualityProfile` say it once for the whole block, in the same way `qualityValidIncidence`
-already declares one angular range within which all of them hold.
+### Where the quality figures come from — one declaration per group {#tax-where-the-quality-figures-come-from-one-declaration-per-group}
+
+A quality number on its own does not say what kind of statement it is. `qualityQualifier` on
+`QualityProfile` says it **per group of figures** — radiometric, geometric, interpretability —
+rather than once for the whole block or separately for each of twenty-six values. A vendor may
+publish a measured geolocation accuracy and a theoretical noise floor for the same product, so
+one posture for the block is too coarse; one per attribute would be twenty-six. The angular
+range within which all of them hold stays a single declaration, `qualityValidIncidence`.
+
+Each entry of `qualityQualifier` carries three fields:
 
 | Field | Values | What it settles |
 |---|---|---|
-| `qualityBasis` | `THEORETICAL` · `MEASURED` · `GUARANTEED` · `NOT_STATED` | Whether the figures are a design budget, a measurement, or a commitment the seller will answer for |
-| `qualityAggregation` | `WORST_CASE` · `TYPICAL` · `RANGE` · `MINIMUM_ACROSS_FLEET` · `NOT_STATED` | How one number was arrived at where performance varies — across sub-swaths, across incidence angles, or across the satellites of a constellation |
+| `scope` | `ALL` · `RADIOMETRIC` · `GEOMETRIC` · `INTERPRETABILITY` | Which group the entry describes. `ALL` states one posture for every group and excludes other entries; otherwise each group appears at most once |
+| `basis` | `THEORETICAL` · `MEASURED` · `GUARANTEED` · `NOT_STATED` | Whether the figures are a design budget, a measurement, or a commitment the seller will answer for |
+| `aggregation` | `WORST_CASE` · `TYPICAL` · `RANGE` · `MINIMUM_ACROSS_FLEET` · `NOT_STATED` | How one number was arrived at where performance varies — across sub-swaths, across incidence angles, or across the satellites of a constellation |
 
-Table: Declarations that apply to every quality figure. {#tbl:tax-quality-declarations}
+Table: Fields of a quality qualifier entry. {#tbl:tax-quality-qualifier-fields}
 
 Why this matters commercially: ESA states outright that its published quality values are
 to be understood **in the theoretical sense**, and the measured Range PSLR in the 2025
 performance report is **partly worse** than the declared threshold. A buyer who reads a
 declared figure as a guarantee may receive a product worse than declared with no basis for
-complaint. One field removes that ambiguity.
+complaint. One declaration per group removes that ambiguity.
 
 `NOT_STATED` is a real value, not a placeholder. It records that the vendor published
 figures without saying what kind they are — the same distinction `GeolocationMetric`
-draws with `UNDEFINED`. **Four of the five reference products can say nothing else, and
-that is the finding**: the industry mostly does not declare this.
+draws with `UNDEFINED`. **Across the five reference products it is the commonest value, and
+that is the finding**: Sentinel-1 declares all its figures theoretical, three products state a
+basis for geolocation alone (measured), and one states none at all. The industry mostly does
+not declare this.
 
 And one attribute whose absence **fails silently**:
 
@@ -466,7 +510,6 @@ And one attribute whose absence **fails silently**:
 > as linear power, as amplitude (its square root) or in decibels (its logarithm). A recipient
 > treating amplitude as power gets a result that looks correct and is wrong by an order of
 > magnitude. Every other missing field shows up as missing data; this one does not.
-
 
 ## Controlled vocabularies
 
@@ -489,14 +532,16 @@ and offer the buyer no choice.
 | `PolarizationMode` | 4 | **OGC `omeo/1.0/sar.xsd`** — `S`, `D`, `T`, `Q` |
 | `TerrainHandling` | 6 | ESA, Capella, ASF |
 | `WeightingFunction` | 6 | ESA, ICEYE |
-| `ResolutionAxis`, `ResolutionPlane`, `MeasurementPoint`, `MeasurementAggregation` | 2 / 2 / 4 / 4 | ESA Sentinel-1 Product Definition |
+| `ResolutionAxis`, `ResolutionPlane` | 2 / 2 | ESA Sentinel-1 Product Definition |
 | `TaskingPriority` | 6 | union of ICEYE, Capella and Open Cosmos values |
 | `AcquisitionPatternType`, `IterationFailurePolicy` | 3 / 3 | Open Cosmos recurrent and systematic tasking |
+| `PairingScheme` | 3 | model construct, for `memberConstraint` |
 | `OrderingMode`, `CatalogueInterface` | 3 / 5 | CEOS OpenSearch Best Practice, vendor APIs. `OrderingMode`'s domain is narrowed per access subtype: an archive sells `BY_SCENE` and `BY_CONSTRAINT`, tasking sells `BY_CONSTRAINT` and `BY_OPPORTUNITY` |
 | `CommitmentLevel` | 3 | model construct |
-| `QualityBasis`, `QualityAggregation` | 4 / 5 | model construct; `MINIMUM_ACROSS_FLEET` exists because a constellation's figures may hold for its best satellite or for all of them |
+| `QualityScope`, `QualityBasis`, `QualityAggregation` | 4 / 4 / 5 | model construct, the three fields of `qualityQualifier`; `MINIMUM_ACROSS_FLEET` exists because a constellation's figures may hold for its best satellite or for all of them |
 | `CoverageType`, `RestrictionBasis` | 2 / 3 | model construct, for `serviceArea` |
-| `GeolocationMetric`, `GeolocationBasis`, `EphemerisClass` | 7 / 3 / 3 | ESA, ICEYE |
+| `GeolocationMetric`, `EphemerisClass` | 7 / 3 | ESA, ICEYE |
+| `GcpType` | 3 | model construct — no vendor publishes it |
 | `PixelScale`, `PixelDataType`, `SpeckleFilter` | 3 / 6 / 5 | ASF HyP3, ICEYE |
 | `AssetRole` | 14 | **STAC SAR Extension v1.3.2**, asset roles |
 | `ArdFamily`, `ArdConformanceLevel` | 7 / 3 | **CEOS-ARD SAR PFS v1.3.1** |
@@ -507,12 +552,11 @@ and offer the buyer no choice.
 
 Table: Controlled vocabularies. {#tbl:tax-vocabularies}
 
-
 ## Units
 
 | Quantity | Unit | Attributes |
 |---|---|---|
-| Length, ground | metre | resolution, pixel spacing, geolocation accuracy, orbit tube diameter |
+| Length, ground | metre | resolution, pixel spacing, geolocation accuracy, orbit tube diameter, perpendicular baseline |
 | Length, large | kilometre | swath width, strip length, scene dimensions |
 | Area | square kilometre | target area, nominal footprint |
 | Angle | degree | incidence, look, squint, reference and normalised angles, latitude |
@@ -541,7 +585,6 @@ Table: Units. {#tbl:tax-units}
 >
 > STAC requires **GHz** for `center_frequency` and `bandwidth`, so 600 MHz is written `0.6`.
 
-
 ## Value ranges and their provenance
 
 Each numeric attribute carries a domain in the machine-readable schema as `minimum` and
@@ -549,15 +592,14 @@ Each numeric attribute carries a domain in the machine-readable schema as `minim
 
 | Provenance | Example attributes | Status |
 |---|---|---|
-| **Read from a source document** | resolution measurement point, polarisation combinations, weighting coefficients 0.52–0.75, orbit tube diameter 120 m, NESZ, PSLR thresholds | verified |
+| **Read from a source document** | the incidence angle each resolution figure is stated at, polarisation combinations, weighting coefficients 0.52–0.75, orbit tube diameter 120 m, NESZ, PSLR thresholds | verified |
 | **Physically bounded** | angles 0–90°, percent 0–100, sigma multiplier 1–3, `enl` ≥ 1 | inherent |
 | **Estimated from observed products** | swath width 5–500 km, strip length 10–600 km, scene dimensions, target area, delivery volume, tasking lead times and horizons | **own estimate — not a vendor declaration** |
 
 Table: Provenance of value ranges. {#tbl:tax-range-provenance}
 
 > [!NOTE]
-> The third row is recorded in the discrepancy register of the main specification, section
-> "Inferred values". It is stated here so that no reader mistakes an estimate for a citation.
+> The third row is stated explicitly so that no reader mistakes an estimate for a citation.
 
 ### Where a stated range is not a constraint {#tax-range-not-constraint}
 
@@ -606,14 +648,13 @@ it holds unchanged in **PSID620 Product Catalog Management v5.0.0**, the file th
 consortium derives from it — the derivation does not correct it.
 
 This baseline emits the two fields as **number**. The consequence is that catalogue files
-generated from it will not validate against either schema as published. Recorded as **R-07**,
-and because the PSI copy carries it too, it is a question for consortium governance rather
+generated from it will not validate against either schema as published. Because the
+PSI copy carries it too, it is a question for consortium governance rather
 than a note about somebody else's standard.
-
 
 ## Machine-readable form
 
-`artifacts/spec/sarImageryProduct.yaml` is JSON Schema draft-07
+The machine-readable form of this baseline is a JSON Schema draft-07 document,
 in the convention used by MEF LSO Sonata product schemas and by the PSI consortium — URN `$id`,
 a `definitions` section, polymorphism as `oneOf` over subtypes each carrying a single-valued enum
 discriminator, and every geometry bound to the public GeoJSON schema.
@@ -622,9 +663,9 @@ From it are generated:
 
 | Artefact | Shapes |
 |---|---|
-| TMF620 `ProductSpecification` | envelope (1 characteristic) · grouped (18) · flat (165, plus 147 aggregation relationships) |
-| TMF620 `ProductOffering` | envelope (1) · grouped (17) · flat (114, of which 17 leave the buyer a choice) |
-| TMF622 `ProductOrder` | envelope (1) · grouped (17) · flat-indexed (102, of which 14 fall on characteristics the offering left open) |
+| TMF620 `ProductSpecification` | envelope (1 characteristic) · grouped (19) · flat (167, plus 148 aggregation relationships) |
+| TMF620 `ProductOffering` | envelope (1) · grouped (17) · flat (122, of which 17 leave the buyer a choice) |
+| TMF622 `ProductOrder` | envelope (1) · grouped (17) · flat-indexed (110, of which 11 fall on characteristics the offering left open) |
 
 Table: Artefacts generated from the machine-readable form. {#tbl:tax-generated-artefacts}
 
@@ -638,33 +679,42 @@ IW GRDH, ICEYE Spot SLC, Capella Spot GEO, ASF HyP3 RTC, and one invented produc
 from the archive and through tasking, which exists to exercise the combinations no single
 real product shows.
 
+## Open points {#tax-open-points}
 
-## Open points
+The open points of the model that bore on this baseline, settled and still open, are listed below. Three of the settled points turned on one question — how to constrain a *set* of acquisitions rather than a single one — and were closed together when that construction was added. Those that bore on this baseline, with how they were settled:
 
-Twenty-five are recorded in the main specification and **all twenty-five are now settled**. The last three turned on one question — how to constrain a *set* of acquisitions rather than a single one — and were closed together when that construction was added. Those that bore on this baseline, with how they were settled:
-
-| # | Question | How it was settled |
-|---|---|---|
-| ~~O-2~~ | Do L2 and L3 belong in the same specification as L1? | **Together.** The boundary between specifications is *who controls the observation*. At L2 and L3 the buyer still does — a composite makes them state the grid, its spacing and the normalised incidence angle. A product where the buyer controls none of that belongs to a separate specification, and has already left this one |
-| ~~O-10~~ | Can a buyer order an interferometric pair, not just be told the product suits one? | **Yes, from version 0.11.** Conditions *between* the acquisitions of a set attach to the recurring acquisition pattern — same track, temporal and perpendicular baselines |
-| ~~O-19~~ | Burst synchronisation tolerance for TOPSAR interferometry | **Added**, as part of the same construction. It had been waiting since 0.7 for somewhere to live |
-| ~~O-3~~ | Is `enl` declared or derived from `looks`? | **Declared, and optional.** The relation is not deterministic, so deriving it would be guessing; `enl` is a property measured off the delivered image |
-| ~~O-13~~ | Are quality figures theoretical, measured or guaranteed? | **One field, `qualityBasis`** — [Two declarations that apply to every quality figure at once](#tax-quality-declarations). Not a qualifier inside 26 values: the question is about the seller's posture, and that is one statement for the block |
-| ~~O-14~~ | Should a figure carry its uncertainty and sample count? | **No — out of scope for a catalogue.** A value with σ and a sample size is a *performance report*; nobody filters products by sample count. The specification carries a reference to the vendor's report instead |
-| ~~O-15~~ | Is a quality declaration worst case, typical or a range? | **One field, `qualityAggregation`** — [Two declarations that apply to every quality figure at once](#tax-quality-declarations), with `MINIMUM_ACROSS_FLEET` for constellations |
-| ~~O-17~~ | A hard ceiling on a single band file | **Added** as `maxBandFileSize`. It decides whether the recipient must handle BigTIFF, so it is a buying decision |
-| ~~O-18~~ | Can a format be paired with its metadata, and marked as being retired? | **Added** as a pairing — §3.1 of the technical specification. Two parallel lists implied combinations that do not exist, so this was a correctness fix |
-| ~~O-20~~ | Is there a second horizon, for feasibility rather than commitment? | **Added** as `feasibilityHorizon` — [Acquisition time and acquisition window](#tax-acquisition-time) |
-| ~~O-23~~ | Will the catalogue gain a geographic Place service? | **Not needed.** A place registry could not carry the *reason* a limit is drawn, so geometry and reason would split across two carriers — the error this model has just finished removing elsewhere. Re-using embargo geometries is answered more cheaply by naming the regime |
-| ~~O-24~~ | Which names that a real transaction carries belong in the product model? | **One of six.** Explained in [What O-24 was, and what it settled](#tax-o24) |
-| ~~O-25~~ | How should the domain of a duration be expressed? | **It should not be** — [Where a stated range is not a constraint](#tax-range-not-constraint). The relations that matter are rules; the filtering problem is a matchmaking concern |
+| Question | How it was settled |
+|---|---|
+| Do L2 and L3 belong in the same specification as L1? | **Together.** The boundary between specifications is *who controls the observation*. At L2 and L3 the buyer still does — a composite makes them state the grid, its spacing and the normalised incidence angle. A product where the buyer controls none of that belongs to a separate specification, and has already left this one |
+| Can a buyer order an interferometric pair, not just be told the product suits one? | **Yes — a pair or a longer stack.** Conditions *between* the acquisitions of a set attach to the recurring acquisition pattern as `memberConstraint` — same track, the pairs the bounds hold between (`pairingScheme`), temporal and perpendicular baselines, burst or squint synchronisation, and the coverage all members share ([Acquisition time and acquisition window](#tax-acquisition-time)) |
+| Burst synchronisation tolerance for TOPSAR interferometry | **Added**, as part of the same construction, as `burstSyncTolerance`. Its stripmap and spotlight counterpart is `dopplerCentroidDifferenceMax` |
+| Is `enl` declared or derived from `looks`? | **Declared, and optional.** The relation is not deterministic, so deriving it would be guessing; `enl` is a property measured off the delivered image |
+| Are quality figures theoretical, measured or guaranteed? | **One declaration per group of figures, `qualityQualifier.basis`** — [Where the quality figures come from — one declaration per group](#tax-where-the-quality-figures-come-from-one-declaration-per-group). Not a qualifier inside 26 values: the question is about the seller's posture. Not one statement for the whole block either: a seller may measure geolocation and only budget the noise floor |
+| Should a figure carry its uncertainty and sample count? | **No — out of scope for a catalogue.** A value with σ and a sample size is a *performance report*; nobody filters products by sample count. The specification carries a reference to the vendor's report instead |
+| Is a quality declaration worst case, typical or a range? | **In the same per-group declaration, `qualityQualifier.aggregation`** — [Where the quality figures come from — one declaration per group](#tax-where-the-quality-figures-come-from-one-declaration-per-group), with `MINIMUM_ACROSS_FLEET` for constellations |
+| A hard ceiling on a single band file | **Added** as `maxBandFileSize`. It decides whether the recipient must handle BigTIFF, so it is a buying decision |
+| Can a format be paired with its metadata, and marked as being retired? | **Added** as a pairing — §3.1 of the technical specification. Two parallel lists implied combinations that do not exist, so this was a correctness fix. The populated metadata extensions (`metadataExtensions`, STAC only) belong to the same pairing, for the same reason |
+| Is there a second horizon, for feasibility rather than commitment? | **Added** as `feasibilityHorizon` — [Acquisition time and acquisition window](#tax-acquisition-time) |
+| Will the catalogue gain a geographic Place service? | **Not needed.** A place registry could not carry the *reason* a limit is drawn, so geometry and reason would split across two carriers — the error this model has just finished removing elsewhere. Re-using embargo geometries is answered more cheaply by naming the regime |
+| Which names that a real transaction carries belong in the product model? | **One of six.** Explained in [The gap found by writing out a purchase](#tax-the-gap-found-by-writing-out-a-purchase) |
+| How should the domain of a duration be expressed? | **It should not be** — [Where a stated range is not a constraint](#tax-range-not-constraint). The relations that matter are rules; the filtering problem is a matchmaking concern |
 
 Table: Settled open points. {#tbl:tax-open-points}
 
-### What O-24 was, and what it settled {#tax-o24}
+Still open:
 
-Every other gap in this register was found by reading: a source document names something the
-model has no field for. O-24 was found differently, and that is the whole of its value.
+| Question | Where it stands |
+|---|---|
+| One `pairingScheme` for every pair-wise bound, or one per bound? | Co-registration of `TOPSAR` stacks usually runs against a reference, while a buyer may want the baseline bounded between all pairs. **One scheme for now**, because no market source asks for more |
+| Should `normalizedIncidenceAngle` be mandatory for a backscatter composite without terrain flattening? | **Optional for now.** Such a composite with neither shows striping along orbit tracks |
+| Which source documents should be re-read before the figures are relied on? | **Being checked.** Three items: the control-point block, whose source names no vendor; the Capella product guide, to be re-read in its current edition; and ICEYE's delivery service levels, which now include a 1 h level for Commercial tasking that the reference products do not yet carry |
+
+Table: Open points still open. {#tbl:tax-open-points-open}
+
+### The gap found by writing out a purchase {#tax-the-gap-found-by-writing-out-a-purchase}
+
+Every other gap was found by reading: a source document names something the
+model has no field for. This one was found differently, and that is the whole of its value.
 
 One complete purchase was written out end to end — an enquiry about an area, a feasibility
 check that returned nine candidate satellite passes, a quote, an order booking one of those
@@ -691,8 +741,7 @@ this list: **a product specification in a catalogue carries what a buyer needs i
 find the product and decide to buy it.** It does not carry what the two parties settle in
 the contract, what is true of one delivered instance, what varies with the seller's
 implementation, or what the buyer learns anyway from the metadata delivered with the data.
-Applied across the register, that filter closed nine points without adding a single field.
-
+Applied across the model's open points, that filter closed nine of them without adding a single field.
 
 ## Source register
 
@@ -720,17 +769,16 @@ Table: Standards used as sources. {#tbl:tax-standards}
 
 | | Source | Taken from it |
 |:---:|---|---|
-| `PV` | **Sentinel-1 Product Definition, S1-RS-MDA-52-7440**, issue 2/7 (2016) | Product Performance Parameters table; the caveat that all values are theoretical; the resolution measurement-point rule; PSLR, NESZ, radiometric accuracy and ALE declarations |
+| `PV` | **Sentinel-1 Product Definition, S1-RS-MDA-52-7440**, issue 2/7 (2016) | Product Performance Parameters table; the caveat that all values are theoretical; the incidence angle at which each resolution figure is stated, averaged over orbits; PSLR, NESZ, radiometric accuracy and ALE declarations |
 | `NV` | **Sentinel-1 Product Definition, issue 2/11** (Nov 2025) | **Deliberately unverified.** Behind a Confluence REST API returning 403. Numeric values in examples come from issue 2/7 and may be out of date; the **field structure**, which is what this baseline takes, is stable between issues |
 | `FV` | **Sentinel-1 Annual Performance Report 2025** | Measured versus declared figures; the reporting format `−20.56 ± 0.49 (311)`; per-sub-swath and per-satellite breakdown |
 | `FV` | **SentiWiki — S1 Products / S1 Mission** | Current product breakdown |
-| `FV` | **Capella Space SAR Imagery Products Guide** | Product formats; the three-way confusion between trade name, strategy and parameter set |
-| `NV` | **ICEYE Data Product Specification** | Known from product pages; the specification document was not retrieved |
-| `NV` | **ASF HyP3 Products (RTC)** | Basis of open point O-1 |
+| `FV` | **Capella Space SAR Imagery Products Guide** | Product formats; the three-way confusion between trade name, strategy and parameter set; adaptive azimuth looks. |
+| `FV` | **ICEYE Data Product Specification** (sar.iceye.com) | Imaging modes, tasking priorities and lead times, delivery service levels |
+| `NV` | **ASF HyP3 Products (RTC)** | Classification of RTC as L2 by ASF, from the service description |
 | `NV` | **Sentinel-1 SAR Technical Guide** | **Unavailable at source** — `sentinel.esa.int` no longer resolves; treated as superseded by SentiWiki |
 
 Table: Mission and product documentation used as sources. {#tbl:tax-mission-docs}
-
 
 ## Status and next steps
 
@@ -738,7 +786,7 @@ Table: Mission and product documentation used as sources. {#tbl:tax-mission-docs
 evidence allows: the attribute set was exercised by generating catalogue, offering and order
 documents from it in three granularities each, by filling five reference products from cited
 vendor documentation, and by writing one complete purchase from enquiry to delivered scene.
-All of that validates against the schema, 44 business rules hold across every product, and
+All of that validates against the schema, 53 business rules hold across every product, and
 each of the rules guarding a case no vendor publishes is checked by a test that breaks the
 product on purpose.
 
@@ -748,11 +796,13 @@ loaded into one, and until that happens the claim stops at this sentence.
 
 What this baseline does **not** yet support:
 
-* **Matchmaking axes.** The attributes exist and four candidate axes are identifiable
-  (resolution, delivery latency, area coverage, revisit), but the attribute-to-axis mapping and
-  the scoring guidance are not part of this document.
+* **Matchmaking axes.** The attribute-to-axis mapping and the scoring guidance are not part of
+  this document; they are in the companion `EO-Matchmaking-Axes.md`.
 * **Optical and multispectral products.** The extension point is structural and real; the
   content is absent.
-* **Theoretical versus measured quality.** Open points O-13 to O-15 remain, and they matter
-  commercially — a buyer treating a declared value as a guarantee may receive a product worse
-  than declared, with no basis for complaint.
+* **Theoretical versus measured quality, in practice.** The model can now say it per group of
+  figures ([Where the quality figures come from — one declaration per group](#tax-where-the-quality-figures-come-from-one-declaration-per-group)); most vendors still do not, and `NOT_STATED` remains the commonest value. A
+  buyer treating a declared value as a guarantee may receive a product worse than declared, with
+  no basis for complaint.
+* **The [open points](#tax-open-points)**, and tandem (bistatic) acquisition,
+  which the model does not describe.

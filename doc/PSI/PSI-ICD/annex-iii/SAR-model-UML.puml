@@ -1,10 +1,9 @@
-@startuml SAR_ProductSpecification_v011_EN
+@startuml SAR_ProductSpecification_v02_EN
 ' =============================================================
 ' SAR Product Specification — TM Forum model
-' Version 0.11 · author: DO
+' Version 0.2
 '
 ' Companion documents:
-'   SAR-TMF-Product-Specification.md  — rationale and history
 '   SAR-technical-specification.md    — class and attribute reference
 '   SAR-data-model.md                — design commentary
 '
@@ -43,6 +42,7 @@ class SarProductSpecification {
   .. dependent on productType ..
   +dataType : DataType *
   +processingLevel : ProcessingLevel *
+  +geophysicalVariable : GeophysicalVariable
 }
 
 ' =============================================================
@@ -104,16 +104,21 @@ class RecurringAcquisition {
 }
 
 class MemberConstraint {
+  .. pairing ..
+  +pairingScheme : PairingScheme
   .. pass geometry ..
   +sameTrack : Boolean
   +samePassDirection : Boolean
   +sameLookSide : Boolean
   .. baselines ..
-  +temporalBaseline : DurationRange
-  +perpendicularBaselineMax : Decimal
+  +temporalBaselineMax : Duration
+  +perpendicularBaselineMin : Decimal <<m>>
+  +perpendicularBaselineMax : Decimal <<m>>
   .. phase conditions ..
-  +burstSyncTolerance : Decimal
-  +coherenceTarget : Decimal
+  +burstSyncTolerance : Decimal <<ms>>
+  +dopplerCentroidDifferenceMax : Decimal <<Hz>>
+  .. coverage ..
+  +commonCoverageFractionMin : Decimal
 }
 
 class ContinuousAcquisition {
@@ -150,7 +155,6 @@ class SensorProfile {
   +bandwidth : Decimal <<GHz>> *
   +polarization : Polarization [1..4] *
   +polarizationMode : PolarizationMode *
-  +observationDirection : ObservationDirection [1..*] *
 }
 
 ' =============================================================
@@ -163,6 +167,7 @@ class AcquisitionProfile {
   +incidenceAngleVariation : Decimal <<deg>> *
   +lookAngle : AngleRange *
   +orbitDirection : OrbitDirection [1..*] *
+  +observationDirection : ObservationDirection [1..*] *
   +squintAngleMax : Decimal <<deg>>
   +illuminationTime : Duration *
 }
@@ -189,9 +194,8 @@ class Resolution <<valueType>> {
   +valueMin : Decimal <<m>> *
   +valueMax : Decimal <<m>> *
   +plane : ResolutionPlane *
-  +referenceAngle : Decimal <<deg>> *
-  +measurementPoint : MeasurementPoint *
-  +measurementAggregation : MeasurementAggregation *
+  +referenceAngle : AngleRange
+  +averagedOverOrbits : Boolean *
 }
 
 ' =============================================================
@@ -201,8 +205,8 @@ class Resolution <<valueType>> {
 class ProcessingProfile {
   .. multi-looking ..
   +looksRange : Integer *
-  +looksAzimuth : Integer *
-  +looksAzimuthMax : Integer
+  +looksAzimuthMin : Integer *
+  +looksAzimuthMax : Integer *
   +enl : Decimal *
   +lookOverlapRange : Decimal
   +lookOverlapAzimuth : Decimal
@@ -247,9 +251,14 @@ class StandardConformance <<valueType>> {
 ' =============================================================
 
 class QualityProfile {
-  +qualityBasis : QualityBasis *
-  +qualityAggregation : QualityAggregation *
+  +qualityQualifier : QualityQualifier [1..3] *
   +qualityValidIncidence : AngleRange *
+}
+
+class QualityQualifier <<valueType>> {
+  +scope : QualityScope *
+  +basis : QualityBasis *
+  +aggregation : QualityAggregation *
 }
 
 class RadiometricQuality {
@@ -276,6 +285,7 @@ class GeometricQuality {
   .. buyer-supplied control points ..
   +gcpSupported : Boolean *
   +gcpFormatAccepted : GcpFileFormat [0..*]
+  +gcpTypeAccepted : GcpType [0..*]
   +gcpMinCount : Integer
   +gcpMaxCount : Integer
   +gcpAccuracyRequired : Decimal <<m>>
@@ -296,7 +306,6 @@ class RadiometricFigure <<valueType>> {
 class GeolocationAccuracy <<valueType>> {
   +value : Decimal <<m>> *
   +metric : GeolocationMetric *
-  +basis : GeolocationBasis *
   +terrainCorrected : Boolean *
   +ephemerisClass : EphemerisClass *
 }
@@ -304,6 +313,7 @@ class GeolocationAccuracy <<valueType>> {
 class GcpSet <<valueType>> {
   +reference : URI *
   +format : GcpFileFormat *
+  +pointType : GcpType [1..*] *
   +epsgCode : Integer *
   +pointCount : Integer *
   +declaredAccuracy : Decimal <<m>> *
@@ -315,7 +325,6 @@ class GcpSet <<valueType>> {
 
 class DeliveryProfile {
   +fileFormat : FileFormatSpec [1..*] *
-  +metadataStandardExtensions : String [0..*]
   +volumeMinGB : Decimal *
   +volumeMaxGB : Decimal *
   +maxBandFileSize : Decimal <<GB>>
@@ -327,6 +336,7 @@ class DeliveryProfile {
 class FileFormatSpec <<valueType>> {
   +format : FileFormat *
   +metadataFormat : MetadataStandard *
+  +metadataExtensions : String [0..*]
   +deprecated : Boolean
 }
 
@@ -340,8 +350,7 @@ class CompositeProfile {
   +aggregationPeriod : Duration *
   +gridReferenceSystem : GridReferenceSystem *
   +gridSpacing : Decimal <<m>> *
-  +normalizedIncidenceAngle : Decimal <<deg>> *
-  +geophysicalVariable : GeophysicalVariable *
+  +normalizedIncidenceAngle : Decimal <<deg>>
   +gapFillingMethod : GapFillingMethod *
   +minSourceAcquisitions : Integer *
 }
@@ -382,7 +391,7 @@ SarProductSpecification "1" *-- "1" RevisitProfile
 SarProductSpecification "1" *-- "1" TargetProfile
 SarProductSpecification "1" *-- "1" SensorProfile
 SarProductSpecification "1" *-- "1" AcquisitionProfile
-SarProductSpecification "1" *-- "1..*" Resolution : one per axis >
+SarProductSpecification "1" *-- "1..*" Resolution : one or more per axis >
 SarProductSpecification "1" *-- "1" ProcessingProfile
 SarProductSpecification "1" *-- "0..1" QualityProfile
 SarProductSpecification "1" *-- "1" DeliveryProfile
@@ -411,6 +420,7 @@ ProcessingProfile "1" *-- "0..*" StandardConformance
 QualityProfile "1" *-- "1" RadiometricQuality
 QualityProfile "1" *-- "1" GeometricQuality
 QualityProfile "1" *-- "0..1" InterpretabilityQuality
+QualityProfile "1" *-- "1..3" QualityQualifier : one per group >
 
 RadiometricQuality "1" *-- "2" RadiometricFigure : abs. and rel. >
 GeometricQuality "1" *-- "1..2" GeolocationAccuracy : base and with GCP >

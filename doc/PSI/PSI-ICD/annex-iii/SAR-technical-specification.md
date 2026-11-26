@@ -2,8 +2,8 @@
 
 # SAR Product Model — Technical Specification
 
-**Version 0.11** · **author: DO**
-**Class diagram:** `SAR-model-UML-EN_DO_v0.11.puml`
+**Version 0.2**
+**Class diagram:** `SAR-model-UML.puml`
 
 ---
 
@@ -64,13 +64,14 @@ offering selects a subset and narrows the domains.
 | `CoverageGeometry` | abstract | `1` in `AcquisitionProfile` | spatial extent |
 | `SwathCoverage` | subtype | — | swath-based coverage |
 | `SceneCoverage` | subtype | — | scene-based coverage |
-| `Resolution` | value type | `1..*` | resolution, one instance per axis |
+| `Resolution` | value type | `1..*` | resolution, one or more entries per axis |
 | `ProcessingProfile` | group | `1` | what was done to the signal |
 | `StandardConformance` | value type | `0..*` in `ProcessingProfile` | conformance to a standard |
 | `QualityProfile` | group | `0..1` | root of the quality block |
 | `RadiometricQuality` | subgroup | `1` in `QualityProfile` | radiometric quality |
 | `GeometricQuality` | subgroup | `1` in `QualityProfile` | geometric quality |
 | `InterpretabilityQuality` | subgroup | `0..1` in `QualityProfile` | interpretability |
+| `QualityQualifier` | value type | `1..3` in `QualityProfile` | basis and aggregation of one group of quality figures |
 | `RadiometricFigure` | value type | `2` in `RadiometricQuality` | radiometric value with its sigma multiplier |
 | `GeolocationAccuracy` | value type | `1..2` in `GeometricQuality` | geolocation accuracy with qualifiers |
 | `GcpSet` | value type | `0..1` in `GeometricQuality` | buyer-supplied control points |
@@ -112,6 +113,7 @@ which a buyer finds it in a catalogue.
 | `systematicProduction` | Boolean | `true` \| `false` | `D` | Whether the product is generated for **every** acquisition or only on demand |
 | `dataType` | enum | `COMPLEX` \| `AMPLITUDE` \| `PHASE_HISTORY` \| `GEOPHYSICAL` | `D*` | Class of data in the file |
 | `processingLevel` | enum | `L0` \| `L1A` \| `L1B` \| `L1C` \| `L2` \| `L3` | `D*` | Processing level in NASA/ESA nomenclature |
+| `geophysicalVariable` | enum `[0..1]` | see [GeophysicalVariable](#spec-remaining-enumerations) | `D` | Which geophysical variable the product carries — an L2 ocean wind field as much as an L3 backscatter composite |
 
 Table: SarProductSpecification attributes. {#tbl:spec-sarproductspecification-attributes}
 
@@ -120,12 +122,13 @@ Table: SarProductSpecification attributes. {#tbl:spec-sarproductspecification-at
 | Attribute | Depends on | Source |
 |---|---|---|
 | `sensorType` | — | `FV` OGC 10-157r4, element `eo:sensorType` |
-| `productType` | — | `FV` STAC `product:type`; values collected from ESA, ICEYE, Capella, ASF |
-| `resolutionClass` | applicable **only** when `productType = GRD` (W-37) | `FV` Sentinel-1 SAR Technical Guide, Level-1 Product Formatting |
+| `productType` | sets `dataType`, `processingLevel` and `geometryProjection`, and narrows `terrainHandling` — [mapping](#spec-producttype-dependent-fields) | `FV` STAC `product:type`; values collected from ESA, ICEYE, Capella, ASF |
+| `resolutionClass` | applicable **only** when `productType = GRD` | `FV` Sentinel-1 SAR Technical Guide, Level-1 Product Formatting |
 | `copernicusCMClass` | — | `NV` ICEYE, row *ESA Copernicus Contributing Mission Class*. **ESA does not publish the class thresholds** — a label quoted from the vendor |
-| `systematicProduction` | — | `Fc` SentiWiki: S1 `GRD` produced systematically, `SLC` only for selected modes and areas |
+| `systematicProduction` | — | `FV` SentiWiki: S1 `GRD` produced systematically, `SLC` only for selected modes and areas |
 | `dataType` | follows from `productType` — [mapping](#spec-producttype-dependent-fields) | `FV` follows from product physics |
 | `processingLevel` | follows from `productType` — [mapping](#spec-producttype-dependent-fields) | `NV` NASA EOSDIS Data Processing Levels; the SAR equivalents of `L1A`/`L1B`/`L1C` are **our own construction**, since ESA collapses them into a single `L1` |
+| `geophysicalVariable` | present exactly when `dataType = GEOPHYSICAL`, at `L2` and `L3` alike | `PV` collected from market products |
 
 Table: SarProductSpecification dependencies and provenance. {#tbl:spec-sarproductspecification-dependencies}
 
@@ -159,7 +162,7 @@ Access to scenes that **already exist**.
 | `catalogueInterface` | enum `[1..*]` | `STAC_API` \| `OGC_CSW` \| `OGC_API_RECORDS` \| `VENDOR_API` \| `WEB_UI_ONLY` | `D` | How to search the archive **before** purchase; decides whether discovery can be automated |
 | `archiveDepthFrom` | Date | date | `D` | How far back the vendor's archive reaches |
 | `includesHistoricalArchive` | Boolean | `true` \| `false` | `D` | Whether **this product** grants access to that full depth, or only to scenes created after purchase |
-| `archiveUpdateLatency` | `ServiceCommitment` | 1 h – 30 d | `D` | How long a new scene takes to enter the archive after acquisition |
+| `archiveUpdateLatency` | `ServiceCommitment` | 1 h – 30 d | `D` | From the **end of sensing** until the scene is **discoverable and orderable** in the archive. Downlink and processing lie inside the interval; the buyer's own download does not |
 | `deliveryLatency` | `ServiceCommitment` | 1 h – 14 d | `D · C` | From order placement to file delivery |
 | `sourceSceneRef` | `SceneReference` `[0..*]` | open domain | `C!` | Identification of specific source scenes |
 
@@ -167,14 +170,14 @@ Table: ArchiveAccess attributes. {#tbl:spec-archiveaccess-attributes}
 
 | Attribute | Depends on | Source |
 |---|---|---|
-| `orderingMode` | `BY_SCENE` makes `sourceSceneRef` mandatory (W-13) and `timeOfInterest` inapplicable (W-41); `BY_CONSTRAINT` is the reverse. The same axis appears in `TaskingAccess`, over a different domain | `FV` patterns present at ESA, ICEYE and Capella |
-| `standingAccess` | independent of `orderingMode`: how a request is phrased and whether access is one-off or standing are two different axes (D-64). When `true`, rule W-38 excludes `exclusivity = PERMANENT` on the tasking side | `FV` subscription models of commercial vendors |
+| `orderingMode` | `BY_SCENE` makes `sourceSceneRef` mandatory and `timeOfInterest` inapplicable; `BY_CONSTRAINT` is the reverse. The same axis appears in `TaskingAccess`, over a different domain | `FV` patterns present at ESA, ICEYE and Capella |
+| `standingAccess` | independent of `orderingMode`: how a request is phrased and whether access is one-off or standing are two different axes. When `true`, a business rule excludes `exclusivity = PERMANENT` on the tasking side | `FV` subscription models of commercial vendors |
 | `catalogueInterface` | distinct from `metadataStandard`: this concerns **search before** purchase, that concerns **metadata of the delivered file** | `FV` CEOS OpenSearch Best Practice; OpenCosmos (STAC API) |
 | `archiveDepthFrom` | does **not** imply `includesHistoricalArchive = true` — see below | `FV` ESA: S1 archive from 2014-10-03 |
 | `includesHistoricalArchive` | independent of `archiveDepthFrom` | `FV` subscription models of commercial vendors |
 | `archiveUpdateLatency` | — | `FV` ESA publishes archive ingestion latency |
 | `deliveryLatency` | on the tasking side the equivalent sits in `TaskingTier`, because it differs per tier | `FV` all vendors |
-| `sourceSceneRef` | mandatory under `BY_SCENE`, inapplicable under `BY_CONSTRAINT` (W-13); when a requested area is given as well, rule W-15 applies | `FV` STAC identity pattern |
+| `sourceSceneRef` | mandatory under `BY_SCENE`, inapplicable under `BY_CONSTRAINT`; when a requested area is given as well, it must lie inside the referenced scene's footprint | `FV` STAC identity pattern |
 
 Table: ArchiveAccess dependencies and provenance. {#tbl:spec-archiveaccess-dependencies}
 
@@ -195,7 +198,7 @@ Ordering **new** acquisitions.
 |---|--|--|-|---|
 | `orderingMode` | enum `[1..2]` | `BY_CONSTRAINT` \| `BY_OPPORTUNITY` | `D` | How the buyer **names** the acquisition: by stating constraints, or by picking a candidate pass |
 | `maxSchedulingHorizon` | `Duration` | days to a year | `D` | How far ahead a **commitment** can be placed |
-| `feasibilityHorizon` | `Duration` | up to three months | `D` | How far ahead candidate passes can be **searched for**. Must not be shorter than the above (W-44) |
+| `feasibilityHorizon` | `Duration` | up to three months | `D` | How far ahead candidate passes can be **searched for**. Must not be shorter than the above |
 | `exclusivity` | enum | `NONE` \| `DELAYED` \| `PERMANENT` | `D · C` | Whether acquired data enters the public archive |
 | `holdbackPeriod` | `Duration` `[0..1]` | 0 – 24 months | `D · C` | Publication deferral period |
 
@@ -203,9 +206,9 @@ Table: TaskingAccess attributes. {#tbl:spec-taskingaccess-attributes}
 
 | Attribute | Depends on | Source |
 |---|---|---|
-| `orderingMode` | `BY_OPPORTUNITY` means the buyer first receives candidate passes and orders one of them - carried in PSID by Check POQ (D-69), with the chosen pass referenced from `productOfferingQualificationItem` on the order item. **Narrower domain than on the archive side**: `BY_SCENE` would mean ordering a scene that does not exist yet | `FV` STAPI (Opportunity); Capella and OpenCosmos both expose pass search before ordering |
-| `maxSchedulingHorizon` | must be ≥ the `minLeadTime` of **every** service tier (W-42) | `FV` Capella: rolling one-week window; OpenCosmos: 14 days |
-| `exclusivity` | `DELAYED` makes `holdbackPeriod` mandatory (W-24); `PERMANENT` combined with `CONTINUOUS` is contradictory (W-38) | `FV` Capella documents optional exclusivity |
+| `orderingMode` | `BY_OPPORTUNITY` means the buyer first receives candidate passes and orders one of them - carried in PSID by Check POQ, with the chosen pass referenced from `productOfferingQualificationItem` on the order item. **Narrower domain than on the archive side**: `BY_SCENE` would mean ordering a scene that does not exist yet | `FV` STAPI (Opportunity); Capella and OpenCosmos both expose pass search before ordering |
+| `maxSchedulingHorizon` | must be ≥ the `minLeadTime` of **every** service tier | `FV` Capella: rolling one-week window; OpenCosmos: 14 days |
+| `exclusivity` | `DELAYED` makes `holdbackPeriod` mandatory; `PERMANENT` combined with `CONTINUOUS` is contradictory | `FV` Capella documents optional exclusivity |
 | `holdbackPeriod` | mandatory **only** under `exclusivity = DELAYED` | `FV` Capella: 30 days and 1 year |
 
 Table: TaskingAccess dependencies and provenance. {#tbl:spec-taskingaccess-dependencies}
@@ -230,7 +233,7 @@ Table: TaskingTier attributes. {#tbl:spec-taskingtier-attributes}
 |---|---|---|
 | `tierName` | — | `FV` ICEYE ("Commercial 3h"), Capella ("1-Day"), OpenCosmos (13 named tiers) |
 | `priority` | — | `FV` ICEYE: `COMMERCIAL`/`BACKGROUND`; Capella: five levels |
-| `minLeadTime` | must be ≤ `minAcquisitionWindowWidth` in `AcquisitionPattern` and ≤ `maxSchedulingHorizon` (W-42) | `FV` ICEYE Table 3-2: 12 h for `COMMERCIAL`, 24 h for `BACKGROUND` - that is, **per priority**, not per product. This is the evidence that moved the field here (D-67) |
+| `minLeadTime` | must be ≤ `minAcquisitionWindowWidth` in `AcquisitionPattern` and ≤ `maxSchedulingHorizon` | `FV` ICEYE Table 3-2: 12 h for `COMMERCIAL`, 24 h for `BACKGROUND` - that is, **per priority**, not per product. This is the evidence that moved the field here |
 | `fulfilmentTime` | distinct from `deliveryLatency`: one governs when the satellite images, the other when the file arrives | `FV` Capella: 1-Day / 3-Day / 7-Day tiers |
 | `deliveryLatency` | as above | `FV` ICEYE: 3 h / 8 h for `COMMERCIAL`, 24 h for `BACKGROUND` |
 | `collectionSuccessRate` | a fleet statistic, **not a guarantee** for an individual order | `PV` ICEYE reports > 90% for `COMMERCIAL`; the 0–100 domain is taken without narrowing |
@@ -291,10 +294,10 @@ Table: RecurringAcquisition attributes. {#tbl:spec-recurringacquisition-attribut
 
 | Attribute | Depends on | Source |
 |---|---|---|
-| `cadenceMin` | **must not be shorter than `revisitTimeMax`** from `RevisitProfile` at the target's latitude (W-33) | `PV` OpenCosmos: weekly … yearly frequencies. Domain estimated |
+| `cadenceMin` | **must not be shorter than `revisitTimeMax`** from `RevisitProfile` at the target's latitude. A technique's own interval requirement — an interferometric repeat cycle — is expressed by an offering narrowing `cadenceMin` and `cadenceMax`, not by a second field. The smallest gap within a set is always a consecutive one, so this field bounds it and `MemberConstraint` carries no temporal minimum | `PV` OpenCosmos: weekly … yearly frequencies. Domain estimated |
 | `cadenceMax` | ≥ `cadenceMin` | `PV` as above |
 | `repetitionCountMin` / `Max` | — | `PV` OpenCosmos: maximum child-request count. Domain estimated |
-| `iterationFailurePolicy` | mandatory under `RECURRING` (W-34) | `NV` **constructed from first principles** — no vendor documents this, and the difference matters to the buyer |
+| `iterationFailurePolicy` | mandatory under `RECURRING`. An acquisition outside a `memberConstraint` bound counts as a failed iteration. `SKIP` is excluded under `pairingScheme = CONSECUTIVE`, where a skipped member would create a new consecutive pair with a doubled gap | `NV` **constructed from first principles** — no vendor documents this, and the difference matters to the buyer |
 | `memberConstraint` | optional; absent means the set is constrained only by rhythm and count | `FV` the interferometric case is documented; the construction is this model's |
 
 Table: RecurringAcquisition dependencies and provenance. {#tbl:spec-recurringacquisition-dependencies}
@@ -333,42 +336,71 @@ Table: ContinuousAcquisition dependencies and provenance. {#tbl:spec-continuousa
 
 Cardinality `0..1` in `RecurringAcquisition`.
 
-Conditions that hold **between** the acquisitions of the set, rather than within
-any one of them. This is the construction that turns `interferometricUse` from a
-declaration of suitability into an ordering path: until it existed the model
-could say a product was fit for interferometry and give the buyer no way to
-order the pair.
+Conditions that hold **between** the acquisitions of the set — a pair or a
+longer stack — rather than within any one of them. This is the construction that
+turns `interferometricUse` from a declaration of suitability into an ordering
+path: without it the model could say a product was fit for interferometry and
+give the buyer no way to order the pair.
+
+Two kinds of condition. **Equality conditions** (`sameTrack`,
+`samePassDirection`, `sameLookSide`) hold across the whole set whatever the
+pairing. **Pair-wise bounds** (`temporalBaselineMax`, `perpendicularBaselineMin`
+/ `Max`, `burstSyncTolerance`, `dopplerCentroidDifferenceMax`) hold between the pairs
+named by `pairingScheme`. An acquisition outside a bound counts as a **failed
+iteration** under `iterationFailurePolicy`.
 
 | Attribute | Type · cardinality | Domain | Role | Meaning |
 |---|--|-|-|---|
+| `pairingScheme` | enum `[0..1]` | `CONSECUTIVE` \| `COMMON_REFERENCE` \| `ALL_PAIRS` | `D · C` | Which pairs the pair-wise bounds hold between |
 | `sameTrack` | Boolean `[0..1]` | `true` \| `false` | `D · C` | All acquisitions from the same orbital track |
 | `samePassDirection` | Boolean `[0..1]` | `true` \| `false` | `D · C` | All ascending, or all descending |
 | `sameLookSide` | Boolean `[0..1]` | `true` \| `false` | `D · C` | All looking the same way |
-| `temporalBaseline` | `DurationRange` `[0..1]` | 1 d – 1 y | `D · C` | Permitted time between consecutive acquisitions |
+| `temporalBaselineMax` | `Duration` `[0..1]` | 1 d – 1 y | `D · C` | Largest permitted time between the paired acquisitions |
+| `perpendicularBaselineMin` | Decimal · m `[0..1]` | 0 – 5000 | `D · C` | Smallest permitted perpendicular baseline |
 | `perpendicularBaselineMax` | Decimal · m `[0..1]` | 0 – 5000 | `D · C` | Largest permitted perpendicular baseline |
-| `burstSyncTolerance` | Decimal · ms `[0..1]` | 0 – 100 | `D` | Largest permitted burst synchronisation error, TOPSAR modes |
-| `coherenceTarget` | Decimal `[0..1]` | 0 – 1 | `D` | Coherence the seller aims for across the set |
+| `burstSyncTolerance` | Decimal · ms `[0..1]` | 0 – 100 | `D` | Largest permitted burst synchronisation error, burst modes (`TOPSAR`, `SCANSAR`) |
+| `dopplerCentroidDifferenceMax` | Decimal · Hz `[0..1]` | 0 – 10 000 | `D` | Largest permitted difference in Doppler centroid between the paired acquisitions, non-burst modes |
+| `commonCoverageFractionMin` | Decimal `[0..1]` | 0 – 1 | `D · C` | Smallest fraction of the requested area covered by **every** member of the set at once |
 
 Table: MemberConstraint attributes. {#tbl:spec-memberconstraint-attributes}
 
 | Attribute | Depends on | Source |
 |---|---|---|
-| `sameTrack` | the condition `repeatCycle` and `orbitTubeDiameter` describe from the constellation side, stated here from the order side | `FV` same sources as those two attributes |
-| `samePassDirection` / `sameLookSide` | — | `PV` standard interferometric practice; **no vendor documents them as orderable** |
-| `temporalBaseline` | constrains more tightly than `cadenceMin` / `cadenceMax`, which express the buyer's rhythm rather than a physical condition | `FV` Sentinel-1 twelve-day repeat cycle |
-| `perpendicularBaselineMax` | bounded in practice by `orbitTubeDiameter` | `PV` **domain estimated** from the critical-baseline limit, not from a price list |
-| `burstSyncTolerance` | TOPSAR modes only; requires `dataType ∈ {COMPLEX, PHASE_HISTORY}` (W-45) | `PV` `SAR-L1-L3`. **Exact vendor figures not verified in this work** |
-| `coherenceTarget` | a target, not a commitment, unless a `ServiceCommitment` says otherwise | `NV` **constructed from first principles** — coherence depends on what is on the ground, which no seller controls, so none publishes a figure |
+| `pairingScheme` | mandatory when any pair-wise bound is present. Under `COMMON_REFERENCE` the seller selects the reference, normally to minimise baseline spread rather than taking the first of the series. For a set of two all three values name the same pair. `CONSECUTIVE` excludes `iterationFailurePolicy = SKIP` | `NV` **constructed** — no vendor documents which pairs a bound applies to |
+| `sameTrack` | the condition `repeatCycle` and `orbitTubeDiameter` describe from the constellation side, stated here from the order side. Holds across the whole set, independent of `pairingScheme` | `FV` same sources as those two attributes |
+| `samePassDirection` / `sameLookSide` | hold across the whole set, independent of `pairingScheme` | `PV` standard interferometric practice; **no vendor documents them as orderable** |
+| `temporalBaselineMax` | not allowed under `CONSECUTIVE`, where it would restate `cadenceMax`. Under `COMMON_REFERENCE` it bounds the distance in time from the reference, under `ALL_PAIRS` the span of the stack. No minimum: the smallest gap is always a consecutive one, which `cadenceMin` bounds | `NV` **constructed** |
+| `perpendicularBaselineMin` | allowed only for a set of two, `repetitionCountMax = 2`; not above `perpendicularBaselineMax`. The height of ambiguity is inversely proportional to the baseline, so a pair meant for height retrieval needs a lower bound as well as an upper one | `NV` **constructed** from interferometric physics |
+| `perpendicularBaselineMax` | bounded in practice by `orbitTubeDiameter`; not below `perpendicularBaselineMin` | `PV` **domain estimated** from the critical-baseline limit, not from a price list |
+| `burstSyncTolerance` | burst modes only, `collectionStrategy ∈ {TOPSAR, SCANSAR}`; requires `dataType ∈ {COMPLEX, PHASE_HISTORY}` | `PV` `SAR-L1-L3`. **Exact vendor figures not verified in this work** |
+| `dopplerCentroidDifferenceMax` | only outside the burst modes, and only under `dataType ∈ {COMPLEX, PHASE_HISTORY}`. A different squint shifts the azimuth (Doppler) spectrum; once the spectra stop overlapping the pair does not interfere. Stated as an angle because `squintAngleMax` is one; it converts to a Doppler centroid difference given platform velocity and wavelength | `NV` **constructed** from SAR physics |
+| `commonCoverageFractionMin` | the set counterpart of `minCoverageFraction`, which bounds each pass on its own. Independent of `pairingScheme` — a property of the whole set, not of its pairs | `NV` **constructed** |
 
 Table: MemberConstraint dependencies and provenance. {#tbl:spec-memberconstraint-dependencies}
+
+**Meaning of `pairingScheme` values:**
+
+| Value | Pair-wise bounds hold between |
+|---|---|
+| `CONSECUTIVE` | each member and the next |
+| `COMMON_REFERENCE` | each member and one reference acquisition, selected by the seller |
+| `ALL_PAIRS` | every pair in the set |
+
+Table: Meaning of pairingScheme values. {#tbl:spec-pairing-scheme-values}
+
+> [!NOTE]
+> 150 m between consecutive members, against one reference, or between every
+> pair are three different commitments, because orbital drift accumulates along
+> a long series.
 
 > [!NOTE]
 > **Why no new pattern subtype.** An interferometric pair is a
 > `RecurringAcquisition` with `repetitionCount` of two and a cadence equal to the
-> repeat cycle, plus these conditions. The temporal dimension of a constraint on a
+> repeat cycle, plus these conditions; a stack is the same with a larger count
+> and a `pairingScheme`. The temporal dimension of a constraint on a
 > set was already `cadenceMin` / `cadenceMax` and the quantitative one already
-> `repetitionCountMin` / `Max`; only the geometric dimension was missing, and it
-> attaches to the existing class.
+> `repetitionCountMin` / `Max`; this class adds the geometric dimension, plus
+> the one temporal bound the cadence cannot say, to the existing class.
 
 ## Revisit and target
 
@@ -386,10 +418,10 @@ Table: RevisitProfile attributes. {#tbl:spec-revisitprofile-attributes}
 
 | Attribute | Depends on | Source |
 |---|---|---|
-| `revisitTimeMin` / `Max` | narrowing `lookAngle` or `incidenceAngle` in an offering **lengthens** actual revisit (W-10); constrains `cadenceMin` (W-33) | `FV` all vendors |
+| `revisitTimeMin` / `Max` | narrowing `lookAngle` or `incidenceAngle` in an offering **lengthens** actual revisit; constrains `cadenceMin` | `FV` all vendors |
 | `revisitReferenceLatitude` | without it, revisit figures are uninterpretable | `FV` polar-orbit physics: revisit grows towards the equator |
-| `repeatCycle` | required when `interferometricUse = true` (W-11). **Distinct from revisit** | `FV` ESA: S1 has a 12-day cycle |
-| `orbitTubeDiameter` | required when `interferometricUse = true` (W-11) | `FV` ESA: *"orbital tube of a **diameter** of 120 m (RMS)"* |
+| `repeatCycle` | required when `interferometricUse = true`. **Distinct from revisit** | `FV` ESA: S1 has a 12-day cycle |
+| `orbitTubeDiameter` | required when `interferometricUse = true` | `FV` ESA: *"orbital tube of a **diameter** of 120 m (RMS)"* |
 
 Table: RevisitProfile dependencies and provenance. {#tbl:spec-revisitprofile-dependencies}
 
@@ -417,7 +449,7 @@ Table: TargetProfile attributes. {#tbl:spec-targetprofile-attributes}
 > **The requested area is not in this table.** `TargetProfile` declares the
 > *limits* on what may be asked for; the polygon itself travels as
 > `Product.place` with `role = requestedAoi` on the inquiry, the qualification
-> item, the order item and the inventory record (D-70, completed in D-72).
+> item, the order item and the inventory record.
 > Carrying it as a characteristic as well would be a second copy of one truth.
 > `serviceArea` is the exception because a `ProductSpecification` has no place
 > slot at all; `timeOfInterest` is a characteristic for the mirror-image reason,
@@ -425,8 +457,8 @@ Table: TargetProfile attributes. {#tbl:spec-targetprofile-attributes}
 
 | Attribute | Depends on | Source |
 |--|---|--|
-| `serviceArea` | the requested area must lie inside some `INCLUDED` entry and outside every `EXCLUDED` one (W-43). It stays in the specification rather than on the offering's `place`, because `ProductOffering.place` in PSID620 is a bare `PlaceRef` with no geometry, and because `restrictionBasis` is a **rule, not a place** (D-68) | `FV` PSID620 OAS, checked in the schema |
-| `timeOfInterest` | inapplicable when `BY_SCENE` is the only ordering mode (W-41) - the scene reference already fixes the time. **Not the same thing as `requestedStartDate`/`requestedEndDate`** on an order item: that is the commitment period, this is the imaging interval (D-71) | `FV` STAPI `datetime`; `archiveDepthFrom` did **not** play this role |
+| `serviceArea` | the requested area must lie inside some `INCLUDED` entry and outside every `EXCLUDED` one. It stays in the specification rather than on the offering's `place`, because `ProductOffering.place` in PSID620 is a bare `PlaceRef` with no geometry, and because `restrictionBasis` is a **rule, not a place** | `FV` PSID620 OAS, checked in the schema |
+| `timeOfInterest` | inapplicable when `BY_SCENE` is the only ordering mode - the scene reference already fixes the time. **Not the same thing as `requestedStartDate`/`requestedEndDate`** on an order item: that is the commitment period, this is the imaging interval | `FV` STAPI `datetime`; `archiveDepthFrom` did **not** play this role |
 | `targetGeometryType` | sets the permitted form of the requested area | `FV` Capella: `POINT` and `POLYGON_AOI`; corridor mode at infrastructure-focused vendors |
 | `targetAreaMin` | **the only place the model expresses an order minimum** — TMF620 v5.0 has no `minimumQuantity` field | `FV` TMF620 OAS v5.0.0, checked in the schema |
 | `targetAreaMax` | — | `PV` domain estimated |
@@ -439,12 +471,12 @@ is why `TargetProfile` has to say which ordering modes it accepts:
 
 | Context | Meaning | Validation |
 |---|---|---|
-| `orderingMode = BY_SCENE` | a **cut-out** from the referenced scene | must lie inside that scene's footprint (W-15); inapplicable when `clippingSupported = false` (W-16) |
+| `orderingMode = BY_SCENE` | a **cut-out** from the referenced scene | must lie inside that scene's footprint; inapplicable when `clippingSupported = false` |
 | `BY_CONSTRAINT` and `BY_OPPORTUNITY` | a **target** — an area to cover or photograph | no containment requirement |
 
 Table: Meaning of the requested area by ordering mode. {#tbl:spec-requested-area}
 
-In every mode it must lie inside the declared `serviceArea` (W-43), which is a
+In every mode it must lie inside the declared `serviceArea`, which is a
 limit the seller sets and the ordering mode does not affect.
 
 > [!NOTE]
@@ -462,9 +494,8 @@ limit the seller sets and the ordering mode does not affect.
 | `frequencyBand` | enum | `X` \| `C` \| `S` \| `L` \| `P` | `D` | Radar frequency band |
 | `centerFrequency` | Decimal · GHz | 0.4 – 12.0 | `D` | Centre frequency |
 | `bandwidth` | Decimal · GHz | 0.01 – 1.5 | `D` | Transmitted signal bandwidth |
-| `polarization` | enum `[1..4]` | `HH` \| `VV` \| `HV` \| `VH` | `D · C` | Transmit and receive polarisation combinations |
+| `polarization` | enum `[1..4]` | `HH` \| `VV` \| `HV` \| `VH` | `D · C` | Transmit and receive polarisation combinations. In a specification and an offering the list is the **domain**; in an order it is the **set of channels acquired together** on every image, not a choice among alternatives |
 | `polarizationMode` | enum | `SINGLE` \| `DUAL` \| `TWIN` \| `QUAD` | `D* · C` | Polarimetric mode |
-| `observationDirection` | enum `[1..*]` | `LEFT` \| `RIGHT` | `D · C` | Which side of the track the radar looks |
 
 Table: SensorProfile attributes. {#tbl:spec-sensorprofile-attributes}
 
@@ -473,9 +504,8 @@ Table: SensorProfile attributes. {#tbl:spec-sensorprofile-attributes}
 | `frequencyBand` | sets penetration depth: `X` — surface, `L` — through tree canopy | `FV` physics: wavelength versus scatterer size |
 | `centerFrequency` | must lie within `frequencyBand` | `FV` all vendors |
 | `bandwidth` | **sets resolution in the `range` direction** — wider band, better resolution | `FV` physics: range resolution = c / (2 · B) |
-| `polarization` | only the combinations enumerated in OGC `sar.xsd` are permitted (W-27); cardinality must agree with `polarizationMode` (W-28) | `FV` OGC 10-157r4, schema `omeo/1.0/sar.xsd` |
+| `polarization` | only the combinations enumerated in OGC `sar.xsd` are permitted; cardinality must agree with `polarizationMode`. Fixed for a series: a per-pass order item does not set it | `FV` OGC 10-157r4, schema `omeo/1.0/sar.xsd` |
 | `polarizationMode` | the seller sets it consistently with the cardinality of `polarization`: 1 → `SINGLE`, 2 → `DUAL` or `TWIN`, 4 → `QUAD` | `FV` OGC `sar.xsd`: values `S`, `D`, **`T`**, `Q` |
-| `observationDirection` | — | `FV` OGC `antennaLookDirection`; STAC `sar:observation_direction` |
 
 Table: SensorProfile dependencies and provenance. {#tbl:spec-sensorprofile-dependencies}
 
@@ -490,9 +520,10 @@ Table: SensorProfile dependencies and provenance. {#tbl:spec-sensorprofile-depen
 |---|--|--|-|--|
 | `collectionStrategy` | enum | see [CollectionStrategy](#spec-collectionstrategy) | `D · C` | How the beam sweeps; subtype selector for `CoverageGeometry` |
 | `incidenceAngle` | `AngleRange` | 5 – 60° | `D · C` | Angle of the wave against vertical **on the ground** |
-| `incidenceAngleVariation` | Decimal · ° | 0 – 25 | `D` | Spread of the angle **within a single scene** |
+| `incidenceAngleVariation` | Decimal · ° | 0 – 25 | `D` | Difference between the far-range and the near-range incidence angle **within a single image**; for a steerable sensor, the maximum over the orderable range |
 | `lookAngle` | `AngleRange` | 5 – 55° | `D · C` | Angle to the target measured **at the satellite** |
 | `orbitDirection` | enum `[1..*]` | `ASCENDING` \| `DESCENDING` | `D · C` | Pass direction |
+| `observationDirection` | enum `[1..*]` | `LEFT` \| `RIGHT` | `D · C` | Side of the ground track, relative to the flight direction, towards which the antenna points |
 | `squintAngleMax` | Decimal · ° `[0..1]` | 0 – 45 | `D` | How far the beam can be steered along track |
 | `illuminationTime` | `Duration` | no declared bound | `D` | How long the radar keeps one point inside its beam |
 
@@ -501,10 +532,11 @@ Table: AcquisitionProfile attributes. {#tbl:spec-acquisitionprofile-attributes}
 | Attribute | Depends on | Source |
 |---|---|---|
 | `collectionStrategy` | selects the `CoverageGeometry` subtype | `FV` nomenclature shared across vendors |
-| `incidenceAngle` | narrowing it in an offering lengthens revisit (W-10); `qualityValidIncidence` declares the sub-range in which quality figures hold | `FV` ESA, ICEYE |
-| `incidenceAngleVariation` | distinct from the orderable range — this is variation **across a single image** | `FV` OGC `incidenceAngleVariation` |
+| `incidenceAngle` | narrowing it in an offering lengthens revisit; `qualityValidIncidence` declares the sub-range in which quality figures hold | `FV` ESA, ICEYE |
+| `incidenceAngleVariation` | distinct from the orderable range — this is variation **across a single image**; for a steerable sensor it depends on the angle chosen | `FV` OGC `incidenceAngleVariation` |
 | `lookAngle` | **not convertible** to `incidenceAngle` without a geometric model including orbital altitude | `FV` Capella uses look angle; ESA and ICEYE use incidence angle |
 | `orbitDirection` | matters for multi-temporal stacks — scenes from opposite directions have different shadow geometry | `FV` STAC `sat:orbit_state` |
+| `observationDirection` | together with `orbitDirection` determines whether the scene is illuminated from the east or the west, and hence the direction of shadow and layover. Acquisition geometry rather than instrument physics; the ordering chain chooses both per pass | `FV` OGC `antennaLookDirection`; STAC `sar:observation_direction` |
 | `squintAngleMax` | — | `FV` spotlight modes require beam steering |
 | `illuminationTime` | **the source of azimuth resolution** — the longer a point is illuminated, the longer the synthetic aperture. No ceiling is declared: observed values run from about 0.8 s for a Sentinel-1 IW burst, through 2–3 s in stripmap, to 10–25 s in spotlight and dwell modes. Sub-second values need `MILLISECOND` ([Duration](#spec-duration)) | `FV` SAR physics; figures `PV` observed, not vendor-declared |
 
@@ -568,7 +600,9 @@ Table: SceneCoverage dependencies and provenance. {#tbl:spec-scenecoverage-depen
 
 ### Resolution *(value type)*
 
-Cardinality `1..*` — **one instance per axis**.
+Cardinality `1..*` — **one or more entries per axis**. Where the figure differs
+by beam, each beam has its own entry at its own `referenceAngle`; the angle
+identifies the beam, so no beam field is needed.
 
 | Attribute | Type · cardinality | Domain | Role | Meaning |
 |---|-|--|-|---|
@@ -576,20 +610,18 @@ Cardinality `1..*` — **one instance per axis**.
 | `valueMin` | Decimal · m | 0.05 – 100 | `D` | Best attainable resolution on this axis |
 | `valueMax` | Decimal · m | 0.05 – 100 | `D` | Worst |
 | `plane` | enum | `SLANT` \| `GROUND` | `D` | In which plane it was measured |
-| `referenceAngle` | Decimal · ° | 5 – 60 | `D` | At which incidence angle the figure was computed |
-| `measurementPoint` | enum | `NEAR_RANGE` \| `MID_RANGE` \| `FAR_RANGE` \| `SCENE_CENTRE` | `D` | **Where in the scene** the figure holds |
-| `measurementAggregation` | enum | `SINGLE` \| `AVERAGED_OVER_ORBITS` \| `PER_BEAM` \| `OVER_ANGLE_RANGE` | `D` | **What it was averaged over**, or how it is distributed |
+| `referenceAngle` | `AngleRange` `[0..1]` | 5 – 60° | `D` | Incidence angle, or angular range, at which the figure holds; `min = max` for a single angle |
+| `averagedOverOrbits` | Boolean | `true` \| `false` | `D` | Whether the figure is an **average over the minimum and the maximum orbit** rather than a figure for one geometry |
 
 Table: Resolution attributes. {#tbl:spec-resolution-attributes}
 
 | Attribute | Depends on | Source |
 |---|---|---|
 | `axis` | range resolution follows from `bandwidth`, azimuth from `illuminationTime` | `FV` STAC: separate `sar:resolution_range` and `_azimuth` fields |
-| `valueMin` / `Max` | — | `FV` all vendors publish ranges |
+| `valueMin` / `Max` | where `referenceAngle` is a range, the figures at its two ends | `FV` all vendors publish ranges |
 | `plane` | `SLANT` is always numerically better than `GROUND` by a factor of 1/sin(incidence angle) — exactly two at 30° | `FV` ICEYE: "Focusing Plane" |
-| `referenceAngle` | without it a `GROUND` value is uninterpretable | `FV` ICEYE uses 30° |
-| `measurementPoint` | ESA declares a **different point per axis** | `FV` S1 Product Definition §7 |
-| `measurementAggregation` | `PER_BEAM` and `OVER_ANGLE_RANGE` mean the declaration **is not a single number** but a set or a function | `FV` S1 Product Definition: WV per beam, SLC over an angle range |
+| `referenceAngle` | mandatory when `plane = GROUND`, which is uninterpretable without it; `min ≤ max`. A `SLANT` figure does not depend on the angle. ESA states a **different swath position per axis**, so the two axes carry different angles | `FV` ICEYE uses 30°; S1 Product Definition §7: WV per beam, SLC over an angle range |
+| `averagedOverOrbits` | independent of `referenceAngle` — position and statistical treatment are two statements | `FV` S1 Product Definition §7 |
 
 Table: Resolution dependencies and provenance. {#tbl:spec-resolution-dependencies}
 
@@ -598,7 +630,9 @@ Table: Resolution dependencies and provenance. {#tbl:spec-resolution-dependencie
 > in the tables correspond to an average over the minimum and maximum orbits, and
 > to the following swath range positions: **near range**, for azimuth resolution;
 > **mid range**, for ground range resolution."* That is two independent
-> statements — where in the scene, and what it was averaged over.
+> statements — where in the scene, written as the incidence angle at that
+> position in `referenceAngle`, and what it was averaged over, written as
+> `averagedOverOrbits`.
 
 ## Processing
 
@@ -609,8 +643,8 @@ Table: Resolution dependencies and provenance. {#tbl:spec-resolution-dependencie
 | Attribute | Type · cardinality | Domain | Role | Meaning |
 |---|--|-|-|---|
 | `looksRange` | Integer | 1 – 30 | `D · C` | Looks averaged in the range direction |
-| `looksAzimuth` | Integer | 1 – 30 | `D · C` | Looks averaged in azimuth |
-| `looksAzimuthMax` | Integer `[0..1]` | 1 – 30 | `D` | Upper bound when the number of looks is chosen **adaptively** |
+| `looksAzimuthMin` | Integer | 1 – 30 | `D · C` | Smallest number of looks averaged in azimuth. Equal to `looksAzimuthMax` when the number is fixed |
+| `looksAzimuthMax` | Integer | 1 – 30 | `D` | Largest number of looks averaged in azimuth. Above `looksAzimuthMin` when the number is chosen **adaptively** |
 | `enl` | Decimal | 1 – 500 | `D` | Equivalent number of looks — the **actual** smoothing |
 | `lookOverlapRange` | Decimal `[0..1]` | 0 – 0.9 | `D` | Look overlap in range |
 | `lookOverlapAzimuth` | Decimal `[0..1]` | 0 – 0.9 | `D` | Look overlap in azimuth |
@@ -636,7 +670,7 @@ Table: ProcessingProfile attributes: spectral weighting. {#tbl:spec-processingpr
 |---|-|---|-|--|
 | `pixelSpacingRange` | Decimal · m | 0.1 – 100 | `D · C` | Pixel grid spacing in range |
 | `pixelSpacingAzimuth` | Decimal · m | 0.1 – 100 | `D · C` | Grid spacing in azimuth |
-| `geometryProjection` | enum | `SLANT_RANGE` \| `GROUND_RANGE_SENSOR` \| `MAP_PROJECTED` | `D · C` | Which geometry the pixels are laid out in |
+| `geometryProjection` | enum | `SLANT_RANGE` \| `GROUND_RANGE_SENSOR` \| `MAP_PROJECTED` | `D* · C` | Which geometry the pixels are laid out in |
 | `terrainHandling` | enum | see [TerrainHandling](#spec-terrainhandling) | `D · C` | How terrain relief was handled |
 | `elevationModel` | enum | `NONE` \| `SRTM_30` \| `SRTM_90` \| `COP_DEM_GLO_30` \| `COP_DEM_GLO_90` \| `ASTER_GDEM` \| `NATIONAL` \| `CUSTOMER_SUPPLIED` \| `OTHER` | `D · C` | Which elevation model was used |
 | `mapProjectionFamily` | enum | `UTM_WGS84` \| `POLAR_STEREOGRAPHIC` \| `GEOGRAPHIC_WGS84` \| `NATIONAL_GRID` \| `OTHER` | `D · C` | Projection family |
@@ -673,29 +707,29 @@ Table: ProcessingProfile attributes: fitness and conformance. {#tbl:spec-process
 
 | Attribute | Depends on | Source |
 |---|--|---|
-| `looksRange` / `looksAzimuth` | under `dataType = COMPLEX` both must be 1 (W-03); under `AMPLITUDE` ≥ 1 (W-04) | `FV` STAC `sar:looks_range` / `_azimuth` |
-| `looksAzimuthMax` | — | `FV` Capella: *"number of looks is adaptively selected"* |
-| `enl` | always **smaller** than `looksRange × looksAzimuth`, because adjacent looks are correlated | `FV` STAC `sar:looks_equivalent_number`; ESA |
+| `looksRange` / `looksAzimuthMin` / `looksAzimuthMax` | under `dataType = COMPLEX` all three, and `enl`, must be 1; under `AMPLITUDE` `looksRange` and `looksAzimuthMin` ≥ 1 | `FV` STAC `sar:looks_range` / `_azimuth` |
+| `looksAzimuthMin` / `looksAzimuthMax` | `looksAzimuthMin ≤ looksAzimuthMax`; a range when the number of looks is selected per image | `FV` Capella: *"number of looks is adaptively selected"*, with ranges such as 9 to 10 |
+| `enl` | always **smaller** than `looksRange` × the azimuth looks, because adjacent looks are correlated | `FV` STAC `sar:looks_equivalent_number`; ESA |
 | `lookOverlap*` | affects `enl` | `FV` ESA: 0.250 × 0.250 for GRD HR |
 | `lookBandwidth*` | — | `FV` ESA publishes per beam |
-| `weightingFunction*` | **conditions the validity of `peakSideLobeRatio*` and `integratedSideLobeRatio*`** (W-32) | `FV` ICEYE: `window_function_range` / `_azimuth`; ESA: Hamming |
+| `weightingFunction*` | **conditions the validity of `peakSideLobeRatio*` and `integratedSideLobeRatio*`** | `FV` ICEYE: `window_function_range` / `_azimuth`; ESA: Hamming |
 | `weightingCoefficient*` | Hamming 0.75 and Hamming 0.52 are **different windows** with different PSLR | `FV` ESA: `Range/Azimuth Hamming Weighting Coefficient`, varying 0.52–0.75 |
 | `pixelSpacing*` | **not the same as resolution** — resolution says what can be told apart, spacing says how densely it was sampled | `FV` ASF HyP3 lets the buyer pick 10/20/30 m; STAC `sar:pixel_spacing_*` |
-| `geometryProjection` | `MAP_PROJECTED` makes `mapProjectionFamily` and `epsgCode` mandatory (W-02) | `FV` ICEYE, Capella |
-| `terrainHandling` | `DEM_*` makes `elevationModel` mandatory (W-01); **the only field distinguishing `GEC` from `GTC`** | `FV` ESA, Capella, ASF |
+| `geometryProjection` | set according to `productType`, which **determines it completely** — [mapping](#spec-producttype-dependent-fields). `MAP_PROJECTED` makes `mapProjectionFamily` and `epsgCode` mandatory | `FV` ESA, ICEYE, Capella, ASF product definitions |
+| `terrainHandling` | `DEM_*` makes `elevationModel` mandatory. **Not determined by `productType` alone** — vendors use one label for different handling: ICEYE `GRD` is `ELLIPSOID_FLAT`, Sentinel-1 `GRD` is `ELLIPSOID_AZIMUTH_VARYING`; the values permitted for each type are fixed — [mapping](#spec-producttype-dependent-fields) | `FV` ESA, ICEYE, Capella, ASF |
 | `elevationModel` | **accuracy in mountains depends on this, not on the declared `geolocationAccuracy`** | `FV` ASF RTC: Copernicus GLO-30 |
 | `mapProjectionFamily` / `epsgCode` | mandatory under `MAP_PROJECTED` | `FV` STAC `proj:code` |
-| `radiometricCalibrationApplied` | `false` requires the `calibration-lut` role in `assetLayer` (W-07) | `FV` ESA GRD ships look-up tables; ICEYE calibrates 7 of 9 modes |
+| `radiometricCalibrationApplied` | `false` requires the `calibration-lut` role in `assetLayer` | `FV` ESA GRD ships look-up tables; ICEYE calibrates 7 of 9 modes |
 | `backscatterConvention` | `DN` means no physical calibration | `FV` STAC expresses this through the asset role |
-| `pixelScale` | **mandatory under `dataType = COMPLEX`** (W-31). Orthogonal to `backscatterConvention` — six combinations from the same data | `FV` ASF HyP3 (`scale`), ICEYE |
+| `pixelScale` | **mandatory under `dataType = COMPLEX`**. Orthogonal to `backscatterConvention` — six combinations from the same data | `FV` ASF HyP3 (`scale`), ICEYE |
 | `pixelDataType` | `CINT16` and `CFLOAT32` only under `dataType = COMPLEX` | `FV` STAC `data_type` |
 | `bitsPerSample` | — | `FV` STAC `raster:bits_per_sample`; ICEYE: 16 |
 | `speckleFilter` | mutually exclusive with phase preservation — filtering destroys phase relationships | `FV` ICEYE, ASF |
-| `interferometricUse` | requires `dataType ∈ {COMPLEX, PHASE_HISTORY}` **and** `repeatCycle` **and** `orbitTubeDiameter` (W-11) | `FV` InSAR physics |
-| `ardFamily` | `≠ NONE` makes `ardConformanceLevel` and `ardSpecVersion` mandatory (W-25) and forces the presence of layers (W-36) | `FV` CEOS-ARD SAR PFS v1.3.1 |
+| `interferometricUse` | requires `dataType ∈ {COMPLEX, PHASE_HISTORY}` **and** `repeatCycle` **and** `orbitTubeDiameter` | `FV` InSAR physics |
+| `ardFamily` | `≠ NONE` makes `ardConformanceLevel` and `ardSpecVersion` mandatory and forces the presence of layers | `FV` CEOS-ARD SAR PFS v1.3.1 |
 | `ardConformanceLevel` | determines which `assetLayer` roles must carry `presence = ALWAYS` | `FV` CEOS-ARD |
 | `ardSpecVersion` | mandatory when conformance is claimed — versions 1.2 and 1.3.1 are different claims | `FV` CEOS-ARD |
-| `standardConformance` | every element requires `version` (W-30) | `FV` Capella declares SICD 1.2.1 |
+| `standardConformance` | every element requires `version` | `FV` Capella declares SICD 1.2.1 |
 
 Table: ProcessingProfile dependencies and provenance. {#tbl:spec-processingprofile-dependencies}
 
@@ -718,7 +752,7 @@ Table: StandardConformance attributes. {#tbl:spec-standardconformance-attributes
 | Attribute | Depends on | Source |
 |---|---|---|
 | `standard` | `SICD`, `SIDD` and `CPHD` are **NGA** standards, not OGC | `FV` NGA; Capella declares SICD |
-| `version` | **mandatory** (W-30) — `SICD` without a version does not say whether 1.1, 1.2 or 1.3 is meant | `FV` Capella: `NGA.STND.0024-1_1.2.1` |
+| `version` | **mandatory** — `SICD` without a version does not say whether 1.1, 1.2 or 1.3 is meant | `FV` Capella: `NGA.STND.0024-1_1.2.1` |
 
 Table: StandardConformance dependencies and provenance. {#tbl:spec-standardconformance-dependencies}
 
@@ -730,17 +764,15 @@ Root of the quality block, cardinality `0..1`.
 
 | Attribute | Type · cardinality | Domain | Role | Meaning |
 |---|-|--|-|---|
-| `qualityBasis` | enum | `THEORETICAL` \| `MEASURED` \| `GUARANTEED` \| `NOT_STATED` | `D` | **Where every figure in this block comes from.** One declaration for the whole block |
-| `qualityAggregation` | enum | `WORST_CASE` \| `TYPICAL` \| `RANGE` \| `MINIMUM_ACROSS_FLEET` \| `NOT_STATED` | `D` | **How a single figure was arrived at** where performance varies across sub-swaths, angles or satellites |
+| `qualityQualifier` | `QualityQualifier` `[1..3]` | see [QualityQualifier](#spec-qualityqualifier) | `D` | **Where the quality figures come from and how a single figure was arrived at, per group of figures** — one entry `ALL` for the whole block, or one entry per group |
 | `qualityValidIncidence` | `AngleRange` | 5 – 60° | `D` | **The angular range in which all quality figures hold** |
 
 Table: QualityProfile attributes. {#tbl:spec-qualityprofile-attributes}
 
 | Attribute | Depends on | Source |
 |---|---|---|
-| `qualityBasis` | applies to every figure in `radiometricQuality`, `geometricQuality` and `interpretabilityQuality`. `NOT_STATED` records that the vendor published figures without saying what kind they are - the same distinction `GeolocationMetric.UNDEFINED` draws, and four of the five reference products can say nothing else | `FV` ESA states its published values are theoretical; most vendors state nothing |
-| `qualityAggregation` | `MINIMUM_ACROSS_FLEET` exists because a constellation's figures may hold for its best satellite or for all of them | `PV` no vendor declares this; the field makes the silence visible |
-| `qualityValidIncidence` | a subset of `incidenceAngle`; choosing an angle outside it raises a warning (W-05) | `FV` ICEYE: *Performant Incidence Range* versus *Time Dominant*; Capella: standard / extended / custom |
+| `qualityQualifier` | `ALL` excludes other entries; otherwise each group (`RADIOMETRIC`, `GEOMETRIC`, `INTERPRETABILITY`) appears at most once. A vendor may publish a measured geolocation accuracy and a theoretical noise floor for the same product, so one posture for the whole block is too coarse, while one per attribute would mean twenty-six | `FV` basis: ESA states its published values are theoretical, most vendors state nothing; `PV` aggregation: no vendor declares it; `NV` the split by group is **constructed** |
+| `qualityValidIncidence` | a subset of `incidenceAngle`; choosing an angle outside it raises a warning | `FV` ICEYE: *Performant Incidence Range* versus *Time Dominant*; Capella: standard / extended / custom |
 
 Table: QualityProfile dependencies and provenance. {#tbl:spec-qualityprofile-dependencies}
 
@@ -763,7 +795,7 @@ Table: RadiometricQuality attributes. {#tbl:spec-radiometricquality-attributes}
 | Attribute | Depends on | Source |
 |---|--|-|
 | `neszMin` / `Max` | determines which surfaces drown in noise | `FV` ESA, ICEYE |
-| `radiometricAccuracyAbs` | requires `sigmaMultiplier` (W-29) | `FV` ESA: 1 dB @ 3σ |
+| `radiometricAccuracyAbs` | requires `sigmaMultiplier` | `FV` ESA: 1 dB @ 3σ |
 | `radiometricAccuracyRel` | **an order of magnitude better** than absolute — a buyer building a time series looks only at this one | `FV` ESA: 0.1 dB |
 | `radiometricResolution` | distinct from accuracy, which **excludes** speckle | `FV` ESA Product Definition |
 | `azimuthAmbiguityRatio` / `rangeAmbiguityRatio` | **directional** convention | `FV` ICEYE |
@@ -789,6 +821,7 @@ Table: RadiometricQuality dependencies and provenance. {#tbl:spec-radiometricqua
 | `integratedSideLobeRatioAzimuth` | Decimal · dB `[0..1]` | −30 – −5 | `D` | ISLR in azimuth |
 | `gcpSupported` | Boolean | `true` \| `false` | `D` | Whether the product accepts buyer-supplied control points |
 | `gcpFormatAccepted` | enum `[0..*]` | `CSV` \| `SHAPEFILE` \| `GEOJSON` \| `VENDOR_TEMPLATE` | `D` | Accepted control-point file formats |
+| `gcpTypeAccepted` | enum `[0..*]` | `CORNER_REFLECTOR` \| `TRANSPONDER` \| `SURVEYED_FEATURE` | `D` | Which kinds of control point the seller accepts |
 | `gcpMinCount` | Integer `[0..1]` | 3 – 100 | `D` | Minimum number of points |
 | `gcpMaxCount` | Integer `[0..1]` | 3 – 100 | `D` | Maximum number of points |
 | `gcpAccuracyRequired` | Decimal · m `[0..1]` | 0.01 – 5.0 | `D` | Required accuracy of the buyer's points |
@@ -799,12 +832,13 @@ Table: GeometricQuality attributes. {#tbl:spec-geometricquality-attributes}
 
 | Attribute | Depends on | Source |
 |---|---|-|
-| `geolocationAccuracy` | — | `FV` ESA: ALE 7 m (NRT); ICEYE reports RMSE |
+| `geolocationAccuracy` | where the figure came from is stated for the geometric group as a whole, in `qualityQualifier` | `FV` ESA: ALE 7 m (NRT); ICEYE reports RMSE |
 | `channelCoRegistrationAccuracy` | meaningful **only** when `polarizationMode ≠ SINGLE` | `FV` a precondition of polarimetry |
-| `peakSideLobeRatio*` | holds **only** for the `weightingFunction*` declared in the same direction (W-32) | `FV` ESA: Range PSLR < −21.2 dB for IW; ICEYE: −20 dB with Taylor |
+| `peakSideLobeRatio*` | holds **only** for the `weightingFunction*` declared in the same direction | `FV` ESA: Range PSLR < −21.2 dB for IW; ICEYE: −20 dB with Taylor |
 | `integratedSideLobeRatio*` | as above | `FV` ESA |
 | `gcpSupported` | `true` unlocks the remaining GCP fields | `FV` commercial vendors |
-| `gcpFormatAccepted`, `gcpMinCount`, `gcpMaxCount`, `gcpAccuracyRequired` | all condition the validity of `geolocationAccuracyWithGcp` (W-22) | `FV` commercial vendors |
+| `gcpFormatAccepted`, `gcpMinCount`, `gcpMaxCount`, `gcpAccuracyRequired` | all condition the validity of `geolocationAccuracyWithGcp` | `FV` commercial vendors |
+| `gcpTypeAccepted` | `gcpSet.pointType` must be a subset of it. In radar geometry the kind matters as much as the accuracy: a corner reflector or a transponder is a bright point with a known phase centre, while a surveyed natural feature may be faint or displaced by layover | `NV` **no vendor publishes it** |
 | `geolocationAccuracyWithGcp` | holds **only** when the submitted points meet those conditions | `FV` commercial vendors |
 | `gcpSet` | the only buyer input in this class | `FV` open-domain input pattern |
 
@@ -833,7 +867,6 @@ Table: InterpretabilityQuality dependencies and provenance. {#tbl:spec-interpret
 | Attribute | Type · cardinality | Domain | Role | Meaning |
 |---|--|--|-|-|
 | `fileFormat` | **`FileFormatSpec`** `[1..*]` | see [FileFormatSpec](#spec-fileformatspec) | `D · C` | The format pairings the product is delivered in - container plus the metadata that comes with it |
-| `metadataStandardExtensions` | String `[0..*]` | e.g. `sar`, `sat`, `proj` | `D` | Which standard extensions are populated |
 | `assetLayer` | `AssetLayer` `[1..*]` | see [AssetLayer](#spec-assetlayer) | `D · C` | Raster layers in the package |
 | `volumeMinGB` | Decimal · GB | 0.05 – 60 | `D` | Smallest typical delivery volume |
 | `volumeMaxGB` | Decimal · GB | 0.05 – 60 | `D` | Largest |
@@ -848,12 +881,11 @@ Table: DeliveryProfile attributes. {#tbl:spec-deliveryprofile-attributes}
 |---|---|---|
 | `fileFormat` | `NITF` is an NGA standard, not OGC. A **pairing** rather than two parallel lists, because a vendor running a current and a legacy set has two pairings, and two lists imply combinations that do not exist | `FV` all vendors; ICEYE runs COG with STAC alongside GeoTIFF with proprietary XML |
 | `maxBandFileSize` | decides whether the recipient must handle BigTIFF | `FV` Sentinel-1 guarantees no GeoTIFF band in a product slice exceeds 2 GB |
-| `metadataStandardExtensions` | — | `FV` STAC: `sar` 1.3.2, `sat`, `proj`, `view` |
-| `assetLayer` | an order must contain every `ALWAYS` role (W-39); adding `ON_REQUEST` roles invalidates `volume*` (W-40) | `FV` STAC `item_assets` at collection level |
+| `assetLayer` | an order must contain every `ALWAYS` role; adding `ON_REQUEST` roles invalidates `volume*` | `FV` STAC `item_assets` at collection level |
 | `volumeMinGB` / `MaxGB` | **the range applies to the full acquisition**, not to a cut-out | `FV` ICEYE, ESA |
-| `deliveryChannel` | narrowed by `securityClassification` (W-19); `OGC_SERVICE` alone without `WCS` makes pixel values inaccessible (W-23) | `FV` all vendors |
+| `deliveryChannel` | narrowed by `securityClassification`; `OGC_SERVICE` alone without `WCS` makes pixel values inaccessible | `FV` all vendors |
 | `ogcService` | **WMS and WMTS return a picture, WCS returns values** | `FV` OGC service standards |
-| `multiSceneDelivery` | `MOSAIC` requires scenes from a permitted time window (W-17) | `FV` commercial vendors |
+| `multiSceneDelivery` | `MOSAIC` requires scenes from a permitted time window | `FV` commercial vendors |
 
 Table: DeliveryProfile dependencies and provenance. {#tbl:spec-deliveryprofile-dependencies}
 
@@ -868,7 +900,7 @@ Table: AssetLayer attributes. {#tbl:spec-assetlayer-attributes}
 
 | Attribute | Depends on | Source |
 |---|---|---|
-| `role` | roles required by CEOS ARD must carry `presence = ALWAYS` (W-36) — see [mapping](#spec-ceos-ard-roles) | `FV` STAC SAR Extension, *Best Practices, Asset Roles* |
+| `role` | roles required by CEOS ARD must carry `presence = ALWAYS` — see [mapping](#spec-ceos-ard-roles) | `FV` STAC SAR Extension, *Best Practices, Asset Roles* |
 | `presence` | `ON_REQUEST` means the buyer selects the layer at order time | `PV` ASF HyP3 lets the buyer choose the DEM, incidence-angle map, scattering-area map and layover/shadow mask. **Unverified for ICEYE and Capella** |
 
 Table: AssetLayer dependencies and provenance. {#tbl:spec-assetlayer-dependencies}
@@ -885,8 +917,7 @@ Present only when `processingLevel = L3`.
 | `aggregationPeriod` | `Duration` | 1 d – 5 years | `D · C` | Exact period under `CUSTOM` |
 | `gridReferenceSystem` | enum | `MGRS` \| `UTM` \| `GEOGRAPHIC` \| `EASE_GRID_2` \| `OTHER` | `D · C` | Grid the variables are mapped onto |
 | `gridSpacing` | Decimal · m | 10 – 25,000 | `D · C` | Grid cell size |
-| `normalizedIncidenceAngle` | Decimal · ° | 5 – 60 | `D` | Reference angle all contributing acquisitions were normalised to |
-| `geophysicalVariable` | enum | `BACKSCATTER` \| `COHERENCE` \| `SOIL_MOISTURE` \| `WIND_SPEED` \| `WAVE_HEIGHT` \| `OTHER` | `D` | Which variable the composite carries |
+| `normalizedIncidenceAngle` | Decimal · ° `[0..1]` | 5 – 60 | `D` | Reference angle all contributing acquisitions were normalised to |
 | `gapFillingMethod` | enum | `NONE` \| `TEMPORAL_INTERPOLATION` \| `SPATIAL_INTERPOLATION` \| `NEAREST_VALID` \| `OTHER` | `D` | How cells without observations were filled |
 | `minSourceAcquisitions` | Integer | 1 – 365 | `D` | Declared minimum of source acquisitions per cell |
 
@@ -894,11 +925,10 @@ Table: CompositeProfile attributes. {#tbl:spec-compositeprofile-attributes}
 
 | Attribute | Depends on | Source |
 |---|---|---|
-| `temporalAggregation` | the presence of the whole class depends on `processingLevel = L3` (S-09) | `FV` NASA EOSDIS: L3A as periodic summaries |
+| `temporalAggregation` | the presence of the whole class depends on `processingLevel = L3` | `FV` NASA EOSDIS: L3A as periodic summaries |
 | `aggregationPeriod` | mandatory under `CUSTOM` | `FV` derived |
 | `gridReferenceSystem` / `gridSpacing` | NASA's definition of L3 rests on a uniform grid | `FV` NASA EOSDIS |
-| `normalizedIncidenceAngle` | **necessary**, because backscatter depends strongly on angle — without normalisation the mosaic shows striping along orbit tracks | `FV` scattering physics |
-| `geophysicalVariable` | — | `PV` collected from market products |
+| `normalizedIncidenceAngle` | only when `geophysicalVariable = BACKSCATTER`; other variables are not normalised to an angle. Optional even then: terrain-flattened `gamma^0` (`backscatterConvention = gamma0` with `terrainHandling = DEM_RADIOMETRIC`) is generally composited without a further normalisation. A backscatter composite with neither shows striping along orbit tracks | `FV` scattering physics |
 | `gapFillingMethod` | — | `NV` **no source** — a construct of this model |
 | `minSourceAcquisitions` | affects composite quality | `FV` declared by composite vendors |
 
@@ -922,15 +952,16 @@ Table: LicensingProfile attributes. {#tbl:spec-licensingprofile-attributes}
 | `licenceModel` | — | `FV` STAC `license` (SPDX in 1.1); vendor practice |
 | `eulaTemplate` | **the name of the document, not its content** — distinct from `licenceModel`, which describes the rights | `FV` vendor practice |
 | `permittedPurpose` | — | `FV` ESA and commercial vendor licences |
-| `eligibleBuyerClass` | `CLASSIFIED` excludes `ANY` (W-20) | `FV` vendor licences |
+| `eligibleBuyerClass` | `CLASSIFIED` excludes `ANY` | `FV` vendor licences |
 | `exportControl` | — | `FV` ITAR, EAR, EU dual-use regulation |
-| `securityClassification` | **narrows `deliveryChannel`** (W-19) — the only place where the legal layer constrains the technical one | `FV` OGC `eo:securityConstraints` |
+| `securityClassification` | **narrows `deliveryChannel`** — the only place where the legal layer constrains the technical one | `FV` OGC `eo:securityConstraints` |
 
 Table: LicensingProfile dependencies and provenance. {#tbl:spec-licensingprofile-dependencies}
 
 ## Simple value types
 
 ### TimePeriod {#spec-timeperiod}
+
 | Attribute | Type | Domain | Meaning |
 |---|---|---|---|
 | `startDateTime` | DateTime `[0..1]` | — | Beginning of the interval. Absent means unbounded in the past |
@@ -950,7 +981,7 @@ or both"*, so **an open interval is supported natively**.
 > of PSI would give one quantity **two encodings within one standard** - which
 > is where two copies of one truth drift apart. The conversion lives at the
 > STAC/STAPI adapter only, which is where another party's format is adopted
-> anyway. Decision **D-66**.
+> anyway.
 
 ### ServiceArea
 
@@ -984,6 +1015,7 @@ in PSI.
 |---|---|---|---|
 | `format` | enum | `COG` \| `GEOTIFF` \| `NITF` \| `HDF5` \| `NETCDF` \| `PNG` | Raster container format |
 | `metadataFormat` | enum | `STAC` \| `OGC_EO` \| `VENDOR_PROPRIETARY` \| `NONE` | Metadata standard delivered with this format |
+| `metadataExtensions` | String `[0..*]` | e.g. `sar`, `sat`, `view`, `proj` | Which extensions of the metadata standard are populated. Allowed only when `metadataFormat = STAC` |
 | `deprecated` | Boolean `[0..1]` | — | Whether the vendor maintains this pairing for compatibility only. Absent means current |
 
 Table: FileFormatSpec attributes. {#tbl:spec-fileformatspec-attributes}
@@ -994,7 +1026,9 @@ Used by `fileFormat` in `DeliveryProfile`.
 shape could not express: ICEYE runs COG with STAC JSON as its current set and GeoTIFF
 with proprietary XML as legacy. A list of formats beside a single metadata standard
 cannot say which goes with which, and a list beside a list implies four combinations
-where two exist.
+where two exist. `metadataExtensions` belongs to the pairing for the same reason: two
+pairings may populate different extensions. Extension list `FV` STAC: `sar` 1.3.2,
+`sat`, `proj`, `view`.
 
 > [!NOTE]
 > **Why `deprecated` and not `isLegacy`.** "Legacy" is an observation about age; a
@@ -1011,6 +1045,7 @@ where two exist.
 > stated.
 
 ### Duration {#spec-duration}
+
 A **length** of time with no position on the calendar. An absolute interval is
 `TimePeriod` ([TimePeriod](#spec-timeperiod)) and the two are never interchanged.
 
@@ -1029,7 +1064,7 @@ which an enum of tiers ("fast delivery", "standard") does not allow.
 > the shortest real value in this domain is sub-second: a Sentinel-1
 > interferometric-wide burst illuminates a point for roughly 0.8 s, so without
 > a finer unit `illuminationTime` could not be stated for the mode that
-> produces most of the world's free SAR imagery. Decision **D-73**.
+> produces most of the world's free SAR imagery.
 
 ### AngleRange
 
@@ -1040,27 +1075,11 @@ which an enum of tiers ("fast delivery", "standard") does not allow.
 
 Table: AngleRange attributes. {#tbl:spec-anglerange-attributes}
 
-Used by `incidenceAngle`, `lookAngle`, `qualityValidIncidence`.
+Used by `incidenceAngle`, `lookAngle`, `qualityValidIncidence`, `Resolution.referenceAngle`.
 
 **Source:** `FV` a construct of this model. Incidence angle and look angle are
 **not automatically convertible**, hence separate fields of the same type rather
 than one field.
-
-### DurationRange
-
-| Attribute | Type | Domain | Meaning |
-|---|---|---|---|
-| `min` | `Duration` | — | Lower bound |
-| `max` | `Duration` | — | Upper bound |
-
-Table: DurationRange attributes. {#tbl:spec-durationrange-attributes}
-
-Used by `temporalBaseline`.
-
-**Source:** `FV` a construct of this model, named for the same reason `AngleRange`
-is: a range used in more than one place is a type, not an anonymous pair of
-fields. It cannot be carried on a single TMF characteristic, because its two
-bounds would land on two separate ones — see R-07 and O-25.
 
 ### ServiceCommitment
 
@@ -1080,7 +1099,7 @@ Table: ServiceCommitment attributes. {#tbl:spec-servicecommitment-attributes}
 
 Table: commitmentLevel values. {#tbl:spec-commitmentlevel-values}
 
-`achievementRate` becomes mandatory under `TARGET` and `GUARANTEED` (W-12).
+`achievementRate` becomes mandatory under `TARGET` and `GUARANTEED`.
 
 **Source:** `FV` vendor SLA practice; `{8 h, GUARANTEED, 99%}` and
 `{8 h, BEST_EFFORT}` are two different products behind the same number.
@@ -1105,7 +1124,6 @@ difference.
 |---|---|---|---|
 | `value` | Decimal · m | 0.01 – 30 | The value |
 | `metric` | enum | `UNDEFINED` \| `CE90` \| `CE95` \| `LE90` \| `RMSE` \| `SIGMA_1` \| `SIGMA_3` | Which statistic it represents |
-| `basis` | enum | `PREDICTED_BUDGET` \| `MEASURED_CALVAL` \| `NOT_PUBLISHED` | Where the figure came from |
 | `terrainCorrected` | Boolean | `true` \| `false` | Whether it is post terrain correction |
 | `ephemerisClass` | enum | `PREDICTED` \| `RESTITUTED` \| `PRECISE` | For which ephemeris class it holds |
 
@@ -1113,10 +1131,11 @@ Table: GeolocationAccuracy attributes. {#tbl:spec-geolocationaccuracy-attributes
 
 **Source:** `FV` ESA marks its declaration `(NRT)`, i.e. for predicted ephemeris;
 ICEYE reports RMSE after terrain correction; Capella (2020) publishes a figure
-**with no statistic** — hence `UNDEFINED`.
+**with no statistic** — hence `UNDEFINED`. Where the figure came from is stated
+for the geometric group as a whole, in `qualityQualifier` ([QualityQualifier](#spec-qualityqualifier)).
 
-> [!IMPORTANT]
-> **`basis = PREDICTED_BUDGET` and `ephemerisClass = PREDICTED` are two
+> [!NOTE]
+> **The basis of the geometric group and `ephemerisClass = PREDICTED` are two
 > different things.** The first says where the figure came from; the second says
 > for which input data it holds. A **measured** value for a **predicted** orbit
 > is the most common case in performance reports.
@@ -1140,16 +1159,40 @@ across catalogues.
 |---|---|---|---|
 | `reference` | URI | open | Pointer to the uploaded file |
 | `format` | enum | `CSV` \| `SHAPEFILE` \| `GEOJSON` \| `VENDOR_TEMPLATE` | File format |
+| `pointType` | enum `[1..*]` | `CORNER_REFLECTOR` \| `TRANSPONDER` \| `SURVEYED_FEATURE` | Which kinds of point the set contains |
 | `epsgCode` | Integer | EPSG code | Coordinate system of the points |
 | `pointCount` | Integer | 3 – 100 | How many points |
 | `declaredAccuracy` | Decimal · m | 0.01 – 5.0 | Declared accuracy of the point measurements |
 
 Table: GcpSet attributes. {#tbl:spec-gcpset-attributes}
 
-All fields carry role `C!` — the buyer supplies them. Validation: W-22.
+All fields carry role `C!` — the buyer supplies them. Validation includes
+that every `pointType` is one of the `gcpTypeAccepted` values.
 
 **Source:** `FV` commercial vendors offering geolocation improvement from
-customer control points.
+customer control points; `pointType` `NV` — no vendor publishes it.
+
+### QualityQualifier *(value type)* {#spec-qualityqualifier}
+
+| Attribute | Type | Domain | Meaning |
+|---|---|---|---|
+| `scope` | enum | `ALL` \| `RADIOMETRIC` \| `GEOMETRIC` \| `INTERPRETABILITY` | Which group of quality figures the entry describes |
+| `basis` | enum | `THEORETICAL` \| `MEASURED` \| `GUARANTEED` \| `NOT_STATED` | Where the figures of the group come from |
+| `aggregation` | enum | `WORST_CASE` \| `TYPICAL` \| `RANGE` \| `MINIMUM_ACROSS_FLEET` \| `NOT_STATED` | How a single figure was arrived at where performance varies across sub-swaths, angles or satellites |
+
+Table: QualityQualifier attributes. {#tbl:spec-qualityqualifier-attributes}
+
+Used by `qualityQualifier` in `QualityProfile`, cardinality `1..3`. `ALL` excludes
+other entries; otherwise each group appears at most once.
+
+`NOT_STATED` records that the vendor published figures without saying what kind
+they are — the same distinction `GeolocationMetric.UNDEFINED` draws — and is
+distinct from omitting the entry. `MINIMUM_ACROSS_FLEET` exists because a
+constellation's figures may hold for its best satellite or for all of them.
+
+**Source:** `FV` basis — ESA states its published values are theoretical; most
+vendors state nothing. `PV` aggregation — no vendor declares it; the field makes
+the silence visible. `NV` the split by group is a construct of this model.
 
 ## Enumerations
 
@@ -1242,8 +1285,8 @@ Table: TaskingPriority codes. {#tbl:spec-taskingpriority-codes}
 
 Table: TerrainHandling codes. {#tbl:spec-terrainhandling-codes}
 
-**Source:** `FV` ESA, Capella, ASF. **The only field distinguishing `GEC` from
-`GTC`.**
+**Source:** `FV` ESA, ICEYE, Capella, ASF. The values permitted for each
+`productType` are in [`productType` → dependent fields](#spec-producttype-dependent-fields).
 
 ### AssetRole {#spec-assetrole}
 
@@ -1269,7 +1312,7 @@ Table: AssetRole codes. {#tbl:spec-assetrole-codes}
 **Source:** `FV` STAC SAR Extension, *Best Practices, Asset Roles*; extended with
 the roles CEOS ARD requires.
 
-### Remaining enumerations
+### Remaining enumerations {#spec-remaining-enumerations}
 
 | Enumeration | Values |
 |---|---|
@@ -1282,6 +1325,7 @@ the roles CEOS ARD requires.
 | `CatalogueInterface` | `STAC_API` \| `OGC_CSW` \| `OGC_API_RECORDS` \| `VENDOR_API` \| `WEB_UI_ONLY` |
 | `AcquisitionPatternType` | `SINGLE` \| `RECURRING` \| `CONTINUOUS` |
 | `IterationFailurePolicy` | `RETRY_IN_SLOT` \| `ROLL_TO_NEXT` \| `SKIP` |
+| `PairingScheme` | `CONSECUTIVE` \| `COMMON_REFERENCE` \| `ALL_PAIRS` |
 | `Exclusivity` | `NONE` \| `DELAYED` \| `PERMANENT` |
 | `TargetGeometryType` | `POINT` \| `POLYGON` \| `CORRIDOR` |
 | `FrequencyBand` | `X` \| `C` \| `S` \| `L` \| `P` |
@@ -1291,8 +1335,6 @@ the roles CEOS ARD requires.
 | `OrbitDirection` | `ASCENDING` \| `DESCENDING` |
 | `ResolutionAxis` | `RANGE` \| `AZIMUTH` |
 | `ResolutionPlane` | `SLANT` \| `GROUND` |
-| `MeasurementPoint` | `NEAR_RANGE` \| `MID_RANGE` \| `FAR_RANGE` \| `SCENE_CENTRE` |
-| `MeasurementAggregation` | `SINGLE` \| `AVERAGED_OVER_ORBITS` \| `PER_BEAM` \| `OVER_ANGLE_RANGE` |
 | `WeightingFunction` | `UNIFORM` \| `HAMMING` \| `HANN` \| `TAYLOR` \| `KAISER` \| `OTHER` |
 | `GeometryProjection` | `SLANT_RANGE` \| `GROUND_RANGE_SENSOR` \| `MAP_PROJECTED` |
 | `ElevationModel` | `NONE` \| `SRTM_30` \| `SRTM_90` \| `COP_DEM_GLO_30` \| `COP_DEM_GLO_90` \| `ASTER_GDEM` \| `NATIONAL` \| `CUSTOMER_SUPPLIED` \| `OTHER` |
@@ -1305,9 +1347,12 @@ the roles CEOS ARD requires.
 | `ArdConformanceLevel` | `THRESHOLD` \| `GOAL` \| `NONE` |
 | `ConformanceStandard` | `SICD` \| `SIDD` \| `CPHD` \| `STAC` \| `OGC_EO` \| `CEOS_ARD` |
 | `GeolocationMetric` | `UNDEFINED` \| `CE90` \| `CE95` \| `LE90` \| `RMSE` \| `SIGMA_1` \| `SIGMA_3` |
-| `GeolocationBasis` | `PREDICTED_BUDGET` \| `MEASURED_CALVAL` \| `NOT_PUBLISHED` |
 | `EphemerisClass` | `PREDICTED` \| `RESTITUTED` \| `PRECISE` |
+| `QualityScope` | `ALL` \| `RADIOMETRIC` \| `GEOMETRIC` \| `INTERPRETABILITY` |
+| `QualityBasis` | `THEORETICAL` \| `MEASURED` \| `GUARANTEED` \| `NOT_STATED` |
+| `QualityAggregation` | `WORST_CASE` \| `TYPICAL` \| `RANGE` \| `MINIMUM_ACROSS_FLEET` \| `NOT_STATED` |
 | `GcpFileFormat` | `CSV` \| `SHAPEFILE` \| `GEOJSON` \| `VENDOR_TEMPLATE` |
+| `GcpType` | `CORNER_REFLECTOR` \| `TRANSPONDER` \| `SURVEYED_FEATURE` |
 | `AssetPresence` | `ALWAYS` \| `ON_REQUEST` |
 | `FileFormat` | `COG` \| `GEOTIFF` \| `NITF` \| `HDF5` \| `NETCDF` \| `PNG` |
 | `MetadataStandard` | `STAC` \| `OGC_EO` \| `VENDOR_PROPRIETARY` \| `NONE` |
@@ -1319,7 +1364,7 @@ the roles CEOS ARD requires.
 | `GeophysicalVariable` | `BACKSCATTER` \| `COHERENCE` \| `SOIL_MOISTURE` \| `WIND_SPEED` \| `WAVE_HEIGHT` \| `OTHER` |
 | `GapFillingMethod` | `NONE` \| `TEMPORAL_INTERPOLATION` \| `SPATIAL_INTERPOLATION` \| `NEAREST_VALID` \| `OTHER` |
 | `CommitmentLevel` | `BEST_EFFORT` \| `TARGET` \| `GUARANTEED` |
-| `TimeUnit` | `SECOND` \| `MINUTE` \| `HOUR` \| `DAY` \| `WEEK` \| `MONTH` \| `YEAR` |
+| `TimeUnit` | `MILLISECOND` \| `SECOND` \| `MINUTE` \| `HOUR` \| `DAY` \| `WEEK` \| `MONTH` \| `YEAR` |
 | `ResolutionClass` | `F` \| `H` \| `M` |
 | `CopernicusCMClass` | `VHR1` \| `VHR2` |
 | `LicenceModel` | `OPEN_DATA` \| `SINGLE_USER` \| `MULTI_USER` \| `ENTERPRISE` \| `RESELL_PERMITTED` |
@@ -1343,6 +1388,27 @@ the seller set is consistent with the table.
 
 The table is in [ProductType](#spec-producttype).
 
+**Geometry and terrain by product type**. `productType` determines
+`geometryProjection` completely; it determines `terrainHandling` only within a
+set, because vendors use one label for different handling — ICEYE `GRD` is
+`ELLIPSOID_FLAT`, Sentinel-1 `GRD` is `ELLIPSOID_AZIMUTH_VARYING`.
+
+| `productType` | `geometryProjection` | permitted `terrainHandling` |
+|---|---|---|
+| `SSC`, `SLC`, `CPHD` | `SLANT_RANGE` | `NONE` |
+| `SGC`, `MGD`, `GRD` | `GROUND_RANGE_SENSOR` | `ELLIPSOID_FLAT` \| `ELLIPSOID_SCENE_HEIGHT` \| `ELLIPSOID_AZIMUTH_VARYING` |
+| `GEC` | `MAP_PROJECTED` | `ELLIPSOID_FLAT` \| `ELLIPSOID_SCENE_HEIGHT` \| `ELLIPSOID_AZIMUTH_VARYING` |
+| `GTC` | `MAP_PROJECTED` | `DEM_GEOMETRIC` |
+| `RTC` | `MAP_PROJECTED` | `DEM_RADIOMETRIC` |
+| `RAW`, `OCN`, `COMPOSITE` | not fixed by product type | not fixed by product type |
+
+Table: Permitted geometry and terrain handling by productType. {#tbl:spec-producttype-geometry}
+
+`GEC` and `GTC` share a geometry and differ in terrain handling; `SGC` and
+`GEC` share an ellipsoid and differ in geometry.
+
+**Source:** `FV` ESA, ICEYE, Capella, ASF product definitions.
+
 **Attributes inapplicable by processing level:**
 
 | Level | Inapplicable | Why |
@@ -1359,7 +1425,7 @@ Table: Attributes inapplicable by processing level. {#tbl:spec-inapplicable-by-l
 ### CEOS ARD → required roles {#spec-ceos-ard-roles}
 
 This table determines which `assetLayer` roles must carry `presence = ALWAYS`
-for the declared `ardFamily` and `ardConformanceLevel` (rule W-36).
+for the declared `ardFamily` and `ardConformanceLevel`.
 **It comes from the CEOS specification, not from the vendor.**
 
 | `ardFamily` | At `THRESHOLD` | Additionally at `GOAL` |
@@ -1395,6 +1461,6 @@ Table: Applicability by subtype selector. {#tbl:spec-selector-applicability}
 
 ---
 
-**Version:** 0.11 · **author:** DO
+**Version:** 0.2
 
 =end
