@@ -15,13 +15,13 @@ dcr_overrides:
  - dcr:
    from: '2026-07-27'
    to: '2026-07-31'
-   version: 'PSI-DOC-VERSION'
+   version: 'MS12 [2.0.0-alpha]'
    author: 'Christine Glaesser'
    message: 'No update, PSI Phase 2 version bump.'
  - dcr:
-   from: '2026-10-14'
-   to: '2026-10-14'
-   version: 'PSI-DOC-VERSION'
+   from: '2026-08-01'
+   to: '2026-12-11'
+   version: 'MS13 [2.1.0]'
    author: 'Manuel Vigelius'
    message: 'Correct Ollama description and OpenAI API name.'
 =end
