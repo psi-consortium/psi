@@ -8,7 +8,7 @@ reference: "PSI-ICD-Annex-III"
 dcr_overrides:
  - dcr:
    from: '2024-01-01'
-   to: '2026-11-30'
+   to: '2026-12-11'
    version: 'PSI-DOC-VERSION'
    author: 'Dominik Ogrodnik'
    message: 'Initial version (activity A102010 EO Domain Modeling & Matchmaking Criteria): EO attribute and taxonomy baseline, EO matchmaking axes and scoring guidance, SAR model notes and UML model, based on draft v0.11 of 2026-11-12. Delivered for stakeholder review.'
@@ -20,9 +20,8 @@ dcr_overrides:
 
 |           | Name              | Function                       | Company         |
 | --------- | ----------------- | ------------------------------ | --------------- |
+| Author    | Dominik Ogrodnik  | Project Team                   | Amartus         |
 | Author    | Christian Grubert | Project Team                   | CGI             |
-| Author    | Norbert Czeranka  | Project Team                   | CGI             |
-| Author    | Dafinka Srezoska  | Project Team                   | CGI             |
 | Author    | Hendrik Oppenberg | Technical Officer              | CGI             |
 | Approval  | Victoria McCarthy | Project Manager                | SES             |
 | Approval  | Wolfgang Robben   | Project Manager                | CGI             |
@@ -117,7 +116,13 @@ levels in [Processing levels](#tax-processing-levels).
 
 @include [EO-Matchmaking-Axes](annex-iii/EO-Matchmaking-Axes.md)
 
+{#page:beginlandscape}
+
 # SAR Data Model
+
+@include [SAR product specification UML model](annex-iii/SAR-model-UML.puml){#fig:sar-product-model width=130%}
+
+{#page:endlandscape}
 
 @include [SAR-data-model](annex-iii/SAR-data-model.md)
 

@@ -10,14 +10,6 @@
 
 =end
 
-{#page:beginlandscape}
-
-# SAR Model UML
-
-@include [SAR product specification UML model](SAR-model-UML.puml){#fig:sar-product-model width=130%}
-
-{#page:endlandscape}
-
 **What this chapter is.** The reasoning behind the model, one section per class:
 why each construct is shaped the way it is, and what goes wrong under the
 alternatives. The class diagram carries **structure only** and this description
