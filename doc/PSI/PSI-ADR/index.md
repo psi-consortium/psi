@@ -108,8 +108,8 @@ dcr_overrides:
    from: '2026-08-01'
    to: '2026-12-11'
    version: 'MS13 [2.1.0]'
-   author: 'Kinga Kocierz, Dominik Ogrodnik'
-   message: 'Accepted ADR044 on the deviations of PSID648 Quote Management from TMF648 and ADR045 on the scope of a product modification. ADR044 v1.1: the update view of PSID648 (Quote_MVO, new QuoteItem_MVO) carries no server-set attributes and accepts only the states set by the customer. Accepted ADR046 on the adoption of TMF679 and TMF648, ADR047 on the deviations of PSID679 Product Offering Qualification from TMF679 and ADR048 on the rules for deviations from TM Forum APIs; ADR031 deprecated with ADR046, and a note in ADR021 refers to ADR046.'
+   author: 'Kinga Kocierz, Dominik Ogrodnik, Alexander Brehmer'
+   message: 'Accepted ADR044-ADR048 covering TMF648/TMF679 adoption and deviations, product modification scope, and deviation rules; deprecated ADR031 and updated ADR021. ADR049 about AI assisted Capabilities'
  =end
 
 # Document Meta Information

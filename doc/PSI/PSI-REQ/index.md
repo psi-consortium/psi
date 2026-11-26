@@ -83,7 +83,7 @@ dcr_overrides:
    to: '2026-12-11'
    version: 'MS13 [2.1.0]'
    author: 'Kinga Kocierz, Dominik Ogrodnik'
-   message: 'Added Quote Management requirements (REQ-03-06) for PSID648 and the QUOTE category. Added Product Offering Qualification Management requirements (REQ-03-05) for PSID679 and the QUALIFICATION category.'
+   message: 'Added requirements for PSID648 Quote Management (REQ-03-06) and PSID679 Product Offering Qualification Management (REQ-03-05).'
 =end
 
 # Document Meta Information
